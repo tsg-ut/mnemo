@@ -4,16 +4,16 @@
 .container .board-wrap {
   text-align: center;
 }
-.container .board-wrap .board {
+.container .board-wrap .rows {
   display: inline-flex;
   flex-direction: column;
   position: relative;
 }
-.container .board-wrap .board .row {
+.container .board-wrap .rows .row {
   display: inline-flex;
   margin: 0;
 }
-.container .board-wrap .board .data-layer {
+.container .board-wrap .data-layer {
   position: absolute;
   top: 0;
   left: 0;
@@ -21,7 +21,7 @@
   bottom: 0;
   pointer-events: none;
 }
-.container .board-wrap .board .data-layer .data {
+.container .board-wrap .data-layer .data {
   position: absolute;
   padding: 3px;
   line-height: 1em;

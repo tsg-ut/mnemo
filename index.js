@@ -169,19 +169,34 @@ var Data = require('./data');
 var typeToConfig = require('./type-to-config');
 
 var Board = function () {
-	function Board(stage, width, height, $board) {
+	function Board(stage, width, height) {
 		_classCallCheck(this, Board);
 
 		this.stage = stage;
 		this.height = height;
 		this.width = width;
-		this.$board = $board;
+		this.$board = stage.$stage.find('.board');
 
 		this.blocks = [];
 		for (var i = 0; i < this.height; i++) {
 			var row = [];
 			this.blocks.push(row);
+
+			var $row = $('<div/>', {
+				'class': 'row',
+				attr: { 'data-y': i }
+			});
+			this.$board.find('.rows').append($row);
+
 			for (var j = 0; j < this.width; j++) {
+				var $block = $('<div/>', {
+					'class': 'block',
+					attr: {
+						'data-x': j,
+						'data-y': i
+					}
+				});
+				$row.append($block);
 				row.push(null);
 			}
 		}
@@ -357,6 +372,18 @@ var Panel = function () {
 					text: part.count
 				})));
 			});
+
+			this.selected = this.$panel.find('.block[seleted]').first().data('type');
+
+			this.$panel.find('.block').click(function (event) {
+				var $block = $(event.target);
+
+				_this.$panel.find('.block').attr('selected', false);
+				$block.attr('selected', true);
+
+				_this.selected = $block.data('type');
+				_this.stage.$selectedBlock = $block;
+			});
 		}
 	}]);
 
@@ -381,17 +408,10 @@ var Stage = function Stage($stage, config) {
 
 	this.$stage = $stage;
 	this.config = config;
-	this.board = new Board(this, config.width, config.height, $stage.find('.board'));
+	this.board = new Board(this, config.width, config.height);
 	this.panel = new Panel(this, config.parts);
 
 	this.$selectedBlock = this.$stage.find('.panel .block[selected]').first();
-
-	this.$stage.find('.panel .block').click(function (event) {
-		var $block = $(event.target);
-		_this.$stage.find('.panel .block').attr('selected', false);
-		$block.attr('selected', true);
-		_this.$selectedBlock = $block;
-	});
 
 	this.$stage.find('.board .block').click(function (event) {
 		var $block = $(event.target);
