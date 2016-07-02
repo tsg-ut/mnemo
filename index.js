@@ -535,7 +535,11 @@ module.exports=[{
 		"wire7",
 		"wire8",
 		"wire9",
-		"times-2"
+		"times-2",
+		"times-3",
+		"plus-1",
+		"plus-2",
+		"minus-2"
 	],
 	"inputX": 2,
 	"outputX": 2,
@@ -649,10 +653,46 @@ module.exports = {
 			plugs: ['top', 'bottom']
 		}
 	},
+	'times-3': {
+		type: 'calc',
+		func: function func(n) {
+			return n * 3;
+		},
+		io: {
+			plugs: ['top', 'bottom']
+		}
+	},
 	'add-3': {
 		type: 'calc',
 		func: function func(n) {
 			return n + 3;
+		},
+		io: {
+			plugs: ['top', 'bottom']
+		}
+	},
+	'plus-1': {
+		type: 'calc',
+		func: function func(n) {
+			return n + 1;
+		},
+		io: {
+			plugs: ['top', 'bottom']
+		}
+	},
+	'plus-2': {
+		type: 'calc',
+		func: function func(n) {
+			return n + 2;
+		},
+		io: {
+			plugs: ['top', 'bottom']
+		}
+	},
+	'minus-2': {
+		type: 'calc',
+		func: function func(n) {
+			return n - 2;
 		},
 		io: {
 			plugs: ['top', 'bottom']

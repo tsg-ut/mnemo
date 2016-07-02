@@ -67,6 +67,21 @@
 .container .block[selected] {
   border: 3px solid red;
 }
+.container .block[data-type=minus-2] {
+  background: url("image/minus-2.png");
+}
+.container .block[data-type=plus-2] {
+  background: url("image/plus-2.png");
+}
+.container .block[data-type=plus-1] {
+  background: url("image/plus-1.png");
+}
+.container .block[data-type=times-2] {
+  background: url("image/times-2.png");
+}
+.container .block[data-type=times-3] {
+  background: url("image/times-3.png");
+}
 .container .block[data-type=div] {
   background: url("image/div.png");
 }
