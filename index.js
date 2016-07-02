@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -25,8 +25,14 @@ var Block = function () {
 	}
 
 	_createClass(Block, [{
-		key: "passTo",
+		key: 'passTo',
 		value: function passTo(direction, data) {
+			if (direction === 'bottom' && this.y + 1 === this.board.height && this.x === this.board.outputBlockX) {
+				this.board.output(data.value);
+				data.fadeOut();
+				return;
+			}
+
 			switch (direction) {
 				case "top":
 					if (0 <= this.y - 1) {
@@ -61,13 +67,13 @@ var Block = function () {
 			}
 		}
 	}, {
-		key: "input",
+		key: 'input',
 		value: function input(position, data) {
 			this.queues[position].push(data);
 			this.checkEmission();
 		}
 	}, {
-		key: "checkEmission",
+		key: 'checkEmission',
 		value: function checkEmission() {
 			var _this = this;
 
@@ -125,7 +131,7 @@ var Block = function () {
 			}
 		}
 	}, {
-		key: "emit",
+		key: 'emit',
 		value: function emit(direction, value) {
 			var _this2 = this;
 
@@ -135,7 +141,7 @@ var Block = function () {
 			});
 		}
 	}, {
-		key: "center",
+		key: 'center',
 		get: function get() {
 			return {
 				x: (this.x + .5) * 50,
@@ -143,7 +149,7 @@ var Block = function () {
 			};
 		}
 	}, {
-		key: "top",
+		key: 'top',
 		get: function get() {
 			return {
 				x: (this.x + .5) * 50,
@@ -151,7 +157,7 @@ var Block = function () {
 			};
 		}
 	}, {
-		key: "left",
+		key: 'left',
 		get: function get() {
 			return {
 				x: this.x * 50,
@@ -159,7 +165,7 @@ var Block = function () {
 			};
 		}
 	}, {
-		key: "right",
+		key: 'right',
 		get: function get() {
 			return {
 				x: (this.x + 1) * 50,
@@ -167,7 +173,7 @@ var Block = function () {
 			};
 		}
 	}, {
-		key: "bottom",
+		key: 'bottom',
 		get: function get() {
 			return {
 				x: (this.x + .5) * 50,
@@ -271,6 +277,12 @@ var Board = function () {
 		value: function input(value) {
 			this.executing = true;
 			this.inputBlock.input('top', new Data(this, this.inputBlock.top, value));
+		}
+	}, {
+		key: 'output',
+		value: function output(value) {
+			this.executing = false;
+			this.stage.output(value);
 		}
 	}, {
 		key: 'inputBlock',
@@ -493,6 +505,11 @@ var Stage = function () {
 		key: 'executeCase',
 		value: function executeCase() {
 			this.board.input(this.config.input[this.caseIndex]);
+		}
+	}, {
+		key: 'output',
+		value: function output(value) {
+			this.$stage.find('.user-outputs .output').eq(this.caseIndex).text(value);
 		}
 	}]);
 
