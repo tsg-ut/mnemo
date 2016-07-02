@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "browserify": "browserify lib/index.js -o index.js -t [ babelify --presets [ es2015 ] ]",
-    "pug": "pug .",
+    "pug": "pug index.pug",
     "less": "lessc index.less index.css",
     "build": "npm run browserify && npm run pug && npm run less",
     "test": "echo \"Error: no test specified\" && exit 1"
