@@ -325,11 +325,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var $ = require('jquery');
 
 var Panel = function () {
-	function Panel(stage, parts) {
+	function Panel(stage) {
 		_classCallCheck(this, Panel);
 
 		this.stage = stage;
-		this.parts = parts;
+		this.parts = stage.config.parts;
 		this.$panel = this.stage.$stage.find('.panel');
 		this.selected = this.parts[0];
 		this.update();
@@ -408,8 +408,9 @@ var Stage = function Stage($stage, config) {
 
 	this.$stage = $stage;
 	this.config = config;
+	this.caseIndex = 0;
 	this.board = new Board(this);
-	this.panel = new Panel(this, config.parts);
+	this.panel = new Panel(this);
 
 	this.$selectedBlock = this.$stage.find('.panel .block[selected]').first();
 
@@ -423,6 +424,26 @@ var Stage = function Stage($stage, config) {
 	this.$stage.find('.execute').click(function (event) {
 		_this.board.execute();
 	});
+
+	this.$stage.find('.inputs').empty().append(config.input.map(function (input) {
+		return $('<div/>', {
+			'class': 'input',
+			text: input
+		});
+	}));
+
+	this.$stage.find('.user-outputs').empty().append(config.output.map(function () {
+		return $('<div/>', {
+			'class': 'output'
+		});
+	}));
+
+	this.$stage.find('.correct-outputs').empty().append(config.output.map(function (output) {
+		return $('<div/>', {
+			'class': 'output',
+			text: output
+		});
+	}));
 };
 
 module.exports = Stage;

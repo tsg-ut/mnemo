@@ -1,5 +1,25 @@
-.container h1 {
+.container h1,
+.container h2 {
   text-align: center;
+}
+.container .inputs,
+.container .user-outputs,
+.container .correct-outputs {
+  display: flex;
+  justify-content: center;
+}
+.container .inputs .input,
+.container .user-outputs .input,
+.container .correct-outputs .input,
+.container .inputs .output,
+.container .user-outputs .output,
+.container .correct-outputs .output {
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 24px;
+  border: 1px solid;
 }
 .container .board-wrap {
   text-align: center;
