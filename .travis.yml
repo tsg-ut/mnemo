@@ -11,6 +11,7 @@ after_success:
   - git checkout gh-pages
   - git checkout master . -f
   - npm run build
+  - ls -lah
   - git add --all
   - git commit -m "Update build"
   - git push "https://${GH_TOKEN}@github.com/tsg-ut/mnemo.git" gh-pages:gh-pages --follow-tags > /dev/null 2>&1
