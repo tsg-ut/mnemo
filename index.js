@@ -236,10 +236,10 @@ var Board = function () {
 			this.blocks[y][x] = block;
 		}
 	}, {
-		key: 'execute',
-		value: function execute() {
+		key: 'input',
+		value: function input(value) {
 			this.executing = true;
-			this.inputBlock.input('top', new Data(this, this.inputBlock.top, 42));
+			this.inputBlock.input('top', new Data(this, this.inputBlock.top, value));
 		}
 	}, {
 		key: 'inputBlock',
@@ -395,56 +395,69 @@ module.exports = Panel;
 },{"jquery":11}],6:[function(require,module,exports){
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var $ = require('jquery');
 var Board = require('./board');
 var Panel = require('./panel');
 
-var Stage = function Stage($stage, config) {
-	var _this = this;
+var Stage = function () {
+	function Stage($stage, config) {
+		var _this = this;
 
-	_classCallCheck(this, Stage);
+		_classCallCheck(this, Stage);
 
-	this.$stage = $stage;
-	this.config = config;
-	this.caseIndex = 0;
-	this.board = new Board(this);
-	this.panel = new Panel(this);
+		this.$stage = $stage;
+		this.config = config;
+		this.caseIndex = 0;
+		this.board = new Board(this);
+		this.panel = new Panel(this);
 
-	this.$selectedBlock = this.$stage.find('.panel .block[selected]').first();
+		this.$selectedBlock = this.$stage.find('.panel .block[selected]').first();
 
-	this.$stage.find('.board .block').click(function (event) {
-		var $block = $(event.target);
-		var type = _this.$selectedBlock.data('type');
-		$block.attr('data-type', type);
-		_this.panel.takeAndPlace($block.data('x'), $block.data('y'), type);
-	});
-
-	this.$stage.find('.execute').click(function (event) {
-		_this.board.execute();
-	});
-
-	this.$stage.find('.inputs').empty().append(config.input.map(function (input) {
-		return $('<div/>', {
-			'class': 'input',
-			text: input
+		this.$stage.find('.board .block').click(function (event) {
+			var $block = $(event.target);
+			var type = _this.$selectedBlock.data('type');
+			$block.attr('data-type', type);
+			_this.panel.takeAndPlace($block.data('x'), $block.data('y'), type);
 		});
-	}));
 
-	this.$stage.find('.user-outputs').empty().append(config.output.map(function () {
-		return $('<div/>', {
-			'class': 'output'
+		this.$stage.find('.execute').click(function (event) {
+			_this.executeCase();
 		});
-	}));
 
-	this.$stage.find('.correct-outputs').empty().append(config.output.map(function (output) {
-		return $('<div/>', {
-			'class': 'output',
-			text: output
-		});
-	}));
-};
+		this.$stage.find('.inputs').empty().append(config.input.map(function (input) {
+			return $('<div/>', {
+				'class': 'input',
+				text: input
+			});
+		}));
+
+		this.$stage.find('.user-outputs').empty().append(config.output.map(function () {
+			return $('<div/>', {
+				'class': 'output'
+			});
+		}));
+
+		this.$stage.find('.correct-outputs').empty().append(config.output.map(function (output) {
+			return $('<div/>', {
+				'class': 'output',
+				text: output
+			});
+		}));
+	}
+
+	_createClass(Stage, [{
+		key: 'executeCase',
+		value: function executeCase() {
+			this.board.input(this.config.input[this.caseIndex]);
+		}
+	}]);
+
+	return Stage;
+}();
 
 module.exports = Stage;
 
