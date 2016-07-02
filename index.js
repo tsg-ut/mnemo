@@ -592,7 +592,7 @@ module.exports=[{
 		"plus-1",
 		"plus-2",
 		"minus-2",
-		"add",
+		"iko-ru",
 		"sub"
 	],
 	"inputX": 2,
@@ -786,6 +786,16 @@ module.exports = {
 		type: 'calc2',
 		func: function func(a, b) {
 			return a / b;
+		},
+		io: {
+			in: ['left', 'right'],
+			out: 'bottom'
+		}
+	},
+	'iko-ru': {
+		type: 'calc2',
+		func: function func(a, b) {
+			return a === b ? 1 : 0;
 		},
 		io: {
 			in: ['left', 'right'],

@@ -21,7 +21,7 @@
 			border: 1px solid;
 			&.correct{ background-color: pink;}
 			&.wrong{ background-color: lightblue;}
-			
+
 		}
 	}
 
@@ -79,7 +79,7 @@
 			border: 3px solid red;
 		}
 
-		@blocks: wire0, wire1, wire2, wire3, wire4, wire5, wire6, wire7, wire8, wire9, times-2, add-3, add, sub, mul, div,times-3,times-2,plus-1,plus-2,minus-2,;
+		@blocks: wire0, wire1, wire2, wire3, wire4, wire5, wire6, wire7, wire8, wire9, times-2, add-3, add, sub, mul, div, times-3, times-2, plus-1, plus-2, minus-2, iko-ru;
 		.-(@i: length(@blocks)) when (@i > 0) {
 			@name: extract(@blocks, @i);
 			&[data-type=@{name}] { background: url("image/@{name}.png"); }

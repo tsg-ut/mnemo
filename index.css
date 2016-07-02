@@ -86,6 +86,9 @@
 .container .block[selected] {
   border: 3px solid red;
 }
+.container .block[data-type=iko-ru] {
+  background: url("image/iko-ru.png");
+}
 .container .block[data-type=minus-2] {
   background: url("image/minus-2.png");
 }
