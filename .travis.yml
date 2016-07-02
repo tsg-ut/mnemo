@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - node
+script:
+  - npm run build
+after_success:
+  - git clean -fxd
+  - git checkout gh-pages
+  - git checkout master . -f
+  - git add --all
+  - git commit -m "Update build"
+  - git push "https://${GH_TOKEN}@github.com/tsg-ut/mnemo.git" gh-pages:gh-pages --follow-tags > /dev/null 2>&1
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
+    - gh-pages
+notifications:
+  webhooks: http://webhook.hakatashi.com/travis
