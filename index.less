@@ -9,9 +9,30 @@
 		.board {
 			display: inline-flex;
 			flex-direction: column;
+			position: relative;
 
 			.row {
 				display: inline-flex;
+				margin: 0;
+			}
+
+			.data-layer {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+
+				.data {
+					position: absolute;
+					padding: 3px;
+					line-height: 1em;
+					font-weight: bold;
+					border-radius: 5px;
+					background: darkorange;
+				    transform: translate(-50%, -50%);
+					color: white;
+				}
 			}
 		}
 	}
