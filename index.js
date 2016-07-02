@@ -57,20 +57,25 @@ var Block = function () {
 
 			var _loop = function _loop(source) {
 				var queue = _this.queues[source];
-				if (queue.length !== 0 && _this.config.io.plugs.includes(source)) {
-					(function () {
-						var destinations = _this.config.io.plugs.filter(function (direction) {
-							return direction !== source;
-						});
-						var data = queue.shift();
-						// pass through
-						data.animate(_this.center).then(function () {
-							destinations.forEach(function (destination) {
-								_this.emit(destination, data.value);
+
+				if (_this.config.type === 'empty') {
+					// nop
+				} else if (_this.config.type === 'wire') {
+					if (queue.length !== 0 && _this.config.io.plugs.includes(source)) {
+						(function () {
+							var destinations = _this.config.io.plugs.filter(function (direction) {
+								return direction !== source;
 							});
-							data.kill();
-						});
-					})();
+							var data = queue.shift();
+							// pass through
+							data.animate(_this.center).then(function () {
+								destinations.forEach(function (destination) {
+									_this.emit(destination, data.value);
+								});
+								data.kill();
+							});
+						})();
+					}
 				}
 			};
 
@@ -344,6 +349,24 @@ module.exports = {
 		type: 'wire',
 		io: {
 			plugs: ['top', 'right', 'bottom']
+		}
+	},
+	wire7: {
+		type: 'wire',
+		io: {
+			plugs: ['right', 'bottom', 'left']
+		}
+	},
+	wire8: {
+		type: 'wire',
+		io: {
+			plugs: ['bottom', 'left', 'top']
+		}
+	},
+	wire9: {
+		type: 'wire',
+		io: {
+			plugs: ['left', 'top', 'right']
 		}
 	}
 };
