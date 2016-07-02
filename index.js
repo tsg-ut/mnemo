@@ -77,18 +77,21 @@ var Block = function () {
 		value: function checkEmission() {
 			var _this = this;
 
-			var _loop = function _loop(source) {
-				var queue = _this.queues[source];
-
-				if (_this.config.type === 'empty') {
+			if (this.config.type === 'empty') {
+				for (var source in this.queues) {
+					var queue = this.queues[source];
 					queue.forEach(function (data) {
 						return data.fadeOut();
 					});
-				} else if (_this.config.type === 'wire') {
-					if (queue.length !== 0 && _this.config.io.plugs.includes(source)) {
+				}
+			} else if (this.config.type === 'wire') {
+				var _loop = function _loop(_source) {
+					var queue = _this.queues[_source];
+
+					if (queue.length !== 0 && _this.config.io.plugs.includes(_source)) {
 						(function () {
 							var destinations = _this.config.io.plugs.filter(function (direction) {
-								return direction !== source;
+								return direction !== _source;
 							});
 							var data = queue.shift();
 							// pass through
@@ -99,16 +102,24 @@ var Block = function () {
 								data.kill();
 							});
 						})();
-					} else if (!_this.config.io.plugs.includes(source)) {
+					} else if (!_this.config.io.plugs.includes(_source)) {
 						queue.forEach(function (data) {
 							return data.fadeOut();
 						});
 					}
-				} else if (_this.config.type === 'calc') {
-					if (queue.length !== 0 && _this.config.io.plugs.includes(source)) {
+				};
+
+				for (var _source in this.queues) {
+					_loop(_source);
+				}
+			} else if (this.config.type === 'calc') {
+				var _loop2 = function _loop2(_source2) {
+					var queue = _this.queues[_source2];
+
+					if (queue.length !== 0 && _this.config.io.plugs.includes(_source2)) {
 						(function () {
 							var destinations = _this.config.io.plugs.filter(function (direction) {
-								return direction !== source;
+								return direction !== _source2;
 							});
 							var data = queue.shift();
 							data.animate(_this.center).then(function () {
@@ -118,16 +129,32 @@ var Block = function () {
 								data.kill();
 							});
 						})();
-					} else if (!_this.config.io.plugs.includes(source)) {
+					} else if (!_this.config.io.plugs.includes(_source2)) {
 						queue.forEach(function (data) {
 							return data.fadeOut();
 						});
 					}
-				}
-			};
+				};
 
-			for (var source in this.queues) {
-				_loop(source);
+				for (var _source2 in this.queues) {
+					_loop2(_source2);
+				}
+			} else if (this.config.type === 'calc2') {
+				if (this.config.io.in.every(function (source) {
+					return _this.queues[source].length > 0;
+				})) {
+					(function () {
+						var dataA = _this.queues[_this.config.io.in[0]].shift();
+						var dataB = _this.queues[_this.config.io.in[1]].shift();
+						dataA.animate(_this.center).promise().then(function () {
+							_this.emit(_this.config.io.out, _this.config.func(dataA.value, dataB.value));
+							dataA.kill();
+						});
+						dataB.animate(_this.center).promise().then(function () {
+							dataB.kill();
+						});
+					})();
+				}
 			}
 		}
 	}, {
@@ -457,6 +484,8 @@ var $ = require('jquery');
 var Board = require('./board');
 var Panel = require('./panel');
 
+window.$ = $;
+
 var Stage = function () {
 	function Stage($stage, config) {
 		var _this = this;
@@ -562,7 +591,9 @@ module.exports=[{
 		"times-3",
 		"plus-1",
 		"plus-2",
-		"minus-2"
+		"minus-2",
+		"add",
+		"sub"
 	],
 	"inputX": 2,
 	"outputX": 2,
@@ -721,40 +752,44 @@ module.exports = {
 			plugs: ['top', 'bottom']
 		}
 	},
-	'add': {
-		type: 'calc',
+	add: {
+		type: 'calc2',
 		func: function func(a, b) {
 			return a + b;
 		},
 		io: {
-			plugs: ['top', 'bottom']
+			in: ['left', 'right'],
+			out: 'bottom'
 		}
 	},
-	'sub': {
-		type: 'calc',
+	sub: {
+		type: 'calc2',
 		func: function func(a, b) {
 			return a - b;
 		},
 		io: {
-			plugs: ['top', 'bottom']
+			in: ['left', 'right'],
+			out: 'bottom'
 		}
 	},
-	'mul': {
-		type: 'calc',
+	mul: {
+		type: 'calc2',
 		func: function func(a, b) {
 			return a * b;
 		},
 		io: {
-			plugs: ['top', 'bottom']
+			in: ['left', 'right'],
+			out: 'bottom'
 		}
 	},
-	'div': {
-		type: 'calc',
+	div: {
+		type: 'calc2',
 		func: function func(a, b) {
 			return a / b;
 		},
 		io: {
-			plugs: ['top', 'bottom']
+			in: ['left', 'right'],
+			out: 'bottom'
 		}
 	}
 };
