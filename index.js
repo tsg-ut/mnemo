@@ -22,10 +22,48 @@ var Block = function (_EventEmitter) {
 		_this.$block = $block;
 		_this.x = config.x;
 		_this.y = config.y;
+		_this.config = config;
+		_this.queues = {
+			top: [],
+			left: [],
+			right: [],
+			bottom: []
+		};
 		return _this;
 	}
 
 	_createClass(Block, [{
+		key: 'input',
+		value: function input(position, data) {
+			this.queues[position].push(data);
+			this.checkEmission();
+		}
+	}, {
+		key: 'checkEmission',
+		value: function checkEmission() {
+			var _this2 = this;
+
+			var _loop = function _loop(source) {
+				var queue = _this2.queues[source];
+				if (queue.length !== 0 && _this2.config.io.plugs.includes(source)) {
+					(function () {
+						var destination = _this2.config.io.plugs.find(function (direction) {
+							return direction !== source;
+						});
+						var data = queue.shift();
+						// pass through
+						data.$element.animate(data.getPosition('center'), 400, 'linear').promise().then(function () {
+							return data.$element.animate(data.getPosition(destination), 400, 'linear');
+						});
+					})();
+				}
+			};
+
+			for (var source in this.queues) {
+				_loop(source);
+			}
+		}
+	}, {
 		key: 'center',
 		get: function get() {
 			return {
@@ -147,28 +185,43 @@ module.exports = Board;
 },{"./block":1,"./data":3,"./type-to-config":5,"async":6,"jquery":8}],3:[function(require,module,exports){
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var $ = require('jquery');
 
-var Data = function Data(board, value) {
-	_classCallCheck(this, Data);
+var Data = function () {
+	function Data(board, value) {
+		_classCallCheck(this, Data);
 
-	this.board = board;
-	this.value = value;
+		this.board = board;
+		this.value = value;
 
-	this.currentBlock = this.board.inputBlock;
+		this.currentBlock = this.board.inputBlock;
 
-	this.$element = $('<div/>', {
-		'class': 'data',
-		text: value,
-		css: {
-			left: this.currentBlock.top.x + 'px',
-			top: this.currentBlock.top.y + 'px'
+		this.$element = $('<div/>', {
+			'class': 'data',
+			text: value,
+			css: this.getPosition('top')
+		});
+		this.board.$board.find('.data-layer').append(this.$element);
+
+		this.currentBlock.input('top', this);
+	}
+
+	_createClass(Data, [{
+		key: 'getPosition',
+		value: function getPosition(position) {
+			return {
+				left: this.currentBlock[position].x + 'px',
+				top: this.currentBlock[position].y + 'px'
+			};
 		}
-	});
-	this.board.$board.find('.data-layer').append(this.$element);
-};
+	}]);
+
+	return Data;
+}();
 
 module.exports = Data;
 
