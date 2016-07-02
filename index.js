@@ -12,6 +12,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var EventEmitter = require('events');
 var Data = require('./data');
 
+var _require = require('./util');
+
+var toCSS = _require.toCSS;
+
 var Block = function (_EventEmitter) {
 	_inherits(Block, _EventEmitter);
 
@@ -57,10 +61,10 @@ var Block = function (_EventEmitter) {
 						});
 						var data = queue.shift();
 						// pass through
-						data.$element.animate(data.getPosition('center'), 400, 'linear').promise().then(function () {
+						data.$element.animate(toCSS(_this2.center), 400, 'linear').promise().then(function () {
 							destinations.forEach(function (destination) {
-								var outData = new Data(_this2, 'center', data.value);
-								outData.$element.animate(outData.getPosition(destination), 400, 'linear').promise().then(function () {});
+								var outData = new Data(_this2.board, _this2.center, data.value);
+								outData.$element.animate(toCSS(_this2[destination]), 400, 'linear').promise().then(function () {});
 							});
 							data.kill();
 						});
@@ -119,7 +123,7 @@ var Block = function (_EventEmitter) {
 
 module.exports = Block;
 
-},{"./data":3,"events":7}],2:[function(require,module,exports){
+},{"./data":3,"./util":6,"events":8}],2:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -172,7 +176,7 @@ var Board = function () {
 		key: 'execute',
 		value: function execute() {
 			this.executing = true;
-			this.inputBlock.input('top', new Data(this.inputBlock, 'top', 42));
+			this.inputBlock.input('top', new Data(this, this.inputBlock.top, 42));
 		}
 	}, {
 		key: 'inputBlock',
@@ -191,7 +195,7 @@ var Board = function () {
 
 module.exports = Board;
 
-},{"./block":1,"./data":3,"./type-to-config":5,"async":6,"jquery":8}],3:[function(require,module,exports){
+},{"./block":1,"./data":3,"./type-to-config":5,"async":7,"jquery":9}],3:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -200,31 +204,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var $ = require('jquery');
 
+var _require = require('./util');
+
+var toCSS = _require.toCSS;
+
 var Data = function () {
-	function Data(block, position, value) {
+	function Data(board, coordinate, value) {
 		_classCallCheck(this, Data);
 
-		this.block = block;
-		this.board = block.board;
+		this.board = board;
 		this.value = value;
 
 		this.$element = $('<div/>', {
 			'class': 'data',
 			text: value,
-			css: this.getPosition(position)
+			css: toCSS(coordinate)
 		});
 		this.board.$board.find('.data-layer').append(this.$element);
 	}
 
 	_createClass(Data, [{
-		key: 'getPosition',
-		value: function getPosition(position) {
-			return {
-				left: this.block[position].x + 'px',
-				top: this.block[position].y + 'px'
-			};
-		}
-	}, {
 		key: 'kill',
 		value: function kill() {
 			this.$element.remove();
@@ -236,7 +235,7 @@ var Data = function () {
 
 module.exports = Data;
 
-},{"jquery":8}],4:[function(require,module,exports){
+},{"./util":6,"jquery":9}],4:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -265,7 +264,7 @@ $(document).ready(function () {
 	});
 });
 
-},{"./board":2,"jquery":8}],5:[function(require,module,exports){
+},{"./board":2,"jquery":9}],5:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -314,6 +313,16 @@ module.exports = {
 };
 
 },{}],6:[function(require,module,exports){
+"use strict";
+
+module.exports.toCSS = function (coordinate) {
+	return {
+		left: coordinate.x + "px",
+		top: coordinate.y + "px"
+	};
+};
+
+},{}],7:[function(require,module,exports){
 (function (process,global){
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -7139,7 +7148,7 @@ module.exports = {
 
 }));
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":9}],7:[function(require,module,exports){
+},{"_process":10}],8:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -7443,7 +7452,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.0.0
  * https://jquery.com/
@@ -17482,7 +17491,7 @@ if ( !noGlobal ) {
 return jQuery;
 } ) );
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
