@@ -301,11 +301,13 @@ $(document).ready(function () {
 });
 
 },{"./stage":6,"./stages.json":7,"jquery":11}],5:[function(require,module,exports){
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var $ = require('jquery');
 
 var Panel = function () {
 	function Panel(stage, parts) {
@@ -313,16 +315,48 @@ var Panel = function () {
 
 		this.stage = stage;
 		this.parts = parts;
+		this.$panel = this.stage.$stage.find('.panel');
+		this.selected = this.parts[0];
+		this.update();
 	}
 
 	_createClass(Panel, [{
-		key: "takeAndPlace",
+		key: 'takeAndPlace',
 		value: function takeAndPlace(x, y, blockName) {
 			var index = this.parts.indexOf(blockName);
 			if (index !== -1) {
 				this.parts.splice(index, 1);
 				this.stage.board.placeBlock(x, y, blockName);
+				this.update();
 			}
+		}
+	}, {
+		key: 'update',
+		value: function update() {
+			var _this = this;
+
+			var uniqueParts = $.unique(this.parts.slice(0)).map(function (name) {
+				return {
+					count: _this.parts.filter(function (part) {
+						return name === part;
+					}).length,
+					name: name
+				};
+			});
+
+			this.$panel.empty();
+			uniqueParts.forEach(function (part) {
+				_this.$panel.append($('<div/>', {
+					'class': 'block',
+					attr: {
+						'data-type': part.name,
+						selected: _this.selected === part.name
+					}
+				}).append($('<div/>', {
+					'class': 'count',
+					text: part.count
+				})));
+			});
 		}
 	}]);
 
@@ -331,10 +365,8 @@ var Panel = function () {
 
 module.exports = Panel;
 
-},{}],6:[function(require,module,exports){
+},{"jquery":11}],6:[function(require,module,exports){
 'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -342,46 +374,36 @@ var $ = require('jquery');
 var Board = require('./board');
 var Panel = require('./panel');
 
-var Stage = function () {
-	function Stage($stage, config) {
-		var _this = this;
+var Stage = function Stage($stage, config) {
+	var _this = this;
 
-		_classCallCheck(this, Stage);
+	_classCallCheck(this, Stage);
 
-		this.$stage = $stage;
-		this.config = config;
-		this.board = new Board(this, config.width, config.height, $stage.find('.board'));
-		this.panel = new Panel(this, config.parts);
+	this.$stage = $stage;
+	this.config = config;
+	this.board = new Board(this, config.width, config.height, $stage.find('.board'));
+	this.panel = new Panel(this, config.parts);
 
-		this.$selectedBlock = this.$stage.find('.panel .block[selected]').first();
+	this.$selectedBlock = this.$stage.find('.panel .block[selected]').first();
 
-		this.$stage.find('.panel .block').click(function (event) {
-			var $block = $(event.target);
-			_this.$stage.find('.panel .block').attr('selected', false);
-			$block.attr('selected', true);
-			_this.$selectedBlock = $block;
-		});
+	this.$stage.find('.panel .block').click(function (event) {
+		var $block = $(event.target);
+		_this.$stage.find('.panel .block').attr('selected', false);
+		$block.attr('selected', true);
+		_this.$selectedBlock = $block;
+	});
 
-		this.$stage.find('.board .block').click(function (event) {
-			var $block = $(event.target);
-			var type = _this.$selectedBlock.data('type');
-			$block.attr('data-type', type);
-			_this.panel.takeAndPlace($block.data('x'), $block.data('y'), type);
-			_this.updatePanel();
-		});
+	this.$stage.find('.board .block').click(function (event) {
+		var $block = $(event.target);
+		var type = _this.$selectedBlock.data('type');
+		$block.attr('data-type', type);
+		_this.panel.takeAndPlace($block.data('x'), $block.data('y'), type);
+	});
 
-		this.$stage.find('.execute').click(function (event) {
-			_this.board.execute();
-		});
-	}
-
-	_createClass(Stage, [{
-		key: 'updatePanel',
-		value: function updatePanel() {}
-	}]);
-
-	return Stage;
-}();
+	this.$stage.find('.execute').click(function (event) {
+		_this.board.execute();
+	});
+};
 
 module.exports = Stage;
 
