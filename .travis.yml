@@ -4,12 +4,14 @@ node_js:
 script:
   - npm run build
 after_success:
+  - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+  - git fetch --unshallow
   - git config user.name "Travis CI"
   - git config user.email "hakatasiloving@gmail.com"
   - git clean -fd
-  - git checkout -- . -f
+  - git checkout -- .
   - git checkout gh-pages
-  - git checkout master . -f
+  - git checkout master .
   - npm run build
   - ls -lah
   - git add --all
