@@ -21,6 +21,22 @@
   font-size: 24px;
   border: 1px solid;
 }
+.container .inputs .input.correct,
+.container .user-outputs .input.correct,
+.container .correct-outputs .input.correct,
+.container .inputs .output.correct,
+.container .user-outputs .output.correct,
+.container .correct-outputs .output.correct {
+  background-color: pink;
+}
+.container .inputs .input.wrong,
+.container .user-outputs .input.wrong,
+.container .correct-outputs .input.wrong,
+.container .inputs .output.wrong,
+.container .user-outputs .output.wrong,
+.container .correct-outputs .output.wrong {
+  background-color: lightblue;
+}
 .container .board-wrap {
   text-align: center;
 }

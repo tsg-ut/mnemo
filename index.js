@@ -516,15 +516,20 @@ var Stage = function () {
 	}, {
 		key: 'output',
 		value: function output(value) {
-			this.$stage.find('.user-outputs .output').eq(this.caseIndex).text(value);
+			var $output = this.$stage.find('.user-outputs .output').eq(this.caseIndex);
+			$output.text(value);
 
 			if (this.config.output[this.caseIndex] === value) {
+				$output.addClass("correct");
 				if (this.config.output.length === this.caseIndex + 1) {
 					// 終了処理をここに書く
 				} else {
 					this.caseIndex++;
 					this.executeCase();
 				}
+			} else {
+
+				$output.addClass("wrong");
 			}
 		}
 	}]);
