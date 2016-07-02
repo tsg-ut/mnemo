@@ -2,11 +2,13 @@ doctype
 html
 	head
 		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
 		title MNEMO
 		script(src="index.js", charset="utf-8")
+		link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet", crossorigin="anonymous")
 		link(href="index.css", rel="stylesheet")
 	body
-		.wrap
+		.container
 			h1 MNEMO
 			.board-wrap
 				.board
@@ -20,4 +22,4 @@ html
 					.block(data-type = 'wire' + i, selected = i === 0)
 
 			.controls
-				button.execute(type = 'button') Execute
+				button.btn.btn-primary.btn-lg.execute(type = 'button') Execute
