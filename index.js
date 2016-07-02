@@ -378,8 +378,6 @@ var $ = require('jquery');
 
 var Panel = function () {
 	function Panel(stage) {
-		var _this = this;
-
 		_classCallCheck(this, Panel);
 
 		this.stage = stage;
@@ -387,14 +385,6 @@ var Panel = function () {
 		this.$panel = this.stage.$stage.find('.panel');
 		this.selected = this.parts[0];
 		this.update();
-		this.stage.$stage.click(function (event) {
-			var $target = $(event.target);
-			if ($target.parents().filter('.panel').length) {
-				return;
-			}
-			_this.selected = null;
-			_this.$panel.find('.block').attr("selected", false);
-		});
 	}
 
 	_createClass(Panel, [{
@@ -413,11 +403,11 @@ var Panel = function () {
 	}, {
 		key: 'update',
 		value: function update() {
-			var _this2 = this;
+			var _this = this;
 
 			var uniqueParts = $.unique(this.parts.slice(0)).map(function (name) {
 				return {
-					count: _this2.parts.filter(function (part) {
+					count: _this.parts.filter(function (part) {
 						return name === part;
 					}).length,
 					name: name
@@ -426,11 +416,11 @@ var Panel = function () {
 
 			this.$panel.empty();
 			uniqueParts.forEach(function (part) {
-				_this2.$panel.append($('<div/>', {
+				_this.$panel.append($('<div/>', {
 					'class': 'block',
 					attr: {
 						'data-type': part.name,
-						selected: _this2.selected === part.name
+						selected: _this.selected === part.name
 					}
 				}).append($('<div/>', {
 					'class': 'count',
@@ -443,11 +433,11 @@ var Panel = function () {
 			this.$panel.find('.block').click(function (event) {
 				var $block = $(event.target);
 
-				_this2.$panel.find('.block').attr('selected', false);
+				_this.$panel.find('.block').attr('selected', false);
 				$block.attr('selected', true);
 
-				_this2.selected = $block.data('type');
-				_this2.stage.$selectedBlock = $block;
+				_this.selected = $block.data('type');
+				_this.stage.$selectedBlock = $block;
 			});
 		}
 	}]);
