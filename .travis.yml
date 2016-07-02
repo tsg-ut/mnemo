@@ -12,6 +12,8 @@ script:
   - npm run build
 after_success:
   - git checkout -- .gitignore
+  - ls -lah
+  - git status
   - git add --all
   - git commit -m "Update build"
   - git push "https://${GH_TOKEN}@github.com/tsg-ut/mnemo.git" gh-pages:gh-pages --follow-tags > /dev/null 2>&1
