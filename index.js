@@ -39,16 +39,16 @@ var Block = function (_EventEmitter) {
 		value: function passTo(direction, data) {
 			switch (direction) {
 				case "top":
-					if (0 <= this.y - 1) board.getBlock(this.x, this.y - 1).input("bottom", data);
+					if (0 <= this.y - 1) this.board.getBlock(this.x, this.y - 1).input("bottom", data);
 					break;
 				case "bottom":
-					if (board.height > this.y + 1) board.getBlock(this.x, this.y + 1).input("top", data);
+					if (this.board.height > this.y + 1) this.board.getBlock(this.x, this.y + 1).input("top", data);
 					break;
 				case "left":
-					if (0 <= this.x - 1) board.getBlock(this.x - 1, this.y).input("right", data);
+					if (0 <= this.x - 1) this.board.getBlock(this.x - 1, this.y).input("right", data);
 					break;
 				case "right":
-					if (board.width > this.x + 1) board.getBlock(this.x + 1, this.y).input("left", data);
+					if (this.board.width > this.x + 1) this.board.getBlock(this.x + 1, this.y).input("left", data);
 					break;
 				default:
 					console.log("error: Block.passTo");
@@ -80,7 +80,9 @@ var Block = function (_EventEmitter) {
 						data.animate(_this2.center).then(function () {
 							destinations.forEach(function (destination) {
 								var outData = new Data(_this2.board, _this2.center, data.value);
-								outData.animate(_this2[destination]).then(function () {});
+								outData.animate(_this2[destination]).then(function () {
+									_this2.passTo(destination, outData);
+								});
 							});
 							data.kill();
 						});
