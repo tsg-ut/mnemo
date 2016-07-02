@@ -1,4 +1,7 @@
-.container h1,
+.container h1 {
+  text-align: center;
+  color: red;
+}
 .container h2 {
   text-align: center;
 }
