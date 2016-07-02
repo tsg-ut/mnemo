@@ -14,11 +14,12 @@ var EventEmitter = require('events');
 var Block = function (_EventEmitter) {
 	_inherits(Block, _EventEmitter);
 
-	function Block($block, config) {
+	function Block(board, $block, config) {
 		_classCallCheck(this, Block);
 
 		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Block).call(this));
 
+		_this.board = board;
 		_this.$block = $block;
 		_this.x = config.x;
 		_this.y = config.y;
@@ -159,14 +160,14 @@ var Board = function () {
 			var config = typeToConfig[type];
 			config.x = x;
 			config.y = y;
-			var block = new Block(this.getBlockElement(x, y), config);
+			var block = new Block(this, this.getBlockElement(x, y), config);
 			this.blocks[y][x] = block;
 		}
 	}, {
 		key: 'execute',
 		value: function execute() {
 			this.executing = true;
-			var data = new Data(this, 42);
+			this.inputBlock.input('top', new Data(this.inputBlock, 'top', 42));
 		}
 	}, {
 		key: 'inputBlock',
@@ -195,30 +196,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var $ = require('jquery');
 
 var Data = function () {
-	function Data(board, value) {
+	function Data(block, position, value) {
 		_classCallCheck(this, Data);
 
-		this.board = board;
+		this.block = block;
+		this.board = block.board;
 		this.value = value;
-
-		this.currentBlock = this.board.inputBlock;
 
 		this.$element = $('<div/>', {
 			'class': 'data',
 			text: value,
-			css: this.getPosition('top')
+			css: this.getPosition(position)
 		});
 		this.board.$board.find('.data-layer').append(this.$element);
-
-		this.currentBlock.input('top', this);
 	}
 
 	_createClass(Data, [{
 		key: 'getPosition',
 		value: function getPosition(position) {
 			return {
-				left: this.currentBlock[position].x + 'px',
-				top: this.currentBlock[position].y + 'px'
+				left: this.block[position].x + 'px',
+				top: this.block[position].y + 'px'
 			};
 		}
 	}]);
@@ -295,6 +293,12 @@ module.exports = {
 		type: 'wire',
 		io: {
 			plugs: ['top', 'right']
+		}
+	},
+	wire6: {
+		type: 'wire',
+		io: {
+			plugs: ['top', 'right', 'bottom']
 		}
 	}
 };

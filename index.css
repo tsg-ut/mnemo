@@ -43,23 +43,26 @@
 .container .block[selected] {
   border: 3px solid red;
 }
-.container .block[data-type=wire0] {
-  background: url(image/wire0.png);
-}
-.container .block[data-type=wire1] {
-  background: url(image/wire1.png);
-}
-.container .block[data-type=wire2] {
-  background: url(image/wire2.png);
-}
-.container .block[data-type=wire3] {
-  background: url(image/wire3.png);
-}
-.container .block[data-type=wire4] {
-  background: url(image/wire4.png);
+.container .block[data-type=wire6] {
+  background: url("image/wire6.png");
 }
 .container .block[data-type=wire5] {
-  background: url(image/wire5.png);
+  background: url("image/wire5.png");
+}
+.container .block[data-type=wire4] {
+  background: url("image/wire4.png");
+}
+.container .block[data-type=wire3] {
+  background: url("image/wire3.png");
+}
+.container .block[data-type=wire2] {
+  background: url("image/wire2.png");
+}
+.container .block[data-type=wire1] {
+  background: url("image/wire1.png");
+}
+.container .block[data-type=wire0] {
+  background: url("image/wire0.png");
 }
 .container .panel {
   display: flex;

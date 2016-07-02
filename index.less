@@ -52,12 +52,12 @@
 			border: 3px solid red;
 		}
 
-		&[data-type=wire0] { background: url(image/wire0.png); }
-		&[data-type=wire1] { background: url(image/wire1.png); }
-		&[data-type=wire2] { background: url(image/wire2.png); }
-		&[data-type=wire3] { background: url(image/wire3.png); }
-		&[data-type=wire4] { background: url(image/wire4.png); }
-		&[data-type=wire5] { background: url(image/wire5.png); }
+		@blocks: wire0, wire1, wire2, wire3, wire4, wire5, wire6;
+	    .-(@i: length(@blocks)) when (@i > 0) {
+	        @name: extract(@blocks, @i);
+			&[data-type=@{name}] { background: url("image/@{name}.png"); }
+	        .-((@i - 1));
+	    } .-;
 	}
 
 	.panel {
