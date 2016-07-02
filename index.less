@@ -1,0 +1,43 @@
+.wrap {
+	width: 800px;
+	margin: 0 auto;
+
+	h1 {
+		text-align: center;
+	}
+
+	.board-wrap {
+		text-align: center;
+
+		.board {
+			display: inline-flex;
+			flex-direction: column;
+
+			.row {
+				display: inline-flex;
+			}
+		}
+	}
+
+	.block {
+		width: 50px;
+		height: 50px;
+		background: pink;
+		border: 1px solid darksalmon;
+		cursor: pointer;
+	}
+
+	.panel {
+		display: flex;
+		width: 600px;
+		overflow-y: auto;
+	    padding: 10px;
+	    margin: 30px auto 0;
+	    background: lightgray;
+	    border-radius: 5px;
+
+		.block {
+		    flex-shrink: 0;
+		}
+	}
+}
