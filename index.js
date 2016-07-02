@@ -392,6 +392,51 @@ module.exports = {
 		io: {
 			plugs: ['top', 'bottom']
 		}
+	},
+	'add-3': {
+		type: 'calc',
+		func: function func(n) {
+			return n + 3;
+		},
+		io: {
+			plugs: ['top', 'bottom']
+		}
+	},
+	'add': {
+		type: 'calc',
+		func: function func(a, b) {
+			return a + b;
+		},
+		io: {
+			plugs: ['top', 'bottom']
+		}
+	},
+	'sub': {
+		type: 'calc',
+		func: function func(a, b) {
+			return a - b;
+		},
+		io: {
+			plugs: ['top', 'bottom']
+		}
+	},
+	'mul': {
+		type: 'calc',
+		func: function func(a, b) {
+			return a * b;
+		},
+		io: {
+			plugs: ['top', 'bottom']
+		}
+	},
+	'div': {
+		type: 'calc',
+		func: function func(a, b) {
+			return a / b;
+		},
+		io: {
+			plugs: ['top', 'bottom']
+		}
 	}
 };
 
