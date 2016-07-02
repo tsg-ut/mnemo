@@ -26,6 +26,8 @@
     "babelify": "^7.3.0",
     "browserify": "^13.0.1",
     "gulp": "^3.9.1",
-    "jquery": "^3.0.0"
+    "jquery": "^3.0.0",
+    "less": "^2.7.1",
+    "pug-cli": "^1.0.0-alpha6"
   }
 }
