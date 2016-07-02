@@ -26,10 +26,18 @@
 		border: 1px solid darksalmon;
 		cursor: pointer;
 		box-sizing: border-box;
+		background-size: contain;
 
 		&[selected] {
 			border: 3px solid red;
 		}
+
+		&[data-type=wire0] { background: url(image/wire0.png); }
+		&[data-type=wire1] { background: url(image/wire1.png); }
+		&[data-type=wire2] { background: url(image/wire2.png); }
+		&[data-type=wire3] { background: url(image/wire3.png); }
+		&[data-type=wire4] { background: url(image/wire4.png); }
+		&[data-type=wire5] { background: url(image/wire5.png); }
 	}
 
 	.panel {
