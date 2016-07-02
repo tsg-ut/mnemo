@@ -12,10 +12,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var EventEmitter = require('events');
 var Data = require('./data');
 
-var _require = require('./util');
-
-var toCSS = _require.toCSS;
-
 var Block = function (_EventEmitter) {
 	_inherits(Block, _EventEmitter);
 
@@ -61,10 +57,10 @@ var Block = function (_EventEmitter) {
 						});
 						var data = queue.shift();
 						// pass through
-						data.$element.animate(toCSS(_this2.center), 400, 'linear').promise().then(function () {
+						data.animate(_this2.center).then(function () {
 							destinations.forEach(function (destination) {
 								var outData = new Data(_this2.board, _this2.center, data.value);
-								outData.$element.animate(toCSS(_this2[destination]), 400, 'linear').promise().then(function () {});
+								outData.animate(_this2[destination]).then(function () {});
 							});
 							data.kill();
 						});
@@ -123,7 +119,7 @@ var Block = function (_EventEmitter) {
 
 module.exports = Block;
 
-},{"./data":3,"./util":6,"events":8}],2:[function(require,module,exports){
+},{"./data":3,"events":8}],2:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -227,6 +223,11 @@ var Data = function () {
 		key: 'kill',
 		value: function kill() {
 			this.$element.remove();
+		}
+	}, {
+		key: 'animate',
+		value: function animate(coordinate) {
+			return this.$element.animate(toCSS(coordinate), 400, 'linear').promise();
 		}
 	}]);
 
