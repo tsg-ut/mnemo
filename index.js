@@ -593,6 +593,7 @@ module.exports=[{
 		"plus-2",
 		"minus-2",
 		"iko-ru",
+		"add",
 		"sub"
 	],
 	"inputX": 2,
