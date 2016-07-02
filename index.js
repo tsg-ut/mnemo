@@ -33,6 +33,9 @@ var Block = function (_EventEmitter) {
 	}
 
 	_createClass(Block, [{
+		key: 'passTo',
+		value: function passTo(direction, data) {}
+	}, {
 		key: 'input',
 		value: function input(position, data) {
 			this.queues[position].push(data);
@@ -53,7 +56,7 @@ var Block = function (_EventEmitter) {
 						var data = queue.shift();
 						// pass through
 						data.$element.animate(data.getPosition('center'), 400, 'linear').promise().then(function () {
-							return data.$element.animate(data.getPosition(destination), 400, 'linear');
+							return data.$element.animate(data.getPosition(destination), 400, 'linear').promise();
 						});
 					})();
 				}
