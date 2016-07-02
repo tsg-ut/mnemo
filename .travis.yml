@@ -7,6 +7,7 @@ after_success:
   - git config user.name "Travis CI"
   - git config user.email "hakatasiloving@gmail.com"
   - git clean -fxd
+  - git checkout -- . -f
   - git checkout gh-pages
   - git checkout master . -f
   - npm run build
