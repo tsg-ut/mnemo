@@ -393,6 +393,9 @@ var Panel = function () {
 			var index = this.parts.indexOf(blockName);
 			if (index !== -1) {
 				this.parts.splice(index, 1);
+				if (this.parts.indexOf(blockName) == -1) {
+					this.selected = null; // maybe, "empty" is better than null
+				}
 				this.stage.board.placeBlock(x, y, blockName);
 				this.update();
 			}
@@ -471,9 +474,11 @@ var Stage = function () {
 
 		this.$stage.find('.board .block').click(function (event) {
 			var $block = $(event.target);
-			var type = _this.$selectedBlock.data('type');
-			$block.attr('data-type', type);
-			_this.panel.takeAndPlace($block.data('x'), $block.data('y'), type);
+			if (_this.panel.selected) {
+				var type = _this.$selectedBlock.data('type');
+				$block.attr('data-type', type);
+				_this.panel.takeAndPlace($block.data('x'), $block.data('y'), type);
+			}
 		});
 
 		this.$stage.find('.execute').click(function (event) {
