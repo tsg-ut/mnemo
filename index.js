@@ -1,6 +1,8 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -12,11 +14,58 @@ var EventEmitter = require('events');
 var Block = function (_EventEmitter) {
 	_inherits(Block, _EventEmitter);
 
-	function Block(config) {
+	function Block($block, config) {
 		_classCallCheck(this, Block);
 
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(Block).call(this));
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Block).call(this));
+
+		_this.$block = $block;
+		_this.x = config.x;
+		_this.y = config.y;
+		return _this;
 	}
+
+	_createClass(Block, [{
+		key: 'center',
+		get: function get() {
+			return {
+				x: (this.x + .5) * 50,
+				y: (this.y + .5) * 50
+			};
+		}
+	}, {
+		key: 'top',
+		get: function get() {
+			return {
+				x: (this.x + .5) * 50,
+				y: this.y * 50
+			};
+		}
+	}, {
+		key: 'left',
+		get: function get() {
+			return {
+				x: this.x * 50,
+				y: (this.y + .5) * 50
+			};
+		}
+	}, {
+		key: 'right',
+		get: function get() {
+			return {
+				x: (this.x + 1) * 50,
+				y: (this.y + .5) * 50
+			};
+		}
+	}, {
+		key: 'bottom',
+		get: function get() {
+			return {
+				x: (this.x + .5) * 50,
+				y: (this.y + 1) * 50
+			};
+		}
+	}]);
 
 	return Block;
 }(EventEmitter);
@@ -31,6 +80,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var async = require('async');
+var $ = require('jquery');
 var Block = require('./block');
 var Data = require('./data');
 var typeToConfig = require('./type-to-config');
@@ -56,12 +106,19 @@ var Board = function () {
 			return this.blocks[y][x];
 		}
 	}, {
+		key: 'getBlockElement',
+		value: function getBlockElement(x, y) {
+			return this.$board.find('.block').filter(function (index, element) {
+				return $(element).data('x') === x.toString() && $(element).data('y') === y.toString();
+			});
+		}
+	}, {
 		key: 'placeBlock',
 		value: function placeBlock(x, y, type) {
 			var config = typeToConfig[type];
 			config.x = x;
 			config.y = y;
-			var block = new Block(config);
+			var block = new Block(this.getBlockElement(x, y), config);
 			this.blocks[y][x] = block;
 		}
 	}, {
@@ -87,24 +144,35 @@ var Board = function () {
 
 module.exports = Board;
 
-},{"./block":1,"./data":3,"./type-to-config":5,"async":6}],3:[function(require,module,exports){
+},{"./block":1,"./data":3,"./type-to-config":5,"async":6,"jquery":8}],3:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var $ = require('jquery');
 
 var Data = function Data(board, value) {
 	_classCallCheck(this, Data);
 
 	this.board = board;
 	this.value = value;
-	this.$element = $('<div/>', { 'class': 'data', text: value });
-	this.board.$board.append(this.$element);
+
 	this.currentBlock = this.board.inputBlock;
+
+	this.$element = $('<div/>', {
+		'class': 'data',
+		text: value,
+		css: {
+			left: this.currentBlock.top.x + 'px',
+			top: this.currentBlock.top.y + 'px'
+		}
+	});
+	this.board.$board.find('.data-layer').append(this.$element);
 };
 
 module.exports = Data;
 
-},{}],4:[function(require,module,exports){
+},{"jquery":8}],4:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
