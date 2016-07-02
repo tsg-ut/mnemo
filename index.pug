@@ -10,17 +10,18 @@ html
 	body
 		.container
 			h1 MNEMO
-			.board-wrap
-				.board
-					- for (let y = 0; y < 9; y++)
-						.row(data-y=y)
-							- for (let x = 0; x < 9; x++)
-								.block(data-x=x, data-y=y)
-					.data-layer
+			.stage
+				.board-wrap
+					.board
+						- for (let y = 0; y < 9; y++)
+							.row(data-y=y)
+								- for (let x = 0; x < 9; x++)
+									.block(data-x=x, data-y=y)
+						.data-layer
 
-			.panel
-				for block, index in ['wire0', 'wire1', 'wire2', 'wire3', 'wire4', 'wire5', 'wire6', 'wire7', 'wire8', 'wire9', 'times-2', 'add-3', 'add', 'sub', 'mul', 'div']
-					.block(data-type = block, selected = index === 0)
+				.panel
+					for block, index in ['wire0', 'wire1', 'wire2', 'wire3', 'wire4', 'wire5', 'wire6', 'wire7', 'wire8', 'wire9', 'times-2', 'add-3', 'add', 'sub', 'mul', 'div']
+						.block(data-type = block, selected = index === 0)
 
-			.controls
-				button.btn.btn-primary.btn-lg.execute(type = 'button') Execute
+				.controls
+					button.btn.btn-primary.btn-lg.execute(type = 'button') Execute
