@@ -152,18 +152,33 @@ var Data = require('./data');
 var typeToConfig = require('./type-to-config');
 
 var Board = function () {
-	function Board($board) {
+	function Board(width, height, $board) {
 		_classCallCheck(this, Board);
 
-		this.height = 3;
-		this.width = 3;
-		this.blocks = [[null, null, null], [null, null, null], [null, null, null]];
-		this.inputBlockX = 1;
-		this.inputBlockY = 0;
-		this.outputBlockX = 1;
-		this.outputBlockY = 2;
-		this.executing = false;
+		this.height = height;
+		this.width = width;
 		this.$board = $board;
+
+		this.blocks = [];
+		for (var i = 0; i < this.height; i++) {
+			var row = [];
+			this.blocks.push(row);
+			for (var j = 0; j < this.width; j++) {
+				row.push(null);
+			}
+		}
+
+		for (var x = 0; x < this.width; x++) {
+			for (var y = 0; y < this.height; y++) {
+				this.placeBlock(x, y, 'empty');
+			}
+		}
+
+		this.inputBlockX = 4;
+		this.inputBlockY = 0;
+		this.outputBlockX = 4;
+		this.outputBlockY = 9;
+		this.executing = false;
 	}
 
 	_createClass(Board, [{
@@ -262,7 +277,7 @@ var $ = require('jquery');
 var Board = require('./board');
 
 $(document).ready(function () {
-	var board = new Board($('.board'));
+	var board = new Board(9, 9, $('.board'));
 	var $selectedBlock = $('.panel .block[selected]').first();
 
 	$('.panel .block').click(function (event) {
@@ -288,6 +303,10 @@ $(document).ready(function () {
 'use strict';
 
 module.exports = {
+	empty: {
+		type: 'empty',
+		io: {}
+	},
 	wire0: {
 		type: 'wire',
 		io: {

@@ -12,9 +12,9 @@ html
 			h1 MNEMO
 			.board-wrap
 				.board
-					- for (let y = 0; y < 3; y++)
+					- for (let y = 0; y < 9; y++)
 						.row(data-y=y)
-							- for (let x = 0; x < 3; x++)
+							- for (let x = 0; x < 9; x++)
 								.block(data-x=x, data-y=y)
 					.data-layer
 
