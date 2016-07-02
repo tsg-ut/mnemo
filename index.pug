@@ -16,5 +16,5 @@ html
 								.block(data-x=x, data-y=y)
 
 			.panel
-				- for (let i = 0; i < 10; i++)
-					.block(data-type=i)
+				- for (let i = 0; i < 6; i++)
+					.block(data-type=i, selected=i===0)
