@@ -20,7 +20,7 @@
 	"output": [16, 6, 18],
 	"width": 5,
 	"height": 5,
-    "statement":"数を3倍してみよう!"
+	"statement": "数を3倍してみよう!"
 },
 {
 	"parts": [
@@ -39,12 +39,12 @@
 		"wire8",
 		"wire9",
 		"times-2",
-        "add-3"
+		"add-3"
 	],
 	"input": [8, 3, 9],
 	"output": [19, 9, 21],
 	"width": 5,
-	"height": 5
-    "statement":"数を2倍して、3足してみよう!"
+	"height": 5,
+	"statement":"数を2倍して、3足してみよう!"
 }
 ]

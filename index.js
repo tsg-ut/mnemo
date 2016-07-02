@@ -169,9 +169,10 @@ var Data = require('./data');
 var typeToConfig = require('./type-to-config');
 
 var Board = function () {
-	function Board(width, height, $board) {
+	function Board(stage, width, height, $board) {
 		_classCallCheck(this, Board);
 
+		this.stage = stage;
 		this.height = height;
 		this.width = width;
 		this.$board = $board;
@@ -242,7 +243,7 @@ var Board = function () {
 
 module.exports = Board;
 
-},{"./block":1,"./data":3,"./type-to-config":5,"async":7,"jquery":8}],3:[function(require,module,exports){
+},{"./block":1,"./data":3,"./type-to-config":8,"async":10,"jquery":11}],3:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -287,36 +288,156 @@ var Data = function () {
 
 module.exports = Data;
 
-},{"./util":6,"jquery":8}],4:[function(require,module,exports){
+},{"./util":9,"jquery":11}],4:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
-var Board = require('./board');
+var stageConfig = require('./stages.json')[0];
+var Stage = require('./stage');
 
 $(document).ready(function () {
-	var board = new Board(9, 9, $('.board'));
-	var $selectedBlock = $('.panel .block[selected]').first();
-
-	$('.panel .block').click(function (event) {
-		var $block = $(event.target);
-		$('.panel .block').attr('selected', false);
-		$block.attr('selected', true);
-		$selectedBlock = $block;
-	});
-
-	$('.board .block').click(function (event) {
-		var $block = $(event.target);
-		var type = $selectedBlock.data('type');
-		$block.attr('data-type', type);
-		board.placeBlock($block.data('x'), $block.data('y'), type);
-	});
-
-	$('.execute').click(function (event) {
-		board.execute();
-	});
+	var $stage = $('.stage');
+	var stage = new Stage($stage, stageConfig);
 });
 
-},{"./board":2,"jquery":8}],5:[function(require,module,exports){
+},{"./stage":6,"./stages.json":7,"jquery":11}],5:[function(require,module,exports){
+"use strict";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Panel = function () {
+	function Panel(stage, parts) {
+		_classCallCheck(this, Panel);
+
+		this.stage = stage;
+		this.parts = parts;
+	}
+
+	_createClass(Panel, [{
+		key: "takeAndPlace",
+		value: function takeAndPlace(x, y, blockName) {
+			var index = this.parts.indexOf(blockName);
+			if (index !== -1) {
+				this.parts.splice(index, 1);
+				this.stage.board.placeBlock(x, y, blockName);
+			}
+		}
+	}]);
+
+	return Panel;
+}();
+
+module.exports = Panel;
+
+},{}],6:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var $ = require('jquery');
+var Board = require('./board');
+var Panel = require('./panel');
+
+var Stage = function () {
+	function Stage($stage, config) {
+		var _this = this;
+
+		_classCallCheck(this, Stage);
+
+		this.$stage = $stage;
+		this.config = config;
+		this.board = new Board(this, config.width, config.height, $stage.find('.board'));
+		this.panel = new Panel(this, config.parts);
+
+		this.$selectedBlock = this.$stage.find('.panel .block[selected]').first();
+
+		this.$stage.find('.panel .block').click(function (event) {
+			var $block = $(event.target);
+			_this.$stage.find('.panel .block').attr('selected', false);
+			$block.attr('selected', true);
+			_this.$selectedBlock = $block;
+		});
+
+		this.$stage.find('.board .block').click(function (event) {
+			var $block = $(event.target);
+			var type = _this.$selectedBlock.data('type');
+			$block.attr('data-type', type);
+			_this.panel.takeAndPlace($block.data('x'), $block.data('y'), type);
+			_this.updatePanel();
+		});
+
+		this.$stage.find('.execute').click(function (event) {
+			_this.board.execute();
+		});
+	}
+
+	_createClass(Stage, [{
+		key: 'updatePanel',
+		value: function updatePanel() {}
+	}]);
+
+	return Stage;
+}();
+
+module.exports = Stage;
+
+},{"./board":2,"./panel":5,"jquery":11}],7:[function(require,module,exports){
+module.exports=[{
+	"parts": [
+		"wire0", "wire0", "wire0",
+		"wire0", "wire0", "wire0",
+		"wire0", "wire0", "wire0",
+		"wire0", "wire0", "wire0",
+		"wire0", "wire0", "wire0",
+		"wire1",
+		"wire2",
+		"wire3",
+		"wire4",
+		"wire5",
+		"wire6",
+		"wire7",
+		"wire8",
+		"wire9",
+		"times-2"
+	],
+	"input": [8, 3, 9],
+	"output": [16, 6, 18],
+	"width": 5,
+	"height": 5,
+	"statement": "数を3倍してみよう!"
+},
+{
+	"parts": [
+		"wire0", "wire0", "wire0",
+		"wire0", "wire0", "wire0",
+		"wire0", "wire0", "wire0",
+		"wire0", "wire0", "wire0",
+		"wire0", "wire0", "wire0",
+		"wire1",
+		"wire2",
+		"wire3",
+		"wire4",
+		"wire5",
+		"wire6",
+		"wire7",
+		"wire8",
+		"wire9",
+		"times-2",
+		"add-3"
+	],
+	"input": [8, 3, 9],
+	"output": [19, 9, 21],
+	"width": 5,
+	"height": 5,
+	"statement":"数を2倍して、3足してみよう!"
+}
+]
+
+},{}],8:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -440,7 +561,7 @@ module.exports = {
 	}
 };
 
-},{}],6:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 "use strict";
 
 module.exports.toCSS = function (coordinate) {
@@ -450,7 +571,7 @@ module.exports.toCSS = function (coordinate) {
 	};
 };
 
-},{}],7:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 (function (process,global){
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -7276,7 +7397,7 @@ module.exports.toCSS = function (coordinate) {
 
 }));
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":9}],8:[function(require,module,exports){
+},{"_process":12}],11:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.0.0
  * https://jquery.com/
@@ -17315,7 +17436,7 @@ if ( !noGlobal ) {
 return jQuery;
 } ) );
 
-},{}],9:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};

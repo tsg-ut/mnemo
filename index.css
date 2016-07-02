@@ -43,6 +43,21 @@
 .container .block[selected] {
   border: 3px solid red;
 }
+.container .block[data-type=div] {
+  background: url("image/div.png");
+}
+.container .block[data-type=mul] {
+  background: url("image/mul.png");
+}
+.container .block[data-type=sub] {
+  background: url("image/sub.png");
+}
+.container .block[data-type=add] {
+  background: url("image/add.png");
+}
+.container .block[data-type=add-3] {
+  background: url("image/add-3.png");
+}
 .container .block[data-type=times-2] {
   background: url("image/times-2.png");
 }
