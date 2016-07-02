@@ -1,0 +1,23 @@
+[{
+	"parts": [
+		"wire0", "wire0", "wire0",
+		"wire0", "wire0", "wire0",
+		"wire0", "wire0", "wire0",
+		"wire0", "wire0", "wire0",
+		"wire0", "wire0", "wire0",
+		"wire1",
+		"wire2",
+		"wire3",
+		"wire4",
+		"wire5",
+		"wire6",
+		"wire7",
+		"wire8",
+		"wire9",
+		"times-2"
+	],
+	"input": [8, 3, 9],
+	"output": [16, 6, 18],
+	"width": 5,
+	"height": 5
+}]
