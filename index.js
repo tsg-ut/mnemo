@@ -36,11 +36,31 @@ var Block = function (_EventEmitter) {
 
 	_createClass(Block, [{
 		key: 'passTo',
-		value: function passTo(direction, data) {}
+		value: function passTo(direction, data) {
+			switch (direction) {
+				case "top":
+					if (0 <= this.y - 1) board.getBlock(this.x, this.y - 1).input("bottom", data);
+					break;
+				case "bottom":
+					if (board.height > this.y + 1) board.getBlock(this.x, this.y + 1).input("top", data);
+					break;
+				case "left":
+					if (0 <= this.x - 1) board.getBlock(this.x - 1, this.y).input("right", data);
+					break;
+				case "right":
+					if (board.width > this.x + 1) board.getBlock(this.x + 1, this.y).input("left", data);
+					break;
+				default:
+					console.log("error: Block.passTo");
+					break;
+			}
+		}
 	}, {
 		key: 'input',
 		value: function input(position, data) {
 			this.queues[position].push(data);
+			console.log(data);
+			console.log(position);
 			this.checkEmission();
 		}
 	}, {
