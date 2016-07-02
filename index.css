@@ -43,6 +43,18 @@
 .container .block[selected] {
   border: 3px solid red;
 }
+.container .block[data-type=times-2] {
+  background: url("image/times-2.png");
+}
+.container .block[data-type=wire9] {
+  background: url("image/wire9.png");
+}
+.container .block[data-type=wire8] {
+  background: url("image/wire8.png");
+}
+.container .block[data-type=wire7] {
+  background: url("image/wire7.png");
+}
 .container .block[data-type=wire6] {
   background: url("image/wire6.png");
 }

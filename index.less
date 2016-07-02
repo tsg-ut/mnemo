@@ -52,7 +52,7 @@
 			border: 3px solid red;
 		}
 
-		@blocks: wire0, wire1, wire2, wire3, wire4, wire5, wire6;
+		@blocks: wire0, wire1, wire2, wire3, wire4, wire5, wire6, wire7, wire8, wire9, times-2;
 	    .-(@i: length(@blocks)) when (@i > 0) {
 	        @name: extract(@blocks, @i);
 			&[data-type=@{name}] { background: url("image/@{name}.png"); }

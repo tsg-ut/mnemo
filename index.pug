@@ -19,8 +19,8 @@ html
 					.data-layer
 
 			.panel
-				- for (let i = 0; i < 7; i++)
-					.block(data-type = 'wire' + i, selected = i === 0)
+				for block, index in ['wire0', 'wire1', 'wire2', 'wire3', 'wire4', 'wire5', 'wire6', 'wire7', 'wire8', 'wire9', 'times-2']
+					.block(data-type = block, selected = index === 0)
 
 			.controls
 				button.btn.btn-primary.btn-lg.execute(type = 'button') Execute

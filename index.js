@@ -76,6 +76,21 @@ var Block = function () {
 							});
 						})();
 					}
+				} else if (_this.config.type === 'calc') {
+					if (queue.length !== 0 && _this.config.io.plugs.includes(source)) {
+						(function () {
+							var destinations = _this.config.io.plugs.filter(function (direction) {
+								return direction !== source;
+							});
+							var data = queue.shift();
+							data.animate(_this.center).then(function () {
+								destinations.forEach(function (destination) {
+									_this.emit(destination, _this.config.func(data.value));
+								});
+								data.kill();
+							});
+						})();
+					}
 				}
 			};
 
@@ -367,6 +382,15 @@ module.exports = {
 		type: 'wire',
 		io: {
 			plugs: ['left', 'top', 'right']
+		}
+	},
+	'times-2': {
+		type: 'calc',
+		func: function func(n) {
+			return n * 2;
+		},
+		io: {
+			plugs: ['top', 'bottom']
 		}
 	}
 };
