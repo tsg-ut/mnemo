@@ -29,16 +29,32 @@ var Block = function () {
 		value: function passTo(direction, data) {
 			switch (direction) {
 				case "top":
-					if (0 <= this.y - 1) this.board.getBlock(this.x, this.y - 1).input("bottom", data);
+					if (0 <= this.y - 1) {
+						this.board.getBlock(this.x, this.y - 1).input("bottom", data);
+					} else {
+						data.fadeOut();
+					}
 					break;
 				case "bottom":
-					if (this.board.height > this.y + 1) this.board.getBlock(this.x, this.y + 1).input("top", data);
+					if (this.board.height > this.y + 1) {
+						this.board.getBlock(this.x, this.y + 1).input("top", data);
+					} else {
+						data.fadeOut();
+					}
 					break;
 				case "left":
-					if (0 <= this.x - 1) this.board.getBlock(this.x - 1, this.y).input("right", data);
+					if (0 <= this.x - 1) {
+						this.board.getBlock(this.x - 1, this.y).input("right", data);
+					} else {
+						data.fadeOut();
+					}
 					break;
 				case "right":
-					if (this.board.width > this.x + 1) this.board.getBlock(this.x + 1, this.y).input("left", data);
+					if (this.board.width > this.x + 1) {
+						this.board.getBlock(this.x + 1, this.y).input("left", data);
+					} else {
+						data.fadeOut();
+					}
 					break;
 				default:
 					break;
@@ -59,7 +75,9 @@ var Block = function () {
 				var queue = _this.queues[source];
 
 				if (_this.config.type === 'empty') {
-					// nop
+					queue.forEach(function (data) {
+						return data.fadeOut();
+					});
 				} else if (_this.config.type === 'wire') {
 					if (queue.length !== 0 && _this.config.io.plugs.includes(source)) {
 						(function () {
@@ -75,6 +93,10 @@ var Block = function () {
 								data.kill();
 							});
 						})();
+					} else if (!_this.config.io.plugs.includes(source)) {
+						queue.forEach(function (data) {
+							return data.fadeOut();
+						});
 					}
 				} else if (_this.config.type === 'calc') {
 					if (queue.length !== 0 && _this.config.io.plugs.includes(source)) {
@@ -90,6 +112,10 @@ var Block = function () {
 								data.kill();
 							});
 						})();
+					} else if (!_this.config.io.plugs.includes(source)) {
+						queue.forEach(function (data) {
+							return data.fadeOut();
+						});
 					}
 				}
 			};
@@ -295,6 +321,15 @@ var Data = function () {
 		key: 'kill',
 		value: function kill() {
 			this.$element.remove();
+		}
+	}, {
+		key: 'fadeOut',
+		value: function fadeOut() {
+			var _this = this;
+
+			this.$element.hide(500, function () {
+				return _this.$element.remove();
+			});
 		}
 	}, {
 		key: 'animate',
