@@ -51,7 +51,6 @@ var Block = function (_EventEmitter) {
 					if (this.board.width > this.x + 1) this.board.getBlock(this.x + 1, this.y).input("left", data);
 					break;
 				default:
-					console.log("error: Block.passTo");
 					break;
 			}
 		}
@@ -59,8 +58,6 @@ var Block = function (_EventEmitter) {
 		key: 'input',
 		value: function input(position, data) {
 			this.queues[position].push(data);
-			console.log(data);
-			console.log(position);
 			this.checkEmission();
 		}
 	}, {
