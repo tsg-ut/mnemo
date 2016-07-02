@@ -6,7 +6,7 @@
 	.board-wrap {
 		text-align: center;
 
-		.board {
+		.rows {
 			display: inline-flex;
 			flex-direction: column;
 			position: relative;
@@ -15,26 +15,26 @@
 				display: inline-flex;
 				margin: 0;
 			}
+		}
 
-			.data-layer {
+		.data-layer {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+
+			pointer-events: none;
+
+			.data {
 				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-
-				pointer-events: none;
-
-				.data {
-					position: absolute;
-					padding: 3px;
-					line-height: 1em;
-					font-weight: bold;
-					border-radius: 5px;
-					background: darkorange;
-					transform: translate(-50%, -50%);
-					color: white;
-				}
+				padding: 3px;
+				line-height: 1em;
+				font-weight: bold;
+				border-radius: 5px;
+				background: darkorange;
+				transform: translate(-50%, -50%);
+				color: white;
 			}
 		}
 	}
