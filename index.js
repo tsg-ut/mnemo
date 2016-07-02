@@ -232,7 +232,12 @@ var Board = function () {
 			var config = typeToConfig[type];
 			config.x = x;
 			config.y = y;
+			config.name = type;
 			var block = new Block(this, this.getBlockElement(x, y), config);
+			if (this.blocks[y][x] && this.blocks[y][x].config.name !== "empty") {
+				console.log(this.blocks[y][x].config.name);
+				this.stage.panel.parts.push(this.blocks[y][x].config.name);
+			}
 			this.blocks[y][x] = block;
 		}
 	}, {
