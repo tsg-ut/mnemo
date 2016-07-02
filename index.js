@@ -474,7 +474,7 @@ var Stage = function () {
 
 		this.$stage.find('.board .block').click(function (event) {
 			var $block = $(event.target);
-			if (_this.panel.selected) {
+			if (_this.panel.selected && !_this.board.executing) {
 				var type = _this.$selectedBlock.data('type');
 				$block.attr('data-type', type);
 				_this.panel.takeAndPlace($block.data('x'), $block.data('y'), type);
