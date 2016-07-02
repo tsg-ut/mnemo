@@ -5,7 +5,7 @@ script:
   - npm run build
 after_success:
   - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-  - git fetch --unshallow
+  - git fetch
   - git config user.name "Travis CI"
   - git config user.email "hakatasiloving@gmail.com"
   - git clean -fd
