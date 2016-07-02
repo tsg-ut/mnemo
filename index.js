@@ -373,7 +373,7 @@ var Panel = function () {
 				})));
 			});
 
-			this.selected = this.$panel.find('.block[seleted]').first().data('type');
+			this.selected = this.$panel.find('.block[selected]').first().data('type');
 
 			this.$panel.find('.block').click(function (event) {
 				var $block = $(event.target);

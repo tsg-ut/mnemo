@@ -127,6 +127,9 @@
 .container .panel .block {
   flex-shrink: 0;
 }
+.container .panel .block .count {
+  pointer-events: none;
+}
 .container .controls {
   text-align: center;
   margin-top: 30px;
