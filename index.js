@@ -10,6 +10,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var EventEmitter = require('events');
+var Data = require('./data');
 
 var Block = function (_EventEmitter) {
 	_inherits(Block, _EventEmitter);
@@ -51,13 +52,17 @@ var Block = function (_EventEmitter) {
 				var queue = _this2.queues[source];
 				if (queue.length !== 0 && _this2.config.io.plugs.includes(source)) {
 					(function () {
-						var destination = _this2.config.io.plugs.find(function (direction) {
+						var destinations = _this2.config.io.plugs.filter(function (direction) {
 							return direction !== source;
 						});
 						var data = queue.shift();
 						// pass through
 						data.$element.animate(data.getPosition('center'), 400, 'linear').promise().then(function () {
-							return data.$element.animate(data.getPosition(destination), 400, 'linear').promise();
+							destinations.forEach(function (destination) {
+								var outData = new Data(_this2, 'center', data.value);
+								outData.$element.animate(outData.getPosition(destination), 400, 'linear').promise().then(function () {});
+							});
+							data.kill();
 						});
 					})();
 				}
@@ -114,7 +119,7 @@ var Block = function (_EventEmitter) {
 
 module.exports = Block;
 
-},{"events":7}],2:[function(require,module,exports){
+},{"./data":3,"events":7}],2:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -218,6 +223,11 @@ var Data = function () {
 				left: this.block[position].x + 'px',
 				top: this.block[position].y + 'px'
 			};
+		}
+	}, {
+		key: 'kill',
+		value: function kill() {
+			this.$element.remove();
 		}
 	}]);
 
