@@ -4,6 +4,10 @@
 .container .board-wrap {
   text-align: center;
 }
+.container .board-wrap .board {
+  display: inline-flex;
+  position: relative;
+}
 .container .board-wrap .rows {
   display: inline-flex;
   flex-direction: column;

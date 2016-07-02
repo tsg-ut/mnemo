@@ -16,6 +16,8 @@
 		"wire9",
 		"times-2"
 	],
+	"inputX": 2,
+	"outputX": 2,
 	"input": [8, 3, 9],
 	"output": [16, 6, 18],
 	"width": 5,

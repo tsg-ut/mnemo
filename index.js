@@ -169,12 +169,12 @@ var Data = require('./data');
 var typeToConfig = require('./type-to-config');
 
 var Board = function () {
-	function Board(stage, width, height) {
+	function Board(stage) {
 		_classCallCheck(this, Board);
 
 		this.stage = stage;
-		this.height = height;
-		this.width = width;
+		this.height = stage.config.height;
+		this.width = stage.config.width;
 		this.$board = stage.$stage.find('.board');
 
 		this.blocks = [];
@@ -207,10 +207,10 @@ var Board = function () {
 			}
 		}
 
-		this.inputBlockX = 4;
+		this.inputBlockX = stage.config.inputX;
 		this.inputBlockY = 0;
-		this.outputBlockX = 4;
-		this.outputBlockY = 9;
+		this.outputBlockX = stage.config.outputX;
+		this.outputBlockY = stage.config.height - 1;
 		this.executing = false;
 	}
 
@@ -408,7 +408,7 @@ var Stage = function Stage($stage, config) {
 
 	this.$stage = $stage;
 	this.config = config;
-	this.board = new Board(this, config.width, config.height);
+	this.board = new Board(this);
 	this.panel = new Panel(this, config.parts);
 
 	this.$selectedBlock = this.$stage.find('.panel .block[selected]').first();
@@ -446,6 +446,8 @@ module.exports=[{
 		"wire9",
 		"times-2"
 	],
+	"inputX": 2,
+	"outputX": 2,
 	"input": [8, 3, 9],
 	"output": [16, 6, 18],
 	"width": 5,
