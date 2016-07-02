@@ -11,7 +11,7 @@ before_script:
 script:
   - npm run build
 after_success:
-  - git checkout -- .gitignore
+  - git checkout f2b3222e3e930b33c5618b26effcf4be451841ed .gitignore
   - ls -lah
   - git status
   - git add --all
