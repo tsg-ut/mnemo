@@ -407,7 +407,14 @@ var Panel = function () {
 		_classCallCheck(this, Panel);
 
 		this.stage = stage;
-		this.parts = stage.config.parts;
+		this.parts = Object.keys(stage.config.parts).map(function (name) {
+			var count = stage.config.parts[name];
+			return Array.from({ length: count }, function () {
+				return name;
+			});
+		}).reduce(function (a, b) {
+			return a.concat(b);
+		}, []);
 		this.$panel = this.stage.$stage.find('.panel');
 		this.selected = this.parts[0];
 		this.update();
@@ -572,64 +579,64 @@ module.exports = Stage;
 
 },{"./board":2,"./panel":5,"jquery":11}],7:[function(require,module,exports){
 module.exports=[{
-	"parts": [
-		"wire0", "wire0", "wire0",
-		"wire0", "wire0", "wire0",
-		"wire0", "wire0", "wire0",
-		"wire0", "wire0", "wire0",
-		"wire0", "wire0", "wire0",
-		"wire1",
-		"wire2",
-		"wire3",
-		"wire4",
-		"wire5",
-		"wire6",
-		"wire7",
-		"wire8",
-		"wire9",
-		"times-2",
-		"times-3",
-		"plus-1",
-		"plus-2",
-		"minus-2",
-		"iko-ru",
-		"add",
-		"sub"
-	],
+	"parts": {
+		"wire0": 99,
+		"wire1": 99,
+		"wire2": 99,
+		"wire3": 99,
+		"wire4": 99,
+		"wire5": 99,
+		"wire6": 99,
+		"wire7": 99,
+		"wire8": 99,
+		"wire9": 99,
+		"times-2": 99,
+		"times-3": 99,
+		"plus-1": 99,
+		"plus-2": 99,
+		"minus-2": 99,
+		"iko-ru": 99,
+		"add": 99,
+		"sub": 99,
+		"div": 99,
+		"mul": 99
+	},
 	"inputX": 2,
 	"outputX": 2,
 	"input": [8, 3, 9],
 	"output": [16, 6, 18],
 	"width": 5,
 	"height": 5,
-	"statement": "数を3倍してみよう!"
-},
-{
-	"parts": [
-		"wire0", "wire0", "wire0",
-		"wire0", "wire0", "wire0",
-		"wire0", "wire0", "wire0",
-		"wire0", "wire0", "wire0",
-		"wire0", "wire0", "wire0",
-		"wire1",
-		"wire2",
-		"wire3",
-		"wire4",
-		"wire5",
-		"wire6",
-		"wire7",
-		"wire8",
-		"wire9",
-		"times-2",
-		"add-3"
-	],
+	"statement": "数を2倍してみよう!"
+}, {
+	"parts": {
+		"wire0": 99,
+		"wire1": 99,
+		"wire2": 99,
+		"wire3": 99,
+		"wire4": 99,
+		"wire5": 99,
+		"wire6": 99,
+		"wire7": 99,
+		"wire8": 99,
+		"wire9": 99,
+		"times-2": 99,
+		"times-3": 99,
+		"plus-1": 99,
+		"plus-2": 99,
+		"minus-2": 99,
+		"iko-ru": 99,
+		"add": 99,
+		"sub": 99,
+		"div": 99,
+		"mul": 99
+	},
 	"input": [8, 3, 9],
 	"output": [19, 9, 21],
 	"width": 5,
 	"height": 5,
 	"statement":"数を2倍して、3足してみよう!"
-}
-]
+}]
 
 },{}],8:[function(require,module,exports){
 'use strict';
