@@ -491,8 +491,6 @@ var $ = require('jquery');
 var Board = require('./board');
 var Panel = require('./panel');
 
-window.$ = $;
-
 var Stage = function () {
 	function Stage($stage, config) {
 		var _this = this;
@@ -516,11 +514,8 @@ var Stage = function () {
 			}
 		});
 
-		this.$stage.find('.execute').click(function (event) {
-			if (_this.board.executing) return;
-			_this.caseIndex = 0;
-			_this.$stage.find('.user-outputs .output').empty();
-			_this.executeCase();
+		this.$stage.find('.execute').click(function () {
+			_this.execute();
 		});
 
 		this.$stage.find('.inputs').empty().append(config.input.map(function (input) {
@@ -545,6 +540,14 @@ var Stage = function () {
 	}
 
 	_createClass(Stage, [{
+		key: 'execute',
+		value: function execute() {
+			if (this.board.executing) return;
+			this.caseIndex = 0;
+			this.$stage.find('.user-outputs .output').empty().removeClass('correct wrong');
+			this.executeCase();
+		}
+	}, {
 		key: 'executeCase',
 		value: function executeCase() {
 			this.board.input(this.config.input[this.caseIndex]);
@@ -554,10 +557,10 @@ var Stage = function () {
 		value: function output(value) {
 			var $output = this.$stage.find('.user-outputs .output').eq(this.caseIndex);
 			$output.text(value);
+			$output.removeClass('correct wrong');
 
 			if (this.config.output[this.caseIndex] === value) {
 				$output.addClass("correct");
-				$output.removeClass("wrong");
 				if (this.config.output.length === this.caseIndex + 1) {
 					// 終了処理をここに書く
 				} else {
@@ -565,9 +568,7 @@ var Stage = function () {
 					this.executeCase();
 				}
 			} else {
-
 				$output.addClass("wrong");
-				$output.removeClass("correct");
 			}
 		}
 	}]);
