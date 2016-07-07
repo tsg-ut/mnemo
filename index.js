@@ -162,10 +162,14 @@ var Block = function () {
 		value: function emit(direction, value) {
 			var _this2 = this;
 
-			var data = new Data(this.board, this.center, value);
-			data.animate(this[direction]).then(function () {
-				_this2.passTo(direction, data);
-			});
+			if (this.board.executing) {
+				(function () {
+					var data = new Data(_this2.board, _this2.center, value);
+					data.animate(_this2[direction]).then(function () {
+						_this2.passTo(direction, data);
+					});
+				})();
+			}
 		}
 	}, {
 		key: 'center',
@@ -555,6 +559,8 @@ var Stage = function () {
 	}, {
 		key: 'output',
 		value: function output(value) {
+			var _this2 = this;
+
 			var $output = this.$stage.find('.user-outputs .output').eq(this.caseIndex);
 			$output.text(value);
 			$output.removeClass('correct wrong');
@@ -564,8 +570,10 @@ var Stage = function () {
 				if (this.config.output.length === this.caseIndex + 1) {
 					// 終了処理をここに書く
 				} else {
-					this.caseIndex++;
-					this.executeCase();
+					setTimeout(function () {
+						_this2.caseIndex++;
+						_this2.executeCase();
+					}, 600); //dataのanimateが400msだったのでそれが終わるまで待つ
 				}
 			} else {
 				$output.addClass("wrong");
