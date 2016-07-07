@@ -1,10 +1,10 @@
-# mnemo
+# mnemo [![Build Status](https://travis-ci.org/tsg-ut/mnemo.svg?branch=master)](https://travis-ci.org/tsg-ut/mnemo)
 
-[![Build Status](https://travis-ci.org/tsg-ut/mnemo.svg?branch=master)](https://travis-ci.org/tsg-ut/mnemo)
-
-![ScreenShot](assets/screen.png)
+[![ScreenShot](assets/screen.png)](http://sig.tsg.ne.jp/mnemo/)
 
 MNEMOは、TSGが制作しているプログラミング風ゲームです。
+
+## **[最新ビルド](http://sig.tsg.ne.jp/mnemo/)**
 
 ## 開発に必要なもの
 
@@ -18,7 +18,9 @@ cd mnemo
 npm install
 ```
 
-## 全部ビルド
+## ビルド
+
+### 全部ビルド
 
 ```sh
 npm run build
