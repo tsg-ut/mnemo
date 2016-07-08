@@ -311,7 +311,6 @@ var Board = function () {
 	}, {
 		key: 'output',
 		value: function output(value) {
-			this.executing = false;
 			this.stage.output(value);
 		}
 	}, {
@@ -569,14 +568,17 @@ var Stage = function () {
 				$output.addClass("correct");
 				if (this.config.output.length === this.caseIndex + 1) {
 					// 終了処理をここに書く
+					this.board.executing = false;
 				} else {
 					setTimeout(function () {
 						_this2.caseIndex++;
 						_this2.executeCase();
 					}, 600); //dataのanimateが400msだったのでそれが終わるまで待つ
+					this.board.executing = true;
 				}
 			} else {
 				$output.addClass("wrong");
+				this.board.executing = false;
 			}
 		}
 	}]);
