@@ -1,8 +1,51 @@
+body {
+	margin: 0;
+	padding: 0px 0px 0px 0px;
+}
+.leftArea {
+	position: fixed !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 20%;
+	height: 100%;
+	background-color: aqua;
+	overflow: auto;
+
+	h1 {
+		text-align: center;
+		color: navy;
+	}
+
+	.quiz-list {
+		.quiz-link {
+			text-align: left;
+			color: navy;
+			text-decoration: underline;
+			cursor: pointer;
+			&.invalid	{
+				text-decoration: underline;
+				cursor: default;
+				color: black;
+				text-decoration: none;
+			}
+		}
+	}
+
+}
 .container {
+	position: fixed !important;
+	position: absolute;
+	top:0;
+	left: 20%;
+	width: 80%;
+	height: 100%;
+	overflow: auto;
+
 	h1 {
 		text-align: center;
 		color: red;
-//		background-image: url(image/back.jpg); 
+//		background-image: url(image/back.jpg);
 	}
 	h2 {
 		text-align: center;
