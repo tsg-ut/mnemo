@@ -45,6 +45,8 @@
 		"transistor": 99,
 		"diode": 99
 	},
+	"inputX": 2,
+	"outputX": 2,
 	"input": [8, 3, 9],
 	"output": [19, 9, 21],
 	"width": 5,
