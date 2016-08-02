@@ -85,10 +85,10 @@
 	"inputX": 2,
 	"outputX": 2,
 	"input": [6,28,496],
-	"output": [1,1,1],
+	"output": [-1,-1,-1],
 	"width": 5,
 	"height": 5,
-	"statement":"1を作ってみよう!"
+	"statement":"-1を作ろう -easy-"
 },
 {
 	"parts": {
@@ -120,5 +120,33 @@
 	"width": 5,
 	"height": 10,
 	"statement":"32を足してみよう!"
+},
+{
+	"parts": {
+		"wire0": 99,
+		"wire1": 99,
+		"wire2": 99,
+		"wire3": 99,
+		"wire4": 99,
+		"wire5": 99,
+		"wire6": 99,
+		"wire7": 99,
+		"wire8": 99,
+		"wire9": 99,
+		"times-2": 99,
+		"times-3": 99,
+		"plus-1": 99,
+		"plus-2": 99,
+		"iko-ru": 99,
+		"add": 99,
+		"mul": 99
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [-1,-2,-3],
+	"output": [-1,-1,-1],
+	"width": 5,
+	"height": 10,
+	"statement":"-1を作ろう! -med-"
 }]
 
