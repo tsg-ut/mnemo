@@ -79,9 +79,9 @@
 			border: 3px solid red;
 		}
 
-		@blocks-rotate4: wireL, wireT;
+		@blocks-rotate4: wireL, wireT, diode;
 		@blocks-rotate2: wireI, times-2, add-3, times-3, plus-1, plus-2, minus-2;
-		@blocks-norotate: add, sub, mul, div, iko-ru;
+		@blocks-norotate: add, sub, mul, div, iko-ru, c-contact, conditional, transistor;
 		.-r4(@i: length(@blocks-rotate4)) when (@i > 0) {
 			@name: extract(@blocks-rotate4, @i);
 			&[data-type=@{name}] {

@@ -12,7 +12,11 @@
 		"add": 99,
 		"sub": 99,
 		"div": 99,
-		"mul": 99
+		"mul": 99,
+		"c-contact": 99,
+		"conditional": 99,
+		"transistor": 99,
+		"diode": 99
 	},
 	"inputX": 2,
 	"outputX": 2,
@@ -35,7 +39,11 @@
 		"add": 99,
 		"sub": 99,
 		"div": 99,
-		"mul": 99
+		"mul": 99,
+		"c-contact": 99,
+		"conditional": 99,
+		"transistor": 99,
+		"diode": 99
 	},
 	"input": [8, 3, 9],
 	"output": [19, 9, 21],
