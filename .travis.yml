@@ -2,12 +2,11 @@ language: node_js
 node_js:
   - node
 before_script:
-  - chmod a+x bin/*
-  - bin/before_script.sh
+  - bash bin/before_script.sh
 script:
   - npm run build
 after_success:
-  - bin/after_success.sh
+  - bash bin/after_success.sh
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
