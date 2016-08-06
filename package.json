@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "browserify": "browserify lib/index.js -o index.js -t [ babelify --presets [ es2015 ] ]",
+    "normalize-map": "replace \"lib\\\\\\\\\\\\\\\\\" \"lib/\" index.js.map",
+    "browserify": "browserify lib/index.js --debug -t [ babelify --presets [ es2015 ] ] | exorcist index.js.map > index.js && npm run normalize-map",
     "pug": "pug index.pug",
     "less": "lessc index.less index.css",
     "build": "concurrently \"npm run browserify\" \"npm run pug\" \"npm run less\"",
@@ -32,10 +33,12 @@
     "browserify": "^13.0.1",
     "chokidar-cli": "^1.2.0",
     "concurrently": "^2.2.0",
+    "exorcist": "^0.4.0",
     "gulp": "^3.9.1",
     "jquery": "^3.0.0",
     "less": "^2.7.1",
     "livereload": "^0.4.1",
-    "pug-cli": "^1.0.0-alpha6"
+    "pug-cli": "^1.0.0-alpha6",
+    "replace": "^0.3.0"
   }
 }
