@@ -6277,6 +6277,7 @@ module.exports.toCSS = function (coordinate) {
 
 }));
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+
 },{"_process":12}],11:[function(require,module,exports){
 /*eslint-disable no-unused-vars*/
 /*!
@@ -16487,4 +16488,5 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[4]);
+},{}]},{},[4])
+//# sourceMappingURL=index.js.map
