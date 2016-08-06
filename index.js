@@ -80,9 +80,10 @@ var Block = function () {
 			if (this.config.type === 'empty') {
 				for (var source in this.queues) {
 					var queue = this.queues[source];
-					queue.forEach(function (data) {
-						return data.fadeOut();
-					});
+					while (queue.length) {
+						var data = queue.shift();
+						data.fadeOut();
+					}
 				}
 			} else if (this.config.type === 'wire') {
 				var _loop = function _loop(_source) {
@@ -103,9 +104,10 @@ var Block = function () {
 							});
 						})();
 					} else if (!_this.config.io.plugs.includes(_source)) {
-						queue.forEach(function (data) {
-							return data.fadeOut();
-						});
+						while (queue.length) {
+							var _data = queue.shift();
+							_data.fadeOut();
+						}
 					}
 				};
 
@@ -130,9 +132,10 @@ var Block = function () {
 							});
 						})();
 					} else if (!_this.config.io.plugs.includes(_source2)) {
-						queue.forEach(function (data) {
-							return data.fadeOut();
-						});
+						while (queue.length) {
+							var _data2 = queue.shift();
+							_data2.fadeOut();
+						}
 					}
 				};
 
@@ -155,6 +158,15 @@ var Block = function () {
 						});
 					})();
 				}
+				for (var _source3 in this.queues) {
+					if (!this.config.io.in.includes(_source3)) {
+						var _queue = this.queues[_source3];
+						while (_queue.length) {
+							var _data3 = _queue.shift();
+							_data3.fadeOut();
+						}
+					}
+				}
 			}
 		}
 	}, {
@@ -162,13 +174,14 @@ var Block = function () {
 		value: function emit(direction, value) {
 			var _this2 = this;
 
+			var data = new Data(this.board, this.center, value);
+
 			if (this.board.executing) {
-				(function () {
-					var data = new Data(_this2.board, _this2.center, value);
-					data.animate(_this2[direction]).then(function () {
-						_this2.passTo(direction, data);
-					});
-				})();
+				data.animate(this[direction]).then(function () {
+					_this2.passTo(direction, data);
+				});
+			} else {
+				data.fadeOut();
 			}
 		}
 	}, {
@@ -274,6 +287,8 @@ var Board = function () {
 		this.inputBlockY = 0;
 		this.outputBlockX = stage.config.outputX;
 		this.outputBlockY = stage.config.height - 1;
+
+		this.dataSize = 0; // 盤上dataの個数
 		this.executing = false;
 	}
 
@@ -312,6 +327,24 @@ var Board = function () {
 		key: 'output',
 		value: function output(value) {
 			this.stage.output(value);
+		}
+	}, {
+		key: 'clearData',
+		value: function clearData() {
+			for (var x = 0; x < this.width; x++) {
+				// 動かずに待機しているdataの削除
+				for (var y = 0; y < this.height; y++) {
+					var queues = this.getBlock(x, y).queues;
+					for (var source in queues) {
+						var queue = queues[source];
+						while (queue.length) {
+							var data = queue.shift();
+							data.fadeOut();
+						}
+					}
+				}
+			}
+			this.executing = false; // dataの動きを止める
 		}
 	}, {
 		key: 'inputBlock',
@@ -356,12 +389,19 @@ var Data = function () {
 			css: toCSS(coordinate)
 		});
 		this.board.$board.find('.data-layer').append(this.$element);
+
+		this.board.dataSize++;
 	}
 
 	_createClass(Data, [{
 		key: 'kill',
 		value: function kill() {
 			this.$element.remove();
+
+			this.board.dataSize--;
+			if (this.board.dataSize === 0) {
+				this.board.stage.onStop();
+			}
 		}
 	}, {
 		key: 'fadeOut',
@@ -369,7 +409,7 @@ var Data = function () {
 			var _this = this;
 
 			this.$element.hide(500, function () {
-				return _this.$element.remove();
+				return _this.kill();
 			});
 		}
 	}, {
@@ -505,6 +545,7 @@ var Stage = function () {
 		this.caseIndex = 0;
 		this.board = new Board(this);
 		this.panel = new Panel(this);
+		this.status = 'stopping';
 
 		this.$selectedBlock = this.$stage.find('.panel .block[selected]').first();
 
@@ -519,6 +560,9 @@ var Stage = function () {
 
 		this.$stage.find('.execute').click(function () {
 			_this.execute();
+		});
+		this.$stage.find('.stop').click(function () {
+			_this.stop();
 		});
 
 		this.$stage.find('.inputs').empty().append(config.input.map(function (input) {
@@ -540,46 +584,71 @@ var Stage = function () {
 				text: output
 			});
 		}));
+
+		this.$stage.find('button.stop').hide();
+		this.$stage.find('button.execute').show();
 	}
 
 	_createClass(Stage, [{
 		key: 'execute',
 		value: function execute() {
-			if (this.board.executing) return;
 			this.caseIndex = 0;
 			this.$stage.find('.user-outputs .output').empty().removeClass('correct wrong');
+
+			this.$stage.find('button.stop').show();
+			this.$stage.find('button.execute').hide();
+
 			this.executeCase();
 		}
 	}, {
 		key: 'executeCase',
 		value: function executeCase() {
+			this.status = 'executing';
 			this.board.input(this.config.input[this.caseIndex]);
+		}
+	}, {
+		key: 'stop',
+		value: function stop() {
+			this.board.clearData();
+		}
+	}, {
+		key: 'onStop',
+		value: function onStop() {
+			this.board.executing = false;
+			switch (this.status) {
+				case 'correct':
+					// ケースが通った
+					if (this.config.output.length === this.caseIndex + 1) {
+						// 次のステージに行く処理。
+					} else {
+						this.caseIndex++;
+						this.executeCase();
+					}
+					break;
+				case 'wrong': // ケースに失敗した
+				case 'executing':
+					// 実行途中に止まった（ユーザによって/Dataの自然消滅）
+					this.$stage.find('button.stop').hide();
+					this.$stage.find('button.execute').show();
+					this.status = 'stopping';
+					break;
+			}
 		}
 	}, {
 		key: 'output',
 		value: function output(value) {
-			var _this2 = this;
-
 			var $output = this.$stage.find('.user-outputs .output').eq(this.caseIndex);
 			$output.text(value);
 			$output.removeClass('correct wrong');
 
 			if (this.config.output[this.caseIndex] === value) {
 				$output.addClass("correct");
-				if (this.config.output.length === this.caseIndex + 1) {
-					// 終了処理をここに書く
-					this.board.executing = false;
-				} else {
-					setTimeout(function () {
-						_this2.caseIndex++;
-						_this2.executeCase();
-					}, 600); //dataのanimateが400msだったのでそれが終わるまで待つ
-					this.board.executing = true;
-				}
+				this.status = 'correct';
 			} else {
 				$output.addClass("wrong");
-				this.board.executing = false;
+				this.status = 'wrong';
 			}
+			this.stop();
 		}
 	}]);
 
