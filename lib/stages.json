@@ -54,16 +54,9 @@
 	"statement": "数を2倍して、3足してみよう!"
 }, {
 	"parts": {
-		"wire0": 99,
-		"wire1": 99,
-		"wire2": 99,
-		"wire3": 99,
-		"wire4": 99,
-		"wire5": 99,
-		"wire6": 99,
-		"wire7": 99,
-		"wire8": 99,
-		"wire9": 99,
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
 		"times-2": 99,
 		"times-3": 99,
 		"plus-1": 99,
@@ -84,16 +77,9 @@
 	"statement": "-1を作ろう -easy-"
 }, {
 	"parts": {
-		"wire0": 99,
-		"wire1": 99,
-		"wire2": 99,
-		"wire3": 99,
-		"wire4": 99,
-		"wire5": 99,
-		"wire6": 99,
-		"wire7": 99,
-		"wire8": 99,
-		"wire9": 99,
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
 		"times-2": 99,
 		"times-3": 99,
 		"plus-1": 99,
@@ -114,16 +100,9 @@
 	"statement": "32を足してみよう!"
 }, {
 	"parts": {
-		"wire0": 99,
-		"wire1": 99,
-		"wire2": 99,
-		"wire3": 99,
-		"wire4": 99,
-		"wire5": 99,
-		"wire6": 99,
-		"wire7": 99,
-		"wire8": 99,
-		"wire9": 99,
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
 		"times-2": 99,
 		"times-3": 99,
 		"plus-1": 99,
@@ -141,16 +120,9 @@
 	"statement": "-1を作ろう! -med-"
 }, {
 	"parts": {
-		"wire0": 99,
-		"wire1": 99,
-		"wire2": 99,
-		"wire3": 99,
-		"wire4": 99,
-		"wire5": 99,
-		"wire6": 99,
-		"wire7": 99,
-		"wire8": 99,
-		"wire9": 99,
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
 		"times-2": 99,
 		"times-3": 99,
 		"plus-1": 99,
