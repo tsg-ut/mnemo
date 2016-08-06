@@ -127,9 +127,10 @@ var Block = function () {
 
 					// Erase data when data exists in non-pluged direction
 					if (!rotatedPlugs.includes(_source)) {
-						queue.forEach(function (data) {
-							return data.fadeOut();
-						});
+						while (queue.length) {
+							var _data = queue.shift();
+							_data.fadeOut();
+						}
 					}
 				};
 
@@ -162,9 +163,10 @@ var Block = function () {
 
 					// Erase data when data exists in non-pluged direction
 					if (!_rotatedPlugs.includes(_source2)) {
-						queue.forEach(function (data) {
-							return data.fadeOut();
-						});
+						while (queue.length) {
+							var _data2 = queue.shift();
+							_data2.fadeOut();
+						}
 					}
 				};
 
@@ -233,9 +235,10 @@ var Block = function () {
 					for (var _source3 in _this.queues) {
 						if (!rotatedIns.includes(_source3)) {
 							var _queue = _this.queues[_source3];
-							_queue.forEach(function (data) {
-								return data.fadeOut();
-							});
+							while (_queue.length) {
+								var _data3 = _queue.shift();
+								_data3.fadeOut();
+							}
 						}
 					}
 				})();
@@ -310,9 +313,10 @@ var Block = function () {
 					for (var _source4 in _this.queues) {
 						if (!rotatedIns.includes(_source4)) {
 							var _queue2 = _this.queues[_source4];
-							_queue2.forEach(function (data) {
-								return data.fadeOut();
-							});
+							while (_queue2.length) {
+								var _data4 = _queue2.shift();
+								_data4.fadeOut();
+							}
 						}
 					}
 				})();
