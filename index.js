@@ -49,30 +49,30 @@ var Block = function () {
 			}
 
 			switch (direction) {
-				case "top":
+				case 'top':
 					if (0 <= this.y - 1) {
-						this.board.getBlock(this.x, this.y - 1).input("bottom", data);
+						this.board.getBlock(this.x, this.y - 1).input('bottom', data);
 					} else {
 						data.fadeOut();
 					}
 					break;
-				case "bottom":
+				case 'bottom':
 					if (this.board.height > this.y + 1) {
-						this.board.getBlock(this.x, this.y + 1).input("top", data);
+						this.board.getBlock(this.x, this.y + 1).input('top', data);
 					} else {
 						data.fadeOut();
 					}
 					break;
-				case "left":
+				case 'left':
 					if (0 <= this.x - 1) {
-						this.board.getBlock(this.x - 1, this.y).input("right", data);
+						this.board.getBlock(this.x - 1, this.y).input('right', data);
 					} else {
 						data.fadeOut();
 					}
 					break;
-				case "right":
+				case 'right':
 					if (this.board.width > this.x + 1) {
-						this.board.getBlock(this.x + 1, this.y).input("left", data);
+						this.board.getBlock(this.x + 1, this.y).input('left', data);
 					} else {
 						data.fadeOut();
 					}
@@ -316,6 +316,33 @@ var Block = function () {
 						}
 					}
 				})();
+			} else if (this.config.type === 'if') {
+				if (this.config.io.in.every(function (source) {
+					return _this.queues[source].length > 0;
+				})) {
+					(function () {
+						var dataA = _this.queues[_this.config.io.in[0]].shift();
+						var dataB = _this.queues[_this.config.io.in[1]].shift();
+
+						if (dataB.value) {
+							dataA.animate(_this.center).promise().then(function () {
+								_this.emit(_this.config.io.out[1], dataA.value);
+								dataA.kill();
+							});
+							dataB.animate(_this.center).promise().then(function () {
+								dataB.kill();
+							});
+						} else {
+							dataA.animate(_this.center).promise().then(function () {
+								_this.emit(_this.config.io.out[0], dataA.value);
+								dataA.kill();
+							});
+							dataB.animate(_this.center).promise().then(function () {
+								dataB.kill();
+							});
+						}
+					})();
+				}
 			}
 		}
 	}, {
@@ -462,13 +489,13 @@ var Board = function () {
 			config.rotate = 0;
 			config.name = type;
 			var oldBlock = this.blocks[y][x];
-			if (oldBlock && oldBlock.config.name !== "empty") {
+			if (oldBlock && oldBlock.config.name !== 'empty') {
 				this.stage.panel.parts.push(oldBlock.config.name);
 				if (oldBlock.config.name === config.name && config.rotate_levels) {
 					config.rotate = (oldBlock.rotate + 1) % config.rotate_levels;
 				}
 			}
-			this.getBlockElement(x, y).attr("data-rotate", config.rotate * 90);
+			this.getBlockElement(x, y).attr('data-rotate', config.rotate * 90);
 			var block = new Block(this, this.getBlockElement(x, y), config);
 			this.blocks[y][x] = block;
 		}
@@ -518,7 +545,7 @@ var Board = function () {
 
 module.exports = Board;
 
-},{"./block":1,"./data":3,"./type-to-config":8,"async":10,"jquery":11}],3:[function(require,module,exports){
+},{"./block":1,"./data":3,"./type-to-config":9,"async":11,"jquery":12}],3:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -579,19 +606,64 @@ var Data = function () {
 
 module.exports = Data;
 
-},{"./util":9,"jquery":11}],4:[function(require,module,exports){
+},{"./util":10,"jquery":12}],4:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var $ = require('jquery');
+var Stage = require('./stage');
+
+var Game = function () {
+	function Game(configs) {
+		_classCallCheck(this, Game);
+
+		this.configs = configs;
+		this.$stage = $('.stage');
+		this.stageIdx = 0;
+		this.retrieve = this.$stage.clone();
+		this.stage = new Stage(this.$stage, configs[this.stageIdx++], this);
+	}
+
+	_createClass(Game, [{
+		key: 'answer',
+		value: function answer(flag) {
+			if (!flag) {
+				// 間違えた場合はゲーム終了か何か
+				alert('you are too clever to answer corectly');
+			} else if (this.configs.length <= this.stageIdx) {
+				// 全てのステージを終了
+				alert('wei wei wei');
+			} else {
+				//ここはなんかもう少しうまいやり方を知りたい
+				this.$stage.remove();
+				this.retrieve.appendTo('.container');
+				this.$stage = $('.stage');
+				this.retrieve = this.$stage.clone(); //何故かもう一度こうしないとうまく動かない
+				this.stage = new Stage(this.$stage, this.configs[this.stageIdx++], this);
+			}
+		}
+	}]);
+
+	return Game;
+}();
+
+module.exports = Game;
+
+},{"./stage":7,"jquery":12}],5:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
-var stageConfig = require('./stages.json')[0];
-var Stage = require('./stage');
+var stageConfigs = require('./stages.json');
+var Game = require('./game');
 
 $(document).ready(function () {
-	var $stage = $('.stage');
-	var stage = new Stage($stage, stageConfig);
+    var game = new Game(stageConfigs);
 });
 
-},{"./stage":6,"./stages.json":7,"jquery":11}],5:[function(require,module,exports){
+},{"./game":4,"./stages.json":8,"jquery":12}],6:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -678,7 +750,7 @@ var Panel = function () {
 
 module.exports = Panel;
 
-},{"jquery":11}],6:[function(require,module,exports){
+},{"jquery":12}],7:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -690,17 +762,20 @@ var Board = require('./board');
 var Panel = require('./panel');
 
 var Stage = function () {
-	function Stage($stage, config) {
+	function Stage($stage, config, game) {
 		var _this = this;
 
 		_classCallCheck(this, Stage);
 
 		this.$stage = $stage;
 		this.config = config;
+		this.game = game;
 		this.caseIndex = 0;
 		this.board = new Board(this);
 		this.panel = new Panel(this);
 		this.status = 'stopping';
+
+		this.$stage.find('.statement').text(config['statement']);
 
 		this.$selectedBlock = this.$stage.find('.panel .block[selected]').first();
 
@@ -774,7 +849,8 @@ var Stage = function () {
 				case 'correct':
 					// ケースが通った
 					if (this.config.output.length === this.caseIndex + 1) {
-						// 次のステージに行く処理。
+						this.board.executing = false;
+						this.game.answer(true);
 					} else {
 						this.caseIndex++;
 						this.executeCase();
@@ -793,14 +869,15 @@ var Stage = function () {
 		key: 'output',
 		value: function output(value) {
 			var $output = this.$stage.find('.user-outputs .output').eq(this.caseIndex);
+
 			$output.text(value);
 			$output.removeClass('correct wrong');
 
 			if (this.config.output[this.caseIndex] === value) {
-				$output.addClass("correct");
+				$output.addClass('correct');
 				this.status = 'correct';
 			} else {
-				$output.addClass("wrong");
+				$output.addClass('wrong');
 				this.status = 'wrong';
 			}
 			this.stop();
@@ -812,7 +889,7 @@ var Stage = function () {
 
 module.exports = Stage;
 
-},{"./board":2,"./panel":5,"jquery":11}],7:[function(require,module,exports){
+},{"./board":2,"./panel":6,"jquery":12}],8:[function(require,module,exports){
 module.exports=[{
 	"parts": {
 		"wireI": 99,
@@ -860,14 +937,106 @@ module.exports=[{
 		"transistor": 99,
 		"diode": 99
 	},
+	"inputX": 2,
+	"outputX": 2,
 	"input": [8, 3, 9],
 	"output": [19, 9, 21],
 	"width": 5,
 	"height": 5,
-	"statement":"数を2倍して、3足してみよう!"
+	"statement": "数を2倍して、3足してみよう!"
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 99,
+		"times-3": 99,
+		"plus-1": 99,
+		"plus-2": 99,
+		"minus-2": 99,
+		"iko-ru": 99,
+		"add": 99,
+		"sub": 99,
+		"div": 99,
+		"mul": 99
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [6, 28, 496],
+	"output": [-1, -1, -1],
+	"width": 5,
+	"height": 5,
+	"statement": "-1を作ろう -easy-"
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 99,
+		"times-3": 99,
+		"plus-1": 99,
+		"plus-2": 99,
+		"minus-2": 99,
+		"iko-ru": 99,
+		"add": 99,
+		"sub": 99,
+		"div": 99,
+		"mul": 99
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [6, 28, 496],
+	"output": [38, 60, 528],
+	"width": 5,
+	"height": 8,
+	"statement": "32を足してみよう!"
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 99,
+		"times-3": 99,
+		"plus-1": 99,
+		"plus-2": 99,
+		"iko-ru": 99,
+		"add": 99,
+		"mul": 99
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [-1, -2, -3],
+	"output": [-1, -1, -1],
+	"width": 5,
+	"height": 10,
+	"statement": "-1を作ろう! -med-"
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 99,
+		"times-3": 99,
+		"plus-1": 99,
+		"plus-2": 99,
+		"minus-2": 99,
+		"iko-ru": 99,
+		"add": 99,
+		"sub": 99,
+		"div": 99,
+		"mul": 99,
+		"if": 99,
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [5, 6, 7],
+	"output": [10, 18, 7],
+	"width": 10,
+	"height": 10,
+	"statement": "ifを使って、5は2倍,6は3倍,それ以外は1倍をしてみよう!"
 }]
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -1046,10 +1215,17 @@ module.exports = {
 			in: ['top', 'left'],
 			out: ['bottom', 'right']
 		}
+	},
+	'if': {
+		type: 'if',
+		io: {
+			in: ['top', 'left'],
+			out: ['bottom', 'right']
+		}
 	}
 };
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 
 module.exports.toCSS = function (coordinate) {
@@ -1059,7 +1235,7 @@ module.exports.toCSS = function (coordinate) {
 	};
 };
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 (function (process,global){
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -6278,7 +6454,7 @@ module.exports.toCSS = function (coordinate) {
 }));
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"_process":12}],11:[function(require,module,exports){
+},{"_process":13}],12:[function(require,module,exports){
 /*eslint-disable no-unused-vars*/
 /*!
  * jQuery JavaScript Library v3.1.0
@@ -16354,7 +16530,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -16488,5 +16664,5 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[4])
+},{}]},{},[5])
 //# sourceMappingURL=index.js.map

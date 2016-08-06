@@ -164,6 +164,9 @@
 .container .block[data-type=wireI][data-rotate='90'] {
   background: url("image/wireI-r90.png");
 }
+.container .block[data-type=if] {
+  background: url("image/if.png");
+}
 .container .block[data-type=transistor] {
   background: url("image/transistor.png");
 }
