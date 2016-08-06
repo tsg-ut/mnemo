@@ -1,15 +1,8 @@
 [{
 	"parts": {
-		"wire0": 99,
-		"wire1": 99,
-		"wire2": 99,
-		"wire3": 99,
-		"wire4": 99,
-		"wire5": 99,
-		"wire6": 99,
-		"wire7": 99,
-		"wire8": 99,
-		"wire9": 99,
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
 		"times-2": 99,
 		"times-3": 99,
 		"plus-1": 99,
@@ -19,7 +12,11 @@
 		"add": 99,
 		"sub": 99,
 		"div": 99,
-		"mul": 99
+		"mul": 99,
+		"c-contact": 99,
+		"conditional": 99,
+		"transistor": 99,
+		"diode": 99
 	},
 	"inputX": 2,
 	"outputX": 2,
@@ -30,16 +27,9 @@
 	"statement": "数を2倍してみよう!"
 }, {
 	"parts": {
-		"wire0": 99,
-		"wire1": 99,
-		"wire2": 99,
-		"wire3": 99,
-		"wire4": 99,
-		"wire5": 99,
-		"wire6": 99,
-		"wire7": 99,
-		"wire8": 99,
-		"wire9": 99,
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
 		"times-2": 99,
 		"times-3": 99,
 		"plus-1": 99,
@@ -49,7 +39,11 @@
 		"add": 99,
 		"sub": 99,
 		"div": 99,
-		"mul": 99
+		"mul": 99,
+		"c-contact": 99,
+		"conditional": 99,
+		"transistor": 99,
+		"diode": 99
 	},
 	"input": [8, 3, 9],
 	"output": [19, 9, 21],
