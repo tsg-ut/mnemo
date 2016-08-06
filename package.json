@@ -7,8 +7,11 @@
     "browserify": "browserify lib/index.js -o index.js -t [ babelify --presets [ es2015 ] ]",
     "pug": "pug index.pug",
     "less": "lessc index.less index.css",
-    "build": "npm run browserify && npm run pug && npm run less",
-    "watch": "chokidar \"lib/**/*.js\" -c \"npm run browserify\"",
+    "build": "concurrently \"npm run browserify\" \"npm run pug\" \"npm run less\"",
+    "watch:js": "chokidar \"lib/**/*.js\" -c \"npm run browserify\"",
+    "watch:pug": "chokidar \"*.pug\" -c \"npm run pug\"",
+    "watch:less": "chokidar \"*.less\" -c \"npm run less\"",
+    "watch": "concurrently \"npm run watch:js\" \"npm run watch:pug\" \"npm run watch:less\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,6 +31,7 @@
     "babelify": "^7.3.0",
     "browserify": "^13.0.1",
     "chokidar-cli": "^1.2.0",
+    "concurrently": "^2.2.0",
     "gulp": "^3.9.1",
     "jquery": "^3.0.0",
     "less": "^2.7.1",
