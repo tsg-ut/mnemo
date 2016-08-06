@@ -45,9 +45,101 @@
 		"transistor": 99,
 		"diode": 99
 	},
+	"inputX": 2,
+	"outputX": 2,
 	"input": [8, 3, 9],
 	"output": [19, 9, 21],
 	"width": 5,
 	"height": 5,
-	"statement":"数を2倍して、3足してみよう!"
+	"statement": "数を2倍して、3足してみよう!"
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 99,
+		"times-3": 99,
+		"plus-1": 99,
+		"plus-2": 99,
+		"minus-2": 99,
+		"iko-ru": 99,
+		"add": 99,
+		"sub": 99,
+		"div": 99,
+		"mul": 99
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [6, 28, 496],
+	"output": [-1, -1, -1],
+	"width": 5,
+	"height": 5,
+	"statement": "-1を作ろう -easy-"
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 99,
+		"times-3": 99,
+		"plus-1": 99,
+		"plus-2": 99,
+		"minus-2": 99,
+		"iko-ru": 99,
+		"add": 99,
+		"sub": 99,
+		"div": 99,
+		"mul": 99
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [6, 28, 496],
+	"output": [38, 60, 528],
+	"width": 5,
+	"height": 8,
+	"statement": "32を足してみよう!"
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 99,
+		"times-3": 99,
+		"plus-1": 99,
+		"plus-2": 99,
+		"iko-ru": 99,
+		"add": 99,
+		"mul": 99
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [-1, -2, -3],
+	"output": [-1, -1, -1],
+	"width": 5,
+	"height": 10,
+	"statement": "-1を作ろう! -med-"
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 99,
+		"times-3": 99,
+		"plus-1": 99,
+		"plus-2": 99,
+		"minus-2": 99,
+		"iko-ru": 99,
+		"add": 99,
+		"sub": 99,
+		"div": 99,
+		"mul": 99,
+		"if": 99,
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [5, 6, 7],
+	"output": [10, 18, 7],
+	"width": 10,
+	"height": 10,
+	"statement": "ifを使って、5は2倍,6は3倍,それ以外は1倍をしてみよう!"
 }]
