@@ -9,10 +9,11 @@
     "pug": "pug index.pug",
     "less": "lessc index.less index.css",
     "build": "concurrently \"npm run browserify\" \"npm run pug\" \"npm run less\"",
-    "watch:js": "chokidar \"lib/**/*.js\" -c \"npm run browserify\"",
+    "watch:js": "watchify lib/index.js --debug --verbose -t [ babelify --presets [ es2015 ] ] -o \"exorcist index.js.map > index.js\"",
+    "watch:map": "chokidar \"index.js.map\" -c \"npm run normalize-map\"",
     "watch:pug": "chokidar \"*.pug\" -c \"npm run pug\"",
     "watch:less": "chokidar \"*.less\" -c \"npm run less\"",
-    "watch": "concurrently \"npm run watch:js\" \"npm run watch:pug\" \"npm run watch:less\"",
+    "watch": "concurrently \"npm run watch:js\" \"npm run watch:map\" \"npm run watch:pug\" \"npm run watch:less\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -39,6 +40,7 @@
     "less": "^2.7.1",
     "livereload": "^0.4.1",
     "pug-cli": "^1.0.0-alpha6",
-    "replace": "^0.3.0"
+    "replace": "^0.3.0",
+    "watchify": "^3.7.0"
   }
 }
