@@ -1,7 +1,11 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -15,6 +19,7 @@ var Block = function () {
 		this.$block = $block;
 		this.x = config.x;
 		this.y = config.y;
+		this.rotate = config.rotate;
 		this.config = config;
 		this.queues = {
 			top: [],
@@ -25,6 +30,16 @@ var Block = function () {
 	}
 
 	_createClass(Block, [{
+		key: 'rotatedDirection',
+		value: function rotatedDirection(direction) {
+			if (!this.config.rotate_levels) {
+				return direction;
+			}
+
+			var directions = ['top', 'right', 'bottom', 'left'];
+			return directions[(directions.indexOf(direction) + this.rotate) % 4];
+		}
+	}, {
 		key: 'passTo',
 		value: function passTo(direction, data) {
 			if (direction === 'bottom' && this.y + 1 === this.board.height && this.x === this.board.outputBlockX) {
@@ -86,12 +101,17 @@ var Block = function () {
 					}
 				}
 			} else if (this.config.type === 'wire') {
+				var rotatedPlugs = this.config.io.plugs.map(function (direction) {
+					return _this.rotatedDirection(direction);
+				});
+
 				var _loop = function _loop(_source) {
 					var queue = _this.queues[_source];
 
-					if (queue.length !== 0 && _this.config.io.plugs.includes(_source)) {
+					// When data exists in pluged direction
+					if (queue.length !== 0 && rotatedPlugs.includes(_source)) {
 						(function () {
-							var destinations = _this.config.io.plugs.filter(function (direction) {
+							var destinations = rotatedPlugs.filter(function (direction) {
 								return direction !== _source;
 							});
 							var data = queue.shift();
@@ -103,11 +123,13 @@ var Block = function () {
 								data.kill();
 							});
 						})();
-					} else if (!_this.config.io.plugs.includes(_source)) {
-						while (queue.length) {
-							var _data = queue.shift();
-							_data.fadeOut();
-						}
+					}
+
+					// Erase data when data exists in non-pluged direction
+					if (!rotatedPlugs.includes(_source)) {
+						queue.forEach(function (data) {
+							return data.fadeOut();
+						});
 					}
 				};
 
@@ -115,12 +137,17 @@ var Block = function () {
 					_loop(_source);
 				}
 			} else if (this.config.type === 'calc') {
+				var _rotatedPlugs = this.config.io.plugs.map(function (direction) {
+					return _this.rotatedDirection(direction);
+				});
+
 				var _loop2 = function _loop2(_source2) {
 					var queue = _this.queues[_source2];
 
-					if (queue.length !== 0 && _this.config.io.plugs.includes(_source2)) {
+					// When data exists in pluged direction
+					if (queue.length !== 0 && _rotatedPlugs.includes(_source2)) {
 						(function () {
-							var destinations = _this.config.io.plugs.filter(function (direction) {
+							var destinations = _rotatedPlugs.filter(function (direction) {
 								return direction !== _source2;
 							});
 							var data = queue.shift();
@@ -131,11 +158,13 @@ var Block = function () {
 								data.kill();
 							});
 						})();
-					} else if (!_this.config.io.plugs.includes(_source2)) {
-						while (queue.length) {
-							var _data2 = queue.shift();
-							_data2.fadeOut();
-						}
+					}
+
+					// Erase data when data exists in non-pluged direction
+					if (!_rotatedPlugs.includes(_source2)) {
+						queue.forEach(function (data) {
+							return data.fadeOut();
+						});
 					}
 				};
 
@@ -143,30 +172,150 @@ var Block = function () {
 					_loop2(_source2);
 				}
 			} else if (this.config.type === 'calc2') {
-				if (this.config.io.in.every(function (source) {
-					return _this.queues[source].length > 0;
-				})) {
-					(function () {
-						var dataA = _this.queues[_this.config.io.in[0]].shift();
-						var dataB = _this.queues[_this.config.io.in[1]].shift();
-						dataA.animate(_this.center).promise().then(function () {
-							_this.emit(_this.config.io.out, _this.config.func(dataA.value, dataB.value));
-							dataA.kill();
-						});
-						dataB.animate(_this.center).promise().then(function () {
-							dataB.kill();
-						});
-					})();
-				}
-				for (var _source3 in this.queues) {
-					if (!this.config.io.in.includes(_source3)) {
-						var _queue = this.queues[_source3];
-						while (_queue.length) {
-							var _data3 = _queue.shift();
-							_data3.fadeOut();
+				(function () {
+					var rotatedIns = _this.config.io.in.map(function (direction) {
+						return _this.rotatedDirection(direction);
+					});
+					var rotatedOut = _this.rotatedDirection(_this.config.io.out);
+
+					// Execute calculation when all inputs are satisfied
+					if (rotatedIns.every(function (source) {
+						return _this.queues[source].length > 0;
+					})) {
+						(function () {
+							var datas = rotatedIns.map(function (source) {
+								return _this.queues[source].shift();
+							});
+
+							datas[0].animate(_this.center).promise().then(function () {
+								var _config;
+
+								_this.emit(rotatedOut, (_config = _this.config).func.apply(_config, _toConsumableArray(datas.map(function (data) {
+									return data.value;
+								}))));
+								datas[0].kill();
+							});
+
+							var _iteratorNormalCompletion = true;
+							var _didIteratorError = false;
+							var _iteratorError = undefined;
+
+							try {
+								var _loop3 = function _loop3() {
+									var data = _step.value;
+
+									data.animate(_this.center).promise().then(function () {
+										data.kill();
+									});
+								};
+
+								for (var _iterator = datas.slice(1)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+									_loop3();
+								}
+							} catch (err) {
+								_didIteratorError = true;
+								_iteratorError = err;
+							} finally {
+								try {
+									if (!_iteratorNormalCompletion && _iterator.return) {
+										_iterator.return();
+									}
+								} finally {
+									if (_didIteratorError) {
+										throw _iteratorError;
+									}
+								}
+							}
+						})();
+					}
+
+					// Erase data when data exists in non-pluged direction
+					for (var _source3 in _this.queues) {
+						if (!rotatedIns.includes(_source3)) {
+							var _queue = _this.queues[_source3];
+							_queue.forEach(function (data) {
+								return data.fadeOut();
+							});
 						}
 					}
-				}
+				})();
+			} else if (this.config.type === 'calc-switch') {
+				(function () {
+					var rotatedIns = _this.config.io.in.map(function (direction) {
+						return _this.rotatedDirection(direction);
+					});
+					var rotatedOuts = _this.config.io.out.map(function (direction) {
+						return _this.rotatedDirection(direction);
+					});
+
+					// Execute calculation when all inputs are satisfied
+					if (rotatedIns.every(function (source) {
+						return _this.queues[source].length > 0;
+					})) {
+						(function () {
+							var datas = rotatedIns.map(function (source) {
+								return _this.queues[source].shift();
+							});
+
+							datas[0].animate(_this.center).promise().then(function () {
+								var _config2;
+
+								var _config$func = (_config2 = _this.config).func.apply(_config2, _toConsumableArray(datas.map(function (data) {
+									return data.value;
+								})));
+
+								var _config$func2 = _slicedToArray(_config$func, 2);
+
+								var directionIndex = _config$func2[0];
+								var value = _config$func2[1];
+
+								_this.emit(rotatedOuts[directionIndex], value);
+								datas[0].kill();
+							});
+
+							var _iteratorNormalCompletion2 = true;
+							var _didIteratorError2 = false;
+							var _iteratorError2 = undefined;
+
+							try {
+								var _loop4 = function _loop4() {
+									var data = _step2.value;
+
+									data.animate(_this.center).promise().then(function () {
+										data.kill();
+									});
+								};
+
+								for (var _iterator2 = datas.slice(1)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+									_loop4();
+								}
+							} catch (err) {
+								_didIteratorError2 = true;
+								_iteratorError2 = err;
+							} finally {
+								try {
+									if (!_iteratorNormalCompletion2 && _iterator2.return) {
+										_iterator2.return();
+									}
+								} finally {
+									if (_didIteratorError2) {
+										throw _iteratorError2;
+									}
+								}
+							}
+						})();
+					}
+
+					// Erase data when data exists in non-pluged direction
+					for (var _source4 in _this.queues) {
+						if (!rotatedIns.includes(_source4)) {
+							var _queue2 = _this.queues[_source4];
+							_queue2.forEach(function (data) {
+								return data.fadeOut();
+							});
+						}
+					}
+				})();
 			}
 		}
 	}, {
@@ -301,7 +450,7 @@ var Board = function () {
 		key: 'getBlockElement',
 		value: function getBlockElement(x, y) {
 			return this.$board.find('.block').filter(function (index, element) {
-				return $(element).data('x') === x.toString() && $(element).data('y') === y.toString();
+				return $(element).data('x') === x && $(element).data('y') === y;
 			});
 		}
 	}, {
@@ -310,11 +459,17 @@ var Board = function () {
 			var config = typeToConfig[type];
 			config.x = x;
 			config.y = y;
+			config.rotate = 0;
 			config.name = type;
-			var block = new Block(this, this.getBlockElement(x, y), config);
-			if (this.blocks[y][x] && this.blocks[y][x].config.name !== "empty") {
-				this.stage.panel.parts.push(this.blocks[y][x].config.name);
+			var oldBlock = this.blocks[y][x];
+			if (oldBlock && oldBlock.config.name !== "empty") {
+				this.stage.panel.parts.push(oldBlock.config.name);
+				if (oldBlock.config.name === config.name && config.rotate_levels) {
+					config.rotate = (oldBlock.rotate + 1) % config.rotate_levels;
+				}
 			}
+			this.getBlockElement(x, y).attr("data-rotate", config.rotate * 90);
+			var block = new Block(this, this.getBlockElement(x, y), config);
 			this.blocks[y][x] = block;
 		}
 	}, {
@@ -660,16 +815,9 @@ module.exports = Stage;
 },{"./board":2,"./panel":5,"jquery":11}],7:[function(require,module,exports){
 module.exports=[{
 	"parts": {
-		"wire0": 99,
-		"wire1": 99,
-		"wire2": 99,
-		"wire3": 99,
-		"wire4": 99,
-		"wire5": 99,
-		"wire6": 99,
-		"wire7": 99,
-		"wire8": 99,
-		"wire9": 99,
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
 		"times-2": 99,
 		"times-3": 99,
 		"plus-1": 99,
@@ -679,7 +827,11 @@ module.exports=[{
 		"add": 99,
 		"sub": 99,
 		"div": 99,
-		"mul": 99
+		"mul": 99,
+		"c-contact": 99,
+		"conditional": 99,
+		"transistor": 99,
+		"diode": 99
 	},
 	"inputX": 2,
 	"outputX": 2,
@@ -690,16 +842,9 @@ module.exports=[{
 	"statement": "数を2倍してみよう!"
 }, {
 	"parts": {
-		"wire0": 99,
-		"wire1": 99,
-		"wire2": 99,
-		"wire3": 99,
-		"wire4": 99,
-		"wire5": 99,
-		"wire6": 99,
-		"wire7": 99,
-		"wire8": 99,
-		"wire9": 99,
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
 		"times-2": 99,
 		"times-3": 99,
 		"plus-1": 99,
@@ -709,7 +854,11 @@ module.exports=[{
 		"add": 99,
 		"sub": 99,
 		"div": 99,
-		"mul": 99
+		"mul": 99,
+		"c-contact": 99,
+		"conditional": 99,
+		"transistor": 99,
+		"diode": 99
 	},
 	"input": [8, 3, 9],
 	"output": [19, 9, 21],
@@ -726,65 +875,26 @@ module.exports = {
 		type: 'empty',
 		io: {}
 	},
-	wire0: {
+	wireI: {
 		type: 'wire',
 		io: {
 			plugs: ['top', 'bottom']
-		}
+		},
+		rotate_levels: 2
 	},
-	wire1: {
-		type: 'wire',
-		io: {
-			plugs: ['right', 'bottom']
-		}
-	},
-	wire2: {
-		type: 'wire',
-		io: {
-			plugs: ['left', 'right']
-		}
-	},
-	wire3: {
-		type: 'wire',
-		io: {
-			plugs: ['left', 'bottom']
-		}
-	},
-	wire4: {
-		type: 'wire',
-		io: {
-			plugs: ['top', 'left']
-		}
-	},
-	wire5: {
+	wireL: {
 		type: 'wire',
 		io: {
 			plugs: ['top', 'right']
-		}
+		},
+		rotate_levels: 4
 	},
-	wire6: {
-		type: 'wire',
-		io: {
-			plugs: ['top', 'right', 'bottom']
-		}
-	},
-	wire7: {
+	wireT: {
 		type: 'wire',
 		io: {
 			plugs: ['right', 'bottom', 'left']
-		}
-	},
-	wire8: {
-		type: 'wire',
-		io: {
-			plugs: ['bottom', 'left', 'top']
-		}
-	},
-	wire9: {
-		type: 'wire',
-		io: {
-			plugs: ['left', 'top', 'right']
-		}
+		},
+		rotate_levels: 4
 	},
 	'times-2': {
 		type: 'calc',
@@ -793,7 +903,8 @@ module.exports = {
 		},
 		io: {
 			plugs: ['top', 'bottom']
-		}
+		},
+		rotate_levels: 2
 	},
 	'times-3': {
 		type: 'calc',
@@ -802,7 +913,8 @@ module.exports = {
 		},
 		io: {
 			plugs: ['top', 'bottom']
-		}
+		},
+		rotate_levels: 2
 	},
 	'add-3': {
 		type: 'calc',
@@ -811,7 +923,8 @@ module.exports = {
 		},
 		io: {
 			plugs: ['top', 'bottom']
-		}
+		},
+		rotate_levels: 2
 	},
 	'plus-1': {
 		type: 'calc',
@@ -820,7 +933,8 @@ module.exports = {
 		},
 		io: {
 			plugs: ['top', 'bottom']
-		}
+		},
+		rotate_levels: 2
 	},
 	'plus-2': {
 		type: 'calc',
@@ -829,7 +943,8 @@ module.exports = {
 		},
 		io: {
 			plugs: ['top', 'bottom']
-		}
+		},
+		rotate_levels: 2
 	},
 	'minus-2': {
 		type: 'calc',
@@ -838,7 +953,8 @@ module.exports = {
 		},
 		io: {
 			plugs: ['top', 'bottom']
-		}
+		},
+		rotate_levels: 2
 	},
 	add: {
 		type: 'calc2',
@@ -888,6 +1004,47 @@ module.exports = {
 		io: {
 			in: ['left', 'right'],
 			out: 'bottom'
+		}
+	},
+	conditional: {
+		type: 'calc2',
+		func: function func(a, b, c) {
+			return a ? b : c;
+		},
+		io: {
+			in: ['top', 'left', 'right'],
+			out: 'bottom'
+		}
+	},
+	diode: {
+		type: 'calc2',
+		func: function func(a) {
+			return a;
+		},
+		io: {
+			in: ['right'],
+			out: 'left'
+		},
+		rotate_levels: 4
+	},
+	'c-contact': {
+		type: 'calc-switch',
+		func: function func(a) {
+			return [a ? 1 : 0, 1];
+		},
+		io: {
+			in: ['top'],
+			out: ['left', 'right']
+		}
+	},
+	transistor: {
+		type: 'calc-switch',
+		func: function func(a, b) {
+			return [a ? 1 : 0, b];
+		},
+		io: {
+			in: ['top', 'left'],
+			out: ['bottom', 'right']
 		}
 	}
 };

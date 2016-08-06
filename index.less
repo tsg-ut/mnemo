@@ -79,9 +79,37 @@
 			border: 3px solid red;
 		}
 
-		@blocks: wire0, wire1, wire2, wire3, wire4, wire5, wire6, wire7, wire8, wire9, times-2, add-3, add, sub, mul, div, times-3, times-2, plus-1, plus-2, minus-2, iko-ru;
-		.-(@i: length(@blocks)) when (@i > 0) {
-			@name: extract(@blocks, @i);
+		@blocks-rotate4: wireL, wireT, diode;
+		@blocks-rotate2: wireI, times-2, add-3, times-3, plus-1, plus-2, minus-2;
+		@blocks-norotate: add, sub, mul, div, iko-ru, c-contact, conditional, transistor;
+		.-r4(@i: length(@blocks-rotate4)) when (@i > 0) {
+			@name: extract(@blocks-rotate4, @i);
+			&[data-type=@{name}] {
+				background: url("image/@{name}.png");
+				&[data-rotate='90'] {
+					background: url("image/@{name}-r90.png");
+				}
+				&[data-rotate='180'] {
+					background: url("image/@{name}-r180.png");
+				}
+				&[data-rotate='270'] {
+					background: url("image/@{name}-r270.png");
+				}
+			}
+			.-r4((@i - 1));
+		} .-r4;
+		.-r2(@i: length(@blocks-rotate2)) when (@i > 0) {
+			@name: extract(@blocks-rotate2, @i);
+			&[data-type=@{name}] {
+				background: url("image/@{name}.png");
+				&[data-rotate='90'] {
+					background: url("image/@{name}-r90.png");
+				}
+			}
+			.-r2((@i - 1));
+		} .-r2;
+		.-(@i: length(@blocks-norotate)) when (@i > 0) {
+			@name: extract(@blocks-norotate, @i);
 			&[data-type=@{name}] { background: url("image/@{name}.png"); }
 			.-((@i - 1));
 		} .-;

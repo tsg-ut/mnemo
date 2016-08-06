@@ -86,23 +86,95 @@
 .container .block[selected] {
   border: 3px solid red;
 }
-.container .block[data-type=iko-ru] {
-  background: url("image/iko-ru.png");
+.container .block[data-type=diode] {
+  background: url("image/diode.png");
+}
+.container .block[data-type=diode][data-rotate='90'] {
+  background: url("image/diode-r90.png");
+}
+.container .block[data-type=diode][data-rotate='180'] {
+  background: url("image/diode-r180.png");
+}
+.container .block[data-type=diode][data-rotate='270'] {
+  background: url("image/diode-r270.png");
+}
+.container .block[data-type=wireT] {
+  background: url("image/wireT.png");
+}
+.container .block[data-type=wireT][data-rotate='90'] {
+  background: url("image/wireT-r90.png");
+}
+.container .block[data-type=wireT][data-rotate='180'] {
+  background: url("image/wireT-r180.png");
+}
+.container .block[data-type=wireT][data-rotate='270'] {
+  background: url("image/wireT-r270.png");
+}
+.container .block[data-type=wireL] {
+  background: url("image/wireL.png");
+}
+.container .block[data-type=wireL][data-rotate='90'] {
+  background: url("image/wireL-r90.png");
+}
+.container .block[data-type=wireL][data-rotate='180'] {
+  background: url("image/wireL-r180.png");
+}
+.container .block[data-type=wireL][data-rotate='270'] {
+  background: url("image/wireL-r270.png");
 }
 .container .block[data-type=minus-2] {
   background: url("image/minus-2.png");
 }
+.container .block[data-type=minus-2][data-rotate='90'] {
+  background: url("image/minus-2-r90.png");
+}
 .container .block[data-type=plus-2] {
   background: url("image/plus-2.png");
+}
+.container .block[data-type=plus-2][data-rotate='90'] {
+  background: url("image/plus-2-r90.png");
 }
 .container .block[data-type=plus-1] {
   background: url("image/plus-1.png");
 }
-.container .block[data-type=times-2] {
-  background: url("image/times-2.png");
+.container .block[data-type=plus-1][data-rotate='90'] {
+  background: url("image/plus-1-r90.png");
 }
 .container .block[data-type=times-3] {
   background: url("image/times-3.png");
+}
+.container .block[data-type=times-3][data-rotate='90'] {
+  background: url("image/times-3-r90.png");
+}
+.container .block[data-type=add-3] {
+  background: url("image/add-3.png");
+}
+.container .block[data-type=add-3][data-rotate='90'] {
+  background: url("image/add-3-r90.png");
+}
+.container .block[data-type=times-2] {
+  background: url("image/times-2.png");
+}
+.container .block[data-type=times-2][data-rotate='90'] {
+  background: url("image/times-2-r90.png");
+}
+.container .block[data-type=wireI] {
+  background: url("image/wireI.png");
+}
+.container .block[data-type=wireI][data-rotate='90'] {
+  background: url("image/wireI-r90.png");
+}
+.container .block[data-type=transistor] {
+  background: url("image/transistor.png");
+}
+.container .block[data-type=conditional] {
+  background: url("image/conditional.png");
+}
+.container .block[data-type=c-contact] {
+  background: url("image/c-contact.png");
+}
+.container .block[data-type=iko-ru] {
+  background: url("image/iko-ru.png");
 }
 .container .block[data-type=div] {
   background: url("image/div.png");
@@ -115,42 +187,6 @@
 }
 .container .block[data-type=add] {
   background: url("image/add.png");
-}
-.container .block[data-type=add-3] {
-  background: url("image/add-3.png");
-}
-.container .block[data-type=times-2] {
-  background: url("image/times-2.png");
-}
-.container .block[data-type=wire9] {
-  background: url("image/wire9.png");
-}
-.container .block[data-type=wire8] {
-  background: url("image/wire8.png");
-}
-.container .block[data-type=wire7] {
-  background: url("image/wire7.png");
-}
-.container .block[data-type=wire6] {
-  background: url("image/wire6.png");
-}
-.container .block[data-type=wire5] {
-  background: url("image/wire5.png");
-}
-.container .block[data-type=wire4] {
-  background: url("image/wire4.png");
-}
-.container .block[data-type=wire3] {
-  background: url("image/wire3.png");
-}
-.container .block[data-type=wire2] {
-  background: url("image/wire2.png");
-}
-.container .block[data-type=wire1] {
-  background: url("image/wire1.png");
-}
-.container .block[data-type=wire0] {
-  background: url("image/wire0.png");
 }
 .container .panel {
   display: flex;
