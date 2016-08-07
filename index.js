@@ -240,10 +240,10 @@ var Block = function (_EventEmitter) {
 
 
 						var output = {};
-						var data = new Data(_this2.board, _this2.config.func(value));
+						var data = new Data(_this2.board, value);
 						var destination = destinations[directionIndex];
-						_this2.outputQueues[direction].push(data);
-						output[direction] = data;
+						_this2.outputQueues[destination].push(data);
+						output[destination] = data;
 
 						_this2.emit('pass', { in: input, out: output });
 					})();
@@ -251,7 +251,7 @@ var Block = function (_EventEmitter) {
 
 				// Erase data when data exists in non-pluged direction
 				for (var _source4 in this.inputQueues) {
-					if (!rotatedIns.includes(_source4)) {
+					if (!_sources.includes(_source4)) {
 						var _queue2 = this.inputQueues[_source4];
 						while (_queue2.length) {
 							var _data4 = _queue2.shift();
@@ -264,11 +264,11 @@ var Block = function (_EventEmitter) {
 	}, {
 		key: 'pass',
 		value: function pass() {
-			for (var _direction in this.outputQueues) {
-				var queue = this.outputQueues[_direction];
+			for (var direction in this.outputQueues) {
+				var queue = this.outputQueues[direction];
 				while (queue.length) {
 					var data = queue.shift();
-					this.passTo(_direction, data);
+					this.passTo(direction, data);
 				}
 			}
 		}
