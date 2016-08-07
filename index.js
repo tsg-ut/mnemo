@@ -477,9 +477,8 @@ var BoardElement = function () {
 			this.board.placeBlock(x, y, type, rotate);
 		}
 	}, {
-		key: 'clearData',
-		value: function clearData() {
-			this.board.clearData();
+		key: 'eraseData',
+		value: function eraseData() {
 			this.dataElements.forEach(function (dataElement) {
 				dataElement.fadeOut();
 			});
@@ -663,20 +662,15 @@ var Board = function (_EventEmitter) {
 	}, {
 		key: 'datas',
 		get: function get() {
-			var blockDatas = this.blocks.map(function (row) {
-				return row.map(function (block) {
+			return this.blocks.reduce(function (previousRow, row) {
+				return previousRow.concat(row.reduce(function (previousBlock, block) {
 					var datas = [];
 					for (var direction in block.inputQueues) {
 						datas = datas.concat(block.inputQueues[direction]);
 						datas = datas.concat(block.outputQueues[direction]);
 					}
-					return datas;
-				});
-			});
-
-			// flatten
-			return blockDatas.reduce(function (a, b) {
-				return a.concat(b);
+					return previousBlock.concat(datas);
+				}, []));
 			}, []);
 		}
 	}]);
@@ -1032,19 +1026,22 @@ var Stage = function () {
 			this.board.step();
 			this.$stage.find('.clock-num').text(this.board.clock);
 
-			Promise.all(this.boardElement.animations).then(function () {
-				_this2.boardElement.animations = [];
-				_this2.board.pass();
+			if (this.board.executing) {
+				Promise.all(this.boardElement.animations).then(function () {
+					_this2.boardElement.animations = [];
+					_this2.board.pass();
 
-				if (_this2.board.executing) {
-					_this2.clockUp();
-				}
-			});
+					if (_this2.board.executing) {
+						_this2.clockUp();
+					}
+				});
+			}
 		}
 	}, {
 		key: 'onHalt',
 		value: function onHalt() {
 			this.boardElement.animations = [];
+			this.boardElement.eraseData();
 			this.$stage.find('button.stop').hide();
 			this.$stage.find('button.execute').show();
 		}
