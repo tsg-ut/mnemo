@@ -2,7 +2,6 @@
 	h1 {
 		text-align: center;
 		color: red;
-//		background-image: url(image/back.jpg);
 	}
 	h2 {
 		text-align: center;
@@ -81,7 +80,7 @@
 
 		@blocks-rotate4: wireL, wireT, diode;
 		@blocks-rotate2: wireI, times-2, add-3, times-3, plus-1, plus-2, minus-2;
-		@blocks-norotate: add, sub, mul, div, iko-ru, c-contact, conditional, transistor, if;
+		@blocks-norotate: add, sub, mul, div, iko-ru, c-contact, conditional, transistor;
 		.-r4(@i: length(@blocks-rotate4)) when (@i > 0) {
 			@name: extract(@blocks-rotate4, @i);
 			&[data-type=@{name}] {
@@ -113,6 +112,11 @@
 			&[data-type=@{name}] { background: url("image/@{name}.png"); }
 			.-((@i - 1));
 		} .-;
+	}
+
+	.clock {
+		text-align: center;
+		font-size: 1.5em;
 	}
 
 	.panel {

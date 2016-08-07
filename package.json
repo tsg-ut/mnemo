@@ -21,7 +21,11 @@
     "url": "git+https://github.com/tsg-ut/mnemo.git"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "TSG",
+    "email": "info@tsg.ne.jp",
+    "url": "http://www.tsg.ne.jp/"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tsg-ut/mnemo/issues"
