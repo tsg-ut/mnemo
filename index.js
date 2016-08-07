@@ -450,6 +450,11 @@ var BoardElement = function () {
 
 				for (var _direction2 in io.out) {
 					var _data = io.out[_direction2];
+
+					if (!block.outputQueues[_direction2].includes(_data)) {
+						continue;
+					}
+
 					var dataElement = new DataElement(_this, _data, block.center);
 
 					var _promise = _data.element.animate(block[_direction2]);
@@ -730,8 +735,12 @@ var DataElement = function () {
 		value: function fadeOut() {
 			var _this = this;
 
-			this.$data.hide(500, function () {
-				return _this.kill();
+			this.$data.hide({
+				duration: 500,
+				queue: false,
+				complete: function complete() {
+					return _this.kill();
+				}
 			});
 		}
 	}, {
