@@ -2,7 +2,6 @@
 	h1 {
 		text-align: center;
 		color: red;
-//		background-image: url(image/back.jpg);
 	}
 	h2 {
 		text-align: center;
@@ -113,6 +112,11 @@
 			&[data-type=@{name}] { background: url("image/@{name}.png"); }
 			.-((@i - 1));
 		} .-;
+	}
+
+	.clock {
+		text-align: center;
+		font-size: 1.5em;
 	}
 
 	.panel {
