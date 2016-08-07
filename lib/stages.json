@@ -133,7 +133,7 @@
 		"sub": 99,
 		"div": 99,
 		"mul": 99,
-		"if": 99,
+		"if": 99
 	},
 	"inputX": 2,
 	"outputX": 2,
