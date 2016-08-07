@@ -233,4 +233,32 @@
 	"height": 13,
 	"statement": "階乗を計算してみよう!",
     "number": 8
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 99,
+		"times-3": 99,
+		"plus-1": 99,
+		"plus-2": 99,
+		"minus-2": 99,
+		"iko-ru": 99,
+		"add": 99,
+		"sub": 99,
+		"div": 99,
+		"mul": 99,
+		"c-contact": 99,
+		"conditional": 99,
+		"transistor": 99,
+		"diode": 99
+	},
+	"inputX": 9,
+	"outputX": 9,
+	"input": [2016, 3791, 5678],
+	"output": [9, 0, 6],
+	"width": 19,
+	"height": 19,
+	"statement": "パリティ（与えられた四桁の数の各桁の和のをmod 10したもの)を計算してみよう!",
+    "number": 10
 }]
