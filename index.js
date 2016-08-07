@@ -196,7 +196,7 @@ var Block = function (_EventEmitter) {
 
 				// Erase data when data exists in non-pluged direction
 				for (var _source3 in this.inputQueues) {
-					if (!rotatedIns.includes(_source3)) {
+					if (!sources.includes(_source3)) {
 						var _queue = this.inputQueues[_source3];
 						while (_queue.length) {
 							var _data3 = _queue.shift();
