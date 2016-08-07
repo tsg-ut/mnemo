@@ -187,8 +187,8 @@ var Block = function (_EventEmitter) {
 						var outData = new Data(_this2.board, (_config = _this2.config).func.apply(_config, _toConsumableArray(datas.map(function (data) {
 							return data.value;
 						}))));
-						_this2.outputQueues[direction].push(outData);
-						output[direction] = outData;
+						_this2.outputQueues[destination].push(outData);
+						output[destination] = outData;
 
 						_this2.emit('pass', { in: input, out: output });
 					})();
