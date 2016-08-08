@@ -7,7 +7,7 @@
     "normalize-map": "replace \"lib\\\\\\\\\\\\\\\\\" \"lib/\" index.js.map",
     "browserify": "browserify lib/index.js --debug -t [ babelify --presets [ es2015 ] ] | exorcist index.js.map > index.js && npm run normalize-map",
     "pug": "pug index.pug",
-    "less": "lessc index.less | postcss --use autoprefixer > index.css",
+    "less": "lessc index.less | postcss --use postcss-import-url --use autoprefixer > index.css",
     "build": "concurrently \"npm run browserify\" \"npm run pug\" \"npm run less\"",
     "watch:js": "watchify lib/index.js --debug --verbose -t [ babelify --presets [ es2015 ] ] -o \"exorcist index.js.map > index.js\"",
     "watch:map": "chokidar \"index.js.map\" -c \"npm run normalize-map\"",

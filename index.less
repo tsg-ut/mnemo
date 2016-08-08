@@ -1,3 +1,5 @@
+@import (css) 'https://fonts.googleapis.com/css?family=Exo+2:900';
+
 .fixed-height(@height) {
 	flex: 0 0 @height;
 	height: @height;
@@ -327,11 +329,12 @@ html, body, .container {
 
 			@height: 40px;
 			height: @height;
-			line-height: @height;
+			line-height: @height - 4px;
+			border: 1px solid;
 
 			text-align: center;
-			font-size: 24px;
-			border: 1px solid;
+			font-size: 32px;
+			font-family: 'Exo 2', sans-serif;
 		}
 
 		.arrow {
