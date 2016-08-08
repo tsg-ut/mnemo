@@ -151,7 +151,7 @@ html, body, .container {
 						display: flex;
 						flex-direction: column;
 
-						.case-upper-pipe-area, .case-downer-pipe-area {
+						.case-top-pipe, .case-bottom-pipe {
 							.grow-height(1);
 						}
 
@@ -175,9 +175,23 @@ html, body, .container {
 					.board-area {
 						.grow-width(3);
 
-						.board-frame {
+						.board-frame-wrapper {
+							width: 300px;
 							height: 100%;
 							margin: 0 auto;
+
+							display: flex;
+							flex-direction: column;
+						}
+
+						.board-top-pipe, .board-bottom-pipe {
+							.grow-height(1);
+						}
+
+						.board-frame {
+							width: 100%;
+
+							.fixed-height(300px);
 
 							display: flex;
 							flex-direction: column;
@@ -264,13 +278,9 @@ html, body, .container {
 		}
 	}
 
-	.board-wrap {
-		text-align: center;
-
-		.board {
-			display: inline-flex;
-			position: relative;
-		}
+	.board {
+		display: inline-flex;
+		position: relative;
 
 		.rows {
 			display: inline-flex;
