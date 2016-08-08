@@ -262,4 +262,32 @@
 	"height": 19,
 	"statement": "パリティ（与えられた四桁の数の各桁の和のをmod 10したもの)を計算してみよう!",
     "number": 10
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 99,
+		"times-3": 99,
+		"plus-1": 99,
+		"plus-2": 99,
+		"minus-2": 99,
+		"iko-ru": 99,
+		"add": 99,
+		"sub": 99,
+		"div": 99,
+		"mul": 99,
+		"c-contact": 99,
+		"conditional": 99,
+		"transistor": 99,
+		"diode": 99
+	},
+	"inputX": [1,3],
+	"outputX": 2,
+	"input": [[3,2], [13,21], [9,4]],
+	"output": [5, 34, 13],
+	"width": 5,
+	"height": 5,
+	"statement": "2変数問題の練習",
+    "number": 12
 }]
