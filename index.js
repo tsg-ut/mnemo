@@ -259,6 +259,34 @@ var Block = function (_EventEmitter) {
 						}
 					}
 				}
+			} else if (this.config.type === 'wireX') {
+				var oppositeDirection = {
+					top: 'bottom',
+					bottom: 'top',
+					left: 'right',
+					right: 'left'
+				};
+				for (var _source5 in this.inputQueues) {
+					var _destination = oppositeDirection[_source5];
+
+					var _queue3 = this.inputQueues[_source5];
+
+					// When data exists in pluged direction
+					if (_queue3.length !== 0) {
+						var _data5 = _queue3.shift();
+
+						// pass through
+						var _input = {};
+						_input[_source5] = _data5;
+
+						var _output = {};
+						var _outData = new Data(this.board, _data5.value);
+						this.outputQueues[_destination].push(_outData);
+						_output[_destination] = _outData;
+
+						this.emit('pass', { in: _input, out: _output });
+					}
+				}
 			}
 		}
 	}, {
@@ -1090,6 +1118,7 @@ module.exports=[{
 		"wireI": 99,
 		"wireL": 99,
 		"wireT": 99,
+		"wireX": 99,
 		"times-2": 99,
 		"times-3": 99,
 		"plus-1": 99,
@@ -1378,6 +1407,10 @@ module.exports = {
 			plugs: ['right', 'bottom', 'left']
 		},
 		rotate_levels: 4
+	},
+	wireX: {
+		type: 'wireX',
+		io: {}
 	},
 	'times-2': {
 		type: 'calc',
