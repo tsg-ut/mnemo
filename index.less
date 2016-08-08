@@ -151,8 +151,28 @@ html, body, .container {
 						display: flex;
 						flex-direction: column;
 
+						.case-joint-top-pipe, .case-joint-bottom-pipe,
+						.case-top-pipe, .case-bottom-pipe {
+							width: 40px;
+							margin: 0 auto;
+						}
+
+						.case-joint-top-pipe, .case-joint-bottom-pipe {
+							.fixed-height(10px);
+						}
+
+						.case-joint-top-pipe {
+							background-image: url(image/pipe-joint-top.png);
+						}
+
+						.case-joint-bottom-pipe {
+							background-image: url(image/pipe-joint-bottom.png);
+						}
+
 						.case-top-pipe, .case-bottom-pipe {
 							.grow-height(1);
+							background-image: url(image/pipe-vertical.png);
+							background-size: 100% 100%;
 						}
 
 						.case-area {
@@ -161,6 +181,9 @@ html, body, .container {
 
 							position: relative;
 							margin: 0 auto;
+
+							padding: 45px;
+							box-sizing: border-box;
 
 							&::before {
 								content: url(image/case-panel.png);
@@ -182,6 +205,30 @@ html, body, .container {
 
 							display: flex;
 							flex-direction: column;
+						}
+
+						.board-joint-top-pipe, .board-joint-bottom-pipe,
+						.board-top-pipe, .board-bottom-pipe {
+							width: 40px;
+							margin: 0 auto;
+						}
+
+						.board-joint-top-pipe, .board-joint-bottom-pipe {
+							.fixed-height(10px);
+						}
+
+						.board-joint-top-pipe {
+							background-image: url(image/pipe-joint-top.png);
+						}
+
+						.board-joint-bottom-pipe {
+							background-image: url(image/pipe-joint-bottom.png);
+						}
+
+						.board-top-pipe, .board-bottom-pipe {
+							.grow-height(1);
+							background-image: url(image/pipe-vertical.png);
+							background-size: 100% 100%;
 						}
 
 						.board-top-pipe, .board-bottom-pipe {
