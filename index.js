@@ -446,7 +446,11 @@ var BoardElement = function () {
 			}
 		}
 
-		this.inputBlockX = stage.config.inputX;
+		if (typeof stage.config.inputX === "number") {
+			this.inputBlockX = [stage.config.inputX];
+		} else {
+			this.inputBlockX = stage.config.inputX;
+		}
 		this.inputBlockY = 0;
 		this.outputBlockX = stage.config.outputX;
 		this.outputBlockY = stage.config.height - 1;
@@ -519,7 +523,11 @@ var BoardElement = function () {
 	}, {
 		key: 'inputBlock',
 		get: function get() {
-			return this.getBlock(this.inputBlockX, this.inputBlockY);
+			var _this2 = this;
+
+			return this.inputBlockX.map(function (x) {
+				return _this2.getBlock(x, _this2.inputBlockY);
+			});
 		}
 	}, {
 		key: 'outputBlock',
@@ -580,7 +588,11 @@ var Board = function (_EventEmitter) {
 			}
 		}
 
-		_this.inputBlockX = config.inputX;
+		if (typeof config.inputX === "number") {
+			_this.inputBlockX = [config.inputX];
+		} else {
+			_this.inputBlockX = config.inputX;
+		}
 		_this.inputBlockY = 0;
 		_this.outputBlockX = config.outputX;
 		_this.outputBlockY = config.height - 1;
@@ -625,24 +637,30 @@ var Board = function (_EventEmitter) {
 	}, {
 		key: 'input',
 		value: function input(value) {
-			var inputData = new Data(this, value);
+			var _this3 = this;
+
+			var newValueArray = typeof value === "number" ? [value] : value;
+
+			var inputData = newValueArray.map(function (v, i) {
+				var newData = new Data(_this3, v);
+				_this3.inputBlock[i].input('top', newData);
+				return newData;
+			});
 
 			this.executing = true;
 			this.clock = 0;
-			this.inputBlock.input('top', inputData);
-
 			return inputData;
 		}
 	}, {
 		key: 'output',
 		value: function output(value) {
-			var _this3 = this;
+			var _this4 = this;
 
 			this.halt();
 
 			// Wait for the next tick to successfully break the clockUp loop
 			process.nextTick(function () {
-				_this3.emit('output', value);
+				_this4.emit('output', value);
 			});
 		}
 	}, {
@@ -685,7 +703,11 @@ var Board = function (_EventEmitter) {
 	}, {
 		key: 'inputBlock',
 		get: function get() {
-			return this.blocks[this.inputBlockY][this.inputBlockX];
+			var _this5 = this;
+
+			return this.inputBlockX.map(function (x) {
+				return _this5.blocks[_this5.inputBlockY][x];
+			});
 		}
 	}, {
 		key: 'outputBlock',
@@ -1049,8 +1071,12 @@ var Stage = function () {
 	}, {
 		key: 'executeCase',
 		value: function executeCase() {
+			var _this2 = this;
+
 			var inputData = this.board.input(this.config.input[this.caseIndex]);
-			var inputDataElement = new DataElement(this.boardElement, inputData, this.board.inputBlock.top);
+			var inputDataElement = inputData.map(function (d, i) {
+				return new DataElement(_this2.boardElement, d, _this2.board.inputBlock[i].top);
+			});
 
 			this.$stage.find('button.stop').show();
 			this.$stage.find('button.execute').hide();
@@ -1060,18 +1086,18 @@ var Stage = function () {
 	}, {
 		key: 'clockUp',
 		value: function clockUp() {
-			var _this2 = this;
+			var _this3 = this;
 
 			this.board.step();
 			this.$stage.find('.clock-num').text(this.board.clock);
 
 			if (this.board.executing) {
 				Promise.all(this.boardElement.animations).then(function () {
-					_this2.boardElement.animations = [];
-					_this2.board.pass();
+					_this3.boardElement.animations = [];
+					_this3.board.pass();
 
-					if (_this2.board.executing) {
-						_this2.clockUp();
+					if (_this3.board.executing) {
+						_this3.clockUp();
 					}
 				});
 			}
@@ -1377,6 +1403,34 @@ module.exports=[{
 	"height": 19,
 	"statement": "パリティ（与えられた四桁の数の各桁の和のをmod 10したもの)を計算してみよう!",
     "number": 10
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 99,
+		"times-3": 99,
+		"plus-1": 99,
+		"plus-2": 99,
+		"minus-2": 99,
+		"iko-ru": 99,
+		"add": 99,
+		"sub": 99,
+		"div": 99,
+		"mul": 99,
+		"c-contact": 99,
+		"conditional": 99,
+		"transistor": 99,
+		"diode": 99
+	},
+	"inputX": [1,3],
+	"outputX": 2,
+	"input": [[3,2], [13,21], [9,4]],
+	"output": [5, 34, 13],
+	"width": 5,
+	"height": 5,
+	"statement": "2変数問題の練習",
+    "number": 12
 }]
 
 },{}],11:[function(require,module,exports){
