@@ -401,32 +401,4 @@
 	"height": 19,
 	"statement": "パリティ（与えられた四桁の数の各桁の和のをmod 10したもの)を計算してみよう!",
     "number": 10
-}, {
-	"parts": {
-		"wireI": 99,
-		"wireL": 99,
-		"wireT": 99,
-		"times-2": 99,
-		"times-3": 99,
-		"plus-1": 99,
-		"plus-2": 99,
-		"minus-2": 99,
-		"iko-ru": 99,
-		"add": 99,
-		"sub": 99,
-		"div": 99,
-		"mul": 99,
-		"c-contact": 99,
-		"conditional": 99,
-		"transistor": 99,
-		"diode": 99
-	},
-	"inputX": 5,
-	"outputX": 5,
-	"input": [5, 8, 8],
-	"output": [5, 21, 233],
-	"width": 11,
-	"height": 11,
-	"statement": "フィボナッチ数を計算してみよう!",
-    "number": 11
 }]
