@@ -1056,6 +1056,12 @@ var Stage = function () {
 			});
 		}));
 
+		this.$stage.find('.arrows').empty().append(config.output.map(function () {
+			return $('<div/>', {
+				'class': 'arrow'
+			});
+		}));
+
 		this.$stage.find('.user-outputs').empty().append(config.output.map(function () {
 			return $('<div/>', {
 				'class': 'output'
@@ -1071,6 +1077,8 @@ var Stage = function () {
 
 		this.$stage.find('button.stop').hide();
 		this.$stage.find('button.execute').show();
+
+		this.updateStyles();
 	}
 
 	_createClass(Stage, [{
@@ -1143,6 +1151,25 @@ var Stage = function () {
 			} else {
 				$output.addClass('wrong');
 			}
+		}
+	}, {
+		key: 'updateStyles',
+		value: function updateStyles() {
+			var _this4 = this;
+
+			var getMargin = function getMargin(selector) {
+				var element = _this4.$stage.find(selector).get(0);
+				var styles = getComputedStyle(element);
+				return parseInt(styles['margin-right']);
+			};
+
+			var leftMargin = getMargin('.case-joint-top-pipe');
+			var rightMargin = getMargin('.board-frame-wrapper') + getMargin('.board-joint-top-pipe');
+
+			this.$stage.find('.upper-pipe-area, .downer-pipe-area').css({
+				marginLeft: leftMargin + 'px',
+				marginRight: rightMargin + 'px'
+			});
 		}
 	}]);
 
