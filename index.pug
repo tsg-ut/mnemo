@@ -11,28 +11,62 @@ html
 			.layer.background-layer
 			.stage.layer.stage-layer
 				.upper-area
+					.pipe-area
+						.upper-pipe-area
+							.left-pad
+							.left-corner-pipe
+							.left-pipe
+							.center-pipe
+							.right-pipe
+							.right-corner-pipe
+							.right-pad
+						.case-board-area
+							.case-pipe-area
+								.case-upper-pipe-area
+								.case-area
+									.case
+										.inputs
+										.arrows
+										.outputs
+											.correct-outputs
+											.user-outputs
+								.case-downer-pipe-area
+							.board-area
+								.board-frame-upper
+									.boader-frame-topleft
+									.boader-frame-top
+									.boader-frame-topright
+								.board-frame-middle
+									.boader-frame-left
+									.boader-frame-center
+										.board
+											.rows
+											.data-layer
+									.boader-frame-right
+								.board-frame-downer
+									.boader-frame-bottomleft
+									.boader-frame-bottom
+									.boader-frame-bottomright
+						.downer-pipe-area
+							.left-pad
+							.left-corner-pipe
+							.left-pipe
+							.center-pipe
+							.right-pipe
+							.right-corner-pipe
+							.right-pad
+					.panel-area
+						.panel
 				.downer-area
-					h2.statement
-
-					h2 Input
-
-					.inputs
-
-					.board-wrap
-						.board
-							.rows
-							.data-layer
-
-					.clock Clock: <span class="clock-num">0</span>
-
-					h2 Output
-
-					.outputs
-						.user-outputs
-						.correct-outputs
-
-					.panel
-
-					.controls
-						button.btn.btn-primary.btn-lg.execute(type = 'button') Execute
-						button.btn.btn-success.btn-lg.stop(type = 'button') Stop
+					.left-area
+					.controls-area
+						.controls
+							button.exit(type = 'button')
+							button.ranking(type = 'button')
+							button.execute(type = 'button')
+							button.rapid(type = 'button')
+							button.step(type = 'button')
+					.right-area
+						.statement-area
+							.mission MISSION
+							.statement
