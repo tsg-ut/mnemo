@@ -5,33 +5,33 @@ html
 		meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
 		title MNEMO
 		script(src="index.js", charset="utf-8")
-		link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet", crossorigin="anonymous")
 		link(href="index.css", rel="stylesheet")
 	body
 		.container
-			h1 MNEMO
-			.stage
-				h2.statement
+			.layer.background-layer
+			.layer.stage-layer
+				.stage
+					h2.statement
 
-				h2 Input
+					h2 Input
 
-				.inputs
+					.inputs
 
-				.board-wrap
-					.board
-						.rows
-						.data-layer
+					.board-wrap
+						.board
+							.rows
+							.data-layer
 
-				.clock Clock: <span class="clock-num">0</span>
+					.clock Clock: <span class="clock-num">0</span>
 
-				h2 Output
+					h2 Output
 
-				.outputs
-					.user-outputs
-					.correct-outputs
+					.outputs
+						.user-outputs
+						.correct-outputs
 
-				.panel
+					.panel
 
-				.controls
-					button.btn.btn-primary.btn-lg.execute(type = 'button') Execute
-					button.btn.btn-success.btn-lg.stop(type = 'button') Stop
+					.controls
+						button.btn.btn-primary.btn-lg.execute(type = 'button') Execute
+						button.btn.btn-success.btn-lg.stop(type = 'button') Stop

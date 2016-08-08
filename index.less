@@ -1,8 +1,33 @@
+html, body, .container {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+}
+
 .container {
+	.layer {
+		background-size: cover;
+		background-position: center;
+
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+
+		z-index: 0;
+
+		&.background-layer {
+			background-image: url(image/background.svg);
+		}
+	}
+
 	h1 {
 		text-align: center;
 		color: red;
 	}
+
 	h2 {
 		text-align: center;
 	}
