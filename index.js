@@ -680,6 +680,19 @@ var Board = function (_EventEmitter) {
 
 			if (this.datas.length === 0) {
 				this.halt();
+			} else {
+				var noOutput = true;
+				this.forBlocks(function (block) {
+					for (var source in block.outputQueues) {
+						if (block.outputQueues[source].length > 0) {
+							noOutput = false;
+							break;
+						}
+					}
+				});
+				if (noOutput) {
+					this.halt();
+				}
 			}
 		}
 	}, {
