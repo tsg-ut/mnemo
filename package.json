@@ -45,6 +45,7 @@
     "less": "^2.7.1",
     "livereload": "^0.4.1",
     "postcss-cli": "^2.5.2",
+    "postcss-import-url": "^2.1.0",
     "pug-cli": "^1.0.0-alpha6",
     "replace": "^0.3.0",
     "watchify": "^3.7.0"
