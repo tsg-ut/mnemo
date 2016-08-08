@@ -104,6 +104,39 @@ html, body, .container {
 
 				.downer-pipe-area {
 					.fixed-height(119px);
+
+					margin-left: 100px;
+					margin-right: 100px;
+
+					display: flex;
+
+					.left-corner-pipe {
+						.fixed-width(93px);
+						background-image: url(image/pipe-downer-left-corner.png);
+					}
+
+					.left-pipe, .right-pipe {
+						background-image: url(image/pipe-downer.png);
+						background-size: 100% 100%;
+					}
+
+					.left-pipe {
+						.grow-width(3);
+					}
+
+					.right-pipe {
+						.grow-width(2);
+					}
+
+					.center-pipe {
+						.fixed-width(131px);
+						background-image: url(image/pipe-downer-center.png);
+					}
+
+					.right-corner-pipe {
+						.fixed-width(93px);
+						background-image: url(image/pipe-downer-right-corner.png);
+					}
 				}
 
 				.case-board-area {
