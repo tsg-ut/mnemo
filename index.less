@@ -9,12 +9,12 @@
 }
 
 .grow-height(@ratio) {
-	flex: @ratio 0 0;
+	flex: @ratio 1 0;
 	height: 0;
 }
 
 .grow-width(@ratio) {
-	flex: @ratio 0 0;
+	flex: @ratio 1 0;
 	width: 0;
 }
 
@@ -174,6 +174,70 @@ html, body, .container {
 
 					.board-area {
 						.grow-width(3);
+
+						.board-frame {
+							height: 100%;
+							margin: 0 auto;
+
+							display: flex;
+							flex-direction: column;
+
+							.top, .bottom {
+								.fixed-height(25px);
+							}
+
+							.middle {
+								.grow-height(1);
+							}
+
+							.top, .bottom, .middle {
+								display: flex;
+
+								.left, .right {
+									.fixed-width(25px);
+								}
+
+								.center {
+									.grow-width(1);
+								}
+							}
+
+							.top .left {
+								background-image: url(image/frame-topleft.png);
+							}
+
+							.top .center {
+								background-image: url(image/frame-top.png);
+								background-size: 100% 100%;
+							}
+
+							.top .right {
+								background-image: url(image/frame-topright.png);
+							}
+
+							.middle .left {
+								background-image: url(image/frame-left.png);
+								background-size: 100% 100%;
+							}
+
+							.middle .right {
+								background-image: url(image/frame-right.png);
+								background-size: 100% 100%;
+							}
+
+							.bottom .left {
+								background-image: url(image/frame-bottomleft.png);
+							}
+
+							.bottom .center {
+								background-image: url(image/frame-bottom.png);
+								background-size: 100% 100%;
+							}
+
+							.bottom .right {
+								background-image: url(image/frame-bottomright.png);
+							}
+						}
 					}
 				}
 			}
