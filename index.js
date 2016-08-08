@@ -1167,7 +1167,7 @@ module.exports=[{
 	"width": 5,
 	"height": 5,
 	"statement": "数を2倍してみよう!",
-    "number": 1
+	"number": 1
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1195,7 +1195,7 @@ module.exports=[{
 	"width": 5,
 	"height": 5,
 	"statement": "数を1足してみよう",
-    "number": 11
+	"number": 11
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1223,7 +1223,7 @@ module.exports=[{
 	"width": 5,
 	"height": 5,
 	"statement": "数を6倍してみよう!",
-    "number": 12
+	"number": 12
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1251,7 +1251,7 @@ module.exports=[{
 	"width": 5,
 	"height": 5,
 	"statement": "数を2で割ってみよう!",
-    "number": 13
+	"number": 13
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1279,7 +1279,7 @@ module.exports=[{
 	"width": 5,
 	"height": 5,
 	"statement": "数を2倍して、3足してみよう!",
-    "number": 2
+	"number": 2
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1307,7 +1307,7 @@ module.exports=[{
 	"width": 5,
 	"height": 5,
 	"statement": "6乗してみよう",
-    "number": 7
+	"number": 7
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1335,7 +1335,7 @@ module.exports=[{
 	"width": 5,
 	"height": 10,
 	"statement": "10で割った余りを求めてみよう!",
-    "number": 14
+	"number": 14
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1359,7 +1359,7 @@ module.exports=[{
 	"width": 5,
 	"height": 5,
 	"statement": "-1を作ろう -easy-",
-    "number": 3
+	"number": 3
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1383,7 +1383,7 @@ module.exports=[{
 	"width": 5,
 	"height": 8,
 	"statement": "32を足してみよう!",
-    "number": 4
+	"number": 4
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1404,7 +1404,7 @@ module.exports=[{
 	"width": 5,
 	"height": 10,
 	"statement": "-1を作ろう! -med-",
-    "number": 5
+	"number": 5
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1431,7 +1431,7 @@ module.exports=[{
 	"width": 9,
 	"height": 6,
 	"statement": "偶数なら2倍,奇数なら3倍してみよう!",
-    "number": 15
+	"number": 15
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1458,7 +1458,7 @@ module.exports=[{
 	"width": 11,
 	"height": 11,
 	"statement": "ifを使って、5は2倍,6は3倍,それ以外は1倍をしてみよう!",
-    "number": 6
+	"number": 6
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1486,7 +1486,7 @@ module.exports=[{
 	"width": 9,
 	"height": 9,
 	"statement": "mod7で2を足してみよう",
-    "number": 9
+	"number": 9
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1514,7 +1514,7 @@ module.exports=[{
 	"width": 13,
 	"height": 13,
 	"statement": "階乗を計算してみよう!",
-    "number": 8
+	"number": 8
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1542,7 +1542,7 @@ module.exports=[{
 	"width": 19,
 	"height": 19,
 	"statement": "パリティ（与えられた四桁の数の各桁の和のをmod 10したもの)を計算してみよう!",
-    "number": 10
+	"number": 10
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1570,7 +1570,7 @@ module.exports=[{
 	"width": 5,
 	"height": 5,
 	"statement": "2変数問題の練習",
-    "number": 12
+	"number": 12
 }]
 
 },{}],11:[function(require,module,exports){
