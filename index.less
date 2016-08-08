@@ -142,14 +142,45 @@ html, body, .container {
 				.case-board-area {
 					flex: 1 0 0;
 					height: 0;
+
+					display: flex;
+
+					.case-pipe-area {
+						.grow-width(2);
+
+						display: flex;
+						flex-direction: column;
+
+						.case-upper-pipe-area, .case-downer-pipe-area {
+							.grow-height(1);
+						}
+
+						.case-area {
+							width: 471px;
+							height: 343px;
+
+							position: relative;
+							margin: 0 auto;
+
+							&::before {
+								content: url(image/case-panel.png);
+								position: absolute;
+								left: -12px;
+								top: -3px;
+								z-index: -1;
+							}
+						}
+					}
+
+					.board-area {
+						.grow-width(3);
+					}
 				}
 			}
 		}
 
 		.downer-area {
-			@height: 130px;
-			flex: 0 0 @height;
-			height: @height;
+			.fixed-height(200px);
 		}
 	}
 
@@ -166,7 +197,6 @@ html, body, .container {
 			border: 1px solid;
 			&.correct{ background-color: pink;}
 			&.wrong{ background-color: lightblue;}
-
 		}
 	}
 
