@@ -1,4 +1,5 @@
 @import (css) 'https://fonts.googleapis.com/css?family=Exo+2:900';
+@import (css) 'https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.css';
 
 .fixed-height(@height) {
 	flex: 0 0 @height;
@@ -21,7 +22,7 @@
 }
 
 .vertical-center {
-	position: relative;
+	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
 }
@@ -31,6 +32,15 @@ html, body, .container {
 	padding: 0;
 	width: 100%;
 	height: 100%;
+}
+
+button {
+	border: none;
+	outline: none;
+	padding: 0;
+	background: none;
+	font-family: inherit;
+	cursor: pointer;
 }
 
 .container {
@@ -205,6 +215,7 @@ html, body, .container {
 
 							.case {
 								.vertical-center;
+								position: relative;
 							}
 						}
 					}
@@ -317,6 +328,10 @@ html, body, .container {
 						.board-wrap {
 							background-color: #e4b67c;
 
+							.block {
+								position: relative;
+							}
+
 							.block::after {
 								content: '';
 
@@ -336,7 +351,18 @@ html, body, .container {
 		}
 
 		.downer-area {
-			.fixed-height(200px);
+			.fixed-height(150px);
+
+			display: flex;
+
+			.left-area, .right-area {
+				.grow-width(1);
+			}
+
+			.controls-area {
+				.fixed-width(420px);
+				position: relative;
+			}
 		}
 	}
 
@@ -494,5 +520,54 @@ html, body, .container {
 				}
 			}
 		}
+	}
+
+	.controls {
+		@button-height: 100px;
+		width: 100%;
+		height: @button-height;
+
+		.vertical-center;
+
+		&::before {
+			@height: 70px;
+			content: '';
+			position: absolute;
+
+			width: 100%;
+			height: @height;
+
+			top: (@button-height - @height) / 2;
+			left: 0;
+
+			background: white;
+			border-radius: 12px;
+			z-index: -1;
+		}
+
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+
+		& > button {
+			width: 50px;
+			height: 50px;
+
+			flex: 0 0 auto;
+
+			&.execute, &.stop {
+				width: 100px;
+				height: 100px;
+			}
+		}
+
+		@buttons: exit, ranking, execute, stop, rapid, step;
+		.-(@i: length(@buttons)) when (@i > 0) {
+			@button: extract(@buttons, @i);
+			& > button.@{button} {
+				background: url('image/control-button-@{button}.png');
+			}
+			.-((@i - 1));
+		} .-;
 	}
 }
