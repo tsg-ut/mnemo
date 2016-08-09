@@ -146,6 +146,47 @@ button {
 			.fixed-width(100vw);
 			height: 100vh;
 			position: relative;
+
+			.menu {
+				width: 500px;
+
+				position: absolute;
+				top: 40%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+
+				.row {
+				    text-align: center;
+				}
+
+				.logo {
+					margin-bottom: 48px;
+				}
+
+				button.big {
+					background: rgba(61, 128, 42, 0.2);
+					transition: background-color .3s;
+
+					padding: 0 2em;
+					margin: 24px 0;
+					border: 2px solid #222248;
+					border-radius: 36px;
+
+					line-height: 72px;
+					font-size: 48px;
+					font-weight: bold;
+					color: white;
+
+					&:hover {
+						background: rgba(61, 128, 42, 0.6);
+					}
+				}
+
+				button.small {
+					font-size: 30px;
+					margin: 18px 0;
+				}
+			}
 		}
 	}
 }
