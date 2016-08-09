@@ -998,11 +998,29 @@ button {
 .container .block[data-type=wireL][data-rotate='270'] {
   background: url("image/wireL-r270.png");
 }
+.container .block[data-type=div-3] {
+  background: url("image/div-3.png");
+}
+.container .block[data-type=div-3][data-rotate='90'] {
+  background: url("image/div-3-r90.png");
+}
+.container .block[data-type=div-2] {
+  background: url("image/div-2.png");
+}
+.container .block[data-type=div-2][data-rotate='90'] {
+  background: url("image/div-2-r90.png");
+}
 .container .block[data-type=minus-2] {
   background: url("image/minus-2.png");
 }
 .container .block[data-type=minus-2][data-rotate='90'] {
   background: url("image/minus-2-r90.png");
+}
+.container .block[data-type=minus-1] {
+  background: url("image/minus-1.png");
+}
+.container .block[data-type=minus-1][data-rotate='90'] {
+  background: url("image/minus-1-r90.png");
 }
 .container .block[data-type=plus-2] {
   background: url("image/plus-2.png");
@@ -1039,6 +1057,12 @@ button {
 }
 .container .block[data-type=wireI][data-rotate='90'] {
   background: url("image/wireI-r90.png");
+}
+.container .block[data-type=mod] {
+  background: url("image/mod.png");
+}
+.container .block[data-type=pow] {
+  background: url("image/pow.png");
 }
 .container .block[data-type=wireX] {
   background: url("image/wireX.png");

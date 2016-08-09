@@ -1225,7 +1225,9 @@ module.exports=[{
 		"times-3": 99,
 		"plus-1": 99,
 		"plus-2": 99,
-		"minus-2": 99
+		"minus-2": 99,
+
+
 	},
 	"inputX": 1,
 	"outputX": 1,
@@ -1724,6 +1726,38 @@ module.exports = {
 		},
 		rotate_levels: 2
 	},
+	'minus-1': {
+		type: 'calc',
+		func: function func(n) {
+			return n - 1;
+		},
+		io: {
+			plugs: ['top', 'bottom']
+		},
+		rotate_levels: 2
+	},
+	'div-2': {
+		type: 'calc',
+		func: function func(n) {
+			return (n - n % 2) / 2;
+		},
+
+		io: {
+			plugs: ['top', 'bottom']
+		},
+		rotate_levels: 2
+	},
+	'div-3': {
+		type: 'calc',
+		func: function func(n) {
+			return (n - n % 3) / 3;
+		},
+
+		io: {
+			plugs: ['top', 'bottom']
+		},
+		rotate_levels: 2
+	},
 	'minus-2': {
 		type: 'calc',
 		func: function func(n) {
@@ -1768,6 +1802,26 @@ module.exports = {
 		type: 'calc2',
 		func: function func(a, b) {
 			return (a - a % b) / b;
+		},
+		io: {
+			in: ['left', 'right'],
+			out: 'bottom'
+		}
+	},
+	mod: {
+		type: 'calc2',
+		func: function func(a, b) {
+			return a % b;
+		},
+		io: {
+			in: ['left', 'right'],
+			out: 'bottom'
+		}
+	},
+	pow: {
+		type: 'calc2',
+		func: function func(a, b) {
+			return Math.pow(a, b);
 		},
 		io: {
 			in: ['left', 'right'],
