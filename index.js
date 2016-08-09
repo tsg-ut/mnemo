@@ -1189,7 +1189,7 @@ module.exports = Stage;
 },{"./board":3,"./board-element":2,"./data-element":4,"./panel":8,"jquery":14}],10:[function(require,module,exports){
 module.exports=[{
 	"parts": {
-		"wireI": 3
+		"wireI": 99
 	},
 	"inputX": 1,
 	"outputX": 1,
