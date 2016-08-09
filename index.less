@@ -532,7 +532,39 @@ button {
 
 			background-image: url(image/arrow-down.png);
 			background-position: center;
-			background-repeat: no-repeat;;
+			background-repeat: no-repeat;
+
+			position: relative;
+			overflow: hidden;
+
+			&::after {
+				content: '';
+				position: absolute;
+
+				left: 0;
+				right: 0;
+				height: 180px;
+
+				background-image: linear-gradient(
+					to bottom,
+					rgba(255, 255, 255, 0) 0%,
+					rgba(255, 255, 255, .5) 12.5%,
+					rgba(255, 255, 255, 0) 25%,
+					rgba(255, 255, 255, .5) 37.5%,
+					rgba(255, 255, 255, 0) 50%,
+					rgba(255, 255, 255, .5) 62.5%,
+					rgba(255, 255, 255, 0) 75%,
+					rgba(255, 255, 255, .5) 87.5%,
+					rgba(255, 255, 255, 0) 100%
+				);
+
+				@keyframes verticalSlide {
+					from { transform: translateY(-50%); }
+					to   { transform: translateY(0); }
+				}
+
+				animation: 3s linear 0s infinite verticalSlide;
+			}
 		}
 	}
 
