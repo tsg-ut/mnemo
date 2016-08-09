@@ -844,6 +844,8 @@ var Stage = require('./stage');
 
 var Game = function () {
 	function Game(configs) {
+		var _this = this;
+
 		_classCallCheck(this, Game);
 
 		this.configs = configs;
@@ -851,6 +853,10 @@ var Game = function () {
 		this.stageIndex = 0;
 		this.stagePrototype = this.$stage.clone();
 		this.currentStage = new Stage(this, configs[this.stageIndex++]);
+
+		$(window).resize(function () {
+			return _this.currentStage.updateStyles();
+		});
 	}
 
 	_createClass(Game, [{
@@ -885,25 +891,25 @@ var stageConfigs = require('./stages.json');
 var Game = require('./game');
 
 $(document).ready(function () {
-    var game = new Game(stageConfigs);
+	var game = new Game(stageConfigs);
 
-    var clicked = false;
-    $('body').click(function () {
-        if (!clicked) {
-            setTimeout(function () {
-                alert('そろそろ次の人に代わってね');
-                clicked = false;
-            }, 5 * 60 * 1000);
-            clicked = true;
-        }
-    });
+	var clicked = false;
+	$('body').click(function () {
+		if (!clicked) {
+			setTimeout(function () {
+				alert('そろそろ次の人に代わってね');
+				clicked = false;
+			}, 5 * 60 * 1000);
+			clicked = true;
+		}
+	});
 
-    $('.modal').each(function (index, element) {
-        var $modal = $(element);
-        $modal.find('.close').click(function () {
-            $modal.remove();
-        });
-    });
+	$('.modal').each(function (index, element) {
+		var $modal = $(element);
+		$modal.find('.close').click(function () {
+			$modal.remove();
+		});
+	});
 });
 
 },{"./game":6,"./stages.json":10,"jquery":14}],8:[function(require,module,exports){
