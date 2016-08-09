@@ -1210,8 +1210,8 @@ module.exports=[{
 		"plus-2": 99,
 		"minus-2": 99
 	},
-	"inputX": 2,
-	"outputX": 2,
+	"inputX": 1,
+	"outputX": 1,
 	"input": [8, 3, 9],
 	"output": [16, 6, 18],
 	"width": 3,
