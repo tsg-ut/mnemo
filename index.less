@@ -152,7 +152,7 @@ button {
 			position: relative;
 
 			.menu {
-				width: 500px;
+				width: 800px;
 
 				position: absolute;
 				top: 40%;
@@ -189,6 +189,46 @@ button {
 				button.small {
 					font-size: 30px;
 					margin: 18px 0;
+				}
+
+				.stage-list {
+					padding: 0;
+					margin: 0 0 1em;
+
+					column-count: 2;
+
+					.stage-name {
+						margin-left: 1em;
+
+						list-style: none;
+
+						text-align: left;
+						line-height: 1.5em;
+						font-size: 20px;
+
+						position: relative;
+						cursor: pointer;
+
+						&::before {
+							content: '';
+
+							width: 0;
+							height: 0;
+							position: absolute;
+							top: calc(~"0.75em - 6px");
+							right: calc(~"100% + 0.3em");
+
+							border-top: 6px solid transparent;
+							border-left: 12px dotted black;
+							border-bottom: 6px solid transparent;
+
+							transition: transform .5s ease-out;
+						}
+
+						&:hover::before {
+							transform: rotateX(360deg);
+						}
+					}
 				}
 			}
 		}
