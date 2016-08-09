@@ -518,7 +518,7 @@ button {
 
 		@blocks-rotate4: wireL, wireT, diode;
 		@blocks-rotate2: wireI, times-2, add-3, times-3, plus-1, plus-2, minus-1, minus-2, div-2, div-3, const-0, const-1, const-2;
-		@blocks-norotate: add, sub, mul, div, iko-ru, c-contact, conditional, transistor, wireX, pow, mod;
+		@blocks-norotate: add, sub, mul, div,  c-contact, conditional, transistor, wireX, pow, mod, bitshift-left, bitshift-right, bitwise-and, bitwise-or, bitwise-xor, iko-ru, neq, gt, geqq, lt, leqq;
 		.-r4(@i: length(@blocks-rotate4)) when (@i > 0) {
 			@name: extract(@blocks-rotate4, @i);
 			&[data-type=@{name}] {
