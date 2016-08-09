@@ -843,14 +843,14 @@ var $ = require('jquery');
 var Stage = require('./stage');
 
 var Game = function () {
-	function Game($stage, configs) {
+	function Game(configs) {
 		_classCallCheck(this, Game);
 
 		this.configs = configs;
-		this.$stage = $stage;
-		this.stageIdx = 0;
-		this.retrieve = this.$stage.clone();
-		this.stage = new Stage(this, configs[this.stageIdx++]);
+		this.$stage = $('.stage');
+		this.stageIndex = 0;
+		this.stagePrototype = this.$stage.clone();
+		this.currentStage = new Stage(this, configs[this.stageIndex++]);
 	}
 
 	_createClass(Game, [{
@@ -865,10 +865,9 @@ var Game = function () {
 			} else {
 				//ここはなんかもう少しうまいやり方を知りたい
 				this.$stage.remove();
-				this.retrieve.appendTo('.container');
+				this.stagePrototype.clone().appendTo('.container');
 				this.$stage = $('.stage');
-				this.retrieve = this.$stage.clone(); //何故かもう一度こうしないとうまく動かない
-				this.stage = new Stage(this, this.configs[this.stageIdx++]);
+				this.currentStage = new Stage(this, this.configs[this.stageIndex++]);
 			}
 		}
 	}]);
@@ -886,7 +885,7 @@ var stageConfigs = require('./stages.json');
 var Game = require('./game');
 
 $(document).ready(function () {
-    var game = new Game($('.stage'), stageConfigs);
+    var game = new Game(stageConfigs);
 
     var clicked = false;
     $('body').click(function () {
