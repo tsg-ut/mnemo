@@ -139,8 +139,7 @@ button {
 	.screens {
 		display: inline-flex;
 
-		transform: translateX(0);
-		transition: transform .5s cubic-bezier(0, 0, 0.3, 1);
+		transition: transform .8s cubic-bezier(0, 0.75, 0.3, 1);
 
 		&.gaming {
 			transform: translateX(-100vw);
@@ -196,6 +195,9 @@ button {
 					margin: 0 0 1em;
 
 					column-count: 2;
+
+					display: none;
+					&.active { display: block; }
 
 					.stage-name {
 						margin-left: 1em;
