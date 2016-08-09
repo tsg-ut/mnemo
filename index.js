@@ -1250,7 +1250,7 @@ module.exports=[{
 	"output": [5, 12, 7],
 	"width": 5,
 	"height": 5,
-	"statement": "数を3引いてみよう",
+	"statement": "数を3引いてみよう!",
 	"number": 11
 }, {
 	"parts": {
@@ -1265,8 +1265,8 @@ module.exports=[{
 	},
 	"inputX": 2,
 	"outputX": 2,
-	"input": [8, 3, 9],
-	"output": [48, 18, 54],
+	"input": [1, 3, 8],
+	"output": [6, 18, 48],
 	"width": 5,
 	"height": 5,
 	"statement": "数を6倍してみよう!",
@@ -1313,12 +1313,12 @@ module.exports=[{
 		"wireT": 99,
 		"add": 99
 	},
-	"inputX": 2,
-	"outputX": 2,
+	"inputX": 1,
+	"outputX": 1,
 	"input": [8, 3, 9],
 	"output": [16, 6, 18],
-	"width": 5,
-	"height": 5,
+	"width": 3,
+	"height": 2,
 	"statement": "数を2倍してみよう!",
 	"number": 1
 }, {
