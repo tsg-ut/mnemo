@@ -998,6 +998,24 @@ button {
 .container .block[data-type=wireL][data-rotate='270'] {
   background: url("image/wireL-r270.png");
 }
+.container .block[data-type=const-2] {
+  background: url("image/const-2.png");
+}
+.container .block[data-type=const-2][data-rotate='90'] {
+  background: url("image/const-2-r90.png");
+}
+.container .block[data-type=const-1] {
+  background: url("image/const-1.png");
+}
+.container .block[data-type=const-1][data-rotate='90'] {
+  background: url("image/const-1-r90.png");
+}
+.container .block[data-type=const-0] {
+  background: url("image/const-0.png");
+}
+.container .block[data-type=const-0][data-rotate='90'] {
+  background: url("image/const-0-r90.png");
+}
 .container .block[data-type=div-3] {
   background: url("image/div-3.png");
 }

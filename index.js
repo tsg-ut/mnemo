@@ -1226,8 +1226,6 @@ module.exports=[{
 		"plus-1": 99,
 		"plus-2": 99,
 		"minus-2": 99,
-
-
 	},
 	"inputX": 1,
 	"outputX": 1,
@@ -1752,7 +1750,6 @@ module.exports = {
 		func: function func(n) {
 			return (n - n % 3) / 3;
 		},
-
 		io: {
 			plugs: ['top', 'bottom']
 		},
@@ -1762,6 +1759,36 @@ module.exports = {
 		type: 'calc',
 		func: function func(n) {
 			return n - 2;
+		},
+		io: {
+			plugs: ['top', 'bottom']
+		},
+		rotate_levels: 2
+	},
+	'const-0': {
+		type: 'calc',
+		func: function func(n) {
+			return 0;
+		},
+		io: {
+			plugs: ['top', 'bottom']
+		},
+		rotate_levels: 2
+	},
+	'const-1': {
+		type: 'calc',
+		func: function func(n) {
+			return 1;
+		},
+		io: {
+			plugs: ['top', 'bottom']
+		},
+		rotate_levels: 2
+	},
+	'const-2': {
+		type: 'calc',
+		func: function func(n) {
+			return 2;
 		},
 		io: {
 			plugs: ['top', 'bottom']
