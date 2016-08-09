@@ -43,25 +43,218 @@ button {
 	cursor: pointer;
 }
 
-.container {
-	.layer {
-		background-size: cover;
-		background-position: center;
+.layer {
+	background-size: cover;
+	background-position: center;
 
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	z-index: 0;
+}
+
+.background-layer {
+	position: fixed;
+	background-image: url(image/background.svg);
+
+	.cloud {
 		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
+		left: 100%;
 
-		z-index: 0;
+		@keyframes slide {
+			from {
+				transform: translateX(0);
+			}
+			to {
+				transform: translateX(calc(-100vw - 100%));
+			}
+		}
 
-		&.background-layer {
-			position: fixed;
-			background-image: url(image/background.svg);
+		animation: linear 1s infinite slide;
+
+		&:nth-child(1) {
+			top: 7%;
+			animation-duration: 120s;
+			animation-delay: -50s;
+			&::before { content: url(image/cloud-01.png); }
+		}
+
+		&:nth-child(2) {
+			top: 15%;
+			animation-duration: 100s;
+			animation-delay: -80s;
+			&::before { content: url(image/cloud-02.png); }
+		}
+
+		&:nth-child(3) {
+			top: 23%;
+			animation-duration: 80s;
+			animation-delay: 0s;
+			&::before { content: url(image/cloud-03.png); }
+		}
+
+		&:nth-child(4) {
+			top: 29%;
+			animation-duration: 150s;
+			animation-delay: -120s;
+			&::before { content: url(image/cloud-04.png); }
+		}
+
+		&:nth-child(5) {
+			top: 37%;
+			animation-duration: 70s;
+			animation-delay: -20s;
+			&::before { content: url(image/cloud-05.png); }
+		}
+
+		&:nth-child(6) {
+			top: 45%;
+			animation-duration: 150s;
+			animation-delay: -60s;
+			&::before { content: url(image/cloud-06.png); }
+		}
+
+		&:nth-child(7) {
+			top: 55%;
+			animation-duration: 110s;
+			animation-delay: -90s;
+			&::before { content: url(image/cloud-07.png); }
+		}
+
+		&:nth-child(8) {
+			top: 68%;
+			animation-duration: 100s;
+			animation-delay: 0s;
+			&::before { content: url(image/cloud-08.png); }
 		}
 	}
+}
 
+.screens-layer {
+	overflow: hidden;
+
+	.screens {
+		display: inline-flex;
+
+		transition: transform .8s cubic-bezier(0, 0.75, 0.3, 1);
+
+		&.gaming {
+			transform: translateX(-100vw);
+		}
+
+		.screen {
+			.fixed-width(100vw);
+			height: 100vh;
+			position: relative;
+
+			.menu {
+				width: 800px;
+
+				position: absolute;
+				top: 40%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+
+				.row {
+				    text-align: center;
+				}
+
+				.logo {
+					margin-bottom: 48px;
+				}
+
+				button.big {
+					background: rgba(61, 128, 42, 0.2);
+					transition: background-color .3s;
+
+					padding: 0 2em;
+					margin: 24px 0;
+					border: 2px solid #222248;
+					border-radius: 36px;
+
+					line-height: 72px;
+					font-size: 48px;
+					font-weight: bold;
+					color: white;
+
+					&:hover {
+						background: rgba(61, 128, 42, 0.6);
+					}
+				}
+
+				button.small {
+					font-size: 30px;
+					margin: 18px 0;
+				}
+
+				.stage-list {
+					padding: 0;
+					margin: 0 0 1em;
+
+					column-count: 2;
+
+					display: none;
+					&.active { display: block; }
+
+					.stage-name {
+						margin-left: 1em;
+
+						list-style: none;
+
+						text-align: left;
+						line-height: 1.5em;
+						font-size: 20px;
+
+						position: relative;
+						cursor: pointer;
+
+						&::before {
+							content: '';
+
+							width: 0;
+							height: 0;
+							position: absolute;
+							top: calc(~"0.75em - 6px");
+							right: calc(~"100% + 0.3em");
+
+							border-top: 6px solid transparent;
+							border-left: 12px dotted black;
+							border-bottom: 6px solid transparent;
+
+							transition: transform .5s ease-out;
+						}
+
+						&:hover::before {
+							transform: rotateX(360deg);
+						}
+					}
+				}
+
+				.credit-body {
+					margin: 0 auto;
+					width: 500px;
+					text-align: justify;
+					line-height: 1.5em;
+
+					display: none;
+					&.active { display: block; }
+
+					a {
+						&, &:visited {
+							text-decoration: none;
+							color: #245cff;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.game-screen {
 	.stage-layer {
 		display: flex;
 		flex-direction: column;
@@ -460,7 +653,39 @@ button {
 
 			background-image: url(image/arrow-down.png);
 			background-position: center;
-			background-repeat: no-repeat;;
+			background-repeat: no-repeat;
+
+			position: relative;
+			overflow: hidden;
+
+			&::after {
+				content: '';
+				position: absolute;
+
+				left: 0;
+				right: 0;
+				height: 180px;
+
+				background-image: linear-gradient(
+					to bottom,
+					rgba(255, 255, 255, 0) 0%,
+					rgba(255, 255, 255, .5) 12.5%,
+					rgba(255, 255, 255, 0) 25%,
+					rgba(255, 255, 255, .5) 37.5%,
+					rgba(255, 255, 255, 0) 50%,
+					rgba(255, 255, 255, .5) 62.5%,
+					rgba(255, 255, 255, 0) 75%,
+					rgba(255, 255, 255, .5) 87.5%,
+					rgba(255, 255, 255, 0) 100%
+				);
+
+				@keyframes verticalSlide {
+					from { transform: translateY(-50%); }
+					to   { transform: translateY(0); }
+				}
+
+				animation: 3s linear 0s infinite verticalSlide;
+			}
 		}
 	}
 
