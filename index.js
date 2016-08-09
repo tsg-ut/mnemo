@@ -1214,8 +1214,8 @@ module.exports=[{
 	"outputX": 2,
 	"input": [8, 3, 9],
 	"output": [16, 6, 18],
-	"width": 5,
-	"height": 5,
+	"width": 3,
+	"height": 3,
 	"statement": "数を2倍してみよう!",
 	"number": 1
 }, {
@@ -1243,16 +1243,7 @@ module.exports=[{
 		"times-3": 99,
 		"plus-1": 99,
 		"plus-2": 99,
-		"minus-2": 99,
-		"iko-ru": 99,
-		"add": 99,
-		"sub": 99,
-		"div": 99,
-		"mul": 99,
-		"c-contact": 99,
-		"conditional": 99,
-		"transistor": 99,
-		"diode": 99
+		"minus-2": 99
 	},
 	"inputX": 2,
 	"outputX": 2,
@@ -1297,6 +1288,21 @@ module.exports=[{
 	"height": 5,
 	"statement": "数を2倍して、2足してみよう!",
 	"number": 2
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"mul": 99
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [8, 3, 9],
+	"output": [16, 6, 18],
+	"width": 5,
+	"height": 5,
+	"statement": "数を2倍してみよう!",
+	"number": 1
 }, {
 	"parts": {
 		"wireI": 99,
