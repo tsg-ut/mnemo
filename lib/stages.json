@@ -1,23 +1,110 @@
 [{
 	"parts": {
+		"wireI": 99
+	},
+	"inputX": 1,
+	"outputX": 1,
+	"input": [4, 10, 7],
+	"output": [4, 10, 7],
+	"width": 3,
+	"height": 3,
+	"statement": "入り口と出口をつなげてみよう!",
+	"number": 1
+}, {
+	"parts": {
 		"wireI": 99,
 		"wireL": 99,
 		"wireT": 99,
-		"wireX": 99,
 		"times-2": 99,
 		"times-3": 99,
 		"plus-1": 99,
 		"plus-2": 99,
-		"minus-2": 99,
-		"iko-ru": 99,
-		"add": 99,
-		"sub": 99,
-		"div": 99,
-		"mul": 99,
-		"c-contact": 99,
-		"conditional": 99,
-		"transistor": 99,
-		"diode": 99
+		"minus-2": 99
+	},
+	"inputX": 1,
+	"outputX": 1,
+	"input": [8, 3, 9],
+	"output": [16, 6, 18],
+	"width": 3,
+	"height": 3,
+	"statement": "数を2倍してみよう!",
+	"number": 1
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"plus-1": 99,
+		"minus-2": 99
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [8, 15, 10],
+	"output": [5, 12, 7],
+	"width": 5,
+	"height": 5,
+	"statement": "数を3引いてみよう",
+	"number": 11
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 99,
+		"times-3": 99,
+		"plus-1": 99,
+		"plus-2": 99,
+		"minus-2": 99
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [8, 3, 9],
+	"output": [48, 18, 54],
+	"width": 5,
+	"height": 5,
+	"statement": "数を6倍してみよう!",
+	"number": 12
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 99,
+		"times-3": 99,
+		"plus-1": 99,
+		"plus-2": 99,
+		"minus-2": 99
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [8, 3, 9],
+	"output": [19, 9, 21],
+	"width": 5,
+	"height": 5,
+	"statement": "数を2倍して、3足してみよう!",
+	"number": 2
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 1,
+		"plus-1": 1
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [8, 5, 3],
+	"output": [18, 12, 8],
+	"width": 5,
+	"height": 5,
+	"statement": "数を2倍して、2足してみよう!",
+	"number": 2
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"add": 99
 	},
 	"inputX": 2,
 	"outputX": 2,
@@ -41,20 +128,16 @@
 		"add": 99,
 		"sub": 99,
 		"div": 99,
-		"mul": 99,
-		"c-contact": 99,
-		"conditional": 99,
-		"transistor": 99,
-		"diode": 99
+		"mul": 99
 	},
 	"inputX": 2,
 	"outputX": 2,
-	"input": [8, 3, 9],
-	"output": [9,4,10],
+	"input": [6, 28, 496],
+	"output": [-1, -1, -1],
 	"width": 5,
 	"height": 5,
-	"statement": "数を1足してみよう",
-	"number": 11
+	"statement": "-1を作ろう -easy-",
+	"number": 3
 }, {
 	"parts": {
 		"wireI": 99,
@@ -77,68 +160,12 @@
 	},
 	"inputX": 2,
 	"outputX": 2,
-	"input": [8, 3, 9],
-	"output": [48, 18, 54],
-	"width": 5,
-	"height": 5,
-	"statement": "数を6倍してみよう!",
-	"number": 12
-}, {
-	"parts": {
-		"wireI": 99,
-		"wireL": 99,
-		"wireT": 99,
-		"times-2": 99,
-		"times-3": 99,
-		"plus-1": 99,
-		"plus-2": 99,
-		"minus-2": 99,
-		"iko-ru": 99,
-		"add": 99,
-		"sub": 99,
-		"div": 99,
-		"mul": 99,
-		"c-contact": 99,
-		"conditional": 99,
-		"transistor": 99,
-		"diode": 99
-	},
-	"inputX": 2,
-	"outputX": 2,
-	"input": [8, 3, 9],
-	"output": [4, 1, 4],
+	"input": [8, 18, 6],
+	"output": [4, 9, 3],
 	"width": 5,
 	"height": 5,
 	"statement": "数を2で割ってみよう!",
 	"number": 13
-}, {
-	"parts": {
-		"wireI": 99,
-		"wireL": 99,
-		"wireT": 99,
-		"times-2": 99,
-		"times-3": 99,
-		"plus-1": 99,
-		"plus-2": 99,
-		"minus-2": 99,
-		"iko-ru": 99,
-		"add": 99,
-		"sub": 99,
-		"div": 99,
-		"mul": 99,
-		"c-contact": 99,
-		"conditional": 99,
-		"transistor": 99,
-		"diode": 99
-	},
-	"inputX": 2,
-	"outputX": 2,
-	"input": [8, 3, 9],
-	"output": [19, 9, 21],
-	"width": 5,
-	"height": 5,
-	"statement": "数を2倍して、3足してみよう!",
-	"number": 2
 }, {
 	"parts": {
 		"wireI": 99,
@@ -195,30 +222,6 @@
 	"height": 10,
 	"statement": "10で割った余りを求めてみよう!",
 	"number": 14
-}, {
-	"parts": {
-		"wireI": 99,
-		"wireL": 99,
-		"wireT": 99,
-		"times-2": 99,
-		"times-3": 99,
-		"plus-1": 99,
-		"plus-2": 99,
-		"minus-2": 99,
-		"iko-ru": 99,
-		"add": 99,
-		"sub": 99,
-		"div": 99,
-		"mul": 99
-	},
-	"inputX": 2,
-	"outputX": 2,
-	"input": [6, 28, 496],
-	"output": [-1, -1, -1],
-	"width": 5,
-	"height": 5,
-	"statement": "-1を作ろう -easy-",
-	"number": 3
 }, {
 	"parts": {
 		"wireI": 99,
