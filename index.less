@@ -26,6 +26,7 @@
 
 	.board-wrap {
 		text-align: center;
+		margin: 30px 0;
 
 		.board {
 			display: inline-flex;
@@ -73,17 +74,24 @@
 		cursor: pointer;
 		box-sizing: border-box;
 		background-size: contain;
+		position: relative;
 
 		&[selected] {
 			border: 3px solid red;
 		}
 
-		&.input-block {
-			background-image: url("image/arrow_empty.png");
+		&.input-block::before {
+			content: url("image/arrow.png");
+			position: absolute;
+			bottom: 100%;
+			left: 14px;
 		}
 
-		&.output-block {
-			background-image: url("image/arrow_empty.png");
+		&.output-block::after {
+			content: url("image/arrow.png");
+			position: absolute;
+			top: 110%;
+			left: 14px;
 		}
 
 		@blocks-rotate4: wireL, wireT, diode;
