@@ -133,6 +133,23 @@ button {
 	}
 }
 
+.screens-layer {
+	overflow: hidden;
+
+	.screens {
+		display: inline-flex;
+
+		transform: translateX(0);
+		transition: transform .5s cubic-bezier(0, 0, 0.3, 1);
+
+		.screen {
+			.fixed-width(100vw);
+			height: 100vh;
+			position: relative;
+		}
+	}
+}
+
 .game-screen {
 	.stage-layer {
 		display: flex;
