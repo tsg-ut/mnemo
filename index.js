@@ -1307,11 +1307,35 @@ module.exports=[{
 	"inputX": 2,
 	"outputX": 2,
 	"input": [8, 3, 9],
-	"output": [4, 1, 4],
+	"output": [19, 9, 21],
 	"width": 5,
 	"height": 5,
-	"statement": "数を2で割ってみよう!",
-	"number": 13
+	"statement": "数を2倍して、3足してみよう!",
+	"number": 2
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 99,
+		"times-3": 99,
+		"plus-1": 99,
+		"plus-2": 99,
+		"minus-2": 99,
+		"iko-ru": 99,
+		"add": 99,
+		"sub": 99,
+		"div": 99,
+		"mul": 99
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [6, 28, 496],
+	"output": [-1, -1, -1],
+	"width": 5,
+	"height": 5,
+	"statement": "-1を作ろう -easy-",
+	"number": 3
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1335,11 +1359,11 @@ module.exports=[{
 	"inputX": 2,
 	"outputX": 2,
 	"input": [8, 3, 9],
-	"output": [19, 9, 21],
+	"output": [4, 1, 4],
 	"width": 5,
 	"height": 5,
-	"statement": "数を2倍して、3足してみよう!",
-	"number": 2
+	"statement": "数を2で割ってみよう!",
+	"number": 13
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1396,30 +1420,6 @@ module.exports=[{
 	"height": 10,
 	"statement": "10で割った余りを求めてみよう!",
 	"number": 14
-}, {
-	"parts": {
-		"wireI": 99,
-		"wireL": 99,
-		"wireT": 99,
-		"times-2": 99,
-		"times-3": 99,
-		"plus-1": 99,
-		"plus-2": 99,
-		"minus-2": 99,
-		"iko-ru": 99,
-		"add": 99,
-		"sub": 99,
-		"div": 99,
-		"mul": 99
-	},
-	"inputX": 2,
-	"outputX": 2,
-	"input": [6, 28, 496],
-	"output": [-1, -1, -1],
-	"width": 5,
-	"height": 5,
-	"statement": "-1を作ろう -easy-",
-	"number": 3
 }, {
 	"parts": {
 		"wireI": 99,
