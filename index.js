@@ -887,6 +887,17 @@ var Game = require('./game');
 
 $(document).ready(function () {
     var game = new Game($('.stage'), stageConfigs);
+
+    var clicked = false;
+    $('body').click(function () {
+        if (!clicked) {
+            setTimeout(function () {
+                alert('そろそろ次の人に代わってね');
+                clicked = false;
+            }, 5 * 60 * 1000);
+            clicked = true;
+        }
+    });
 });
 
 },{"./game":6,"./stages.json":10,"jquery":14}],8:[function(require,module,exports){
