@@ -628,7 +628,6 @@ button {
   width: 0;
 }
 .container .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-frame-wrapper {
-  width: 300px;
   height: 100%;
   margin: 0 auto;
   display: -webkit-box;
@@ -678,9 +677,9 @@ button {
 .container .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-frame {
   width: 100%;
   -webkit-box-flex: 0;
-      -ms-flex: 0 0 300px;
-          flex: 0 0 300px;
-  height: 300px;
+      -ms-flex: 0 0 0;
+          flex: 0 0 0;
+  height: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1041,6 +1040,7 @@ button {
   background: #ffa32e;
   border-radius: 5px;
   border: 2px outset #ff920e;
+  min-width: 50px;
 }
 .container .panel .block {
   background-color: white;

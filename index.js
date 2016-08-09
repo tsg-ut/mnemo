@@ -1020,6 +1020,14 @@ var Stage = function () {
 		this.boardElement = new BoardElement(this, this.board);
 		this.panel = new Panel(this);
 
+		this.$stage.find('.board-frame-wrapper').css({
+			width: 50 + this.config.width * 50 + 'px'
+		});
+		this.$stage.find('.board-frame').css({
+			height: 50 + this.config.height * 50 + 'px',
+			flexBasis: 50 + this.config.height * 50 + 'px'
+		});
+
 		this.caseIndex = 0;
 
 		this.board.on('output', function (value) {
@@ -1180,6 +1188,18 @@ module.exports = Stage;
 
 },{"./board":3,"./board-element":2,"./data-element":4,"./panel":8,"jquery":14}],10:[function(require,module,exports){
 module.exports=[{
+	"parts": {
+		"wireI": 3
+	},
+	"inputX": 1,
+	"outputX": 1,
+	"input": [4, 10, 7],
+	"output": [4, 10, 7],
+	"width": 3,
+	"height": 3,
+	"statement": "入り口と出口をつなげてみよう!",
+	"number": 1
+}, {
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
