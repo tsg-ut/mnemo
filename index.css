@@ -794,6 +794,40 @@ button {
   width: 420px;
   position: relative;
 }
+.container .modal-layer {
+  pointer-events: none;
+}
+.container .modal-layer .modal {
+  pointer-events: initial;
+  width: 80%;
+  background: url("http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/restaurant_icons.png");
+  color: #333;
+  box-sizing: border-box;
+  border-radius: 30px;
+  position: absolute;
+  max-height: 80vh;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.container .modal-layer .modal .close {
+  width: 102px;
+  height: 102px;
+  background-image: url(image/close.png);
+  position: absolute;
+  top: -30px;
+  right: -30px;
+}
+.container .modal-layer .modal .modal-content {
+  padding: 50px;
+  overflow-y: auto;
+  width: 100%;
+  max-height: 80vh;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 24px;
+}
 .container .inputs,
 .container .arrows,
 .container .user-outputs,

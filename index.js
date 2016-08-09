@@ -898,6 +898,13 @@ $(document).ready(function () {
             clicked = true;
         }
     });
+
+    $('.modal').each(function (index, element) {
+        var $modal = $(element);
+        $modal.find('.close').click(function () {
+            $modal.remove();
+        });
+    });
 });
 
 },{"./game":6,"./stages.json":10,"jquery":14}],8:[function(require,module,exports){
