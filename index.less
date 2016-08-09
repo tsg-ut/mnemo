@@ -43,97 +43,97 @@ button {
 	cursor: pointer;
 }
 
-.container {
-	.layer {
-		background-size: cover;
-		background-position: center;
+.layer {
+	background-size: cover;
+	background-position: center;
 
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	z-index: 0;
+}
+
+.background-layer {
+	position: fixed;
+	background-image: url(image/background.svg);
+
+	.cloud {
 		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
+		left: 100%;
 
-		z-index: 0;
-	}
-
-	.background-layer {
-		position: fixed;
-		background-image: url(image/background.svg);
-
-		.cloud {
-			position: absolute;
-			left: 100%;
-
-			@keyframes slide {
-				from {
-					transform: translateX(0);
-				}
-				to {
-					transform: translateX(calc(-100vw - 100%));
-				}
+		@keyframes slide {
+			from {
+				transform: translateX(0);
 			}
-
-			animation: linear 1s infinite slide;
-
-			&:nth-child(1) {
-				top: 7%;
-				animation-duration: 120s;
-				animation-delay: -50s;
-				&::before { content: url(image/cloud-01.png); }
-			}
-
-			&:nth-child(2) {
-				top: 15%;
-				animation-duration: 100s;
-				animation-delay: -80s;
-				&::before { content: url(image/cloud-02.png); }
-			}
-
-			&:nth-child(3) {
-				top: 23%;
-				animation-duration: 80s;
-				animation-delay: 0s;
-				&::before { content: url(image/cloud-03.png); }
-			}
-
-			&:nth-child(4) {
-				top: 29%;
-				animation-duration: 150s;
-				animation-delay: -120s;
-				&::before { content: url(image/cloud-04.png); }
-			}
-
-			&:nth-child(5) {
-				top: 37%;
-				animation-duration: 70s;
-				animation-delay: -20s;
-				&::before { content: url(image/cloud-05.png); }
-			}
-
-			&:nth-child(6) {
-				top: 45%;
-				animation-duration: 150s;
-				animation-delay: -60s;
-				&::before { content: url(image/cloud-06.png); }
-			}
-
-			&:nth-child(7) {
-				top: 55%;
-				animation-duration: 110s;
-				animation-delay: -90s;
-				&::before { content: url(image/cloud-07.png); }
-			}
-
-			&:nth-child(8) {
-				top: 68%;
-				animation-duration: 100s;
-				animation-delay: 0s;
-				&::before { content: url(image/cloud-08.png); }
+			to {
+				transform: translateX(calc(-100vw - 100%));
 			}
 		}
-	}
 
+		animation: linear 1s infinite slide;
+
+		&:nth-child(1) {
+			top: 7%;
+			animation-duration: 120s;
+			animation-delay: -50s;
+			&::before { content: url(image/cloud-01.png); }
+		}
+
+		&:nth-child(2) {
+			top: 15%;
+			animation-duration: 100s;
+			animation-delay: -80s;
+			&::before { content: url(image/cloud-02.png); }
+		}
+
+		&:nth-child(3) {
+			top: 23%;
+			animation-duration: 80s;
+			animation-delay: 0s;
+			&::before { content: url(image/cloud-03.png); }
+		}
+
+		&:nth-child(4) {
+			top: 29%;
+			animation-duration: 150s;
+			animation-delay: -120s;
+			&::before { content: url(image/cloud-04.png); }
+		}
+
+		&:nth-child(5) {
+			top: 37%;
+			animation-duration: 70s;
+			animation-delay: -20s;
+			&::before { content: url(image/cloud-05.png); }
+		}
+
+		&:nth-child(6) {
+			top: 45%;
+			animation-duration: 150s;
+			animation-delay: -60s;
+			&::before { content: url(image/cloud-06.png); }
+		}
+
+		&:nth-child(7) {
+			top: 55%;
+			animation-duration: 110s;
+			animation-delay: -90s;
+			&::before { content: url(image/cloud-07.png); }
+		}
+
+		&:nth-child(8) {
+			top: 68%;
+			animation-duration: 100s;
+			animation-delay: 0s;
+			&::before { content: url(image/cloud-08.png); }
+		}
+	}
+}
+
+.game-screen {
 	.stage-layer {
 		display: flex;
 		flex-direction: column;

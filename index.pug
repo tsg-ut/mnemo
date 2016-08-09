@@ -11,88 +11,91 @@ html
 			.layer.background-layer
 				- for (let i = 0; i < 8; i++)
 					.cloud
-			.stage.layer.stage-layer
-				.upper-area
-					.pipe-area
-						.upper-pipe-area
-							.left-corner-pipe
-							.left-pipe
-							.center-pipe
-							.right-pipe
-							.right-corner-pipe
-						.case-board-area
-							.case-pipe-area
-								.case-joint-top-pipe
-								.case-top-pipe
-								.case-area
-									.case
-										.inputs
-										.arrows
-										.outputs
-											.correct-outputs
-											.user-outputs
-								.case-bottom-pipe
-								.case-joint-bottom-pipe
-							.board-area
-								.board-frame-wrapper
-									.board-joint-top-pipe
-									.board-top-pipe
-									.board-frame
-										.top
-											.left
-											.center
-											.right
-										.middle
-											.left
-											.center.board-wrap
-												.board
-													.rows
-													.data-layer
-											.right
-										.bottom
-											.left
-											.center
-											.right
-									.board-bottom-pipe
-									.board-joint-bottom-pipe
-						.downer-pipe-area
-							.left-corner-pipe
-							.left-pipe
-							.center-pipe
-							.right-pipe
-							.right-corner-pipe
-					.panel-area
-						.panel
-				.downer-area
-					.left-area
-					.controls-area
-						.controls
-							button.exit(type = 'button')
-							button.ranking(type = 'button')
-							button.execute(type = 'button')
-							button.stop(type = 'button')
-							button.rapid(type = 'button')
-							button.step(type = 'button')
-					.right-area
-						.statement-area
-							.mission MISSION
-							.statement
-			.layer.modal-layer
-				.modal
-					button.close
-					.modal-content
-						img(src='image/logo.png')
+			.layer.screens-layer
+				.screen.menu-screen
+				.screen.game-screen
+					.stage.layer.stage-layer
+						.upper-area
+							.pipe-area
+								.upper-pipe-area
+									.left-corner-pipe
+									.left-pipe
+									.center-pipe
+									.right-pipe
+									.right-corner-pipe
+								.case-board-area
+									.case-pipe-area
+										.case-joint-top-pipe
+										.case-top-pipe
+										.case-area
+											.case
+												.inputs
+												.arrows
+												.outputs
+													.correct-outputs
+													.user-outputs
+										.case-bottom-pipe
+										.case-joint-bottom-pipe
+									.board-area
+										.board-frame-wrapper
+											.board-joint-top-pipe
+											.board-top-pipe
+											.board-frame
+												.top
+													.left
+													.center
+													.right
+												.middle
+													.left
+													.center.board-wrap
+														.board
+															.rows
+															.data-layer
+													.right
+												.bottom
+													.left
+													.center
+													.right
+											.board-bottom-pipe
+											.board-joint-bottom-pipe
+								.downer-pipe-area
+									.left-corner-pipe
+									.left-pipe
+									.center-pipe
+									.right-pipe
+									.right-corner-pipe
+							.panel-area
+								.panel
+						.downer-area
+							.left-area
+							.controls-area
+								.controls
+									button.exit(type = 'button')
+									button.ranking(type = 'button')
+									button.execute(type = 'button')
+									button.stop(type = 'button')
+									button.rapid(type = 'button')
+									button.step(type = 'button')
+							.right-area
+								.statement-area
+									.mission MISSION
+									.statement
+					.layer.modal-layer
+						.modal
+							button.close
+							.modal-content
+								img(src='image/logo.png')
 
-						p プログラミング体験パズルゲーム、MNEMO(ニーモ)をお遊びいただき、ありがとうございます!
-						p このゲームの目的はパネルに表示されている数を、下の数に変換することです。
+								p プログラミング体験パズルゲーム、MNEMO(ニーモ)をお遊びいただき、ありがとうございます!
+								p このゲームの目的はパネルに表示されている数を、下の数に変換することです。
 
-						img(src='image/modal/01/case.png')
+								img(src='image/modal/01/case.png')
 
-						p 百聞は一見にしかず! まずはボードの上と下をパイプでつないでみましょう。
-						p ボードをクリックするとパイプを配置できます。
+								p 百聞は一見にしかず! まずはボードの上と下をパイプでつないでみましょう。
+								p ボードをクリックするとパイプを配置できます。
 
-						img(src='image/modal/01/board.png')
+								img(src='image/modal/01/board.png')
 
-						p 準備ができたら、下の実行ボタンを押してください。
+								p 準備ができたら、下の実行ボタンを押してください。
 
-						img(src='image/modal/01/control.png')
+								img(src='image/modal/01/control.png')
