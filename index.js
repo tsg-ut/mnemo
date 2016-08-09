@@ -1308,6 +1308,22 @@ module.exports=[{
 		"wireI": 99,
 		"wireL": 99,
 		"wireT": 99,
+		"times-2": 1,
+		"plus-1": 1
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [8, 5, 3],
+	"output": [18, 12, 8],
+	"width": 5,
+	"height": 5,
+	"statement": "数を2倍して、2足してみよう!",
+	"number": 2
+}, {
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
 		"times-2": 99,
 		"times-3": 99,
 		"plus-1": 99,
