@@ -365,6 +365,45 @@ button {
 		}
 	}
 
+	.modal-layer {
+		pointer-events: none;
+
+		.modal {
+			pointer-events: initial;
+			width: 80%;
+			background: url("http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/restaurant_icons.png");
+			color: #333;
+			box-sizing: border-box;
+			border-radius: 30px;
+			position: absolute;
+			max-height: 80vh;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+
+			.close {
+				width: 102px;
+				height: 102px;
+
+				background-image: url(image/close.png);
+
+				position: absolute;
+				top: -30px;
+				right: -30px;
+			}
+
+			.modal-content {
+				padding: 50px;
+				overflow-y: auto;
+				width: 100%;
+				max-height: 80vh;
+				box-sizing: border-box;
+				text-align: center;
+				font-size: 24px;
+			}
+		}
+	}
+
 	.inputs, .arrows, .user-outputs, .correct-outputs {
 		display: flex;
 
