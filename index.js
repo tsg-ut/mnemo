@@ -1293,7 +1293,7 @@ module.exports=[{
 		"wireI": 99,
 		"wireL": 99,
 		"wireT": 99,
-		"mul": 99
+		"add": 99
 	},
 	"inputX": 2,
 	"outputX": 2,
