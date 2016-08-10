@@ -29,18 +29,23 @@
 		margin: 30px 0;
 
 		.board {
-			display: inline-flex;
+			display: inline-block;
 			position: relative;
 		}
 
 		.rows {
-			display: inline-flex;
-			flex-direction: column;
+			display: inline-block;
 			position: relative;
+			vertical-align: top;
 
 			.row {
-				display: inline-flex;
 				margin: 0;
+				font-size: 0;
+
+				.block {
+					display: inline-block;
+					font-size: initial;
+				}
 			}
 		}
 
@@ -136,7 +141,6 @@
 	}
 
 	.panel {
-		display: flex;
 		width: auto;
 		max-width: 600px;
 		overflow-y: auto;
@@ -144,9 +148,12 @@
 		margin: 30px auto 0;
 		background: lightgray;
 		border-radius: 5px;
+		font-size: 0;
+		white-space: nowrap;
 
 		.block {
-			flex-shrink: 0;
+			display: inline-block;
+			font-size: initial;
 
 			.count {
 				pointer-events: none;
