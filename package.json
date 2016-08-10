@@ -14,7 +14,10 @@
     "watch:pug": "chokidar \"*.pug\" -c \"npm run pug\"",
     "watch:less": "chokidar \"*.less\" -c \"npm run less\"",
     "watch": "concurrently \"npm run watch:js\" \"npm run watch:map\" \"npm run watch:pug\" \"npm run watch:less\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "mochify:phantom": "mochify test/board.ls --reporter spec --extension ls --extension js --transform browserify-livescript --transform [ babelify --presets [ es2015 ] --plugins transform-object-assign ]",
+    "mochify:node": "mochify test/board.ls --node --reporter spec --extension ls --extension js --transform browserify-livescript --transform [ babelify --presets [ es2015 ] --plugins transform-object-assign ]",
+    "mochify": "npm run mochify:node && npm run mochify:phantom",
+    "test": "npm run mochify"
   },
   "repository": {
     "type": "git",
@@ -39,6 +42,8 @@
     "babel-preset-es2015": "^6.9.0",
     "babelify": "^7.3.0",
     "browserify": "^13.0.1",
+    "browserify-livescript": "^0.2.3",
+    "chai": "^3.5.0",
     "chokidar-cli": "^1.2.0",
     "concurrently": "^2.2.0",
     "core-js": "^2.4.1",
@@ -47,6 +52,7 @@
     "jquery": "^3.0.0",
     "less": "^2.7.1",
     "livereload": "^0.4.1",
+    "mochify": "^2.18.1",
     "postcss-cli": "^2.5.2",
     "postcss-import-url": "^2.1.0",
     "pug-cli": "^1.0.0-alpha6",
