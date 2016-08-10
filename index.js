@@ -986,18 +986,27 @@ var Panel = function () {
 	_createClass(Panel, [{
 		key: 'takeAndPlace',
 		value: function takeAndPlace(x, y, blockName) {
+			if (blockName === 'empty') {
+				var oldBlock = this.stage.board.getBlock(x, y);
+				if (oldBlock && oldBlock.config.name !== 'empty') {
+					this.parts.push(oldBlock.config.name);
+					this.stage.boardElement.placeBlock(x, y, blockName, 0);
+					this.update();
+				}
+				return;
+			}
 			var index = this.parts.indexOf(blockName);
 
 			if (index !== -1) {
 				var rotate = 0;
 
-				var oldBlock = this.stage.board.getBlock(x, y);
-				if (oldBlock && oldBlock.config.name !== 'empty') {
-					if (oldBlock.config.name === blockName && oldBlock.config.rotate_levels) {
-						rotate = (oldBlock.rotate + 1) % oldBlock.config.rotate_levels;
+				var _oldBlock = this.stage.board.getBlock(x, y);
+				if (_oldBlock && _oldBlock.config.name !== 'empty') {
+					if (_oldBlock.config.name === blockName && _oldBlock.config.rotate_levels) {
+						rotate = (_oldBlock.rotate + 1) % _oldBlock.config.rotate_levels;
 					} else {
 						this.parts.splice(index, 1);
-						this.parts.push(oldBlock.config.name);
+						this.parts.push(_oldBlock.config.name);
 					}
 				} else {
 					this.parts.splice(index, 1);
@@ -1114,6 +1123,14 @@ var Stage = function () {
 				var type = _this.$selectedBlock.data('type');
 				_this.panel.takeAndPlace($block.data('x'), $block.data('y'), type);
 			}
+		});
+
+		this.$stage.find('.board .block').bind('contextmenu', function (event) {
+			var $block = $(event.target);
+			if (!_this.board.executing) {
+				_this.panel.takeAndPlace($block.data('x'), $block.data('y'), 'empty');
+			}
+			return false;
 		});
 
 		this.$stage.find('.execute').click(function () {
