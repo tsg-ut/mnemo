@@ -1691,6 +1691,7 @@ module.exports=[{
 		 "times-3": 99,
 		 "plus-1": 99,
 		 "plus-2": 99,
+		 "minus-1": 99,
 		 "minus-2": 99,
 		 "iko-ru": 99,
 		 "add": 99,
