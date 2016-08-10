@@ -1296,7 +1296,7 @@ module.exports=[{
 		"times-3": 99,
 		"plus-1": 99,
 		"plus-2": 99,
-		"minus-2": 99,
+		"minus-2": 99
 	},
 	"inputX": 1,
 	"outputX": 1,
@@ -1773,7 +1773,7 @@ module.exports=[{
 	"width": 9,
 	"height": 9,
 	"statement": "累乗(easy)",
-    "number": 12
+	"number": 12
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1819,7 +1819,7 @@ module.exports=[{
 	"width": 15,
 	"height": 15,
 	"statement": "累乗(hard)",
-    "number": 12
+	"number": 12
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1860,7 +1860,7 @@ module.exports=[{
 	"width": 13,
 	"height": 13,
 	"statement": "最大公約数(GCD)",
-    "number": 12
+	"number": 12
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1882,7 +1882,7 @@ module.exports=[{
 	"width": 7,
 	"height": 9,
 	"statement": "-1をつくれ (hard?)",
-    "number": 12
+	"number": 12
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1920,7 +1920,7 @@ module.exports=[{
 	"width": 9,
 	"height": 9,
 	"statement": "平方根(easy)",
-    "number": 12
+	"number": 12
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1967,7 +1967,7 @@ module.exports=[{
 	"width": 15,
 	"height": 15,
 	"statement": "平方根(hard)",
-    "number": 12
+	"number": 12
 }]
 
 },{}],11:[function(require,module,exports){
