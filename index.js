@@ -937,17 +937,6 @@ var Game = require('./game');
 $(document).ready(function () {
 	var game = new Game(stageConfigs);
 
-	var clicked = false;
-	$('body').click(function () {
-		if (!clicked) {
-			setTimeout(function () {
-				alert('そろそろ次の人に代わってね');
-				clicked = false;
-			}, 5 * 60 * 1000);
-			clicked = true;
-		}
-	});
-
 	$('.modal').each(function (index, element) {
 		var $modal = $(element);
 		$modal.find('.close').click(function () {
