@@ -1330,6 +1330,39 @@ button {
 .game-screen .block[data-type=wireI][data-rotate='90'] {
   background: url("image/wireI-r90.png");
 }
+.game-screen .block[data-type=leqq] {
+  background: url("image/leqq.png");
+}
+.game-screen .block[data-type=lt] {
+  background: url("image/lt.png");
+}
+.game-screen .block[data-type=geqq] {
+  background: url("image/geqq.png");
+}
+.game-screen .block[data-type=gt] {
+  background: url("image/gt.png");
+}
+.game-screen .block[data-type=neq] {
+  background: url("image/neq.png");
+}
+.game-screen .block[data-type=iko-ru] {
+  background: url("image/iko-ru.png");
+}
+.game-screen .block[data-type=bitwise-xor] {
+  background: url("image/bitwise-xor.png");
+}
+.game-screen .block[data-type=bitwise-or] {
+  background: url("image/bitwise-or.png");
+}
+.game-screen .block[data-type=bitwise-and] {
+  background: url("image/bitwise-and.png");
+}
+.game-screen .block[data-type=bitshift-right] {
+  background: url("image/bitshift-right.png");
+}
+.game-screen .block[data-type=bitshift-left] {
+  background: url("image/bitshift-left.png");
+}
 .game-screen .block[data-type=mod] {
   background: url("image/mod.png");
 }
@@ -1347,9 +1380,6 @@ button {
 }
 .game-screen .block[data-type=c-contact] {
   background: url("image/c-contact.png");
-}
-.game-screen .block[data-type=iko-ru] {
-  background: url("image/iko-ru.png");
 }
 .game-screen .block[data-type=div] {
   background: url("image/div.png");
