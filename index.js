@@ -1017,28 +1017,26 @@ var Panel = function () {
 		value: function update() {
 			var _this = this;
 
-			var uniqueParts = this.parts.filter(function (name, i) {
-				return _this.parts.indexOf(name) === i;
-			}).map(function (name) {
-				return {
-					count: _this.parts.filter(function (part) {
-						return name === part;
-					}).length,
-					name: name
-				};
+			var uniqueParts = new Map();
+
+			this.parts.forEach(function (name, i) {
+				if (!uniqueParts.has(name)) {
+					uniqueParts.set(name, 0);
+				}
+				uniqueParts.set(name, uniqueParts.get(name) + 1);
 			});
 
 			this.$panel.empty();
-			uniqueParts.forEach(function (part) {
+			uniqueParts.forEach(function (count, name) {
 				_this.$panel.append($('<div/>', {
 					'class': 'block',
 					attr: {
-						'data-type': part.name,
-						selected: _this.selected === part.name
+						'data-type': name,
+						selected: _this.selected === name
 					}
 				}).append($('<div/>', {
 					'class': 'count',
-					text: part.count
+					text: count
 				})));
 			});
 
