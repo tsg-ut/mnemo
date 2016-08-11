@@ -1217,181 +1217,181 @@ button {
   border: 3px solid red;
 }
 .game-screen .block[data-type=diode] {
-  background: url("image/diode.png");
+  background-image: url("image/diode.png");
 }
 .game-screen .block[data-type=diode][data-rotate='90'] {
-  background: url("image/diode-r90.png");
+  background-image: url("image/diode-r90.png");
 }
 .game-screen .block[data-type=diode][data-rotate='180'] {
-  background: url("image/diode-r180.png");
+  background-image: url("image/diode-r180.png");
 }
 .game-screen .block[data-type=diode][data-rotate='270'] {
-  background: url("image/diode-r270.png");
+  background-image: url("image/diode-r270.png");
 }
 .game-screen .block[data-type=wireT] {
-  background: url("image/wireT.png");
+  background-image: url("image/wireT.png");
 }
 .game-screen .block[data-type=wireT][data-rotate='90'] {
-  background: url("image/wireT-r90.png");
+  background-image: url("image/wireT-r90.png");
 }
 .game-screen .block[data-type=wireT][data-rotate='180'] {
-  background: url("image/wireT-r180.png");
+  background-image: url("image/wireT-r180.png");
 }
 .game-screen .block[data-type=wireT][data-rotate='270'] {
-  background: url("image/wireT-r270.png");
+  background-image: url("image/wireT-r270.png");
 }
 .game-screen .block[data-type=wireL] {
-  background: url("image/wireL.png");
+  background-image: url("image/wireL.png");
 }
 .game-screen .block[data-type=wireL][data-rotate='90'] {
-  background: url("image/wireL-r90.png");
+  background-image: url("image/wireL-r90.png");
 }
 .game-screen .block[data-type=wireL][data-rotate='180'] {
-  background: url("image/wireL-r180.png");
+  background-image: url("image/wireL-r180.png");
 }
 .game-screen .block[data-type=wireL][data-rotate='270'] {
-  background: url("image/wireL-r270.png");
+  background-image: url("image/wireL-r270.png");
 }
 .game-screen .block[data-type=const-2] {
-  background: url("image/const-2.png");
+  background-image: url("image/const-2.png");
 }
 .game-screen .block[data-type=const-2][data-rotate='90'] {
-  background: url("image/const-2-r90.png");
+  background-image: url("image/const-2-r90.png");
 }
 .game-screen .block[data-type=const-1] {
-  background: url("image/const-1.png");
+  background-image: url("image/const-1.png");
 }
 .game-screen .block[data-type=const-1][data-rotate='90'] {
-  background: url("image/const-1-r90.png");
+  background-image: url("image/const-1-r90.png");
 }
 .game-screen .block[data-type=const-0] {
-  background: url("image/const-0.png");
+  background-image: url("image/const-0.png");
 }
 .game-screen .block[data-type=const-0][data-rotate='90'] {
-  background: url("image/const-0-r90.png");
+  background-image: url("image/const-0-r90.png");
 }
 .game-screen .block[data-type=div-3] {
-  background: url("image/div-3.png");
+  background-image: url("image/div-3.png");
 }
 .game-screen .block[data-type=div-3][data-rotate='90'] {
-  background: url("image/div-3-r90.png");
+  background-image: url("image/div-3-r90.png");
 }
 .game-screen .block[data-type=div-2] {
-  background: url("image/div-2.png");
+  background-image: url("image/div-2.png");
 }
 .game-screen .block[data-type=div-2][data-rotate='90'] {
-  background: url("image/div-2-r90.png");
+  background-image: url("image/div-2-r90.png");
 }
 .game-screen .block[data-type=minus-2] {
-  background: url("image/minus-2.png");
+  background-image: url("image/minus-2.png");
 }
 .game-screen .block[data-type=minus-2][data-rotate='90'] {
-  background: url("image/minus-2-r90.png");
+  background-image: url("image/minus-2-r90.png");
 }
 .game-screen .block[data-type=minus-1] {
-  background: url("image/minus-1.png");
+  background-image: url("image/minus-1.png");
 }
 .game-screen .block[data-type=minus-1][data-rotate='90'] {
-  background: url("image/minus-1-r90.png");
+  background-image: url("image/minus-1-r90.png");
 }
 .game-screen .block[data-type=plus-2] {
-  background: url("image/plus-2.png");
+  background-image: url("image/plus-2.png");
 }
 .game-screen .block[data-type=plus-2][data-rotate='90'] {
-  background: url("image/plus-2-r90.png");
+  background-image: url("image/plus-2-r90.png");
 }
 .game-screen .block[data-type=plus-1] {
-  background: url("image/plus-1.png");
+  background-image: url("image/plus-1.png");
 }
 .game-screen .block[data-type=plus-1][data-rotate='90'] {
-  background: url("image/plus-1-r90.png");
+  background-image: url("image/plus-1-r90.png");
 }
 .game-screen .block[data-type=times-3] {
-  background: url("image/times-3.png");
+  background-image: url("image/times-3.png");
 }
 .game-screen .block[data-type=times-3][data-rotate='90'] {
-  background: url("image/times-3-r90.png");
+  background-image: url("image/times-3-r90.png");
 }
 .game-screen .block[data-type=add-3] {
-  background: url("image/add-3.png");
+  background-image: url("image/add-3.png");
 }
 .game-screen .block[data-type=add-3][data-rotate='90'] {
-  background: url("image/add-3-r90.png");
+  background-image: url("image/add-3-r90.png");
 }
 .game-screen .block[data-type=times-2] {
-  background: url("image/times-2.png");
+  background-image: url("image/times-2.png");
 }
 .game-screen .block[data-type=times-2][data-rotate='90'] {
-  background: url("image/times-2-r90.png");
+  background-image: url("image/times-2-r90.png");
 }
 .game-screen .block[data-type=wireI] {
-  background: url("image/wireI.png");
+  background-image: url("image/wireI.png");
 }
 .game-screen .block[data-type=wireI][data-rotate='90'] {
-  background: url("image/wireI-r90.png");
+  background-image: url("image/wireI-r90.png");
 }
 .game-screen .block[data-type=leqq] {
-  background: url("image/leqq.png");
+  background-image: url("image/leqq.png");
 }
 .game-screen .block[data-type=lt] {
-  background: url("image/lt.png");
+  background-image: url("image/lt.png");
 }
 .game-screen .block[data-type=geqq] {
-  background: url("image/geqq.png");
+  background-image: url("image/geqq.png");
 }
 .game-screen .block[data-type=gt] {
-  background: url("image/gt.png");
+  background-image: url("image/gt.png");
 }
 .game-screen .block[data-type=neq] {
-  background: url("image/neq.png");
+  background-image: url("image/neq.png");
 }
 .game-screen .block[data-type=iko-ru] {
-  background: url("image/iko-ru.png");
+  background-image: url("image/iko-ru.png");
 }
 .game-screen .block[data-type=bitwise-xor] {
-  background: url("image/bitwise-xor.png");
+  background-image: url("image/bitwise-xor.png");
 }
 .game-screen .block[data-type=bitwise-or] {
-  background: url("image/bitwise-or.png");
+  background-image: url("image/bitwise-or.png");
 }
 .game-screen .block[data-type=bitwise-and] {
-  background: url("image/bitwise-and.png");
+  background-image: url("image/bitwise-and.png");
 }
 .game-screen .block[data-type=bitshift-right] {
-  background: url("image/bitshift-right.png");
+  background-image: url("image/bitshift-right.png");
 }
 .game-screen .block[data-type=bitshift-left] {
-  background: url("image/bitshift-left.png");
+  background-image: url("image/bitshift-left.png");
 }
 .game-screen .block[data-type=mod] {
-  background: url("image/mod.png");
+  background-image: url("image/mod.png");
 }
 .game-screen .block[data-type=pow] {
-  background: url("image/pow.png");
+  background-image: url("image/pow.png");
 }
 .game-screen .block[data-type=wireX] {
-  background: url("image/wireX.png");
+  background-image: url("image/wireX.png");
 }
 .game-screen .block[data-type=transistor] {
-  background: url("image/transistor.png");
+  background-image: url("image/transistor.png");
 }
 .game-screen .block[data-type=conditional] {
-  background: url("image/conditional.png");
+  background-image: url("image/conditional.png");
 }
 .game-screen .block[data-type=c-contact] {
-  background: url("image/c-contact.png");
+  background-image: url("image/c-contact.png");
 }
 .game-screen .block[data-type=div] {
-  background: url("image/div.png");
+  background-image: url("image/div.png");
 }
 .game-screen .block[data-type=mul] {
-  background: url("image/mul.png");
+  background-image: url("image/mul.png");
 }
 .game-screen .block[data-type=sub] {
-  background: url("image/sub.png");
+  background-image: url("image/sub.png");
 }
 .game-screen .block[data-type=add] {
-  background: url("image/add.png");
+  background-image: url("image/add.png");
 }
 .game-screen .panel {
   overflow: auto;

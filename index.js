@@ -19,7 +19,7 @@ var EventEmitter = require('events');
 var Block = function (_EventEmitter) {
 	_inherits(Block, _EventEmitter);
 
-	function Block(board, config) {
+	function Block(board, config, size) {
 		_classCallCheck(this, Block);
 
 		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Block).call(this));
@@ -29,6 +29,7 @@ var Block = function (_EventEmitter) {
 		_this.y = config.y;
 		_this.rotate = config.rotate;
 		_this.config = config;
+		_this.size = size;
 		_this.inputQueues = {
 			top: [],
 			left: [],
@@ -360,40 +361,40 @@ var Block = function (_EventEmitter) {
 		key: 'center',
 		get: function get() {
 			return {
-				x: (this.x + .5) * 50,
-				y: (this.y + .5) * 50
+				x: (this.x + .5) * this.size,
+				y: (this.y + .5) * this.size
 			};
 		}
 	}, {
 		key: 'top',
 		get: function get() {
 			return {
-				x: (this.x + .5) * 50,
-				y: this.y * 50
+				x: (this.x + .5) * this.size,
+				y: this.y * this.size
 			};
 		}
 	}, {
 		key: 'left',
 		get: function get() {
 			return {
-				x: this.x * 50,
-				y: (this.y + .5) * 50
+				x: this.x * this.size,
+				y: (this.y + .5) * this.size
 			};
 		}
 	}, {
 		key: 'right',
 		get: function get() {
 			return {
-				x: (this.x + 1) * 50,
-				y: (this.y + .5) * 50
+				x: (this.x + 1) * this.size,
+				y: (this.y + .5) * this.size
 			};
 		}
 	}, {
 		key: 'bottom',
 		get: function get() {
 			return {
-				x: (this.x + .5) * 50,
-				y: (this.y + 1) * 50
+				x: (this.x + .5) * this.size,
+				y: (this.y + 1) * this.size
 			};
 		}
 	}]);
@@ -563,7 +564,7 @@ var EventEmitter = require('events');
 var Board = function (_EventEmitter) {
 	_inherits(Board, _EventEmitter);
 
-	function Board(config) {
+	function Board(config, blockSize) {
 		_classCallCheck(this, Board);
 
 		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Board).call(this));
@@ -573,6 +574,7 @@ var Board = function (_EventEmitter) {
 
 		_this.executing = false;
 		_this.clock = 0;
+		_this.blockSize = blockSize;
 
 		_this.blocks = [];
 		for (var i = 0; i < _this.height; i++) {
@@ -607,6 +609,14 @@ var Board = function (_EventEmitter) {
 			return this.blocks[y][x];
 		}
 	}, {
+		key: 'setBlockSize',
+		value: function setBlockSize(blockSize) {
+			this.blockSize = blockSize;
+			this.forBlocks(function (block) {
+				return block.size = blockSize;
+			});
+		}
+	}, {
 		key: 'forBlocks',
 		value: function forBlocks(callback) {
 			for (var x = 0; x < this.width; x++) {
@@ -627,7 +637,7 @@ var Board = function (_EventEmitter) {
 			config.rotate = rotate;
 			config.name = type;
 
-			var block = new Block(this, config);
+			var block = new Block(this, config, this.blockSize);
 			block.on('erase', function (data) {
 				_this2.emit('erase', block, data);
 			});
@@ -898,7 +908,7 @@ var Game = function () {
 	}, {
 		key: 'answer',
 		value: function answer() {
-			if (this.configs.length <= this.stageIdx) {
+			if (this.configs.length <= this.stageIndex) {
 				// 全てのステージを終了
 				alert('wei wei wei');
 			} else {
@@ -1081,20 +1091,14 @@ var Stage = function () {
 		this.game = game;
 		this.config = config;
 		this.$stage = this.game.$stage;
+		this.blockSize = 50;
+		this.caseIndex = 0;
 
-		this.board = new Board(this.config);
+		this.board = new Board(this.config, this.blockSize);
 		this.boardElement = new BoardElement(this, this.board);
 		this.panel = new Panel(this);
 
-		this.$stage.find('.board-frame-wrapper').css({
-			width: 50 + this.config.width * 50 + 'px'
-		});
-		this.$stage.find('.board-frame').css({
-			height: 50 + this.config.height * 50 + 'px',
-			flexBasis: 50 + this.config.height * 50 + 'px'
-		});
-
-		this.caseIndex = 0;
+		this.updateStyles();
 
 		this.board.on('output', function (value) {
 			return _this.output(value);
@@ -1242,6 +1246,28 @@ var Stage = function () {
 		key: 'updateStyles',
 		value: function updateStyles() {
 			var _this4 = this;
+
+			var boardWidth = this.$stage.find('.board-area').width() - 50;
+			var boardHeight = this.$stage.find('.board-area').height() - 70;
+			var boardSize = Math.min(boardWidth, boardHeight); // 上下のmarginは固定と仮定
+			var stageSize = Math.max(this.config.width, this.config.height);
+			if (boardSize > 50 * stageSize) {
+				this.blockSize = 50;
+			} else {
+				this.blockSize = boardSize / stageSize;
+			}
+
+			this.board.setBlockSize(this.blockSize);
+
+			this.$stage.find('.board .block').height(this.blockSize);
+			this.$stage.find('.board .block').width(this.blockSize);
+			this.$stage.find('.board-frame-wrapper').css({
+				width: 50 + this.config.width * this.blockSize + 'px'
+			});
+			this.$stage.find('.board-frame').css({
+				height: 50 + this.config.height * this.blockSize + 'px',
+				flexBasis: 50 + this.config.height * this.blockSize + 'px'
+			});
 
 			var getMargin = function getMargin(selector) {
 				var element = _this4.$stage.find(selector).get(0);

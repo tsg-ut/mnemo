@@ -747,15 +747,15 @@ button {
 		.-r4(@i: length(@blocks-rotate4)) when (@i > 0) {
 			@name: extract(@blocks-rotate4, @i);
 			&[data-type=@{name}] {
-				background: url("image/@{name}.png");
+				background-image: url("image/@{name}.png");
 				&[data-rotate='90'] {
-					background: url("image/@{name}-r90.png");
+					background-image: url("image/@{name}-r90.png");
 				}
 				&[data-rotate='180'] {
-					background: url("image/@{name}-r180.png");
+					background-image: url("image/@{name}-r180.png");
 				}
 				&[data-rotate='270'] {
-					background: url("image/@{name}-r270.png");
+					background-image: url("image/@{name}-r270.png");
 				}
 			}
 			.-r4((@i - 1));
@@ -763,16 +763,16 @@ button {
 		.-r2(@i: length(@blocks-rotate2)) when (@i > 0) {
 			@name: extract(@blocks-rotate2, @i);
 			&[data-type=@{name}] {
-				background: url("image/@{name}.png");
+				background-image: url("image/@{name}.png");
 				&[data-rotate='90'] {
-					background: url("image/@{name}-r90.png");
+					background-image: url("image/@{name}-r90.png");
 				}
 			}
 			.-r2((@i - 1));
 		} .-r2;
 		.-(@i: length(@blocks-norotate)) when (@i > 0) {
 			@name: extract(@blocks-norotate, @i);
-			&[data-type=@{name}] { background: url("image/@{name}.png"); }
+			&[data-type=@{name}] { background-image: url("image/@{name}.png"); }
 			.-((@i - 1));
 		} .-;
 	}
