@@ -230,6 +230,25 @@ button {
 						&:hover::before {
 							transform: rotateX(360deg);
 						}
+
+						&.cleared {
+							&::before {
+								content: '';
+
+								width: 0;
+								height: 0;
+								position: absolute;
+								top: calc(~"0.75em - 6px");
+								right: calc(~"100% + 0.3em");
+
+								border-top: 6px solid transparent;
+								border-left: 12px dotted red;
+								border-bottom: 6px solid transparent;
+
+								transition: transform .5s ease-out;
+							}
+						}
+
 					}
 				}
 
