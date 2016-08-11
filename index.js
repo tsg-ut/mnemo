@@ -786,7 +786,7 @@ var DataElement = function () {
 
 		this.$data = $('<div/>', {
 			'class': 'data',
-			text: this.data.value,
+			attr: { 'data-value': this.data.value },
 			css: toCSS(coordinate)
 		});
 
@@ -2375,8 +2375,7 @@ module.exports = {
 
 module.exports.toCSS = function (coordinate) {
 	return {
-		left: coordinate.x + "px",
-		top: coordinate.y + "px"
+		transform: "translate(" + coordinate.x + "px, " + coordinate.y + "px)"
 	};
 };
 

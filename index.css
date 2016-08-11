@@ -1195,7 +1195,8 @@ button {
   bottom: 0;
   pointer-events: none;
 }
-.game-screen .board .data-layer .data {
+.game-screen .board .data-layer .data::after {
+  content: attr(data-value);
   position: absolute;
   padding: 3px;
   line-height: 1em;
