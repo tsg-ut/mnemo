@@ -1591,7 +1591,7 @@ module.exports=[{
 	"input": [5, 6, -10],
 	"output": [15, 12, -20],
 	"width": 9,
-	"height": 6,
+	"height": 7,
 	"statement": "偶数なら2倍,奇数なら3倍してみよう!",
 	"number": 15
 }, {
