@@ -571,6 +571,7 @@ var Board = function (_EventEmitter) {
 		_this.width = config.width;
 
 		_this.executing = false;
+		_this.paused = false;
 		_this.clock = 0;
 		_this.blockSize = blockSize;
 
@@ -658,6 +659,7 @@ var Board = function (_EventEmitter) {
 			});
 
 			this.executing = true;
+			this.paused = false;
 			this.clock = 0;
 			return inputData;
 		}
@@ -701,7 +703,7 @@ var Board = function (_EventEmitter) {
 					}
 				});
 				if (noOutput) {
-					this.halt();
+					this.pause();
 				}
 			}
 		}
@@ -720,8 +722,15 @@ var Board = function (_EventEmitter) {
 		key: 'halt',
 		value: function halt() {
 			this.executing = false;
+			this.paused = false;
 			this.clearData();
 			this.emit('halt');
+		}
+	}, {
+		key: 'pause',
+		value: function pause() {
+			this.paused = true;
+			this.emit('paused');
 		}
 	}, {
 		key: 'inputBlock',
@@ -1200,12 +1209,12 @@ var Stage = function () {
 			this.board.step();
 			this.$stage.find('.clock-num').text(this.board.clock);
 
-			if (this.board.executing) {
+			if (this.board.executing && !this.board.paused) {
 				Promise.all(this.boardElement.animations).then(function () {
 					_this3.boardElement.animations = [];
 					_this3.board.pass();
 
-					if (_this3.board.executing) {
+					if (_this3.board.executing && !_this3.board.paused) {
 						_this3.clockUp();
 					}
 				});
