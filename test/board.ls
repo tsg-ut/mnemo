@@ -13,7 +13,6 @@ describe 'Board' ->
       outputX: 2
       width: 5
       height: 4
-      statement: 'Increment numbers'
 
   describe 'constructor' ->
     It 'creates height x width numbers of empty blocks' ->
