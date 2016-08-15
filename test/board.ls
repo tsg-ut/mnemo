@@ -11,8 +11,6 @@ describe 'Board' ->
     @board = new Board do
       inputX: 2
       outputX: 2
-      input: [1 4 9]
-      output: [2 5 10]
       width: 5
       height: 4
       statement: 'Increment numbers'
