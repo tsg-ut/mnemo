@@ -17,6 +17,7 @@
     "mochify:phantom": "mochify test/board.ls --reporter spec --extension ls --extension js --transform browserify-livescript --transform [ babelify --presets [ es2015 ] --plugins transform-object-assign ]",
     "mochify:node": "mochify test/board.ls --node --reporter spec --extension ls --extension js --transform browserify-livescript --transform [ babelify --presets [ es2015 ] ] --plugin [ mochify-istanbul --exclude \"**/+(test|node_modules)/**/*\" --report text --report text-summary --report lcovonly --dir coverage ]",
     "mochify": "npm run mochify:node && npm run mochify:phantom",
+    "coveralls": "cat coverage/lcov.info | coveralls",
     "test": "npm run mochify"
   },
   "repository": {
@@ -47,6 +48,7 @@
     "chokidar-cli": "^1.2.0",
     "concurrently": "^2.2.0",
     "core-js": "^2.4.1",
+    "coveralls": "^2.11.12",
     "exorcist": "^0.4.0",
     "gulp": "^3.9.1",
     "jquery": "^3.0.0",
