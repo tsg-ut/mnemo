@@ -1,4 +1,12 @@
-# mnemo [![Build Status](https://travis-ci.org/tsg-ut/mnemo.svg?branch=master)](https://travis-ci.org/tsg-ut/mnemo)
+# MNEMO
+
+[![Build Status][travis-image]][travis-url]
+[![Coverage Status][coveralls-image]][coveralls-url]
+
+[travis-url]: https://travis-ci.org/tsg-ut/mnemo
+[travis-image]: https://travis-ci.org/tsg-ut/mnemo.svg?branch=master
+[coveralls-url]: https://coveralls.io/github/tsg-ut/mnemo?branch=master
+[coveralls-image]: https://coveralls.io/repos/github/tsg-ut/mnemo/badge.svg?branch=master
 
 [![ScreenShot](assets/screen.png)](http://sig.tsg.ne.jp/mnemo/)
 
@@ -49,4 +57,3 @@ npm run less
 ```sh
 npm run watch
 ```
-
