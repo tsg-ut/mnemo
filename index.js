@@ -893,7 +893,7 @@ var Game = function () {
 		$('ol.stage-list').append($stageNames);
 
 		$(window).resize(function () {
-			return _this.currentStage.updateStyles();
+			return _this.currentStage && _this.currentStage.updateStyles();
 		});
 		$('.menu-screen button.start').click(function () {
 			_this.startStage(0);
@@ -1255,8 +1255,6 @@ var Stage = function () {
 	}, {
 		key: 'updateStyles',
 		value: function updateStyles() {
-			var _this4 = this;
-
 			var boardWidth = this.$stage.find('.board-area').width() - 50;
 			var boardHeight = this.$stage.find('.board-area').height() - 70;
 			var boardSize = Math.min(boardWidth, boardHeight); // 上下のmarginは固定と仮定
@@ -1279,14 +1277,12 @@ var Stage = function () {
 				flexBasis: 50 + this.config.height * this.blockSize + 'px'
 			});
 
-			var getMargin = function getMargin(selector) {
-				var element = _this4.$stage.find(selector).get(0);
-				var styles = getComputedStyle(element);
-				return parseInt(styles['margin-right']);
-			};
+			var $leftPipe = this.$stage.find('.case-joint-top-pipe');
+			var leftMargin = ($leftPipe.parent().width() - $leftPipe.width()) / 2;
 
-			var leftMargin = getMargin('.case-joint-top-pipe');
-			var rightMargin = getMargin('.board-frame-wrapper') + getMargin('.board-joint-top-pipe');
+			var $boardArea = this.$stage.find('.board-area');
+			var $rightPipe = this.$stage.find('.board-joint-top-pipe');
+			var rightMargin = ($boardArea.width() - $rightPipe.width()) / 2;
 
 			this.$stage.find('.upper-pipe-area, .downer-pipe-area').css({
 				marginLeft: leftMargin + 'px',

@@ -639,8 +639,8 @@ button {
 }
 .game-screen .stage-layer .upper-area {
   -webkit-box-flex: 1;
-      -ms-flex: 1 0 0;
-          flex: 1 0 0;
+      -ms-flex: 1 0 0%;
+          flex: 1 0 0%;
   height: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -657,8 +657,8 @@ button {
 }
 .game-screen .stage-layer .upper-area .pipe-area {
   -webkit-box-flex: 1;
-      -ms-flex: 1 0 0;
-          flex: 1 0 0;
+      -ms-flex: 1 0 0%;
+          flex: 1 0 0%;
   width: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -693,14 +693,14 @@ button {
 }
 .game-screen .stage-layer .upper-area .pipe-area .upper-pipe-area .left-pipe {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 0;
-          flex: 1 1 0;
+      -ms-flex: 1 1 0%;
+          flex: 1 1 0%;
   width: 0;
 }
 .game-screen .stage-layer .upper-area .pipe-area .upper-pipe-area .right-pipe {
   -webkit-box-flex: 2;
-      -ms-flex: 2 1 0;
-          flex: 2 1 0;
+      -ms-flex: 2 1 0%;
+          flex: 2 1 0%;
   width: 0;
 }
 .game-screen .stage-layer .upper-area .pipe-area .upper-pipe-area .center-pipe {
@@ -742,14 +742,14 @@ button {
 }
 .game-screen .stage-layer .upper-area .pipe-area .downer-pipe-area .left-pipe {
   -webkit-box-flex: 3;
-      -ms-flex: 3 1 0;
-          flex: 3 1 0;
+      -ms-flex: 3 1 0%;
+          flex: 3 1 0%;
   width: 0;
 }
 .game-screen .stage-layer .upper-area .pipe-area .downer-pipe-area .right-pipe {
   -webkit-box-flex: 2;
-      -ms-flex: 2 1 0;
-          flex: 2 1 0;
+      -ms-flex: 2 1 0%;
+          flex: 2 1 0%;
   width: 0;
 }
 .game-screen .stage-layer .upper-area .pipe-area .downer-pipe-area .center-pipe {
@@ -768,8 +768,8 @@ button {
 }
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area {
   -webkit-box-flex: 1;
-      -ms-flex: 1 0 0;
-          flex: 1 0 0;
+      -ms-flex: 1 0 0%;
+          flex: 1 0 0%;
   height: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -777,8 +777,8 @@ button {
 }
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .case-pipe-area {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 0;
-          flex: 1 1 0;
+      -ms-flex: 1 1 0%;
+          flex: 1 1 0%;
   width: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -811,8 +811,8 @@ button {
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .case-pipe-area .case-top-pipe,
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .case-pipe-area .case-bottom-pipe {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 0;
-          flex: 1 1 0;
+      -ms-flex: 1 1 0%;
+          flex: 1 1 0%;
   height: 0;
   background-image: url(image/pipe-vertical.png);
   background-size: 100% 100%;
@@ -841,8 +841,8 @@ button {
 }
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 0;
-          flex: 1 1 0;
+      -ms-flex: 1 1 0%;
+          flex: 1 1 0%;
   width: 0;
 }
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-frame-wrapper {
@@ -879,8 +879,8 @@ button {
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-top-pipe,
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-bottom-pipe {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 0;
-          flex: 1 1 0;
+      -ms-flex: 1 1 0%;
+          flex: 1 1 0%;
   height: 0;
   background-image: url(image/pipe-vertical.png);
   background-size: 100% 100%;
@@ -888,15 +888,15 @@ button {
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-top-pipe,
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-bottom-pipe {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 0;
-          flex: 1 1 0;
+      -ms-flex: 1 1 0%;
+          flex: 1 1 0%;
   height: 0;
 }
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-frame {
   width: 100%;
   -webkit-box-flex: 0;
-      -ms-flex: 0 0 0;
-          flex: 0 0 0;
+      -ms-flex: 0 0 0%;
+          flex: 0 0 0%;
   height: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -915,8 +915,8 @@ button {
 }
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-frame .middle {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 0;
-          flex: 1 1 0;
+      -ms-flex: 1 1 0%;
+          flex: 1 1 0%;
   height: 0;
 }
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-frame .top,
@@ -941,8 +941,8 @@ button {
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-frame .bottom .center,
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-frame .middle .center {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 0;
-          flex: 1 1 0;
+      -ms-flex: 1 1 0%;
+          flex: 1 1 0%;
   width: 0;
 }
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-frame .top .left {
@@ -1001,8 +1001,8 @@ button {
 .game-screen .stage-layer .downer-area .left-area,
 .game-screen .stage-layer .downer-area .right-area {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 0;
-          flex: 1 1 0;
+      -ms-flex: 1 1 0%;
+          flex: 1 1 0%;
   width: 0;
 }
 .game-screen .stage-layer .downer-area .controls-area {
@@ -1063,8 +1063,8 @@ button {
 .game-screen .user-outputs .output,
 .game-screen .correct-outputs .output {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 0;
-          flex: 1 1 0;
+      -ms-flex: 1 1 0%;
+          flex: 1 1 0%;
   width: 0;
   height: 40px;
   line-height: 36px;
@@ -1117,8 +1117,8 @@ button {
 .game-screen .user-outputs .arrow,
 .game-screen .correct-outputs .arrow {
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 0;
-          flex: 1 1 0;
+      -ms-flex: 1 1 0%;
+          flex: 1 1 0%;
   width: 0;
   height: 75px;
   background-image: url(image/arrow-down.png);
