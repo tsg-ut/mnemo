@@ -19,37 +19,38 @@ describe 'Block' ->
       height: 1
 
   describe 'WireI block' ->
-    before-each ->
-      @board.place-block 0, 0, 'wireI', 0
-      @block = @board.get-block 0, 0
+    context 'without rotation' ->
+      before-each ->
+        @board.place-block 0, 0, 'wireI', 0
+        @block = @board.get-block 0, 0
 
-    It 'conveys data from top to bottom' ->
-      data = new Data @board, 334
-      @block.input 'top', data
-      @block.step!
+      It 'conveys data from top to bottom' ->
+        data = new Data @board, 334
+        @block.input 'top', data
+        @block.step!
 
-      expect @block.output-queues.bottom .to.deep.equal [data]
+        expect @block.output-queues.bottom .to.deep.equal [data]
 
-    It 'conveys data from bottom to top' ->
-      data = new Data @board, 334
-      @block.input 'bottom', data
-      @block.step!
+      It 'conveys data from bottom to top' ->
+        data = new Data @board, 334
+        @block.input 'bottom', data
+        @block.step!
 
-      expect @block.output-queues.top .to.deep.equal [data]
+        expect @block.output-queues.top .to.deep.equal [data]
 
-    It 'erases any data put on left and right side' ->
-      resolve, reject <~ new Promise _
+      It 'erases any data put on the right side' ->
+        resolve, reject <~ new Promise _
 
-      data = new Data @board, 334
-      @block.input 'right', data
+        data = new Data @board, 334
+        @block.input 'right', data
 
-      @block.on 'erase' (erased-data) ->
-        expect erased-data .to.equal data
-        resolve!
+        @block.on 'erase' (erased-data) ->
+          expect erased-data .to.equal data
+          resolve!
 
-      @block.step!
+        @block.step!
 
-    context 'when rotated' ->
+    context 'with rotation' ->
       before-each ->
         @board.place-block 0, 0, 'wireI', 1
         @block = @board.get-block 0, 0
