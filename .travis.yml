@@ -2,6 +2,10 @@ language: node_js
 node_js:
   - node
 
+cache:
+  directories:
+    node_modules
+
 # https://github.com/electron/electron/blob/master/docs/tutorial/testing-on-headless-ci.md
 addons:
   apt:
