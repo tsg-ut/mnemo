@@ -14,13 +14,15 @@ describe 'Application' ->
   before ->
     @timeout 5000
 
-    app = connect!
-    app.use serve-static '.'
-    http.create-server app .listen 49130
-
-    nightmare
-    .viewport 1600 900
-    .goto 'http://localhost:49130/'
+    new Promise (resolve, reject) ->
+      app = connect!
+      app.use serve-static '.'
+      http.create-server app .listen 49130 (error) ->
+        if error then reject! else resolve!
+    .then ->
+      nightmare
+      .viewport 1600 900
+      .goto 'http://localhost:49130/'
 
   describe 'Menu Screen' ->
     describe 'Start Button' ->
