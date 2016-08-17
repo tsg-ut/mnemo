@@ -24,6 +24,10 @@ describe 'Application' ->
       .viewport 1600 900
       .goto 'http://localhost:49130/'
 
+  It 'is sane' ->
+    nightmare.evaluate -> document.body.outerHTML
+    .then -> console.log it
+
   describe 'Menu Screen' ->
     describe 'Start Button' ->
       before ->
