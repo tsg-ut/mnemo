@@ -29,3 +29,18 @@ describe 'Board' ->
     It 'executes the board' ->
       @board.input 100
       expect @board.executing .to.be.true
+
+    It 'is wireI only board and carries data to output' ->
+      resolve, reject <~ new Promise _
+      
+      for y in [0,1,2,3]
+        @board.place-block 2, y, 'wireI', 0
+      
+      @board.on 'output' (output-value) ->
+          expect output-value .to.equal 100
+          resolve!
+      
+      @board.input 100
+      for x in [0,1,2,3]
+        @board.step!
+        @board.pass!
