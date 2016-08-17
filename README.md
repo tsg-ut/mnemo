@@ -57,3 +57,23 @@ npm run less
 ```sh
 npm run watch
 ```
+
+## テスト
+
+### 全部テスト
+
+```sh
+npm test
+```
+
+### ユニットテストだけ実行
+
+```sh
+npm run unit
+```
+
+### 機能テストだけ実行
+
+```sh
+npm run functional
+```
