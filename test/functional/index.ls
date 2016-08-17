@@ -1,9 +1,7 @@
 require! {
   nightmare: Nightmare
   chai: {expect}
-  http
-  connect
-  'serve-static'
+  'file-url'
 }
 
 nightmare = Nightmare!
@@ -12,17 +10,9 @@ It = global.it
 
 describe 'Application' ->
   before ->
-    @timeout 5000
-
-    new Promise (resolve, reject) ->
-      app = connect!
-      app.use serve-static '.'
-      http.create-server app .listen 49130 (error) ->
-        if error then reject! else resolve!
-    .then ->
-      nightmare
-      .viewport 1600 900
-      .goto 'http://localhost:49130/'
+    nightmare
+    .viewport 1600 900
+    .goto file-url 'index.html'
 
   describe 'Menu Screen' ->
     describe 'Start Button' ->
