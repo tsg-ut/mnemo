@@ -1,6 +1,16 @@
 language: node_js
 node_js:
   - node
+
+# https://github.com/electron/electron/blob/master/docs/tutorial/testing-on-headless-ci.md
+addons:
+  apt:
+    packages:
+      - xvfb
+before_install:
+  - export DISPLAY=':99.0'
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+
 before_script:
   - bash bin/before_script.sh
 script:
@@ -9,9 +19,11 @@ script:
 after_success:
   - npm run coveralls
   - bash bin/after_success.sh
+
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
     - gh-pages
+
 notifications:
   webhooks: http://webhook.hakatashi.com/travis
