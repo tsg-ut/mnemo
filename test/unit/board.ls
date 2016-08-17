@@ -1,7 +1,7 @@
 require! {
   chai: {expect}
-  '../lib/board': Board
-  '../lib/block': Block
+  '../../lib/board': Board
+  '../../lib/block': Block
 }
 
 It = global.it

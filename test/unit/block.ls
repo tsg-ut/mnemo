@@ -3,9 +3,9 @@ require! {
   # Shims for phantomjs environment
   'core-js/es5'
   'core-js/es6'
-  '../lib/board': Board
-  '../lib/block': Block
-  '../lib/data': Data
+  '../../lib/board': Board
+  '../../lib/block': Block
+  '../../lib/data': Data
 }
 
 It = global.it
