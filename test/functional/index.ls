@@ -17,7 +17,7 @@ describe 'Application' ->
   describe 'Menu Screen' ->
     describe 'Start Button' ->
       before ->
-        nightmare.refresh!wait 200
+        nightmare.refresh!wait 'button.start'
 
       It 'navigates to game screen when clicked' ->
         nightmare
@@ -27,7 +27,7 @@ describe 'Application' ->
 
     describe 'Select Button' ->
       before ->
-        nightmare.refresh!wait 200
+        nightmare.refresh!wait 'button.select'
 
       It 'shows stage selector when clicked' ->
         nightmare
@@ -49,7 +49,7 @@ describe 'Application' ->
 
     describe 'Credit Button' ->
       before ->
-        nightmare.refresh!wait 200
+        nightmare.refresh!wait 'button.credit'
 
       It 'shows credit when clicked' ->
         nightmare
