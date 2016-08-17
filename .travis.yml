@@ -14,8 +14,8 @@ before_install:
 before_script:
   - bash bin/before_script.sh
 script:
-  - npm test
   - npm run build
+  - npm test
 after_success:
   - npm run coveralls
   - bash bin/after_success.sh
