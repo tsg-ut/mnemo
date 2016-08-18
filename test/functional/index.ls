@@ -10,6 +10,8 @@ It = global.it
 
 describe 'Application' ->
   before ->
+    @timeout 10000
+
     nightmare
     .viewport 1600 900
     .goto file-url 'index.html'
