@@ -460,6 +460,8 @@ button {
 							display: flex;
 							flex-direction: column;
 
+							position: relative;
+
 							.top, .bottom {
 								.fixed-height(25px);
 							}
@@ -514,6 +516,39 @@ button {
 
 							.bottom .right {
 								background-image: url(image/frame-bottomright.png);
+							}
+
+							.clock-area {
+								position: absolute;
+								top: 100%;
+								right: 0;
+
+								padding: 3px 4px 4px;
+
+								border: 2px outset #ff920e;
+								border-top: none;
+								border-bottom-right-radius: 6px;
+								border-bottom-left-radius: 6px;
+
+								background: #fbae36;
+								color: #fffdf7;
+								font-size: 16px;
+								font-weight: bold;
+								font-family: Arial;
+								line-height: 1;
+
+								.clock-icon {
+									display: inline-block;
+									width: 16px;
+									height: 16px;
+									background-image: url(image/clock-icon.png);
+									vertical-align: text-top;
+									margin-right: .2em;
+								}
+
+								.clock-value {
+									vertical-align: bottom;
+								}
 							}
 						}
 
