@@ -737,10 +737,6 @@ button {
 		box-sizing: border-box;
 		background-size: contain;
 
-		&[selected] {
-			border: 3px solid red;
-		}
-
 		&::before, &::after {
 			content: '';
 			position: absolute;
@@ -819,6 +815,8 @@ button {
 
 				border: 3px solid red;
 				pointer-events: none;
+
+				margin: -3px;
 			}
 
 			.count {
