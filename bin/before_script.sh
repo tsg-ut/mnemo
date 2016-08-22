@@ -10,6 +10,6 @@ fi
 git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 git fetch
 git config user.name "Travis CI"
-git config user.email "hakatasiloving@gmail.com"
+git config user.email "info@tsg.ne.jp"
 git checkout gh-pages
 git checkout master .
