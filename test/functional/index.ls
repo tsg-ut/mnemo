@@ -4,7 +4,12 @@ require! {
   'file-url'
 }
 
-nightmare = Nightmare!
+nightmare = Nightmare {
+  width: 1600
+  height: 900
+  x: 0
+  y: 0
+}
 
 It = global.it
 
@@ -13,7 +18,6 @@ describe 'Application' ->
     @timeout 10000
 
     nightmare
-    .viewport 1600 900
     .goto file-url 'index.html'
 
   describe 'Menu Screen' ->
