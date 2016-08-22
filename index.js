@@ -51,7 +51,7 @@ var Block = function (_EventEmitter) {
 	_createClass(Block, [{
 		key: 'rotatedDirection',
 		value: function rotatedDirection(direction) {
-			if (!this.config.rotate_levels) {
+			if (!this.config.rotatable) {
 				return direction;
 			}
 
@@ -1013,8 +1013,8 @@ var Panel = function () {
 
 				var _oldBlock = this.stage.board.getBlock(x, y);
 				if (_oldBlock && _oldBlock.config.name !== 'empty') {
-					if (_oldBlock.config.name === blockName && _oldBlock.config.rotate_levels) {
-						rotate = (_oldBlock.rotate + 1) % _oldBlock.config.rotate_levels;
+					if (_oldBlock.config.name === blockName && _oldBlock.config.rotatable) {
+						rotate = (_oldBlock.rotate + 1) % 4;
 					} else {
 						this.parts.splice(index, 1);
 						this.parts.push(_oldBlock.config.name);
@@ -2064,21 +2064,21 @@ module.exports = {
 		io: {
 			plugs: ['top', 'bottom']
 		},
-		rotate_levels: 2
+		rotatable: true
 	},
 	wireL: {
 		type: 'wire',
 		io: {
 			plugs: ['top', 'right']
 		},
-		rotate_levels: 4
+		rotatable: true
 	},
 	wireT: {
 		type: 'wire',
 		io: {
 			plugs: ['right', 'bottom', 'left']
 		},
-		rotate_levels: 4
+		rotatable: true
 	},
 	wireX: {
 		type: 'wireX',
@@ -2092,7 +2092,7 @@ module.exports = {
 		io: {
 			plugs: ['top', 'bottom']
 		},
-		rotate_levels: 2
+		rotatable: true
 	},
 	'times-3': {
 		type: 'calc',
@@ -2102,7 +2102,7 @@ module.exports = {
 		io: {
 			plugs: ['top', 'bottom']
 		},
-		rotate_levels: 2
+		rotatable: true
 	},
 	'add-3': {
 		type: 'calc',
@@ -2112,7 +2112,7 @@ module.exports = {
 		io: {
 			plugs: ['top', 'bottom']
 		},
-		rotate_levels: 2
+		rotatable: true
 	},
 	'plus-1': {
 		type: 'calc',
@@ -2122,7 +2122,7 @@ module.exports = {
 		io: {
 			plugs: ['top', 'bottom']
 		},
-		rotate_levels: 2
+		rotatable: true
 	},
 	'plus-2': {
 		type: 'calc',
@@ -2132,7 +2132,7 @@ module.exports = {
 		io: {
 			plugs: ['top', 'bottom']
 		},
-		rotate_levels: 2
+		rotatable: true
 	},
 	'minus-1': {
 		type: 'calc',
@@ -2142,7 +2142,7 @@ module.exports = {
 		io: {
 			plugs: ['top', 'bottom']
 		},
-		rotate_levels: 2
+		rotatable: true
 	},
 	'div-2': {
 		type: 'calc',
@@ -2153,7 +2153,7 @@ module.exports = {
 		io: {
 			plugs: ['top', 'bottom']
 		},
-		rotate_levels: 2
+		rotatable: true
 	},
 	'div-3': {
 		type: 'calc',
@@ -2163,7 +2163,7 @@ module.exports = {
 		io: {
 			plugs: ['top', 'bottom']
 		},
-		rotate_levels: 2
+		rotatable: true
 	},
 	'minus-2': {
 		type: 'calc',
@@ -2173,7 +2173,7 @@ module.exports = {
 		io: {
 			plugs: ['top', 'bottom']
 		},
-		rotate_levels: 2
+		rotatable: true
 	},
 	'const-0': {
 		type: 'calc',
@@ -2183,7 +2183,7 @@ module.exports = {
 		io: {
 			plugs: ['top', 'bottom']
 		},
-		rotate_levels: 2
+		rotatable: true
 	},
 	'const-1': {
 		type: 'calc',
@@ -2193,7 +2193,7 @@ module.exports = {
 		io: {
 			plugs: ['top', 'bottom']
 		},
-		rotate_levels: 2
+		rotatable: true
 	},
 	'const-2': {
 		type: 'calc',
@@ -2203,7 +2203,7 @@ module.exports = {
 		io: {
 			plugs: ['top', 'bottom']
 		},
-		rotate_levels: 2
+		rotatable: true
 	},
 	add: {
 		type: 'calc2',
@@ -2394,7 +2394,7 @@ module.exports = {
 			in: ['right'],
 			out: 'left'
 		},
-		rotate_levels: 4
+		rotatable: true
 	},
 	'c-contact': {
 		type: 'calc-switch',

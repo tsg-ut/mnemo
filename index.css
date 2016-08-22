@@ -1213,184 +1213,175 @@ button {
   box-sizing: border-box;
   background-size: contain;
 }
-.game-screen .block[selected] {
-  border: 3px solid red;
+.game-screen .block::before,
+.game-screen .block::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  box-sizing: border-box;
+  background-size: contain;
 }
-.game-screen .block[data-type=diode] {
+.game-screen .block[data-rotate='90']::before {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+.game-screen .block[data-rotate='180']::before {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+.game-screen .block[data-rotate='270']::before {
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg);
+}
+.game-screen .block[data-type=diode]::before {
   background-image: url("image/diode.png");
 }
-.game-screen .block[data-type=diode][data-rotate='90'] {
-  background-image: url("image/diode-r90.png");
-}
-.game-screen .block[data-type=diode][data-rotate='180'] {
-  background-image: url("image/diode-r180.png");
-}
-.game-screen .block[data-type=diode][data-rotate='270'] {
-  background-image: url("image/diode-r270.png");
-}
-.game-screen .block[data-type=wireT] {
+.game-screen .block[data-type=wireT]::before {
   background-image: url("image/wireT.png");
 }
-.game-screen .block[data-type=wireT][data-rotate='90'] {
-  background-image: url("image/wireT-r90.png");
-}
-.game-screen .block[data-type=wireT][data-rotate='180'] {
-  background-image: url("image/wireT-r180.png");
-}
-.game-screen .block[data-type=wireT][data-rotate='270'] {
-  background-image: url("image/wireT-r270.png");
-}
-.game-screen .block[data-type=wireL] {
+.game-screen .block[data-type=wireL]::before {
   background-image: url("image/wireL.png");
 }
-.game-screen .block[data-type=wireL][data-rotate='90'] {
-  background-image: url("image/wireL-r90.png");
-}
-.game-screen .block[data-type=wireL][data-rotate='180'] {
-  background-image: url("image/wireL-r180.png");
-}
-.game-screen .block[data-type=wireL][data-rotate='270'] {
-  background-image: url("image/wireL-r270.png");
-}
-.game-screen .block[data-type=const-2] {
-  background-image: url("image/const-2.png");
-}
-.game-screen .block[data-type=const-2][data-rotate='90'] {
-  background-image: url("image/const-2-r90.png");
-}
-.game-screen .block[data-type=const-1] {
-  background-image: url("image/const-1.png");
-}
-.game-screen .block[data-type=const-1][data-rotate='90'] {
-  background-image: url("image/const-1-r90.png");
-}
-.game-screen .block[data-type=const-0] {
-  background-image: url("image/const-0.png");
-}
-.game-screen .block[data-type=const-0][data-rotate='90'] {
-  background-image: url("image/const-0-r90.png");
-}
-.game-screen .block[data-type=div-3] {
-  background-image: url("image/div-3.png");
-}
-.game-screen .block[data-type=div-3][data-rotate='90'] {
-  background-image: url("image/div-3-r90.png");
-}
-.game-screen .block[data-type=div-2] {
-  background-image: url("image/div-2.png");
-}
-.game-screen .block[data-type=div-2][data-rotate='90'] {
-  background-image: url("image/div-2-r90.png");
-}
-.game-screen .block[data-type=minus-2] {
-  background-image: url("image/minus-2.png");
-}
-.game-screen .block[data-type=minus-2][data-rotate='90'] {
-  background-image: url("image/minus-2-r90.png");
-}
-.game-screen .block[data-type=minus-1] {
-  background-image: url("image/minus-1.png");
-}
-.game-screen .block[data-type=minus-1][data-rotate='90'] {
-  background-image: url("image/minus-1-r90.png");
-}
-.game-screen .block[data-type=plus-2] {
-  background-image: url("image/plus-2.png");
-}
-.game-screen .block[data-type=plus-2][data-rotate='90'] {
-  background-image: url("image/plus-2-r90.png");
-}
-.game-screen .block[data-type=plus-1] {
-  background-image: url("image/plus-1.png");
-}
-.game-screen .block[data-type=plus-1][data-rotate='90'] {
-  background-image: url("image/plus-1-r90.png");
-}
-.game-screen .block[data-type=times-3] {
-  background-image: url("image/times-3.png");
-}
-.game-screen .block[data-type=times-3][data-rotate='90'] {
-  background-image: url("image/times-3-r90.png");
-}
-.game-screen .block[data-type=add-3] {
-  background-image: url("image/add-3.png");
-}
-.game-screen .block[data-type=add-3][data-rotate='90'] {
-  background-image: url("image/add-3-r90.png");
-}
-.game-screen .block[data-type=times-2] {
-  background-image: url("image/times-2.png");
-}
-.game-screen .block[data-type=times-2][data-rotate='90'] {
-  background-image: url("image/times-2-r90.png");
-}
-.game-screen .block[data-type=wireI] {
+.game-screen .block[data-type=wireI]::before {
   background-image: url("image/wireI.png");
 }
-.game-screen .block[data-type=wireI][data-rotate='90'] {
-  background-image: url("image/wireI-r90.png");
+.game-screen .block[data-type=const-2]::before {
+  background-image: url("image/wireI.png");
 }
-.game-screen .block[data-type=leqq] {
+.game-screen .block[data-type=const-2]::after {
+  background-image: url("image/const-2.png");
+}
+.game-screen .block[data-type=const-1]::before {
+  background-image: url("image/wireI.png");
+}
+.game-screen .block[data-type=const-1]::after {
+  background-image: url("image/const-1.png");
+}
+.game-screen .block[data-type=const-0]::before {
+  background-image: url("image/wireI.png");
+}
+.game-screen .block[data-type=const-0]::after {
+  background-image: url("image/const-0.png");
+}
+.game-screen .block[data-type=div-3]::before {
+  background-image: url("image/wireI.png");
+}
+.game-screen .block[data-type=div-3]::after {
+  background-image: url("image/div-3.png");
+}
+.game-screen .block[data-type=div-2]::before {
+  background-image: url("image/wireI.png");
+}
+.game-screen .block[data-type=div-2]::after {
+  background-image: url("image/div-2.png");
+}
+.game-screen .block[data-type=minus-2]::before {
+  background-image: url("image/wireI.png");
+}
+.game-screen .block[data-type=minus-2]::after {
+  background-image: url("image/minus-2.png");
+}
+.game-screen .block[data-type=minus-1]::before {
+  background-image: url("image/wireI.png");
+}
+.game-screen .block[data-type=minus-1]::after {
+  background-image: url("image/minus-1.png");
+}
+.game-screen .block[data-type=plus-2]::before {
+  background-image: url("image/wireI.png");
+}
+.game-screen .block[data-type=plus-2]::after {
+  background-image: url("image/plus-2.png");
+}
+.game-screen .block[data-type=plus-1]::before {
+  background-image: url("image/wireI.png");
+}
+.game-screen .block[data-type=plus-1]::after {
+  background-image: url("image/plus-1.png");
+}
+.game-screen .block[data-type=times-3]::before {
+  background-image: url("image/wireI.png");
+}
+.game-screen .block[data-type=times-3]::after {
+  background-image: url("image/times-3.png");
+}
+.game-screen .block[data-type=add-3]::before {
+  background-image: url("image/wireI.png");
+}
+.game-screen .block[data-type=add-3]::after {
+  background-image: url("image/add-3.png");
+}
+.game-screen .block[data-type=times-2]::before {
+  background-image: url("image/wireI.png");
+}
+.game-screen .block[data-type=times-2]::after {
+  background-image: url("image/times-2.png");
+}
+.game-screen .block[data-type=leqq]::before {
   background-image: url("image/leqq.png");
 }
-.game-screen .block[data-type=lt] {
+.game-screen .block[data-type=lt]::before {
   background-image: url("image/lt.png");
 }
-.game-screen .block[data-type=geqq] {
+.game-screen .block[data-type=geqq]::before {
   background-image: url("image/geqq.png");
 }
-.game-screen .block[data-type=gt] {
+.game-screen .block[data-type=gt]::before {
   background-image: url("image/gt.png");
 }
-.game-screen .block[data-type=neq] {
+.game-screen .block[data-type=neq]::before {
   background-image: url("image/neq.png");
 }
-.game-screen .block[data-type=iko-ru] {
+.game-screen .block[data-type=iko-ru]::before {
   background-image: url("image/iko-ru.png");
 }
-.game-screen .block[data-type=bitwise-xor] {
+.game-screen .block[data-type=bitwise-xor]::before {
   background-image: url("image/bitwise-xor.png");
 }
-.game-screen .block[data-type=bitwise-or] {
+.game-screen .block[data-type=bitwise-or]::before {
   background-image: url("image/bitwise-or.png");
 }
-.game-screen .block[data-type=bitwise-and] {
+.game-screen .block[data-type=bitwise-and]::before {
   background-image: url("image/bitwise-and.png");
 }
-.game-screen .block[data-type=bitshift-right] {
+.game-screen .block[data-type=bitshift-right]::before {
   background-image: url("image/bitshift-right.png");
 }
-.game-screen .block[data-type=bitshift-left] {
+.game-screen .block[data-type=bitshift-left]::before {
   background-image: url("image/bitshift-left.png");
 }
-.game-screen .block[data-type=mod] {
+.game-screen .block[data-type=mod]::before {
   background-image: url("image/mod.png");
 }
-.game-screen .block[data-type=pow] {
+.game-screen .block[data-type=pow]::before {
   background-image: url("image/pow.png");
 }
-.game-screen .block[data-type=wireX] {
+.game-screen .block[data-type=wireX]::before {
   background-image: url("image/wireX.png");
 }
-.game-screen .block[data-type=transistor] {
+.game-screen .block[data-type=transistor]::before {
   background-image: url("image/transistor.png");
 }
-.game-screen .block[data-type=conditional] {
+.game-screen .block[data-type=conditional]::before {
   background-image: url("image/conditional.png");
 }
-.game-screen .block[data-type=c-contact] {
+.game-screen .block[data-type=c-contact]::before {
   background-image: url("image/c-contact.png");
 }
-.game-screen .block[data-type=div] {
+.game-screen .block[data-type=div]::before {
   background-image: url("image/div.png");
 }
-.game-screen .block[data-type=mul] {
+.game-screen .block[data-type=mul]::before {
   background-image: url("image/mul.png");
 }
-.game-screen .block[data-type=sub] {
+.game-screen .block[data-type=sub]::before {
   background-image: url("image/sub.png");
 }
-.game-screen .block[data-type=add] {
+.game-screen .block[data-type=add]::before {
   background-image: url("image/add.png");
 }
 .game-screen .panel {
@@ -1411,10 +1402,10 @@ button {
 .game-screen .panel .block[selected]::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
   border: 3px solid red;
   pointer-events: none;
 }
