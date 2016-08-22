@@ -1209,7 +1209,7 @@ var Stage = function () {
 			var _this3 = this;
 
 			this.board.step();
-			this.$stage.find('.clock-num').text(this.board.clock);
+			this.$stage.find('.clock-value').text(this.board.clock);
 
 			if (this.board.executing && !this.board.paused) {
 				Promise.all(this.boardElement.animations).then(function () {

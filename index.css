@@ -905,6 +905,7 @@ button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  position: relative;
 }
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-frame .top,
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-frame .bottom {
@@ -972,6 +973,33 @@ button {
 }
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-frame .bottom .right {
   background-image: url(image/frame-bottomright.png);
+}
+.game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-frame .clock-area {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  padding: 3px 4px 4px;
+  border: 2px outset #ff920e;
+  border-top: none;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  background: #fbae36;
+  color: #fffdf7;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: Arial;
+  line-height: 1;
+}
+.game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-frame .clock-area .clock-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url(image/clock-icon.png);
+  vertical-align: text-top;
+  margin-right: .2em;
+}
+.game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-frame .clock-area .clock-value {
+  vertical-align: bottom;
 }
 .game-screen .stage-layer .upper-area .pipe-area .case-board-area .board-area .board-wrap {
   background-color: #e4b67c;
