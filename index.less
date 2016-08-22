@@ -741,38 +741,53 @@ button {
 			border: 3px solid red;
 		}
 
-		@blocks-rotate4: wireL, wireT, diode;
-		@blocks-rotate2: wireI, times-2, add-3, times-3, plus-1, plus-2, minus-1, minus-2, div-2, div-3, const-0, const-1, const-2;
+		&::before, &::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+
+			pointer-events: none;
+			box-sizing: border-box;
+			background-size: contain;
+		}
+		&[data-rotate='90']::before {
+			transform: rotate(90deg);
+		}
+		&[data-rotate='180']::before {
+			transform: rotate(180deg);
+		}
+		&[data-rotate='270']::before {
+			transform: rotate(270deg);
+		}
+		@blocks-rotatable: wireI, wireL, wireT, diode;
+		@blocks-rotate-back-wireI: times-2, add-3, times-3, plus-1, plus-2, minus-1, minus-2, div-2, div-3, const-0, const-1, const-2;
 		@blocks-norotate: add, sub, mul, div,  c-contact, conditional, transistor, wireX, pow, mod, bitshift-left, bitshift-right, bitwise-and, bitwise-or, bitwise-xor, iko-ru, neq, gt, geqq, lt, leqq;
-		.-r4(@i: length(@blocks-rotate4)) when (@i > 0) {
-			@name: extract(@blocks-rotate4, @i);
-			&[data-type=@{name}] {
+
+		.-r(@i: length(@blocks-rotatable)) when (@i > 0) {
+			@name: extract(@blocks-rotatable, @i);
+			&[data-type=@{name}]::before {
 				background-image: url("image/@{name}.png");
-				&[data-rotate='90'] {
-					background-image: url("image/@{name}-r90.png");
+			}
+			.-r((@i - 1));
+		} .-r;
+		.-rI(@i: length(@blocks-rotate-back-wireI)) when (@i > 0) {
+			@name: extract(@blocks-rotate-back-wireI, @i);
+			&[data-type=@{name}] {
+				&::before {
+					background-image: url("image/wireI.png");
 				}
-				&[data-rotate='180'] {
-					background-image: url("image/@{name}-r180.png");
-				}
-				&[data-rotate='270'] {
-					background-image: url("image/@{name}-r270.png");
+				&::after {
+					background-image: url("image/@{name}.png");
 				}
 			}
-			.-r4((@i - 1));
-		} .-r4;
-		.-r2(@i: length(@blocks-rotate2)) when (@i > 0) {
-			@name: extract(@blocks-rotate2, @i);
-			&[data-type=@{name}] {
-				background-image: url("image/@{name}.png");
-				&[data-rotate='90'], &[data-rotate='270'] {
-					background-image: url("image/@{name}-r90.png");
-				}
-			}
-			.-r2((@i - 1));
-		} .-r2;
+			.-rI((@i - 1));
+		} .-rI;
 		.-(@i: length(@blocks-norotate)) when (@i > 0) {
 			@name: extract(@blocks-norotate, @i);
-			&[data-type=@{name}] { background-image: url("image/@{name}.png"); }
+			&[data-type=@{name}]::before { background-image: url("image/@{name}.png"); }
 			.-((@i - 1));
 		} .-;
 	}
