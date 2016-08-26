@@ -19,7 +19,8 @@
     "unit": "npm run mochify:node && npm run mochify:phantom",
     "functional": "mocha \"test/functional/*.ls\" --reporter spec --compilers ls:livescript",
     "coveralls": "cat coverage/lcov.info | coveralls",
-    "test": "npm run unit && npm run functional"
+    "test": "npm run unit && npm run functional",
+    "lint": "eslint lib"
   },
   "repository": {
     "type": "git",
@@ -47,6 +48,7 @@
     "concurrently": "^2.2.0",
     "core-js": "^2.4.1",
     "coveralls": "^2.11.12",
+    "eslint": "^3.3.1",
     "exorcist": "^0.4.0",
     "file-url": "^1.1.0",
     "gulp": "^3.9.1",
