@@ -125,7 +125,7 @@
         "no-extend-native": "error",
         "no-extra-bind": "error",
         "no-extra-label": "error",
-        "no-extra-parens": "error",
+        "no-extra-parens": "off",
         "no-floating-decimal": "off",
         "no-global-assign": "error",
         "no-implicit-globals": "error",
@@ -150,7 +150,7 @@
         "no-multiple-empty-lines": "error",
         "no-negated-condition": "warn",
         "no-nested-ternary": "error",
-        "no-new": "error",
+        "no-new": "off",
         "no-new-func": "error",
         "no-new-object": "error",
         "no-new-require": "error",
@@ -199,13 +199,7 @@
         "no-warning-comments": "warn",
         "no-whitespace-before-property": "error",
         "no-with": "error",
-        "object-curly-newline": [
-            "error",
-            {
-                "multiline": true,
-                "minProperties": 1
-            }
-        ],
+        "object-curly-newline": "off",
         "object-curly-spacing": [
             "error",
             "never"
