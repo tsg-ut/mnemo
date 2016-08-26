@@ -14,6 +14,22 @@ describe 'Board' ->
       width: 5
       height: 4
 
+  It 'carries input data to output when plugged input and output by wires' ->
+    resolve, reject <~ new Promise _
+
+    for y from 0 til 4
+      @board.place-block 2, y, 'wireI', 0
+
+    @board.on 'output' (output-value) ->
+      expect output-value .to.equal 100
+      resolve!
+
+    @board.input 100
+
+    for x from 0 til 4
+      @board.step!
+      @board.pass!
+
   describe 'constructor' ->
     It 'creates height x width numbers of empty blocks' ->
       expect @board.blocks .to.have.length-of 4
