@@ -77,3 +77,9 @@ npm run unit
 ```sh
 npm run functional
 ```
+
+### Lint
+
+```sh
+npm run lint
+```
