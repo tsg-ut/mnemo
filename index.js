@@ -37,7 +37,7 @@ var Block = function (_EventEmitter) {
 	function Block(board, config, size) {
 		_classCallCheck(this, Block);
 
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Block).call(this));
+		var _this = _possibleConstructorReturn(this, (Block.__proto__ || Object.getPrototypeOf(Block)).call(this));
 
 		_this.board = board;
 		_this.x = config.x;
@@ -192,7 +192,7 @@ var Block = function (_EventEmitter) {
 
 						// Calculate and pass through
 						var input = {};
-						sources.forEach(function (source, index) {
+						sources.forEach(function (source) {
 							var data = _this2.inputQueues[source].shift();
 							input[source] = data;
 							datas.push(data);
@@ -239,7 +239,7 @@ var Block = function (_EventEmitter) {
 
 						// Calculate and pass through
 						var input = {};
-						_sources.forEach(function (source, index) {
+						_sources.forEach(function (source) {
 							var data = _this2.inputQueues[source].shift();
 							input[source] = data;
 							datas.push(data);
@@ -427,7 +427,6 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var $ = require('jquery');
-var Board = require('./board');
 var DataElement = require('./data-element');
 
 var BoardElement = function () {
@@ -446,14 +445,14 @@ var BoardElement = function () {
 
 		for (var i = 0; i < this.height; i++) {
 			var $row = $('<div/>', {
-				'class': 'row',
+				class: 'row',
 				attr: { 'data-y': i }
 			});
 			this.$board.find('.rows').append($row);
 
 			for (var j = 0; j < this.width; j++) {
 				$row.append($('<div/>', {
-					'class': 'block',
+					class: 'block',
 					attr: {
 						'data-x': j,
 						'data-y': i
@@ -462,7 +461,7 @@ var BoardElement = function () {
 			}
 		}
 
-		if (typeof stage.config.inputX === "number") {
+		if (typeof stage.config.inputX === 'number') {
 			this.inputBlockX = [stage.config.inputX];
 		} else {
 			this.inputBlockX = stage.config.inputX;
@@ -503,7 +502,7 @@ var BoardElement = function () {
 						continue;
 					}
 
-					var dataElement = new DataElement(_this, _data, block.center);
+					new DataElement(_this, _data, block.center);
 
 					var _promise = _data.element.animate(block[_direction2]);
 					outputAnimations.push(_promise);
@@ -557,7 +556,7 @@ var BoardElement = function () {
 
 module.exports = BoardElement;
 
-},{"./board":4,"./data-element":5,"jquery":263}],4:[function(require,module,exports){
+},{"./data-element":5,"jquery":263}],4:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -580,7 +579,7 @@ var Board = function (_EventEmitter) {
 	function Board(config, blockSize) {
 		_classCallCheck(this, Board);
 
-		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Board).call(this));
+		var _this = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this));
 
 		_this.height = config.height;
 		_this.width = config.width;
@@ -606,7 +605,7 @@ var Board = function (_EventEmitter) {
 			}
 		}
 
-		if (typeof config.inputX === "number") {
+		if (typeof config.inputX === 'number') {
 			_this.inputBlockX = [config.inputX];
 		} else {
 			_this.inputBlockX = config.inputX;
@@ -627,7 +626,7 @@ var Board = function (_EventEmitter) {
 		value: function setBlockSize(blockSize) {
 			this.blockSize = blockSize;
 			this.forBlocks(function (block) {
-				return block.size = blockSize;
+				block.size = blockSize;
 			});
 		}
 	}, {
@@ -665,7 +664,7 @@ var Board = function (_EventEmitter) {
 		value: function input(value) {
 			var _this3 = this;
 
-			var newValueArray = typeof value === "number" ? [value] : value;
+			var newValueArray = typeof value === 'number' ? [value] : value;
 
 			var inputData = newValueArray.map(function (v, i) {
 				var newData = new Data(_this3, v);
@@ -809,7 +808,7 @@ var DataElement = function () {
 		boardElement.dataElements.push(this);
 
 		this.$data = $('<div/>', {
-			'class': 'data',
+			class: 'data',
 			text: this.data.value,
 			css: toCSS(coordinate)
 		});
@@ -890,7 +889,7 @@ var Game = function () {
 
 		var $stageNames = this.configs.map(function (config, index) {
 			var $stageName = $('<li/>', {
-				'class': 'stage-name',
+				class: 'stage-name',
 				text: config.statement
 			});
 
@@ -971,7 +970,7 @@ var stageConfigs = require('./stages.json');
 var Game = require('./game');
 
 $(document).ready(function () {
-	var game = new Game(stageConfigs);
+	new Game(stageConfigs);
 
 	$('.modal').each(function (index, element) {
 		var $modal = $(element);
@@ -1052,7 +1051,7 @@ var Panel = function () {
 
 			var uniqueParts = new Map();
 
-			this.parts.forEach(function (name, i) {
+			this.parts.forEach(function (name) {
 				if (!uniqueParts.has(name)) {
 					uniqueParts.set(name, 0);
 				}
@@ -1062,13 +1061,13 @@ var Panel = function () {
 			this.$panel.empty();
 			uniqueParts.forEach(function (count, name) {
 				_this.$panel.append($('<div/>', {
-					'class': 'block',
+					class: 'block',
 					attr: {
 						'data-type': name,
 						selected: _this.selected === name
 					}
 				}).append($('<div/>', {
-					'class': 'count',
+					class: 'count',
 					text: count
 				})));
 			});
@@ -1164,26 +1163,26 @@ var Stage = function () {
 
 		this.$stage.find('.inputs').empty().append(config.input.map(function (input) {
 			return $('<div/>', {
-				'class': 'input',
+				class: 'input',
 				text: input
 			});
 		}));
 
 		this.$stage.find('.arrows').empty().append(config.output.map(function () {
 			return $('<div/>', {
-				'class': 'arrow'
+				class: 'arrow'
 			});
 		}));
 
 		this.$stage.find('.user-outputs').empty().append(config.output.map(function () {
 			return $('<div/>', {
-				'class': 'output'
+				class: 'output'
 			});
 		}));
 
 		this.$stage.find('.correct-outputs').empty().append(config.output.map(function (output) {
 			return $('<div/>', {
-				'class': 'output',
+				class: 'output',
 				text: output
 			});
 		}));
@@ -1208,8 +1207,8 @@ var Stage = function () {
 			var _this2 = this;
 
 			var inputData = this.board.input(this.config.input[this.caseIndex]);
-			var inputDataElement = inputData.map(function (d, i) {
-				return new DataElement(_this2.boardElement, d, _this2.board.inputBlock[i].top);
+			inputData.forEach(function (d, i) {
+				new DataElement(_this2.boardElement, d, _this2.board.inputBlock[i].top);
 			});
 
 			this.$stage.find('button.stop').show();
@@ -2191,7 +2190,7 @@ module.exports = {
 	},
 	'const-0': {
 		type: 'calc',
-		func: function func(n) {
+		func: function func() {
 			return 0;
 		},
 		io: {
@@ -2201,7 +2200,7 @@ module.exports = {
 	},
 	'const-1': {
 		type: 'calc',
-		func: function func(n) {
+		func: function func() {
 			return 1;
 		},
 		io: {
@@ -2211,7 +2210,7 @@ module.exports = {
 	},
 	'const-2': {
 		type: 'calc',
-		func: function func(n) {
+		func: function func() {
 			return 2;
 		},
 		io: {
@@ -2339,7 +2338,7 @@ module.exports = {
 			out: 'bottom'
 		}
 	},
-	'neq': {
+	neq: {
 		type: 'calc2',
 		func: function func(a, b) {
 			return a !== b ? 1 : 0;
@@ -2349,7 +2348,7 @@ module.exports = {
 			out: 'bottom'
 		}
 	},
-	'gt': {
+	gt: {
 		type: 'calc2',
 		func: function func(a, b) {
 			return a > b ? 1 : 0;
@@ -2359,7 +2358,7 @@ module.exports = {
 			out: 'bottom'
 		}
 	},
-	'geqq': {
+	geqq: {
 		type: 'calc2',
 		func: function func(a, b) {
 			return a >= b ? 1 : 0;
@@ -2369,7 +2368,7 @@ module.exports = {
 			out: 'bottom'
 		}
 	},
-	'lt': {
+	lt: {
 		type: 'calc2',
 		func: function func(a, b) {
 			return a < b ? 1 : 0;
@@ -2379,7 +2378,7 @@ module.exports = {
 			out: 'bottom'
 		}
 	},
-	'leqq': {
+	leqq: {
 		type: 'calc2',
 		func: function func(a, b) {
 			return a <= b ? 1 : 0;
