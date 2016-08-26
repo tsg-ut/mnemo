@@ -19,8 +19,8 @@
     "unit": "npm run mochify:node && npm run mochify:phantom",
     "functional": "mocha \"test/functional/*.ls\" --reporter spec --compilers ls:livescript",
     "coveralls": "cat coverage/lcov.info | coveralls",
-    "test": "npm run unit && npm run functional && npm run lint",
-    "lint": "eslint \"lib/**/*.js\" --ignore-pattern \"lib/analytics.js\""
+    "lint": "eslint \"lib/**/*.js\" --ignore-pattern \"lib/analytics.js\"",
+    "test": "npm run unit && npm run functional && npm run lint"
   },
   "repository": {
     "type": "git",
