@@ -1,10 +1,15 @@
 require! {
   nightmare: Nightmare
   chai: {expect}
+  'mocha-logger'
   'file-url'
 }
 
-nightmare = Nightmare!
+nightmare = Nightmare do
+  show: false
+  width: 1600
+  height: 900
+  center: true
 
 It = global.it
 
@@ -12,9 +17,11 @@ describe 'Application' ->
   before ->
     @timeout 10000
 
+    start-time = Date.now!
+
     nightmare
-    .viewport 1600 900
     .goto file-url 'index.html'
+    .then -> mocha-logger.log "It took #{Date.now! - start-time}ms to launch app"
 
   describe 'Menu Screen' ->
     describe 'Start Button' ->
