@@ -1046,7 +1046,7 @@ var Panel = function () {
 				this.update();
 			} else if (!this.selected && oldBlock.config.name !== 'empty' && oldBlock.config.rotatable) {
 				var _rotate = (oldBlock.rotate + 1) % 4;
-				this.stage.boardElement.placeBlock(x, y, blockName, _rotate);
+				this.stage.boardElement.placeBlock(x, y, oldBlock.config.name, _rotate);
 				this.update();
 			}
 		}
