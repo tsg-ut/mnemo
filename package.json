@@ -54,6 +54,7 @@
     "gulp": "^3.9.1",
     "jquery": "^3.0.0",
     "less": "^2.7.1",
+    "mocha-logger": "^1.0.4",
     "mochify": "^2.18.1",
     "mochify-istanbul": "^2.4.1",
     "nightmare": "^2.6.1",
