@@ -29,14 +29,14 @@ describe 'Block' ->
         @block.input 'top', data
         @block.step!
 
-        expect @block.output-queues.bottom .to.deep.equal [data]
+        expect @block.output-queues.get \bottom .to.deep.equal [data]
 
       It 'conveys data from bottom to top' ->
         data = new Data @board, 334
         @block.input 'bottom', data
         @block.step!
 
-        expect @block.output-queues.top .to.deep.equal [data]
+        expect @block.output-queues.get \top .to.deep.equal [data]
 
       It 'erases any data put on the right side' ->
         resolve, reject <~ new Promise _
@@ -60,4 +60,4 @@ describe 'Block' ->
         @block.input 'left', data
         @block.step!
 
-        expect @block.output-queues.right .to.deep.equal [data]
+        expect @block.output-queues.get \right .to.deep.equal [data]
