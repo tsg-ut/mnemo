@@ -21,7 +21,7 @@ describe 'Block' ->
   describe 'WireI block' ->
     context 'without rotation' ->
       before-each ->
-        @board.place-block 0, 0, 'wireI', 0
+        @board.place-block x: 0, y: 0, type: \wireI, rotate: 0
         @block = @board.get-block 0, 0
 
       It 'conveys data from top to bottom' ->
@@ -52,7 +52,7 @@ describe 'Block' ->
 
     context 'with rotation' ->
       before-each ->
-        @board.place-block 0, 0, 'wireI', 1
+        @board.place-block x: 0, y: 0, type: \wireI, rotate: 1
         @block = @board.get-block 0, 0
 
       It 'conveys data from left to right' ->

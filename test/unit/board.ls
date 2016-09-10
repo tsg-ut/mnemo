@@ -18,7 +18,7 @@ describe 'Board' ->
     resolve, reject <~ new Promise _
 
     for y from 0 til 4
-      @board.place-block 2, y, 'wireI', 0
+      @board.place-block x: 2, y: y, type: \wireI, rotate: 0
 
     @board.on 'output' (output-value) ->
       expect output-value .to.equal 100
