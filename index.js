@@ -45,18 +45,9 @@ var Block = function (_EventEmitter) {
 		_this.rotate = config.rotate;
 		_this.config = config;
 		_this.size = size;
-		_this.inputQueues = {
-			top: [],
-			left: [],
-			right: [],
-			bottom: []
-		};
-		_this.outputQueues = {
-			top: [],
-			left: [],
-			right: [],
-			bottom: []
-		};
+		_this.inputQueues = new Map([['top', []], ['left', []], ['right', []], ['bottom', []]]);
+
+		_this.outputQueues = new Map([['top', []], ['left', []], ['right', []], ['bottom', []]]);
 		return _this;
 	}
 
@@ -73,7 +64,7 @@ var Block = function (_EventEmitter) {
 	}, {
 		key: 'input',
 		value: function input(position, data) {
-			this.inputQueues[position].push(data);
+			this.inputQueues.get(position).push(data);
 		}
 	}, {
 		key: 'step',
@@ -82,11 +73,31 @@ var Block = function (_EventEmitter) {
 
 			if (this.config.type === 'empty') {
 				// Erase all data passed to the empty block
-				for (var source in this.inputQueues) {
-					var queue = this.inputQueues[source];
-					while (queue.length) {
-						var data = queue.shift();
-						this.emit('erase', data);
+				var _iteratorNormalCompletion = true;
+				var _didIteratorError = false;
+				var _iteratorError = undefined;
+
+				try {
+					for (var _iterator = this.inputQueues.values()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+						var queue = _step.value;
+
+						while (queue.length) {
+							var data = queue.shift();
+							this.emit('erase', data);
+						}
+					}
+				} catch (err) {
+					_didIteratorError = true;
+					_iteratorError = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion && _iterator.return) {
+							_iterator.return();
+						}
+					} finally {
+						if (_didIteratorError) {
+							throw _iteratorError;
+						}
 					}
 				}
 			} else if (this.config.type === 'wire') {
@@ -94,86 +105,128 @@ var Block = function (_EventEmitter) {
 					return _this2.rotatedDirection(direction);
 				});
 
-				var _loop = function _loop(_source) {
-					var queue = _this2.inputQueues[_source];
+				var _iteratorNormalCompletion2 = true;
+				var _didIteratorError2 = false;
+				var _iteratorError2 = undefined;
 
-					// When data exists in pluged direction
-					if (queue.length !== 0 && rotatedPlugs.includes(_source)) {
-						(function () {
-							var destinations = rotatedPlugs.filter(function (direction) {
-								return direction !== _source;
-							});
-							var data = queue.shift();
+				try {
+					var _loop = function _loop() {
+						var _step2$value = _slicedToArray(_step2.value, 2);
 
-							// pass through
-							var input = {};
-							input[_source] = data;
+						var source = _step2$value[0];
+						var queue = _step2$value[1];
 
-							var output = {};
-							destinations.forEach(function (direction) {
-								var outData = new Data(_this2.board, data.value);
-								_this2.outputQueues[direction].push(outData);
-								output[direction] = outData;
-							});
+						// When data exists in pluged direction
+						if (queue.length !== 0 && rotatedPlugs.includes(source)) {
+							(function () {
+								var destinations = rotatedPlugs.filter(function (direction) {
+									return direction !== source;
+								});
+								var data = queue.shift();
 
-							_this2.emit('pass', { in: input, out: output });
-						})();
+								// pass through
+								var input = new Map([[source, data]]);
+
+								var output = new Map();
+								destinations.forEach(function (direction) {
+									var outData = new Data(_this2.board, data.value);
+									_this2.outputQueues.get(direction).push(outData);
+									output.set(direction, outData);
+								});
+
+								_this2.emit('pass', { in: input, out: output });
+							})();
+						}
+
+						// Erase data when data exists in non-pluged direction
+						if (!rotatedPlugs.includes(source)) {
+							while (queue.length) {
+								var _data = queue.shift();
+								_this2.emit('erase', _data);
+							}
+						}
+					};
+
+					for (var _iterator2 = this.inputQueues.entries()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+						_loop();
 					}
-
-					// Erase data when data exists in non-pluged direction
-					if (!rotatedPlugs.includes(_source)) {
-						while (queue.length) {
-							var _data = queue.shift();
-							_this2.emit('erase', _data);
+				} catch (err) {
+					_didIteratorError2 = true;
+					_iteratorError2 = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion2 && _iterator2.return) {
+							_iterator2.return();
+						}
+					} finally {
+						if (_didIteratorError2) {
+							throw _iteratorError2;
 						}
 					}
-				};
-
-				for (var _source in this.inputQueues) {
-					_loop(_source);
 				}
 			} else if (this.config.type === 'calc') {
 				var _rotatedPlugs = this.config.io.plugs.map(function (direction) {
 					return _this2.rotatedDirection(direction);
 				});
 
-				var _loop2 = function _loop2(_source2) {
-					var queue = _this2.inputQueues[_source2];
+				var _iteratorNormalCompletion3 = true;
+				var _didIteratorError3 = false;
+				var _iteratorError3 = undefined;
 
-					// When data exists in pluged direction
-					if (queue.length !== 0 && _rotatedPlugs.includes(_source2)) {
-						(function () {
-							var destinations = _rotatedPlugs.filter(function (direction) {
-								return direction !== _source2;
-							});
-							var data = queue.shift();
+				try {
+					var _loop2 = function _loop2() {
+						var _step3$value = _slicedToArray(_step3.value, 2);
 
-							// Calculate and pass through
-							var input = {};
-							input[_source2] = data;
+						var source = _step3$value[0];
+						var queue = _step3$value[1];
 
-							var output = {};
-							destinations.forEach(function (direction) {
-								var outData = new Data(_this2.board, _this2.config.func(data.value));
-								_this2.outputQueues[direction].push(outData);
-								output[direction] = outData;
-							});
+						// When data exists in pluged direction
+						if (queue.length !== 0 && _rotatedPlugs.includes(source)) {
+							(function () {
+								var destinations = _rotatedPlugs.filter(function (direction) {
+									return direction !== source;
+								});
+								var data = queue.shift();
 
-							_this2.emit('pass', { in: input, out: output });
-						})();
+								// Calculate and pass through
+								var input = new Map([[source, source]]);
+
+								var output = new Map();
+								destinations.forEach(function (direction) {
+									var outData = new Data(_this2.board, _this2.config.func(data.value));
+									_this2.outputQueues.get(direction).push(outData);
+									output.set(direction, outData);
+								});
+
+								_this2.emit('pass', { in: input, out: output });
+							})();
+						}
+
+						// Erase data when data exists in non-pluged direction
+						if (!_rotatedPlugs.includes(source)) {
+							while (queue.length) {
+								var _data2 = queue.shift();
+								_this2.emit('erase', _data2);
+							}
+						}
+					};
+
+					for (var _iterator3 = this.inputQueues.entries()[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+						_loop2();
 					}
-
-					// Erase data when data exists in non-pluged direction
-					if (!_rotatedPlugs.includes(_source2)) {
-						while (queue.length) {
-							var _data2 = queue.shift();
-							_this2.emit('erase', _data2);
+				} catch (err) {
+					_didIteratorError3 = true;
+					_iteratorError3 = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion3 && _iterator3.return) {
+							_iterator3.return();
+						}
+					} finally {
+						if (_didIteratorError3) {
+							throw _iteratorError3;
 						}
 					}
-				};
-
-				for (var _source2 in this.inputQueues) {
-					_loop2(_source2);
 				}
 			} else if (this.config.type === 'calc2') {
 				var sources = this.config.io.in.map(function (direction) {
@@ -183,7 +236,7 @@ var Block = function (_EventEmitter) {
 
 				// Execute calculation when all inputs are satisfied
 				if (sources.every(function (source) {
-					return _this2.inputQueues[source].length > 0;
+					return _this2.inputQueues.get(source).length > 0;
 				})) {
 					(function () {
 						var _config;
@@ -191,32 +244,53 @@ var Block = function (_EventEmitter) {
 						var datas = [];
 
 						// Calculate and pass through
-						var input = {};
+						var input = new Map();
 						sources.forEach(function (source) {
-							var data = _this2.inputQueues[source].shift();
-							input[source] = data;
+							var data = _this2.inputQueues.get(source).shift();
+							input.set(source, data);
 							datas.push(data);
 						});
-
-						var output = {};
 
 						var outData = new Data(_this2.board, (_config = _this2.config).func.apply(_config, _toConsumableArray(datas.map(function (data) {
 							return data.value;
 						}))));
-						_this2.outputQueues[destination].push(outData);
-						output[destination] = outData;
+						_this2.outputQueues.get(destination).push(outData);
+						var output = new Map(destination, outData);
 
 						_this2.emit('pass', { in: input, out: output });
 					})();
 				}
 
 				// Erase data when data exists in non-pluged direction
-				for (var _source3 in this.inputQueues) {
-					if (!sources.includes(_source3)) {
-						var _queue = this.inputQueues[_source3];
-						while (_queue.length) {
-							var _data3 = _queue.shift();
-							this.emit('erase', _data3);
+				var _iteratorNormalCompletion4 = true;
+				var _didIteratorError4 = false;
+				var _iteratorError4 = undefined;
+
+				try {
+					for (var _iterator4 = this.inputQueues.entries()[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+						var _step4$value = _slicedToArray(_step4.value, 2);
+
+						var _source = _step4$value[0];
+						var _queue = _step4$value[1];
+
+						if (!sources.includes(_source)) {
+							while (_queue.length) {
+								var _data3 = _queue.shift();
+								this.emit('erase', _data3);
+							}
+						}
+					}
+				} catch (err) {
+					_didIteratorError4 = true;
+					_iteratorError4 = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion4 && _iterator4.return) {
+							_iterator4.return();
+						}
+					} finally {
+						if (_didIteratorError4) {
+							throw _iteratorError4;
 						}
 					}
 				}
@@ -230,7 +304,7 @@ var Block = function (_EventEmitter) {
 
 				// Execute calculation when all inputs are satisfied
 				if (_sources.every(function (source) {
-					return _this2.inputQueues[source].length > 0;
+					return _this2.inputQueues.get(source).length > 0;
 				})) {
 					(function () {
 						var _config2;
@@ -238,16 +312,18 @@ var Block = function (_EventEmitter) {
 						var datas = [];
 
 						// Calculate and pass through
-						var input = {};
+						var input = new Map();
 						_sources.forEach(function (source) {
-							var data = _this2.inputQueues[source].shift();
-							input[source] = data;
+							var data = _this2.inputQueues.get(source).shift();
+							input.set(source, data);
 							datas.push(data);
 						});
 
-						var _config$func = (_config2 = _this2.config).func.apply(_config2, _toConsumableArray(datas.map(function (data) {
+						var values = datas.map(function (data) {
 							return data.value;
-						})));
+						});
+
+						var _config$func = (_config2 = _this2.config).func.apply(_config2, _toConsumableArray(values));
 
 						var _config$func2 = _slicedToArray(_config$func, 2);
 
@@ -255,23 +331,45 @@ var Block = function (_EventEmitter) {
 						var value = _config$func2[1];
 
 
-						var output = {};
 						var data = new Data(_this2.board, value);
 						var destination = destinations[directionIndex];
-						_this2.outputQueues[destination].push(data);
-						output[destination] = data;
+						_this2.outputQueues.get(destination).push(data);
+						var output = new Map([[destination, data]]);
 
 						_this2.emit('pass', { in: input, out: output });
 					})();
 				}
 
 				// Erase data when data exists in non-pluged direction
-				for (var _source4 in this.inputQueues) {
-					if (!_sources.includes(_source4)) {
-						var _queue2 = this.inputQueues[_source4];
-						while (_queue2.length) {
-							var _data4 = _queue2.shift();
-							this.emit('erase', _data4);
+				var _iteratorNormalCompletion5 = true;
+				var _didIteratorError5 = false;
+				var _iteratorError5 = undefined;
+
+				try {
+					for (var _iterator5 = this.inputQueues.entries()[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+						var _step5$value = _slicedToArray(_step5.value, 2);
+
+						var _source2 = _step5$value[0];
+						var _queue2 = _step5$value[1];
+
+						if (!_sources.includes(_source2)) {
+							while (_queue2.length) {
+								var _data4 = _queue2.shift();
+								this.emit('erase', _data4);
+							}
+						}
+					}
+				} catch (err) {
+					_didIteratorError5 = true;
+					_iteratorError5 = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion5 && _iterator5.return) {
+							_iterator5.return();
+						}
+					} finally {
+						if (_didIteratorError5) {
+							throw _iteratorError5;
 						}
 					}
 				}
@@ -282,25 +380,45 @@ var Block = function (_EventEmitter) {
 					left: 'right',
 					right: 'left'
 				};
-				for (var _source5 in this.inputQueues) {
-					var _destination = oppositeDirection[_source5];
+				var _iteratorNormalCompletion6 = true;
+				var _didIteratorError6 = false;
+				var _iteratorError6 = undefined;
 
-					var _queue3 = this.inputQueues[_source5];
+				try {
+					for (var _iterator6 = this.inputQueues.entries()[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+						var _step6$value = _slicedToArray(_step6.value, 2);
 
-					// When data exists in pluged direction
-					if (_queue3.length !== 0) {
-						var _data5 = _queue3.shift();
+						var _source3 = _step6$value[0];
+						var _queue3 = _step6$value[1];
 
-						// pass through
-						var _input = {};
-						_input[_source5] = _data5;
+						var _destination = oppositeDirection[_source3];
 
-						var _output = {};
-						var _outData = new Data(this.board, _data5.value);
-						this.outputQueues[_destination].push(_outData);
-						_output[_destination] = _outData;
+						// When data exists in pluged direction
+						if (_queue3.length !== 0) {
+							var _data5 = _queue3.shift();
 
-						this.emit('pass', { in: _input, out: _output });
+							// pass through
+							var _input = new Map([[_source3, _data5]]);
+
+							var _outData = new Data(this.board, _data5.value);
+							this.outputQueues.get(_destination).push(_outData);
+							var _output = new Map([[_destination, _outData]]);
+
+							this.emit('pass', { in: _input, out: _output });
+						}
+					}
+				} catch (err) {
+					_didIteratorError6 = true;
+					_iteratorError6 = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion6 && _iterator6.return) {
+							_iterator6.return();
+						}
+					} finally {
+						if (_didIteratorError6) {
+							throw _iteratorError6;
+						}
 					}
 				}
 			}
@@ -308,11 +426,34 @@ var Block = function (_EventEmitter) {
 	}, {
 		key: 'pass',
 		value: function pass() {
-			for (var direction in this.outputQueues) {
-				var queue = this.outputQueues[direction];
-				while (queue.length) {
-					var data = queue.shift();
-					this.passTo(direction, data);
+			var _iteratorNormalCompletion7 = true;
+			var _didIteratorError7 = false;
+			var _iteratorError7 = undefined;
+
+			try {
+				for (var _iterator7 = this.outputQueues.entries()[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+					var _step7$value = _slicedToArray(_step7.value, 2);
+
+					var direction = _step7$value[0];
+					var queue = _step7$value[1];
+
+					while (queue.length) {
+						var data = queue.shift();
+						this.passTo(direction, data);
+					}
+				}
+			} catch (err) {
+				_didIteratorError7 = true;
+				_iteratorError7 = err;
+			} finally {
+				try {
+					if (!_iteratorNormalCompletion7 && _iterator7.return) {
+						_iterator7.return();
+					}
+				} finally {
+					if (_didIteratorError7) {
+						throw _iteratorError7;
+					}
 				}
 			}
 		}
@@ -363,11 +504,31 @@ var Block = function (_EventEmitter) {
 
 			// Erase data when data exists in non-pluged direction
 			[this.inputQueues, this.outputQueues].forEach(function (queues) {
-				for (var source in queues) {
-					var queue = queues[source];
-					while (queue.length) {
-						var data = queue.shift();
-						_this3.emit('erase', data);
+				var _iteratorNormalCompletion8 = true;
+				var _didIteratorError8 = false;
+				var _iteratorError8 = undefined;
+
+				try {
+					for (var _iterator8 = queues.values()[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+						var queue = _step8.value;
+
+						while (queue.length) {
+							var data = queue.shift();
+							_this3.emit('erase', data);
+						}
+					}
+				} catch (err) {
+					_didIteratorError8 = true;
+					_iteratorError8 = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion8 && _iterator8.return) {
+							_iterator8.return();
+						}
+					} finally {
+						if (_didIteratorError8) {
+							throw _iteratorError8;
+						}
 					}
 				}
 			});
@@ -421,6 +582,8 @@ module.exports = Block;
 
 },{"./data":6,"core-js/fn/array/includes":17,"events":263}],3:[function(require,module,exports){
 'use strict';
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -482,30 +645,93 @@ var BoardElement = function () {
 			var inputAnimations = [];
 			var outputAnimations = [];
 
-			for (var direction in io.in) {
-				var data = io.in[direction];
-				if (data.element) {
-					var promise = data.element.animate(block.center);
-					inputAnimations.push(promise);
+			var _iteratorNormalCompletion = true;
+			var _didIteratorError = false;
+			var _iteratorError = undefined;
+
+			try {
+				for (var _iterator = io.in.values()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+					var data = _step.value;
+
+					if (data.element) {
+						var promise = data.element.animate(block.center);
+						inputAnimations.push(promise);
+					}
+				}
+			} catch (err) {
+				_didIteratorError = true;
+				_iteratorError = err;
+			} finally {
+				try {
+					if (!_iteratorNormalCompletion && _iterator.return) {
+						_iterator.return();
+					}
+				} finally {
+					if (_didIteratorError) {
+						throw _iteratorError;
+					}
 				}
 			}
 
 			var animation = Promise.all(inputAnimations).then(function () {
-				for (var _direction in io.in) {
-					io.in[_direction].element.kill();
+				var _iteratorNormalCompletion2 = true;
+				var _didIteratorError2 = false;
+				var _iteratorError2 = undefined;
+
+				try {
+					for (var _iterator2 = io.in.values()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+						var data = _step2.value;
+
+						data.element.kill();
+					}
+				} catch (err) {
+					_didIteratorError2 = true;
+					_iteratorError2 = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion2 && _iterator2.return) {
+							_iterator2.return();
+						}
+					} finally {
+						if (_didIteratorError2) {
+							throw _iteratorError2;
+						}
+					}
 				}
 
-				for (var _direction2 in io.out) {
-					var _data = io.out[_direction2];
+				var _iteratorNormalCompletion3 = true;
+				var _didIteratorError3 = false;
+				var _iteratorError3 = undefined;
 
-					if (!block.outputQueues[_direction2].includes(_data)) {
-						continue;
+				try {
+					for (var _iterator3 = io.out.entries()[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+						var _step3$value = _slicedToArray(_step3.value, 2);
+
+						var direction = _step3$value[0];
+						var _data = _step3$value[1];
+
+						if (!block.outputQueues.get(direction).includes(_data)) {
+							continue;
+						}
+
+						new DataElement(_this, _data, block.center);
+
+						var promise = _data.element.animate(block[direction]);
+						outputAnimations.push(promise);
 					}
-
-					new DataElement(_this, _data, block.center);
-
-					var _promise = _data.element.animate(block[_direction2]);
-					outputAnimations.push(_promise);
+				} catch (err) {
+					_didIteratorError3 = true;
+					_iteratorError3 = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion3 && _iterator3.return) {
+							_iterator3.return();
+						}
+					} finally {
+						if (_didIteratorError3) {
+							throw _iteratorError3;
+						}
+					}
 				}
 
 				return Promise.all(outputAnimations);
@@ -524,9 +750,14 @@ var BoardElement = function () {
 		}
 	}, {
 		key: 'placeBlock',
-		value: function placeBlock(x, y, type, rotate) {
+		value: function placeBlock(_ref) {
+			var x = _ref.x;
+			var y = _ref.y;
+			var type = _ref.type;
+			var rotate = _ref.rotate;
+
 			this.getBlock(x, y).attr('data-type', type).attr('data-rotate', rotate * 90);
-			this.board.placeBlock(x, y, type, rotate);
+			this.board.placeBlock({ x: x, y: y, type: type, rotate: rotate });
 		}
 	}, {
 		key: 'eraseData',
@@ -556,7 +787,7 @@ var BoardElement = function () {
 
 module.exports = BoardElement;
 
-},{"./data-element":5,"jquery":265}],4:[function(require,module,exports){
+},{"./data-element":5,"jquery":264}],4:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -601,7 +832,7 @@ var Board = function (_EventEmitter) {
 
 		for (var x = 0; x < _this.width; x++) {
 			for (var y = 0; y < _this.height; y++) {
-				_this.placeBlock(x, y, 'empty');
+				_this.placeBlock({ x: x, y: y, type: 'empty' });
 			}
 		}
 
@@ -641,8 +872,13 @@ var Board = function (_EventEmitter) {
 		}
 	}, {
 		key: 'placeBlock',
-		value: function placeBlock(x, y, type, rotate) {
+		value: function placeBlock(_ref) {
 			var _this2 = this;
+
+			var x = _ref.x;
+			var y = _ref.y;
+			var type = _ref.type;
+			var rotate = _ref.rotate;
 
 			var config = Object.assign({}, typeToConfig[type]);
 			config.x = x;
@@ -709,10 +945,31 @@ var Board = function (_EventEmitter) {
 			} else {
 				var noOutput = true;
 				this.forBlocks(function (block) {
-					for (var source in block.outputQueues) {
-						if (block.outputQueues[source].length > 0) {
-							noOutput = false;
-							break;
+					var _iteratorNormalCompletion = true;
+					var _didIteratorError = false;
+					var _iteratorError = undefined;
+
+					try {
+						for (var _iterator = block.outputQueues.values()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+							var queue = _step.value;
+
+							if (queue.length > 0) {
+								noOutput = false;
+								break;
+							}
+						}
+					} catch (err) {
+						_didIteratorError = true;
+						_iteratorError = err;
+					} finally {
+						try {
+							if (!_iteratorNormalCompletion && _iterator.return) {
+								_iterator.return();
+							}
+						} finally {
+							if (_didIteratorError) {
+								throw _iteratorError;
+							}
 						}
 					}
 				});
@@ -766,10 +1023,32 @@ var Board = function (_EventEmitter) {
 			return this.blocks.reduce(function (previousRow, row) {
 				return previousRow.concat(row.reduce(function (previousBlock, block) {
 					var datas = [];
-					for (var direction in block.inputQueues) {
-						datas = datas.concat(block.inputQueues[direction]);
-						datas = datas.concat(block.outputQueues[direction]);
+					var _iteratorNormalCompletion2 = true;
+					var _didIteratorError2 = false;
+					var _iteratorError2 = undefined;
+
+					try {
+						for (var _iterator2 = block.inputQueues.keys()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+							var direction = _step2.value;
+
+							datas = datas.concat(block.inputQueues.get(direction));
+							datas = datas.concat(block.outputQueues.get(direction));
+						}
+					} catch (err) {
+						_didIteratorError2 = true;
+						_iteratorError2 = err;
+					} finally {
+						try {
+							if (!_iteratorNormalCompletion2 && _iterator2.return) {
+								_iterator2.return();
+							}
+						} finally {
+							if (_didIteratorError2) {
+								throw _iteratorError2;
+							}
+						}
 					}
+
 					return previousBlock.concat(datas);
 				}, []));
 			}, []);
@@ -783,7 +1062,7 @@ module.exports = Board;
 
 }).call(this,require('_process'))
 
-},{"./block":2,"./data":6,"./type-to-config":12,"_process":266,"events":263}],5:[function(require,module,exports){
+},{"./block":2,"./data":6,"./type-to-config":12,"_process":265,"events":263}],5:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -851,7 +1130,7 @@ var DataElement = function () {
 
 module.exports = DataElement;
 
-},{"./util":13,"jquery":265}],6:[function(require,module,exports){
+},{"./util":13,"jquery":264}],6:[function(require,module,exports){
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -957,7 +1236,7 @@ var Game = function () {
 
 module.exports = Game;
 
-},{"./stage":10,"jquery":265}],8:[function(require,module,exports){
+},{"./stage":10,"jquery":264}],8:[function(require,module,exports){
 'use strict';
 
 require('./analytics');
@@ -980,7 +1259,7 @@ $(document).ready(function () {
 	});
 });
 
-},{"./analytics":1,"./game":7,"./stages.json":11,"core-js/es5":15,"core-js/es6":16,"jquery":265}],9:[function(require,module,exports){
+},{"./analytics":1,"./game":7,"./stages.json":11,"core-js/es5":15,"core-js/es6":16,"jquery":264}],9:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1016,7 +1295,7 @@ var Panel = function () {
 			if (blockName === 'empty') {
 				if (oldBlock.config.name !== 'empty') {
 					this.parts.push(oldBlock.config.name);
-					this.stage.boardElement.placeBlock(x, y, blockName, 0);
+					this.stage.boardElement.placeBlock({ x: x, y: y, type: blockName, rotate: 0 });
 					this.update();
 				}
 				return;
@@ -1027,26 +1306,24 @@ var Panel = function () {
 			if (index !== -1) {
 				var rotate = 0;
 
-				if (oldBlock.config.name !== 'empty') {
-					if (oldBlock.config.name === blockName && oldBlock.config.rotatable) {
-						rotate = (oldBlock.rotate + 1) % 4;
-					} else {
-						this.parts.splice(index, 1);
-						this.parts.push(oldBlock.config.name);
-					}
+				if (oldBlock.config.name === 'empty') {
+					this.parts.splice(index, 1);
+				} else if (oldBlock.config.name === blockName && oldBlock.config.rotatable) {
+					rotate = (oldBlock.rotate + 1) % 4;
 				} else {
 					this.parts.splice(index, 1);
+					this.parts.push(oldBlock.config.name);
 				}
 
 				if (this.parts.indexOf(blockName) === -1) {
 					this.selected = null;
 				}
 
-				this.stage.boardElement.placeBlock(x, y, blockName, rotate);
+				this.stage.boardElement.placeBlock({ x: x, y: y, type: blockName, rotate: rotate });
 				this.update();
 			} else if (!this.selected && oldBlock.config.name !== 'empty' && oldBlock.config.rotatable) {
 				var _rotate = (oldBlock.rotate + 1) % 4;
-				this.stage.boardElement.placeBlock(x, y, oldBlock.config.name, _rotate);
+				this.stage.boardElement.placeBlock({ x: x, y: y, type: oldBlock.config.name, rotate: _rotate });
 				this.update();
 			}
 		}
@@ -1097,7 +1374,7 @@ var Panel = function () {
 
 module.exports = Panel;
 
-},{"assert":14,"jquery":265}],10:[function(require,module,exports){
+},{"assert":14,"jquery":264}],10:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1168,29 +1445,19 @@ var Stage = function () {
 		});
 
 		this.$stage.find('.inputs').empty().append(config.input.map(function (input) {
-			return $('<div/>', {
-				class: 'input',
-				text: input
-			});
+			return $('<div/>', { class: 'input', text: input });
 		}));
 
 		this.$stage.find('.arrows').empty().append(config.output.map(function () {
-			return $('<div/>', {
-				class: 'arrow'
-			});
+			return $('<div/>', { class: 'arrow' });
 		}));
 
 		this.$stage.find('.user-outputs').empty().append(config.output.map(function () {
-			return $('<div/>', {
-				class: 'output'
-			});
+			return $('<div/>', { class: 'output' });
 		}));
 
 		this.$stage.find('.correct-outputs').empty().append(config.output.map(function (output) {
-			return $('<div/>', {
-				class: 'output',
-				text: output
-			});
+			return $('<div/>', { class: 'output', text: output });
 		}));
 
 		this.$stage.find('button.stop').hide();
@@ -1314,7 +1581,7 @@ var Stage = function () {
 
 module.exports = Stage;
 
-},{"./board":4,"./board-element":3,"./data-element":5,"./panel":9,"jquery":265}],11:[function(require,module,exports){
+},{"./board":4,"./board-element":3,"./data-element":5,"./panel":9,"jquery":264}],11:[function(require,module,exports){
 module.exports=[{
 	"parts": {
 		"wireI": 99
@@ -2581,6 +2848,7 @@ module.exports = {
 	},
 	neq: {
 		type: 'calc2',
+		// eslint-disable-next-line no-negated-condition
 		func: function func(a, b) {
 			return a !== b ? 1 : 0;
 		},
@@ -8586,31 +8854,6 @@ function isUndefined(arg) {
 }
 
 },{}],264:[function(require,module,exports){
-if (typeof Object.create === 'function') {
-  // implementation from standard node.js 'util' module
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-  };
-} else {
-  // old school shim for old browsers
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    var TempCtor = function () {}
-    TempCtor.prototype = superCtor.prototype
-    ctor.prototype = new TempCtor()
-    ctor.prototype.constructor = ctor
-  }
-}
-
-},{}],265:[function(require,module,exports){
 /*eslint-disable no-unused-vars*/
 /*!
  * jQuery JavaScript Library v3.1.0
@@ -18686,7 +18929,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}],266:[function(require,module,exports){
+},{}],265:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -18698,25 +18941,40 @@ var process = module.exports = {};
 var cachedSetTimeout;
 var cachedClearTimeout;
 
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
 (function () {
     try {
-        cachedSetTimeout = setTimeout;
-    } catch (e) {
-        cachedSetTimeout = function () {
-            throw new Error('setTimeout is not defined');
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
         }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
     }
     try {
-        cachedClearTimeout = clearTimeout;
-    } catch (e) {
-        cachedClearTimeout = function () {
-            throw new Error('clearTimeout is not defined');
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
         }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
     }
 } ())
 function runTimeout(fun) {
     if (cachedSetTimeout === setTimeout) {
         //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
         return setTimeout(fun, 0);
     }
     try {
@@ -18737,6 +18995,11 @@ function runTimeout(fun) {
 function runClearTimeout(marker) {
     if (cachedClearTimeout === clearTimeout) {
         //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
         return clearTimeout(marker);
     }
     try {
@@ -18847,6 +19110,31 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 process.umask = function() { return 0; };
+
+},{}],266:[function(require,module,exports){
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    ctor.prototype = Object.create(superCtor.prototype, {
+      constructor: {
+        value: ctor,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    var TempCtor = function () {}
+    TempCtor.prototype = superCtor.prototype
+    ctor.prototype = new TempCtor()
+    ctor.prototype.constructor = ctor
+  }
+}
 
 },{}],267:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
@@ -19446,5 +19734,5 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./support/isBuffer":267,"_process":266,"inherits":264}]},{},[8])
+},{"./support/isBuffer":267,"_process":265,"inherits":266}]},{},[8])
 //# sourceMappingURL=index.js.map
