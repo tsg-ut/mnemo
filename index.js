@@ -189,7 +189,7 @@ var Block = function (_EventEmitter) {
 								var data = queue.shift();
 
 								// Calculate and pass through
-								var input = new Map([[source, source]]);
+								var input = new Map([[source, data]]);
 
 								var output = new Map();
 								destinations.forEach(function (direction) {
