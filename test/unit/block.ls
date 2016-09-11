@@ -275,3 +275,21 @@ describe 'Block' ->
           right: 4
         out:
           bottom: -8
+
+    It 'returns Infinity when dividing by zero' ->
+      io-test do
+        type: \div
+        in:
+          left: 33
+          right: 0
+        out:
+          bottom: Infinity
+
+    It 'returns -Infinity when dividing by minus zero' ->
+      io-test do
+        type: \div
+        in:
+          left: 33
+          right: -0
+        out:
+          bottom: -Infinity
