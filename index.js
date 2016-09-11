@@ -255,7 +255,7 @@ var Block = function (_EventEmitter) {
 							return data.value;
 						}))));
 						_this2.outputQueues.get(destination).push(outData);
-						var output = new Map(destination, outData);
+						var output = new Map([[destination, outData]]);
 
 						_this2.emit('pass', { in: input, out: output });
 					})();
@@ -2759,6 +2759,9 @@ module.exports = {
 	div: {
 		type: 'calc2',
 		func: function func(a, b) {
+			if (b === 0) {
+				return a / b;
+			}
 			return (a - a % b) / b;
 		},
 		io: {
