@@ -5,12 +5,6 @@ require! {
   'file-url'
 }
 
-nightmare = Nightmare do
-  show: false
-  width: 1600
-  height: 900
-  center: true
-
 It = global.it
 
 describe 'Application' ->
@@ -19,27 +13,33 @@ describe 'Application' ->
 
     start-time = Date.now!
 
-    nightmare
-    .goto file-url 'index.html'
+    @nightmare = Nightmare do
+      show: false
+      width: 1600
+      height: 900
+      center: true
+
+    @nightmare
+    .goto file-url('index.html') + '?fx=off'
     .then -> mocha-logger.log "It took #{Date.now! - start-time}ms to launch app"
 
   describe 'Menu Screen' ->
     describe 'Start Button' ->
       before ->
-        nightmare.refresh!wait 'button.start'
+        @nightmare.refresh!wait 'button.start'
 
       It 'navigates to game screen when clicked' ->
-        nightmare
+        @nightmare
         .click 'button.start'
         .evaluate -> document.query-selector '.screens' .classList.contains 'gaming'
         .then -> expect it .to.be.true
 
     describe 'Select Button' ->
       before ->
-        nightmare.refresh!wait 'button.select'
+        @nightmare.refresh!wait 'button.select'
 
       It 'shows stage selector when clicked' ->
-        nightmare
+        @nightmare
         .click 'button.select'
         .evaluate ->
           document.query-selector '.stage-list' .{offset-width, offset-height}
@@ -48,7 +48,7 @@ describe 'Application' ->
           expect it.offset-height .to.not.equal 0
 
       It 'hides stage selector when clicked again' ->
-        nightmare
+        @nightmare
         .click 'button.select'
         .evaluate ->
           document.query-selector '.stage-list' .{offset-width, offset-height}
@@ -58,10 +58,10 @@ describe 'Application' ->
 
     describe 'Credit Button' ->
       before ->
-        nightmare.refresh!wait 'button.credit'
+        @nightmare.refresh!wait 'button.credit'
 
       It 'shows credit when clicked' ->
-        nightmare
+        @nightmare
         .click 'button.credit'
         .evaluate ->
           document.query-selector '.credit-body' .{offset-width, offset-height}
@@ -70,7 +70,7 @@ describe 'Application' ->
           expect it.offset-height .to.not.equal 0
 
       It 'hides credit when clicked again' ->
-        nightmare
+        @nightmare
         .click 'button.credit'
         .evaluate ->
           document.query-selector '.credit-body' .{offset-width, offset-height}
@@ -79,4 +79,4 @@ describe 'Application' ->
           expect it.offset-height .to.equal 0
 
   after ->
-    nightmare.end!
+    @nightmare.end!
