@@ -24,6 +24,7 @@ describe 'Application' ->
     .then -> mocha-logger.log "It took #{Date.now! - start-time}ms to launch app"
 
   require './menu'
+  require './game'
 
   after ->
     @nightmare.end!

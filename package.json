@@ -17,7 +17,7 @@
     "mochify:phantom": "mochify \"test/unit/*.ls\" --reporter spec --extension ls --extension js --transform browserify-livescript --transform [ babelify --presets [ es2015 ] ]",
     "mochify:node": "mochify \"test/unit/*.ls\" --node --reporter spec --extension ls --extension js --transform browserify-livescript --transform [ babelify --presets [ es2015 ] ] --plugin [ mochify-istanbul --exclude \"**/+(test|node_modules)/**/*\" --report text --report text-summary --report lcovonly --dir coverage ]",
     "unit": "npm run mochify:node && npm run mochify:phantom",
-    "functional": "mocha \"test/functional/*.ls\" --reporter spec --compilers ls:livescript",
+    "functional": "mocha \"test/functional/index.ls\" --reporter spec --compilers ls:livescript",
     "coveralls": "cat coverage/lcov.info | coveralls",
     "lint": "eslint \"lib/**/*.js\" --ignore-pattern \"lib/analytics.js\"",
     "test": "npm run unit && npm run functional && npm run lint"
