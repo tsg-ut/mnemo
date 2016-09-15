@@ -1169,7 +1169,7 @@ var Game = function () {
 		var $stageNames = this.configs.map(function (config, index) {
 			var $stageName = $('<li/>', {
 				class: 'stage-name',
-				text: config.statement
+				text: config.title
 			});
 
 			$stageName.click(function () {
@@ -1601,7 +1601,8 @@ module.exports=[{
 	"width": 3,
 	"height": 3,
 	"statement": "入り口と出口をつなげてみよう!",
-	"number": 1
+	"number": 1,
+	"title": "練習"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1620,7 +1621,8 @@ module.exports=[{
 	"width": 3,
 	"height": 3,
 	"statement": "数を2倍してみよう!",
-	"number": 1
+	"number": 1,
+	"title": "四則演算 -基本- 1"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1636,7 +1638,8 @@ module.exports=[{
 	"width": 5,
 	"height": 5,
 	"statement": "数を3引いてみよう!",
-	"number": 11
+	"number": 11,
+	"title": "四則演算 -基本- 2"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1655,7 +1658,8 @@ module.exports=[{
 	"width": 5,
 	"height": 5,
 	"statement": "数を6倍してみよう!",
-	"number": 12
+	"number": 12,
+	"title": "四則演算 -基本- 3"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1674,7 +1678,8 @@ module.exports=[{
 	"width": 5,
 	"height": 5,
 	"statement": "数を2倍して、3足してみよう!",
-	"number": 2
+	"number": 2,
+	"title": "四則演算 -基本- 4"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1690,7 +1695,8 @@ module.exports=[{
 	"width": 5,
 	"height": 5,
 	"statement": "数を2倍して、2足してみよう!",
-	"number": 2
+	"number": 2,
+	"title": "四則演算 -基本- 6"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1705,7 +1711,8 @@ module.exports=[{
 	"width": 3,
 	"height": 2,
 	"statement": "数を2倍してみよう!",
-	"number": 1
+	"number": 1,
+	"title": "四則演算 -基本- 7"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1728,8 +1735,9 @@ module.exports=[{
 	"output": [-1, -1, -1],
 	"width": 5,
 	"height": 5,
-	"statement": "-1を作ろう -easy-",
-	"number": 3
+	"statement": "四則演算を組み合わせてどの入力に対しても、-1を出力するような回路を作ってみよう",
+	"number": 3,
+	"title": "-1を作ろう -easy-"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1756,8 +1764,9 @@ module.exports=[{
 	"output": [4, 9, 3],
 	"width": 5,
 	"height": 5,
-	"statement": "数を2で割ってみよう!",
-	"number": 13
+	"statement": "÷演算子をうまく使って、数を2で割ってみよう!",
+	"number": 13,
+	"title": "割り算 -easy-"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1784,8 +1793,9 @@ module.exports=[{
 	"output": [64, 729, 15625],
 	"width": 5,
 	"height": 5,
-	"statement": "6乗してみよう",
-	"number": 7
+	"statement": "x演算子をうまく配置して、6乗を計算してみよう!",
+	"number": 7,
+	"title": "6乗"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1813,7 +1823,8 @@ module.exports=[{
 	"width": 5,
 	"height": 10,
 	"statement": "10で割った余りを求めてみよう!",
-	"number": 14
+	"number": 14,
+	"title": "余りの計算"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1836,8 +1847,9 @@ module.exports=[{
 	"output": [38, 60, 528],
 	"width": 5,
 	"height": 8,
-	"statement": "32を足してみよう!",
-	"number": 4
+	"statement": "演算子をうまく配置して、32を足してみよう!",
+	"number": 4,
+	"title": "32を足してみよう"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1857,8 +1869,9 @@ module.exports=[{
 	"output": [-1, -1, -1],
 	"width": 5,
 	"height": 10,
-	"statement": "-1を作ろう! -med-",
-	"number": 5
+	"statement": "より少ない演算子で入力全てを-1に出力する回路を作ろう（一般的でなく、入力全てさえ正解すれば良い）",
+	"number": 5,
+	"title": "-1を作ろう! -med-"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1885,7 +1898,8 @@ module.exports=[{
 	"width": 9,
 	"height": 7,
 	"statement": "偶数なら2倍,奇数なら3倍してみよう!",
-	"number": 15
+	"number": 15,
+	"title": "条件分岐 -基本- 1"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1912,7 +1926,8 @@ module.exports=[{
 	"width": 11,
 	"height": 11,
 	"statement": "ifを使って、5は2倍,6は3倍,それ以外は1倍をしてみよう!",
-	"number": 6
+	"number": 6,
+	"title": "条件分岐 -基本- 2"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1940,7 +1955,8 @@ module.exports=[{
 	"width": 9,
 	"height": 9,
 	"statement": "mod7で2を足してみよう",
-	"number": 9
+	"number": 9,
+	"title": "条件分岐 -基本- 3"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1968,7 +1984,8 @@ module.exports=[{
 	"width": 13,
 	"height": 13,
 	"statement": "階乗を計算してみよう!",
-	"number": 8
+	"number": 8,
+	"title": "階乗"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -1995,37 +2012,39 @@ module.exports=[{
 	"output": [9, 0, 6],
 	"width": 19,
 	"height": 19,
-	"statement": "パリティ（与えられた四桁の数の各桁の和のをmod 10したもの)を計算してみよう!",
-	"number": 10
+	"statement": "与えられた四桁の数の各桁の和のをmod 10したものを計算してみよう!",
+	"number": 10,
+	"title": "パリティ"
 }, {
-	 "parts": {
-		 "wireI": 99,
-		 "wireL": 99,
-		 "wireT": 99,
-		 "times-2": 99,
-		 "times-3": 99,
-		 "plus-1": 99,
-		 "plus-2": 99,
-		 "minus-1": 99,
-		 "minus-2": 99,
-		 "iko-ru": 99,
-		 "add": 99,
-		 "sub": 99,
-		 "div": 99,
-		 "mul": 99,
-		 "c-contact": 99,
-		 "conditional": 99,
-		 "transistor": 99,
-		 "diode": 99
-	 },
-	 "inputX": 5,
-	 "outputX": 5,
-	 "input": [5, 8, 13],
-	 "output": [5, 21, 233],
-	 "width": 11,
-	 "height": 11,
-	 "statement": "n番目のフィボナッチ数を計算してみよう!",
-	 "number": 16
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 99,
+		"times-3": 99,
+		"plus-1": 99,
+		"plus-2": 99,
+		"minus-1": 99,
+		"minus-2": 99,
+		"iko-ru": 99,
+		"add": 99,
+		"sub": 99,
+		"div": 99,
+		"mul": 99,
+		"c-contact": 99,
+		"conditional": 99,
+		"transistor": 99,
+		"diode": 99
+	},
+	"inputX": 5,
+	"outputX": 5,
+	"input": [5, 8, 13],
+	"output": [5, 21, 233],
+	"width": 11,
+	"height": 11,
+	"statement": "n番目のフィボナッチ数を計算してみよう!",
+	"number": 16,
+	"title": "フィボナッチ数"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -2052,8 +2071,9 @@ module.exports=[{
 	"output": [5, 34, 13],
 	"width": 5,
 	"height": 5,
-	"statement": "2変数問題の練習",
-	"number": 12
+	"statement": "2つの数字が与えられるのでそれらを足しあわせた結果を出力してみよう!",
+	"number": 12,
+	"title": "2変数 -基本-"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -2088,8 +2108,9 @@ module.exports=[{
 	"output": [9, 256, -16807],
 	"width": 9,
 	"height": 9,
-	"statement": "累乗(easy)",
-	"number": 12
+	"statement": "1つ目に与えられた数を2つ目に与えられた数乗してみよう!",
+	"number": 12,
+	"title": "累乗 -easy-"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -2134,8 +2155,9 @@ module.exports=[{
 	"output": [121, 243, 34359738368],
 	"width": 15,
 	"height": 15,
-	"statement": "累乗(hard)",
-	"number": 12
+	"statement": "1つ目に与えられた数を2つ目に与えられた数乗してみよう!(ただし、愚直に計算すると時間がかかるので、より早く計算できるように工夫してみよう)",
+	"number": 12,
+	"title": "累乗 -hard-"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -2153,7 +2175,8 @@ module.exports=[{
 	"width": 5,
 	"height": 5,
 	"statement": "右の数を左の数で割ってみよう!",
-	"number": 12
+	"number": 12,
+	"title": "割り算 -hard-"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -2193,8 +2216,9 @@ module.exports=[{
 	"output": [2, 6, 18],
 	"width": 13,
 	"height": 13,
-	"statement": "最大公約数(GCD)",
-	"number": 12
+	"statement": "二数の最大公約数を計算してみよう!",
+	"number": 12,
+	"title": "最大公約数"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -2234,8 +2258,9 @@ module.exports=[{
 	"output": [24, 90, 1155],
 	"width": 11,
 	"height": 11,
-	"statement": "最小公倍数(LCM)",
-	"number": 17
+	"statement": "最小公倍数を計算してみよう",
+	"number": 17,
+	"title": "最小公倍数"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -2256,8 +2281,9 @@ module.exports=[{
 	"output": [2, 4, 1],
 	"width": 7,
 	"height": 9,
-	"statement": "-1をつくれ (hard?)",
-	"number": 12
+	"statement": "入力の値から1引いた値を出力してみよう!",
+	"number": 12,
+	"title": "-1をつくれ -hard-"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -2294,8 +2320,9 @@ module.exports=[{
 	"output": [3, 4, 6],
 	"width": 9,
 	"height": 9,
-	"statement": "平方根(easy)",
-	"number": 12
+	"statement": "平方根を計算してみよう!",
+	"number": 12,
+	"title": "平方根 -easy-"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -2341,8 +2368,9 @@ module.exports=[{
 	"output": [3, 56, 3541],
 	"width": 15,
 	"height": 15,
-	"statement": "平方根(hard)",
-	"number": 12
+	"statement": "平方根を計算してみよう! (ただし、愚直に計算すると計算に長い時間かかるので、より速く計算できるように工夫してみよう)",
+	"number": 12,
+	"statement": "平方根 -hard-"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -2388,8 +2416,9 @@ module.exports=[{
 	"output": [255, 192, 129],
 	"width": 7,
 	"height": 7,
-	"statement": "8bitの2の補数を考えてみよう!", 
-	"number": 12
+	"statement": "8bitの2の補数を計算してみよう!", 
+	"number": 12,
+	"statement": "2の補数"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -2436,7 +2465,8 @@ module.exports=[{
 	"width": 15,
 	"height": 15,
 	"statement": "数をバイナリ表記にしてみよう!",
-	"number": 12
+	"number": 12,
+	"title": "バイナリアン -easy-"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -2483,7 +2513,8 @@ module.exports=[{
 	"width": 5,
 	"height": 5,
 	"statement": "メルセンヌ素数と完全数の関係を考えてみよう!", 
-	"number": 12
+	"number": 12,
+	"title": "完全数"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -2530,7 +2561,8 @@ module.exports=[{
 	"width": 15,
 	"height": 15,
 	"statement": "数を反転してみよう!",
-	"number": 12
+	"number": 12,
+	"title": "反転"
 }, {
 	"parts": {
 		"wireI": 99,
@@ -2577,7 +2609,8 @@ module.exports=[{
 	"width": 15,
 	"height": 15,
 	"statement": "数の最上位の桁を取り出してみよう!",
-	"number": 12
+	"number": 12,
+	"title": "最上位の桁"
 }]
 
 },{}],12:[function(require,module,exports){
