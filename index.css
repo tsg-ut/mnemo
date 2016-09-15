@@ -1140,6 +1140,16 @@ button {
   background-position: center;
   background-repeat: no-repeat;
 }
+.game-screen .inputs .input .inner-text,
+.game-screen .arrows .input .inner-text,
+.game-screen .user-outputs .input .inner-text,
+.game-screen .correct-outputs .input .inner-text,
+.game-screen .inputs .output .inner-text,
+.game-screen .arrows .output .inner-text,
+.game-screen .user-outputs .output .inner-text,
+.game-screen .correct-outputs .output .inner-text {
+  vertical-align: bottom;
+}
 .game-screen .inputs .arrow,
 .game-screen .arrows .arrow,
 .game-screen .user-outputs .arrow,

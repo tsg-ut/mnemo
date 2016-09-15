@@ -1453,8 +1453,20 @@ var Stage = function () {
 		});
 
 		this.$stage.find('.inputs').empty().append(config.input.map(function (input) {
-			return $('<div/>', { class: 'input', text: input });
+			return $('<div/>', { class: 'input' }).append($('<span/>', {
+				class: 'inner-text',
+				text: input
+			}));
 		}));
+
+		this.$stage.find('.inputs .input').each(function (index, input) {
+			var $span = $(input).find('.inner-text');
+			var inputWidth = $(input).outerWidth();
+			var spanWidth = $span.width();
+			if (inputWidth < spanWidth) {
+				$span.css({ fontSize: inputWidth / spanWidth * 100 - 2 + '%' });
+			}
+		});
 
 		this.$stage.find('.arrows').empty().append(config.output.map(function () {
 			return $('<div/>', { class: 'arrow' });
@@ -1465,8 +1477,20 @@ var Stage = function () {
 		}));
 
 		this.$stage.find('.correct-outputs').empty().append(config.output.map(function (output) {
-			return $('<div/>', { class: 'output', text: output });
+			return $('<div/>', { class: 'output' }).append($('<span/>', {
+				class: 'inner-text',
+				text: output
+			}));
 		}));
+
+		this.$stage.find('.outputs .output').each(function (index, output) {
+			var $span = $(output).find('.inner-text');
+			var outputWidth = $(output).outerWidth();
+			var spanWidth = $span.width();
+			if (outputWidth < spanWidth) {
+				$span.css({ fontSize: outputWidth / spanWidth * 100 - 2 + '%' });
+			}
+		});
 
 		this.$stage.find('button.stop').hide();
 		this.$stage.find('button.execute').show();
