@@ -5,8 +5,6 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-	res.end('<h1>Hello, World!</h1>');
-});
+app.use('/', require('./routes/index'));
 
 app.listen(3000);
