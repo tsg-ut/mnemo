@@ -787,7 +787,7 @@ var BoardElement = function () {
 
 module.exports = BoardElement;
 
-},{"./data-element":5,"jquery":264}],4:[function(require,module,exports){
+},{"./data-element":5,"jquery":265}],4:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1062,7 +1062,7 @@ module.exports = Board;
 
 }).call(this,require('_process'))
 
-},{"./block":2,"./data":6,"./type-to-config":12,"_process":265,"events":263}],5:[function(require,module,exports){
+},{"./block":2,"./data":6,"./type-to-config":12,"_process":266,"events":263}],5:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1130,7 +1130,7 @@ var DataElement = function () {
 
 module.exports = DataElement;
 
-},{"./util":13,"jquery":264}],6:[function(require,module,exports){
+},{"./util":13,"jquery":265}],6:[function(require,module,exports){
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1236,7 +1236,7 @@ var Game = function () {
 
 module.exports = Game;
 
-},{"./stage":10,"jquery":264}],8:[function(require,module,exports){
+},{"./stage":10,"jquery":265}],8:[function(require,module,exports){
 'use strict';
 
 require('./analytics');
@@ -1267,7 +1267,7 @@ $(document).ready(function () {
 	});
 });
 
-},{"./analytics":1,"./game":7,"./stages.json":11,"core-js/es5":15,"core-js/es6":16,"jquery":264,"querystring":268}],9:[function(require,module,exports){
+},{"./analytics":1,"./game":7,"./stages.json":11,"core-js/es5":15,"core-js/es6":16,"jquery":265,"querystring":269}],9:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1382,7 +1382,7 @@ var Panel = function () {
 
 module.exports = Panel;
 
-},{"assert":14,"jquery":264}],10:[function(require,module,exports){
+},{"assert":14,"jquery":265}],10:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1589,7 +1589,7 @@ var Stage = function () {
 
 module.exports = Stage;
 
-},{"./board":4,"./board-element":3,"./data-element":5,"./panel":9,"jquery":264}],11:[function(require,module,exports){
+},{"./board":4,"./board-element":3,"./data-element":5,"./panel":9,"jquery":265}],11:[function(require,module,exports){
 module.exports=[{
 	"parts": {
 		"wireI": 99
@@ -8898,6 +8898,31 @@ function isUndefined(arg) {
 }
 
 },{}],264:[function(require,module,exports){
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    ctor.prototype = Object.create(superCtor.prototype, {
+      constructor: {
+        value: ctor,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    var TempCtor = function () {}
+    TempCtor.prototype = superCtor.prototype
+    ctor.prototype = new TempCtor()
+    ctor.prototype.constructor = ctor
+  }
+}
+
+},{}],265:[function(require,module,exports){
 /*eslint-disable no-unused-vars*/
 /*!
  * jQuery JavaScript Library v3.1.0
@@ -18973,7 +18998,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}],265:[function(require,module,exports){
+},{}],266:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -19155,7 +19180,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],266:[function(require,module,exports){
+},{}],267:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -19241,7 +19266,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],267:[function(require,module,exports){
+},{}],268:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -19328,38 +19353,13 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],268:[function(require,module,exports){
+},{}],269:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":266,"./encode":267}],269:[function(require,module,exports){
-if (typeof Object.create === 'function') {
-  // implementation from standard node.js 'util' module
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-  };
-} else {
-  // old school shim for old browsers
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    var TempCtor = function () {}
-    TempCtor.prototype = superCtor.prototype
-    ctor.prototype = new TempCtor()
-    ctor.prototype.constructor = ctor
-  }
-}
-
-},{}],270:[function(require,module,exports){
+},{"./decode":267,"./encode":268}],270:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
@@ -19957,5 +19957,5 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./support/isBuffer":270,"_process":265,"inherits":269}]},{},[8])
+},{"./support/isBuffer":270,"_process":266,"inherits":264}]},{},[8])
 //# sourceMappingURL=index.js.map

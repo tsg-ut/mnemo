@@ -64,5 +64,9 @@
     "pug-cli": "^1.0.0-alpha6",
     "replace": "^0.3.0",
     "watchify": "^3.7.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
   }
 }
