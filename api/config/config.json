@@ -1,22 +1,20 @@
 {
   "development": {
-    "username": "root",
+    "username": null,
     "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "database": "mnemo_development",
+    "dialect": "sqlite"
   },
   "test": {
-    "username": "root",
+    "username": null,
     "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "database": "mnemo_test",
+    "dialect": "sqlite"
   },
   "production": {
     "username": "root",
     "password": null,
-    "database": "database_production",
+    "database": "mnemo",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
