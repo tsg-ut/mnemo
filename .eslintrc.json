@@ -35,7 +35,7 @@
         "camelcase": "error",
         "comma-dangle": [
             "error",
-            "only-multiline"
+            "always-multiline"
         ],
         "comma-spacing": "error",
         "comma-style": [
