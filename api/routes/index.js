@@ -7,11 +7,6 @@ const sequelize = new Sequelize('mnemo', '', '', {
 	storage: 'db.sqlite3',
 });
 
-const Submission = sequelize.define('submission', {
-	userName: Sequelize.STRING,
-	point: Sequelize.INTEGER,
-});
-
 router.get('/', (req, res) => {
 	res.end('hoge');
 });

@@ -1,15 +1,15 @@
 {
   "development": {
-    "username": null,
-    "password": null,
-    "database": "mnemo_development",
-    "dialect": "sqlite"
+    "username": "",
+    "password": "",
+    "dialect": "sqlite",
+    "storage": "db-development.sqlite3"
   },
   "test": {
-    "username": null,
-    "password": null,
-    "database": "mnemo_test",
-    "dialect": "sqlite"
+    "username": "",
+    "password": "",
+    "dialect": "sqlite",
+    "storage": "db-test.sqlite3"
   },
   "production": {
     "username": "root",
