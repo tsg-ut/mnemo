@@ -14,8 +14,7 @@ before_install:
 before_script:
   - bash bin/before_script.sh
 script:
-  - npm run build
-  - npm run minify
+  - npm run build:production
   - npm test
 after_success:
   - npm run coveralls
