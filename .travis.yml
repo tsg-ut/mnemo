@@ -15,6 +15,7 @@ before_script:
   - bash bin/before_script.sh
 script:
   - npm run build
+  - npm run minify
   - npm test
 after_success:
   - npm run coveralls
