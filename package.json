@@ -9,6 +9,9 @@
     "pug": "pug index.pug",
     "less": "lessc index.less | postcss --use postcss-import-url --use postcss-flexbugs-fixes --use autoprefixer > index.css",
     "build": "concurrently \"npm run browserify\" \"npm run pug\" \"npm run less\"",
+    "minify:js": "uglifyjs index.js -o index.js",
+    "minify:css": "cssnano index.css index.css",
+    "minify": "concurrently \"npm run minify:js\" \"npm run minify:css\"",
     "watch:js": "watchify lib/index.js --debug --verbose -t [ babelify --presets [ es2015 ] ] -o \"exorcist index.js.map > index.js\"",
     "watch:map": "chokidar \"index.js.map\" -c \"npm run normalize-map\"",
     "watch:pug": "chokidar \"*.pug\" -c \"npm run pug\"",
@@ -48,6 +51,7 @@
     "concurrently": "^2.2.0",
     "core-js": "^2.4.1",
     "coveralls": "^2.11.12",
+    "cssnano-cli": "^1.0.5",
     "eslint": "^3.3.1",
     "exorcist": "^0.4.0",
     "file-url": "^1.1.0",
@@ -63,6 +67,7 @@
     "postcss-import-url": "^2.1.0",
     "pug-cli": "^1.0.0-alpha6",
     "replace": "^0.3.0",
+    "uglifyify": "^3.0.3",
     "watchify": "^3.7.0"
   },
   "dependencies": {
