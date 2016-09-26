@@ -50,7 +50,7 @@
     "browserify-livescript": "^0.2.3",
     "chai": "^3.5.0",
     "chokidar-cli": "^1.2.0",
-    "concurrently": "^2.2.0",
+    "concurrently": "^3.0.0",
     "core-js": "^2.4.1",
     "coveralls": "^2.11.12",
     "cross-env": "^3.0.0",
