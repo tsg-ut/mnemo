@@ -105,6 +105,7 @@ Temporary Items
 .Trash-*
 
 /index.js
+/index.min.js
 *.html
 *.css
 *.map
