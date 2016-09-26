@@ -4,8 +4,12 @@ html
 		meta(charset="utf-8")
 		meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
 		title MNEMO
-		script(src="index.js", charset="utf-8")
-		link(href="index.css", rel="stylesheet")
+		if process.env.NODE_ENV === 'production'
+			script(src="index.min.js", charset="utf-8")
+			link(href="index.min.css", rel="stylesheet")
+		else
+			script(src="index.js", charset="utf-8")
+			link(href="index.css", rel="stylesheet")
 	body
 		.container
 			.layer.background-layer
