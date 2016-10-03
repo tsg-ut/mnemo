@@ -39,6 +39,10 @@ module.exports = {
 				primaryKey: true,
 				autoIncrement: true,
 			},
+			name: {
+				type: Sequelize.TEXT,
+				allowNull: false,
+			},
 			createdAt: {
 				type: Sequelize.DATE,
 			},
