@@ -28,4 +28,6 @@ const Submission = sequelize.define('submissions', {
 	},
 });
 
+Submission.belongsTo(Stage);
+
 module.exports = Submission;
