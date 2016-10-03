@@ -1,14 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('mnemo', '', '', {
-	dialect: 'sqlite',
-	storage: 'db.sqlite3',
-});
+const Stage = require('../models/stage');
 
 router.get('/', (req, res) => {
-	res.end('hoge');
+	Stage.count().then((stages) => {
+		res.end(`There are ${stages} stages in DB.`);
+	});
 });
 
 module.exports = router;
