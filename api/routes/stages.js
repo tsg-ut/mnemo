@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Stages = require('../models/stage');
+const Submissions = require('../models/submission');
 
 router.get('/', (req, res) => {
 	Stages.findAll().then((stages) => {
@@ -25,6 +26,21 @@ router.get('/:stage', (req, res) => {
 		} else {
 			res.json(stage);
 		}
+	});
+});
+
+router.get('/:stage/submissions', (req, res) => {
+	const stageName = req.params.stage;
+
+	Submissions.findAll({
+		include: [{
+			model: Stages,
+			where: {name: stageName},
+		}],
+		order: 'score DESC',
+		limit: 10,
+	}).then((submissions) => {
+		res.json(submissions);
 	});
 });
 
