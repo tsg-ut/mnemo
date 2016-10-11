@@ -22,7 +22,9 @@ module.exports = {
 		}]),
 	]),
 
-	down: (queryInterface) => Promise.all([
-		queryInterface.bulkDelete('stages', null, {}),
-	]),
+	down: (queryInterface) => (
+		queryInterface.bulkDelete('submissions', null, {}).then(
+			() => queryInterface.bulkDelete('stages', null, {})
+		)
+	),
 };
