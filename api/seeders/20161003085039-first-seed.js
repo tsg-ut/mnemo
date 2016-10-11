@@ -5,6 +5,8 @@ module.exports = {
 	up: (queryInterface) => (
 		queryInterface.bulkInsert('stages', stages.map((stage, index) => ({
 			name: stage.name || `stage${index}`,
+			width: stage.width,
+			height: stage.height,
 			createdAt: new Date(),
 			updatedAt: new Date(),
 		})), {}).then(() => (

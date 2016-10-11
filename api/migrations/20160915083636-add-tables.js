@@ -39,6 +39,14 @@ module.exports = {
 				primaryKey: true,
 				autoIncrement: true,
 			},
+			width: {
+				type: Sequelize.INTEGER,
+				allowNull: false,
+			},
+			height: {
+				type: Sequelize.INTEGER,
+				allowNull: false,
+			},
 			name: {
 				type: Sequelize.TEXT,
 				allowNull: false,
