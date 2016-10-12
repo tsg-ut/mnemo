@@ -4,6 +4,8 @@ const router = express.Router();
 const Stages = require('../models/stage');
 const Submissions = require('../models/submission');
 
+const {validateSubmission} = require('../../lib/util');
+
 router.get('/', (req, res) => {
 	Stages.findAll().then((stages) => {
 		res.json(stages);
@@ -52,17 +54,30 @@ router.post('/:stage/submissions', (req, res) => {
 			name: stageName,
 		},
 	}).then((stage) => {
+		const submissionData = req.body;
+
 		if (stage === null) {
-			res.status(403).json({
+			res.status(400).json({
 				error: true,
 				message: 'stage not found',
 			});
 		} else {
+			submissionData.stage = stage;
+			const {pass, message} = validateSubmission(submissionData);
+
+			if (!pass) {
+				res.status(400).json({
+					error: true,
+					message,
+				});
+				return;
+			}
+
 			Submissions.create({
 				name: req.body.name || null,
-				board: req.body.board,
+				board: JSON.stringify(req.body.board),
 				score: req.body.score,
-				stage,
+				stageId: stage.id,
 			}).then((submission) => {
 				res.json(submission);
 			}).catch((error) => {
