@@ -1,0 +1,21 @@
+{
+  "development": {
+    "username": "",
+    "password": "",
+    "dialect": "sqlite",
+    "storage": "db-development.sqlite3"
+  },
+  "test": {
+    "username": "",
+    "password": "",
+    "dialect": "sqlite",
+    "storage": "db-test.sqlite3"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "mnemo",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

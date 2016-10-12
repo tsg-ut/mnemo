@@ -25,7 +25,8 @@
     "functional": "mocha \"test/functional/index.ls\" --reporter spec --compilers ls:livescript",
     "coveralls": "cat coverage/lcov.info | coveralls",
     "lint": "eslint \"lib/**/*.js\" --ignore-pattern \"lib/analytics.js\"",
-    "test": "npm run unit && npm run functional && npm run lint"
+    "test": "npm run unit && npm run functional && npm run lint",
+    "api": "cd api && node index.js"
   },
   "repository": {
     "type": "git",
@@ -75,6 +76,8 @@
   },
   "dependencies": {
     "body-parser": "^1.15.2",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "sequelize": "^3.24.3",
+    "sqlite3": "^3.1.4"
   }
 }
