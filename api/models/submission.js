@@ -6,7 +6,6 @@ const Stage = require('./stage');
 const Submission = sequelize.define('submissions', {
 	name: {
 		type: Sequelize.STRING,
-		allowNull: false,
 	},
 	board: {
 		type: Sequelize.TEXT,

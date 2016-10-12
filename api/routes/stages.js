@@ -44,4 +44,35 @@ router.get('/:stage/submissions', (req, res) => {
 	});
 });
 
+router.post('/:stage/submissions', (req, res) => {
+	const stageName = req.params.stage;
+
+	Stages.findOne({
+		where: {
+			name: stageName,
+		},
+	}).then((stage) => {
+		if (stage === null) {
+			res.status(403).json({
+				error: true,
+				message: 'stage not found',
+			});
+		} else {
+			Submissions.create({
+				name: req.body.name || null,
+				board: req.body.board,
+				score: req.body.score,
+				stage,
+			}).then((submission) => {
+				res.json(submission);
+			}).catch((error) => {
+				res.status(500).json({
+					error: true,
+					message: error.message,
+				});
+			});
+		}
+	});
+});
+
 module.exports = router;

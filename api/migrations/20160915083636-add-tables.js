@@ -14,7 +14,6 @@ module.exports = {
 			},
 			name: {
 				type: Sequelize.STRING,
-				allowNull: false,
 			},
 			board: {
 				type: Sequelize.TEXT,
