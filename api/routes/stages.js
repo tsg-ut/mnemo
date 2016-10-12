@@ -57,7 +57,7 @@ router.post('/:stage/submissions', (req, res) => {
 		const submissionData = req.body;
 
 		if (stage === null) {
-			res.status(400).json({
+			res.status(404).json({
 				error: true,
 				message: 'stage not found',
 			});
