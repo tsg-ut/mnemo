@@ -1,4 +1,5 @@
 [{
+	"name": "wire01",
 	"parts": {
 		"wireI": 99
 	},
@@ -12,6 +13,7 @@
 	"number": 1,
 	"title": "練習"
 }, {
+	"name": "calc01",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -32,6 +34,7 @@
 	"number": 1,
 	"title": "四則演算 -基本- 1"
 }, {
+	"name": "calc02",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -49,6 +52,7 @@
 	"number": 11,
 	"title": "四則演算 -基本- 2"
 }, {
+	"name": "calc03",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -69,6 +73,7 @@
 	"number": 12,
 	"title": "四則演算 -基本- 3"
 }, {
+	"name": "calc04",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -89,6 +94,7 @@
 	"number": 2,
 	"title": "四則演算 -基本- 4"
 }, {
+	"name": "calc05",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -104,8 +110,9 @@
 	"height": 5,
 	"statement": "数を2倍して、2足してみよう!",
 	"number": 2,
-	"title": "四則演算 -基本- 6"
+	"title": "四則演算 -基本- 5"
 }, {
+	"name": "calc06",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -120,8 +127,9 @@
 	"height": 2,
 	"statement": "数を2倍してみよう!",
 	"number": 1,
-	"title": "四則演算 -基本- 7"
+	"title": "四則演算 -基本- 6"
 }, {
+	"name": "make-minus-one-easy",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -147,6 +155,7 @@
 	"number": 3,
 	"title": "-1を作ろう -easy-"
 }, {
+	"name": "division-easy",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -176,6 +185,7 @@
 	"number": 13,
 	"title": "割り算 -easy-"
 }, {
+	"name": "sixth-power",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -205,6 +215,7 @@
 	"number": 7,
 	"title": "6乗"
 }, {
+	"name": "remainder",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -234,6 +245,7 @@
 	"number": 14,
 	"title": "余りの計算"
 }, {
+	"name": "plus-32",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -259,6 +271,7 @@
 	"number": 4,
 	"title": "32を足してみよう"
 }, {
+	"name": "make-minus-one-med",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -281,6 +294,7 @@
 	"number": 5,
 	"title": "-1を作ろう! -med-"
 }, {
+	"name": "conditional01",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -309,6 +323,7 @@
 	"number": 15,
 	"title": "条件分岐 -基本- 1"
 }, {
+	"name": "conditional02",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -337,6 +352,7 @@
 	"number": 6,
 	"title": "条件分岐 -基本- 2"
 }, {
+	"name": "conditional03",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -366,6 +382,7 @@
 	"number": 9,
 	"title": "条件分岐 -基本- 3"
 }, {
+	"name": "factorial",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -395,6 +412,7 @@
 	"number": 8,
 	"title": "階乗"
 }, {
+	"name": "parity",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -424,6 +442,7 @@
 	"number": 10,
 	"title": "パリティ"
 }, {
+	"name": "fibonacci",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -454,6 +473,7 @@
 	"number": 16,
 	"title": "フィボナッチ数"
 }, {
+	"name": "bivariation01",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -483,6 +503,7 @@
 	"number": 12,
 	"title": "2変数 -基本-"
 }, {
+	"name": "power-easy",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -520,6 +541,7 @@
 	"number": 12,
 	"title": "累乗 -easy-"
 }, {
+	"name": "power-hard",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -567,6 +589,7 @@
 	"number": 12,
 	"title": "累乗 -hard-"
 }, {
+	"name": "division-hard",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -586,6 +609,7 @@
 	"number": 12,
 	"title": "割り算 -hard-"
 }, {
+	"name": "gcd",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -628,6 +652,7 @@
 	"number": 12,
 	"title": "最大公約数"
 }, {
+	"name": "lcm",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -670,6 +695,7 @@
 	"number": 17,
 	"title": "最小公倍数"
 }, {
+	"name": "make-minus-one-hard",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -693,6 +719,7 @@
 	"number": 12,
 	"title": "-1をつくれ -hard-"
 }, {
+	"name": "sqrt-easy",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -732,6 +759,7 @@
 	"number": 12,
 	"title": "平方根 -easy-"
 }, {
+	"name": "sqrt-hard",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -780,6 +808,7 @@
 	"number": 12,
 	"statement": "平方根 -hard-"
 }, {
+	"name": "complement-of-2",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -824,10 +853,11 @@
 	"output": [255, 192, 129],
 	"width": 7,
 	"height": 7,
-	"statement": "8bitの2の補数を計算してみよう!", 
+	"statement": "8bitの2の補数を計算してみよう!",
 	"number": 12,
 	"statement": "2の補数"
 }, {
+	"name": "binarian-easy",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -876,6 +906,7 @@
 	"number": 12,
 	"title": "バイナリアン -easy-"
 }, {
+	"name": "perfect-number",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -920,10 +951,11 @@
 	"output": [6, 496, 33550336],
 	"width": 5,
 	"height": 5,
-	"statement": "メルセンヌ素数と完全数の関係を考えてみよう!", 
+	"statement": "メルセンヌ素数と完全数の関係を考えてみよう!",
 	"number": 12,
 	"title": "完全数"
 }, {
+	"name": "reversal",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -972,6 +1004,7 @@
 	"number": 12,
 	"title": "反転"
 }, {
+	"name": "msd",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,

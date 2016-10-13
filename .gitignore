@@ -109,3 +109,4 @@ Temporary Items
 *.html
 *.css
 *.map
+*.sqlite3

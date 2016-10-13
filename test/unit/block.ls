@@ -31,8 +31,7 @@ describe 'Block' ->
     block.step!
 
     entries = block.output-queues.entries!
-    while iterator = entries.next!
-      break if iterator.done
+    until (iterator = entries.next!).done
       [destination, queue] = iterator.value
 
       if io.out[destination] is undefined
