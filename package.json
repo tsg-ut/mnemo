@@ -65,7 +65,7 @@
     "mocha-logger": "^1.0.4",
     "mochify": "^2.18.1",
     "mochify-istanbul": "^2.4.1",
-    "nightmare": "~2.8.1",
+    "nightmare": "^2.8.1",
     "postcss-cli": "^2.5.2",
     "postcss-flexbugs-fixes": "^2.0.0",
     "postcss-import-url": "^2.1.0",
