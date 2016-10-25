@@ -1,5 +1,6 @@
 @import (css) 'https://fonts.googleapis.com/css?family=Exo+2:900';
 @import (css) 'https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.css';
+@import (css) 'https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css';
 
 .fixed-height(@height) {
 	flex: 0 0 @height;
@@ -41,6 +42,10 @@ button {
 	background: none;
 	font-family: inherit;
 	cursor: pointer;
+}
+
+.github-fork-ribbon::before {
+	background-color: #284fbd;
 }
 
 .layer {

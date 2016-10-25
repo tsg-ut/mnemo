@@ -94,20 +94,20 @@ describe 'Block' ->
         out: top: 334
 
   describe 'WireT block' ->
-    It 'conveys data from left to right and bottom' ->
+    It 'conveys data from left to right and top' ->
       io-test do
         type: \wireT
         in:
           left: 334
         out:
           right: 334
-          bottom: 334
+          top: 334
 
-    It 'conveys data from bottom to right and left' ->
+    It 'conveys data from top to right and left' ->
       io-test do
         type: \wireT
         in:
-          bottom: 334
+          top: 334
         out:
           right: 334
           left: 334
