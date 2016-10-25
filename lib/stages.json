@@ -10,7 +10,8 @@
 	"width": 3,
 	"height": 3,
 	"statement": "入り口と出口をつなげてみよう!",
-	"title": "練習"
+	"title": "練習",
+	"modal": "tutorial01"
 }, {
 	"name": "calc01",
 	"parts": {
