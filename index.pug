@@ -6,10 +6,10 @@ html
 		title MNEMO
 		script if (location.hostname === 'mnemo.pro' && location.protocol === 'http:') location.protocol = 'https:';
 		if process.env.NODE_ENV === 'production'
-			script(src="index.min.js", charset="utf-8")
+			script(src="index.min.js", charset="utf-8", async)
 			link(href="index.min.css", rel="stylesheet")
 		else
-			script(src="index.js", charset="utf-8")
+			script(src="index.js", charset="utf-8", async)
 			link(href="index.css", rel="stylesheet")
 	body
 		a.github-fork-ribbon(href='https://github.com/tsg-ut/mnemo', title='Fork me on GitHub', target='_blank') Fork me on GitHub
