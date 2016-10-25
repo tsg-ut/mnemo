@@ -118,7 +118,11 @@ html
 										.mission MISSION
 										.statement
 						.layer.modal-layer
-							.modal
-								button.close
-								.modal-content
-									include:markdown-it modals/tutorial01.md
+							- const modals = ['tutorial01']
+							each modal in modals
+								.modal(class=modal)
+									button.close
+									.modal-content
+										case modal
+											when 'tutorial01': include:markdown-it modals/tutorial01.md
+										button.close-content OK
