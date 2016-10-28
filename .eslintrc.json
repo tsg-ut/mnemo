@@ -233,7 +233,7 @@
             "error",
             "single"
         ],
-        "radix": "error",
+        "radix": "ignore",
         "require-jsdoc": "error",
         "rest-spread-spacing": [
             "error",
