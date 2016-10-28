@@ -16,7 +16,7 @@
     "build:production": "concurrently \"npm run browserify:production\" \"npm run pug:production\" \"npm run less:production\"",
     "watch:js": "watchify lib/index.js --debug --verbose -t [ babelify --presets [ es2015 ] ] -o \"exorcist index.js.map > index.js\"",
     "watch:map": "chokidar \"index.js.map\" -c \"npm run normalize-map\"",
-    "watch:pug": "chokidar \"*.pug\" -c \"npm run pug\"",
+    "watch:pug": "chokidar \"*.pug\" \"modals/*\" -c \"npm run pug\"",
     "watch:less": "chokidar \"*.less\" -c \"npm run less\"",
     "watch": "concurrently \"npm run watch:js\" \"npm run watch:map\" \"npm run watch:pug\" \"npm run watch:less\"",
     "mochify:phantom": "mochify \"test/unit/*.ls\" --reporter spec --extension ls --extension js --transform browserify-livescript --transform [ babelify --presets [ es2015 ] ]",

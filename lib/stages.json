@@ -31,7 +31,8 @@
 	"width": 3,
 	"height": 3,
 	"statement": "数を2倍してみよう!",
-	"title": "四則演算 -基本- 1"
+	"title": "四則演算 -基本- 1",
+	"modal": "tutorial02"
 }, {
 	"name": "calc02",
 	"parts": {
