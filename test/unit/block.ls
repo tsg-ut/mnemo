@@ -292,3 +292,21 @@ describe 'Block' ->
           right: -0
         out:
           bottom: -Infinity
+  describe 'pow block' ->
+    It 'powers left by right and send it to bottom' ->
+      io-test do
+        type: \pow
+        in:
+          left: 3
+          right: 4
+        out:
+          bottom: 81
+
+    It 'deletes numbers after the decimal point' ->
+      io-test do
+        type: \pow
+        in:
+          left: 2
+          right: -3
+        out:
+          bottom: 0
