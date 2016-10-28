@@ -310,3 +310,12 @@ describe 'Block' ->
           right: -3
         out:
           bottom: 0
+    It 'deletes numbers after the decimal point' ->
+      io-test do
+        type: \pow
+        in:
+          left: -2
+          right: -3
+        out:
+          bottom: 0
+
