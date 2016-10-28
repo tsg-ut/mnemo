@@ -1057,4 +1057,21 @@
 	"height": 19,
 	"statement": "3で割った余りを求めてみよう!",
 	"title": "mod3 -hard-"
+}, {
+	"name": "100",
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"iko-ru": 99,
+		"add": 99
+	},
+	"inputX": 4,
+	"outputX": 4,
+	"input": [10, 0, -1],
+	"output": [100, 100, 100],
+	"width": 9,
+	"height": 8,
+	"statement": "100を作ろう!",
+	"title": "100"
 }]
