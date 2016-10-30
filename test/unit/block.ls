@@ -125,6 +125,37 @@ describe 'Block' ->
         in: left: 334
         out: right: 334
 
+  describe 'WireXdot block' ->
+    It 'conveys data from top to left, right, and bottom' ->
+      io-test do
+        type: \wireXdot
+        in:
+          top: 334
+        out:
+          right: 334
+          left: 334
+          bottom: 334
+
+    It 'conveys data from left to top, right, and bottom' ->
+      io-test do
+        type: \wireXdot
+        in:
+          left: 334
+        out:
+          right: 334
+          top: 334
+          bottom: 334
+
+    It 'conveys data from bottom to top, right, and left' ->
+      io-test do
+        type: \wireXdot
+        in:
+          bottom: 334
+        out:
+          right: 334
+          top: 334
+          left: 334
+
   describe 'times-2 block' ->
     It 'converts data by multiplying 2' ->
       io-test do
