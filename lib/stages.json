@@ -1094,4 +1094,24 @@
 	"height": 5,
 	"statement": "100を作ろう!",
 	"title": "100再び"
+}, {
+	"name": "1000",
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 99,
+		"const-1": 99,
+		"add": 99,
+		"sub": 99,
+		"mul": 99
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [-1, 10, 1],
+	"output": [1000, 1000, 1000],
+	"width": 5,
+	"height": 5,
+	"statement": "1000を作ろう!",
+	"title": "1000"
 }]
