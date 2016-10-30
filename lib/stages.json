@@ -1109,7 +1109,7 @@
 	"inputX": 2,
 	"outputX": 2,
 	"input": [5, 10, 1],
-	"output": [100, 100, 100],
+	"output": [1000, 1000, 1000],
 	"width": 5,
 	"height": 5,
 	"statement": "1000を作ろう!",
