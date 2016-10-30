@@ -1,7 +1,7 @@
 [{
 	"name": "wire01",
 	"parts": {
-		"wireI": 99
+		"wireI": null
 	},
 	"inputX": 1,
 	"outputX": 1,
