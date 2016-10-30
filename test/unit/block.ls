@@ -125,6 +125,37 @@ describe 'Block' ->
         in: left: 334
         out: right: 334
 
+  describe 'WireXdot block' ->
+    It 'conveys data from top to left, right, and bottom' ->
+      io-test do
+        type: \wireXdot
+        in:
+          top: 334
+        out:
+          right: 334
+          left: 334
+          bottom: 334
+
+    It 'conveys data from left to top, right, and bottom' ->
+      io-test do
+        type: \wireXdot
+        in:
+          left: 334
+        out:
+          right: 334
+          top: 334
+          bottom: 334
+
+    It 'conveys data from bottom to top, right, and left' ->
+      io-test do
+        type: \wireXdot
+        in:
+          bottom: 334
+        out:
+          right: 334
+          top: 334
+          left: 334
+
   describe 'times-2 block' ->
     It 'converts data by multiplying 2' ->
       io-test do
@@ -292,3 +323,30 @@ describe 'Block' ->
           right: -0
         out:
           bottom: -Infinity
+  describe 'pow block' ->
+    It 'powers left by right and send it to bottom' ->
+      io-test do
+        type: \pow
+        in:
+          left: 3
+          right: 4
+        out:
+          bottom: 81
+
+    It 'deletes numbers after the decimal point' ->
+      io-test do
+        type: \pow
+        in:
+          left: 2
+          right: -3
+        out:
+          bottom: 0
+    It 'deletes numbers after the decimal point' ->
+      io-test do
+        type: \pow
+        in:
+          left: -2
+          right: -3
+        out:
+          bottom: 0
+

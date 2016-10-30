@@ -1,7 +1,7 @@
 [{
 	"name": "wire01",
 	"parts": {
-		"wireI": 99
+		"wireI": null
 	},
 	"inputX": 1,
 	"outputX": 1,
@@ -10,7 +10,6 @@
 	"width": 3,
 	"height": 3,
 	"statement": "入り口と出口をつなげてみよう!",
-	"number": 1,
 	"title": "練習"
 }, {
 	"name": "calc01",
@@ -31,7 +30,6 @@
 	"width": 3,
 	"height": 3,
 	"statement": "数を2倍してみよう!",
-	"number": 1,
 	"title": "四則演算 -基本- 1"
 }, {
 	"name": "calc02",
@@ -49,7 +47,6 @@
 	"width": 5,
 	"height": 5,
 	"statement": "数を3引いてみよう!",
-	"number": 11,
 	"title": "四則演算 -基本- 2"
 }, {
 	"name": "calc03",
@@ -70,7 +67,6 @@
 	"width": 5,
 	"height": 5,
 	"statement": "数を6倍してみよう!",
-	"number": 12,
 	"title": "四則演算 -基本- 3"
 }, {
 	"name": "calc04",
@@ -91,7 +87,6 @@
 	"width": 5,
 	"height": 5,
 	"statement": "数を2倍して、3足してみよう!",
-	"number": 2,
 	"title": "四則演算 -基本- 4"
 }, {
 	"name": "calc05",
@@ -109,7 +104,6 @@
 	"width": 5,
 	"height": 5,
 	"statement": "数を2倍して、2足してみよう!",
-	"number": 2,
 	"title": "四則演算 -基本- 5"
 }, {
 	"name": "calc06",
@@ -126,7 +120,6 @@
 	"width": 3,
 	"height": 2,
 	"statement": "数を2倍してみよう!",
-	"number": 1,
 	"title": "四則演算 -基本- 6"
 }, {
 	"name": "make-minus-one-easy",
@@ -139,7 +132,7 @@
 		"plus-1": 99,
 		"plus-2": 99,
 		"minus-2": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"add": 99,
 		"sub": 99,
 		"div": 99,
@@ -152,7 +145,6 @@
 	"width": 5,
 	"height": 5,
 	"statement": "四則演算を組み合わせてどの入力に対しても、-1を出力するような回路を作ってみよう",
-	"number": 3,
 	"title": "-1を作ろう -easy-"
 }, {
 	"name": "division-easy",
@@ -165,7 +157,7 @@
 		"plus-1": 99,
 		"plus-2": 99,
 		"minus-2": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"add": 99,
 		"sub": 99,
 		"div": 99,
@@ -182,7 +174,6 @@
 	"width": 5,
 	"height": 5,
 	"statement": "➗ブロックをうまく使って、数を2で割ってみよう!",
-	"number": 13,
 	"title": "割り算 -easy-"
 }, {
 	"name": "sixth-power",
@@ -195,7 +186,7 @@
 		"plus-1": 99,
 		"plus-2": 99,
 		"minus-2": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"add": 99,
 		"sub": 99,
 		"div": 99,
@@ -212,7 +203,6 @@
 	"width": 5,
 	"height": 5,
 	"statement": "✖️ブロックをうまく配置して、6乗を計算してみよう!",
-	"number": 7,
 	"title": "6乗"
 }, {
 	"name": "remainder",
@@ -225,7 +215,7 @@
 		"plus-1": 99,
 		"plus-2": 99,
 		"minus-2": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"add": 99,
 		"sub": 99,
 		"div": 99,
@@ -242,7 +232,6 @@
 	"width": 5,
 	"height": 10,
 	"statement": "10で割った余りを求めてみよう!",
-	"number": 14,
 	"title": "余りの計算"
 }, {
 	"name": "plus-32",
@@ -255,7 +244,7 @@
 		"plus-1": 99,
 		"plus-2": 99,
 		"minus-2": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"add": 99,
 		"sub": 99,
 		"div": 99,
@@ -268,7 +257,6 @@
 	"width": 5,
 	"height": 8,
 	"statement": "演算子をうまく配置して、32を足してみよう!",
-	"number": 4,
 	"title": "32を足してみよう"
 }, {
 	"name": "make-minus-one-med",
@@ -280,7 +268,7 @@
 		"times-3": 99,
 		"plus-1": 99,
 		"plus-2": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"add": 99,
 		"mul": 99
 	},
@@ -291,7 +279,6 @@
 	"width": 5,
 	"height": 10,
 	"statement": "より少ない演算子で入力全てを-1に出力する回路を作ろう（一般的でなく、入力全てさえ正解すれば良い）",
-	"number": 5,
 	"title": "-1を作ろう -med-"
 }, {
 	"name": "conditional01",
@@ -304,7 +291,7 @@
 		"plus-1": 99,
 		"plus-2": 99,
 		"minus-2": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"add": 99,
 		"sub": 99,
 		"div": 99,
@@ -320,7 +307,6 @@
 	"width": 9,
 	"height": 7,
 	"statement": "偶数なら2倍,奇数なら3倍してみよう!",
-	"number": 15,
 	"title": "条件分岐 -基本- 1"
 }, {
 	"name": "conditional02",
@@ -333,7 +319,7 @@
 		"plus-1": 99,
 		"plus-2": 99,
 		"minus-2": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"add": 99,
 		"sub": 99,
 		"div": 99,
@@ -349,7 +335,6 @@
 	"width": 11,
 	"height": 11,
 	"statement": "ifを使って、5は2倍,6は3倍,それ以外は1倍をしてみよう!",
-	"number": 6,
 	"title": "条件分岐 -基本- 2"
 }, {
 	"name": "conditional03",
@@ -362,7 +347,7 @@
 		"plus-1": 99,
 		"plus-2": 99,
 		"minus-2": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"add": 99,
 		"sub": 99,
 		"div": 99,
@@ -379,7 +364,6 @@
 	"width": 9,
 	"height": 9,
 	"statement": "mod7で2を足してみよう",
-	"number": 9,
 	"title": "条件分岐 -基本- 3"
 }, {
 	"name": "factorial",
@@ -392,7 +376,7 @@
 		"plus-1": 99,
 		"plus-2": 99,
 		"minus-2": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"add": 99,
 		"sub": 99,
 		"div": 99,
@@ -409,7 +393,6 @@
 	"width": 13,
 	"height": 13,
 	"statement": "階乗を計算してみよう!",
-	"number": 8,
 	"title": "階乗"
 }, {
 	"name": "parity",
@@ -422,7 +405,7 @@
 		"plus-1": 99,
 		"plus-2": 99,
 		"minus-2": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"add": 99,
 		"sub": 99,
 		"div": 99,
@@ -439,7 +422,6 @@
 	"width": 19,
 	"height": 19,
 	"statement": "与えられた四桁の数の各桁の和のをmod 10したものを計算してみよう!",
-	"number": 10,
 	"title": "パリティ"
 }, {
 	"name": "fibonacci",
@@ -453,7 +435,7 @@
 		"plus-2": 99,
 		"minus-1": 99,
 		"minus-2": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"add": 99,
 		"sub": 99,
 		"div": 99,
@@ -470,7 +452,6 @@
 	"width": 11,
 	"height": 11,
 	"statement": "n番目のフィボナッチ数を計算してみよう!",
-	"number": 16,
 	"title": "フィボナッチ数"
 }, {
 	"name": "bivariation01",
@@ -483,7 +464,7 @@
 		"plus-1": 99,
 		"plus-2": 99,
 		"minus-2": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"add": 99,
 		"sub": 99,
 		"div": 99,
@@ -500,7 +481,6 @@
 	"width": 5,
 	"height": 5,
 	"statement": "2つの数字が与えられるのでそれらを足しあわせた結果を出力してみよう!",
-	"number": 12,
 	"title": "2変数 -基本-"
 }, {
 	"name": "power-easy",
@@ -520,7 +500,7 @@
 		"const-0": 99,
 		"const-1": 99,
 		"const-2": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"add": 99,
 		"sub": 99,
 		"div": 99,
@@ -538,7 +518,6 @@
 	"width": 9,
 	"height": 9,
 	"statement": "1つ目に与えられた数を2つ目に与えられた数乗してみよう!",
-	"number": 12,
 	"title": "累乗 -easy-"
 }, {
 	"name": "power-hard",
@@ -568,7 +547,7 @@
 		"bitwise-and": 99,
 		"bitwise-or": 99,
 		"bitwise-xor": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"neq": 99,
 		"gt": 99,
 		"geqq": 99,
@@ -586,7 +565,6 @@
 	"width": 15,
 	"height": 15,
 	"statement": "1つ目に与えられた数を2つ目に与えられた数乗してみよう!(ただし、愚直に計算すると時間がかかるので、より早く計算できるように工夫してみよう)",
-	"number": 12,
 	"title": "累乗 -hard-"
 }, {
 	"name": "division-hard",
@@ -606,7 +584,6 @@
 	"width": 5,
 	"height": 5,
 	"statement": "右の数を左の数で割ってみよう!",
-	"number": 12,
 	"title": "割り算 -hard-"
 }, {
 	"name": "gcd",
@@ -631,7 +608,7 @@
 		"div": 99,
 		"mul": 99,
 		"mod": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"neq": 99,
 		"gt": 99,
 		"geqq": 99,
@@ -649,7 +626,6 @@
 	"width": 13,
 	"height": 13,
 	"statement": "二数の最大公約数を計算してみよう!",
-	"number": 12,
 	"title": "最大公約数"
 }, {
 	"name": "lcm",
@@ -674,7 +650,7 @@
 		"div": 99,
 		"mul": 99,
 		"mod": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"neq": 99,
 		"gt": 99,
 		"geqq": 99,
@@ -692,7 +668,6 @@
 	"width": 11,
 	"height": 11,
 	"statement": "最小公倍数を計算してみよう",
-	"number": 17,
 	"title": "最小公倍数"
 }, {
 	"name": "make-minus-one-hard",
@@ -702,7 +677,7 @@
 		"wireT": 99,
 		"wireX": 99,
 		"plus-1": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"add": 99,
 		"c-contact": 99,
 		"conditional": 99,
@@ -716,7 +691,6 @@
 	"width": 7,
 	"height": 9,
 	"statement": "入力の値から1引いた値を出力してみよう!",
-	"number": 12,
 	"title": "-1を作ろう -hard-"
 }, {
 	"name": "sqrt-easy",
@@ -742,7 +716,7 @@
 		"mul": 99,
 		"mod": 99,
 		"pow": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"neq": 99,
 		"c-contact": 99,
 		"conditional": 99,
@@ -756,7 +730,6 @@
 	"width": 9,
 	"height": 9,
 	"statement": "平方根を計算してみよう!",
-	"number": 12,
 	"title": "平方根 -easy-"
 }, {
 	"name": "sqrt-hard",
@@ -787,7 +760,7 @@
 		"bitwise-and": 99,
 		"bitwise-or": 99,
 		"bitwise-xor": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"neq": 99,
 		"gt": 99,
 		"geqq": 99,
@@ -805,7 +778,6 @@
 	"width": 15,
 	"height": 15,
 	"statement": "平方根を計算してみよう! (ただし、愚直に計算すると計算に長い時間かかるので、より速く計算できるように工夫してみよう)",
-	"number": 12,
 	"title": "平方根 -hard-"
 }, {
 	"name": "complement-of-2",
@@ -836,7 +808,7 @@
 		"bitwise-and": 99,
 		"bitwise-or": 99,
 		"bitwise-xor": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"neq": 99,
 		"gt": 99,
 		"geqq": 99,
@@ -854,7 +826,6 @@
 	"width": 7,
 	"height": 7,
 	"statement": "8bitの2の補数を計算してみよう!",
-	"number": 12,
 	"title": "2の補数"
 }, {
 	"name": "binarian-easy",
@@ -885,7 +856,7 @@
 		"bitwise-and": 99,
 		"bitwise-or": 99,
 		"bitwise-xor": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"neq": 99,
 		"gt": 99,
 		"geqq": 99,
@@ -903,7 +874,6 @@
 	"width": 15,
 	"height": 15,
 	"statement": "数をバイナリ表記にしてみよう!",
-	"number": 12,
 	"title": "バイナリアン -easy-"
 }, {
 	"name": "perfect-number",
@@ -934,7 +904,7 @@
 		"bitwise-and": 99,
 		"bitwise-or": 99,
 		"bitwise-xor": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"neq": 99,
 		"gt": 99,
 		"geqq": 99,
@@ -952,7 +922,6 @@
 	"width": 5,
 	"height": 5,
 	"statement": "メルセンヌ素数と完全数の関係を考えてみよう!",
-	"number": 12,
 	"title": "完全数"
 }, {
 	"name": "reversal",
@@ -983,7 +952,7 @@
 		"bitwise-and": 99,
 		"bitwise-or": 99,
 		"bitwise-xor": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"neq": 99,
 		"gt": 99,
 		"geqq": 99,
@@ -1001,7 +970,6 @@
 	"width": 15,
 	"height": 15,
 	"statement": "数を反転してみよう!",
-	"number": 12,
 	"title": "反転"
 }, {
 	"name": "msd",
@@ -1032,7 +1000,7 @@
 		"bitwise-and": 99,
 		"bitwise-or": 99,
 		"bitwise-xor": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"neq": 99,
 		"gt": 99,
 		"geqq": 99,
@@ -1050,7 +1018,6 @@
 	"width": 15,
 	"height": 15,
 	"statement": "数の最上位の桁を取り出してみよう!",
-	"number": 12,
 	"title": "最上位の桁"
 }, {
 	"name": "mod3-hard",
@@ -1071,7 +1038,7 @@
 		"add": 99,
 		"sub": 99,
 		"pow": 99,
-		"iko-ru": 99,
+		"equal": 99,
 		"neq": 99,
 		"gt": 99,
 		"geqq": 99,
@@ -1090,4 +1057,61 @@
 	"height": 19,
 	"statement": "3で割った余りを求めてみよう!",
 	"title": "mod3 -hard-"
+}, {
+	"name": "100",
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"equal": 99,
+		"add": 99
+	},
+	"inputX": 4,
+	"outputX": 4,
+	"input": [10, 0, -1],
+	"output": [100, 100, 100],
+	"width": 9,
+	"height": 8,
+	"statement": "100を作ろう!",
+	"title": "100"
+}, {
+	"name": "100-again",
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 99,
+		"const-1": 99,
+		"add": 99,
+		"sub": 99,
+		"mul": 99
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [-1, 10, 1],
+	"output": [100, 100, 100],
+	"width": 5,
+	"height": 5,
+	"statement": "100を作ろう!",
+	"title": "100再び"
+}, {
+	"name": "1000",
+	"parts": {
+		"wireI": 99,
+		"wireL": 99,
+		"wireT": 99,
+		"times-2": 99,
+		"const-1": 99,
+		"add": 99,
+		"sub": 99,
+		"mul": 99
+	},
+	"inputX": 2,
+	"outputX": 2,
+	"input": [-1, 10, 1],
+	"output": [1000, 1000, 1000],
+	"width": 5,
+	"height": 5,
+	"statement": "1000を作ろう!",
+	"title": "1000"
 }]
