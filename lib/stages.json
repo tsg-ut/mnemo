@@ -1075,7 +1075,7 @@
 	"statement": "100を作ろう!",
 	"title": "100"
 }, {
-	"name": "100再び",
+	"name": "100-again",
 	"parts": {
 		"wireI": 99,
 		"wireL": 99,
@@ -1092,6 +1092,6 @@
 	"output": [100, 100, 100],
 	"width": 5,
 	"height": 5,
-	"statement": "100を作りましょう",
+	"statement": "100を作ろう!",
 	"title": "100再び"
 }]
