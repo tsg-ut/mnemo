@@ -805,7 +805,7 @@ button {
 		}
 		@blocks-rotatable: wireI, wireL, wireT, diode;
 		@blocks-rotate-back-wireI: times-2, add-3, times-3, plus-1, plus-2, minus-1, minus-2, div-2, div-3, const-0, const-1, const-2;
-		@blocks-norotate: add, sub, mul, div,  c-contact, conditional, transistor, wireX, pow, mod, bitshift-left, bitshift-right, bitwise-and, bitwise-or, bitwise-xor, equal, neq, gt, geqq, lt, leqq;
+		@blocks-norotate: wireXdot, add, sub, mul, div,  c-contact, conditional, transistor, wireX, pow, mod, bitshift-left, bitshift-right, bitwise-and, bitwise-or, bitwise-xor, equal, neq, gt, geqq, lt, leqq;
 
 		.-r(@i: length(@blocks-rotatable)) when (@i > 0) {
 			@name: extract(@blocks-rotatable, @i);
