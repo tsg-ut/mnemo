@@ -4,6 +4,7 @@ html
 		meta(charset="utf-8")
 		meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
 		title MNEMO
+		script if (location.hostname === 'mnemo.pro' && location.protocol === 'http:') location.protocol = 'https:';
 		if process.env.NODE_ENV === 'production'
 			script(src="index.min.js", charset="utf-8")
 			link(href="index.min.css", rel="stylesheet")
