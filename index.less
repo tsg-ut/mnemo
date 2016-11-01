@@ -29,7 +29,7 @@
 
 @font-face {
 	font-family: infinity;
-	src: url('image/infinity.woff') format('woff');
+	src: inline('image/infinity.woff') format('woff');
 	font-weight: 900;
 	font-style: normal;
 }
@@ -981,6 +981,18 @@ button {
 		right: 0;
 		font-size: 30px;
 		transform: translateY(-50%);
+
+		.result-head {
+			display: flex;
+			justify-content: center;
+
+			.clear {
+				width: width('image/clear.svg', 2);
+				height: height('image/clear.svg', 2);
+				background: url('image/clear.svg');
+				background-size: size('image/clear.svg', 2);
+			}
+		}
 
 		.stats {
 			background: rgba(0, 0, 0, .7);
