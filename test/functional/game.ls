@@ -52,5 +52,5 @@ describe 'Game Screen' ->
       .click '.board .block[data-x="1"][data-y="2"]'
       .click 'button.execute'
       .wait -> document.query-selector-all '.data' .length is 0
-      .evaluate -> document.query-selector '.result' |> getComputedStyle
+      .evaluate -> document.query-selector '.result' |> get-computed-style
       .then -> expect it.display .to.equal 'block'
