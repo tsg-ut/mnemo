@@ -128,12 +128,12 @@ html
 									button.close 閉じる
 									button.next 次のステージへ
 						.layer.modal-layer
-							- const modals = ['tutorial01', 'tutorial02']
+							- const modals = ['01', '02']
 							each modal in modals
 								.modal(class=modal)
 									button.close
 									.modal-content
 										case modal
-											when 'tutorial01': include:markdown-it modals/tutorial01.md
-											when 'tutorial02': include:markdown-it modals/tutorial02.md
+											when '01': include modals/01/content.pug
+											when '02': include modals/02/content.pug
 										button.close-content OK
