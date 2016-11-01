@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-	res.redirect('http://sig.tsg.ne.jp/mnemo/');
+	res.redirect('https://mnemo.pro/');
 });
 
 module.exports = router;
