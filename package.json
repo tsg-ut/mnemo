@@ -80,7 +80,6 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "jstransformer-markdown-it": "^1.0.0",
     "sequelize": "^3.24.3",
     "sqlite3": "^3.1.4"
   }
