@@ -976,6 +976,7 @@ button {
 	}
 
 	.result {
+		display: none;
 		position: absolute;
 		top: 50%;
 		left: 0;
@@ -993,12 +994,12 @@ button {
 				background: url('image/clear.svg');
 				background-size: size('image/clear.svg', 2);
 
-				animation: 0.5s clear-animate;
+				animation: 0.5s clear-animate cubic-bezier(0, 0, 0, 1);
 
 				@keyframes clear-animate {
 					from {
 						opacity: 0;
-						transform: scale(2);
+						transform: scale(3);
 					}
 					to {
 						opacity: 1;
@@ -1019,6 +1020,8 @@ button {
 			font-weight: 900;
 			line-height: 1.5;
 			font-size: 42px;
+
+			overflow: hidden;
 
 			// Background that can animate :)
 			&::before {
