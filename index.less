@@ -660,6 +660,158 @@ button {
 		}
 	}
 
+	.result-layer {
+		pointer-events: none;
+
+		.result {
+			display: none;
+			position: absolute;
+			top: 50%;
+			left: 0;
+			right: 0;
+			font-size: 30px;
+			transform: translateY(-50%);
+			pointer-events: all;
+
+			.result-head {
+				display: flex;
+				justify-content: center;
+
+				.clear {
+					width: width('image/clear.svg', 2);
+					height: height('image/clear.svg', 2);
+					background: url('image/clear.svg');
+					background-size: size('image/clear.svg', 2);
+
+					animation: 0.5s clear-animate cubic-bezier(0, 0, 0, 1);
+
+					@keyframes clear-animate {
+						from {
+							opacity: 0;
+							transform: scale(3);
+						}
+						to {
+							opacity: 1;
+							transform: scale(1);
+						}
+					}
+				}
+			}
+
+			.stats {
+				display: flex;
+				justify-content: center;
+				position: relative;
+				margin-top: 20px;
+
+				color: #222;
+				font-family: 'Exo 2';
+				font-weight: 900;
+				line-height: 1.5;
+				font-size: 42px;
+
+				overflow: hidden;
+
+				// Background that can animate :)
+				&::before {
+					@overrap: 15%;
+					content: '';
+					display: block;
+					position: absolute;
+
+					top: 0;
+					left: 100%;
+					bottom: 0;
+					width: 100% + @overrap;
+
+					background: linear-gradient(
+						90deg,
+						rgba(255, 255, 255, 0),
+						rgba(255, 255, 255, 0.7) percentage(@overrap / (100% + @overrap)),
+						rgba(255, 255, 255, 0.7)
+					);
+
+					animation: 0.5s 1s stats-animate forwards;
+
+					@keyframes stats-animate {
+						from {left: 100%}
+						to {left: -@overrap}
+					}
+
+					z-index: -1;
+				}
+
+				& > div {
+					margin: 0 0.5em;
+					opacity: 0;
+
+					animation: 0.5s 1s stats-div-animate forwards;
+
+					@keyframes stats-div-animate {
+						from {opacity: 0}
+						to {opacity: 1}
+					}
+
+					&::before {
+						width: 1.2em;
+						height: 1.2em;
+						display: inline-block;
+						vertical-align: -10%;
+						margin-right: 0.3em;
+					}
+
+					&.clocks::before {
+						content: inline('image/clock-icon.svg');
+					}
+
+					&.blocks::before {
+						content: url('image/conditional.png');
+					}
+				}
+			}
+
+			.block-area {
+				display: flex;
+				justify-content: center;
+				margin-top: 1em;
+
+				button {
+					width: 240px;
+					margin: 0 15px;
+
+					border-radius: 12px;
+
+					color: white;
+					line-height: 2em;
+					font-weight: bold;
+
+					opacity: 0;
+
+					animation: 0.5s 1.2s result-button-animate forwards;
+
+					@keyframes result-button-animate {
+						from {
+							opacity: 0;
+							transform: translateY(30px);
+						}
+						to {
+							opacity: 1;
+							transform: translateY(0);
+						}
+					}
+
+					&.close {
+						background: #4e4e4e;
+					}
+
+					&.next {
+						background: #354fd6;
+					}
+				}
+			}
+		}
+	}
+
 	.inputs, .arrows, .user-outputs, .correct-outputs {
 		display: flex;
 
@@ -972,153 +1124,6 @@ button {
 			border-top-left-radius: 14px;
 			border-bottom-left-radius: 14px;
 			color: #333;
-		}
-	}
-
-	.result {
-		display: none;
-		position: absolute;
-		top: 50%;
-		left: 0;
-		right: 0;
-		font-size: 30px;
-		transform: translateY(-50%);
-
-		.result-head {
-			display: flex;
-			justify-content: center;
-
-			.clear {
-				width: width('image/clear.svg', 2);
-				height: height('image/clear.svg', 2);
-				background: url('image/clear.svg');
-				background-size: size('image/clear.svg', 2);
-
-				animation: 0.5s clear-animate cubic-bezier(0, 0, 0, 1);
-
-				@keyframes clear-animate {
-					from {
-						opacity: 0;
-						transform: scale(3);
-					}
-					to {
-						opacity: 1;
-						transform: scale(1);
-					}
-				}
-			}
-		}
-
-		.stats {
-			display: flex;
-			justify-content: center;
-			position: relative;
-			margin-top: 20px;
-
-			color: #222;
-			font-family: 'Exo 2';
-			font-weight: 900;
-			line-height: 1.5;
-			font-size: 42px;
-
-			overflow: hidden;
-
-			// Background that can animate :)
-			&::before {
-				@overrap: 15%;
-				content: '';
-				display: block;
-				position: absolute;
-
-				top: 0;
-				left: 100%;
-				bottom: 0;
-				width: 100% + @overrap;
-
-				background: linear-gradient(
-					90deg,
-					rgba(255, 255, 255, 0),
-					rgba(255, 255, 255, 0.7) percentage(@overrap / (100% + @overrap)),
-					rgba(255, 255, 255, 0.7)
-				);
-
-				animation: 0.5s 1s stats-animate forwards;
-
-				@keyframes stats-animate {
-					from {left: 100%}
-					to {left: -@overrap}
-				}
-
-				z-index: -1;
-			}
-
-			& > div {
-				margin: 0 0.5em;
-				opacity: 0;
-
-				animation: 0.5s 1s stats-div-animate forwards;
-
-				@keyframes stats-div-animate {
-					from {opacity: 0}
-					to {opacity: 1}
-				}
-
-				&::before {
-					width: 1.2em;
-					height: 1.2em;
-					display: inline-block;
-					vertical-align: -10%;
-					margin-right: 0.3em;
-				}
-
-				&.clocks::before {
-					content: inline('image/clock-icon.svg');
-				}
-
-				&.blocks::before {
-					content: url('image/conditional.png');
-				}
-			}
-		}
-
-		.block-area {
-			display: flex;
-			justify-content: center;
-			margin-top: 1em;
-
-			button {
-				width: 240px;
-				margin: 0 15px;
-
-				border-radius: 12px;
-
-				color: white;
-				line-height: 2em;
-				font-weight: bold;
-
-				opacity: 0;
-
-				animation: 0.5s 1.2s result-button-animate forwards;
-
-				@keyframes result-button-animate {
-					from {
-						opacity: 0;
-						transform: translateY(30px);
-					}
-					to {
-						opacity: 1;
-						transform: translateY(0);
-					}
-				}
-
-				&.close {
-					background: #4e4e4e;
-				}
-
-				&.next {
-					background: #354fd6;
-				}
-			}
 		}
 	}
 }
