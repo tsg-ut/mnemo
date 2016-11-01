@@ -117,11 +117,18 @@ html
 									.statement-area
 										.mission MISSION
 										.statement
+							.result
+								.result-head CLEAR!
+								.stats
+									.clocks 100
+									.blocks 100
+								.block-area
+									button.close 閉じる
+									button.next 次のステージへ
 						.layer.modal-layer
 							- const modals = ['tutorial01', 'tutorial02']
 							each modal in modals
 								.modal(class=modal)
-									button.close
 									.modal-content
 										case modal
 											when 'tutorial01': include:markdown-it modals/tutorial01.md
