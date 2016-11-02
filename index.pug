@@ -6,10 +6,10 @@ html
 		title MNEMO
 		script if (location.hostname === 'mnemo.pro' && location.protocol === 'http:') location.protocol = 'https:';
 		if process.env.NODE_ENV === 'production'
-			script(src="index.min.js", charset="utf-8")
+			script(src="index.min.js", charset="utf-8", async)
 			link(href="index.min.css", rel="stylesheet")
 		else
-			script(src="index.js", charset="utf-8")
+			script(src="index.js", charset="utf-8", async)
 			link(href="index.css", rel="stylesheet")
 	body
 		a.github-fork-ribbon(href='https://github.com/tsg-ut/mnemo', title='Fork me on GitHub', target='_blank') Fork me on GitHub
@@ -117,22 +117,23 @@ html
 									.statement-area
 										.mission MISSION
 										.statement
+						.layer.result-layer
+							.result
+								.result-head
+									.clear
+								.stats
+									.clocks 0
+									.blocks 0
+								.block-area
+									button.close 閉じる
+									button.next 次のステージへ
 						.layer.modal-layer
-							.modal
-								button.close
-								.modal-content
-									img(src='image/logo.png')
-
-									p プログラミング体験パズルゲーム、MNEMO(ニーモ)をお遊びいただき、ありがとうございます!
-									p このゲームの目的はパネルに表示されている数を、下の数に変換することです。
-
-									img(src='image/modal/01/case.png')
-
-									p 百聞は一見にしかず! まずはボードの上と下をパイプでつないでみましょう。
-									p ボードをクリックするとパイプを配置できます。
-
-									img(src='image/modal/01/board.png')
-
-									p 準備ができたら、下の実行ボタンを押してください。
-
-									img(src='image/modal/01/control.png')
+							- const modals = ['01', '02']
+							each modal in modals
+								.modal(class=modal)
+									button.close
+									.modal-content
+										case modal
+											when '01': include modals/01/content.pug
+											when '02': include modals/02/content.pug
+										button.close-content OK

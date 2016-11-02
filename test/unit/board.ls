@@ -45,3 +45,10 @@ describe 'Board' ->
     It 'executes the board' ->
       @board.input 100
       expect @board.executing .to.be.true
+
+  describe '#blockCount' ->
+    It 'counts blocks in board' ->
+      @board.place-block x: 2, y: 1, type: \wireI, rotate: 0
+      @board.place-block x: 3, y: 2, type: \times-2, rotate: 0
+      @board.place-block x: 0, y: 3, type: \diode, rotate: 1
+      expect @board.block-count .to.equal 3
