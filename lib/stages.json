@@ -10,7 +10,8 @@
 	"width": 3,
 	"height": 3,
 	"statement": "入り口と出口をつなげてみよう!",
-	"title": "練習"
+	"title": "練習",
+	"modal": "01"
 }, {
 	"name": "calc01",
 	"parts": {
@@ -30,7 +31,8 @@
 	"width": 3,
 	"height": 3,
 	"statement": "数を2倍してみよう!",
-	"title": "四則演算 -基本- 1"
+	"title": "四則演算 -基本- 1",
+	"modal": "02"
 }, {
 	"name": "calc02",
 	"parts": {
@@ -131,8 +133,8 @@
 		"times-3": null,
 		"plus-1": null,
 		"plus-2": null,
+		"minus-1": null,
 		"minus-2": null,
-		"equal": null,
 		"add": null,
 		"sub": null,
 		"div": null,
@@ -156,16 +158,12 @@
 		"times-3": null,
 		"plus-1": null,
 		"plus-2": null,
+		"minus-1": null,
 		"minus-2": null,
-		"equal": null,
 		"add": null,
 		"sub": null,
 		"div": null,
-		"mul": null,
-		"c-contact": null,
-		"conditional": null,
-		"transistor": null,
-		"diode": null
+		"mul": null
 	},
 	"inputX": 2,
 	"outputX": 2,
@@ -185,16 +183,12 @@
 		"times-3": null,
 		"plus-1": null,
 		"plus-2": null,
+		"minus-1": null,
 		"minus-2": null,
-		"equal": null,
 		"add": null,
 		"sub": null,
 		"div": null,
-		"mul": null,
-		"c-contact": null,
-		"conditional": null,
-		"transistor": null,
-		"diode": null
+		"mul": null
 	},
 	"inputX": 2,
 	"outputX": 2,
@@ -214,16 +208,12 @@
 		"times-3": null,
 		"plus-1": null,
 		"plus-2": null,
+		"minus-1": null,
 		"minus-2": null,
-		"equal": null,
 		"add": null,
 		"sub": null,
 		"div": null,
-		"mul": null,
-		"c-contact": null,
-		"conditional": null,
-		"transistor": null,
-		"diode": null
+		"mul": null
 	},
 	"inputX": 2,
 	"outputX": 2,
@@ -243,8 +233,8 @@
 		"times-3": null,
 		"plus-1": null,
 		"plus-2": null,
+		"minus-1": null,
 		"minus-2": null,
-		"equal": null,
 		"add": null,
 		"sub": null,
 		"div": null,
@@ -334,7 +324,7 @@
 	"output": [10, 18, 7],
 	"width": 11,
 	"height": 11,
-	"statement": "ifを使って、5は2倍,6は3倍,それ以外は1倍をしてみよう!",
+	"statement": "ifを使って、5は2倍、6は3倍、それ以外は1倍をしてみよう!",
 	"title": "条件分岐 -基本- 2"
 }, {
 	"name": "conditional03",
