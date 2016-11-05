@@ -62,7 +62,6 @@ router.post('/:stage/submissions', (req, res) => {
 				message: 'stage not found',
 			});
 		} else {
-			submissionData.stage = stage;
 			const {pass, message} = validateSubmission(submissionData);
 
 			if (!pass) {
