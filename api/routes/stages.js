@@ -82,7 +82,7 @@ router.post('/:stage/submissions', (req, res) => {
 			Submissions.create({
 				name: req.body.name || null,
 				board: JSON.stringify(req.body.board),
-				score: req.body.score,
+				score: req.body.score, // FIXME: Use validator-calculated score value
 				stageId: stage.id,
 			}).then((submission) => {
 				res.json(submission);

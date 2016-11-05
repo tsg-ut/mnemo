@@ -58,20 +58,21 @@ describe('/stages', () => {
 		it('creates new submission data if the submission is valid', () => (
 			chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'hakatashi',
+				score: 100, // FIXME: remove
 				board: [{
 					x: 0,
 					y: 0,
-					name: 'wire01',
+					name: 'wireI',
 					rotate: 0,
 				}, {
 					x: 0,
 					y: 1,
-					name: 'wire01',
+					name: 'wireI',
 					rotate: 0,
 				}, {
 					x: 0,
 					y: 2,
-					name: 'wire01',
+					name: 'wireI',
 					rotate: 0,
 				}],
 			}).then((res) => {
