@@ -1,0 +1,51 @@
+name: lcm
+parts:
+  wireI: null
+  wireL: null
+  wireT: null
+  wireX: null
+  times-2: null
+  times-3: null
+  div-2: null
+  div-3: null
+  plus-1: null
+  plus-2: null
+  minus-1: null
+  minus-2: null
+  const-0: null
+  const-1: null
+  const-2: null
+  add: null
+  sub: null
+  div: null
+  mul: null
+  mod: null
+  equal: null
+  neq: null
+  gt: null
+  geqq: null
+  lt: null
+  leqq: null
+  c-contact: null
+  conditional: null
+  transistor: null
+  diode: null
+inputX:
+  - 4
+  - 6
+outputX: 5
+input:
+  - - 6
+    - 8
+  - - 9
+    - 30
+  - - 15
+    - 77
+output:
+  - 24
+  - 90
+  - 1155
+width: 11
+height: 11
+statement: 最小公倍数を計算してみよう
+title: 最小公倍数

@@ -1,0 +1,32 @@
+name: conditional01
+parts:
+  wireI: null
+  wireL: null
+  wireT: null
+  times-2: null
+  times-3: null
+  plus-1: null
+  plus-2: null
+  minus-2: null
+  equal: null
+  add: null
+  sub: null
+  div: null
+  mul: null
+  c-contact: null
+  conditional: null
+  transistor: null
+inputX: 4
+outputX: 4
+input:
+  - 5
+  - 6
+  - -10
+output:
+  - 15
+  - 12
+  - -20
+width: 9
+height: 7
+statement: '偶数なら2倍,奇数なら3倍してみよう!'
+title: 条件分岐 -基本- 1

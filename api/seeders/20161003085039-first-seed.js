@@ -1,4 +1,4 @@
-const stages = require('../../lib/stages.json');
+const stages = require('../../stages');
 const Stages = require('../models/stage');
 
 module.exports = {
