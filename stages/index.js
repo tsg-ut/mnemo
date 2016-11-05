@@ -1,6 +1,6 @@
 /* eslint global-require: 'off' */
 
-if (!process.browser) {
+if (!process.browser && process.env.MOCHIFY !== 'true') {
 	require('yamlify/register');
 }
 
