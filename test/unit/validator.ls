@@ -250,3 +250,121 @@ describe 'validator' ->
             rotate: 4
             ...
     ]
+
+    fails 'positions of blocks are not unique' [
+      * stage: 'wire01'
+        board:
+          * x: 0
+            y: 0
+            name: 'wireI'
+            rotate: 0
+          * x: 0
+            y: 0
+            name: 'wireI'
+            rotate: 0
+      * stage: 'wire01'
+        board:
+          * x: 2
+            y: 2
+            name: 'wireI'
+            rotate: 0
+          * x: 0
+            y: 0
+            name: 'wireI'
+            rotate: 0
+          * x: 2
+            y: 2
+            name: 'wireI'
+            rotate: 0
+    ]
+
+    fails 'used blocks are not matching to the stage' [
+      * stage: 'wire01'
+        board:
+          * x: 0
+            y: 0
+            name: 'times-2'
+            rotate: 0
+            ...
+      * stage: 'calc05'
+        board:
+          * x: 0
+            y: 0
+            name: 'times-2'
+            rotate: 0
+          * x: 0
+            y: 1
+            name: 'times-2'
+            rotate: 0
+    ]
+
+    fails 'the board cannot clear the stage' [
+      # Wire is cut
+      * stage: 'wire01'
+        board:
+          * x: 1
+            y: 0
+            name: 'wireI'
+            rotate: 0
+          * x: 0
+            y: 1
+            name: 'wireI'
+            rotate: 0
+          * x: 1
+            y: 2
+            name: 'wireI'
+            rotate: 0
+      # Rotation is not correct
+      * stage: 'wire01'
+        board:
+          * x: 1
+            y: 0
+            name: 'wireI'
+            rotate: 0
+          * x: 1
+            y: 1
+            name: 'wireI'
+            rotate: 1
+          * x: 1
+            y: 2
+            name: 'wireI'
+            rotate: 0
+      # Output is incorrect
+      * stage: 'calc01'
+        board:
+          * x: 1
+            y: 0
+            name: 'wireI'
+            rotate: 0
+          * x: 1
+            y: 1
+            name: 'wireI'
+            rotate: 0
+          * x: 1
+            y: 2
+            name: 'wireI'
+            rotate: 0
+      # Can even pass a test case, but not all
+      * stage: 'calc03'
+        board:
+          * x: 2
+            y: 0
+            name: 'plus-1'
+            rotate: 0
+          * x: 2
+            y: 1
+            name: 'plus-1'
+            rotate: 0
+          * x: 2
+            y: 2
+            name: 'plus-1'
+            rotate: 0
+          * x: 2
+            y: 3
+            name: 'plus-1'
+            rotate: 0
+          * x: 2
+            y: 4
+            name: 'plus-1'
+            rotate: 0
+    ]
