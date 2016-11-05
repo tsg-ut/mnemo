@@ -77,6 +77,8 @@ describe 'Board' ->
       expect @board.clock .to.equal 3
 
     It 'limits maximum execution clocks to 1000' ->
+      @timeout 10000
+
       @board.place-block x: 1, y: 0, type: \wireL, rotate: 1
       @board.place-block x: 2, y: 0, type: \wireT, rotate: 3
       @board.place-block x: 1, y: 1, type: \wireL, rotate: 0
