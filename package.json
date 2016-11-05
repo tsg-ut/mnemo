@@ -26,7 +26,8 @@
     "coveralls": "cat coverage/lcov.info | coveralls",
     "lint": "eslint \"lib/**/*.js\" --ignore-pattern \"lib/analytics.js\"",
     "test": "npm run unit && npm run functional && npm run lint",
-    "api": "cd api && node index.js"
+    "api": "cd api && node index.js",
+    "test:api": "cd api && mocha --recursive"
   },
   "repository": {
     "type": "git",
@@ -50,6 +51,7 @@
     "browserify": "^13.0.1",
     "browserify-livescript": "^0.2.3",
     "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "chokidar-cli": "^1.2.0",
     "concurrently": "^3.0.0",
     "core-js": "^2.4.1",
@@ -74,6 +76,7 @@
     "postcss-font-magician": "^1.5.0",
     "pug-cli": "^1.0.0-alpha6",
     "replace": "^0.3.0",
+    "sinon": "^1.17.6",
     "uglifyify": "^3.0.3",
     "watchify": "^3.7.0",
     "yamlify": "^0.1.3"
