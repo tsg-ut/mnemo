@@ -1,5 +1,9 @@
 /* eslint global-require: 'off' */
 
+if (!process.browser) {
+	require('yamlify/register');
+}
+
 module.exports = [
 	require('./wire01.yml'),
 	require('./calc01.yml'),
