@@ -78,7 +78,6 @@
     "pug-cli": "^1.0.0-alpha6",
     "replace": "^0.3.0",
     "sequelize-cli": "^2.4.0",
-    "sinon": "^1.17.6",
     "uglifyify": "^3.0.3",
     "watchify": "^3.7.0",
     "yamlify": "^0.1.3"
