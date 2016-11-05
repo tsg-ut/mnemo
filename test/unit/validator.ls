@@ -169,7 +169,7 @@ describe 'validator' ->
             ...
     ]
 
-    fails 'name of block 0 should be a string' [
+    fails 'type of block 0 should be a string' [
       * stage: 'wire01'
         board:
           * x: 0
@@ -193,7 +193,7 @@ describe 'validator' ->
             ...
     ]
 
-    fails 'name of block 0 is unknown' [
+    fails 'type of block 0 is unknown' [
       * stage: 'wire01'
         board:
           * x: 0
