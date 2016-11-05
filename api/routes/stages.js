@@ -4,7 +4,7 @@ const router = express.Router();
 const Stages = require('../models/stage');
 const Submissions = require('../models/submission');
 
-const {validateSubmission} = require('../../lib/util');
+const {validateSubmission} = require('../../lib/validator');
 
 router.get('/', (req, res) => {
 	Stages.findAll().then((stages) => {
