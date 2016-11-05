@@ -42,7 +42,12 @@ router.get('/:stage/submissions', (req, res) => {
 		order: 'score DESC',
 		limit: 10,
 	}).then((submissions) => {
-		res.json(submissions);
+		const data = submissions.map((submission) => ({
+			name: submission.name,
+			score: submission.score,
+		}));
+
+		res.json(data);
 	});
 });
 
@@ -62,6 +67,8 @@ router.post('/:stage/submissions', (req, res) => {
 				message: 'stage not found',
 			});
 		} else {
+			submissionData.stage = stageName;
+
 			const {pass, message} = validateSubmission(submissionData);
 
 			if (!pass) {
