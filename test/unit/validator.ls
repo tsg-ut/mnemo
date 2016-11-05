@@ -47,13 +47,13 @@ describe 'validator' ->
         board:
           * x: 0
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             ...
       * stage: 'wire01'
         board:
           * x: 0
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
             hoge: 'fuga'
             ...
@@ -64,28 +64,28 @@ describe 'validator' ->
         board:
           * x: null
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
             ...
       * stage: 'wire01'
         board:
           * x: 'hoge'
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
             ...
       * stage: 'wire01'
         board:
           * x: 0.1
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
             ...
       * stage: 'wire01'
         board:
           * x: Infinity
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
             ...
     ]
@@ -95,21 +95,21 @@ describe 'validator' ->
         board:
           * x: -1
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
             ...
       * stage: 'wire01'
         board:
           * x: 3
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
             ...
       * stage: 'wire01'
         board:
           * x: 100
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
             ...
     ]
@@ -119,28 +119,28 @@ describe 'validator' ->
         board:
           * x: 0
             y: null
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
             ...
       * stage: 'wire01'
         board:
           * x: 0
             y: 'hoge'
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
             ...
       * stage: 'wire01'
         board:
           * x: 0
             y: 0.1
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
             ...
       * stage: 'wire01'
         board:
           * x: 0
             y: Infinity
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
             ...
     ]
@@ -150,21 +150,21 @@ describe 'validator' ->
         board:
           * x: 0
             y: -1
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
             ...
       * stage: 'wire01'
         board:
           * x: 0
             y: 3
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
             ...
       * stage: 'wire01'
         board:
           * x: 0
             y: 100
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
             ...
     ]
@@ -174,21 +174,21 @@ describe 'validator' ->
         board:
           * x: 0
             y: 0
-            name: null
+            type: null
             rotate: 0
             ...
       * stage: 'wire01'
         board:
           * x: 0
             y: 0
-            name: 42
+            type: 42
             rotate: 0
             ...
       * stage: 'wire01'
         board:
           * x: 0
             y: 0
-            name: []
+            type: []
             rotate: 0
             ...
     ]
@@ -198,7 +198,7 @@ describe 'validator' ->
         board:
           * x: 0
             y: 0
-            name: 'hoge'
+            type: 'hoge'
             rotate: 0
             ...
     ]
@@ -208,28 +208,28 @@ describe 'validator' ->
         board:
           * x: 0
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: null
             ...
       * stage: 'wire01'
         board:
           * x: 0
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: 'hoge'
             ...
       * stage: 'wire01'
         board:
           * x: 0
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0.1
             ...
       * stage: 'wire01'
         board:
           * x: 0
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: Infinity
             ...
     ]
@@ -239,14 +239,14 @@ describe 'validator' ->
         board:
           * x: 0
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: -1
             ...
       * stage: 'wire01'
         board:
           * x: 0
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: 4
             ...
     ]
@@ -256,25 +256,25 @@ describe 'validator' ->
         board:
           * x: 0
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
           * x: 0
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
       * stage: 'wire01'
         board:
           * x: 2
             y: 2
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
           * x: 0
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
           * x: 2
             y: 2
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
     ]
 
@@ -283,18 +283,18 @@ describe 'validator' ->
         board:
           * x: 0
             y: 0
-            name: 'times-2'
+            type: 'times-2'
             rotate: 0
             ...
       * stage: 'calc05'
         board:
           * x: 0
             y: 0
-            name: 'times-2'
+            type: 'times-2'
             rotate: 0
           * x: 0
             y: 1
-            name: 'times-2'
+            type: 'times-2'
             rotate: 0
     ]
 
@@ -304,67 +304,67 @@ describe 'validator' ->
         board:
           * x: 1
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
           * x: 0
             y: 1
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
           * x: 1
             y: 2
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
       # Rotation is not correct
       * stage: 'wire01'
         board:
           * x: 1
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
           * x: 1
             y: 1
-            name: 'wireI'
+            type: 'wireI'
             rotate: 1
           * x: 1
             y: 2
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
       # Output is incorrect
       * stage: 'calc01'
         board:
           * x: 1
             y: 0
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
           * x: 1
             y: 1
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
           * x: 1
             y: 2
-            name: 'wireI'
+            type: 'wireI'
             rotate: 0
       # Can even pass a test case, but not all
       * stage: 'calc03'
         board:
           * x: 2
             y: 0
-            name: 'plus-1'
+            type: 'plus-1'
             rotate: 0
           * x: 2
             y: 1
-            name: 'plus-1'
+            type: 'plus-1'
             rotate: 0
           * x: 2
             y: 2
-            name: 'plus-1'
+            type: 'plus-1'
             rotate: 0
           * x: 2
             y: 3
-            name: 'plus-1'
+            type: 'plus-1'
             rotate: 0
           * x: 2
             y: 4
-            name: 'plus-1'
+            type: 'plus-1'
             rotate: 0
     ]

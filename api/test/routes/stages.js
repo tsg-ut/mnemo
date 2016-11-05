@@ -62,17 +62,17 @@ describe('/stages', () => {
 				board: [{
 					x: 0,
 					y: 0,
-					name: 'wireI',
+					type: 'wireI',
 					rotate: 0,
 				}, {
 					x: 0,
 					y: 1,
-					name: 'wireI',
+					type: 'wireI',
 					rotate: 0,
 				}, {
 					x: 0,
 					y: 2,
-					name: 'wireI',
+					type: 'wireI',
 					rotate: 0,
 				}],
 			}).then((res) => {
