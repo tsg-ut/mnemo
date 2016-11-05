@@ -52,3 +52,37 @@ describe 'Board' ->
       @board.place-block x: 3, y: 2, type: \times-2, rotate: 0
       @board.place-block x: 0, y: 3, type: \diode, rotate: 1
       expect @board.block-count .to.equal 3
+
+  describe '#run' ->
+    It 'run the board until the end and report the output' ->
+      @board.place-block x: 2, y: 0, type: \wireI, rotate: 0
+      @board.place-block x: 2, y: 1, type: \minus-1, rotate: 0
+      @board.place-block x: 2, y: 2, type: \times-2, rotate: 0
+      @board.place-block x: 2, y: 3, type: \wireI, rotate: 0
+
+      @board.run 7
+
+      expect @board.output-value .to.equal 12
+      expect @board.clock .to.equal 4
+
+    It 'remains outputValue to null when no output was generated' ->
+      @board.place-block x: 2, y: 0, type: \wireI, rotate: 0
+      @board.place-block x: 2, y: 1, type: \minus-1, rotate: 0
+      @board.place-block x: 2, y: 2, type: \times-2, rotate: 1 # cut
+      @board.place-block x: 2, y: 3, type: \wireI, rotate: 0
+
+      @board.run 7
+
+      expect @board.output-value .to.be.null
+      expect @board.clock .to.equal 3
+
+    It 'limits maximum execution clocks to 1000' ->
+      @board.place-block x: 1, y: 0, type: \wireL, rotate: 1
+      @board.place-block x: 2, y: 0, type: \wireT, rotate: 3
+      @board.place-block x: 1, y: 1, type: \wireL, rotate: 0
+      @board.place-block x: 2, y: 1, type: \wireL, rotate: 3
+
+      @board.run 7
+
+      expect @board.output-value .to.be.null
+      expect @board.clock .to.equal 1000
