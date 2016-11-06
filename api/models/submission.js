@@ -11,6 +11,20 @@ const Submission = sequelize.define('submissions', {
 		type: Sequelize.TEXT,
 		allowNull: false,
 	},
+	blocks: {
+		type: Sequelize.INTEGER,
+		allowNull: false,
+		validate: {
+			min: 0,
+		},
+	},
+	clocks: {
+		type: Sequelize.INTEGER,
+		allowNull: false,
+		validate: {
+			min: 0,
+		},
+	},
 	score: {
 		type: Sequelize.INTEGER,
 		allowNull: false,

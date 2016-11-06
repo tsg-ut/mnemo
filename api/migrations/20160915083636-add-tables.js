@@ -19,6 +19,14 @@ module.exports = {
 				type: Sequelize.TEXT,
 				allowNull: false,
 			},
+			blocks: {
+				type: Sequelize.INTEGER,
+				allowNull: false,
+			},
+			clocks: {
+				type: Sequelize.INTEGER,
+				allowNull: false,
+			},
 			score: {
 				type: Sequelize.INTEGER,
 				allowNull: false,

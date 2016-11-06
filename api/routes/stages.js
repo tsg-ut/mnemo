@@ -69,7 +69,7 @@ router.post('/:stage/submissions', (req, res) => {
 		} else {
 			submissionData.stage = stageName;
 
-			const {pass, message} = validateSubmission(submissionData);
+			const {pass, message, blocks, clocks} = validateSubmission(submissionData);
 
 			if (!pass) {
 				res.status(400).json({
@@ -83,6 +83,8 @@ router.post('/:stage/submissions', (req, res) => {
 				name: req.body.name || null,
 				board: JSON.stringify(req.body.board),
 				score: req.body.score, // FIXME: Use validator-calculated score value
+				blocks,
+				clocks,
 				stageId: stage.id,
 			}).then((submission) => {
 				res.json(submission);

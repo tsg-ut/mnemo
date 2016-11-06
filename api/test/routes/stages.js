@@ -60,17 +60,17 @@ describe('/stages', () => {
 				name: 'hakatashi',
 				score: 100, // FIXME: remove
 				board: [{
-					x: 0,
+					x: 1,
 					y: 0,
 					type: 'wireI',
 					rotate: 0,
 				}, {
-					x: 0,
+					x: 1,
 					y: 1,
 					type: 'wireI',
 					rotate: 0,
 				}, {
-					x: 0,
+					x: 1,
 					y: 2,
 					type: 'wireI',
 					rotate: 0,

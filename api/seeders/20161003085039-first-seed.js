@@ -14,22 +14,24 @@ module.exports = {
 				return queryInterface.bulkInsert('submissions', [{
 					name: 'hakatashi',
 					board: JSON.stringify([{
-						x: 0,
-						y: 0,
-						name: 'wireI',
-						rotate: 0,
-					}, {
 						x: 1,
 						y: 0,
 						name: 'wireI',
 						rotate: 0,
 					}, {
-						x: 2,
-						y: 0,
+						x: 1,
+						y: 1,
+						name: 'wireI',
+						rotate: 0,
+					}, {
+						x: 1,
+						y: 2,
 						name: 'wireI',
 						rotate: 0,
 					}]),
 					score: 100,
+					blocks: 3,
+					clocks: 3,
 					stageId: stage.id,
 					createdAt: new Date(),
 					updatedAt: new Date(),
