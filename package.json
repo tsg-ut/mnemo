@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "normalize-map": "replace \"lib\\\\\\\\\\\\\\\\\" \"lib/\" index.js.map",
-    "browserify": "browserify lib/index.js --debug -t [ babelify --presets [ es2015 ] ] | exorcist index.js.map > index.js && npm run normalize-map",
+    "browserify": "browserify lib/index.js --debug -t yamlify -t [ babelify --presets [ es2015 ] ] | exorcist index.js.map > index.js && npm run normalize-map",
     "pug": "pug index.pug",
     "less": "lessc index.less | postcss --use postcss-assets --use postcss-font-magician --postcss-font-magician.protocol=https: ---use postcss-flexbugs-fixes --use autoprefixer > index.css",
     "build": "concurrently \"npm run browserify\" \"npm run pug\" \"npm run less\"",
     "normalize-map:production": "replace \"lib\\\\\\\\\\\\\\\\\" \"lib/\" index.min.js.map",
-    "browserify:production": "cross-env NODE_ENV=production browserify lib/index.js --debug -t [ babelify --presets [ es2015 ] ] -t uglifyify | exorcist index.min.js.map > index.min.js && npm run normalize-map:production",
+    "browserify:production": "cross-env NODE_ENV=production browserify lib/index.js --debug -t yamlify -t [ babelify --presets [ es2015 ] ] -t uglifyify | exorcist index.min.js.map > index.min.js && npm run normalize-map:production",
     "pug:production": "cross-env NODE_ENV=production pug index.pug",
     "less:production": "cross-env NODE_ENV=production lessc index.less | postcss --use postcss-assets --use postcss-font-magician --postcss-font-magician.protocol=https: --use postcss-flexbugs-fixes --use autoprefixer --use cssnano > index.min.css",
     "build:production": "concurrently \"npm run browserify:production\" \"npm run pug:production\" \"npm run less:production\"",
@@ -19,14 +19,16 @@
     "watch:pug": "chokidar \"*.pug\" \"modals/*/*\" -c \"npm run pug\"",
     "watch:less": "chokidar \"*.less\" -c \"npm run less\"",
     "watch": "concurrently \"npm run watch:js\" \"npm run watch:map\" \"npm run watch:pug\" \"npm run watch:less\"",
-    "mochify:phantom": "mochify \"test/unit/*.ls\" --reporter spec --extension ls --extension js --transform browserify-livescript --transform [ babelify --presets [ es2015 ] ]",
-    "mochify:node": "mochify \"test/unit/*.ls\" --node --reporter spec --extension ls --extension js --transform browserify-livescript --transform [ babelify --presets [ es2015 ] ] --plugin [ mochify-istanbul --exclude \"**/+(test|node_modules)/**/*\" --report text --report text-summary --report lcovonly --dir coverage ]",
+    "mochify:phantom": "cross-env MOCHIFY=true mochify \"test/unit/*.ls\" --reporter spec --extension ls --extension js --transform yamlify --transform browserify-livescript --transform [ babelify --presets [ es2015 ] ]",
+    "mochify:node": "cross-env MOCHIFY=true mochify \"test/unit/*.ls\" --node --reporter spec --extension ls --extension js --transform yamlify --transform browserify-livescript --transform [ babelify --presets [ es2015 ] ] --plugin [ mochify-istanbul --exclude \"**/+(test|node_modules)/**/*\" --report text --report text-summary --report lcovonly --dir coverage ]",
     "unit": "npm run mochify:node && npm run mochify:phantom",
     "functional": "mocha \"test/functional/index.ls\" --reporter spec --compilers ls:livescript",
     "coveralls": "cat coverage/lcov.info | coveralls",
     "lint": "eslint \"lib/**/*.js\" --ignore-pattern \"lib/analytics.js\"",
     "test": "npm run unit && npm run functional && npm run lint",
-    "api": "cd api && node index.js"
+    "api": "cd api && node index.js",
+    "test:api:init": "cd api && cross-env NODE_ENV=test sequelize db:migrate:undo:all && cross-env NODE_ENV=test sequelize db:migrate && cross-env NODE_ENV=test sequelize db:seed:all",
+    "test:api": "cd api && cross-env NODE_ENV=test mocha --recursive"
   },
   "repository": {
     "type": "git",
@@ -50,6 +52,7 @@
     "browserify": "^13.0.1",
     "browserify-livescript": "^0.2.3",
     "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "chokidar-cli": "^1.2.0",
     "concurrently": "^3.0.0",
     "core-js": "^2.4.1",
@@ -73,9 +76,12 @@
     "postcss-flexbugs-fixes": "^2.0.0",
     "postcss-font-magician": "^1.5.0",
     "pug-cli": "^1.0.0-alpha6",
+    "regenerator-runtime": "^0.9.6",
     "replace": "^0.3.0",
+    "sequelize-cli": "^2.4.0",
     "uglifyify": "^3.0.3",
-    "watchify": "^3.7.0"
+    "watchify": "^3.7.0",
+    "yamlify": "^0.1.3"
   },
   "dependencies": {
     "body-parser": "^1.15.2",

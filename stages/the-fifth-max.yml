@@ -1,0 +1,108 @@
+name: the-fifth-max
+parts:
+  wireI: null
+  wireL: null
+  wireT: null
+  wireX: null
+  times-2: null
+  times-3: null
+  div-2: null
+  div-3: null
+  plus-1: null
+  plus-2: null
+  minus-1: null
+  minus-2: null
+  const-0: null
+  const-1: null
+  const-2: null
+  add: null
+  sub: null
+  div: null
+  mul: null
+  mod: null
+  pow: null
+  bitshift-left: null
+  bitshift-right: null
+  bitwise-and: null
+  bitwise-or: null
+  bitwise-xor: null
+  equal: null
+  neq: null
+  gt: null
+  geqq: null
+  lt: null
+  leqq: null
+  c-contact: null
+  conditional: null
+  transistor: null
+  diode: null
+inputX:
+  - 14
+  - 16
+outputX: 15
+input:
+  - - 5
+    - - 1
+      - 2
+      - 3
+      - 4
+      - 5
+  - - 5
+    - - 0
+      - 1
+      - -1
+      - 2
+      - -2
+  - - 11
+    - - 7
+      - 68
+      - 11
+      - 85
+      - 53
+      - 14
+      - 96
+      - 88
+      - 61
+      - 21
+      - 57
+  - - 31
+    - - 26
+      - 23
+      - 43
+      - 48
+      - 2
+      - 7
+      - 16
+      - 69
+      - 19
+      - 16
+      - 3
+      - 41
+      - 3
+      - 17
+      - 39
+      - 98
+      - 65
+      - 77
+      - 52
+      - 89
+      - 31
+      - 37
+      - 49
+      - 15
+      - 46
+      - 2
+      - 53
+      - 74
+      - 83
+      - 8
+      - 98
+output:
+  - 3
+  - 0
+  - 57
+  - 39
+width: 31
+height: 31
+statement: 与えられた配列の中央値を求めてみよう。ただし、配列の大きさは奇数であり、また中央値はただ一つであることが保証されている。
+title: 中央値

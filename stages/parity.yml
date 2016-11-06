@@ -1,0 +1,33 @@
+name: parity
+parts:
+  wireI: null
+  wireL: null
+  wireT: null
+  times-2: null
+  times-3: null
+  plus-1: null
+  plus-2: null
+  minus-2: null
+  equal: null
+  add: null
+  sub: null
+  div: null
+  mul: null
+  c-contact: null
+  conditional: null
+  transistor: null
+  diode: null
+inputX: 9
+outputX: 9
+input:
+  - 2016
+  - 3791
+  - 5678
+output:
+  - 9
+  - 0
+  - 6
+width: 19
+height: 19
+statement: 与えられた四桁の数の各桁の和のをmod 10したものを計算してみよう!
+title: パリティ

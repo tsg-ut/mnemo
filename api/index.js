@@ -9,3 +9,5 @@ app.use('/', require('./routes/index'));
 app.use('/stages', require('./routes/stages'));
 
 app.listen(3000);
+
+module.exports = app;

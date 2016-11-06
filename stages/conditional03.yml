@@ -1,0 +1,33 @@
+name: conditional03
+parts:
+  wireI: null
+  wireL: null
+  wireT: null
+  times-2: null
+  times-3: null
+  plus-1: null
+  plus-2: null
+  minus-2: null
+  equal: null
+  add: null
+  sub: null
+  div: null
+  mul: null
+  c-contact: null
+  conditional: null
+  transistor: null
+  diode: null
+inputX: 4
+outputX: 4
+input:
+  - 3
+  - 5
+  - 6
+output:
+  - 5
+  - 0
+  - 1
+width: 9
+height: 9
+statement: mod7で2を足してみよう
+title: 条件分岐 -基本- 3
