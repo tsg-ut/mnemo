@@ -76,6 +76,7 @@
     "postcss-flexbugs-fixes": "^2.0.0",
     "postcss-font-magician": "^1.5.0",
     "pug-cli": "^1.0.0-alpha6",
+    "regenerator-runtime": "^0.9.6",
     "replace": "^0.3.0",
     "sequelize-cli": "^2.4.0",
     "uglifyify": "^3.0.3",

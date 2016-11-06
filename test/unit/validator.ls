@@ -368,3 +368,46 @@ describe 'validator' ->
             type: 'plus-1'
             rotate: 0
     ]
+
+    It 'passes if the correct board is given' ->
+      {pass, message, blocks, clocks} = validate-submission do
+        stage: 'wire01'
+        board:
+          * x: 1
+            y: 0
+            type: 'wireI'
+            rotate: 0
+          * x: 1
+            y: 1
+            type: 'wireI'
+            rotate: 0
+          * x: 1
+            y: 2
+            type: 'wireI'
+            rotate: 0
+
+      expect pass .to.be.true
+      expect message .to.be.undefined
+      expect blocks .to.equal 3
+      expect clocks .to.equal 3
+
+      {pass, message, blocks, clocks} = validate-submission do
+        stage: 'calc01'
+        board:
+          * x: 1
+            y: 0
+            type: 'wireI'
+            rotate: 0
+          * x: 1
+            y: 1
+            type: 'times-2'
+            rotate: 0
+          * x: 1
+            y: 2
+            type: 'wireI'
+            rotate: 0
+
+      expect pass .to.be.true
+      expect message .to.be.undefined
+      expect blocks .to.equal 3
+      expect clocks .to.equal 3
