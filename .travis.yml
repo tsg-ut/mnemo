@@ -16,6 +16,8 @@ before_script:
 script:
   - npm run build:production
   - npm test
+  - npm run test:api:init
+  - npm run test:api
 after_success:
   - npm run coveralls
   - bash bin/after_success.sh

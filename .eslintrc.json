@@ -61,7 +61,13 @@
             "never"
         ],
         "func-style": "error",
-        "generator-star-spacing": "error",
+        "generator-star-spacing": [
+            "error",
+            {
+                "before": false,
+                "after": true
+            }
+        ],
         "global-require": "error",
         "guard-for-in": "warn",
         "handle-callback-err": "error",

@@ -4,7 +4,7 @@ const router = express.Router();
 const Stages = require('../models/stage');
 const Submissions = require('../models/submission');
 
-const {validateSubmission} = require('../../lib/util');
+const {validateSubmission} = require('../../lib/validator');
 
 router.get('/', (req, res) => {
 	Stages.findAll().then((stages) => {
@@ -42,7 +42,12 @@ router.get('/:stage/submissions', (req, res) => {
 		order: 'score DESC',
 		limit: 10,
 	}).then((submissions) => {
-		res.json(submissions);
+		const data = submissions.map((submission) => ({
+			name: submission.name,
+			score: submission.score,
+		}));
+
+		res.json(data);
 	});
 });
 
@@ -62,8 +67,9 @@ router.post('/:stage/submissions', (req, res) => {
 				message: 'stage not found',
 			});
 		} else {
-			submissionData.stage = stage;
-			const {pass, message} = validateSubmission(submissionData);
+			submissionData.stage = stageName;
+
+			const {pass, message, blocks, clocks} = validateSubmission(submissionData);
 
 			if (!pass) {
 				res.status(400).json({
@@ -76,7 +82,9 @@ router.post('/:stage/submissions', (req, res) => {
 			Submissions.create({
 				name: req.body.name || null,
 				board: JSON.stringify(req.body.board),
-				score: req.body.score,
+				score: req.body.score, // FIXME: Use validator-calculated score value
+				blocks,
+				clocks,
 				stageId: stage.id,
 			}).then((submission) => {
 				res.json(submission);
