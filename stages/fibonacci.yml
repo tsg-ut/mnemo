@@ -30,5 +30,6 @@ output:
   - 233
 width: 11
 height: 11
+clockLimit: 500
 statement: n番目のフィボナッチ数を計算してみよう!
 title: フィボナッチ数

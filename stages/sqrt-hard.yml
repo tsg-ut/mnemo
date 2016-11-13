@@ -48,5 +48,6 @@ output:
   - 3541
 width: 15
 height: 15
+clockLimit: 500
 statement: 平方根を計算してみよう! (ただし、愚直に計算すると計算に長い時間かかるので、より速く計算できるように工夫してみよう)
 title: 平方根 -hard-

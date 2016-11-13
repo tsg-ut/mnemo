@@ -34,5 +34,6 @@ output:
   - 13
 width: 5
 height: 5
+clockLimit: 25
 statement: 2つの数字が与えられるのでそれらを足しあわせた結果を出力してみよう!
 title: 2変数 -基本-

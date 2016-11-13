@@ -25,5 +25,6 @@ output:
   - 9
 width: 5
 height: 10
+clockLimit: 50
 statement: 10で割った余りを求めてみよう!
 title: 余りの計算

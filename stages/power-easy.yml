@@ -42,5 +42,6 @@ output:
   - -16807
 width: 9
 height: 9
+clockLimit: 500
 statement: 1つ目に与えられた数を2つ目に与えられた数乗してみよう!
 title: 累乗 -easy-

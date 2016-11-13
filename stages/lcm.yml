@@ -47,5 +47,6 @@ output:
   - 1155
 width: 11
 height: 11
+clockLimit: 500
 statement: 最小公倍数を計算してみよう
 title: 最小公倍数

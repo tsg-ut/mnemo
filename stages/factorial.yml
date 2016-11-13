@@ -29,5 +29,6 @@ output:
   - 5040
 width: 13
 height: 13
+clockLimit: 500
 statement: 階乗を計算してみよう!
 title: 階乗

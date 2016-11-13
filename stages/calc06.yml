@@ -16,5 +16,6 @@ output:
   - 18
 width: 3
 height: 2
+clockLimit: 10
 statement: 数を2倍してみよう!
 title: 四則演算 -基本- 6

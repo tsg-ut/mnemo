@@ -40,5 +40,6 @@ output:
   - 2
 width: 19
 height: 19
+clockLimit: 1000
 statement: 3で割った余りを求めてみよう!
 title: mod3 -hard-
