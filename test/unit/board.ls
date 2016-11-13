@@ -53,6 +53,13 @@ describe 'Board' ->
       @board.place-block x: 0, y: 3, type: \diode, rotate: 1
       expect @board.block-count .to.equal 3
 
+  describe '#weighedBlockCount' ->
+    It 'sums up block weights in board' ->
+      @board.place-block x: 2, y: 1, type: \wireI, rotate: 0
+      @board.place-block x: 3, y: 2, type: \times-2, rotate: 0
+      @board.place-block x: 0, y: 3, type: \diode, rotate: 1
+      expect @board.weighed-block-count .to.equal 6
+
   describe '#run' ->
     It 'run the board until the end and report the output' ->
       @board.place-block x: 2, y: 0, type: \wireI, rotate: 0
