@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "^6.9.1"
+  },
   "scripts": {
     "normalize-map": "replace \"lib\\\\\\\\\\\\\\\\\" \"lib/\" index.js.map",
     "browserify": "browserify lib/index.js --debug -t yamlify -t [ babelify --presets [ es2015 ] ] | exorcist index.js.map > index.js && npm run normalize-map",
