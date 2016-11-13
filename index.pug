@@ -127,6 +127,13 @@ html
 								.block-area
 									button.close 閉じる
 									button.next 次のステージへ
+							.clock-limit
+								.head Clock Limit Exceeded!
+								.message
+									| 実行時間が制約(
+									strong.limit-value
+									| )を超えたため、停止しました。
+								button.ok OK
 						.layer.modal-layer
 							- const modals = ['01', '02']
 							each modal in modals
