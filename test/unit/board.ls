@@ -13,6 +13,7 @@ describe 'Board' ->
       outputX: 2
       width: 5
       height: 4
+      clock-limit: 100
 
   It 'carries input data to output when plugged input and output by wires' ->
     resolve, reject <~ new Promise _
@@ -83,9 +84,7 @@ describe 'Board' ->
       expect @board.output-value .to.be.null
       expect @board.clock .to.equal 3
 
-    It 'limits maximum execution clocks to 1000' ->
-      @timeout 10000
-
+    It 'limits maximum execution clocks to stage\'s clock limit' ->
       @board.place-block x: 1, y: 0, type: \wireL, rotate: 1
       @board.place-block x: 2, y: 0, type: \wireT, rotate: 3
       @board.place-block x: 1, y: 1, type: \wireL, rotate: 0
@@ -94,4 +93,4 @@ describe 'Board' ->
       @board.run 7
 
       expect @board.output-value .to.be.null
-      expect @board.clock .to.equal 1000
+      expect @board.clock .to.equal 100
