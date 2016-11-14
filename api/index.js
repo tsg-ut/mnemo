@@ -8,6 +8,10 @@ app.use(bodyParser.json());
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(enforce.HTTPS({trustProtoHeader: true}));
+	app.use((req, res, done) => {
+		console.log(req.hostname);
+		done();
+	});
 }
 
 app.use('/', require('./routes/index'));
