@@ -88,7 +88,7 @@
     "body-parser": "^1.15.2",
     "core-js": "^2.4.1",
     "express": "^4.14.0",
-    "express-sslify": "^1.1.0",
+    "forcedomain": "^0.8.0",
     "pg": "^6.1.0",
     "regenerator-runtime": "^0.9.6",
     "sequelize": "^3.24.3",
