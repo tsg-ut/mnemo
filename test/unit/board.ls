@@ -47,6 +47,14 @@ describe 'Board' ->
       @board.input 100
       expect @board.executing .to.be.true
 
+  describe '#dataCount' ->
+    It 'counts data in board' ->
+      @board.place-block x: 2, y: 0, type: \wireXdot, rotate: 0
+      @board.input 100
+      @board.step!
+
+      expect @board.data-count .to.equal 3
+
   describe '#blockCount' ->
     It 'counts blocks in board' ->
       @board.place-block x: 2, y: 1, type: \wireI, rotate: 0
