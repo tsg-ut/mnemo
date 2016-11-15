@@ -773,6 +773,69 @@ button {
 				}
 			}
 
+			.score-window {
+				width: 100%;
+				max-width: 600px;
+				background: #EEE;
+				border: #222 2px solid;
+				color: white;
+				position: relative;
+				text-align: center;
+				margin: 30px auto;
+				padding: 10px;
+				z-index: 0;
+
+				&::before {
+					content: '';
+					position: absolute;
+					@margin: 3px;
+					top: @margin;
+					left: @margin;
+					right: @margin;
+					bottom: @margin;
+
+					border: #222 2px solid;
+					background: repeating-linear-gradient(-45deg, #333, #333 10px, #444 10px, #444 20px);
+					z-index: -1;
+				}
+
+				.score {
+					line-height: 2em;
+					font-size: 22px;
+					margin: 10px 0;
+
+					.score-value {
+						font-family: 'Exo 2', sans-serif;
+						font-weight: 900;
+						font-size: 60px;
+						margin-left: 0.3em;
+					}
+				}
+
+				.name {
+					display: block;
+					margin: 5px auto;
+					border-radius: 4px;
+					background: white;
+					color: #333;
+					border: none;
+					outline: none;
+					padding: 7px 12px;
+					font-size: 18px;
+					width: 15em;
+				}
+
+				.register {
+					border-radius: 5px;
+					background: #555;
+					color: white;
+					display: block;
+					margin: 12px auto;
+					font-size: 20px;
+					padding: 0.5em 1em;
+				}
+			}
+
 			.block-area {
 				display: flex;
 				justify-content: center;
