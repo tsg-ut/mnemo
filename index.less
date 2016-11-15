@@ -683,16 +683,28 @@ button {
 					background: inline('image/clear.svg');
 					background-size: size('image/clear.svg', 2);
 
-					animation: 0.5s clear-animate cubic-bezier(0, 0, 0, 1);
+					animation: 1.5s clear-animate cubic-bezier(0, 0, 0, 1);
+
+					@y-distance: 200px;
 
 					@keyframes clear-animate {
-						from {
+						0% {
 							opacity: 0;
-							transform: scale(3);
+							transform: scale(3) translateY(@y-distance);
+							transform-origin: 50% calc(~"50% + "@y-distance);
 						}
-						to {
+						30% {
 							opacity: 1;
+							transform: scale(1) translateY(@y-distance);
+							transform-origin: 50% calc(~"50% + "@y-distance);
+						}
+						70% {
+							transform: scale(1) translateY(@y-distance);
+							animation-timing-function: ease;
+						}
+						100% {
 							transform: scale(1);
+							transform-origin: 50% 50%;
 						}
 					}
 				}
@@ -731,7 +743,7 @@ button {
 						rgba(255, 255, 255, 0.7)
 					);
 
-					animation: 0.5s 1s stats-animate forwards;
+					animation: 0.5s 1.3s stats-animate forwards;
 
 					@keyframes stats-animate {
 						from {left: 100%}
@@ -748,7 +760,7 @@ button {
 
 					white-space: nowrap;
 
-					animation: 0.5s 1s stats-div-animate forwards;
+					animation: 0.5s 1.2s stats-div-animate forwards;
 
 					@keyframes stats-div-animate {
 						from {opacity: 0}
@@ -784,6 +796,20 @@ button {
 				margin: 30px auto;
 				padding: 10px;
 				z-index: 0;
+				opacity: 0;
+
+				animation: 0.5s 1.4s score-window-animate forwards;
+
+				@keyframes score-window-animate {
+					from {
+						opacity: 0;
+						transform: translateY(30px);
+					}
+					to {
+						opacity: 1;
+						transform: translateY(0);
+					}
+				}
 
 				&::before {
 					content: '';
@@ -805,6 +831,9 @@ button {
 					margin: 10px 0;
 
 					.score-value {
+						width: 3em;
+						display: inline-block;
+						text-align: right;
 						font-family: 'Exo 2', sans-serif;
 						font-weight: 900;
 						font-size: 60px;
@@ -853,7 +882,7 @@ button {
 
 					opacity: 0;
 
-					animation: 0.5s 1.2s result-button-animate forwards;
+					animation: 0.5s 1.6s result-button-animate forwards;
 
 					@keyframes result-button-animate {
 						from {
