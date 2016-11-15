@@ -814,7 +814,7 @@ button {
 			}
 		}
 
-		.clock-limit {
+		.limit {
 			display: none;
 			position: absolute;
 
@@ -825,20 +825,18 @@ button {
 			width: 100%;
 			max-width: 600px;
 			padding: 20px 0px;
-			border: 10px ridge #ff2e2e;
+			border-width: 10px;
+			border-style: ridge;
 			border-radius: 10px;
-
-			background: #1f0000;
-			color: #ff2e2e;
 
 			font-size: 30px;
 			text-align: center;
 
 			pointer-events: all;
 
-			animation: 1s clock-limit-animate steps(1, end);
+			animation: 1s limit-animate steps(1, end);
 
-			@keyframes clock-limit-animate {
+			@keyframes limit-animate {
 				0% {opacity: 1}
 				25% {opacity: 0}
 				50% {opacity: 1}
@@ -859,13 +857,32 @@ button {
 
 			.ok {
 				color: white;
-				background: #ff2e2e;
 				line-height: 1.5em;
 				padding: 0 2em;
 				font-size: 28px;
 				font-weight: bold;
 				border-radius: 0.3em;
 				margin-top: 0.5em;
+			}
+
+			&.clock-limit {
+				background: #1f0000;
+				border-color: #ff2e2e;
+				color: #ff2e2e;
+
+				.ok {
+					background: #ff2e2e;
+				}
+			}
+
+			&.data-limit {
+				background: #1f1600;
+				border-color: #bd8c14;
+				color: #bd8c14;
+
+				.ok {
+					background: #bd8c14;
+				}
 			}
 		}
 	}

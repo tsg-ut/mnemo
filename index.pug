@@ -134,6 +134,13 @@ html
 									strong.limit-value
 									| )を超えたため、停止しました。
 								button.ok OK
+							.limit.data-limit
+								.head Data Limit Exceeded!
+								.message
+									| データ数が制約(
+									strong.limit-value 100
+									| )を超えたため、停止しました。
+								button.ok OK
 						.layer.modal-layer
 							- const modals = ['01', '02']
 							each modal in modals
