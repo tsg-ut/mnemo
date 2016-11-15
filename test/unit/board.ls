@@ -94,3 +94,13 @@ describe 'Board' ->
 
       expect @board.output-value .to.be.null
       expect @board.clock .to.equal 100
+
+    It 'limits simultaneous data count to 100' ->
+      for x from 0 to 4
+        for y from 0 to 2
+          @board.place-block {x, y, type: \wireXdot, rotate: 0}
+
+      @board.run 7
+
+      expect @board.output-value .to.be.null
+      expect @board.clock .to.be.above 1 .and.below 100
