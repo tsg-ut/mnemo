@@ -83,6 +83,7 @@ describe('/stages', () => {
 			}).then((submission) => {
 				expect(submission).to.not.be.null;
 				expect(submission.name).to.equal('hakatashi');
+				expect(submission.score).to.equal(10000);
 			})
 		));
 	});
