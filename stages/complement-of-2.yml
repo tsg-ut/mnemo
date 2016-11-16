@@ -48,5 +48,6 @@ output:
   - 129
 width: 7
 height: 7
+clockLimit: 50
 statement: 8bitの2の補数を計算してみよう!
 title: 2の補数

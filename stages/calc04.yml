@@ -20,5 +20,6 @@ output:
   - 21
 width: 5
 height: 5
+clockLimit: 25
 statement: 数を2倍して、3足してみよう!
 title: 四則演算 -基本- 4

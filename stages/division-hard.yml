@@ -24,5 +24,6 @@ output:
   - -9
 width: 5
 height: 5
+clockLimit: 25
 statement: 右の数を左の数で割ってみよう!
 title: 割り算 -hard-

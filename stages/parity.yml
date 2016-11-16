@@ -29,5 +29,6 @@ output:
   - 6
 width: 19
 height: 19
+clockLimit: 500
 statement: 与えられた四桁の数の各桁の和のをmod 10したものを計算してみよう!
 title: パリティ

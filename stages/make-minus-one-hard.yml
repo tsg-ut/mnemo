@@ -23,5 +23,6 @@ output:
   - 1
 width: 7
 height: 9
+clockLimit: 500
 statement: 入力の値から1引いた値を出力してみよう!
 title: '-1を作ろう -hard-'

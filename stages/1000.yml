@@ -20,5 +20,6 @@ output:
   - 1000
 width: 5
 height: 5
+clockLimit: 25
 statement: 1000を作ろう!
 title: '1000'

@@ -124,9 +124,30 @@ html
 								.stats
 									.clocks 0
 									.blocks 0
+								.score-window
+									.score
+										| スコア
+										= ' '
+										span.score-value
+									input.name(placeholder='名前')
+									button.register(disabled=true) ランキングに登録する
 								.block-area
 									button.close 閉じる
 									button.next 次のステージへ
+							.limit.clock-limit
+								.head Clock Limit Exceeded!
+								.message
+									| 実行時間が制約(
+									strong.limit-value
+									| )を超えたため、停止しました。
+								button.ok OK
+							.limit.data-limit
+								.head Data Limit Exceeded!
+								.message
+									| データ数が制約(
+									strong.limit-value 100
+									| )を超えたため、停止しました。
+								button.ok OK
 						.layer.modal-layer
 							- const modals = ['01', '02']
 							each modal in modals
