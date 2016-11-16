@@ -63,7 +63,7 @@
     "cssnano": "^3.7.5",
     "eslint": "^3.3.1",
     "exorcist": "^0.4.0",
-    "file-url": "^1.1.0",
+    "file-url": "^2.0.0",
     "github-fork-ribbon-css": "^0.2.1",
     "gulp": "^3.9.1",
     "jquery": "^3.0.0",
