@@ -47,5 +47,6 @@ output:
   - 18
 width: 13
 height: 13
+clockLimit: 500
 statement: 二数の最大公約数を計算してみよう!
 title: 最大公約数

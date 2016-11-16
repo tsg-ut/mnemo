@@ -4,7 +4,8 @@ const router = express.Router();
 const Stages = require('../models/stage');
 const Submissions = require('../models/submission');
 
-const {validateSubmission} = require('../../lib/validator');
+const {validateSubmission, calculateScore} = require('../../lib/validator');
+const stageData = require('../../stages');
 
 router.get('/', (req, res) => {
 	Stages.findAll().then((stages) => {
@@ -79,10 +80,18 @@ router.post('/:stage/submissions', (req, res) => {
 				return;
 			}
 
+			const stageDatum = stageData.find((s) => s.name === stageName);
+
+			const score = calculateScore({
+				clocks,
+				blocks,
+				stage: stageDatum,
+			});
+
 			Submissions.create({
 				name: req.body.name || null,
 				board: JSON.stringify(req.body.board),
-				score: req.body.score, // FIXME: Use validator-calculated score value
+				score,
 				blocks,
 				clocks,
 				stageId: stage.id,

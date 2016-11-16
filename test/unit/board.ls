@@ -13,6 +13,7 @@ describe 'Board' ->
       outputX: 2
       width: 5
       height: 4
+      clock-limit: 100
 
   It 'carries input data to output when plugged input and output by wires' ->
     resolve, reject <~ new Promise _
@@ -46,12 +47,27 @@ describe 'Board' ->
       @board.input 100
       expect @board.executing .to.be.true
 
+  describe '#dataCount' ->
+    It 'counts data in board' ->
+      @board.place-block x: 2, y: 0, type: \wireXdot, rotate: 0
+      @board.input 100
+      @board.step!
+
+      expect @board.data-count .to.equal 3
+
   describe '#blockCount' ->
     It 'counts blocks in board' ->
       @board.place-block x: 2, y: 1, type: \wireI, rotate: 0
       @board.place-block x: 3, y: 2, type: \times-2, rotate: 0
       @board.place-block x: 0, y: 3, type: \diode, rotate: 1
       expect @board.block-count .to.equal 3
+
+  describe '#weighedBlockCount' ->
+    It 'sums up block weights in board' ->
+      @board.place-block x: 2, y: 1, type: \wireI, rotate: 0
+      @board.place-block x: 3, y: 2, type: \times-2, rotate: 0
+      @board.place-block x: 0, y: 3, type: \diode, rotate: 1
+      expect @board.weighed-block-count .to.equal 6
 
   describe '#run' ->
     It 'run the board until the end and report the output' ->
@@ -76,9 +92,7 @@ describe 'Board' ->
       expect @board.output-value .to.be.null
       expect @board.clock .to.equal 3
 
-    It 'limits maximum execution clocks to 1000' ->
-      @timeout 10000
-
+    It 'limits maximum execution clocks to stage\'s clock limit' ->
       @board.place-block x: 1, y: 0, type: \wireL, rotate: 1
       @board.place-block x: 2, y: 0, type: \wireT, rotate: 3
       @board.place-block x: 1, y: 1, type: \wireL, rotate: 0
@@ -87,4 +101,14 @@ describe 'Board' ->
       @board.run 7
 
       expect @board.output-value .to.be.null
-      expect @board.clock .to.equal 1000
+      expect @board.clock .to.equal 100
+
+    It 'limits simultaneous data count to 100' ->
+      for x from 0 to 4
+        for y from 0 to 2
+          @board.place-block {x, y, type: \wireXdot, rotate: 0}
+
+      @board.run 7
+
+      expect @board.output-value .to.be.null
+      expect @board.clock .to.be.above 1 .and.below 100

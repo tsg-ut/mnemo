@@ -20,6 +20,7 @@ output:
   - 18
 width: 3
 height: 3
+clockLimit: 10
 statement: 数を2倍してみよう!
 title: 四則演算 -基本- 1
 modal: '02'

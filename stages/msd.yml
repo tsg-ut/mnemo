@@ -50,5 +50,6 @@ output:
   - 6
 width: 15
 height: 15
+clockLimit: 500
 statement: 数の最上位の桁を取り出してみよう!
 title: 最上位の桁

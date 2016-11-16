@@ -48,5 +48,6 @@ output:
   - 33550336
 width: 5
 height: 5
+clockLimit: 100
 statement: メルセンヌ素数と完全数の関係を考えてみよう!
 title: 完全数

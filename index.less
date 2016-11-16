@@ -683,16 +683,28 @@ button {
 					background: inline('image/clear.svg');
 					background-size: size('image/clear.svg', 2);
 
-					animation: 0.5s clear-animate cubic-bezier(0, 0, 0, 1);
+					animation: 1.5s clear-animate cubic-bezier(0, 0, 0, 1);
+
+					@y-distance: 200px;
 
 					@keyframes clear-animate {
-						from {
+						0% {
 							opacity: 0;
-							transform: scale(3);
+							transform: scale(3) translateY(@y-distance);
+							transform-origin: 50% calc(~"50% + "@y-distance);
 						}
-						to {
+						30% {
 							opacity: 1;
+							transform: scale(1) translateY(@y-distance);
+							transform-origin: 50% calc(~"50% + "@y-distance);
+						}
+						70% {
+							transform: scale(1) translateY(@y-distance);
+							animation-timing-function: ease;
+						}
+						100% {
 							transform: scale(1);
+							transform-origin: 50% 50%;
 						}
 					}
 				}
@@ -731,7 +743,7 @@ button {
 						rgba(255, 255, 255, 0.7)
 					);
 
-					animation: 0.5s 1s stats-animate forwards;
+					animation: 0.5s 1.3s stats-animate forwards;
 
 					@keyframes stats-animate {
 						from {left: 100%}
@@ -748,7 +760,7 @@ button {
 
 					white-space: nowrap;
 
-					animation: 0.5s 1s stats-div-animate forwards;
+					animation: 0.5s 1.2s stats-div-animate forwards;
 
 					@keyframes stats-div-animate {
 						from {opacity: 0}
@@ -773,6 +785,87 @@ button {
 				}
 			}
 
+			.score-window {
+				width: 100%;
+				max-width: 600px;
+				background: #EEE;
+				border: #222 2px solid;
+				color: white;
+				position: relative;
+				text-align: center;
+				margin: 30px auto;
+				padding: 10px;
+				z-index: 0;
+				opacity: 0;
+
+				animation: 0.5s 1.4s score-window-animate forwards;
+
+				@keyframes score-window-animate {
+					from {
+						opacity: 0;
+						transform: translateY(30px);
+					}
+					to {
+						opacity: 1;
+						transform: translateY(0);
+					}
+				}
+
+				&::before {
+					content: '';
+					position: absolute;
+					@margin: 3px;
+					top: @margin;
+					left: @margin;
+					right: @margin;
+					bottom: @margin;
+
+					border: #222 2px solid;
+					background: repeating-linear-gradient(-45deg, #333, #333 10px, #444 10px, #444 20px);
+					z-index: -1;
+				}
+
+				.score {
+					line-height: 2em;
+					font-size: 22px;
+					margin: 10px 0;
+
+					.score-value {
+						width: 3em;
+						display: inline-block;
+						text-align: right;
+						font-family: 'Exo 2', sans-serif;
+						font-weight: 900;
+						font-size: 60px;
+						margin-left: 0.3em;
+					}
+				}
+
+				.name {
+					display: block;
+					margin: 5px auto;
+					border-radius: 4px;
+					background: white;
+					color: #333;
+					border: none;
+					outline: none;
+					padding: 7px 12px;
+					font-size: 18px;
+					width: 15em;
+				}
+
+				.register {
+					border-radius: 5px;
+					background: #555;
+					color: white;
+					display: block;
+					margin: 12px auto;
+					font-size: 20px;
+					padding: 0.5em 1em;
+					cursor: not-allowed;
+				}
+			}
+
 			.block-area {
 				display: flex;
 				justify-content: center;
@@ -790,7 +883,7 @@ button {
 
 					opacity: 0;
 
-					animation: 0.5s 1.2s result-button-animate forwards;
+					animation: 0.5s 1.6s result-button-animate forwards;
 
 					@keyframes result-button-animate {
 						from {
@@ -810,6 +903,78 @@ button {
 					&.next {
 						background: #354fd6;
 					}
+				}
+			}
+		}
+
+		.limit {
+			display: none;
+			position: absolute;
+
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+
+			width: 100%;
+			max-width: 600px;
+			padding: 20px 0px;
+			border-width: 10px;
+			border-style: ridge;
+			border-radius: 10px;
+
+			font-size: 30px;
+			text-align: center;
+
+			pointer-events: all;
+
+			animation: 1s limit-animate steps(1, end);
+
+			@keyframes limit-animate {
+				0% {opacity: 1}
+				25% {opacity: 0}
+				50% {opacity: 1}
+				75% {opacity: 0}
+				100% {opacity: 1}
+			}
+
+			.head {
+				font-weight: bold;
+				font-size: 50px;
+				font-family: 'Exo 2';
+			}
+
+			.message {
+				font-size: 18px;
+				line-height: 2;
+			}
+
+			.ok {
+				color: white;
+				line-height: 1.5em;
+				padding: 0 2em;
+				font-size: 28px;
+				font-weight: bold;
+				border-radius: 0.3em;
+				margin-top: 0.5em;
+			}
+
+			&.clock-limit {
+				background: #1f0000;
+				border-color: #ff2e2e;
+				color: #ff2e2e;
+
+				.ok {
+					background: #ff2e2e;
+				}
+			}
+
+			&.data-limit {
+				background: #1f1600;
+				border-color: #bd8c14;
+				color: #bd8c14;
+
+				.ok {
+					background: #bd8c14;
 				}
 			}
 		}

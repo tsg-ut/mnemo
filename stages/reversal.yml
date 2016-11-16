@@ -48,5 +48,6 @@ output:
   - 987654321
 width: 15
 height: 15
+clockLimit: 500
 statement: 数を反転してみよう!
 title: 反転

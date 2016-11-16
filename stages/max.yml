@@ -79,5 +79,6 @@ output:
   - 98
 width: 11
 height: 11
+clockLimit: 500
 statement: 与えられた配列の最大値を求めてみよう
 title: 最大値

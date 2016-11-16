@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "^6.9.1"
+  },
   "scripts": {
     "normalize-map": "replace \"lib\\\\\\\\\\\\\\\\\" \"lib/\" index.js.map",
     "browserify": "browserify lib/index.js --debug -t yamlify -t [ babelify --presets [ es2015 ] ] | exorcist index.js.map > index.js && npm run normalize-map",
@@ -14,7 +17,7 @@
     "pug:production": "cross-env NODE_ENV=production pug index.pug",
     "less:production": "cross-env NODE_ENV=production lessc index.less | postcss --use postcss-assets --use postcss-font-magician --postcss-font-magician.protocol=https: --use postcss-flexbugs-fixes --use autoprefixer --use cssnano > index.min.css",
     "build:production": "concurrently \"npm run browserify:production\" \"npm run pug:production\" \"npm run less:production\"",
-    "watch:js": "watchify lib/index.js --debug --verbose -t [ babelify --presets [ es2015 ] ] -o \"exorcist index.js.map > index.js\"",
+    "watch:js": "watchify lib/index.js --debug --verbose -t yamlify -t [ babelify --presets [ es2015 ] ] -o \"exorcist index.js.map > index.js\"",
     "watch:map": "chokidar \"index.js.map\" -c \"npm run normalize-map\"",
     "watch:pug": "chokidar \"*.pug\" \"modals/*/*\" -c \"npm run pug\"",
     "watch:less": "chokidar \"*.less\" -c \"npm run less\"",
@@ -55,7 +58,6 @@
     "chai-http": "^3.0.0",
     "chokidar-cli": "^1.2.0",
     "concurrently": "^3.0.0",
-    "core-js": "^2.4.1",
     "coveralls": "^2.11.12",
     "cross-env": "^3.1.1",
     "cssnano": "^3.7.5",
@@ -76,17 +78,20 @@
     "postcss-flexbugs-fixes": "^2.0.0",
     "postcss-font-magician": "^1.5.0",
     "pug-cli": "^1.0.0-alpha6",
-    "regenerator-runtime": "^0.9.6",
     "replace": "^0.3.0",
     "sequelize-cli": "^2.4.0",
+    "sqlite3": "^3.1.4",
     "uglifyify": "^3.0.3",
-    "watchify": "^3.7.0",
-    "yamlify": "^0.1.3"
+    "watchify": "^3.7.0"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
+    "core-js": "^2.4.1",
     "express": "^4.14.0",
+    "forcedomain": "^0.8.0",
+    "pg": "^6.1.0",
+    "regenerator-runtime": "^0.9.6",
     "sequelize": "^3.24.3",
-    "sqlite3": "^3.1.4"
+    "yamlify": "^0.1.3"
   }
 }

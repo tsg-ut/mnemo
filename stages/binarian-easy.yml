@@ -48,5 +48,6 @@ output:
   - 1111111111111111
 width: 15
 height: 15
+clockLimit: 500
 statement: 数をバイナリ表記にしてみよう!
 title: バイナリアン -easy-

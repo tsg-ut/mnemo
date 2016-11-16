@@ -29,5 +29,6 @@ output:
   - 1
 width: 9
 height: 9
+clockLimit: 50
 statement: mod7で2を足してみよう
 title: 条件分岐 -基本- 3

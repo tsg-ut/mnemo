@@ -58,7 +58,6 @@ describe('/stages', () => {
 		it('creates new submission data if the submission is valid', () => (
 			chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'hakatashi',
-				score: 100, // FIXME: remove
 				board: [{
 					x: 1,
 					y: 0,
@@ -84,6 +83,7 @@ describe('/stages', () => {
 			}).then((submission) => {
 				expect(submission).to.not.be.null;
 				expect(submission.name).to.equal('hakatashi');
+				expect(submission.score).to.equal(10000);
 			})
 		));
 	});

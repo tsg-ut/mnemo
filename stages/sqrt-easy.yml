@@ -39,5 +39,6 @@ output:
   - 6
 width: 9
 height: 9
+clockLimit: 200
 statement: 平方根を計算してみよう!
 title: 平方根 -easy-

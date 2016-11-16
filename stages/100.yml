@@ -17,5 +17,6 @@ output:
   - 100
 width: 9
 height: 8
+clockLimit: 100
 statement: 100を作ろう!
 title: '100'

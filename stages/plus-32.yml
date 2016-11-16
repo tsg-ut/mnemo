@@ -25,5 +25,6 @@ output:
   - 528
 width: 5
 height: 8
+clockLimit: 50
 statement: 演算子をうまく配置して、32を足してみよう!
 title: 32を足してみよう
