@@ -426,6 +426,7 @@ describe 'Block' ->
           right: -3
         out:
           bottom: 0
+
     It 'deletes numbers after the decimal point' ->
       io-test do
         type: \pow
@@ -434,6 +435,15 @@ describe 'Block' ->
           right: -3
         out:
           bottom: 0
+
+    It 'returns 1 when left is 1 and right is an infinity' ->
+      io-test do
+        type: \pow
+        in:
+          left: 1
+          right: Infinity
+        out:
+          bottom: 1
 
   describe 'log block' ->
     It 'sends to bottom the logarithm of right with base of left' ->
