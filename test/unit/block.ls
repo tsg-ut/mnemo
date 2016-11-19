@@ -281,6 +281,12 @@ describe 'Block' ->
         in: top: 1000
         out: bottom: 3
 
+    It 'ignores sign of input data' ->
+      io-test do
+        type: \log10
+        in: top: -334
+        out: bottom: 2
+
   describe 'log2 block' ->
     It 'converts data into the logarithm of it with base 2' ->
       io-test do
@@ -292,6 +298,12 @@ describe 'Block' ->
       io-test do
         type: \log2
         in: top: 334
+        out: bottom: 8
+
+    It 'ignores sign of input data' ->
+      io-test do
+        type: \log2
+        in: top: -334
         out: bottom: 8
 
   describe 'const-0 block' ->
@@ -459,3 +471,12 @@ describe 'Block' ->
           right: 0
         out:
           bottom: -Infinity
+
+    It 'ignores signs of input data' ->
+      io-test do
+        type: \log
+        in:
+          left: -4
+          right: -33
+        out:
+          bottom: 2
