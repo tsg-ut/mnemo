@@ -287,7 +287,7 @@ describe 'Block' ->
         in: top: 1e15
         out: bottom: 15
 
-    It 'calculates log_10 1e15-1 correctly' ->
+    It 'calculates log_10 (1e15 - 1) correctly' ->
       io-test do
         type: \log10
         in: top: 1e15-1
