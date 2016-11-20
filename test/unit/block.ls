@@ -457,6 +457,24 @@ describe 'Block' ->
         out:
           bottom: 1
 
+    It 'returns infinity when left is an infinity and right is 1' ->
+       io-test do
+        type: \pow
+        in:
+          left: Infinity
+          right: 1
+        out:
+          bottom: Infinity
+
+    It 'returns -infinity when left is -0 and right is -1' ->
+      io-test do
+        type: \pow
+        in:
+          left: -0
+          right: -1
+        out:
+          bottom: -Infinity
+
   describe 'log block' ->
     It 'sends to bottom the logarithm of right with base of left' ->
       io-test do
