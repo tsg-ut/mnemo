@@ -290,7 +290,7 @@ describe 'Block' ->
     It 'calculates log_10 (1e15 - 1) correctly' ->
       io-test do
         type: \log10
-        in: top: 1e15-1
+        in: top: 1e15 - 1
         out: bottom: 14
 
     It 'ignores sign of input data' ->
