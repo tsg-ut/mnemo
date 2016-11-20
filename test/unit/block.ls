@@ -281,6 +281,18 @@ describe 'Block' ->
         in: top: 1000
         out: bottom: 3
 
+    It 'calculates log_10 1e15 correctly' ->
+      io-test do
+        type: \log10
+        in: top: 1e15
+        out: bottom: 15
+
+    It 'calculates log_10 (1e15 - 1) correctly' ->
+      io-test do
+        type: \log10
+        in: top: 1e15 - 1
+        out: bottom: 14
+
     It 'ignores sign of input data' ->
       io-test do
         type: \log10
@@ -472,6 +484,24 @@ describe 'Block' ->
           right: 1000
         out:
           bottom: 3
+
+    It 'calculates log_10 Infinity correctly' ->
+      io-test do
+        type: \log
+        in:
+          left: 10
+          right: Infinity
+        out:
+          bottom: Infinity
+
+    It 'calculates log_Infinity 10 correctly' ->
+      io-test do
+        type: \log
+        in:
+          left: Infinity
+          right: 10
+        out:
+          bottom: 0
 
     It 'returns -Infinity when right is 0' ->
       io-test do
