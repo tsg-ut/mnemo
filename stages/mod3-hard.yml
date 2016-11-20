@@ -10,12 +10,18 @@ parts:
   minus-2: null
   times-2: null
   times-3: null
+  times-10: null
+  log10: null
+  log2: null
   const-0: null
   const-1: null
   const-2: null
+  const-3: null
+  const-10: null
   add: null
   sub: null
   pow: null
+  log: null
   equal: null
   neq: null
   gt: null
