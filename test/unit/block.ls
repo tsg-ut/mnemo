@@ -170,6 +170,13 @@ describe 'Block' ->
         in: top: 334
         out: bottom: 1002
 
+  describe 'times-10 block' ->
+    It 'converts data by multiplying 10' ->
+      io-test do
+        type: \times-10
+        in: top: 334
+        out: bottom: 3340
+
   describe 'plus-1 block' ->
     It 'converts data by adding 1' ->
       io-test do
@@ -222,6 +229,25 @@ describe 'Block' ->
         in: top: -17
         out: bottom: -5
 
+  describe 'div-10 block' ->
+    It 'converts data by dividing by 10' ->
+      io-test do
+        type: \div-10
+        in: top: 330
+        out: bottom: 33
+
+    It 'omits remainder of the division' ->
+      io-test do
+        type: \div-10
+        in: top: 334
+        out: bottom: 33
+
+    It 'rounds remainder into zero' ->
+      io-test do
+        type: \div-10
+        in: top: -334
+        out: bottom: -33
+
   describe 'minus-1 block' ->
     It 'converts data by subtracting 1' ->
       io-test do
@@ -235,6 +261,50 @@ describe 'Block' ->
         type: \minus-2
         in: top: 334
         out: bottom: 332
+
+  describe 'log10 block' ->
+    It 'converts data into the logarithm of it with base 10' ->
+      io-test do
+        type: \log10
+        in: top: 100
+        out: bottom: 2
+
+    It 'truncates decimal places' ->
+      io-test do
+        type: \log10
+        in: top: 334
+        out: bottom: 2
+
+    It 'calculates log_10 1000 correctly' ->
+      io-test do
+        type: \log10
+        in: top: 1000
+        out: bottom: 3
+
+    It 'ignores sign of input data' ->
+      io-test do
+        type: \log10
+        in: top: -334
+        out: bottom: 2
+
+  describe 'log2 block' ->
+    It 'converts data into the logarithm of it with base 2' ->
+      io-test do
+        type: \log2
+        in: top: 1024
+        out: bottom: 10
+
+    It 'truncates decimal places' ->
+      io-test do
+        type: \log2
+        in: top: 334
+        out: bottom: 8
+
+    It 'ignores sign of input data' ->
+      io-test do
+        type: \log2
+        in: top: -334
+        out: bottom: 8
 
   describe 'const-0 block' ->
     It 'converts any input data into 0' ->
@@ -256,6 +326,20 @@ describe 'Block' ->
         type: \const-2
         in: top: 334
         out: bottom: 2
+
+  describe 'const-3 block' ->
+    It 'converts any input data into 3' ->
+      io-test do
+        type: \const-3
+        in: top: 334
+        out: bottom: 3
+
+  describe 'const-10 block' ->
+    It 'converts any input data into 10' ->
+      io-test do
+        type: \const-10
+        in: top: 334
+        out: bottom: 10
 
   describe 'add block' ->
     It 'adds up left and right and send it to bottom' ->
@@ -323,6 +407,7 @@ describe 'Block' ->
           right: -0
         out:
           bottom: -Infinity
+
   describe 'pow block' ->
     It 'powers left by right and send it to bottom' ->
       io-test do
@@ -341,6 +426,7 @@ describe 'Block' ->
           right: -3
         out:
           bottom: 0
+
     It 'deletes numbers after the decimal point' ->
       io-test do
         type: \pow
@@ -350,3 +436,57 @@ describe 'Block' ->
         out:
           bottom: 0
 
+    It 'returns 1 when left is 1 and right is an infinity' ->
+      io-test do
+        type: \pow
+        in:
+          left: 1
+          right: Infinity
+        out:
+          bottom: 1
+
+  describe 'log block' ->
+    It 'sends to bottom the logarithm of right with base of left' ->
+      io-test do
+        type: \log
+        in:
+          left: 3
+          right: 81
+        out:
+          bottom: 4
+
+    It 'truncates decimal places' ->
+      io-test do
+        type: \log
+        in:
+          left: 4
+          right: 33
+        out:
+          bottom: 2
+
+    It 'calculates log_10 1000 correctly' ->
+      io-test do
+        type: \log
+        in:
+          left: 10
+          right: 1000
+        out:
+          bottom: 3
+
+    It 'returns -Infinity when right is 0' ->
+      io-test do
+        type: \log
+        in:
+          left: 334
+          right: 0
+        out:
+          bottom: -Infinity
+
+    It 'ignores signs of input data' ->
+      io-test do
+        type: \log
+        in:
+          left: -4
+          right: -33
+        out:
+          bottom: 2
