@@ -490,3 +490,63 @@ describe 'Block' ->
           right: -33
         out:
           bottom: 2
+
+  describe 'c-contact block' ->
+    context 'without rotation' ->
+      It 'receives nonzero data from top and sends 1 to right' ->
+        io-test do
+          type: \c-contact
+          in: top: 334
+          out: right: 1
+
+      It 'receives zero from top and sends 1 to left' ->
+        io-test do
+          type: \c-contact
+          in: top: 0
+          out: left: 1
+
+    context 'with 90deg rotated' ->
+      It 'receives nonzero data from right and sends 1 to bottom' ->
+        io-test do
+          type: \c-contact
+          rotate: 1
+          in: right: 334
+          out: bottom: 1
+
+      It 'receives zero from right and sends 1 to top' ->
+        io-test do
+          type: \c-contact
+          rotate: 1
+          in: right: 0
+          out: top: 1
+
+  describe 'transistor block' ->
+    context 'without rotation' ->
+      It 'receives nonzero data from top and conveys data from left to right' ->
+        io-test do
+          type: \transistor
+          in:
+            top: 33
+            left: 4
+          out:
+            right: 4
+
+      It 'receives zero from top and conveys data from left to bottom' ->
+        io-test do
+          type: \transistor
+          in:
+            top: 0
+            left: 334
+          out:
+            bottom: 334
+
+    context 'with 90deg rotated' ->
+      It 'receives nonzero data from right and conveys data from top to bottom' ->
+        io-test do
+          type: \transistor
+          rotate: 1
+          in:
+            top: 33
+            right: 4
+          out:
+            bottom: 33
