@@ -862,7 +862,23 @@ button {
 					margin: 12px auto;
 					font-size: 20px;
 					padding: 0.5em 1em;
-					cursor: not-allowed;
+
+					&[disabled] {
+						opacity: 0.5;
+						cursor: wait;
+
+						&.error {
+							opacity: 1;
+							background: #f91919;
+							cursor: default;
+						}
+
+						&.success {
+							opacity: 1;
+							background: #4698b7;
+							cursor: default;
+						}
+					}
 				}
 			}
 
