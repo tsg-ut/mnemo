@@ -980,10 +980,16 @@ button {
 		}
 
 		.ranking {
+			display: none;
 			pointer-events: initial;
+
 			position: absolute;
 			top: 50%;
 			left: 50%;
+
+			border: #222 6px solid;
+			padding: 1em 0;
+
 			transform: translate(-50%, -50%);
 			background: repeating-linear-gradient(-45deg, #333, #333 10px, #444 10px, #444 20px);
 			color: wheat;
@@ -991,8 +997,19 @@ button {
 			max-width: 500px;
 			max-height: calc(~"100% - 80px");
 			overflow-y: auto;
-			border: #222 6px solid;
-			padding: 1em 0;
+
+			animation: 0.5s ranking-animate;
+
+			@keyframes ranking-animate {
+				from {
+					transform: translate(-50%, calc(-50% + 100px));
+					opacity: 0;
+				}
+				to {
+					transform: translate(-50%, -50%);
+					opacity: 1;
+				}
+			}
 
 			.head {
 				text-align: center;
@@ -1101,6 +1118,21 @@ button {
 						}
 					}
 				}
+			}
+
+			.close {
+				display: block;
+
+				margin: 0 auto;
+				padding: 0 2em;
+				border-radius: 0.3em;
+
+				background: #5f5f5f;
+
+				line-height: 2em;
+				color: white;
+				font-size: 24px;
+				font-weight: bold;
 			}
 		}
 	}
