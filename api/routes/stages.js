@@ -40,12 +40,17 @@ router.get('/:stage/submissions', (req, res) => {
 			model: Stages,
 			where: {name: stageName},
 		}],
-		order: 'score DESC',
-		limit: 10,
+		order: [
+			['score', 'DESC'],
+			['createdAt', 'ASC'],
+		],
+		limit: 20,
 	}).then((submissions) => {
 		const data = submissions.map((submission) => ({
 			name: submission.name,
 			score: submission.score,
+			blocks: submission.blocks,
+			clocks: submission.clocks,
 		}));
 
 		res.json(data);

@@ -130,7 +130,7 @@ html
 										= ' '
 										span.score-value
 									input.name(placeholder='名前')
-									button.register(disabled=true) ランキングに登録する
+									button.register ランキングに登録する
 								.block-area
 									button.close 閉じる
 									button.next 次のステージへ
@@ -148,6 +148,13 @@ html
 									strong.limit-value 100
 									| )を超えたため、停止しました。
 								button.ok OK
+							.ranking.loading
+								.head
+									| ステージ「
+									span.stage-name 余りの計算
+									| 」のランキング
+								ol.ranks
+								button.close 閉じる
 						.layer.modal-layer
 							- const modals = ['01', '02']
 							each modal in modals

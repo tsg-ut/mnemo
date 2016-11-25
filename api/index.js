@@ -1,8 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const forceDomain = require('forcedomain');
+const cors = require('cors');
 
 const app = express();
+
+app.use(cors({
+	origin: ['https://mnemo.pro', /^https?:\/\/localhost(:\d+)?$/],
+	optionsSuccessStatus: 200,
+}));
 
 app.use(bodyParser.json());
 
