@@ -978,6 +978,131 @@ button {
 				}
 			}
 		}
+
+		.ranking {
+			pointer-events: initial;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background: repeating-linear-gradient(-45deg, #333, #333 10px, #444 10px, #444 20px);
+			color: wheat;
+			width: calc(~"100% - 30px");
+			max-width: 500px;
+			max-height: calc(~"100% - 80px");
+			overflow-y: auto;
+			border: #222 6px solid;
+			padding: 1em 0;
+
+			.head {
+				text-align: center;
+				font-size: 24px;
+				font-weight: bold;
+
+				.stage-name {
+					color: #fbff43;
+				}
+			}
+
+			&.loading .ranks {
+				height: 200px;
+				background-image: inline('image/ring.svg');
+				background-repeat: no-repeat;
+				background-position: center;
+
+				.rank, & > * {
+					display: none;
+				}
+			}
+
+			.ranks {
+				padding: 0;
+				counter-reset: rank-index;
+
+				.rank {
+					display: flex;
+					padding: 0 0.5em;
+					color: #333;
+					font-weight: bold;
+					font-size: 24px;
+					line-height: 1.5;
+					counter-increment: rank-index;
+
+					&:nth-child(2n) {
+						background: rgba(255, 255, 255, 0.5);
+					}
+
+					&:nth-child(2n+1) {
+						background: rgba(255, 255, 255, 0.7);
+					}
+
+					&::before {
+						width: 1.5em;
+						text-align: center;
+						font-size: 24px;
+					}
+
+					&:first-child::before {
+						content: '';
+						background-image: inline('image/crown.svg');
+						background-size: 80%;
+						background-position: center;
+						background-repeat: no-repeat;
+					}
+
+					&:nth-child(n+2)::before {
+						content: counter(rank-index);
+						font-family: 'Exo 2', sans-serif;
+						font-weight: 900;
+					}
+
+					.name {
+						flex: 1 1 0;
+						text-overflow: ellipsis;
+						overflow: hidden;
+						font-size: 20px;
+						line-height: 36px;
+					}
+
+					.data {
+						display: flex;
+						font-family: 'Exo 2', sans-serif;
+						font-weight: 900;
+
+						& > * {
+							margin-right: 0.5em;
+
+							&::before {
+								content: '';
+								width: 1.2em;
+								height: 1.2em;
+								display: inline-block;
+								vertical-align: -15%;
+								margin-right: 0.1em;
+								background-size: contain;
+							}
+						}
+
+						.clocks::before {
+							background-image: inline('image/clock-icon.svg');
+						}
+
+						.blocks::before {
+							background-image: url('image/conditional.png');
+						}
+					}
+
+					.score {
+						font-family: 'Exo 2', sans-serif;
+						font-weight: 900;
+
+						&::after {
+							content: 'pt';
+						}
+					}
+				}
+			}
+		}
 	}
 
 	.inputs, .arrows, .user-outputs, .correct-outputs {

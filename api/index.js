@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const forceDomain = require('forcedomain');
+const routemap = require('express-routemap');
 
 const app = express();
 
@@ -17,5 +18,6 @@ app.use('/', require('./routes/index'));
 app.use('/stages', require('./routes/stages'));
 
 app.listen(process.env.PORT || 3000);
+routemap(app);
 
 module.exports = app;
