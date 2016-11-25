@@ -862,7 +862,23 @@ button {
 					margin: 12px auto;
 					font-size: 20px;
 					padding: 0.5em 1em;
-					cursor: not-allowed;
+
+					&[disabled] {
+						opacity: 0.5;
+						cursor: wait;
+
+						&.error {
+							opacity: 1;
+							background: #f91919;
+							cursor: default;
+						}
+
+						&.success {
+							opacity: 1;
+							background: #4698b7;
+							cursor: default;
+						}
+					}
 				}
 			}
 
@@ -976,6 +992,166 @@ button {
 				.ok {
 					background: #bd8c14;
 				}
+			}
+		}
+
+		.ranking {
+			display: none;
+			pointer-events: initial;
+
+			position: absolute;
+			top: 50%;
+			left: 50%;
+
+			border: #222 6px solid;
+			padding: 1em 0;
+
+			transform: translate(-50%, -50%);
+			background: repeating-linear-gradient(-45deg, #333, #333 10px, #444 10px, #444 20px);
+			color: wheat;
+			width: calc(~"100% - 30px");
+			max-width: 500px;
+			max-height: calc(~"100% - 80px");
+			overflow-y: auto;
+
+			animation: 0.5s ranking-animate;
+
+			@keyframes ranking-animate {
+				from {
+					transform: translate(-50%, calc(-50% + 100px));
+					opacity: 0;
+				}
+				to {
+					transform: translate(-50%, -50%);
+					opacity: 1;
+				}
+			}
+
+			.head {
+				text-align: center;
+				font-size: 24px;
+				font-weight: bold;
+
+				.stage-name {
+					color: #fbff43;
+				}
+			}
+
+			&.loading .ranks {
+				height: 200px;
+				background-image: inline('image/ring.svg');
+				background-repeat: no-repeat;
+				background-position: center;
+
+				.rank, & > * {
+					display: none;
+				}
+			}
+
+			.ranks {
+				padding: 0;
+				counter-reset: rank-index;
+
+				.rank {
+					display: flex;
+					padding: 0 0.5em;
+					color: #333;
+					font-weight: bold;
+					font-size: 24px;
+					line-height: 1.5;
+					counter-increment: rank-index;
+
+					&:nth-child(2n) {
+						background: rgba(255, 255, 255, 0.5);
+					}
+
+					&:nth-child(2n+1) {
+						background: rgba(255, 255, 255, 0.7);
+					}
+
+					&::before {
+						width: 1.5em;
+						text-align: center;
+						font-size: 24px;
+					}
+
+					&:first-child::before {
+						content: '';
+						background-image: inline('image/crown.svg');
+						background-size: 80%;
+						background-position: center;
+						background-repeat: no-repeat;
+					}
+
+					&:nth-child(n+2)::before {
+						content: counter(rank-index);
+						font-family: 'Exo 2', sans-serif;
+						font-weight: 900;
+					}
+
+					.name {
+						flex: 1 1 0;
+						text-overflow: ellipsis;
+						overflow: hidden;
+						margin-left: 0.5em;
+						font-size: 20px;
+						line-height: 36px;
+					}
+
+					.data {
+						display: flex;
+						font-family: 'Exo 2', sans-serif;
+						font-weight: 900;
+
+						& > * {
+							margin-right: 0.5em;
+
+							&::before {
+								content: '';
+								width: 0.8em;
+								height: 0.8em;
+								display: inline-block;
+								vertical-align: -5%;
+								margin-right: 0.1em;
+								background-size: contain;
+							}
+						}
+
+						.clocks::before {
+							background-image: inline('image/clock-icon.svg');
+						}
+
+						.blocks::before {
+							background-image: url('image/conditional.png');
+						}
+					}
+
+					.score {
+						flex: 0 0 4.5em;
+						font-family: 'Exo 2', sans-serif;
+						font-weight: 900;
+						text-align: right;
+
+						&::after {
+							content: 'pt';
+						}
+					}
+				}
+			}
+
+			.close {
+				display: block;
+
+				margin: 0 auto;
+				padding: 0 2em;
+				border-radius: 0.3em;
+
+				background: #5f5f5f;
+
+				line-height: 2em;
+				color: white;
+				font-size: 24px;
+				font-weight: bold;
 			}
 		}
 	}
