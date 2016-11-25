@@ -46,6 +46,8 @@ router.get('/:stage/submissions', (req, res) => {
 		const data = submissions.map((submission) => ({
 			name: submission.name,
 			score: submission.score,
+			blocks: submission.blocks,
+			clocks: submission.clocks,
 		}));
 
 		res.json(data);

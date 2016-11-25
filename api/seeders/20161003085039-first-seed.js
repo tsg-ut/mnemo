@@ -10,7 +10,7 @@ module.exports = {
 		})), {}).then(() => (
 			Stages.findOne({where: {name: 'wire01'}})
 		)).then((stage) => {
-			if (process.env.NODE_ENV === 'test') {
+			if (process.env.NODE_ENV !== 'production') {
 				return queryInterface.bulkInsert('submissions', [{
 					name: 'hakatashi',
 					board: JSON.stringify([{
@@ -29,7 +29,7 @@ module.exports = {
 						name: 'wireI',
 						rotate: 0,
 					}]),
-					score: 100,
+					score: 10000,
 					blocks: 3,
 					clocks: 3,
 					stageId: stage.id,
