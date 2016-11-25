@@ -1077,6 +1077,7 @@ button {
 						flex: 1 1 0;
 						text-overflow: ellipsis;
 						overflow: hidden;
+						margin-left: 0.5em;
 						font-size: 20px;
 						line-height: 36px;
 					}
@@ -1091,10 +1092,10 @@ button {
 
 							&::before {
 								content: '';
-								width: 1.2em;
-								height: 1.2em;
+								width: 0.8em;
+								height: 0.8em;
 								display: inline-block;
-								vertical-align: -15%;
+								vertical-align: -5%;
 								margin-right: 0.1em;
 								background-size: contain;
 							}
@@ -1110,8 +1111,10 @@ button {
 					}
 
 					.score {
+						flex: 0 0 4.5em;
 						font-family: 'Exo 2', sans-serif;
 						font-weight: 900;
+						text-align: right;
 
 						&::after {
 							content: 'pt';
