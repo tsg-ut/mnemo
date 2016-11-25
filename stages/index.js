@@ -17,6 +17,7 @@ module.exports = [
 	require('./sixth-power.yml'),
 	require('./remainder.yml'),
 	require('./plus-32.yml'),
+	require('./plus-32-hard.yml'),
 	require('./make-minus-one-med.yml'),
 	require('./conditional01.yml'),
 	require('./conditional02.yml'),
