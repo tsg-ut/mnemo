@@ -409,5 +409,5 @@ describe 'validator' ->
 
       expect pass .to.be.true
       expect message .to.be.undefined
-      expect blocks .to.equal 3
+      expect blocks .to.equal 4
       expect clocks .to.equal 3
