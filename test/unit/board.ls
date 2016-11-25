@@ -69,6 +69,18 @@ describe 'Board' ->
       @board.place-block x: 0, y: 3, type: \diode, rotate: 1
       expect @board.weighed-block-count .to.equal 6
 
+  describe '#json' ->
+    It 'return JSON data of the current board state' ->
+      @board.place-block x: 0, y: 3, type: \diode, rotate: 1
+      @board.place-block x: 2, y: 1, type: \wireI, rotate: 0
+      @board.place-block x: 3, y: 2, type: \times-2, rotate: 0
+
+      expect JSON.parse @board.json .to.deep.equal [
+        * x: 2, y: 1, type: \wireI, rotate: 0
+        * x: 3, y: 2, type: \times-2, rotate: 0
+        * x: 0, y: 3, type: \diode, rotate: 1
+      ]
+
   describe '#run' ->
     It 'run the board until the end and report the output' ->
       @board.place-block x: 2, y: 0, type: \wireI, rotate: 0

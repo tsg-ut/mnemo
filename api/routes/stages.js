@@ -44,7 +44,7 @@ router.get('/:stage/submissions', (req, res) => {
 			['score', 'DESC'],
 			['createdAt', 'ASC'],
 		],
-		limit: 50,
+		limit: 20,
 	}).then((submissions) => {
 		const data = submissions.map((submission) => ({
 			name: submission.name,
