@@ -17,8 +17,6 @@ module.exports = [
 	require('./sixth-power.yml'),
 	require('./remainder.yml'),
 	require('./plus-32.yml'),
-	require('./plus-32-hard.yml'),
-	require('./make-minus-one-med.yml'),
 	require('./conditional01.yml'),
 	require('./conditional02.yml'),
 	require('./conditional03.yml'),
@@ -31,6 +29,7 @@ module.exports = [
 	require('./division-hard.yml'),
 	require('./gcd.yml'),
 	require('./lcm.yml'),
+	require('./make-minus-one-med.yml'),
 	require('./make-minus-one-hard.yml'),
 	require('./sqrt-easy.yml'),
 	require('./sqrt-hard.yml'),
@@ -45,4 +44,5 @@ module.exports = [
 	require('./100.yml'),
 	require('./100-again.yml'),
 	require('./1000.yml'),
+	require('./plus-32-hard.yml'),
 ];
