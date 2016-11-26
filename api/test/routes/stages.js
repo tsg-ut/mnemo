@@ -57,7 +57,7 @@ describe('/stages', () => {
 	describe('POST /stages/:stage/submissions', () => {
 		it('creates new submission data if the submission is valid', () => (
 			chai.request(app).post('/stages/wire01/submissions').send({
-				name: 'hakatashi',
+				name: 'satos',
 				board: [{
 					x: 1,
 					y: 0,
@@ -76,14 +76,84 @@ describe('/stages', () => {
 				}],
 			}).then((res) => {
 				expect(res).to.have.status(200);
+				expect(res).to.be.json;
+				expect(res.body.name).to.equal('satos');
+				expect(res.body.score).to.equal(10000);
+				expect(res.body.blocks).to.equal(3);
 
 				return Submissions.findOne({
 					order: 'createdAt DESC',
 				});
 			}).then((submission) => {
 				expect(submission).to.not.be.null;
-				expect(submission.name).to.equal('hakatashi');
+				expect(submission.name).to.equal('satos');
 				expect(submission.score).to.equal(10000);
+			})
+		));
+
+		it('reports error when the submission with higher score is existing', () => (
+			chai.request(app).post('/stages/wire01/submissions').send({
+				name: 'hakatashi',
+				board: [{
+					x: 1,
+					y: 0,
+					type: 'wireI',
+					rotate: 0,
+				}, {
+					x: 1,
+					y: 1,
+					type: 'wireI',
+					rotate: 0,
+				}, {
+					x: 0,
+					y: 1,
+					type: 'wireI',
+					rotate: 0,
+				}, {
+					x: 1,
+					y: 2,
+					type: 'wireI',
+					rotate: 0,
+				}],
+			}).catch((res) => {
+				expect(res).to.have.status(400);
+			})
+		));
+
+		it('updates record when the submission score is higher than existing one', () => (
+			chai.request(app).post('/stages/wire01/submissions').send({
+				name: 'kurgm',
+				board: [{
+					x: 1,
+					y: 0,
+					type: 'wireI',
+					rotate: 0,
+				}, {
+					x: 1,
+					y: 1,
+					type: 'wireI',
+					rotate: 0,
+				}, {
+					x: 1,
+					y: 2,
+					type: 'wireI',
+					rotate: 0,
+				}],
+			}).then((res) => {
+				expect(res).to.have.status(200);
+				expect(res).to.be.json;
+				expect(res.body.score).to.equal(10000);
+				expect(res.body.blocks).to.equal(3);
+
+				return Submissions.findAll({
+					where: {
+						name: 'kurgm',
+					},
+				});
+			}).then((submissions) => {
+				expect(submissions).to.have.length(1);
+				expect(submissions[0].score).to.equal(10000);
+				expect(submissions[0].blocks).to.equal(3);
 			})
 		));
 	});

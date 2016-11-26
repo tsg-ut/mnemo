@@ -1,3 +1,4 @@
+const assert = require('assert');
 const express = require('express');
 const router = express.Router();
 
@@ -42,7 +43,7 @@ router.get('/:stage/submissions', (req, res) => {
 		}],
 		order: [
 			['score', 'DESC'],
-			['createdAt', 'ASC'],
+			['updatedAt', 'ASC'],
 		],
 		limit: 20,
 	}).then((submissions) => {
@@ -60,11 +61,27 @@ router.get('/:stage/submissions', (req, res) => {
 router.post('/:stage/submissions', (req, res) => {
 	const stageName = req.params.stage;
 
-	Stages.findOne({
-		where: {
-			name: stageName,
-		},
-	}).then((stage) => {
+	Promise.all([
+		Stages.findOne({
+			where: {
+				name: stageName,
+			},
+		}),
+		Submissions.findOne({
+			where: {
+				name: req.body.name,
+			},
+			include: [{
+				model: Stages,
+				where: {
+					name: stageName,
+				},
+			}],
+			order: [
+				['score', 'DESC'],
+			],
+		}),
+	]).then(([stage, existingSubmission]) => {
 		const submissionData = req.body;
 
 		if (stage === null) {
@@ -93,21 +110,61 @@ router.post('/:stage/submissions', (req, res) => {
 				stage: stageDatum,
 			});
 
-			Submissions.create({
-				name: req.body.name || null,
-				board: JSON.stringify(req.body.board),
-				score,
-				blocks,
-				clocks,
-				stageId: stage.id,
-			}).then((submission) => {
-				res.json(submission);
-			}).catch((error) => {
-				res.status(500).json({
-					error: true,
-					message: error.message,
+			if (existingSubmission) {
+				if (score <= existingSubmission.score) {
+					res.status(400).json({
+						error: true,
+						message: 'user name existing',
+					});
+					return;
+				}
+
+				Submissions.update({
+					name: req.body.name,
+					board: JSON.stringify(req.body.board),
+					score,
+					blocks,
+					clocks,
+					stageId: stage.id,
+				}, {
+					where: {
+						name: req.body.name,
+						stageId: stage.id,
+					},
+				}).then(([count]) => {
+					assert.strictEqual(count, 1);
+					return Submissions.findOne({
+						where: {
+							name: req.body.name,
+							stageId: stage.id,
+						},
+					});
+				}).then((submission) => {
+					res.json(submission);
+				}).catch((error) => {
+					res.status(500).json({
+						error: true,
+						message: error.message,
+					});
 				});
-			});
+			} else {
+				// If no previous submission is existing
+				Submissions.create({
+					name: req.body.name,
+					board: JSON.stringify(req.body.board),
+					score,
+					blocks,
+					clocks,
+					stageId: stage.id,
+				}).then((submission) => {
+					res.json(submission);
+				}).catch((error) => {
+					res.status(500).json({
+						error: true,
+						message: error.message,
+					});
+				});
+			}
 		}
 	});
 });
