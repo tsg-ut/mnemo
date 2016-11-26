@@ -76,6 +76,10 @@ describe('/stages', () => {
 				}],
 			}).then((res) => {
 				expect(res).to.have.status(200);
+				expect(res).to.be.json;
+				expect(res.body.name).to.equal('satos');
+				expect(res.body.score).to.equal(10000);
+				expect(res.body.blocks).to.equal(3);
 
 				return Submissions.findOne({
 					order: 'createdAt DESC',
@@ -137,6 +141,9 @@ describe('/stages', () => {
 				}],
 			}).then((res) => {
 				expect(res).to.have.status(200);
+				expect(res).to.be.json;
+				expect(res.body.score).to.equal(10000);
+				expect(res.body.blocks).to.equal(3);
 
 				return Submissions.findAll({
 					where: {

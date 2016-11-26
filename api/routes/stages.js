@@ -1,3 +1,4 @@
+const assert = require('assert');
 const express = require('express');
 const router = express.Router();
 
@@ -109,29 +110,61 @@ router.post('/:stage/submissions', (req, res) => {
 				stage: stageDatum,
 			});
 
-			if (existingSubmission && score <= existingSubmission.score) {
-				res.status(400).json({
-					error: true,
-					message: 'The user name is existing',
-				});
-				return;
-			}
+			if (existingSubmission) {
+				if (score <= existingSubmission.score) {
+					res.status(400).json({
+						error: true,
+						message: 'The user name is existing',
+					});
+					return;
+				}
 
-			Submissions.create({
-				name: req.body.name || null,
-				board: JSON.stringify(req.body.board),
-				score,
-				blocks,
-				clocks,
-				stageId: stage.id,
-			}).then((submission) => {
-				res.json(submission);
-			}).catch((error) => {
-				res.status(500).json({
-					error: true,
-					message: error.message,
+				Submissions.update({
+					name: req.body.name,
+					board: JSON.stringify(req.body.board),
+					score,
+					blocks,
+					clocks,
+					stageId: stage.id,
+				}, {
+					where: {
+						name: req.body.name,
+						stageId: stage.id,
+					},
+				}).then(([count]) => {
+					assert.strictEqual(count, 1);
+					return Submissions.findOne({
+						where: {
+							name: req.body.name,
+							stageId: stage.id,
+						},
+					});
+				}).then((submission) => {
+					res.json(submission);
+				}).catch((error) => {
+					res.status(500).json({
+						error: true,
+						message: error.message,
+					});
 				});
-			});
+			} else {
+				// If no previous submission is existing
+				Submissions.create({
+					name: req.body.name,
+					board: JSON.stringify(req.body.board),
+					score,
+					blocks,
+					clocks,
+					stageId: stage.id,
+				}).then((submission) => {
+					res.json(submission);
+				}).catch((error) => {
+					res.status(500).json({
+						error: true,
+						message: error.message,
+					});
+				});
+			}
 		}
 	});
 });
