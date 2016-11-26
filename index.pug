@@ -156,7 +156,7 @@ html
 								ol.ranks
 								button.close 閉じる
 						.layer.modal-layer
-							- const modals = ['01', '02']
+							- const modals = ['01', '02', '03']
 							each modal in modals
 								.modal(class=modal)
 									button.close
@@ -164,4 +164,5 @@ html
 										case modal
 											when '01': include modals/01/content.pug
 											when '02': include modals/02/content.pug
+											when '03': include modals/03/content.pug
 										button.close-content OK

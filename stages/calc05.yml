@@ -1,8 +1,6 @@
 name: calc05
 parts:
   wireI: null
-  wireL: null
-  wireT: null
   times-2: 1
   plus-1: 1
 inputX: 2
