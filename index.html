@@ -46,4 +46,109 @@ Licensed under CC-BY</li></ul></div></div></div><div class="screen game-screen">
 </svg>
 </p><p>わかりやすいですね!</p><p>また、それぞれのステージでやることは、<br>
 右下の<strong>MISSION</strong>という部分に書いてあります。</p><p><img alt="ミッション" src="modals/02/mission.png"></p><p>というわけで、このステージでは<img alt="times-2ブロック" src="image/times-2.png">を使って、<br>
-入ってきた数を2倍にしてみましょう!</p><button class="close-content">OK</button></div></div><div class="modal 03"><button class="close"></button><div class="modal-content"><p>同じブロックを何度もクリックすると、<br>ブロックを回転させることができます。</p><p><video src="modals/03/rotate.mp4" autoplay loop></video></p><p><strong>右クリック</strong>すると、ブロックを消去することができます。</p><p><video src="modals/03/remove.mp4" autoplay loop></video></p><button class="close-content">OK</button></div></div></div></div></div></div></div></body></html>
+入ってきた数を2倍にしてみましょう!</p><button class="close-content">OK</button></div></div><div class="modal 03"><button class="close"></button><div class="modal-content"><p>同じブロックを何度もクリックすると、<br>ブロックを回転させることができます。</p><p><video src="modals/03/rotate.mp4" autoplay loop></video></p><p><strong>右クリック</strong>すると、ブロックを消去することができます。</p><p><video src="modals/03/remove.mp4" autoplay loop></video></p><button class="close-content">OK</button></div></div><div class="modal 04"><button class="close"></button><div class="modal-content"><p><img alt="wireTブロック" src="image/wireT.png">は、入ってきた数を<br>他の2つの方向に送ります。</p><p><?xml version="1.0"?>
+<svg width="50" height="50" viewPort="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<style>
+		.data-in {
+			animation: 2s linear infinite move-in;
+		}
+		@keyframes move-in {
+			0% {transform: translate(25px, -15px)}
+			40% {
+				transform: translate(25px, 25px);
+				animation-timing-function: steps(1, start);
+			}
+			100% {transform: translate(25px, -15px)}
+		}
+		.data-out1 {
+			animation: 2s linear infinite move-out1;
+		}
+		@keyframes move-out1 {
+			0% {
+				transform: translate(-15px, 25px);
+				animation-timing-function: steps(1, end);
+			}
+			40% {transform: translate(25px, 25px)}
+			80% {transform: translate(-15px, 25px)}
+			100% {transform: translate(-15px, 25px)}
+		}
+		.data-out2 {
+			animation: 2s linear infinite move-out2;
+		}
+		@keyframes move-out2 {
+			0% {
+				transform: translate(65px, 25px);
+				animation-timing-function: steps(1, end);
+			}
+			40% {transform: translate(25px, 25px)}
+			80% {transform: translate(65px, 25px)}
+			100% {transform: translate(65px, 25px)}
+		}
+	</style>
+	<image xlink:href="https://mnemo.pro/image/wireT.png" x="0" y="0" width="50" height="50"/>
+	<g class="data-in">
+		<rect x="-10" y="-10" width="20" height="20" rx="5" ry="5" fill="#ff8c00"/>
+		<text x="0" y="7" text-anchor="middle" font-size="14" font-weight="bold" fill="white">42</text>
+	</g>
+	<g class="data-out1">
+		<rect x="-10" y="-10" width="20" height="20" rx="5" ry="5" fill="#ff8c00"/>
+		<text x="0" y="7" text-anchor="middle" font-size="14" font-weight="bold" fill="white">42</text>
+	</g>
+	<g class="data-out2">
+		<rect x="-10" y="-10" width="20" height="20" rx="5" ry="5" fill="#ff8c00"/>
+		<text x="0" y="7" text-anchor="middle" font-size="14" font-weight="bold" fill="white">42</text>
+	</g>
+</svg>
+</p><p><img alt="addブロック" src="image/add.png">は、左右から入ってきた数を<br>足し合わせて、下に送ります。</p><p><?xml version="1.0"?>
+<svg width="50" height="50" viewPort="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<style>
+		.data-in1 {
+			animation: 2s linear infinite move-in1;
+		}
+		@keyframes move-in1 {
+			0% {transform: translate(-15px, 25px)}
+			40% {
+				transform: translate(25px, 25px);
+				animation-timing-function: steps(1, start);
+			}
+			100% {transform: translate(25px, -15px)}
+		}
+		.data-in2 {
+			animation: 2s linear infinite move-in2;
+		}
+		@keyframes move-in2 {
+			0% {transform: translate(65px, 25px)}
+			40% {
+				transform: translate(25px, 25px);
+				animation-timing-function: steps(1, start);
+			}
+			100% {transform: translate(25px, -15px)}
+		}
+		.data-out {
+			animation: 2s linear infinite move-out;
+		}
+		@keyframes move-out {
+			0% {
+				transform: translate(25px, 65px);
+				animation-timing-function: steps(1, end);
+			}
+			40% {transform: translate(25px, 25px)}
+			80% {transform: translate(25px, 65px)}
+			100% {transform: translate(25px, 65px)}
+		}
+	</style>
+	<image xlink:href="https://mnemo.pro/image/add.png" x="0" y="0" width="50" height="50"/>
+	<g class="data-in1">
+		<rect x="-10" y="-10" width="20" height="20" rx="5" ry="5" fill="#ff8c00"/>
+		<text x="0" y="7" text-anchor="middle" font-size="14" font-weight="bold" fill="white">33</text>
+	</g>
+	<g class="data-in2">
+		<rect x="-8" y="-10" width="16" height="20" rx="5" ry="5" fill="#ff8c00"/>
+		<text x="0" y="7" text-anchor="middle" font-size="14" font-weight="bold" fill="white">4</text>
+	</g>
+	<g class="data-out">
+		<rect x="-10" y="-10" width="20" height="20" rx="5" ry="5" fill="#ff8c00"/>
+		<text x="0" y="7" text-anchor="middle" font-size="14" font-weight="bold" fill="white">37</text>
+	</g>
+</svg>
+</p><button class="close-content">OK</button></div></div></div></div></div></div></div></body></html>
