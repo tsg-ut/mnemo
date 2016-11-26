@@ -31,3 +31,4 @@ height: 7
 clockLimit: 100
 statement: '偶数なら2倍,奇数なら3倍してみよう!'
 title: 条件分岐 -基本- 1
+modal: conditionals
