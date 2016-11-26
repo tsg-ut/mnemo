@@ -60,11 +60,27 @@ router.get('/:stage/submissions', (req, res) => {
 router.post('/:stage/submissions', (req, res) => {
 	const stageName = req.params.stage;
 
-	Stages.findOne({
-		where: {
-			name: stageName,
-		},
-	}).then((stage) => {
+	Promise.all([
+		Stages.findOne({
+			where: {
+				name: stageName,
+			},
+		}),
+		Submissions.findOne({
+			where: {
+				name: req.body.name,
+			},
+			include: [{
+				model: Stages,
+				where: {
+					name: stageName,
+				},
+			}],
+			order: [
+				['score', 'DESC'],
+			],
+		}),
+	]).then(([stage, existingSubmission]) => {
 		const submissionData = req.body;
 
 		if (stage === null) {
@@ -92,6 +108,14 @@ router.post('/:stage/submissions', (req, res) => {
 				blocks,
 				stage: stageDatum,
 			});
+
+			if (existingSubmission && score <= existingSubmission.score) {
+				res.status(400).json({
+					error: true,
+					message: 'The user name is existing',
+				});
+				return;
+			}
 
 			Submissions.create({
 				name: req.body.name || null,
