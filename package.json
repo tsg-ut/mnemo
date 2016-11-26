@@ -32,7 +32,7 @@
     "api:init": "cd api && sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
     "api": "cd api && node index.js",
     "test:api:init": "cd api && cross-env NODE_ENV=test sequelize db:migrate:undo:all && cross-env NODE_ENV=test sequelize db:migrate && cross-env NODE_ENV=test sequelize db:seed:all",
-    "test:api": "cd api && cross-env NODE_ENV=test mocha --recursive"
+    "test:api": "cd api && cross-env NODE_ENV=test istanbul cover ../node_modules/mocha/bin/_mocha -- --recursive"
   },
   "repository": {
     "type": "git",
@@ -68,6 +68,7 @@
     "fetch-ponyfill": "^3.0.2",
     "file-url": "^2.0.0",
     "github-fork-ribbon-css": "^0.2.1",
+    "istanbul": "^0.4.5",
     "jquery": "^3.0.0",
     "less": "^2.7.1",
     "mocha-logger": "^1.0.4",

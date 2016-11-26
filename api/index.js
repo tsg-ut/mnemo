@@ -22,6 +22,8 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/', require('./routes/index'));
 app.use('/stages', require('./routes/stages'));
 
-app.listen(process.env.PORT || 3000);
+if (process.env.NODE_ENV !== 'test') {
+	app.listen(process.env.PORT || 3000);
+}
 
 module.exports = app;
