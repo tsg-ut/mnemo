@@ -43,7 +43,7 @@ router.get('/:stage/submissions', (req, res) => {
 		}],
 		order: [
 			['score', 'DESC'],
-			['createdAt', 'ASC'],
+			['updatedAt', 'ASC'],
 		],
 		limit: 20,
 	}).then((submissions) => {
@@ -114,7 +114,7 @@ router.post('/:stage/submissions', (req, res) => {
 				if (score <= existingSubmission.score) {
 					res.status(400).json({
 						error: true,
-						message: 'The user name is existing',
+						message: 'user name existing',
 					});
 					return;
 				}
