@@ -11,10 +11,10 @@
 			}
 			100% {transform: translate(25px, -15px)}
 		}
-		.data-out {
-			animation: 2s linear infinite move-out;
+		.data-out-down {
+			animation: 2s linear infinite move-out-down;
 		}
-		@keyframes move-out {
+		@keyframes move-out-down {
 			0% {
 				transform: translate(25px, 65px);
 				animation-timing-function: steps(1, end);
@@ -30,7 +30,7 @@
 		<rect x="-8" y="-10" width="16" height="20" rx="5" ry="5" fill="#ff8c00"/>
 		<text x="0" y="7" text-anchor="middle" font-size="14" font-weight="bold" fill="white">8</text>
 	</g>
-	<g class="data-out">
+	<g class="data-out-down">
 		<rect x="-12" y="-10" width="24" height="20" rx="5" ry="5" fill="#ff8c00"/>
 		<text x="0" y="7" text-anchor="middle" font-size="14" font-weight="bold" fill="white">16</text>
 	</g>
