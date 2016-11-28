@@ -2,11 +2,14 @@
 
 [![Build Status][travis-image]][travis-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
+[![Code Climate][codeclimate-image]][codeclimate-url]
 
 [travis-url]: https://travis-ci.org/tsg-ut/mnemo
 [travis-image]: https://travis-ci.org/tsg-ut/mnemo.svg?branch=master
 [coveralls-url]: https://coveralls.io/github/tsg-ut/mnemo?branch=master
 [coveralls-image]: https://coveralls.io/repos/github/tsg-ut/mnemo/badge.svg?branch=master
+[codeclimate-url]: https://codeclimate.com/github/tsg-ut/mnemo
+[codeclimate-image]: https://codeclimate.com/github/tsg-ut/mnemo/badges/gpa.svg
 
 [![ScreenShot](assets/screen.png)](https://mnemo.pro/)
 
