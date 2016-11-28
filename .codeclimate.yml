@@ -2,10 +2,12 @@ engines:
   eslint:
     enabled: true
     channel: eslint-3
+
 ratings:
   paths:
     - lib/**/*.js
     - api/**/*.js
+
 exclude_paths:
   - lib/analytics.js
   - api/coverage/**/*.js
