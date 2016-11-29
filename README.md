@@ -19,7 +19,7 @@ MNEMOは、TSGが制作しているプログラミング風ゲームです。
 
 ## 開発に必要なもの
 
-* Node.js v6
+* Node.js v7
 
 ## 開発環境のセットアップ
 
@@ -28,6 +28,8 @@ git clone https://github.com/tsg-ut/mnemo.git
 cd mnemo
 npm install
 ```
+
+APIのセットアップ・ビルド・テストは[api/README.md](api/README.md)を参照。
 
 ## ビルド
 
