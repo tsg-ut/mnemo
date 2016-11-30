@@ -1,9 +1,25 @@
 doctype
 html
 	head
-		meta(charset="utf-8")
-		meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
-		title MNEMO
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=1200')
+		title MNEMO プログラミング風パズルゲーム
+		meta(name='description', content='MNEMO(ニーモ)は、ブラウザ上で遊べるパズルゲームです。小学生からガチプログラマーまで。めざせランキング制覇。')
+		// meta keywords は全く必要ないらしいけど、一応と言うか念のため
+		meta(name='keywords', content='パズル,ゲーム,プログラミング,MNEMO,ニーモ')
+		meta(property='fb:app_id', content='1864540247116178')
+		meta(property='og:title', content='MNEMO プログラミング風パズルゲーム')
+		meta(property='og:type', content='website')
+		meta(property='og:url', content='https://mnemo.pro/')
+		meta(property='og:image', content='https://mnemo.pro/image/ogimage.png')
+		meta(property='og:description', content='MNEMO(ニーモ)は、ブラウザ上で遊べるパズルゲームです。小学生からガチプログラマーまで。めざせランキング制覇。')
+		meta(property='og:site_name', content='MNEMO')
+		meta(name='twitter:card', content='summary')
+		meta(name='twitter:site', content='@tsg_ut')
+		meta(name='twitter:creator', content='@tsg_ut')
+		meta(name='twitter:title', content='MNEMO プログラミング風パズルゲーム')
+		meta(name='twitter:description', content='MNEMO(ニーモ)は、ブラウザ上で遊べるパズルゲームです。小学生からガチプログラマーまで。めざせランキング制覇。')
+		meta(name='twitter:image', content='https://mnemo.pro/image/ogimage.png')
 		script if (location.hostname === 'mnemo.pro' && location.protocol === 'http:') location.protocol = 'https:';
 		if process.env.NODE_ENV === 'production'
 			script(src="index.min.js", charset="utf-8", async)
