@@ -22,7 +22,11 @@ html
 					.screen.menu-screen
 						.menu
 							.row
-								img.logo(src = 'image/logo-slim.png')
+								img.logo(src='image/logo-slim.png')
+							.row.tsg-credit
+								| by
+								a(href='http://tsg.ne.jp/', target='_blank')
+									img.tsg-logo(src='image/tsg.png')
 							.row
 								button.big.start はじめる
 							.row
@@ -105,6 +109,8 @@ html
 									.panel
 							.downer-area
 								.left-area
+									a(href='http://tsg.ne.jp/', target='_blank')
+										img.tsg-logo(src='image/tsg.png')
 								.controls-area
 									.controls
 										button.exit(type = 'button')
