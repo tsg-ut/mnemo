@@ -1,21 +1,22 @@
 # MNEMO API Server
 
-とりあえず開発環境ではSQLiteを使うようにする。
+開発環境ではSQLite、本番環境ではPostgreSQLを使用する。
 
 ## 開発環境のセットアップ
 
 ```
-cd /path/to/mnemo
-npm install
-npm install sequelize-cli -g
-cd api
-sequelize db:migrate
-sequelize db:seed:all
+npm run api:init
 ```
 
 ## サーバー起動
 
 ```
-cd /path/to/mnemo/api
-node index.js
+npm run api
+```
+
+## テスト実行
+
+```
+npm run test:api:init
+npm run test:api
 ```
