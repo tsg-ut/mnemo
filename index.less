@@ -34,6 +34,14 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'FontAwesome';
+	src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	unicode-range: U+F099;
+}
+
 html, body, .container {
 	margin: 0;
 	padding: 0;
@@ -53,6 +61,18 @@ button {
 
 .github-fork-ribbon::before {
 	background-color: #284fbd;
+}
+
+.fa {
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	font-smoothing: antialiased;
+}
+
+.fa-twitter:before {
+	content: "\f099";
 }
 
 .layer {
@@ -900,6 +920,21 @@ button {
 							cursor: default;
 						}
 					}
+				}
+
+				.tweet {
+					display: block;
+
+					width: 160px;
+					margin: 12px auto;
+					padding: 0.3em 1em;
+					border-radius: 5px;
+
+					background: #3f94ef;
+
+					color: white;
+					font-size: 16px;
+					text-decoration: none;
 				}
 			}
 
