@@ -174,8 +174,17 @@ button {
 					text-align: center;
 				}
 
-				.logo {
-					margin-bottom: 48px;
+				.tsg-credit {
+					color: white;
+					font-size: 26px;
+					font-weight: bold;
+					margin-bottom: 20px;
+				}
+
+				.tsg-logo {
+					vertical-align: -50%;
+					width: 100px;
+					margin-left: 0.3em;
 				}
 
 				button.big {
@@ -596,6 +605,18 @@ button {
 
 			.left-area, .right-area {
 				.grow-width(1);
+			}
+
+			.left-area {
+				position: relative;
+
+				.tsg-logo {
+					position: absolute;
+					left: 50px;
+					top: 50%;
+					transform: translateY(-50%);
+					width: 160px;
+				}
 			}
 
 			.controls-area {
