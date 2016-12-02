@@ -17,6 +17,5 @@ npm run api
 ## テスト実行
 
 ```
-npm run test:api:init
 npm run test:api
 ```

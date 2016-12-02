@@ -6,6 +6,7 @@ const chaiHttp = require('chai-http');
 const Umzug = require('umzug');
 const app = require('../../');
 const sequelize = require('../../models');
+const Stages = require('../../models/stage');
 const Submissions = require('../../models/submission');
 
 const umzug = new Umzug({
@@ -22,17 +23,42 @@ chai.use(chaiHttp);
 
 const expect = chai.expect;
 
-describe('/stages', () => {
-	before(() => (
-		umzug.up()
-	));
+const now = new Date();
+const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000);
 
+let transaction = null;
+
+// Execute migration
+before(() => (
+	umzug.up()
+));
+
+beforeEach(() => (
+	sequelize.transaction().then((newTransaction) => {
+		transaction = newTransaction;
+	})
+));
+
+afterEach(() => (
+	transaction.rollback()
+));
+
+describe('/stages', () => {
 	describe('GET /stages', () => {
 		it('retuns JSON of the stage array', () => (
-			chai.request(app).get('/stages').then((res) => {
+			Stages.bulkCreate([{
+				name: 'stage1',
+			}, {
+				name: 'stage2',
+			}, {
+				name: 'stage3',
+			}], {transaction}).then(() => (
+				chai.request(app).get('/stages')
+			)).then((res) => {
 				expect(res).to.have.status(200);
 				expect(res).to.be.json;
 				expect(res.body).to.be.an('array');
+				expect(res.body).to.have.length(3);
 
 				res.body.forEach((stage) => {
 					expect(stage).to.have.property('id');
@@ -44,7 +70,11 @@ describe('/stages', () => {
 
 	describe('GET /stages/:stage', () => {
 		it('retuns JSON of the stage information', () => (
-			chai.request(app).get('/stages/wire01').then((res) => {
+			Stages.bulkCreate([{
+				name: 'wire01',
+			}], {transaction}).then(() => (
+				chai.request(app).get('/stages/wire01')
+			)).then((res) => {
 				expect(res).to.have.status(200);
 				expect(res).to.be.json;
 				expect(res.body).to.have.property('id');
@@ -55,10 +85,74 @@ describe('/stages', () => {
 
 	describe('GET /stages/:stage/submissions', () => {
 		it('retuns JSON of the submissions', () => (
-			chai.request(app).get('/stages/wire01/submissions').then((res) => {
+			Stages.create({
+				name: 'wire01',
+			}, {transaction}).then((stage) => {
+				const board = JSON.stringify([{
+					x: 1,
+					y: 0,
+					name: 'wireI',
+					rotate: 0,
+				}, {
+					x: 1,
+					y: 1,
+					name: 'wireI',
+					rotate: 0,
+				}, {
+					x: 1,
+					y: 2,
+					name: 'wireI',
+					rotate: 0,
+				}]);
+
+				return Submissions.bulkCreate([{
+					name: 'kurgm',
+					board,
+					score: 5000,
+					blocks: 3,
+					clocks: 3,
+					stageId: stage.id,
+					createdAt: now,
+					updatedAt: now,
+				}, {
+					name: 'moratorium08',
+					board,
+					score: 10000,
+					blocks: 3,
+					clocks: 3,
+					stageId: stage.id,
+					createdAt: now,
+					updatedAt: now,
+				}, {
+					name: 'Yosshi999',
+					board,
+					score: 5000,
+					blocks: 3,
+					clocks: 3,
+					stageId: stage.id,
+					createdAt: yesterday,
+					updatedAt: yesterday,
+				}, {
+					name: 'hakatashi',
+					board,
+					score: 10000,
+					blocks: 3,
+					clocks: 3,
+					stageId: stage.id,
+					createdAt: yesterday,
+					updatedAt: yesterday,
+				}], {transaction});
+			}).then(() => (
+				chai.request(app).get('/stages/wire01/submissions')
+			)).then((res) => {
 				expect(res).to.have.status(200);
 				expect(res).to.be.json;
 				expect(res.body).to.be.an('array');
+				expect(res.body).to.have.length(4);
+				expect(res.body[0].name).to.equal('hakatashi');
+				expect(res.body[1].name).to.equal('moratorium08');
+				expect(res.body[2].name).to.equal('Yosshi999');
+				expect(res.body[3].name).to.equal('kurgm');
 
 				res.body.forEach((submission) => {
 					expect(submission).to.have.property('name');
@@ -71,6 +165,12 @@ describe('/stages', () => {
 	});
 
 	describe('POST /stages/:stage/submissions', () => {
+		beforeEach(() => (
+			Stages.create({
+				name: 'wire01',
+			})
+		));
+
 		it('creates new submission data if the submission is valid', () => (
 			chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'satos',
