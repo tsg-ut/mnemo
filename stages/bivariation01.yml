@@ -1,4 +1,5 @@
 name: bivariation01
+version: 1
 parts:
   wireI: null
   wireL: null

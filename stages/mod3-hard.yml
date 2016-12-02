@@ -1,4 +1,5 @@
 name: mod3-hard
+version: 1
 parts:
   wireI: null
   wireL: null
