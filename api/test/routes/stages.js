@@ -8,6 +8,8 @@ const app = require('../../');
 const sequelize = require('../../models');
 const Stages = require('../../models/stage');
 const Submissions = require('../../models/submission');
+const stageData = require('../../../stages');
+const wire01 = stageData.find((stageDatum) => stageDatum.name === 'wire01');
 
 const umzug = new Umzug({
 	storage: 'sequelize',
@@ -84,34 +86,35 @@ describe('/stages', () => {
 	});
 
 	describe('GET /stages/:stage/submissions', () => {
+		const board = JSON.stringify([{
+			x: 1,
+			y: 0,
+			name: 'wireI',
+			rotate: 0,
+		}, {
+			x: 1,
+			y: 1,
+			name: 'wireI',
+			rotate: 0,
+		}, {
+			x: 1,
+			y: 2,
+			name: 'wireI',
+			rotate: 0,
+		}]);
+
 		it('retuns JSON of the submissions', () => (
 			Stages.create({
 				name: 'wire01',
-			}, {transaction}).then((stage) => {
-				const board = JSON.stringify([{
-					x: 1,
-					y: 0,
-					name: 'wireI',
-					rotate: 0,
-				}, {
-					x: 1,
-					y: 1,
-					name: 'wireI',
-					rotate: 0,
-				}, {
-					x: 1,
-					y: 2,
-					name: 'wireI',
-					rotate: 0,
-				}]);
-
-				return Submissions.bulkCreate([{
+			}, {transaction}).then((stage) => (
+				Submissions.bulkCreate([{
 					name: 'kurgm',
 					board,
 					score: 5000,
 					blocks: 3,
 					clocks: 3,
 					stageId: stage.id,
+					version: 2,
 					createdAt: now,
 					updatedAt: now,
 				}, {
@@ -121,6 +124,7 @@ describe('/stages', () => {
 					blocks: 3,
 					clocks: 3,
 					stageId: stage.id,
+					version: 2,
 					createdAt: now,
 					updatedAt: now,
 				}, {
@@ -130,6 +134,7 @@ describe('/stages', () => {
 					blocks: 3,
 					clocks: 3,
 					stageId: stage.id,
+					version: 2,
 					createdAt: yesterday,
 					updatedAt: yesterday,
 				}, {
@@ -139,10 +144,11 @@ describe('/stages', () => {
 					blocks: 3,
 					clocks: 3,
 					stageId: stage.id,
+					version: 2,
 					createdAt: yesterday,
 					updatedAt: yesterday,
-				}], {transaction});
-			}).then(() => (
+				}], {transaction})
+			)).then(() => (
 				chai.request(app).get('/stages/wire01/submissions')
 			)).then((res) => {
 				expect(res).to.have.status(200);
@@ -160,6 +166,44 @@ describe('/stages', () => {
 					// Should not leak the board information ;)
 					expect(submission).to.not.have.property('board');
 				});
+			})
+		));
+
+		it('only lists submissions with latest version', () => (
+			Stages.create({
+				name: 'wire01',
+			}, {transaction}).then((stage) => (
+				Submissions.bulkCreate([{
+					name: 'gasin',
+					board,
+					score: 10000,
+					blocks: 3,
+					clocks: 3,
+					stageId: stage.id,
+					version: 1,
+				}, {
+					name: 'satos',
+					board,
+					score: 10000,
+					blocks: 3,
+					clocks: 3,
+					stageId: stage.id,
+					version: 2,
+				}, {
+					name: 'cookies',
+					board,
+					score: 10000,
+					blocks: 3,
+					clocks: 3,
+					stageId: stage.id,
+					version: 3,
+				}], {transaction})
+			)).then(() => (
+				chai.request(app).get('/stages/wire01/submissions')
+			)).then((res) => {
+				expect(res).to.have.status(200);
+				expect(res.body).to.have.length(1);
+				expect(res.body[0].name).to.equal('satos');
 			})
 		));
 	});
@@ -224,6 +268,7 @@ describe('/stages', () => {
 				expect(res.body.name).to.equal('satos');
 				expect(res.body.score).to.equal(10000);
 				expect(res.body.blocks).to.equal(3);
+				expect(res.body.version).to.equal(wire01.version);
 
 				return Submissions.findOne({
 					order: 'createdAt DESC',
@@ -275,6 +320,38 @@ describe('/stages', () => {
 				expect(submissions).to.have.length(1);
 				expect(submissions[0].score).to.equal(10000);
 				expect(submissions[0].blocks).to.equal(3);
+			})
+		));
+
+		it('updates record when existing submission version is outdated', () => (
+			Submissions.create({
+				name: 'cookies',
+				board: JSON.stringify(validBoard),
+				score: 10000,
+				blocks: 3,
+				clocks: 3,
+				version: 1,
+				stageId: stage.id,
+			}).then(() => (
+				chai.request(app).post('/stages/wire01/submissions').send({
+					name: 'cookies',
+					board: lowerScoreBoard,
+				})
+			)).then((res) => {
+				expect(res).to.have.status(200);
+				expect(res).to.be.json;
+				expect(res.body.score).to.be.below(10000);
+				expect(res.body.blocks).to.equal(4);
+
+				return Submissions.findAll({
+					where: {
+						name: 'cookies',
+					},
+				});
+			}).then((submissions) => {
+				expect(submissions).to.have.length(1);
+				expect(submissions[0].score).to.be.below(10000);
+				expect(submissions[0].blocks).to.equal(4);
 			})
 		));
 	});
