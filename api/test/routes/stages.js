@@ -165,31 +165,59 @@ describe('/stages', () => {
 	});
 
 	describe('POST /stages/:stage/submissions', () => {
+		let stage = null;
+
 		beforeEach(() => (
 			Stages.create({
 				name: 'wire01',
+			}).then((newStage) => {
+				stage = newStage;
 			})
 		));
+
+		const validBoard = [{
+			x: 1,
+			y: 0,
+			type: 'wireI',
+			rotate: 0,
+		}, {
+			x: 1,
+			y: 1,
+			type: 'wireI',
+			rotate: 0,
+		}, {
+			x: 1,
+			y: 2,
+			type: 'wireI',
+			rotate: 0,
+		}];
+
+		const lowerScoreBoard = [{
+			x: 1,
+			y: 0,
+			type: 'wireI',
+			rotate: 0,
+		}, {
+			x: 1,
+			y: 1,
+			type: 'wireI',
+			rotate: 0,
+		}, {
+			x: 0,
+			y: 1,
+			type: 'wireI',
+			rotate: 0,
+		}, {
+			x: 1,
+			y: 2,
+			type: 'wireI',
+			rotate: 0,
+		}];
 
 		it('creates new submission data if the submission is valid', () => (
 			chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'satos',
-				board: [{
-					x: 1,
-					y: 0,
-					type: 'wireI',
-					rotate: 0,
-				}, {
-					x: 1,
-					y: 1,
-					type: 'wireI',
-					rotate: 0,
-				}, {
-					x: 1,
-					y: 2,
-					type: 'wireI',
-					rotate: 0,
-				}],
+				board: validBoard,
 			}).then((res) => {
 				expect(res).to.have.status(200);
 				expect(res).to.be.json;
@@ -210,27 +238,14 @@ describe('/stages', () => {
 		it('reports error when the submission with higher score is existing', () => (
 			chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'hakatashi',
-				board: [{
-					x: 1,
-					y: 0,
-					type: 'wireI',
-					rotate: 0,
-				}, {
-					x: 1,
-					y: 1,
-					type: 'wireI',
-					rotate: 0,
-				}, {
-					x: 0,
-					y: 1,
-					type: 'wireI',
-					rotate: 0,
-				}, {
-					x: 1,
-					y: 2,
-					type: 'wireI',
-					rotate: 0,
-				}],
+				board: validBoard,
+			}).then(() => (
+				chai.request(app).post('/stages/wire01/submissions').send({
+					name: 'hakatashi',
+					board: lowerScoreBoard,
+				})
+			)).then(() => {
+				expect.fail();
 			}).catch((res) => {
 				expect(res).to.have.status(400);
 			})
@@ -239,23 +254,13 @@ describe('/stages', () => {
 		it('updates record when the submission score is higher than existing one', () => (
 			chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'kurgm',
-				board: [{
-					x: 1,
-					y: 0,
-					type: 'wireI',
-					rotate: 0,
-				}, {
-					x: 1,
-					y: 1,
-					type: 'wireI',
-					rotate: 0,
-				}, {
-					x: 1,
-					y: 2,
-					type: 'wireI',
-					rotate: 0,
-				}],
-			}).then((res) => {
+				board: lowerScoreBoard,
+			}).then(() => (
+				chai.request(app).post('/stages/wire01/submissions').send({
+					name: 'kurgm',
+					board: validBoard,
+				})
+			)).then((res) => {
 				expect(res).to.have.status(200);
 				expect(res).to.be.json;
 				expect(res.body.score).to.equal(10000);
