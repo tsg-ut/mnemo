@@ -50,10 +50,13 @@ describe('/stages', () => {
 		it('retuns JSON of the stage array', () => (
 			Stages.bulkCreate([{
 				name: 'stage1',
+				version: 1,
 			}, {
 				name: 'stage2',
+				version: 2,
 			}, {
 				name: 'stage3',
+				version: 3,
 			}], {transaction}).then(() => (
 				chai.request(app).get('/stages')
 			)).then((res) => {
@@ -106,6 +109,7 @@ describe('/stages', () => {
 		it('retuns JSON of the submissions', () => (
 			Stages.create({
 				name: 'wire01',
+				version: 2,
 			}, {transaction}).then((stage) => (
 				Submissions.bulkCreate([{
 					name: 'kurgm',
@@ -172,6 +176,7 @@ describe('/stages', () => {
 		it('only lists submissions with latest version', () => (
 			Stages.create({
 				name: 'wire01',
+				version: 3,
 			}, {transaction}).then((stage) => (
 				Submissions.bulkCreate([{
 					name: 'gasin',
@@ -203,21 +208,13 @@ describe('/stages', () => {
 			)).then((res) => {
 				expect(res).to.have.status(200);
 				expect(res.body).to.have.length(1);
-				expect(res.body[0].name).to.equal('satos');
+				expect(res.body[0].name).to.equal('cookies');
 			})
 		));
 	});
 
 	describe('POST /stages/:stage/submissions', () => {
 		let stage = null;
-
-		beforeEach(() => (
-			Stages.create({
-				name: 'wire01',
-			}).then((newStage) => {
-				stage = newStage;
-			})
-		));
 
 		const validBoard = [{
 			x: 1,
@@ -257,6 +254,15 @@ describe('/stages', () => {
 			type: 'wireI',
 			rotate: 0,
 		}];
+
+		beforeEach(() => (
+			Stages.create({
+				name: 'wire01',
+				version: 1,
+			}).then((newStage) => {
+				stage = newStage;
+			})
+		));
 
 		it('creates new submission data if the submission is valid', () => (
 			chai.request(app).post('/stages/wire01/submissions').send({
