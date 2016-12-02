@@ -85,6 +85,7 @@
     "sequelize-cli": "^2.4.0",
     "sqlite3": "^3.1.4",
     "uglifyify": "^3.0.3",
+    "umzug": "^1.11.0",
     "watchify": "^3.7.0"
   },
   "dependencies": {

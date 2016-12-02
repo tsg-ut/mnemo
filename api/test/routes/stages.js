@@ -3,14 +3,30 @@
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const Umzug = require('umzug');
 const app = require('../../');
+const sequelize = require('../../models');
 const Submissions = require('../../models/submission');
+
+const umzug = new Umzug({
+	storage: 'sequelize',
+	storageOptions: {
+		sequelize,
+	},
+	migrations: {
+		params: [sequelize.getQueryInterface(), sequelize.constructor],
+	},
+});
 
 chai.use(chaiHttp);
 
 const expect = chai.expect;
 
 describe('/stages', () => {
+	before(() => (
+		umzug.up()
+	));
+
 	describe('GET /stages', () => {
 		it('retuns JSON of the stage array', () => (
 			chai.request(app).get('/stages').then((res) => {
