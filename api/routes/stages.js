@@ -39,7 +39,12 @@ router.get('/:stage/submissions', (req, res) => {
 	Submissions.findAll({
 		include: [{
 			model: Stages,
-			where: {name: stageName},
+			where: {
+				name: stageName,
+				migratedVersion: {
+					$col: 'submissions.version',
+				},
+			},
 		}],
 		order: [
 			['score', 'DESC'],
@@ -113,7 +118,7 @@ router.post('/:stage/submissions', (req, res) => {
 		});
 
 		if (existingSubmission) {
-			if (score <= existingSubmission.score) {
+			if (score <= existingSubmission.score && stageDatum.version <= existingSubmission.version) {
 				res.status(400).json({
 					error: true,
 					message: 'user name existing',
@@ -127,6 +132,7 @@ router.post('/:stage/submissions', (req, res) => {
 				score,
 				blocks,
 				clocks,
+				version: stageDatum.version,
 				stageId: stage.id,
 			}, {
 				where: {
@@ -157,6 +163,7 @@ router.post('/:stage/submissions', (req, res) => {
 				score,
 				blocks,
 				clocks,
+				version: stageDatum.version,
 				stageId: stage.id,
 			}).then((submission) => {
 				res.json(submission);
