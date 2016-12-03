@@ -38,7 +38,7 @@ module.exports = [
 	require('./perfect-number.yml'),
 	require('./reversal.yml'),
 	require('./msd.js'),
-	require('./mod3-hard.yml'),
+	require('./mod3-hard.js'),
 	require('./max.yml'),
 	require('./the-fifth-max.yml'),
 	require('./100.yml'),
