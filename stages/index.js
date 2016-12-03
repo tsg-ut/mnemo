@@ -31,7 +31,7 @@ module.exports = [
 	require('./lcm.js'),
 	require('./make-minus-one-med.yml'),
 	require('./make-minus-one-hard.yml'),
-	require('./sqrt-easy.yml'),
+	require('./sqrt-easy.js'),
 	require('./sqrt-hard.yml'),
 	require('./complement-of-2.yml'),
 	require('./binarian-easy.yml'),
