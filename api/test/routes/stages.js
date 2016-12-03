@@ -323,6 +323,17 @@ describe('/stages', () => {
 			})
 		));
 
+		it('rejects submission with empty name', () => (
+			chai.request(app).post('/stages/wire01/submissions').send({
+				name: '',
+				board: validBoard,
+			}).then(() => {
+				expect.fail();
+			}).catch((res) => {
+				expect(res).to.not.have.status(200);
+			})
+		));
+
 		it('updates record when the submission score is higher than existing one', () => (
 			chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'kurgm',
