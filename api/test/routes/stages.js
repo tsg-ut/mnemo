@@ -30,10 +30,8 @@ const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000);
 
 let transaction = null;
 
-// Execute migration
-before(() => (
-	umzug.up()
-));
+// Execute all migrations
+before(() => umzug.up());
 
 beforeEach(() => (
 	sequelize.transaction().then((newTransaction) => {
@@ -50,13 +48,13 @@ describe('/stages', () => {
 		it('retuns JSON of the stage array', () => (
 			Stages.bulkCreate([{
 				name: 'stage1',
-				version: 1,
+				migratedVersion: 1,
 			}, {
 				name: 'stage2',
-				version: 2,
+				migratedVersion: 2,
 			}, {
 				name: 'stage3',
-				version: 3,
+				migratedVersion: 3,
 			}], {transaction}).then(() => (
 				chai.request(app).get('/stages')
 			)).then((res) => {
@@ -77,6 +75,7 @@ describe('/stages', () => {
 		it('retuns JSON of the stage information', () => (
 			Stages.bulkCreate([{
 				name: 'wire01',
+				migratedVersion: 2,
 			}], {transaction}).then(() => (
 				chai.request(app).get('/stages/wire01')
 			)).then((res) => {
@@ -109,7 +108,7 @@ describe('/stages', () => {
 		it('retuns JSON of the submissions', () => (
 			Stages.create({
 				name: 'wire01',
-				version: 2,
+				migratedVersion: 2,
 			}, {transaction}).then((stage) => (
 				Submissions.bulkCreate([{
 					name: 'kurgm',
@@ -173,20 +172,12 @@ describe('/stages', () => {
 			})
 		));
 
-		it('only lists submissions with latest version', () => (
+		it('only lists submissions with the migrated version', () => (
 			Stages.create({
 				name: 'wire01',
-				version: 3,
+				migratedVersion: 3,
 			}, {transaction}).then((stage) => (
 				Submissions.bulkCreate([{
-					name: 'gasin',
-					board,
-					score: 10000,
-					blocks: 3,
-					clocks: 3,
-					stageId: stage.id,
-					version: 1,
-				}, {
 					name: 'satos',
 					board,
 					score: 10000,
@@ -202,6 +193,14 @@ describe('/stages', () => {
 					clocks: 3,
 					stageId: stage.id,
 					version: 3,
+				}, {
+					name: 'gasin',
+					board,
+					score: 10000,
+					blocks: 3,
+					clocks: 3,
+					stageId: stage.id,
+					version: 4,
 				}], {transaction})
 			)).then(() => (
 				chai.request(app).get('/stages/wire01/submissions')
@@ -258,7 +257,7 @@ describe('/stages', () => {
 		beforeEach(() => (
 			Stages.create({
 				name: 'wire01',
-				version: 1,
+				migratedVersion: 1,
 			}).then((newStage) => {
 				stage = newStage;
 			})

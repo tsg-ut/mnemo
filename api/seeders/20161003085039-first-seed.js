@@ -4,7 +4,7 @@ module.exports = {
 	up: (queryInterface) => (
 		queryInterface.bulkInsert('stages', stages.map((stage, index) => ({
 			name: stage.name || `stage${index}`,
-			version: stage.version,
+			migratedVersion: stage.version,
 			createdAt: new Date(),
 			updatedAt: new Date(),
 		})), {})
