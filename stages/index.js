@@ -22,7 +22,7 @@ module.exports = [
 	require('./conditional03.yml'),
 	require('./factorial.js'),
 	require('./parity.js'),
-	require('./fibonacci.yml'),
+	require('./fibonacci.js'),
 	require('./bivariation01.yml'),
 	require('./power-easy.yml'),
 	require('./power-hard.yml'),
