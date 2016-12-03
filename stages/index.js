@@ -25,7 +25,7 @@ module.exports = [
 	require('./fibonacci.js'),
 	require('./bivariation01.yml'),
 	require('./power-easy.yml'),
-	require('./power-hard.yml'),
+	require('./power-hard.js'),
 	require('./division-hard.yml'),
 	require('./gcd.yml'),
 	require('./lcm.yml'),
