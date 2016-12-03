@@ -20,7 +20,7 @@ module.exports = [
 	require('./conditional01.yml'),
 	require('./conditional02.yml'),
 	require('./conditional03.yml'),
-	require('./factorial.yml'),
+	require('./factorial.js'),
 	require('./parity.yml'),
 	require('./fibonacci.yml'),
 	require('./bivariation01.yml'),
