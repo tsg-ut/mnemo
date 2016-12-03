@@ -8,7 +8,7 @@ module.exports = [
 	require('./wire01.yml'),
 	require('./calc01.yml'),
 	require('./calc02.yml'),
-	require('./calc03.yml'),
+	require('./calc03.js'),
 	require('./calc04.yml'),
 	require('./calc05.yml'),
 	require('./calc06.yml'),
