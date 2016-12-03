@@ -70,6 +70,7 @@
     "istanbul": "^0.4.5",
     "jquery": "^3.0.0",
     "less": "^2.7.1",
+    "mathjs": "^3.8.0",
     "mocha-logger": "^1.0.4",
     "mochify": "^2.18.1",
     "mochify-istanbul": "^2.4.1",
