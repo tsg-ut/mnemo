@@ -76,7 +76,10 @@ sequelize.transaction((transaction) => {
 						blocks,
 						clocks,
 						version: stageDatum.version,
-					}, {transaction});
+					}, {
+						transaction,
+						silent: true,
+					});
 				});
 			}).then(() => {
 				console.log(`Updating migratedVersion of "${stage.name}" stage...`);
