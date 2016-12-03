@@ -105,7 +105,7 @@ describe('/stages', () => {
 			rotate: 0,
 		}]);
 
-		it('retuns JSON of the submissions', () => (
+		it('retuns JSON of the correctly ordered submissions', () => (
 			Stages.create({
 				name: 'wire01',
 				migratedVersion: 2,
@@ -208,6 +208,28 @@ describe('/stages', () => {
 				expect(res).to.have.status(200);
 				expect(res.body).to.have.length(1);
 				expect(res.body[0].name).to.equal('cookies');
+			})
+		));
+
+		it('limits returned submissions to 20', () => (
+			Stages.create({
+				name: 'wire01',
+				migratedVersion: 2,
+			}, {transaction}).then((stage) => (
+				Submissions.bulkCreate(Array.from({length: 100}, (item, index) => ({
+					name: `user${index}`,
+					board,
+					score: 10000,
+					blocks: 3,
+					clocks: 3,
+					stageId: stage.id,
+					version: 2,
+				})), {transaction})
+			)).then(() => (
+				chai.request(app).get('/stages/wire01/submissions')
+			)).then((res) => {
+				expect(res).to.have.status(200);
+				expect(res.body).to.have.length(20);
 			})
 		));
 	});
