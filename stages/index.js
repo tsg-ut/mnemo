@@ -27,7 +27,7 @@ module.exports = [
 	require('./power-easy.yml'),
 	require('./power-hard.js'),
 	require('./division-hard.yml'),
-	require('./gcd.yml'),
+	require('./gcd.js'),
 	require('./lcm.yml'),
 	require('./make-minus-one-med.yml'),
 	require('./make-minus-one-hard.yml'),

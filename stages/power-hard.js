@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'power-hard',
-	version: 1,
+	version: 2,
 	parts: {
 		wireI: null,
 		wireL: null,
