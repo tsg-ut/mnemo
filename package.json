@@ -81,6 +81,7 @@
     "postcss-font-magician": "^1.5.0",
     "pug-cli": "^1.0.0-alpha6",
     "replace": "^0.3.0",
+    "seedrandom": "^2.4.2",
     "sequelize-cli": "^2.4.0",
     "sqlite3": "^3.1.4",
     "uglifyify": "^3.0.3",

@@ -411,3 +411,33 @@ describe 'validator' ->
       expect message .to.be.undefined
       expect blocks .to.equal 4
       expect clocks .to.equal 3
+
+    It 'supports dynamically generated test cases' ->
+      {pass, message, blocks, clocks} = validate-submission do
+        stage: 'calc03'
+        board:
+          * x: 2
+            y: 0
+            type: 'wireI'
+            rotate: 0
+          * x: 2
+            y: 1
+            type: 'times-2'
+            rotate: 0
+          * x: 2
+            y: 2
+            type: 'wireI'
+            rotate: 0
+          * x: 2
+            y: 3
+            type: 'times-3'
+            rotate: 0
+          * x: 2
+            y: 4
+            type: 'wireI'
+            rotate: 0
+
+      expect pass .to.be.true
+      expect message .to.be.undefined
+      expect blocks .to.equal 7
+      expect clocks .to.equal 5
