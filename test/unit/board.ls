@@ -1,5 +1,6 @@
 require! {
   chai: {expect}
+  seedrandom
   '../../lib/board': Board
   '../../lib/block': Block
 }
@@ -80,6 +81,21 @@ describe 'Board' ->
         * x: 3, y: 2, type: \times-2, rotate: 0
         * x: 0, y: 3, type: \diode, rotate: 1
       ]
+
+  describe '#getSeededRandom' ->
+    It 'returns seeded random function with board data' ->
+      @board.place-block x: 1, y: 1, type: \diode, rotate: 1
+
+      expected-random = seedrandom '[[1,1,"diode",1]]'
+      result-random = @board.get-seeded-random!
+
+      expect result-random .to.be.a \function
+
+      expected = expected-random!
+      result = result-random!
+
+      expect result .to.be.a \number
+      expect result .to.equal expected
 
   describe '#run' ->
     It 'run the board until the end and report the output' ->
