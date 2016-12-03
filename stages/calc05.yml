@@ -1,4 +1,5 @@
 name: calc05
+version: 1
 parts:
   wireI: null
   times-2: 1

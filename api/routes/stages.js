@@ -39,7 +39,12 @@ router.get('/:stage/submissions', (req, res) => {
 	Submissions.findAll({
 		include: [{
 			model: Stages,
-			where: {name: stageName},
+			where: {
+				name: stageName,
+				migratedVersion: {
+					$col: 'submissions.version',
+				},
+			},
 		}],
 		order: [
 			['score', 'DESC'],
@@ -89,82 +94,85 @@ router.post('/:stage/submissions', (req, res) => {
 				error: true,
 				message: 'stage not found',
 			});
-		} else {
-			submissionData.stage = stageName;
+			return;
+		}
 
-			const {pass, message, blocks, clocks} = validateSubmission(submissionData);
+		submissionData.stage = stageName;
 
-			if (!pass) {
+		const {pass, message, blocks, clocks} = validateSubmission(submissionData);
+
+		if (!pass) {
+			res.status(400).json({
+				error: true,
+				message,
+			});
+			return;
+		}
+
+		const stageDatum = stageData.find((s) => s.name === stageName);
+
+		const score = calculateScore({
+			clocks,
+			blocks,
+			stage: stageDatum,
+		});
+
+		if (existingSubmission) {
+			if (score <= existingSubmission.score && stageDatum.version <= existingSubmission.version) {
 				res.status(400).json({
 					error: true,
-					message,
+					message: 'user name existing',
 				});
 				return;
 			}
 
-			const stageDatum = stageData.find((s) => s.name === stageName);
-
-			const score = calculateScore({
-				clocks,
+			Submissions.update({
+				name: req.body.name,
+				board: JSON.stringify(req.body.board),
+				score,
 				blocks,
-				stage: stageDatum,
-			});
-
-			if (existingSubmission) {
-				if (score <= existingSubmission.score) {
-					res.status(400).json({
-						error: true,
-						message: 'user name existing',
-					});
-					return;
-				}
-
-				Submissions.update({
+				clocks,
+				version: stageDatum.version,
+				stageId: stage.id,
+			}, {
+				where: {
 					name: req.body.name,
-					board: JSON.stringify(req.body.board),
-					score,
-					blocks,
-					clocks,
 					stageId: stage.id,
-				}, {
+				},
+			}).then(([count]) => {
+				assert.strictEqual(count, 1);
+				return Submissions.findOne({
 					where: {
 						name: req.body.name,
 						stageId: stage.id,
 					},
-				}).then(([count]) => {
-					assert.strictEqual(count, 1);
-					return Submissions.findOne({
-						where: {
-							name: req.body.name,
-							stageId: stage.id,
-						},
-					});
-				}).then((submission) => {
-					res.json(submission);
-				}).catch((error) => {
-					res.status(500).json({
-						error: true,
-						message: error.message,
-					});
 				});
-			} else {
-				// If no previous submission is existing
-				Submissions.create({
-					name: req.body.name,
-					board: JSON.stringify(req.body.board),
-					score,
-					blocks,
-					clocks,
-					stageId: stage.id,
-				}).then((submission) => {
-					res.json(submission);
-				}).catch((error) => {
-					res.status(500).json({
-						error: true,
-						message: error.message,
-					});
+			}).then((submission) => {
+				res.json(submission);
+			}).catch((error) => {
+				res.status(500).json({
+					error: true,
+					message: error.message,
 				});
-			}
+			});
+		} else {
+			// If no previous submission is existing
+			Submissions.create({
+				name: req.body.name,
+				board: JSON.stringify(req.body.board),
+				score,
+				blocks,
+				clocks,
+				version: stageDatum.version,
+				stageId: stage.id,
+			}).then((submission) => {
+				res.json(submission);
+			}).catch((error) => {
+				res.status(500).json({
+					error: true,
+					message: error.message,
+				});
+			});
 		}
 	});
 });

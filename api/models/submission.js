@@ -43,6 +43,14 @@ const Submission = sequelize.define('submissions', {
 			key: 'id',
 		},
 	},
+	version: {
+		type: Sequelize.INTEGER,
+		allowNull: false,
+		defaultValue: 1,
+		validate: {
+			min: 1,
+		},
+	},
 });
 
 Submission.belongsTo(Stage);
