@@ -1,4 +1,5 @@
 name: wire01
+version: 2
 parts:
   wireI: null
 inputX: 1

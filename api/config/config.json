@@ -9,7 +9,8 @@
     "username": "",
     "password": "",
     "dialect": "sqlite",
-    "storage": "db-test.sqlite3"
+    "storage": ":memory:",
+    "logging": false
   },
   "production": {
     "use_env_variable": "DATABASE_URL"

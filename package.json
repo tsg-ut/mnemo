@@ -31,7 +31,6 @@
     "test": "npm run unit && npm run functional && npm run lint",
     "api:init": "cd api && sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
     "api": "cd api && node index.js",
-    "test:api:init": "cd api && cross-env NODE_ENV=test sequelize db:migrate:undo:all && cross-env NODE_ENV=test sequelize db:migrate && cross-env NODE_ENV=test sequelize db:seed:all",
     "test:api": "cd api && cross-env NODE_ENV=test istanbul cover ../node_modules/mocha/bin/_mocha -- --recursive"
   },
   "repository": {
@@ -85,9 +84,11 @@
     "sequelize-cli": "^2.4.0",
     "sqlite3": "^3.1.4",
     "uglifyify": "^3.0.3",
+    "umzug": "^1.11.0",
     "watchify": "^3.7.0"
   },
   "dependencies": {
+    "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
     "core-js": "^2.4.1",
     "cors": "^2.8.1",
