@@ -5,6 +5,7 @@ require! {
   seedrandom
   'core-js/es5'
   'core-js/es6'
+  '../../stages/calc03'
   '../../stages/factorial'
 }
 
@@ -36,6 +37,15 @@ io-spec = ({input, output}) ->
 describe 'Stage Data' ->
   before-each ->
     @random = seedrandom ''
+
+  describe 'calc03 stage' ->
+    It 'generates multiply of 6' ->
+      io = calc03.io-generator @random
+
+      expect io .to.satisfy io-spec
+
+      expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
+        6 * input is output
 
   describe 'factoriol stage' ->
     It 'generates factorals' ->
