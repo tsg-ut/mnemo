@@ -9,6 +9,7 @@ require! {
   '../../stages/factorial'
   '../../stages/parity'
   '../../stages/fibonacci'
+  '../../stages/power-hard'
 }
 
 chai.use chai-things
@@ -21,7 +22,10 @@ zip = (array-A, array-B) ->
   Array.from {length: Math.min array-A.length, array-B.length}, (item, index) ->
     [array-A[index], array-B[index]]
 
-integrality = (n) -> Number.is-integer n or Number.is-finite n
+integrality = (n) ->
+  | typeof! n is \Number => Number.is-integer n
+  | typeof! n is \Array => n.every integrality
+  | otherwise => false
 
 io-spec = ({input, output}) ->
   expect input .to.be.an \array
@@ -91,3 +95,14 @@ describe 'Stage Data' ->
         output is fibonacci-calc input
 
       expect io.input.3 .to.equal 20
+
+  describe 'power-hard stage' ->
+    It 'generates powers' ->
+      io = power-hard.io-generator @random
+
+      expect io .to.satisfy io-spec
+
+      expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
+        output is Math.pow input.0, input.1
+
+      expect io.input.2 .to.deep.equal [2, 35]
