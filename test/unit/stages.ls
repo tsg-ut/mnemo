@@ -11,6 +11,7 @@ require! {
   '../../stages/fibonacci'
   '../../stages/power-hard'
   '../../stages/gcd'
+  '../../stages/lcm'
 }
 
 chai.use chai-things
@@ -119,3 +120,14 @@ describe 'Stage Data' ->
         output is mathjs.gcd input.0, input.1
 
       expect io.input.3 .to.deep.equal [56, 1275]
+
+  describe 'lcm stage' ->
+    It 'generates LCMs' ->
+      io = lcm.io-generator @random
+
+      expect io .to.satisfy io-spec
+
+      expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
+        output is mathjs.lcm input.0, input.1
+
+      expect io.input.3 .to.deep.equal [450, 756]
