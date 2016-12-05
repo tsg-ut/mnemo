@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'gcd',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
