@@ -4,6 +4,8 @@ parts:
   wireI: null
   wireL: null
   wireT: null
+  wireX: null
+  wireXdot: null
   nand: null
 inputX:
   - 1
