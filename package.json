@@ -57,6 +57,7 @@
     "browserify-livescript": "^0.2.3",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "chai-things": "^0.2.0",
     "chokidar-cli": "^1.2.0",
     "concurrently": "^3.0.0",
     "coveralls": "^2.11.12",

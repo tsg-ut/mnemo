@@ -1,5 +1,6 @@
 require! {
-  chai: {expect}
+  chai
+  'chai-things'
   mathjs # as reference implementation
   seedrandom
   'core-js/es5'
@@ -7,16 +8,30 @@ require! {
   '../../stages/factorial'
 }
 
+chai.use chai-things
+
+{expect} = chai
+
 It = global.it
 
 zip = (array-A, array-B) ->
   Array.from {length: Math.min array-A.length, array-B.length}, (item, index) ->
     [array-A[index], array-B[index]]
 
-uniqueness = (array) ->
-  unique-array = Array.from new Set array
-  expect array .to.deep.equal unique-array
-  return true
+integrality = (n) -> Number.is-integer n or Number.is-finite n
+
+io-spec = ({input, output}) ->
+  expect input .to.be.an \array
+  expect output .to.be.an \array
+
+  # Uniqueness of input
+  unique-input = Array.from new Set input
+  expect input .to.deep.equal unique-input
+
+  expect input .to.all.satisfy integrality
+  expect output .to.all.satisfy integrality
+
+  expect input .to.have.length output.length
 
 describe 'Stage Data' ->
   before-each ->
@@ -24,9 +39,9 @@ describe 'Stage Data' ->
 
   describe 'factoriol stage' ->
     It 'generates factorals' ->
-      {input, output} = factorial.io-generator @random
+      io = factorial.io-generator @random
 
-      expect input .to.satisfy uniqueness
+      expect io .to.satisfy io-spec
 
-      for [input, output] in zip input, output
-        expect output .to.equal mathjs.factorial input
+      expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
+        output is mathjs.factorial input
