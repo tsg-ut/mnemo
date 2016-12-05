@@ -13,6 +13,7 @@ require! {
   '../../stages/gcd'
   '../../stages/lcm'
   '../../stages/sqrt-easy'
+  '../../stages/sqrt-hard'
   '../../stages/msd'
   '../../stages/mod3-hard'
 }
@@ -148,6 +149,20 @@ describe 'Stage Data' ->
       expect io.output.1 .to.be.least 2 .and.most 14
       expect io.output.2 .to.be.least 2 .and.most 14
       expect io.output.3 .to.equal 15
+
+  describe 'sqrt-hard stage' ->
+    It 'generates hard square roots' ->
+      io = sqrt-hard.io-generator @random
+
+      expect io .to.satisfy io-spec
+
+      expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
+        input is output ** 2
+
+      expect io.output.0 .to.equal 3
+      expect io.output.1 .to.be.least 10 .and.below 100
+      expect io.output.2 .to.be.least 1000 .and.below 5000
+      expect io.output.3 .to.equal 5103
 
   describe 'msd stage' ->
     It 'generates MSDs' ->
