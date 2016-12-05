@@ -12,6 +12,7 @@ require! {
   '../../stages/power-hard'
   '../../stages/gcd'
   '../../stages/lcm'
+  '../../stages/sqrt-easy'
 }
 
 chai.use chai-things
@@ -131,3 +132,17 @@ describe 'Stage Data' ->
         output is mathjs.lcm input.0, input.1
 
       expect io.input.3 .to.deep.equal [450, 756]
+
+  describe 'sqrt-easy stage' ->
+    It 'generates square roots' ->
+      io = sqrt-easy.io-generator @random
+
+      expect io .to.satisfy io-spec
+
+      expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
+        input is output ** 2
+
+      expect io.output.0 .to.be.least 2 .and.most 14
+      expect io.output.1 .to.be.least 2 .and.most 14
+      expect io.output.2 .to.be.least 2 .and.most 14
+      expect io.output.3 .to.equal 15
