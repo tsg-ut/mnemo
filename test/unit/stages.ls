@@ -10,6 +10,7 @@ require! {
   '../../stages/parity'
   '../../stages/fibonacci'
   '../../stages/power-hard'
+  '../../stages/gcd'
 }
 
 chai.use chai-things
@@ -105,4 +106,16 @@ describe 'Stage Data' ->
       expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
         output is Math.pow input.0, input.1
 
+      # TODO: test input.0 ond input.1
       expect io.input.2 .to.deep.equal [2, 35]
+
+  describe 'gcd stage' ->
+    It 'generates GCDs' ->
+      io = gcd.io-generator @random
+
+      expect io .to.satisfy io-spec
+
+      expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
+        output is mathjs.gcd input.0, input.1
+
+      expect io.input.3 .to.deep.equal [56, 1275]
