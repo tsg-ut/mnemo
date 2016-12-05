@@ -14,6 +14,7 @@ require! {
   '../../stages/lcm'
   '../../stages/sqrt-easy'
   '../../stages/msd'
+  '../../stages/mod3-hard'
 }
 
 chai.use chai-things
@@ -159,3 +160,22 @@ describe 'Stage Data' ->
 
       expect io.input.2 .to.equal 0
       expect io.input.3 .to.equal 123456789
+
+  describe 'mod3-hard stage' ->
+    It 'generates moduloes of 3' ->
+      io = mod3-hard.io-generator @random
+
+      expect io .to.satisfy io-spec
+
+      expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
+        output is input % 3
+
+      expect io.input.0 .to.be.least 10000000 .and.below 90000000
+      expect io.input.1 .to.be.least 10000000 .and.below 90000000
+      expect io.input.2 .to.be.least 10000000 .and.below 90000000
+      expect io.input.3 .to.be.least 10000000 .and.below 90000000
+      expect io.input.4 .to.be.least 99990000 .and.below 100000000
+
+      expect io.output.0 .to.equal 0
+      expect io.output.1 .to.equal 1
+      expect io.output.2 .to.equal 2
