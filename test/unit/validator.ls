@@ -344,6 +344,25 @@ describe 'validator' ->
             y: 2
             type: 'wireI'
             rotate: 0
+      # Endless
+      * stage: 'calc01'
+        board:
+          * x: 0
+            y: 0
+            type: 'wireL'
+            rotate: 1
+          * x: 1
+            y: 0
+            type: 'wireT'
+            rotate: 3
+          * x: 0
+            y: 1
+            type: 'wireL'
+            rotate: 0
+          * x: 1
+            y: 1
+            type: 'wireL'
+            rotate: 3
       # Can even pass a test case, but not all
       * stage: 'calc03'
         board:
