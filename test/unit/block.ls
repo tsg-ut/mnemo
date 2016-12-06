@@ -598,3 +598,185 @@ describe 'Block' ->
             right: 4
           out:
             bottom: 33
+
+  describe 'and block' ->
+    It 'calculates logical and' ->
+      io-test do
+        type: \and
+        in:
+          left: 0
+          right: 0
+        out:
+          bottom: 0
+
+      io-test do
+        type: \and
+        in:
+          left: 1
+          right: 0
+        out:
+          bottom: 0
+
+      io-test do
+        type: \and
+        in:
+          left: 0
+          right: 1
+        out:
+          bottom: 0
+
+      io-test do
+        type: \and
+        in:
+          left: 1
+          right: 1
+        out:
+          bottom: 1
+
+  describe 'or block' ->
+    It 'calculates logical or' ->
+      io-test do
+        type: \or
+        in:
+          left: 0
+          right: 0
+        out:
+          bottom: 0
+
+      io-test do
+        type: \or
+        in:
+          left: 1
+          right: 0
+        out:
+          bottom: 1
+
+      io-test do
+        type: \or
+        in:
+          left: 0
+          right: 1
+        out:
+          bottom: 1
+
+      io-test do
+        type: \or
+        in:
+          left: 1
+          right: 1
+        out:
+          bottom: 1
+
+  describe 'nand block' ->
+    It 'calculates logical nand' ->
+      io-test do
+        type: \nand
+        in:
+          left: 0
+          right: 0
+        out:
+          bottom: 1
+
+      io-test do
+        type: \nand
+        in:
+          left: 1
+          right: 0
+        out:
+          bottom: 1
+
+      io-test do
+        type: \nand
+        in:
+          left: 0
+          right: 1
+        out:
+          bottom: 1
+
+      io-test do
+        type: \nand
+        in:
+          left: 1
+          right: 1
+        out:
+          bottom: 0
+
+  describe 'nor block' ->
+    It 'calculates logical nor' ->
+      io-test do
+        type: \nor
+        in:
+          left: 0
+          right: 0
+        out:
+          bottom: 1
+
+      io-test do
+        type: \nor
+        in:
+          left: 1
+          right: 0
+        out:
+          bottom: 0
+
+      io-test do
+        type: \nor
+        in:
+          left: 0
+          right: 1
+        out:
+          bottom: 0
+
+      io-test do
+        type: \nor
+        in:
+          left: 1
+          right: 1
+        out:
+          bottom: 0
+
+  describe 'xor block' ->
+    It 'calculates logical xor' ->
+      io-test do
+        type: \xor
+        in:
+          left: 0
+          right: 0
+        out:
+          bottom: 0
+
+      io-test do
+        type: \xor
+        in:
+          left: 1
+          right: 0
+        out:
+          bottom: 1
+
+      io-test do
+        type: \xor
+        in:
+          left: 0
+          right: 1
+        out:
+          bottom: 1
+
+      io-test do
+        type: \xor
+        in:
+          left: 1
+          right: 1
+        out:
+          bottom: 0
+
+  describe 'not block' ->
+    It 'calculates logical not' ->
+      io-test do
+        type: \not
+        in: top: 0
+        out: bottom: 1
+
+      io-test do
+        type: \not
+        in: top: 1
+        out: bottom: 0
