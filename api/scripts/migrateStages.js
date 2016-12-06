@@ -1,7 +1,6 @@
 /* eslint no-console: 'off' */
 
 // ステージのバージョンを変更した場合にランキングをマイグレートするスクリプト
-// TODO: ステージを追加・削除した場合に対応
 
 const assert = require('assert');
 const Promise = require('bluebird');
@@ -18,6 +17,27 @@ sequelize.transaction((transaction) => {
 	return Stages.findAll({transaction}).then((stages) => {
 		console.log(`Got ${stages.length} stages`);
 
+		// Migrate added stages
+		const stageAdditions = stageData.filter((stageDatum) => (
+			stages.every((stage) => (
+				stage.name !== stageDatum.name
+			))
+		));
+
+		if (stageAdditions.length === 0) {
+			console.log('No stage additions. Continueing...');
+			return Promise.resolve(stages);
+		}
+
+		console.log(`Creating ${stageAdditions.length} new stages...`);
+
+		return Stages.bulkCreate(stageAdditions.map((stageDatum) => ({
+			name: stageDatum.name,
+			migratedVersion: stageDatum.version,
+		})), {transaction}).then(() => (
+			Stages.findAll({transaction})
+		));
+	}).then((stages) => {
 		// Find stages which needs migration
 		const migratingStages = stages.filter((stage) => {
 			const stageDatum = stageData.find((tempStage) => tempStage.name === stage.name);
