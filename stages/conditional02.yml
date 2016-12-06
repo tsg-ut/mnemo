@@ -30,5 +30,5 @@ output:
 width: 11
 height: 11
 clockLimit: 100
-statement: ifを使って、5は2倍、6は3倍、それ以外は1倍をしてみよう!
+statement: 5は2倍、6は3倍、それ以外は1倍をしてみよう!
 title: 条件分岐 -基本- 2
