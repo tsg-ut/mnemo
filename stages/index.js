@@ -45,4 +45,5 @@ module.exports = [
 	require('./100-again.yml'),
 	require('./1000.yml'),
 	require('./plus-32-hard.yml'),
+	require('./xor.yml'),
 ];
