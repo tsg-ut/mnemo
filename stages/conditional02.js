@@ -28,7 +28,7 @@ module.exports = {
 			if (input === 5) {
 				return 10;
 			} else if (input === 6) {
-				return 15;
+				return 18;
 			}
 			return input;
 		};
