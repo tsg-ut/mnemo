@@ -24,6 +24,40 @@ module.exports = {
 	input: [5, 6, null, null],
 	output: [10, 18, null, null],
 	ioGenerator: (random) => {
+		const lowerbound = (array, value) => {
+			if (array[0] > value) {
+				return -1;
+			}
+
+			let lb = 0;
+			let ub = array.length;
+
+			while (lb + 1 < ub) {
+				const middle = Math.floor((ub + lb) / 2);
+				if (array[middle] > value) {
+					ub = middle;
+				} else {
+					lb = middle;
+				}
+			}
+			return lb;
+		};
+
+		const generateRandom = (excludes, maximum = 200) => {
+			excludes.sort();
+			const modifiedMax = maximum - excludes.length;
+			const number = Math.floor(random() * modifiedMax);
+
+			let before = -1;
+			let offset = 0;
+			while (before !== offset) {
+				const tmp = lowerbound(excludes, number + offset) + 1;
+				before = offset;
+				offset = tmp;
+			}
+			return number + offset;
+		};
+
 		const generateAnswer = (input) => {
 			if (input === 5) {
 				return 10;
@@ -33,10 +67,10 @@ module.exports = {
 			return input;
 		};
 
-		const input1 = Math.floor(random() * 200);
+		const input1 = generateRandom([5, 6], 198);
 		const output1 = generateAnswer(input1);
 
-		const input2 = Math.floor(random() * 200);
+		const input2 = generateRandom([5, 6], 198);
 		const output2 = generateAnswer(input2);
 
 		return {

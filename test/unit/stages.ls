@@ -55,13 +55,13 @@ fibonacci-calc = (n, value = 1, prev = 0) ->
   if n is 0 then prev else fibonacci-calc n - 1, value + prev, value
 
 conditional1-calc = (x) ->
-  if (x % 2) is 0 then 2 * x else 3 * x
+  if x % 2 is 0 then 2 * x else 3 * x
 
 conditional2-calc = (x) ->
   if x is 5
-  then 10
+    10
   else if x is 6
-  then 18
+    18
   else x
 
 describe 'Stage Data' ->
@@ -89,6 +89,11 @@ describe 'Stage Data' ->
       expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
         output is conditional1-calc input
 
+      expect io.input.0 .to.equal 5
+      expect io.input.1 .to.equal -10
+      expect io.input.2 .to.be.below 200
+      expect io.input.3 .to.be.below 200
+
   describe 'conditional02 stage' ->
     It 'generates 2*5 if 5, 3*6 else if 6, 1 otherwise' ->
       io = conditional02.io-generator @random
@@ -98,6 +103,11 @@ describe 'Stage Data' ->
       expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
         output is conditional2-calc input
 
+      expect io.input.0 .to.equal 5
+      expect io.input.1 .to.equal 6
+      expect io.input.2 .to.be.below 200
+      expect io.input.3 .to.be.below 200
+
   describe 'conditional03 stage' ->
     It 'generates two addition in modulo 7' ->
       io = conditional03.io-generator @random
@@ -106,6 +116,12 @@ describe 'Stage Data' ->
 
       expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
         output is (input + 2) % 7
+
+      expect io.input.0 .to.equal 5
+      expect io.input.1 .to.equal 3
+      expect io.input.2 .to.be.below 200
+      expect io.input.3 .to.be.below 200
+      expect io.input.4 .to.be.below 200
 
   describe 'factoriol stage' ->
     It 'generates factorals' ->
