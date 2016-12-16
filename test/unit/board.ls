@@ -46,7 +46,7 @@ describe 'Board' ->
   describe '#input' ->
     It 'executes the board' ->
       @board.input 100
-      expect @board.executing .to.be.true
+      expect @board.status .to.equal 'executing'
 
   describe '#dataCount' ->
     It 'counts data in board' ->
