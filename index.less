@@ -503,67 +503,16 @@ button {
 
 							position: relative;
 
-							.top, .bottom {
-								.fixed-height(25px);
-							}
-
-							.middle {
-								.grow-height(1);
-							}
-
-							.top, .bottom, .middle {
-								display: flex;
-
-								.left, .right {
-									.fixed-width(25px);
-								}
-
-								.center {
-									.grow-width(1);
-								}
-							}
-
-							.top .left {
-								background-image: url(image/frame-topleft.png);
-							}
-
-							.top .center {
-								background-image: url(image/frame-top.png);
-								background-size: 100% 100%;
-							}
-
-							.top .right {
-								background-image: url(image/frame-topright.png);
-							}
-
-							.middle .left {
-								background-image: url(image/frame-left.png);
-								background-size: 100% 100%;
-							}
-
-							.middle .right {
-								background-image: url(image/frame-right.png);
-								background-size: 100% 100%;
-							}
-
-							.bottom .left {
-								background-image: url(image/frame-bottomleft.png);
-							}
-
-							.bottom .center {
-								background-image: url(image/frame-bottom.png);
-								background-size: 100% 100%;
-							}
-
-							.bottom .right {
-								background-image: url(image/frame-bottomright.png);
-							}
+                            border-style: solid;
+                            border-width: 25px;
+                            border-image: url(image/frame.png) 25 repeat;
 
 							.clock-area {
 								position: absolute;
 								top: 100%;
 								right: 0;
 
+                                margin: 25px -25px;
 								padding: 3px 4px 4px;
 
 								border: 2px outset #ff920e;
