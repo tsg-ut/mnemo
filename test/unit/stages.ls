@@ -123,8 +123,8 @@ describe 'Stage Data' ->
       expect io.input.3 .to.be.below 200
       expect io.input.4 .to.be.below 200
 
-  describe 'factoriol stage' ->
-    It 'generates factorals' ->
+  describe 'factorial stage' ->
+    It 'generates factorials' ->
       io = factorial.io-generator @random
 
       expect io .to.satisfy io-spec
