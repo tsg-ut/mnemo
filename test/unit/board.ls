@@ -56,6 +56,18 @@ describe 'Board' ->
 
       expect @board.data-count .to.equal 3
 
+  describe '#dataExists' ->
+    It 'returns if any data exist on the current board' ->
+      @board.place-block x: 2, y: 0, type: \wireXdot, rotate: 0
+      @board.input 100
+      expect @board.data-exists .to.be.true
+      @board.step!
+      expect @board.data-exists .to.be.true
+      @board.pass!
+      expect @board.data-exists .to.be.true
+      @board.step!
+      expect @board.data-exists .to.be.false
+
   describe '#blockCount' ->
     It 'counts blocks in board' ->
       @board.place-block x: 2, y: 1, type: \wireI, rotate: 0
