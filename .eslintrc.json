@@ -123,6 +123,10 @@
         "no-bitwise": "off",
         "no-caller": "error",
         "no-catch-shadow": "error",
+        "no-constant-condition": [
+            "error", 
+            { "checkLoops" : false }
+        ],
         "no-confusing-arrow": "off",
         "no-continue": "off",
         "no-div-regex": "error",

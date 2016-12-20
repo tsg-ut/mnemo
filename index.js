@@ -673,9 +673,16 @@ var Block = function (_EventEmitter) {
 		_this.rotate = config.rotate;
 		_this.config = config;
 		_this.size = size;
+		_this.inputExists = false; // indicates whether self has input
+		_this.outputExists = false; // indicates whether self has anything as output now
 		_this.inputQueues = new Map([['top', []], ['left', []], ['right', []], ['bottom', []]]);
 
 		_this.outputQueues = new Map([['top', []], ['left', []], ['right', []], ['bottom', []]]);
+		if (_this.config.type === 'wire' || _this.config.type === 'calc') {
+			_this.rotatedPlugs = _this.config.io.plugs.map(function (direction) {
+				return _this.rotatedDirection(direction);
+			});
+		}
 		return _this;
 	}
 
@@ -692,6 +699,7 @@ var Block = function (_EventEmitter) {
 	}, {
 		key: 'input',
 		value: function input(position, data) {
+			this.inputExists = true;
 			this.inputQueues.get(position).push(data);
 		}
 	}, {
@@ -699,354 +707,383 @@ var Block = function (_EventEmitter) {
 		value: function step() {
 			var _this2 = this;
 
-			if (this.config.type === 'empty') {
-				// Erase all data passed to the empty block
-				var _iteratorNormalCompletion = true;
-				var _didIteratorError = false;
-				var _iteratorError = undefined;
+			this.inputExists = false;
 
-				try {
-					for (var _iterator = this.inputQueues.values()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-						var queue = _step.value;
+			switch (this.config.type) {
+				case 'empty':
+					{
+						// Erase all data passed to the empty block
+						var _iteratorNormalCompletion = true;
+						var _didIteratorError = false;
+						var _iteratorError = undefined;
 
-						while (queue.length) {
-							var data = queue.shift();
-							this.emit('erase', data);
-						}
-					}
-				} catch (err) {
-					_didIteratorError = true;
-					_iteratorError = err;
-				} finally {
-					try {
-						if (!_iteratorNormalCompletion && _iterator.return) {
-							_iterator.return();
-						}
-					} finally {
-						if (_didIteratorError) {
-							throw _iteratorError;
-						}
-					}
-				}
-			} else if (this.config.type === 'wire') {
-				var rotatedPlugs = this.config.io.plugs.map(function (direction) {
-					return _this2.rotatedDirection(direction);
-				});
+						try {
+							for (var _iterator = this.inputQueues.values()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+								var queue = _step.value;
 
-				var _iteratorNormalCompletion2 = true;
-				var _didIteratorError2 = false;
-				var _iteratorError2 = undefined;
-
-				try {
-					var _loop = function _loop() {
-						var _step2$value = _slicedToArray(_step2.value, 2),
-						    source = _step2$value[0],
-						    queue = _step2$value[1];
-
-						// When data exists in pluged direction
-						if (queue.length !== 0 && rotatedPlugs.includes(source)) {
-							(function () {
-								var destinations = rotatedPlugs.filter(function (direction) {
-									return direction !== source;
-								});
-								var data = queue.shift();
-
-								// pass through
-								var input = new Map([[source, data]]);
-
-								var output = new Map();
-								destinations.forEach(function (direction) {
-									var outData = new Data(_this2.board, data.value);
-									_this2.outputQueues.get(direction).push(outData);
-									output.set(direction, outData);
-								});
-
-								_this2.emit('pass', { in: input, out: output });
-							})();
-						}
-
-						// Erase data when data exists in non-pluged direction
-						if (!rotatedPlugs.includes(source)) {
-							while (queue.length) {
-								var _data = queue.shift();
-								_this2.emit('erase', _data);
+								while (queue.length) {
+									var data = queue.shift();
+									this.emit('erase', data);
+								}
+							}
+						} catch (err) {
+							_didIteratorError = true;
+							_iteratorError = err;
+						} finally {
+							try {
+								if (!_iteratorNormalCompletion && _iterator.return) {
+									_iterator.return();
+								}
+							} finally {
+								if (_didIteratorError) {
+									throw _iteratorError;
+								}
 							}
 						}
-					};
 
-					for (var _iterator2 = this.inputQueues.entries()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-						_loop();
+						break;
 					}
-				} catch (err) {
-					_didIteratorError2 = true;
-					_iteratorError2 = err;
-				} finally {
-					try {
-						if (!_iteratorNormalCompletion2 && _iterator2.return) {
-							_iterator2.return();
+				case 'wire':
+					{
+						var _iteratorNormalCompletion2 = true;
+						var _didIteratorError2 = false;
+						var _iteratorError2 = undefined;
+
+						try {
+							var _loop = function _loop() {
+								var _step2$value = _slicedToArray(_step2.value, 2),
+								    source = _step2$value[0],
+								    queue = _step2$value[1];
+
+								// When data exists in pluged direction
+								if (queue.length === 0) {
+									return 'continue';
+								}
+								if (_this2.rotatedPlugs.includes(source)) {
+									(function () {
+										var destinations = _this2.rotatedPlugs.filter(function (direction) {
+											return direction !== source;
+										});
+										var data = queue.shift();
+
+										// pass through
+										var input = new Map([[source, data]]);
+
+										var output = new Map();
+										destinations.forEach(function (direction) {
+											var outData = new Data(_this2.board, data.value);
+											_this2.outputQueues.get(direction).push(outData);
+											output.set(direction, outData);
+										});
+
+										_this2.emit('pass', { in: input, out: output });
+										_this2.outputExists = true;
+									})();
+								} else {
+									// Erase data when data exists in non-pluged direction
+									while (queue.length) {
+										var _data = queue.shift();
+										_this2.emit('erase', _data);
+									}
+								}
+							};
+
+							for (var _iterator2 = this.inputQueues.entries()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+								var _ret = _loop();
+
+								if (_ret === 'continue') continue;
+							}
+						} catch (err) {
+							_didIteratorError2 = true;
+							_iteratorError2 = err;
+						} finally {
+							try {
+								if (!_iteratorNormalCompletion2 && _iterator2.return) {
+									_iterator2.return();
+								}
+							} finally {
+								if (_didIteratorError2) {
+									throw _iteratorError2;
+								}
+							}
 						}
-					} finally {
-						if (_didIteratorError2) {
-							throw _iteratorError2;
-						}
+
+						break;
 					}
-				}
-			} else if (this.config.type === 'calc') {
-				var _rotatedPlugs = this.config.io.plugs.map(function (direction) {
-					return _this2.rotatedDirection(direction);
-				});
+				case 'calc':
+					{
+						var _iteratorNormalCompletion3 = true;
+						var _didIteratorError3 = false;
+						var _iteratorError3 = undefined;
 
-				var _iteratorNormalCompletion3 = true;
-				var _didIteratorError3 = false;
-				var _iteratorError3 = undefined;
+						try {
+							var _loop2 = function _loop2() {
+								var _step3$value = _slicedToArray(_step3.value, 2),
+								    source = _step3$value[0],
+								    queue = _step3$value[1];
 
-				try {
-					var _loop2 = function _loop2() {
-						var _step3$value = _slicedToArray(_step3.value, 2),
-						    source = _step3$value[0],
-						    queue = _step3$value[1];
+								// When data exists in pluged direction
+								if (queue.length !== 0 && _this2.rotatedPlugs.includes(source)) {
+									(function () {
+										var destinations = _this2.rotatedPlugs.filter(function (direction) {
+											return direction !== source;
+										});
+										var data = queue.shift();
 
-						// When data exists in pluged direction
-						if (queue.length !== 0 && _rotatedPlugs.includes(source)) {
+										// Calculate and pass through
+										var input = new Map([[source, data]]);
+
+										var output = new Map();
+										destinations.forEach(function (direction) {
+											var value = _this2.config.func(data.value);
+											var outData = new Data(_this2.board, isNaN(value) ? 0 : value);
+											_this2.outputQueues.get(direction).push(outData);
+											output.set(direction, outData);
+										});
+
+										_this2.emit('pass', { in: input, out: output });
+										_this2.outputExists = true;
+									})();
+								}
+
+								// Erase data when data exists in non-pluged direction
+								if (!_this2.rotatedPlugs.includes(source)) {
+									while (queue.length) {
+										var _data2 = queue.shift();
+										_this2.emit('erase', _data2);
+									}
+								}
+							};
+
+							for (var _iterator3 = this.inputQueues.entries()[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+								_loop2();
+							}
+						} catch (err) {
+							_didIteratorError3 = true;
+							_iteratorError3 = err;
+						} finally {
+							try {
+								if (!_iteratorNormalCompletion3 && _iterator3.return) {
+									_iterator3.return();
+								}
+							} finally {
+								if (_didIteratorError3) {
+									throw _iteratorError3;
+								}
+							}
+						}
+
+						break;
+					}
+				case 'calc2':
+					{
+						var sources = this.config.io.in.map(function (direction) {
+							return _this2.rotatedDirection(direction);
+						});
+						var destination = this.rotatedDirection(this.config.io.out);
+
+						// Execute calculation when all inputs are satisfied
+						if (sources.every(function (source) {
+							return _this2.inputQueues.get(source).length > 0;
+						})) {
 							(function () {
-								var destinations = _rotatedPlugs.filter(function (direction) {
-									return direction !== source;
-								});
-								var data = queue.shift();
+								var _config;
+
+								var datas = [];
 
 								// Calculate and pass through
-								var input = new Map([[source, data]]);
-
-								var output = new Map();
-								destinations.forEach(function (direction) {
-									var value = _this2.config.func(data.value);
-									var outData = new Data(_this2.board, isNaN(value) ? 0 : value);
-									_this2.outputQueues.get(direction).push(outData);
-									output.set(direction, outData);
+								var input = new Map();
+								sources.forEach(function (source) {
+									var data = _this2.inputQueues.get(source).shift();
+									input.set(source, data);
+									datas.push(data);
 								});
 
+								var value = (_config = _this2.config).func.apply(_config, _toConsumableArray(datas.map(function (data) {
+									return data.value;
+								})));
+								var outData = new Data(_this2.board, isNaN(value) ? 0 : value);
+								_this2.outputQueues.get(destination).push(outData);
+								var output = new Map([[destination, outData]]);
+
 								_this2.emit('pass', { in: input, out: output });
+								_this2.outputExists = true;
 							})();
 						}
 
 						// Erase data when data exists in non-pluged direction
-						if (!_rotatedPlugs.includes(source)) {
-							while (queue.length) {
-								var _data2 = queue.shift();
-								_this2.emit('erase', _data2);
+						var _iteratorNormalCompletion4 = true;
+						var _didIteratorError4 = false;
+						var _iteratorError4 = undefined;
+
+						try {
+							for (var _iterator4 = this.inputQueues.entries()[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+								var _step4$value = _slicedToArray(_step4.value, 2),
+								    _source = _step4$value[0],
+								    _queue = _step4$value[1];
+
+								if (!sources.includes(_source)) {
+									while (_queue.length) {
+										var _data3 = _queue.shift();
+										this.emit('erase', _data3);
+									}
+								}
+							}
+						} catch (err) {
+							_didIteratorError4 = true;
+							_iteratorError4 = err;
+						} finally {
+							try {
+								if (!_iteratorNormalCompletion4 && _iterator4.return) {
+									_iterator4.return();
+								}
+							} finally {
+								if (_didIteratorError4) {
+									throw _iteratorError4;
+								}
 							}
 						}
-					};
 
-					for (var _iterator3 = this.inputQueues.entries()[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-						_loop2();
+						break;
 					}
-				} catch (err) {
-					_didIteratorError3 = true;
-					_iteratorError3 = err;
-				} finally {
-					try {
-						if (!_iteratorNormalCompletion3 && _iterator3.return) {
-							_iterator3.return();
-						}
-					} finally {
-						if (_didIteratorError3) {
-							throw _iteratorError3;
-						}
-					}
-				}
-			} else if (this.config.type === 'calc2') {
-				var sources = this.config.io.in.map(function (direction) {
-					return _this2.rotatedDirection(direction);
-				});
-				var destination = this.rotatedDirection(this.config.io.out);
-
-				// Execute calculation when all inputs are satisfied
-				if (sources.every(function (source) {
-					return _this2.inputQueues.get(source).length > 0;
-				})) {
-					(function () {
-						var _config;
-
-						var datas = [];
-
-						// Calculate and pass through
-						var input = new Map();
-						sources.forEach(function (source) {
-							var data = _this2.inputQueues.get(source).shift();
-							input.set(source, data);
-							datas.push(data);
+				case 'calc-switch':
+					{
+						var _sources = this.config.io.in.map(function (direction) {
+							return _this2.rotatedDirection(direction);
+						});
+						var destinations = this.config.io.out.map(function (direction) {
+							return _this2.rotatedDirection(direction);
 						});
 
-						var value = (_config = _this2.config).func.apply(_config, _toConsumableArray(datas.map(function (data) {
-							return data.value;
-						})));
-						var outData = new Data(_this2.board, isNaN(value) ? 0 : value);
-						_this2.outputQueues.get(destination).push(outData);
-						var output = new Map([[destination, outData]]);
+						// Execute calculation when all inputs are satisfied
+						if (_sources.every(function (source) {
+							return _this2.inputQueues.get(source).length > 0;
+						})) {
+							(function () {
+								var _config2;
 
-						_this2.emit('pass', { in: input, out: output });
-					})();
-				}
+								var datas = [];
 
-				// Erase data when data exists in non-pluged direction
-				var _iteratorNormalCompletion4 = true;
-				var _didIteratorError4 = false;
-				var _iteratorError4 = undefined;
+								// Calculate and pass through
+								var input = new Map();
+								_sources.forEach(function (source) {
+									var data = _this2.inputQueues.get(source).shift();
+									input.set(source, data);
+									datas.push(data);
+								});
 
-				try {
-					for (var _iterator4 = this.inputQueues.entries()[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-						var _step4$value = _slicedToArray(_step4.value, 2),
-						    _source = _step4$value[0],
-						    _queue = _step4$value[1];
+								var values = datas.map(function (data) {
+									return data.value;
+								});
 
-						if (!sources.includes(_source)) {
-							while (_queue.length) {
-								var _data3 = _queue.shift();
-								this.emit('erase', _data3);
+								var _config$func = (_config2 = _this2.config).func.apply(_config2, _toConsumableArray(values)),
+								    directionIndex = _config$func.directionIndex,
+								    value = _config$func.value;
+
+								var data = new Data(_this2.board, isNaN(value) ? 0 : value);
+								var destination = destinations[directionIndex];
+								_this2.outputQueues.get(destination).push(data);
+								var output = new Map([[destination, data]]);
+
+								_this2.emit('pass', { in: input, out: output });
+								_this2.outputExists = true;
+							})();
+						}
+
+						// Erase data when data exists in non-pluged direction
+						var _iteratorNormalCompletion5 = true;
+						var _didIteratorError5 = false;
+						var _iteratorError5 = undefined;
+
+						try {
+							for (var _iterator5 = this.inputQueues.entries()[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+								var _step5$value = _slicedToArray(_step5.value, 2),
+								    _source2 = _step5$value[0],
+								    _queue2 = _step5$value[1];
+
+								if (!_sources.includes(_source2)) {
+									while (_queue2.length) {
+										var _data4 = _queue2.shift();
+										this.emit('erase', _data4);
+									}
+								}
+							}
+						} catch (err) {
+							_didIteratorError5 = true;
+							_iteratorError5 = err;
+						} finally {
+							try {
+								if (!_iteratorNormalCompletion5 && _iterator5.return) {
+									_iterator5.return();
+								}
+							} finally {
+								if (_didIteratorError5) {
+									throw _iteratorError5;
+								}
 							}
 						}
+
+						break;
 					}
-				} catch (err) {
-					_didIteratorError4 = true;
-					_iteratorError4 = err;
-				} finally {
-					try {
-						if (!_iteratorNormalCompletion4 && _iterator4.return) {
-							_iterator4.return();
-						}
-					} finally {
-						if (_didIteratorError4) {
-							throw _iteratorError4;
-						}
-					}
-				}
-			} else if (this.config.type === 'calc-switch') {
-				var _sources = this.config.io.in.map(function (direction) {
-					return _this2.rotatedDirection(direction);
-				});
-				var destinations = this.config.io.out.map(function (direction) {
-					return _this2.rotatedDirection(direction);
-				});
+				case 'wireX':
+					{
+						var oppositeDirection = {
+							top: 'bottom',
+							bottom: 'top',
+							left: 'right',
+							right: 'left'
+						};
+						var _iteratorNormalCompletion6 = true;
+						var _didIteratorError6 = false;
+						var _iteratorError6 = undefined;
 
-				// Execute calculation when all inputs are satisfied
-				if (_sources.every(function (source) {
-					return _this2.inputQueues.get(source).length > 0;
-				})) {
-					(function () {
-						var _config2;
+						try {
+							for (var _iterator6 = this.inputQueues.entries()[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+								var _step6$value = _slicedToArray(_step6.value, 2),
+								    _source3 = _step6$value[0],
+								    _queue3 = _step6$value[1];
 
-						var datas = [];
+								var _destination = oppositeDirection[_source3];
 
-						// Calculate and pass through
-						var input = new Map();
-						_sources.forEach(function (source) {
-							var data = _this2.inputQueues.get(source).shift();
-							input.set(source, data);
-							datas.push(data);
-						});
+								// When data exists in pluged direction
+								if (_queue3.length !== 0) {
+									var _data5 = _queue3.shift();
 
-						var values = datas.map(function (data) {
-							return data.value;
-						});
+									// pass through
+									var input = new Map([[_source3, _data5]]);
 
-						var _config$func = (_config2 = _this2.config).func.apply(_config2, _toConsumableArray(values)),
-						    directionIndex = _config$func.directionIndex,
-						    value = _config$func.value;
+									var outData = new Data(this.board, _data5.value);
+									this.outputQueues.get(_destination).push(outData);
+									var output = new Map([[_destination, outData]]);
 
-						var data = new Data(_this2.board, isNaN(value) ? 0 : value);
-						var destination = destinations[directionIndex];
-						_this2.outputQueues.get(destination).push(data);
-						var output = new Map([[destination, data]]);
-
-						_this2.emit('pass', { in: input, out: output });
-					})();
-				}
-
-				// Erase data when data exists in non-pluged direction
-				var _iteratorNormalCompletion5 = true;
-				var _didIteratorError5 = false;
-				var _iteratorError5 = undefined;
-
-				try {
-					for (var _iterator5 = this.inputQueues.entries()[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-						var _step5$value = _slicedToArray(_step5.value, 2),
-						    _source2 = _step5$value[0],
-						    _queue2 = _step5$value[1];
-
-						if (!_sources.includes(_source2)) {
-							while (_queue2.length) {
-								var _data4 = _queue2.shift();
-								this.emit('erase', _data4);
+									this.emit('pass', { in: input, out: output });
+									this.outputExists = true;
+								}
+							}
+						} catch (err) {
+							_didIteratorError6 = true;
+							_iteratorError6 = err;
+						} finally {
+							try {
+								if (!_iteratorNormalCompletion6 && _iterator6.return) {
+									_iterator6.return();
+								}
+							} finally {
+								if (_didIteratorError6) {
+									throw _iteratorError6;
+								}
 							}
 						}
+
+						break;
 					}
-				} catch (err) {
-					_didIteratorError5 = true;
-					_iteratorError5 = err;
-				} finally {
-					try {
-						if (!_iteratorNormalCompletion5 && _iterator5.return) {
-							_iterator5.return();
-						}
-					} finally {
-						if (_didIteratorError5) {
-							throw _iteratorError5;
-						}
-					}
-				}
-			} else if (this.config.type === 'wireX') {
-				var oppositeDirection = {
-					top: 'bottom',
-					bottom: 'top',
-					left: 'right',
-					right: 'left'
-				};
-				var _iteratorNormalCompletion6 = true;
-				var _didIteratorError6 = false;
-				var _iteratorError6 = undefined;
-
-				try {
-					for (var _iterator6 = this.inputQueues.entries()[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-						var _step6$value = _slicedToArray(_step6.value, 2),
-						    _source3 = _step6$value[0],
-						    _queue3 = _step6$value[1];
-
-						var _destination = oppositeDirection[_source3];
-
-						// When data exists in pluged direction
-						if (_queue3.length !== 0) {
-							var _data5 = _queue3.shift();
-
-							// pass through
-							var input = new Map([[_source3, _data5]]);
-
-							var outData = new Data(this.board, _data5.value);
-							this.outputQueues.get(_destination).push(outData);
-							var output = new Map([[_destination, outData]]);
-
-							this.emit('pass', { in: input, out: output });
-						}
-					}
-				} catch (err) {
-					_didIteratorError6 = true;
-					_iteratorError6 = err;
-				} finally {
-					try {
-						if (!_iteratorNormalCompletion6 && _iterator6.return) {
-							_iterator6.return();
-						}
-					} finally {
-						if (_didIteratorError6) {
-							throw _iteratorError6;
-						}
-					}
-				}
 			}
 		}
 	}, {
 		key: 'pass',
 		value: function pass() {
+			this.outputExists = false;
+
 			var _iteratorNormalCompletion7 = true;
 			var _didIteratorError7 = false;
 			var _iteratorError7 = undefined;
@@ -1089,28 +1126,32 @@ var Block = function (_EventEmitter) {
 			switch (direction) {
 				case 'top':
 					if (0 <= this.y - 1) {
-						this.board.getBlock(this.x, this.y - 1).input('bottom', data);
+						var nextBlock = this.board.getBlock(this.x, this.y - 1);
+						nextBlock.input('bottom', data);
 					} else {
 						this.emit('erase', data);
 					}
 					break;
 				case 'bottom':
 					if (this.board.height > this.y + 1) {
-						this.board.getBlock(this.x, this.y + 1).input('top', data);
+						var _nextBlock = this.board.getBlock(this.x, this.y + 1);
+						_nextBlock.input('top', data);
 					} else {
 						this.emit('erase', data);
 					}
 					break;
 				case 'left':
 					if (0 <= this.x - 1) {
-						this.board.getBlock(this.x - 1, this.y).input('right', data);
+						var _nextBlock2 = this.board.getBlock(this.x - 1, this.y);
+						_nextBlock2.input('right', data);
 					} else {
 						this.emit('erase', data);
 					}
 					break;
 				case 'right':
 					if (this.board.width > this.x + 1) {
-						this.board.getBlock(this.x + 1, this.y).input('left', data);
+						var _nextBlock3 = this.board.getBlock(this.x + 1, this.y);
+						_nextBlock3.input('left', data);
 					} else {
 						this.emit('erase', data);
 					}
@@ -1545,29 +1586,28 @@ var Board = function (_EventEmitter) {
 
 			this.input(inputValue);
 
-			// 頼む～ES6末尾再帰最適化実装してくれ～という気分
 			var clockUp = function clockUp() {
-				_this3.step();
+				while (true) {
+					_this3.step();
 
-				if (_this3.status === 'stop' || _this3.status === 'paused') {
-					return null;
+					if (_this3.status === 'stop' || _this3.status === 'paused') {
+						return null;
+					}
+
+					_this3.pass();
+
+					if (_this3.status === 'stop' || _this3.status === 'paused') {
+						return null;
+					}
+
+					if (_this3.clock >= _this3.clockLimit) {
+						return null;
+					}
+
+					if (_this3.dataCount >= 100) {
+						return null;
+					}
 				}
-
-				_this3.pass();
-
-				if (_this3.status === 'stop' || _this3.status === 'paused') {
-					return null;
-				}
-
-				if (_this3.clock >= _this3.clockLimit) {
-					return null;
-				}
-
-				if (_this3.dataCount > 100) {
-					return null;
-				}
-
-				return clockUp();
 			};
 
 			clockUp();
@@ -1622,41 +1662,16 @@ var Board = function (_EventEmitter) {
 			});
 			this.clock++;
 
-			if (this.datas.length === 0) {
-				this.halt();
-			} else {
-				var noOutput = true;
-				this.forBlocks(function (block) {
-					var _iteratorNormalCompletion = true;
-					var _didIteratorError = false;
-					var _iteratorError = undefined;
+			var outputExists = false;
+			this.forBlocks(function (block) {
+				outputExists = block.outputExists || outputExists;
+			});
 
-					try {
-						for (var _iterator = block.outputQueues.values()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-							var queue = _step.value;
-
-							if (queue.length > 0) {
-								noOutput = false;
-								break;
-							}
-						}
-					} catch (err) {
-						_didIteratorError = true;
-						_iteratorError = err;
-					} finally {
-						try {
-							if (!_iteratorNormalCompletion && _iterator.return) {
-								_iterator.return();
-							}
-						} finally {
-							if (_didIteratorError) {
-								throw _iteratorError;
-							}
-						}
-					}
-				});
-				if (noOutput) {
+			if (!outputExists) {
+				if (this.dataExists) {
 					this.pause();
+				} else {
+					this.halt();
 				}
 			}
 		}
@@ -1667,7 +1682,12 @@ var Board = function (_EventEmitter) {
 				return block.pass();
 			});
 
-			if (this.datas.length === 0) {
+			var inputExists = false;
+			this.forBlocks(function (block) {
+				inputExists = block.inputExists || inputExists;
+			});
+
+			if (!inputExists) {
 				this.halt();
 			}
 		}
@@ -1730,15 +1750,40 @@ var Board = function (_EventEmitter) {
 			var count = 0;
 
 			this.forBlocks(function (block) {
+				var _iteratorNormalCompletion = true;
+				var _didIteratorError = false;
+				var _iteratorError = undefined;
+
+				try {
+					for (var _iterator = block.inputQueues.values()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+						var queue = _step.value;
+
+						count += queue.length;
+					}
+				} catch (err) {
+					_didIteratorError = true;
+					_iteratorError = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion && _iterator.return) {
+							_iterator.return();
+						}
+					} finally {
+						if (_didIteratorError) {
+							throw _iteratorError;
+						}
+					}
+				}
+
 				var _iteratorNormalCompletion2 = true;
 				var _didIteratorError2 = false;
 				var _iteratorError2 = undefined;
 
 				try {
-					for (var _iterator2 = block.inputQueues.values()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-						var queue = _step2.value;
+					for (var _iterator2 = block.outputQueues.values()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+						var _queue = _step2.value;
 
-						count += queue.length;
+						count += _queue.length;
 					}
 				} catch (err) {
 					_didIteratorError2 = true;
@@ -1754,16 +1799,30 @@ var Board = function (_EventEmitter) {
 						}
 					}
 				}
+			});
 
+			return count;
+		}
+	}, {
+		key: 'dataExists',
+		get: function get() {
+			var res = false;
+			this.forBlocks(function (block) {
+				if (res === true) {
+					return;
+				}
 				var _iteratorNormalCompletion3 = true;
 				var _didIteratorError3 = false;
 				var _iteratorError3 = undefined;
 
 				try {
-					for (var _iterator3 = block.outputQueues.values()[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-						var _queue = _step3.value;
+					for (var _iterator3 = block.inputQueues.values()[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+						var queue = _step3.value;
 
-						count += _queue.length;
+						if (queue.length > 0) {
+							res = true;
+							return;
+						}
 					}
 				} catch (err) {
 					_didIteratorError3 = true;
@@ -1779,45 +1838,37 @@ var Board = function (_EventEmitter) {
 						}
 					}
 				}
-			});
 
-			return count;
-		}
-	}, {
-		key: 'datas',
-		get: function get() {
-			return this.blocks.reduce(function (previousRow, row) {
-				return previousRow.concat(row.reduce(function (previousBlock, block) {
-					var datas = [];
-					var _iteratorNormalCompletion4 = true;
-					var _didIteratorError4 = false;
-					var _iteratorError4 = undefined;
+				var _iteratorNormalCompletion4 = true;
+				var _didIteratorError4 = false;
+				var _iteratorError4 = undefined;
 
-					try {
-						for (var _iterator4 = block.inputQueues.keys()[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-							var direction = _step4.value;
+				try {
+					for (var _iterator4 = block.outputQueues.values()[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+						var _queue2 = _step4.value;
 
-							datas = datas.concat(block.inputQueues.get(direction));
-							datas = datas.concat(block.outputQueues.get(direction));
-						}
-					} catch (err) {
-						_didIteratorError4 = true;
-						_iteratorError4 = err;
-					} finally {
-						try {
-							if (!_iteratorNormalCompletion4 && _iterator4.return) {
-								_iterator4.return();
-							}
-						} finally {
-							if (_didIteratorError4) {
-								throw _iteratorError4;
-							}
+						if (_queue2.length > 0) {
+							res = true;
+							return;
 						}
 					}
+				} catch (err) {
+					_didIteratorError4 = true;
+					_iteratorError4 = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion4 && _iterator4.return) {
+							_iterator4.return();
+						}
+					} finally {
+						if (_didIteratorError4) {
+							throw _iteratorError4;
+						}
+					}
+				}
+			});
 
-					return previousBlock.concat(datas);
-				}, []));
-			}, []);
+			return res;
 		}
 
 		// Generate the JSON serializable board data that can be exchanged between API
