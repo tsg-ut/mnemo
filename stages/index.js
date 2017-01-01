@@ -1,9 +1,5 @@
 /* eslint global-require: 'off' */
 
-if (!process.browser && process.env.MOCHIFY !== 'true') {
-	require('yamlify/register');
-}
-
 module.exports = [
 	require('./wire01.json'),
 	require('./calc01.json'),
