@@ -1,0 +1,31 @@
+{
+	"statement": "1000を作ろう!",
+	"inputX": 2,
+	"version": 2,
+	"width": 5,
+	"input": [
+		-1,
+		10,
+		1
+	],
+	"name": "1000",
+	"height": 5,
+	"output": [
+		1000,
+		1000,
+		1000
+	],
+	"clockLimit": 25,
+	"outputX": 2,
+	"title": "1000",
+	"parts": {
+		"wireI": null,
+		"wireL": null,
+		"wireT": null,
+		"times-2": null,
+		"const-1": null,
+		"add": null,
+		"sub": null,
+		"mul": null
+	}
+}

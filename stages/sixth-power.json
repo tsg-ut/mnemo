@@ -1,0 +1,36 @@
+{
+	"statement": "✖️ブロックをうまく配置して、6乗を計算してみよう!",
+	"inputX": 2,
+	"version": 2,
+	"width": 5,
+	"input": [
+		2,
+		3,
+		5
+	],
+	"name": "sixth-power",
+	"height": 5,
+	"output": [
+		64,
+		729,
+		15625
+	],
+	"clockLimit": 25,
+	"outputX": 2,
+	"title": "6乗",
+	"parts": {
+		"wireI": null,
+		"wireL": null,
+		"wireT": null,
+		"plus-1": null,
+		"plus-2": null,
+		"minus-1": null,
+		"minus-2": null,
+		"times-2": null,
+		"times-3": null,
+		"add": null,
+		"sub": null,
+		"mul": null,
+		"div": null
+	}
+}

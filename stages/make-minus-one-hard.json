@@ -1,0 +1,34 @@
+{
+	"statement": "入力の値から1引いた値を出力してみよう!",
+	"inputX": 3,
+	"version": 2,
+	"width": 7,
+	"input": [
+		3,
+		5,
+		2
+	],
+	"name": "make-minus-one-hard",
+	"height": 9,
+	"output": [
+		2,
+		4,
+		1
+	],
+	"clockLimit": 500,
+	"outputX": 3,
+	"title": "-1を作ろう -hard-",
+	"parts": {
+		"wireI": null,
+		"wireL": null,
+		"wireT": null,
+		"wireX": null,
+		"diode": null,
+		"plus-1": null,
+		"add": null,
+		"equal": null,
+		"transistor": null,
+		"conditional": null,
+		"c-contact": null
+	}
+}

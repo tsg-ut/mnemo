@@ -1,0 +1,33 @@
+{
+	"statement": "より少ない演算子で入力全てを-1に出力する回路を作ろう（一般的でなく、入力全てさえ正解すれば良い）",
+	"inputX": 2,
+	"version": 2,
+	"width": 5,
+	"input": [
+		-1,
+		-2,
+		-3
+	],
+	"name": "make-minus-one-med",
+	"height": 10,
+	"output": [
+		-1,
+		-1,
+		-1
+	],
+	"clockLimit": 50,
+	"outputX": 2,
+	"title": "-1を作ろう -med-",
+	"parts": {
+		"wireI": null,
+		"wireL": null,
+		"wireT": null,
+		"plus-1": null,
+		"plus-2": null,
+		"times-2": null,
+		"times-3": null,
+		"equal": null,
+		"add": null,
+		"mul": null
+	}
+}

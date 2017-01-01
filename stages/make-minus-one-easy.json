@@ -1,0 +1,36 @@
+{
+	"statement": "四則演算を組み合わせてどの入力に対しても、-1を出力するような回路を作ってみよう",
+	"inputX": 2,
+	"version": 2,
+	"width": 5,
+	"input": [
+		6,
+		28,
+		496
+	],
+	"name": "make-minus-one-easy",
+	"height": 5,
+	"output": [
+		-1,
+		-1,
+		-1
+	],
+	"clockLimit": 25,
+	"outputX": 2,
+	"title": "-1を作ろう -easy-",
+	"parts": {
+		"wireI": null,
+		"wireL": null,
+		"wireT": null,
+		"plus-1": null,
+		"plus-2": null,
+		"minus-1": null,
+		"minus-2": null,
+		"times-2": null,
+		"times-3": null,
+		"add": null,
+		"sub": null,
+		"mul": null,
+		"div": null
+	}
+}

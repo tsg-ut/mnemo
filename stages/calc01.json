@@ -1,0 +1,32 @@
+{
+	"statement": "数を2倍してみよう!",
+	"inputX": 1,
+	"version": 2,
+	"width": 3,
+	"input": [
+		8,
+		3,
+		9
+	],
+	"modal": "02",
+	"name": "calc01",
+	"height": 3,
+	"output": [
+		16,
+		6,
+		18
+	],
+	"clockLimit": 10,
+	"outputX": 1,
+	"title": "四則演算 -基本- 1",
+	"parts": {
+		"wireI": null,
+		"wireL": null,
+		"wireT": null,
+		"plus-1": null,
+		"plus-2": null,
+		"minus-2": null,
+		"times-2": null,
+		"times-3": null
+	}
+}

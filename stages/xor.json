@@ -1,0 +1,46 @@
+{
+	"statement": "XORを作ろう!",
+	"inputX": [
+		1,
+		3
+	],
+	"version": 1,
+	"width": 5,
+	"input": [
+		[
+			0,
+			0
+		],
+		[
+			0,
+			1
+		],
+		[
+			1,
+			0
+		],
+		[
+			1,
+			1
+		]
+	],
+	"name": "xor",
+	"height": 5,
+	"output": [
+		0,
+		1,
+		1,
+		0
+	],
+	"clockLimit": 25,
+	"outputX": 2,
+	"title": "XOR",
+	"parts": {
+		"wireI": null,
+		"wireL": null,
+		"wireT": null,
+		"wireX": null,
+		"wireXdot": null,
+		"nand": null
+	}
+}

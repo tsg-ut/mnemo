@@ -1,0 +1,28 @@
+{
+	"statement": "数を2倍してみよう!",
+	"inputX": 1,
+	"version": 2,
+	"width": 3,
+	"input": [
+		8,
+		3,
+		9
+	],
+	"modal": "04",
+	"name": "calc06",
+	"height": 2,
+	"output": [
+		16,
+		6,
+		18
+	],
+	"clockLimit": 10,
+	"outputX": 1,
+	"title": "四則演算 -基本- 6",
+	"parts": {
+		"wireI": null,
+		"wireL": null,
+		"wireT": null,
+		"add": null
+	}
+}

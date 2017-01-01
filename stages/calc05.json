@@ -1,0 +1,26 @@
+{
+	"statement": "数を2倍して、2足してみよう!",
+	"inputX": 2,
+	"version": 2,
+	"width": 5,
+	"input": [
+		8,
+		5,
+		3
+	],
+	"name": "calc05",
+	"height": 5,
+	"output": [
+		18,
+		12,
+		8
+	],
+	"clockLimit": 25,
+	"outputX": 2,
+	"title": "四則演算 -基本- 5",
+	"parts": {
+		"wireI": null,
+		"plus-1": 1,
+		"times-2": 1
+	}
+}

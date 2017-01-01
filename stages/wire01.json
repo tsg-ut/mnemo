@@ -1,0 +1,25 @@
+{
+	"statement": "入り口と出口をつなげてみよう!",
+	"inputX": 1,
+	"version": 3,
+	"width": 3,
+	"input": [
+		4,
+		10,
+		7
+	],
+	"modal": "01",
+	"name": "wire01",
+	"height": 3,
+	"output": [
+		4,
+		10,
+		7
+	],
+	"clockLimit": 10,
+	"outputX": 1,
+	"title": "練習",
+	"parts": {
+		"wireI": null
+	}
+}

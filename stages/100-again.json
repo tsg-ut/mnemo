@@ -1,0 +1,31 @@
+{
+	"statement": "100を作ろう!",
+	"inputX": 2,
+	"version": 2,
+	"width": 5,
+	"input": [
+		-1,
+		10,
+		1
+	],
+	"name": "100-again",
+	"height": 5,
+	"output": [
+		100,
+		100,
+		100
+	],
+	"clockLimit": 25,
+	"outputX": 2,
+	"title": "100再び",
+	"parts": {
+		"wireI": null,
+		"wireL": null,
+		"wireT": null,
+		"const-1": null,
+		"times-2": null,
+		"add": null,
+		"sub": null,
+		"mul": null
+	}
+}

@@ -1,0 +1,36 @@
+{
+	"statement": "➗ブロックをうまく使って、数を2で割ってみよう!",
+	"inputX": 2,
+	"version": 2,
+	"width": 5,
+	"input": [
+		8,
+		18,
+		6
+	],
+	"name": "division-easy",
+	"height": 5,
+	"output": [
+		4,
+		9,
+		3
+	],
+	"clockLimit": 25,
+	"outputX": 2,
+	"title": "割り算 -easy-",
+	"parts": {
+		"wireI": null,
+		"wireL": null,
+		"wireT": null,
+		"plus-1": null,
+		"plus-2": null,
+		"times-2": null,
+		"times-3": null,
+		"minus-1": null,
+		"minus-2": null,
+		"add": null,
+		"sub": null,
+		"mul": null,
+		"div": null
+	}
+}

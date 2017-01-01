@@ -1,0 +1,29 @@
+{
+	"statement": "数を2倍して、3足してみよう!",
+	"inputX": 2,
+	"version": 2,
+	"width": 5,
+	"input": [
+		8,
+		3,
+		9
+	],
+	"name": "calc04",
+	"height": 5,
+	"output": [
+		19,
+		9,
+		21
+	],
+	"clockLimit": 25,
+	"outputX": 2,
+	"title": "四則演算 -基本- 4",
+	"parts": {
+		"wireI": null,
+		"plus-1": null,
+		"plus-2": null,
+		"minus-2": null,
+		"times-2": null,
+		"times-3": null
+	}
+}
