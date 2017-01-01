@@ -1,11 +1,29 @@
-{
-	"statement": "与えられた配列の最大値を求めてみよう",
+module.exports = {
+	"name": "max",
+	"version": 2,
+	"parts": {
+		"wireI": null,
+		"wireL": null,
+		"wireT": null,
+		"wireX": null,
+		"const-0": null,
+		"minus-1": null,
+		"equal": null,
+		"neq": null,
+		"gt": null,
+		"geqq": null,
+		"lt": null,
+		"leqq": null,
+		"c-contact": null,
+		"conditional": null,
+		"transistor": null,
+		"diode": null
+	},
 	"inputX": [
 		4,
 		6
 	],
-	"version": 2,
-	"width": 11,
+	"outputX": 5,
 	"input": [
 		[
 			3,
@@ -75,33 +93,15 @@
 			]
 		]
 	],
-	"name": "max",
-	"height": 11,
 	"output": [
 		3,
 		3,
 		96,
 		98
 	],
+	"width": 11,
+	"height": 11,
 	"clockLimit": 500,
-	"outputX": 5,
-	"title": "最大値",
-	"parts": {
-		"wireI": null,
-		"wireL": null,
-		"wireT": null,
-		"wireX": null,
-		"diode": null,
-		"minus-1": null,
-		"const-0": null,
-		"equal": null,
-		"neq": null,
-		"gt": null,
-		"geqq": null,
-		"lt": null,
-		"leqq": null,
-		"transistor": null,
-		"conditional": null,
-		"c-contact": null
-	}
-}
+	"statement": "与えられた配列の最大値を求めてみよう",
+	"title": "最大値"
+};

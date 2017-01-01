@@ -1,59 +1,59 @@
-{
-	"statement": "数を反転してみよう!",
-	"inputX": 7,
-	"version": 2,
-	"width": 15,
-	"input": [
-		2016,
-		111111,
-		123456789
-	],
+module.exports = {
 	"name": "reversal",
-	"height": 15,
-	"output": [
-		6102,
-		111111,
-		987654321
-	],
-	"clockLimit": 500,
-	"outputX": 7,
-	"title": "反転",
+	"version": 2,
 	"parts": {
 		"wireI": null,
 		"wireL": null,
 		"wireT": null,
 		"wireX": null,
-		"diode": null,
-		"plus-1": null,
-		"plus-2": null,
-		"minus-1": null,
-		"minus-2": null,
 		"times-2": null,
 		"times-3": null,
 		"div-2": null,
 		"div-3": null,
+		"plus-1": null,
+		"plus-2": null,
+		"minus-1": null,
+		"minus-2": null,
 		"const-0": null,
 		"const-1": null,
 		"const-2": null,
 		"add": null,
-		"mul": null,
 		"sub": null,
-		"pow": null,
 		"div": null,
+		"mul": null,
 		"mod": null,
+		"pow": null,
+		"bitshift-left": null,
+		"bitshift-right": null,
 		"bitwise-and": null,
 		"bitwise-or": null,
 		"bitwise-xor": null,
-		"bitshift-left": null,
-		"bitshift-right": null,
 		"equal": null,
 		"neq": null,
 		"gt": null,
 		"geqq": null,
 		"lt": null,
 		"leqq": null,
+		"c-contact": null,
 		"conditional": null,
 		"transistor": null,
-		"c-contact": null
-	}
-}
+		"diode": null
+	},
+	"inputX": 7,
+	"outputX": 7,
+	"input": [
+		2016,
+		111111,
+		123456789
+	],
+	"output": [
+		6102,
+		111111,
+		987654321
+	],
+	"width": 15,
+	"height": 15,
+	"clockLimit": 500,
+	"statement": "数を反転してみよう!",
+	"title": "反転"
+};

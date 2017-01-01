@@ -1,59 +1,59 @@
-{
-	"statement": "8bitの2の補数を計算してみよう!",
-	"inputX": 3,
-	"version": 2,
-	"width": 7,
-	"input": [
-		1,
-		64,
-		127
-	],
+module.exports = {
 	"name": "complement-of-2",
-	"height": 7,
-	"output": [
-		255,
-		192,
-		129
-	],
-	"clockLimit": 50,
-	"outputX": 3,
-	"title": "2の補数",
+	"version": 2,
 	"parts": {
 		"wireI": null,
 		"wireL": null,
 		"wireT": null,
 		"wireX": null,
-		"diode": null,
-		"plus-1": null,
-		"plus-2": null,
-		"minus-1": null,
-		"minus-2": null,
 		"times-2": null,
 		"times-3": null,
 		"div-2": null,
 		"div-3": null,
+		"plus-1": null,
+		"plus-2": null,
+		"minus-1": null,
+		"minus-2": null,
 		"const-0": null,
 		"const-1": null,
 		"const-2": null,
 		"add": null,
-		"mul": null,
 		"sub": null,
-		"pow": null,
 		"div": null,
+		"mul": null,
 		"mod": null,
+		"pow": null,
+		"bitshift-left": null,
+		"bitshift-right": null,
 		"bitwise-and": null,
 		"bitwise-or": null,
 		"bitwise-xor": null,
-		"bitshift-left": null,
-		"bitshift-right": null,
 		"equal": null,
 		"neq": null,
 		"gt": null,
 		"geqq": null,
 		"lt": null,
 		"leqq": null,
+		"c-contact": null,
 		"conditional": null,
 		"transistor": null,
-		"c-contact": null
-	}
-}
+		"diode": null
+	},
+	"inputX": 3,
+	"outputX": 3,
+	"input": [
+		1,
+		64,
+		127
+	],
+	"output": [
+		255,
+		192,
+		129
+	],
+	"width": 7,
+	"height": 7,
+	"clockLimit": 50,
+	"statement": "8bitの2の補数を計算してみよう!",
+	"title": "2の補数"
+};
