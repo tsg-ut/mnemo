@@ -2297,7 +2297,7 @@ $(function () {
 	new Game(stageConfigs);
 });
 
-},{"../stages":470,"./analytics":1,"./game":9,"core-js/es5":63,"core-js/es6":64,"jquery":360,"querystring":410}],11:[function(require,module,exports){
+},{"../stages":471,"./analytics":1,"./game":9,"core-js/es5":63,"core-js/es6":64,"jquery":360,"querystring":410}],11:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -3262,7 +3262,7 @@ module.exports.validateSubmission = function (submission) {
 	return { pass: true, clocks: maxClock, blocks: board.weighedBlockCount };
 };
 
-},{"../stages":470,"./block-configs":3,"./board":6,"./util":13,"assert":29}],15:[function(require,module,exports){
+},{"../stages":471,"./block-configs":3,"./board":6,"./util":13,"assert":29}],15:[function(require,module,exports){
 var asn1 = exports;
 
 asn1.bignum = require('bn.js');
@@ -4597,7 +4597,7 @@ function derDecodeLen(buf, primitive, fail) {
 
   // Long form
   var num = len & 0x7f;
-  if (num >= 4)
+  if (num > 4)
     return buf.error('length octect is too long');
 
   len = 0;
@@ -50728,14 +50728,45 @@ module.exports = {"name":"100","version":2,"parts":{"wireI":null,"wireL":null,"w
 },{}],452:[function(require,module,exports){
 module.exports = {"name":"1000","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"const-1":null,"add":null,"sub":null,"mul":null},"inputX":2,"outputX":2,"input":[-1,10,1],"output":[1000,1000,1000],"width":5,"height":5,"clockLimit":25,"statement":"1000を作ろう!","title":"1000"};
 },{}],453:[function(require,module,exports){
-module.exports = {"name":"binarian-easy","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"wireX":null,"times-2":null,"times-3":null,"div-2":null,"div-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"const-0":null,"const-1":null,"const-2":null,"add":null,"sub":null,"div":null,"mul":null,"mod":null,"pow":null,"bitshift-left":null,"bitshift-right":null,"bitwise-and":null,"bitwise-or":null,"bitwise-xor":null,"equal":null,"neq":null,"gt":null,"geqq":null,"lt":null,"leqq":null,"c-contact":null,"conditional":null,"transistor":null,"diode":null},"inputX":7,"outputX":7,"input":[3,2016,65535],"output":[11,11111100000,1111111111111111],"width":15,"height":15,"clockLimit":500,"statement":"数をバイナリ表記にしてみよう!","title":"バイナリアン -easy-"};
+'use strict';
+
+module.exports = {
+	name: '2017',
+	version: 1,
+	parts: {
+		wireI: null,
+		wireL: null,
+		wireT: null,
+		wireX: null,
+		wireXdot: null,
+		'const-0': null,
+		'const-1': null,
+		'const-2': null,
+		add: null,
+		sub: null,
+		mul: null,
+		div: null
+	},
+	inputX: 4,
+	outputX: 4,
+	input: [2, 0, 1, 7],
+	output: [2017, 2017, 2017, 2017],
+	width: 9,
+	height: 9,
+	clockLimit: 50,
+	statement: '2017を作ろう!',
+	title: '2017'
+};
+
 },{}],454:[function(require,module,exports){
-module.exports = {"name":"bivariation01","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"minus-2":null,"equal":null,"add":null,"sub":null,"div":null,"mul":null,"c-contact":null,"conditional":null,"transistor":null,"diode":null},"inputX":[1,3],"outputX":2,"input":[[3,2],[13,21],[9,4]],"output":[5,34,13],"width":5,"height":5,"clockLimit":25,"statement":"2つの数字が与えられるのでそれらを足しあわせた結果を出力してみよう!","title":"2変数 -基本-"};
+module.exports = {"name":"binarian-easy","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"wireX":null,"times-2":null,"times-3":null,"div-2":null,"div-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"const-0":null,"const-1":null,"const-2":null,"add":null,"sub":null,"div":null,"mul":null,"mod":null,"pow":null,"bitshift-left":null,"bitshift-right":null,"bitwise-and":null,"bitwise-or":null,"bitwise-xor":null,"equal":null,"neq":null,"gt":null,"geqq":null,"lt":null,"leqq":null,"c-contact":null,"conditional":null,"transistor":null,"diode":null},"inputX":7,"outputX":7,"input":[3,2016,65535],"output":[11,11111100000,1111111111111111],"width":15,"height":15,"clockLimit":500,"statement":"数をバイナリ表記にしてみよう!","title":"バイナリアン -easy-"};
 },{}],455:[function(require,module,exports){
-module.exports = {"name":"calc01","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"minus-2":null},"inputX":1,"outputX":1,"input":[8,3,9],"output":[16,6,18],"width":3,"height":3,"clockLimit":10,"statement":"数を2倍してみよう!","title":"四則演算 -基本- 1","modal":"02"};
+module.exports = {"name":"bivariation01","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"minus-2":null,"equal":null,"add":null,"sub":null,"div":null,"mul":null,"c-contact":null,"conditional":null,"transistor":null,"diode":null},"inputX":[1,3],"outputX":2,"input":[[3,2],[13,21],[9,4]],"output":[5,34,13],"width":5,"height":5,"clockLimit":25,"statement":"2つの数字が与えられるのでそれらを足しあわせた結果を出力してみよう!","title":"2変数 -基本-"};
 },{}],456:[function(require,module,exports){
-module.exports = {"name":"calc02","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"plus-1":null,"minus-2":null},"inputX":2,"outputX":2,"input":[8,15,10],"output":[5,12,7],"width":5,"height":5,"clockLimit":25,"statement":"数を3引いてみよう!","title":"四則演算 -基本- 2","modal":"03"};
+module.exports = {"name":"calc01","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"minus-2":null},"inputX":1,"outputX":1,"input":[8,3,9],"output":[16,6,18],"width":3,"height":3,"clockLimit":10,"statement":"数を2倍してみよう!","title":"四則演算 -基本- 1","modal":"02"};
 },{}],457:[function(require,module,exports){
+module.exports = {"name":"calc02","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"plus-1":null,"minus-2":null},"inputX":2,"outputX":2,"input":[8,15,10],"output":[5,12,7],"width":5,"height":5,"clockLimit":25,"statement":"数を3引いてみよう!","title":"四則演算 -基本- 2","modal":"03"};
+},{}],458:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -50771,15 +50802,15 @@ module.exports = {
 	title: '四則演算 -基本- 3'
 };
 
-},{}],458:[function(require,module,exports){
-module.exports = {"name":"calc04","version":2,"parts":{"wireI":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"minus-2":null},"inputX":2,"outputX":2,"input":[8,3,9],"output":[19,9,21],"width":5,"height":5,"clockLimit":25,"statement":"数を2倍して、3足してみよう!","title":"四則演算 -基本- 4"};
 },{}],459:[function(require,module,exports){
-module.exports = {"name":"calc05","version":2,"parts":{"wireI":null,"times-2":1,"plus-1":1},"inputX":2,"outputX":2,"input":[8,5,3],"output":[18,12,8],"width":5,"height":5,"clockLimit":25,"statement":"数を2倍して、2足してみよう!","title":"四則演算 -基本- 5"};
+module.exports = {"name":"calc04","version":2,"parts":{"wireI":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"minus-2":null},"inputX":2,"outputX":2,"input":[8,3,9],"output":[19,9,21],"width":5,"height":5,"clockLimit":25,"statement":"数を2倍して、3足してみよう!","title":"四則演算 -基本- 4"};
 },{}],460:[function(require,module,exports){
-module.exports = {"name":"calc06","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"add":null},"inputX":1,"outputX":1,"input":[8,3,9],"output":[16,6,18],"width":3,"height":2,"clockLimit":10,"statement":"数を2倍してみよう!","title":"四則演算 -基本- 6","modal":"04"};
+module.exports = {"name":"calc05","version":2,"parts":{"wireI":null,"times-2":1,"plus-1":1},"inputX":2,"outputX":2,"input":[8,5,3],"output":[18,12,8],"width":5,"height":5,"clockLimit":25,"statement":"数を2倍して、2足してみよう!","title":"四則演算 -基本- 5"};
 },{}],461:[function(require,module,exports){
-module.exports = {"name":"complement-of-2","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"wireX":null,"times-2":null,"times-3":null,"div-2":null,"div-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"const-0":null,"const-1":null,"const-2":null,"add":null,"sub":null,"div":null,"mul":null,"mod":null,"pow":null,"bitshift-left":null,"bitshift-right":null,"bitwise-and":null,"bitwise-or":null,"bitwise-xor":null,"equal":null,"neq":null,"gt":null,"geqq":null,"lt":null,"leqq":null,"c-contact":null,"conditional":null,"transistor":null,"diode":null},"inputX":3,"outputX":3,"input":[1,64,127],"output":[255,192,129],"width":7,"height":7,"clockLimit":50,"statement":"8bitの2の補数を計算してみよう!","title":"2の補数"};
+module.exports = {"name":"calc06","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"add":null},"inputX":1,"outputX":1,"input":[8,3,9],"output":[16,6,18],"width":3,"height":2,"clockLimit":10,"statement":"数を2倍してみよう!","title":"四則演算 -基本- 6","modal":"04"};
 },{}],462:[function(require,module,exports){
+module.exports = {"name":"complement-of-2","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"wireX":null,"times-2":null,"times-3":null,"div-2":null,"div-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"const-0":null,"const-1":null,"const-2":null,"add":null,"sub":null,"div":null,"mul":null,"mod":null,"pow":null,"bitshift-left":null,"bitshift-right":null,"bitwise-and":null,"bitwise-or":null,"bitwise-xor":null,"equal":null,"neq":null,"gt":null,"geqq":null,"lt":null,"leqq":null,"c-contact":null,"conditional":null,"transistor":null,"diode":null},"inputX":3,"outputX":3,"input":[1,64,127],"output":[255,192,129],"width":7,"height":7,"clockLimit":50,"statement":"8bitの2の補数を計算してみよう!","title":"2の補数"};
+},{}],463:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -50827,7 +50858,7 @@ module.exports = {
 	modal: 'conditionals'
 };
 
-},{}],463:[function(require,module,exports){
+},{}],464:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -50877,7 +50908,7 @@ module.exports = {
 	title: '条件分岐 -基本- 2'
 };
 
-},{}],464:[function(require,module,exports){
+},{}],465:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -50942,11 +50973,11 @@ module.exports = {
 	title: '条件分岐 -基本- 3'
 };
 
-},{}],465:[function(require,module,exports){
-module.exports = {"name":"division-easy","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"add":null,"sub":null,"div":null,"mul":null},"inputX":2,"outputX":2,"input":[8,18,6],"output":[4,9,3],"width":5,"height":5,"clockLimit":25,"statement":"➗ブロックをうまく使って、数を2で割ってみよう!","title":"割り算 -easy-"};
 },{}],466:[function(require,module,exports){
-module.exports = {"name":"division-hard","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"add":null,"sub":null,"div":null,"mul":null},"inputX":[1,3],"outputX":2,"input":[[3,6],[71,7597],[-13,117]],"output":[2,107,-9],"width":5,"height":5,"clockLimit":25,"statement":"右の数を左の数で割ってみよう!","title":"割り算 -hard-"};
+module.exports = {"name":"division-easy","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"add":null,"sub":null,"div":null,"mul":null},"inputX":2,"outputX":2,"input":[8,18,6],"output":[4,9,3],"width":5,"height":5,"clockLimit":25,"statement":"➗ブロックをうまく使って、数を2で割ってみよう!","title":"割り算 -easy-"};
 },{}],467:[function(require,module,exports){
+module.exports = {"name":"division-hard","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"add":null,"sub":null,"div":null,"mul":null},"inputX":[1,3],"outputX":2,"input":[[3,6],[71,7597],[-13,117]],"output":[2,107,-9],"width":5,"height":5,"clockLimit":25,"statement":"右の数を左の数で割ってみよう!","title":"割り算 -hard-"};
+},{}],468:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -51014,7 +51045,7 @@ module.exports = {
 	title: '階乗'
 };
 
-},{}],468:[function(require,module,exports){
+},{}],469:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -51084,7 +51115,7 @@ module.exports = {
 	title: 'フィボナッチ数'
 };
 
-},{}],469:[function(require,module,exports){
+},{}],470:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -51180,7 +51211,7 @@ module.exports = {
 	title: '最大公約数'
 };
 
-},{}],470:[function(require,module,exports){
+},{}],471:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -51190,11 +51221,11 @@ if (!process.browser && undefined !== 'true') {
 	require('yamlify/register');
 }
 
-module.exports = [require('./wire01.yml'), require('./calc01.yml'), require('./calc02.yml'), require('./calc03.js'), require('./calc04.yml'), require('./calc05.yml'), require('./calc06.yml'), require('./make-minus-one-easy.yml'), require('./division-easy.yml'), require('./sixth-power.yml'), require('./remainder.yml'), require('./plus-32.yml'), require('./conditional01.js'), require('./conditional02.js'), require('./conditional03.js'), require('./factorial.js'), require('./parity.js'), require('./fibonacci.js'), require('./bivariation01.yml'), require('./power-easy.yml'), require('./power-hard.js'), require('./division-hard.yml'), require('./gcd.js'), require('./lcm.js'), require('./make-minus-one-med.yml'), require('./make-minus-one-hard.yml'), require('./sqrt-easy.js'), require('./sqrt-hard.js'), require('./complement-of-2.yml'), require('./binarian-easy.yml'), require('./perfect-number.yml'), require('./reversal.yml'), require('./msd.js'), require('./mod3-hard.js'), require('./max.yml'), require('./the-fifth-max.yml'), require('./100.yml'), require('./100-again.yml'), require('./1000.yml'), require('./plus-32-hard.yml'), require('./xor.yml')];
+module.exports = [require('./wire01.yml'), require('./calc01.yml'), require('./calc02.yml'), require('./calc03.js'), require('./calc04.yml'), require('./calc05.yml'), require('./calc06.yml'), require('./make-minus-one-easy.yml'), require('./division-easy.yml'), require('./sixth-power.yml'), require('./remainder.yml'), require('./plus-32.yml'), require('./conditional01.js'), require('./conditional02.js'), require('./conditional03.js'), require('./factorial.js'), require('./parity.js'), require('./fibonacci.js'), require('./bivariation01.yml'), require('./power-easy.yml'), require('./power-hard.js'), require('./division-hard.yml'), require('./gcd.js'), require('./lcm.js'), require('./make-minus-one-med.yml'), require('./make-minus-one-hard.yml'), require('./sqrt-easy.js'), require('./sqrt-hard.js'), require('./complement-of-2.yml'), require('./binarian-easy.yml'), require('./perfect-number.yml'), require('./reversal.yml'), require('./msd.js'), require('./mod3-hard.js'), require('./max.yml'), require('./the-fifth-max.yml'), require('./100.yml'), require('./100-again.yml'), require('./1000.yml'), require('./plus-32-hard.yml'), require('./xor.yml'), require('./2017.js')];
 
 }).call(this,require('_process'))
 
-},{"./100-again.yml":450,"./100.yml":451,"./1000.yml":452,"./binarian-easy.yml":453,"./bivariation01.yml":454,"./calc01.yml":455,"./calc02.yml":456,"./calc03.js":457,"./calc04.yml":458,"./calc05.yml":459,"./calc06.yml":460,"./complement-of-2.yml":461,"./conditional01.js":462,"./conditional02.js":463,"./conditional03.js":464,"./division-easy.yml":465,"./division-hard.yml":466,"./factorial.js":467,"./fibonacci.js":468,"./gcd.js":469,"./lcm.js":471,"./make-minus-one-easy.yml":472,"./make-minus-one-hard.yml":473,"./make-minus-one-med.yml":474,"./max.yml":475,"./mod3-hard.js":476,"./msd.js":477,"./parity.js":478,"./perfect-number.yml":479,"./plus-32-hard.yml":480,"./plus-32.yml":481,"./power-easy.yml":482,"./power-hard.js":483,"./remainder.yml":484,"./reversal.yml":485,"./sixth-power.yml":486,"./sqrt-easy.js":487,"./sqrt-hard.js":488,"./the-fifth-max.yml":489,"./wire01.yml":490,"./xor.yml":491,"_process":401,"yamlify/register":449}],471:[function(require,module,exports){
+},{"./100-again.yml":450,"./100.yml":451,"./1000.yml":452,"./2017.js":453,"./binarian-easy.yml":454,"./bivariation01.yml":455,"./calc01.yml":456,"./calc02.yml":457,"./calc03.js":458,"./calc04.yml":459,"./calc05.yml":460,"./calc06.yml":461,"./complement-of-2.yml":462,"./conditional01.js":463,"./conditional02.js":464,"./conditional03.js":465,"./division-easy.yml":466,"./division-hard.yml":467,"./factorial.js":468,"./fibonacci.js":469,"./gcd.js":470,"./lcm.js":472,"./make-minus-one-easy.yml":473,"./make-minus-one-hard.yml":474,"./make-minus-one-med.yml":475,"./max.yml":476,"./mod3-hard.js":477,"./msd.js":478,"./parity.js":479,"./perfect-number.yml":480,"./plus-32-hard.yml":481,"./plus-32.yml":482,"./power-easy.yml":483,"./power-hard.js":484,"./remainder.yml":485,"./reversal.yml":486,"./sixth-power.yml":487,"./sqrt-easy.js":488,"./sqrt-hard.js":489,"./the-fifth-max.yml":490,"./wire01.yml":491,"./xor.yml":492,"_process":401,"yamlify/register":449}],472:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -51298,15 +51329,15 @@ module.exports = {
 	title: '最小公倍数'
 };
 
-},{}],472:[function(require,module,exports){
-module.exports = {"name":"make-minus-one-easy","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"add":null,"sub":null,"div":null,"mul":null},"inputX":2,"outputX":2,"input":[6,28,496],"output":[-1,-1,-1],"width":5,"height":5,"clockLimit":25,"statement":"四則演算を組み合わせてどの入力に対しても、-1を出力するような回路を作ってみよう","title":"-1を作ろう -easy-"};
 },{}],473:[function(require,module,exports){
-module.exports = {"name":"make-minus-one-hard","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"wireX":null,"plus-1":null,"equal":null,"add":null,"c-contact":null,"conditional":null,"transistor":null,"diode":null},"inputX":3,"outputX":3,"input":[3,5,2],"output":[2,4,1],"width":7,"height":9,"clockLimit":500,"statement":"入力の値から1引いた値を出力してみよう!","title":"-1を作ろう -hard-"};
+module.exports = {"name":"make-minus-one-easy","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"add":null,"sub":null,"div":null,"mul":null},"inputX":2,"outputX":2,"input":[6,28,496],"output":[-1,-1,-1],"width":5,"height":5,"clockLimit":25,"statement":"四則演算を組み合わせてどの入力に対しても、-1を出力するような回路を作ってみよう","title":"-1を作ろう -easy-"};
 },{}],474:[function(require,module,exports){
-module.exports = {"name":"make-minus-one-med","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"equal":null,"add":null,"mul":null},"inputX":2,"outputX":2,"input":[-1,-2,-3],"output":[-1,-1,-1],"width":5,"height":10,"clockLimit":50,"statement":"より少ない演算子で入力全てを-1に出力する回路を作ろう（一般的でなく、入力全てさえ正解すれば良い）","title":"-1を作ろう -med-"};
+module.exports = {"name":"make-minus-one-hard","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"wireX":null,"plus-1":null,"equal":null,"add":null,"c-contact":null,"conditional":null,"transistor":null,"diode":null},"inputX":3,"outputX":3,"input":[3,5,2],"output":[2,4,1],"width":7,"height":9,"clockLimit":500,"statement":"入力の値から1引いた値を出力してみよう!","title":"-1を作ろう -hard-"};
 },{}],475:[function(require,module,exports){
-module.exports = {"name":"max","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"wireX":null,"const-0":null,"minus-1":null,"equal":null,"neq":null,"gt":null,"geqq":null,"lt":null,"leqq":null,"c-contact":null,"conditional":null,"transistor":null,"diode":null},"inputX":[4,6],"outputX":5,"input":[[3,[1,2,3]],[4,[3,2,1,3]],[10,[68,11,85,53,14,96,88,61,21,57]],[30,[26,23,43,48,2,7,16,69,16,3,41,3,17,39,98,65,77,52,89,31,37,49,15,46,2,53,74,83,8,93]]],"output":[3,3,96,98],"width":11,"height":11,"clockLimit":500,"statement":"与えられた配列の最大値を求めてみよう","title":"最大値"};
+module.exports = {"name":"make-minus-one-med","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"equal":null,"add":null,"mul":null},"inputX":2,"outputX":2,"input":[-1,-2,-3],"output":[-1,-1,-1],"width":5,"height":10,"clockLimit":50,"statement":"より少ない演算子で入力全てを-1に出力する回路を作ろう（一般的でなく、入力全てさえ正解すれば良い）","title":"-1を作ろう -med-"};
 },{}],476:[function(require,module,exports){
+module.exports = {"name":"max","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"wireX":null,"const-0":null,"minus-1":null,"equal":null,"neq":null,"gt":null,"geqq":null,"lt":null,"leqq":null,"c-contact":null,"conditional":null,"transistor":null,"diode":null},"inputX":[4,6],"outputX":5,"input":[[3,[1,2,3]],[4,[3,2,1,3]],[10,[68,11,85,53,14,96,88,61,21,57]],[30,[26,23,43,48,2,7,16,69,16,3,41,3,17,39,98,65,77,52,89,31,37,49,15,46,2,53,74,83,8,93]]],"output":[3,3,96,98],"width":11,"height":11,"clockLimit":500,"statement":"与えられた配列の最大値を求めてみよう","title":"最大値"};
+},{}],477:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -51375,7 +51406,7 @@ module.exports = {
 	title: 'mod3 -hard-'
 };
 
-},{}],477:[function(require,module,exports){
+},{}],478:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -51451,7 +51482,7 @@ module.exports = {
 	title: '最上位の桁'
 };
 
-},{}],478:[function(require,module,exports){
+},{}],479:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -51541,15 +51572,15 @@ module.exports = {
 	title: 'パリティ'
 };
 
-},{}],479:[function(require,module,exports){
-module.exports = {"name":"perfect-number","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"wireX":null,"times-2":null,"times-3":null,"div-2":null,"div-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"const-0":null,"const-1":null,"const-2":null,"add":null,"sub":null,"div":null,"mul":null,"mod":null,"pow":null,"bitshift-left":null,"bitshift-right":null,"bitwise-and":null,"bitwise-or":null,"bitwise-xor":null,"equal":null,"neq":null,"gt":null,"geqq":null,"lt":null,"leqq":null,"c-contact":null,"conditional":null,"transistor":null,"diode":null},"inputX":2,"outputX":2,"input":[3,31,8191],"output":[6,496,33550336],"width":5,"height":5,"clockLimit":100,"statement":"メルセンヌ素数と完全数の関係を考えてみよう!","title":"完全数"};
 },{}],480:[function(require,module,exports){
-module.exports = {"name":"plus-32-hard","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"add":null,"sub":null,"div":null,"mul":null},"inputX":1,"outputX":1,"input":[6,28,496],"output":[38,60,528],"width":3,"height":6,"clockLimit":50,"statement":"演算子をうまく配置して、32を足してみよう!","title":"32を足してみよう-hard-"};
+module.exports = {"name":"perfect-number","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"wireX":null,"times-2":null,"times-3":null,"div-2":null,"div-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"const-0":null,"const-1":null,"const-2":null,"add":null,"sub":null,"div":null,"mul":null,"mod":null,"pow":null,"bitshift-left":null,"bitshift-right":null,"bitwise-and":null,"bitwise-or":null,"bitwise-xor":null,"equal":null,"neq":null,"gt":null,"geqq":null,"lt":null,"leqq":null,"c-contact":null,"conditional":null,"transistor":null,"diode":null},"inputX":2,"outputX":2,"input":[3,31,8191],"output":[6,496,33550336],"width":5,"height":5,"clockLimit":100,"statement":"メルセンヌ素数と完全数の関係を考えてみよう!","title":"完全数"};
 },{}],481:[function(require,module,exports){
-module.exports = {"name":"plus-32","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"add":null,"sub":null,"div":null,"mul":null},"inputX":2,"outputX":2,"input":[6,28,496],"output":[38,60,528],"width":5,"height":8,"clockLimit":50,"statement":"演算子をうまく配置して、32を足してみよう!","title":"32を足してみよう"};
+module.exports = {"name":"plus-32-hard","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"add":null,"sub":null,"div":null,"mul":null},"inputX":1,"outputX":1,"input":[6,28,496],"output":[38,60,528],"width":3,"height":6,"clockLimit":50,"statement":"演算子をうまく配置して、32を足してみよう!","title":"32を足してみよう-hard-"};
 },{}],482:[function(require,module,exports){
-module.exports = {"name":"power-easy","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"wireX":null,"times-2":null,"times-3":null,"div-2":null,"div-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"const-0":null,"const-1":null,"const-2":null,"equal":null,"add":null,"sub":null,"div":null,"mul":null,"mod":null,"c-contact":null,"conditional":null,"transistor":null,"diode":null},"inputX":[3,5],"outputX":4,"input":[[3,2],[4,4],[-7,5]],"output":[9,256,-16807],"width":9,"height":9,"clockLimit":200,"statement":"1つ目に与えられた数を2つ目に与えられた数乗してみよう!","title":"累乗 -easy-"};
+module.exports = {"name":"plus-32","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"add":null,"sub":null,"div":null,"mul":null},"inputX":2,"outputX":2,"input":[6,28,496],"output":[38,60,528],"width":5,"height":8,"clockLimit":50,"statement":"演算子をうまく配置して、32を足してみよう!","title":"32を足してみよう"};
 },{}],483:[function(require,module,exports){
+module.exports = {"name":"power-easy","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"wireX":null,"times-2":null,"times-3":null,"div-2":null,"div-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"const-0":null,"const-1":null,"const-2":null,"equal":null,"add":null,"sub":null,"div":null,"mul":null,"mod":null,"c-contact":null,"conditional":null,"transistor":null,"diode":null},"inputX":[3,5],"outputX":4,"input":[[3,2],[4,4],[-7,5]],"output":[9,256,-16807],"width":9,"height":9,"clockLimit":200,"statement":"1つ目に与えられた数を2つ目に与えられた数乗してみよう!","title":"累乗 -easy-"};
+},{}],484:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -51623,13 +51654,13 @@ module.exports = {
 	title: '累乗 -hard-'
 };
 
-},{}],484:[function(require,module,exports){
-module.exports = {"name":"remainder","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"add":null,"sub":null,"div":null,"mul":null},"inputX":2,"outputX":2,"input":[8,13,39],"output":[8,3,9],"width":5,"height":10,"clockLimit":50,"statement":"10で割った余りを求めてみよう!","title":"余りの計算"};
 },{}],485:[function(require,module,exports){
-module.exports = {"name":"reversal","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"wireX":null,"times-2":null,"times-3":null,"div-2":null,"div-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"const-0":null,"const-1":null,"const-2":null,"add":null,"sub":null,"div":null,"mul":null,"mod":null,"pow":null,"bitshift-left":null,"bitshift-right":null,"bitwise-and":null,"bitwise-or":null,"bitwise-xor":null,"equal":null,"neq":null,"gt":null,"geqq":null,"lt":null,"leqq":null,"c-contact":null,"conditional":null,"transistor":null,"diode":null},"inputX":7,"outputX":7,"input":[2016,111111,123456789],"output":[6102,111111,987654321],"width":15,"height":15,"clockLimit":500,"statement":"数を反転してみよう!","title":"反転"};
+module.exports = {"name":"remainder","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"add":null,"sub":null,"div":null,"mul":null},"inputX":2,"outputX":2,"input":[8,13,39],"output":[8,3,9],"width":5,"height":10,"clockLimit":50,"statement":"10で割った余りを求めてみよう!","title":"余りの計算"};
 },{}],486:[function(require,module,exports){
-module.exports = {"name":"sixth-power","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"add":null,"sub":null,"div":null,"mul":null},"inputX":2,"outputX":2,"input":[2,3,5],"output":[64,729,15625],"width":5,"height":5,"clockLimit":25,"statement":"✖️ブロックをうまく配置して、6乗を計算してみよう!","title":"6乗"};
+module.exports = {"name":"reversal","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"wireX":null,"times-2":null,"times-3":null,"div-2":null,"div-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"const-0":null,"const-1":null,"const-2":null,"add":null,"sub":null,"div":null,"mul":null,"mod":null,"pow":null,"bitshift-left":null,"bitshift-right":null,"bitwise-and":null,"bitwise-or":null,"bitwise-xor":null,"equal":null,"neq":null,"gt":null,"geqq":null,"lt":null,"leqq":null,"c-contact":null,"conditional":null,"transistor":null,"diode":null},"inputX":7,"outputX":7,"input":[2016,111111,123456789],"output":[6102,111111,987654321],"width":15,"height":15,"clockLimit":500,"statement":"数を反転してみよう!","title":"反転"};
 },{}],487:[function(require,module,exports){
+module.exports = {"name":"sixth-power","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"times-2":null,"times-3":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"add":null,"sub":null,"div":null,"mul":null},"inputX":2,"outputX":2,"input":[2,3,5],"output":[64,729,15625],"width":5,"height":5,"clockLimit":25,"statement":"✖️ブロックをうまく配置して、6乗を計算してみよう!","title":"6乗"};
+},{}],488:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -51701,7 +51732,7 @@ module.exports = {
 	title: '平方根 -easy-'
 };
 
-},{}],488:[function(require,module,exports){
+},{}],489:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -51766,11 +51797,11 @@ module.exports = {
 	title: '平方根 -hard-'
 };
 
-},{}],489:[function(require,module,exports){
-module.exports = {"name":"the-fifth-max","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"wireX":null,"times-2":null,"times-3":null,"times-10":null,"div-2":null,"div-3":null,"div-10":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"log10":null,"log2":null,"const-0":null,"const-1":null,"const-2":null,"const-3":null,"const-10":null,"add":null,"sub":null,"div":null,"mul":null,"mod":null,"pow":null,"log":null,"bitshift-left":null,"bitshift-right":null,"bitwise-and":null,"bitwise-or":null,"bitwise-xor":null,"equal":null,"neq":null,"gt":null,"geqq":null,"lt":null,"leqq":null,"c-contact":null,"conditional":null,"transistor":null,"diode":null},"inputX":[14,16],"outputX":15,"input":[[5,[1,2,3,4,5]],[5,[0,1,-1,2,-2]],[7,[51,90,20,30,1,60,81]],[7,[67,90,46,99,59,23,66]],[7,[22,89,48,20,88,39,22]]],"output":[3,0,51,66,39],"width":31,"height":31,"clockLimit":2000,"statement":"与えられた配列の中央値を求めてみよう。ただし、配列の大きさは奇数であり、また中央値はただ一つであることが保証されている。","title":"中央値"};
 },{}],490:[function(require,module,exports){
-module.exports = {"name":"wire01","version":3,"parts":{"wireI":null},"inputX":1,"outputX":1,"input":[4,10,7],"output":[4,10,7],"width":3,"height":3,"clockLimit":10,"statement":"入り口と出口をつなげてみよう!","title":"練習","modal":"01"};
+module.exports = {"name":"the-fifth-max","version":2,"parts":{"wireI":null,"wireL":null,"wireT":null,"wireX":null,"times-2":null,"times-3":null,"times-10":null,"div-2":null,"div-3":null,"div-10":null,"plus-1":null,"plus-2":null,"minus-1":null,"minus-2":null,"log10":null,"log2":null,"const-0":null,"const-1":null,"const-2":null,"const-3":null,"const-10":null,"add":null,"sub":null,"div":null,"mul":null,"mod":null,"pow":null,"log":null,"bitshift-left":null,"bitshift-right":null,"bitwise-and":null,"bitwise-or":null,"bitwise-xor":null,"equal":null,"neq":null,"gt":null,"geqq":null,"lt":null,"leqq":null,"c-contact":null,"conditional":null,"transistor":null,"diode":null},"inputX":[14,16],"outputX":15,"input":[[5,[1,2,3,4,5]],[5,[0,1,-1,2,-2]],[7,[51,90,20,30,1,60,81]],[7,[67,90,46,99,59,23,66]],[7,[22,89,48,20,88,39,22]]],"output":[3,0,51,66,39],"width":31,"height":31,"clockLimit":2000,"statement":"与えられた配列の中央値を求めてみよう。ただし、配列の大きさは奇数であり、また中央値はただ一つであることが保証されている。","title":"中央値"};
 },{}],491:[function(require,module,exports){
+module.exports = {"name":"wire01","version":3,"parts":{"wireI":null},"inputX":1,"outputX":1,"input":[4,10,7],"output":[4,10,7],"width":3,"height":3,"clockLimit":10,"statement":"入り口と出口をつなげてみよう!","title":"練習","modal":"01"};
+},{}],492:[function(require,module,exports){
 module.exports = {"name":"xor","version":1,"parts":{"wireI":null,"wireL":null,"wireT":null,"wireX":null,"wireXdot":null,"nand":null},"inputX":[1,3],"outputX":2,"input":[[0,0],[0,1],[1,0],[1,1]],"output":[0,1,1,0],"width":5,"height":5,"clockLimit":25,"statement":"XORを作ろう!","title":"XOR"};
 },{}]},{},[10])
 //# sourceMappingURL=index.js.map
