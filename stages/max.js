@@ -1,37 +1,37 @@
 module.exports = {
-	"name": "max",
-	"version": 2,
-	"parts": {
-		"wireI": null,
-		"wireL": null,
-		"wireT": null,
-		"wireX": null,
-		"const-0": null,
-		"minus-1": null,
-		"equal": null,
-		"neq": null,
-		"gt": null,
-		"geqq": null,
-		"lt": null,
-		"leqq": null,
-		"c-contact": null,
-		"conditional": null,
-		"transistor": null,
-		"diode": null
+	name: 'max',
+	version: 2,
+	parts: {
+		wireI: null,
+		wireL: null,
+		wireT: null,
+		wireX: null,
+		'const-0': null,
+		'minus-1': null,
+		equal: null,
+		neq: null,
+		gt: null,
+		geqq: null,
+		lt: null,
+		leqq: null,
+		'c-contact': null,
+		conditional: null,
+		transistor: null,
+		diode: null,
 	},
-	"inputX": [
+	inputX: [
 		4,
-		6
+		6,
 	],
-	"outputX": 5,
-	"input": [
+	outputX: 5,
+	input: [
 		[
 			3,
 			[
 				1,
 				2,
-				3
-			]
+				3,
+			],
 		],
 		[
 			4,
@@ -39,8 +39,8 @@ module.exports = {
 				3,
 				2,
 				1,
-				3
-			]
+				3,
+			],
 		],
 		[
 			10,
@@ -54,8 +54,8 @@ module.exports = {
 				88,
 				61,
 				21,
-				57
-			]
+				57,
+			],
 		],
 		[
 			30,
@@ -89,19 +89,19 @@ module.exports = {
 				74,
 				83,
 				8,
-				93
-			]
-		]
+				93,
+			],
+		],
 	],
-	"output": [
+	output: [
 		3,
 		3,
 		96,
-		98
+		98,
 	],
-	"width": 11,
-	"height": 11,
-	"clockLimit": 500,
-	"statement": "与えられた配列の最大値を求めてみよう",
-	"title": "最大値"
+	width: 11,
+	height: 11,
+	clockLimit: 500,
+	statement: '与えられた配列の最大値を求めてみよう',
+	title: '最大値',
 };

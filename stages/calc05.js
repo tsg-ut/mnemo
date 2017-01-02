@@ -1,26 +1,26 @@
 module.exports = {
-	"name": "calc05",
-	"version": 2,
-	"parts": {
-		"wireI": null,
-		"times-2": 1,
-		"plus-1": 1
+	name: 'calc05',
+	version: 2,
+	parts: {
+		wireI: null,
+		'times-2': 1,
+		'plus-1': 1,
 	},
-	"inputX": 2,
-	"outputX": 2,
-	"input": [
+	inputX: 2,
+	outputX: 2,
+	input: [
 		8,
 		5,
-		3
+		3,
 	],
-	"output": [
+	output: [
 		18,
 		12,
-		8
+		8,
 	],
-	"width": 5,
-	"height": 5,
-	"clockLimit": 25,
-	"statement": "数を2倍して、2足してみよう!",
-	"title": "四則演算 -基本- 5"
+	width: 5,
+	height: 5,
+	clockLimit: 25,
+	statement: '数を2倍して、2足してみよう!',
+	title: '四則演算 -基本- 5',
 };

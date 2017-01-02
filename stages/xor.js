@@ -1,46 +1,46 @@
 module.exports = {
-	"name": "xor",
-	"version": 1,
-	"parts": {
-		"wireI": null,
-		"wireL": null,
-		"wireT": null,
-		"wireX": null,
-		"wireXdot": null,
-		"nand": null
+	name: 'xor',
+	version: 1,
+	parts: {
+		wireI: null,
+		wireL: null,
+		wireT: null,
+		wireX: null,
+		wireXdot: null,
+		nand: null,
 	},
-	"inputX": [
+	inputX: [
 		1,
-		3
+		3,
 	],
-	"outputX": 2,
-	"input": [
+	outputX: 2,
+	input: [
 		[
 			0,
-			0
+			0,
 		],
 		[
 			0,
-			1
+			1,
 		],
 		[
 			1,
-			0
+			0,
 		],
 		[
 			1,
-			1
-		]
+			1,
+		],
 	],
-	"output": [
+	output: [
 		0,
 		1,
 		1,
-		0
+		0,
 	],
-	"width": 5,
-	"height": 5,
-	"clockLimit": 25,
-	"statement": "XORを作ろう!",
-	"title": "XOR"
+	width: 5,
+	height: 5,
+	clockLimit: 25,
+	statement: 'XORを作ろう!',
+	title: 'XOR',
 };

@@ -1,36 +1,36 @@
 module.exports = {
-	"name": "sixth-power",
-	"version": 2,
-	"parts": {
-		"wireI": null,
-		"wireL": null,
-		"wireT": null,
-		"times-2": null,
-		"times-3": null,
-		"plus-1": null,
-		"plus-2": null,
-		"minus-1": null,
-		"minus-2": null,
-		"add": null,
-		"sub": null,
-		"div": null,
-		"mul": null
+	name: 'sixth-power',
+	version: 2,
+	parts: {
+		wireI: null,
+		wireL: null,
+		wireT: null,
+		'times-2': null,
+		'times-3': null,
+		'plus-1': null,
+		'plus-2': null,
+		'minus-1': null,
+		'minus-2': null,
+		add: null,
+		sub: null,
+		div: null,
+		mul: null,
 	},
-	"inputX": 2,
-	"outputX": 2,
-	"input": [
+	inputX: 2,
+	outputX: 2,
+	input: [
 		2,
 		3,
-		5
+		5,
 	],
-	"output": [
+	output: [
 		64,
 		729,
-		15625
+		15625,
 	],
-	"width": 5,
-	"height": 5,
-	"clockLimit": 25,
-	"statement": "✖️ブロックをうまく配置して、6乗を計算してみよう!",
-	"title": "6乗"
+	width: 5,
+	height: 5,
+	clockLimit: 25,
+	statement: '✖️ブロックをうまく配置して、6乗を計算してみよう!',
+	title: '6乗',
 };
