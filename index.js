@@ -2596,8 +2596,7 @@ var Stage = function () {
 			_this.$ranking.hide();
 		});
 
-		// TODO: CSSでテキスト管理したい
-		this.$result.find('.register').text('ランキングに登録する').attr('disabled', false).removeClass('success error');
+		this.resetResults();
 
 		this.updateStyles();
 	}
@@ -2778,6 +2777,7 @@ var Stage = function () {
 
 				if (this.config.output.length === this.caseIndex + 1) {
 					$.fx.off = params.fx === 'off';
+					this.resetResults();
 					this.game.answer();
 				} else {
 					this.caseIndex++;
@@ -2884,6 +2884,16 @@ var Stage = function () {
 					_this6.panel.takeAndPlace(block.x, block.y, block.type);
 				}
 			});
+		}
+	}, {
+		key: 'resetResults',
+		value: function resetResults() {
+			var $register = this.$result.find('.register');
+
+			// TODO: CSSでテキスト管理したい
+			$register.text('ランキングに登録する');
+			$register.removeClass('success error');
+			$register.attr('disabled', false);
 		}
 	}]);
 
