@@ -303,6 +303,7 @@ button {
 		.upper-area {
 			flex: 1 0 0;
 			height: 0;
+			min-height: 0; // Fix firefox flex bug http://stackoverflow.com/a/28639686
 
 			display: flex;
 
@@ -1374,7 +1375,8 @@ button {
 	}
 
 	.panel {
-		overflow: auto;
+		overflow-x: auto;
+		overflow-y: scroll;
 		padding: 8px;
 		margin: 30px 0;
 		background: #ffa32e;
