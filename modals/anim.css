@@ -1,0 +1,92 @@
+.data-in-top {
+  animation: 2s linear infinite move-in-top;
+}
+@keyframes move-in-top {
+  0% {transform: translate(25px, -15px)}
+  40% {
+    transform: translate(25px, 25px);
+    animation-timing-function: steps(1, start);
+  }
+  100% {transform: translate(25px, -15px)}
+}
+.data-in-left {
+  animation: 2s linear infinite move-in-left;
+}
+@keyframes move-in-left {
+  0% {transform: translate(-15px, 25px)}
+  40% {
+    transform: translate(25px, 25px);
+    animation-timing-function: steps(1, start);
+  }
+  100% {transform: translate(-15px, 25px)}
+}
+.data-in-right {
+  animation: 2s linear infinite move-in-right;
+}
+@keyframes move-in-right {
+  0% {transform: translate(65px, 25px)}
+  40% {
+    transform: translate(25px, 25px);
+    animation-timing-function: steps(1, start);
+  }
+  100% {transform: translate(65px, 25px)}
+}
+.data-in-bottom {
+  animation: 2s linear infinite move-in-bottom;
+}
+@keyframes move-in-bottom {
+  0% {transform: translate(25px, 65px)}
+  40% {
+    transform: translate(25px, 25px);
+    animation-timing-function: steps(1, start);
+  }
+  100% {transform: translate(25px, 65px)}
+}
+.data-out-top {
+  animation: 2s linear infinite move-out-top;
+}
+@keyframes move-out-top {
+  0% {
+    transform: translate(25px, -15px);
+    animation-timing-function: steps(1, end);
+  }
+  40% {transform: translate(25px, 25px)}
+  80% {transform: translate(25px, -15px)}
+  100% {transform: translate(25px, -15px)}
+}
+.data-out-left {
+  animation: 2s linear infinite move-out-left;
+}
+@keyframes move-out-left {
+  0% {
+    transform: translate(-15px, 25px);
+    animation-timing-function: steps(1, end);
+  }
+  40% {transform: translate(25px, 25px)}
+  80% {transform: translate(-15px, 25px)}
+  100% {transform: translate(-15px, 25px)}
+}
+.data-out-right {
+  animation: 2s linear infinite move-out-right;
+}
+@keyframes move-out-right {
+  0% {
+    transform: translate(65px, 25px);
+    animation-timing-function: steps(1, end);
+  }
+  40% {transform: translate(25px, 25px)}
+  80% {transform: translate(65px, 25px)}
+  100% {transform: translate(65px, 25px)}
+}
+.data-out-bottom {
+  animation: 2s linear infinite move-out-bottom;
+}
+@keyframes move-out-bottom {
+  0% {
+    transform: translate(25px, 65px);
+    animation-timing-function: steps(1, end);
+  }
+  40% {transform: translate(25px, 25px)}
+  80% {transform: translate(25px, 65px)}
+  100% {transform: translate(25px, 65px)}
+}
