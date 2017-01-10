@@ -2286,18 +2286,37 @@ var $ = require('jquery');
 var stageConfigs = require('../stages');
 var Game = require('./game');
 
+var _require = require('./util'),
+    isiOS = _require.isiOS,
+    isMac = _require.isMac;
+
 // parse GET parameters of the location
+
+
 var params = querystring.parse(location.search.slice(1));
 
 if (params.fx === 'off') {
 	$.fx.off = true;
 }
 
+// Modernizr-like OS detection
+if (isiOS()) {
+	$('html').addClass('ios');
+} else {
+	$('html').addClass('no-ios');
+}
+
+if (isMac()) {
+	$('html').addClass('mac');
+} else {
+	$('html').addClass('no-mac');
+}
+
 $(function () {
 	new Game(stageConfigs);
 });
 
-},{"../stages":436,"./analytics":1,"./game":9,"core-js/es5":62,"core-js/es6":63,"jquery":358,"querystring":377}],11:[function(require,module,exports){
+},{"../stages":436,"./analytics":1,"./game":9,"./util":13,"core-js/es5":62,"core-js/es6":63,"jquery":358,"querystring":377}],11:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -3002,6 +3021,16 @@ module.exports.log = function (a, b) {
 
 module.exports.floorTowardsZero = function (decimal) {
 	return 0 < decimal ? Math.floor(decimal) : Math.ceil(decimal);
+};
+
+// http://stackoverflow.com/a/9039885
+module.exports.isiOS = function () {
+	return navigator.userAgent.match(/iPad|iPhone|iPod/) && !window.MSStream;
+};
+
+// http://stackoverflow.com/a/11752084
+module.exports.isMac = function () {
+	return navigator.platform.toLowerCase().startsWith('mac');
 };
 
 },{"regenerator-runtime/runtime":390}],14:[function(require,module,exports){
