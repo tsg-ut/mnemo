@@ -1,66 +1,20 @@
 <?xml version="1.0"?>
+<?xml-stylesheet type="text/css" href="../anim.css"?>
 <svg width="50" height="50" viewPort="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-	<style>
-		.data-in1 {
-			animation: 2s linear infinite move-in1;
-		}
-		@keyframes move-in1 {
-			0% {transform: translate(25px, -15px)}
-			40% {
-				transform: translate(25px, 25px);
-				animation-timing-function: steps(1, start);
-			}
-			100% {transform: translate(25px, -15px)}
-		}
-		.data-in2 {
-			animation: 2s linear infinite move-in2;
-		}
-		@keyframes move-in2 {
-			0% {transform: translate(-15px, 25px)}
-			40% {
-				transform: translate(25px, 25px);
-				animation-timing-function: steps(1, start);
-			}
-			100% {transform: translate(25px, -15px)}
-		}
-		.data-in3 {
-			animation: 2s linear infinite move-in3;
-		}
-		@keyframes move-in3 {
-			0% {transform: translate(65px, 25px)}
-			40% {
-				transform: translate(25px, 25px);
-				animation-timing-function: steps(1, start);
-			}
-			100% {transform: translate(25px, -15px)}
-		}
-		.data-out-down {
-			animation: 2s linear infinite move-out-down;
-		}
-		@keyframes move-out-down {
-			0% {
-				transform: translate(25px, 65px);
-				animation-timing-function: steps(1, end);
-			}
-			40% {transform: translate(25px, 25px)}
-			80% {transform: translate(25px, 65px)}
-			100% {transform: translate(25px, 65px)}
-		}
-	</style>
 	<image xlink:href="https://mnemo.pro/image/conditional.png" x="0" y="0" width="50" height="50"/>
-	<g class="data-in1">
+	<g class="data-in-top">
 		<rect x="-8" y="-10" width="16" height="20" rx="5" ry="5" fill="#ff8c00"/>
 		<text x="0" y="7" text-anchor="middle" font-size="14" font-weight="bold" fill="white">1</text>
 	</g>
-	<g class="data-in2">
+	<g class="data-in-left">
 		<rect x="-8" y="-10" width="16" height="20" rx="5" ry="5" fill="#ff8c00"/>
 		<text x="0" y="7" text-anchor="middle" font-size="14" font-weight="bold" fill="white">3</text>
 	</g>
-	<g class="data-in3">
+	<g class="data-in-right">
 		<rect x="-8" y="-10" width="16" height="20" rx="5" ry="5" fill="#ff8c00"/>
 		<text x="0" y="7" text-anchor="middle" font-size="14" font-weight="bold" fill="white">7</text>
 	</g>
-	<g class="data-out-down">
+	<g class="data-out-bottom">
 		<rect x="-8" y="-10" width="16" height="20" rx="5" ry="5" fill="#ff8c00"/>
 		<text x="0" y="7" text-anchor="middle" font-size="14" font-weight="bold" fill="white">3</text>
 	</g>

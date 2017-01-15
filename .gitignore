@@ -110,3 +110,4 @@ Temporary Items
 *.css
 *.map
 *.sqlite3
+!/modals/anim.css
