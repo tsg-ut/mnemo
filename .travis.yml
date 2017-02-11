@@ -10,10 +10,13 @@ addons:
 before_install:
   - export DISPLAY=':99.0'
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+  - node --version
 
 before_script:
   - bash bin/before_script.sh
+  - node --version
 script:
+  - node --version
   - npm run build:production
   - npm test
   - npm run test:api
