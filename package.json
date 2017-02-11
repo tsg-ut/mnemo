@@ -90,7 +90,7 @@
   },
   "dependencies": {
     "bluebird": "^3.4.6",
-    "body-parser": "^1.15.2",
+    "body-parser": "^1.16.1",
     "core-js": "^2.4.1",
     "cors": "^2.8.1",
     "express": "^4.14.0",
