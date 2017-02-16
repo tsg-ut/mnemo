@@ -760,30 +760,28 @@ var Block = function (_EventEmitter) {
 									return 'continue';
 								}
 								if (_this2.rotatedPlugs.includes(source)) {
-									(function () {
-										var destinations = _this2.rotatedPlugs.filter(function (direction) {
-											return direction !== source;
-										});
-										var data = queue.shift();
+									var destinations = _this2.rotatedPlugs.filter(function (direction) {
+										return direction !== source;
+									});
+									var _data = queue.shift();
 
-										// pass through
-										var input = new Map([[source, data]]);
+									// pass through
+									var input = new Map([[source, _data]]);
 
-										var output = new Map();
-										destinations.forEach(function (direction) {
-											var outData = new Data(_this2.board, data.value);
-											_this2.outputQueues.get(direction).push(outData);
-											output.set(direction, outData);
-										});
+									var output = new Map();
+									destinations.forEach(function (direction) {
+										var outData = new Data(_this2.board, _data.value);
+										_this2.outputQueues.get(direction).push(outData);
+										output.set(direction, outData);
+									});
 
-										_this2.emit('pass', { in: input, out: output });
-										_this2.outputExists = true;
-									})();
+									_this2.emit('pass', { in: input, out: output });
+									_this2.outputExists = true;
 								} else {
 									// Erase data when data exists in non-pluged direction
 									while (queue.length) {
-										var _data = queue.shift();
-										_this2.emit('erase', _data);
+										var _data2 = queue.shift();
+										_this2.emit('erase', _data2);
 									}
 								}
 							};
@@ -824,33 +822,31 @@ var Block = function (_EventEmitter) {
 
 								// When data exists in pluged direction
 								if (queue.length !== 0 && _this2.rotatedPlugs.includes(source)) {
-									(function () {
-										var destinations = _this2.rotatedPlugs.filter(function (direction) {
-											return direction !== source;
-										});
-										var data = queue.shift();
+									var destinations = _this2.rotatedPlugs.filter(function (direction) {
+										return direction !== source;
+									});
+									var _data3 = queue.shift();
 
-										// Calculate and pass through
-										var input = new Map([[source, data]]);
+									// Calculate and pass through
+									var input = new Map([[source, _data3]]);
 
-										var output = new Map();
-										destinations.forEach(function (direction) {
-											var value = _this2.config.func(data.value);
-											var outData = new Data(_this2.board, isNaN(value) ? 0 : value);
-											_this2.outputQueues.get(direction).push(outData);
-											output.set(direction, outData);
-										});
+									var output = new Map();
+									destinations.forEach(function (direction) {
+										var value = _this2.config.func(_data3.value);
+										var outData = new Data(_this2.board, isNaN(value) ? 0 : value);
+										_this2.outputQueues.get(direction).push(outData);
+										output.set(direction, outData);
+									});
 
-										_this2.emit('pass', { in: input, out: output });
-										_this2.outputExists = true;
-									})();
+									_this2.emit('pass', { in: input, out: output });
+									_this2.outputExists = true;
 								}
 
 								// Erase data when data exists in non-pluged direction
 								if (!_this2.rotatedPlugs.includes(source)) {
 									while (queue.length) {
-										var _data2 = queue.shift();
-										_this2.emit('erase', _data2);
+										var _data4 = queue.shift();
+										_this2.emit('erase', _data4);
 									}
 								}
 							};
@@ -886,29 +882,27 @@ var Block = function (_EventEmitter) {
 						if (sources.every(function (source) {
 							return _this2.inputQueues.get(source).length > 0;
 						})) {
-							(function () {
-								var _config;
+							var _config;
 
-								var datas = [];
+							var datas = [];
 
-								// Calculate and pass through
-								var input = new Map();
-								sources.forEach(function (source) {
-									var data = _this2.inputQueues.get(source).shift();
-									input.set(source, data);
-									datas.push(data);
-								});
+							// Calculate and pass through
+							var input = new Map();
+							sources.forEach(function (source) {
+								var data = _this2.inputQueues.get(source).shift();
+								input.set(source, data);
+								datas.push(data);
+							});
 
-								var value = (_config = _this2.config).func.apply(_config, _toConsumableArray(datas.map(function (data) {
-									return data.value;
-								})));
-								var outData = new Data(_this2.board, isNaN(value) ? 0 : value);
-								_this2.outputQueues.get(destination).push(outData);
-								var output = new Map([[destination, outData]]);
+							var value = (_config = this.config).func.apply(_config, _toConsumableArray(datas.map(function (data) {
+								return data.value;
+							})));
+							var outData = new Data(this.board, isNaN(value) ? 0 : value);
+							this.outputQueues.get(destination).push(outData);
+							var output = new Map([[destination, outData]]);
 
-								_this2.emit('pass', { in: input, out: output });
-								_this2.outputExists = true;
-							})();
+							this.emit('pass', { in: input, out: output });
+							this.outputExists = true;
 						}
 
 						// Erase data when data exists in non-pluged direction
@@ -924,8 +918,8 @@ var Block = function (_EventEmitter) {
 
 								if (!sources.includes(_source)) {
 									while (_queue.length) {
-										var _data3 = _queue.shift();
-										this.emit('erase', _data3);
+										var _data5 = _queue.shift();
+										this.emit('erase', _data5);
 									}
 								}
 							}
@@ -959,35 +953,33 @@ var Block = function (_EventEmitter) {
 						if (_sources.every(function (source) {
 							return _this2.inputQueues.get(source).length > 0;
 						})) {
-							(function () {
-								var _config2;
+							var _config2;
 
-								var datas = [];
+							var _datas = [];
 
-								// Calculate and pass through
-								var input = new Map();
-								_sources.forEach(function (source) {
-									var data = _this2.inputQueues.get(source).shift();
-									input.set(source, data);
-									datas.push(data);
-								});
+							// Calculate and pass through
+							var _input = new Map();
+							_sources.forEach(function (source) {
+								var data = _this2.inputQueues.get(source).shift();
+								_input.set(source, data);
+								_datas.push(data);
+							});
 
-								var values = datas.map(function (data) {
-									return data.value;
-								});
+							var values = _datas.map(function (data) {
+								return data.value;
+							});
 
-								var _config$func = (_config2 = _this2.config).func.apply(_config2, _toConsumableArray(values)),
-								    directionIndex = _config$func.directionIndex,
-								    value = _config$func.value;
+							var _config$func = (_config2 = this.config).func.apply(_config2, _toConsumableArray(values)),
+							    directionIndex = _config$func.directionIndex,
+							    _value = _config$func.value;
 
-								var data = new Data(_this2.board, isNaN(value) ? 0 : value);
-								var destination = destinations[directionIndex];
-								_this2.outputQueues.get(destination).push(data);
-								var output = new Map([[destination, data]]);
+							var _data6 = new Data(this.board, isNaN(_value) ? 0 : _value);
+							var _destination = destinations[directionIndex];
+							this.outputQueues.get(_destination).push(_data6);
+							var _output = new Map([[_destination, _data6]]);
 
-								_this2.emit('pass', { in: input, out: output });
-								_this2.outputExists = true;
-							})();
+							this.emit('pass', { in: _input, out: _output });
+							this.outputExists = true;
 						}
 
 						// Erase data when data exists in non-pluged direction
@@ -1003,8 +995,8 @@ var Block = function (_EventEmitter) {
 
 								if (!_sources.includes(_source2)) {
 									while (_queue2.length) {
-										var _data4 = _queue2.shift();
-										this.emit('erase', _data4);
+										var _data7 = _queue2.shift();
+										this.emit('erase', _data7);
 									}
 								}
 							}
@@ -1043,20 +1035,20 @@ var Block = function (_EventEmitter) {
 								    _source3 = _step6$value[0],
 								    _queue3 = _step6$value[1];
 
-								var _destination = oppositeDirection[_source3];
+								var _destination2 = oppositeDirection[_source3];
 
 								// When data exists in pluged direction
 								if (_queue3.length !== 0) {
-									var _data5 = _queue3.shift();
+									var _data8 = _queue3.shift();
 
 									// pass through
-									var input = new Map([[_source3, _data5]]);
+									var _input2 = new Map([[_source3, _data8]]);
 
-									var outData = new Data(this.board, _data5.value);
-									this.outputQueues.get(_destination).push(outData);
-									var output = new Map([[_destination, outData]]);
+									var _outData = new Data(this.board, _data8.value);
+									this.outputQueues.get(_destination2).push(_outData);
+									var _output2 = new Map([[_destination2, _outData]]);
 
-									this.emit('pass', { in: input, out: output });
+									this.emit('pass', { in: _input2, out: _output2 });
 									this.outputExists = true;
 								}
 							}
@@ -24220,7 +24212,7 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
 }).call(this,require("buffer").Buffer)
 
 },{"buffer":60,"create-hash/md5":314}],346:[function(require,module,exports){
-(function () {
+(function (self) {
   'use strict';
 
   function fetchPonyfill(options) {
@@ -24256,6 +24248,28 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
           })(),
           formData: 'FormData' in self,
           arrayBuffer: 'ArrayBuffer' in self
+        }
+
+        if (support.arrayBuffer) {
+          var viewClasses = [
+            '[object Int8Array]',
+            '[object Uint8Array]',
+            '[object Uint8ClampedArray]',
+            '[object Int16Array]',
+            '[object Uint16Array]',
+            '[object Int32Array]',
+            '[object Uint32Array]',
+            '[object Float32Array]',
+            '[object Float64Array]'
+          ]
+
+          var isDataView = function(obj) {
+            return obj && DataView.prototype.isPrototypeOf(obj)
+          }
+
+          var isArrayBufferView = ArrayBuffer.isView || function(obj) {
+            return obj && viewClasses.indexOf(Object.prototype.toString.call(obj)) > -1
+          }
         }
 
         function normalizeName(name) {
@@ -24311,12 +24325,8 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
         Headers.prototype.append = function(name, value) {
           name = normalizeName(name)
           value = normalizeValue(value)
-          var list = this.map[name]
-          if (!list) {
-            list = []
-            this.map[name] = list
-          }
-          list.push(value)
+          var oldValue = this.map[name]
+          this.map[name] = oldValue ? oldValue+','+value : value
         }
 
         Headers.prototype['delete'] = function(name) {
@@ -24324,12 +24334,8 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
         }
 
         Headers.prototype.get = function(name) {
-          var values = this.map[normalizeName(name)]
-          return values ? values[0] : null
-        }
-
-        Headers.prototype.getAll = function(name) {
-          return this.map[normalizeName(name)] || []
+          name = normalizeName(name)
+          return this.has(name) ? this.map[name] : null
         }
 
         Headers.prototype.has = function(name) {
@@ -24337,15 +24343,15 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
         }
 
         Headers.prototype.set = function(name, value) {
-          this.map[normalizeName(name)] = [normalizeValue(value)]
+          this.map[normalizeName(name)] = normalizeValue(value)
         }
 
         Headers.prototype.forEach = function(callback, thisArg) {
-          Object.getOwnPropertyNames(this.map).forEach(function(name) {
-            this.map[name].forEach(function(value) {
-              callback.call(thisArg, value, name, this)
-            }, this)
-          }, this)
+          for (var name in this.map) {
+            if (this.map.hasOwnProperty(name)) {
+              callback.call(thisArg, this.map[name], name, this)
+            }
+          }
         }
 
         Headers.prototype.keys = function() {
@@ -24390,14 +24396,36 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
 
         function readBlobAsArrayBuffer(blob) {
           var reader = new FileReader()
+          var promise = fileReaderReady(reader)
           reader.readAsArrayBuffer(blob)
-          return fileReaderReady(reader)
+          return promise
         }
 
         function readBlobAsText(blob) {
           var reader = new FileReader()
+          var promise = fileReaderReady(reader)
           reader.readAsText(blob)
-          return fileReaderReady(reader)
+          return promise
+        }
+
+        function readArrayBufferAsText(buf) {
+          var view = new Uint8Array(buf)
+          var chars = new Array(view.length)
+
+          for (var i = 0; i < view.length; i++) {
+            chars[i] = String.fromCharCode(view[i])
+          }
+          return chars.join('')
+        }
+
+        function bufferClone(buf) {
+          if (buf.slice) {
+            return buf.slice(0)
+          } else {
+            var view = new Uint8Array(buf.byteLength)
+            view.set(new Uint8Array(buf))
+            return view.buffer
+          }
         }
 
         function Body() {
@@ -24405,7 +24433,9 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
 
           this._initBody = function(body) {
             this._bodyInit = body
-            if (typeof body === 'string') {
+            if (!body) {
+              this._bodyText = ''
+            } else if (typeof body === 'string') {
               this._bodyText = body
             } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
               this._bodyBlob = body
@@ -24413,11 +24443,12 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
               this._bodyFormData = body
             } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
               this._bodyText = body.toString()
-            } else if (!body) {
-              this._bodyText = ''
-            } else if (support.arrayBuffer && ArrayBuffer.prototype.isPrototypeOf(body)) {
-              // Only support ArrayBuffers for POST method.
-              // Receiving ArrayBuffers happens via Blobs, instead.
+            } else if (support.arrayBuffer && support.blob && isDataView(body)) {
+              this._bodyArrayBuffer = bufferClone(body.buffer)
+              // IE 10-11 can't handle a DataView body.
+              this._bodyInit = new Blob([this._bodyArrayBuffer])
+            } else if (support.arrayBuffer && (ArrayBuffer.prototype.isPrototypeOf(body) || isArrayBufferView(body))) {
+              this._bodyArrayBuffer = bufferClone(body)
             } else {
               throw new Error('unsupported BodyInit type')
             }
@@ -24442,6 +24473,8 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
 
               if (this._bodyBlob) {
                 return Promise.resolve(this._bodyBlob)
+              } else if (this._bodyArrayBuffer) {
+                return Promise.resolve(new Blob([this._bodyArrayBuffer]))
               } else if (this._bodyFormData) {
                 throw new Error('could not read FormData body as blob')
               } else {
@@ -24450,27 +24483,28 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
             }
 
             this.arrayBuffer = function() {
-              return this.blob().then(readBlobAsArrayBuffer)
-            }
-
-            this.text = function() {
-              var rejected = consumed(this)
-              if (rejected) {
-                return rejected
-              }
-
-              if (this._bodyBlob) {
-                return readBlobAsText(this._bodyBlob)
-              } else if (this._bodyFormData) {
-                throw new Error('could not read FormData body as text')
+              if (this._bodyArrayBuffer) {
+                return consumed(this) || Promise.resolve(this._bodyArrayBuffer)
               } else {
-                return Promise.resolve(this._bodyText)
+                return this.blob().then(readBlobAsArrayBuffer)
               }
             }
-          } else {
-            this.text = function() {
-              var rejected = consumed(this)
-              return rejected ? rejected : Promise.resolve(this._bodyText)
+          }
+
+          this.text = function() {
+            var rejected = consumed(this)
+            if (rejected) {
+              return rejected
+            }
+
+            if (this._bodyBlob) {
+              return readBlobAsText(this._bodyBlob)
+            } else if (this._bodyArrayBuffer) {
+              return Promise.resolve(readArrayBufferAsText(this._bodyArrayBuffer))
+            } else if (this._bodyFormData) {
+              throw new Error('could not read FormData body as text')
+            } else {
+              return Promise.resolve(this._bodyText)
             }
           }
 
@@ -24498,7 +24532,8 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
         function Request(input, options) {
           options = options || {}
           var body = options.body
-          if (Request.prototype.isPrototypeOf(input)) {
+
+          if (input instanceof Request) {
             if (input.bodyUsed) {
               throw new TypeError('Already read')
             }
@@ -24509,12 +24544,12 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
             }
             this.method = input.method
             this.mode = input.mode
-            if (!body) {
+            if (!body && input._bodyInit != null) {
               body = input._bodyInit
               input.bodyUsed = true
             }
           } else {
-            this.url = input
+            this.url = String(input)
           }
 
           this.credentials = options.credentials || this.credentials || 'omit'
@@ -24532,7 +24567,7 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
         }
 
         Request.prototype.clone = function() {
-          return new Request(this)
+          return new Request(this, { body: this._bodyInit })
         }
 
         function decode(body) {
@@ -24548,16 +24583,17 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
           return form
         }
 
-        function headers(xhr) {
-          var head = new Headers()
-          var pairs = (xhr.getAllResponseHeaders() || '').trim().split('\n')
-          pairs.forEach(function(header) {
-            var split = header.trim().split(':')
-            var key = split.shift().trim()
-            var value = split.join(':').trim()
-            head.append(key, value)
+        function parseHeaders(rawHeaders) {
+          var headers = new Headers()
+          rawHeaders.split(/\r?\n/).forEach(function(line) {
+            var parts = line.split(':')
+            var key = parts.shift().trim()
+            if (key) {
+              var value = parts.join(':').trim()
+              headers.append(key, value)
+            }
           })
-          return head
+          return headers
         }
 
         Body.call(Request.prototype)
@@ -24568,10 +24604,10 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
           }
 
           this.type = 'default'
-          this.status = options.status
+          this.status = 'status' in options ? options.status : 200
           this.ok = this.status >= 200 && this.status < 300
-          this.statusText = options.statusText
-          this.headers = options.headers instanceof Headers ? options.headers : new Headers(options.headers)
+          this.statusText = 'statusText' in options ? options.statusText : 'OK'
+          this.headers = new Headers(options.headers)
           this.url = options.url || ''
           this._initBody(bodyInit)
         }
@@ -24609,35 +24645,16 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
 
         self.fetch = function(input, init) {
           return new Promise(function(resolve, reject) {
-            var request
-            if (Request.prototype.isPrototypeOf(input) && !init) {
-              request = input
-            } else {
-              request = new Request(input, init)
-            }
-
+            var request = new Request(input, init)
             var xhr = new XMLHttpRequest()
-
-            function responseURL() {
-              if ('responseURL' in xhr) {
-                return xhr.responseURL
-              }
-
-              // Avoid security warnings on getResponseHeader when not allowed by CORS
-              if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
-                return xhr.getResponseHeader('X-Request-URL')
-              }
-
-              return
-            }
 
             xhr.onload = function() {
               var options = {
                 status: xhr.status,
                 statusText: xhr.statusText,
-                headers: headers(xhr),
-                url: responseURL()
+                headers: parseHeaders(xhr.getAllResponseHeaders() || '')
               }
+              options.url = 'responseURL' in xhr ? xhr.responseURL : options.headers.get('X-Request-URL')
               var body = 'response' in xhr ? xhr.response : xhr.responseText
               resolve(new Response(body, options))
             }
@@ -24689,7 +24706,7 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
   } else {
     self.fetchPonyfill = fetchPonyfill;
   }
-}());
+}(typeof self === 'undefined' ? this : self));
 
 
 },{}],347:[function(require,module,exports){
