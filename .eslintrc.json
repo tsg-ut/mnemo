@@ -5,7 +5,13 @@
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "plugins": ["react"],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
     "rules": {
         "accessor-pairs": "error",
         "array-bracket-spacing": [
@@ -124,7 +130,7 @@
         "no-caller": "error",
         "no-catch-shadow": "error",
         "no-constant-condition": [
-            "error", 
+            "error",
             { "checkLoops" : false }
         ],
         "no-confusing-arrow": "off",
