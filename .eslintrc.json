@@ -5,7 +5,14 @@
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "plugins": ["react"],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
     "rules": {
         "accessor-pairs": "error",
         "array-bracket-spacing": [
@@ -124,7 +131,7 @@
         "no-caller": "error",
         "no-catch-shadow": "error",
         "no-constant-condition": [
-            "error", 
+            "error",
             { "checkLoops" : false }
         ],
         "no-confusing-arrow": "off",
@@ -148,7 +155,7 @@
             "error",
             "functions"
         ],
-        "no-invalid-this": "error",
+        "no-invalid-this": "off",
         "no-iterator": "error",
         "no-label-var": "error",
         "no-labels": "error",
