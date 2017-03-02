@@ -7,6 +7,12 @@ if [ "$TRAVIS_SECURE_ENV_VARS" != "true" ] || [ "$TRAVIS_BRANCH" != "master" ] |
 	exit 0
 fi
 
+git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+git fetch
+git config user.name "Travis CI"
+git config user.email "info@tsg.ne.jp"
+git branch gh-pages origin/gh-pages
+git symbolic-ref HEAD refs/heads/gh-pages
 git checkout f2b3222e3e930b33c5618b26effcf4be451841ed .gitignore
 git add --all
 git commit -m "Update build - ${TRAVIS_COMMIT}"
