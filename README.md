@@ -1,10 +1,9 @@
 # MNEMO
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/tsg-ut/mnemo.svg)](https://greenkeeper.io/)
-
 [![Build Status][travis-image]][travis-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
 [![Code Climate][codeclimate-image]][codeclimate-url]
+[![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
 
 [travis-url]: https://travis-ci.org/tsg-ut/mnemo
 [travis-image]: https://travis-ci.org/tsg-ut/mnemo.svg?branch=master
@@ -12,6 +11,8 @@
 [coveralls-image]: https://coveralls.io/repos/github/tsg-ut/mnemo/badge.svg?branch=master
 [codeclimate-url]: https://codeclimate.com/github/tsg-ut/mnemo
 [codeclimate-image]: https://codeclimate.com/github/tsg-ut/mnemo/badges/gpa.svg
+[greenkeeper-url]: https://greenkeeper.io/
+[greenkeeper-image]: https://badges.greenkeeper.io/tsg-ut/mnemo.svg
 
 [![ScreenShot](assets/screen.png)](https://mnemo.pro/)
 
