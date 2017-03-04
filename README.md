@@ -1,5 +1,7 @@
 # MNEMO
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/tsg-ut/mnemo.svg)](https://greenkeeper.io/)
+
 [![Build Status][travis-image]][travis-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
 [![Code Climate][codeclimate-image]][codeclimate-url]
