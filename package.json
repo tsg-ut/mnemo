@@ -84,7 +84,7 @@
     "nightmare": "^2.8.1",
     "normalize.css": "^5.0.0",
     "postcss-assets": "^4.1.0",
-    "postcss-cli": "^2.5.2",
+    "postcss-cli": "^3.0.0",
     "postcss-flexbugs-fixes": "^2.0.0",
     "postcss-font-magician": "^1.5.0",
     "pug-cli": "^1.0.0-alpha6",
