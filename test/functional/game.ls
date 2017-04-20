@@ -21,7 +21,7 @@ describe 'Game Screen' ->
 
     It 'can place blocks' ->
       @nightmare
-      .click '.panel > .block[data-type=wireI]'
+      .click '.panel > .block[data-type="wireI"]'
       .click '.board .block[data-x="1"][data-y="0"]'
       .then ~>
         @nightmare
@@ -47,7 +47,7 @@ describe 'Game Screen' ->
 
     It 'succeeds when placed more blocks correctly' ->
       @nightmare
-      .click '.panel > .block[data-type=wireI]'
+      .click '.panel > .block[data-type="wireI"]'
       .click '.board .block[data-x="1"][data-y="1"]'
       .click '.board .block[data-x="1"][data-y="2"]'
       .click 'button.execute'
