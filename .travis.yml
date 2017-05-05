@@ -29,12 +29,12 @@ install:
   - yarn upgrade --no-lockfile
 
 script:
-  - npm run build:production
-  - npm test
-  - npm run test:api
+  - yarn build:production
+  - yarn test
+  - yarn test:api
 
 after_success:
-  - npm run coveralls
+  - yarn coveralls
   - bash bin/deploy.sh
 
 cache:
