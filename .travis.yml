@@ -21,7 +21,8 @@ before_install:
   - export DISPLAY=':99.0'
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
 
-install: yarn install
+# yarn upgrade will also install missing packages as well
+install: yarn upgrade
 
 script:
   - ls -lah node_modules/.bin
@@ -32,6 +33,11 @@ script:
 after_success:
   - npm run coveralls
   - bash bin/deploy.sh
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
 
 branches:
   except:
