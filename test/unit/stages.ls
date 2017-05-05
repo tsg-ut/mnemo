@@ -19,6 +19,7 @@ require! {
   '../../stages/sqrt-hard'
   '../../stages/msd'
   '../../stages/mod3-hard'
+  '../../stages/repeat-self'
 }
 
 chai.use chai-things
@@ -250,3 +251,15 @@ describe 'Stage Data' ->
       expect io.output.0 .to.equal 0
       expect io.output.1 .to.equal 1
       expect io.output.2 .to.equal 2
+
+  describe 'repeat-self stage' ->
+    It 'generates valid io' ->
+      io = repeat-self.io-generator @random
+
+      expect io .to.satisfy io-spec
+
+      expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
+        output is (input.to-string!repeat input |> parse-int)
+
+      expect io.input.0 .to.equal 1
+      expect io.input.3 .to.equal 9
