@@ -2,6 +2,7 @@ language: node_js
 node_js:
   - node
 
+dist: trusty
 sudo: false
 
 # Setup xvfb
@@ -28,7 +29,6 @@ install:
   - yarn upgrade --no-lockfile
 
 script:
-  - ls -lah node_modules/.bin
   - npm run build:production
   - npm test
   - npm run test:api
