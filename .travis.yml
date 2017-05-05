@@ -23,7 +23,7 @@ before_install:
 
 # yarn upgrade will also install missing packages as well
 install:
-  # Fake lockfile *puke*
+  # Yarn needs lockfile to exist even if --no-lockfile option is provided. So... fake lockfile *puke*
   - touch yarn.lock
   - yarn upgrade --no-lockfile
 
