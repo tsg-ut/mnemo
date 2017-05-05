@@ -78,6 +78,7 @@
     "jquery": "^3.0.0",
     "less": "^2.7.1",
     "mathjs": "^3.8.0",
+    "mocha": "^3.3.0",
     "mocha-logger": "^1.0.4",
     "mochify": "^3.1.0",
     "mochify-istanbul": "^2.4.1",
