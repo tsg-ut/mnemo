@@ -43,4 +43,5 @@ module.exports = [
 	require('./plus-32-hard.js'),
 	require('./xor.js'),
 	require('./2017.js'),
+	require('./repeat-self.js'),
 ];
