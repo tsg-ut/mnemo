@@ -43834,9 +43834,9 @@ module.exports = {
 
 /* eslint global-require: 'off' */
 
-module.exports = [require('./wire01.js'), require('./calc01.js'), require('./calc02.js'), require('./calc03.js'), require('./calc04.js'), require('./calc05.js'), require('./calc06.js'), require('./make-minus-one-easy.js'), require('./division-easy.js'), require('./sixth-power.js'), require('./remainder.js'), require('./plus-32.js'), require('./conditional01.js'), require('./conditional02.js'), require('./conditional03.js'), require('./factorial.js'), require('./parity.js'), require('./fibonacci.js'), require('./bivariation01.js'), require('./power-easy.js'), require('./power-hard.js'), require('./division-hard.js'), require('./gcd.js'), require('./lcm.js'), require('./make-minus-one-med.js'), require('./make-minus-one-hard.js'), require('./sqrt-easy.js'), require('./sqrt-hard.js'), require('./complement-of-2.js'), require('./binarian-easy.js'), require('./perfect-number.js'), require('./reversal.js'), require('./msd.js'), require('./mod3-hard.js'), require('./max.js'), require('./the-fifth-max.js'), require('./100.js'), require('./100-again.js'), require('./1000.js'), require('./plus-32-hard.js'), require('./xor.js'), require('./2017.js')];
+module.exports = [require('./wire01.js'), require('./calc01.js'), require('./calc02.js'), require('./calc03.js'), require('./calc04.js'), require('./calc05.js'), require('./calc06.js'), require('./make-minus-one-easy.js'), require('./division-easy.js'), require('./sixth-power.js'), require('./remainder.js'), require('./plus-32.js'), require('./conditional01.js'), require('./conditional02.js'), require('./conditional03.js'), require('./factorial.js'), require('./parity.js'), require('./fibonacci.js'), require('./bivariation01.js'), require('./power-easy.js'), require('./power-hard.js'), require('./division-hard.js'), require('./gcd.js'), require('./lcm.js'), require('./make-minus-one-med.js'), require('./make-minus-one-hard.js'), require('./sqrt-easy.js'), require('./sqrt-hard.js'), require('./complement-of-2.js'), require('./binarian-easy.js'), require('./perfect-number.js'), require('./reversal.js'), require('./msd.js'), require('./mod3-hard.js'), require('./max.js'), require('./the-fifth-max.js'), require('./100.js'), require('./100-again.js'), require('./1000.js'), require('./plus-32-hard.js'), require('./xor.js'), require('./2017.js'), require('./repeat-self.js')];
 
-},{"./100-again.js":460,"./100.js":461,"./1000.js":462,"./2017.js":463,"./binarian-easy.js":464,"./bivariation01.js":465,"./calc01.js":466,"./calc02.js":467,"./calc03.js":468,"./calc04.js":469,"./calc05.js":470,"./calc06.js":471,"./complement-of-2.js":472,"./conditional01.js":473,"./conditional02.js":474,"./conditional03.js":475,"./division-easy.js":476,"./division-hard.js":477,"./factorial.js":478,"./fibonacci.js":479,"./gcd.js":480,"./lcm.js":482,"./make-minus-one-easy.js":483,"./make-minus-one-hard.js":484,"./make-minus-one-med.js":485,"./max.js":486,"./mod3-hard.js":487,"./msd.js":488,"./parity.js":489,"./perfect-number.js":490,"./plus-32-hard.js":491,"./plus-32.js":492,"./power-easy.js":493,"./power-hard.js":494,"./remainder.js":495,"./reversal.js":496,"./sixth-power.js":497,"./sqrt-easy.js":498,"./sqrt-hard.js":499,"./the-fifth-max.js":500,"./wire01.js":501,"./xor.js":502}],482:[function(require,module,exports){
+},{"./100-again.js":460,"./100.js":461,"./1000.js":462,"./2017.js":463,"./binarian-easy.js":464,"./bivariation01.js":465,"./calc01.js":466,"./calc02.js":467,"./calc03.js":468,"./calc04.js":469,"./calc05.js":470,"./calc06.js":471,"./complement-of-2.js":472,"./conditional01.js":473,"./conditional02.js":474,"./conditional03.js":475,"./division-easy.js":476,"./division-hard.js":477,"./factorial.js":478,"./fibonacci.js":479,"./gcd.js":480,"./lcm.js":482,"./make-minus-one-easy.js":483,"./make-minus-one-hard.js":484,"./make-minus-one-med.js":485,"./max.js":486,"./mod3-hard.js":487,"./msd.js":488,"./parity.js":489,"./perfect-number.js":490,"./plus-32-hard.js":491,"./plus-32.js":492,"./power-easy.js":493,"./power-hard.js":494,"./remainder.js":495,"./repeat-self.js":496,"./reversal.js":497,"./sixth-power.js":498,"./sqrt-easy.js":499,"./sqrt-hard.js":500,"./the-fifth-max.js":501,"./wire01.js":502,"./xor.js":503}],482:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -44572,6 +44572,71 @@ module.exports = {
 'use strict';
 
 module.exports = {
+	name: 'repeat-self',
+	version: 1,
+	parts: {
+		wireI: null,
+		wireL: null,
+		wireT: null,
+		wireX: null,
+		wireXdot: null,
+		'times-2': null,
+		'times-10': null,
+		'div-2': null,
+		'plus-1': null,
+		'minus-1': null,
+		'const-0': null,
+		'const-1': null,
+		'const-2': null,
+		'const-10': null,
+		add: null,
+		sub: null,
+		div: null,
+		mul: null,
+		pow: null,
+		equal: null,
+		conditional: null,
+		transistor: null,
+		diode: null
+	},
+	inputX: 4,
+	outputX: 4,
+	input: [1, null, null, 9],
+	output: [1, null, null, 999999999],
+	ioGenerator: function ioGenerator(random) {
+		var candidates = Array.from({ length: 7 }, function (item, index) {
+			return index + 2;
+		}); // 2..8
+		var inputs = [];
+
+		// Shuffle array and take heading 3
+		var index1 = Math.floor(random() * 7);
+		inputs.push(candidates[index1]);
+		candidates[index1] = candidates[0];
+
+		var index2 = Math.floor(random() * 6) + 1;
+		inputs.push(candidates[index2]);
+
+		inputs.sort(function (a, b) {
+			return a - b;
+		});
+
+		return {
+			input: [1, inputs[0], inputs[1], 9],
+			output: [1, parseInt(inputs[0].toString().repeat(inputs[0])), parseInt(inputs[1].toString().repeat(inputs[1])), 999999999]
+		};
+	},
+	width: 9,
+	height: 9,
+	clockLimit: 300,
+	statement: '一桁の数を自分自身の回数だけリピートしよう！',
+	title: '自己反復'
+};
+
+},{}],497:[function(require,module,exports){
+'use strict';
+
+module.exports = {
 	name: 'reversal',
 	version: 2,
 	parts: {
@@ -44623,7 +44688,7 @@ module.exports = {
 	title: '反転'
 };
 
-},{}],497:[function(require,module,exports){
+},{}],498:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44655,7 +44720,7 @@ module.exports = {
 	title: '6乗'
 };
 
-},{}],498:[function(require,module,exports){
+},{}],499:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44727,7 +44792,7 @@ module.exports = {
 	title: '平方根 -easy-'
 };
 
-},{}],499:[function(require,module,exports){
+},{}],500:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44792,7 +44857,7 @@ module.exports = {
 	title: '平方根 -hard-'
 };
 
-},{}],500:[function(require,module,exports){
+},{}],501:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44854,7 +44919,7 @@ module.exports = {
 	title: '中央値'
 };
 
-},{}],501:[function(require,module,exports){
+},{}],502:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44875,7 +44940,7 @@ module.exports = {
 	modal: '01'
 };
 
-},{}],502:[function(require,module,exports){
+},{}],503:[function(require,module,exports){
 'use strict';
 
 module.exports = {
