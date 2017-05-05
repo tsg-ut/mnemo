@@ -2,22 +2,45 @@ language: node_js
 node_js:
   - node
 
+dist: trusty
+sudo: false
+
+# Setup xvfb
 # https://github.com/electron/electron/blob/master/docs/tutorial/testing-on-headless-ci.md
+# Install yarn
+# https://github.com/travis-ci/travis-ci/issues/6720#issuecomment-285981417
 addons:
   apt:
+    sources:
+      - sourceline: 'deb https://dl.yarnpkg.com/debian/ stable main'
+        key_url: 'https://dl.yarnpkg.com/debian/pubkey.gpg'
     packages:
       - xvfb
+      - yarn
+
 before_install:
   - export DISPLAY=':99.0'
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
 
+# yarn upgrade will also install missing packages as well
+install:
+  # Yarn needs lockfile to exist even if --no-lockfile option is provided. So... fake lockfile *puke*
+  - touch yarn.lock
+  - yarn upgrade --no-lockfile
+
 script:
-  - npm run build:production
-  - npm test
-  - npm run test:api
+  - yarn build:production
+  - yarn test
+  - yarn test:api
+
 after_success:
-  - npm run coveralls
+  - yarn coveralls
   - bash bin/deploy.sh
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
 
 branches:
   except:
