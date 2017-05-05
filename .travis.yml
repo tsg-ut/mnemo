@@ -22,7 +22,7 @@ before_install:
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
 
 # yarn upgrade will also install missing packages as well
-install: yarn upgrade
+install: yarn upgrade --no-lockfile
 
 script:
   - ls -lah node_modules/.bin
