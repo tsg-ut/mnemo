@@ -28,8 +28,8 @@ module.exports = {
 		pow: null,
 		sqrt: null,
 	},
-	inputX: 5,
-	outputX: 5,
+	inputX: 6,
+	outputX: 6,
 	input: [null, null, null, 30],
 	output: [null, null, null, 832040],
 	ioGenerator: (random) => {
@@ -71,8 +71,8 @@ module.exports = {
 			],
 		};
 	},
-	width: 11,
-	height: 11,
+	width: 13,
+	height: 13,
 	clockLimit: 50,
 	statement: 'n番目のフィボナッチ数を計算してみよう!',
 	title: 'フィボナッチ数 -hard-',
