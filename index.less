@@ -324,62 +324,16 @@ button {
 					overflow: visible;
 				}
 
-				.board-frame {
+				.board-background {
 					fill: #e4b67c;
-
-					.clock-area {
-						position: absolute;
-						top: calc(~"100% + 25px");
-						right: -25px;
-
-						padding: 3px 4px 4px;
-
-						border: 2px outset #ff920e;
-						border-top: none;
-						border-bottom-right-radius: 6px;
-						border-bottom-left-radius: 6px;
-
-						background: #fbae36;
-						color: #fffdf7;
-						font-size: 16px;
-						font-weight: bold;
-						font-family: Arial;
-						line-height: 1;
-
-						.clock-icon {
-							display: inline-block;
-							width: 16px;
-							height: 16px;
-							background-image: inline('image/clock-icon.svg');
-							vertical-align: text-top;
-							margin-right: .2em;
-						}
-
-						.clock-value {
-							vertical-align: bottom;
-						}
-					}
 				}
 
-				.board-wrap {
-					background-color: #e4b67c;
-
-					.block {
-						position: relative;
-					}
-
-					.block::after {
-						content: '';
-
-						position: absolute;
-						top: 0;
-						left: 0;
-						right: 0;
-						bottom: 0;
-
-						border: 1px dotted rgba(0, 0, 0, .3);
-						pointer-events: none;
-					}
+				.block-border {
+					fill: none;
+					stroke: black;
+					stroke-dasharray: 1, 5;
+					stroke-opacity: 0.3;
+					stroke-width: 1px;
 				}
 			}
 		}

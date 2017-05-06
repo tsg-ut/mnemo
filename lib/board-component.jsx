@@ -115,7 +115,21 @@ class BoardElement extends React.Component {
 	render() {
 		return (
 			<svg className="board-svg" viewBox="0 0 300 300">
-				<rect className="board-frame"/>
+				<rect className="board-background" width={this.width * 50} height={this.height * 50}/>
+				<g>{
+					Array.from({length: this.height}, (_, y) => (
+						Array.from({length: this.width}, (_, x) => (
+							<rect
+								key={y * this.width + x}
+								className="block-border"
+								width="50"
+								height="50"
+								x={x * 50}
+								y={y * 50}
+							/>
+						))
+					))
+				}</g>
 			</svg>
 		);
 	}
