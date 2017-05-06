@@ -20,6 +20,7 @@ require! {
   '../../stages/msd'
   '../../stages/mod3-hard'
   '../../stages/repeat-self'
+  '../../stages/fibonacci-hard'
 }
 
 chai.use chai-things
@@ -263,3 +264,14 @@ describe 'Stage Data' ->
 
       expect io.input.0 .to.equal 1
       expect io.input.3 .to.equal 9
+
+  describe 'fibonacci-hord stage' ->
+    It 'generates fibonaccis' ->
+      io = fibonacci-hard.io-generator @random
+
+      expect io .to.satisfy io-spec
+
+      expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
+        output is fibonacci-calc input
+
+      expect io.input.3 .to.equal 25
