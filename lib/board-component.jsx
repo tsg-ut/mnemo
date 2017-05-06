@@ -1,8 +1,14 @@
 const $ = require('jquery');
 const DataElement = require('./data-element');
 const React = require('react');
+const PropTypes = require('prop-types');
 
 class BoardElement extends React.Component {
+	static propTypes = {
+		width: PropTypes.number.isRequired,
+		height: PropTypes.number.isRequired,
+	}
+
 	constructor(props, state) {
 		super(props, state);
 
@@ -11,28 +17,8 @@ class BoardElement extends React.Component {
 		this.stage = stage;
 		this.board = board;
 
-		this.height = stage.config.height;
-		this.width = stage.config.width;
 		this.$board = stage.$stage.find('.board');
 		this.dataElements = [];
-
-		for (let i = 0; i < this.height; i++) {
-			const $row = $('<div/>', {
-				class: 'row',
-				attr: {'data-y': i},
-			});
-			this.$board.find('.rows').append($row);
-
-			for (let j = 0; j < this.width; j++) {
-				$row.append($('<div/>', {
-					class: 'block',
-					attr: {
-						'data-x': j,
-						'data-y': i,
-					},
-				}));
-			}
-		}
 
 		if (typeof stage.config.inputX === 'number') {
 			this.inputBlockX = [stage.config.inputX];
@@ -41,7 +27,7 @@ class BoardElement extends React.Component {
 		}
 		this.inputBlockY = 0;
 		this.outputBlockX = stage.config.outputX;
-		this.outputBlockY = stage.config.height - 1;
+		this.outputBlockY = this.props.height - 1;
 
 		this.animations = [];
 
@@ -114,13 +100,17 @@ class BoardElement extends React.Component {
 
 	render() {
 		return (
-			<svg className="board-svg" viewBox="0 0 300 300">
-				<rect className="board-background" width={this.width * 50} height={this.height * 50}/>
+			<svg className="board-svg" viewBox="-150 -150 450 450">
+				<rect
+					className="board-background"
+					width={this.props.width * 50}
+					height={this.props.height * 50}
+				/>
 				<g>{
-					Array.from({length: this.height}, (_, y) => (
-						Array.from({length: this.width}, (_, x) => (
+					Array.from({length: this.props.height}, (_, y) => (
+						Array.from({length: this.props.width}, (_, x) => (
 							<rect
-								key={y * this.width + x}
+								key={y * this.props.width + x}
 								className="block-border"
 								width="50"
 								height="50"
