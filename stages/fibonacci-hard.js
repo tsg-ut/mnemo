@@ -23,6 +23,7 @@ module.exports = {
 		div: null,
 		mul: null,
 		pow: null,
+		sqrt: null,
 	},
 	inputX: 7,
 	outputX: 7,

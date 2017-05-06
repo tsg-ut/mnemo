@@ -780,3 +780,46 @@ describe 'Block' ->
         type: \not
         in: top: 1
         out: bottom: 0
+
+  describe 'sqrt block' ->
+    It 'calculates square root' ->
+      io-test do
+        type: \sqrt
+        in: top: 1
+        out: bottom: 1
+
+      io-test do
+        type: \sqrt
+        in: top: 80
+        out: bottom: 8
+
+      io-test do
+        type: \sqrt
+        in: top: 81
+        out: bottom: 9
+
+      io-test do
+        type: \sqrt
+        in: top: 334
+        out: bottom: 18
+
+      io-test do
+        type: \sqrt
+        in: top: Infinity
+        out: bottom: Infinity
+
+    It 'returns zero when negative numbers were given' ->
+      io-test do
+        type: \sqrt
+        in: top: 0
+        out: bottom: 0
+
+      io-test do
+        type: \sqrt
+        in: top: -334
+        out: bottom: 0
+
+      io-test do
+        type: \sqrt
+        in: top: -Infinity
+        out: bottom: 0
