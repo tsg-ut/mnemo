@@ -1,8 +1,13 @@
 const $ = require('jquery');
 const DataElement = require('./data-element');
+const React = require('react');
 
-class BoardElement {
-	constructor(stage, board) {
+class BoardElement extends React.Component {
+	constructor(props, state) {
+		super(props, state);
+
+		const {stage, board} = this.props;
+
 		this.stage = stage;
 		this.board = board;
 
@@ -105,6 +110,14 @@ class BoardElement {
 		this.dataElements.forEach((dataElement) => {
 			dataElement.fadeOut();
 		});
+	}
+
+	render() {
+		return (
+			<svg className="board-svg" viewBox="0 0 300 300">
+				<rect className="board-frame"/>
+			</svg>
+		);
 	}
 }
 
