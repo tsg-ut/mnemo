@@ -314,255 +314,69 @@ button {
 				display: flex;
 			}
 
-			.pipe-area {
+			svg.board-area {
 				flex: 1 0 0;
 				width: 0;
 
 				display: flex;
 				flex-direction: column;
+				overflow: visible;
 
-				.upper-pipe-area {
-					.fixed-height(131px);
+				.board-frame {
+					fill: #e4b67c;
 
-					margin-left: 100px;
-					margin-right: 100px;
+					.clock-area {
+						position: absolute;
+						top: calc(~"100% + 25px");
+						right: -25px;
 
-					display: flex;
+						padding: 3px 4px 4px;
 
-					.left-corner-pipe {
-						.fixed-width(93px);
-						background-image: url(image/pipe-upper-left-corner.png);
-					}
+						border: 2px outset #ff920e;
+						border-top: none;
+						border-bottom-right-radius: 6px;
+						border-bottom-left-radius: 6px;
 
-					.left-pipe, .right-pipe {
-						background-image: url(image/pipe-upper.png);
-						background-size: 100% 100%;
-					}
+						background: #fbae36;
+						color: #fffdf7;
+						font-size: 16px;
+						font-weight: bold;
+						font-family: Arial;
+						line-height: 1;
 
-					.left-pipe {
-						.grow-width(1);
-					}
+						.clock-icon {
+							display: inline-block;
+							width: 16px;
+							height: 16px;
+							background-image: inline('image/clock-icon.svg');
+							vertical-align: text-top;
+							margin-right: .2em;
+						}
 
-					.right-pipe {
-						.grow-width(2);
-					}
-
-					.center-pipe {
-						.fixed-width(81px);
-						background-image: url(image/pipe-upper-center.png);
-					}
-
-					.right-corner-pipe {
-						.fixed-width(93px);
-						background-image: url(image/pipe-upper-right-corner.png);
+						.clock-value {
+							vertical-align: bottom;
+						}
 					}
 				}
 
-				.downer-pipe-area {
-					.fixed-height(119px);
+				.board-wrap {
+					background-color: #e4b67c;
 
-					margin-left: 100px;
-					margin-right: 100px;
-
-					display: flex;
-
-					.left-corner-pipe {
-						.fixed-width(93px);
-						background-image: url(image/pipe-downer-left-corner.png);
+					.block {
+						position: relative;
 					}
 
-					.left-pipe, .right-pipe {
-						background-image: url(image/pipe-downer.png);
-						background-size: 100% 100%;
-					}
+					.block::after {
+						content: '';
 
-					.left-pipe {
-						.grow-width(3);
-					}
+						position: absolute;
+						top: 0;
+						left: 0;
+						right: 0;
+						bottom: 0;
 
-					.right-pipe {
-						.grow-width(2);
-					}
-
-					.center-pipe {
-						.fixed-width(131px);
-						background-image: url(image/pipe-downer-center.png);
-					}
-
-					.right-corner-pipe {
-						.fixed-width(93px);
-						background-image: url(image/pipe-downer-right-corner.png);
-					}
-				}
-
-				.case-board-area {
-					flex: 1 0 0;
-					height: 0;
-
-					display: flex;
-
-					.case-pipe-area {
-						.grow-width(1);
-
-						display: flex;
-						flex-direction: column;
-
-						.case-joint-top-pipe, .case-joint-bottom-pipe,
-						.case-top-pipe, .case-bottom-pipe {
-							width: 40px;
-							margin: 0 auto;
-						}
-
-						.case-joint-top-pipe, .case-joint-bottom-pipe {
-							.fixed-height(10px);
-						}
-
-						.case-joint-top-pipe {
-							background-image: url(image/pipe-joint-top.png);
-						}
-
-						.case-joint-bottom-pipe {
-							background-image: url(image/pipe-joint-bottom.png);
-						}
-
-						.case-top-pipe, .case-bottom-pipe {
-							.grow-height(1);
-							background-image: url(image/pipe-vertical.png);
-							background-size: 100% 100%;
-						}
-
-						.case-area {
-							width: 471px;
-							height: 343px;
-
-							position: relative;
-							margin: 0 auto;
-
-							padding: 45px;
-							box-sizing: border-box;
-
-							&::before {
-								content: url(image/case-panel.png);
-								position: absolute;
-								left: -12px;
-								top: -3px;
-								z-index: -1;
-							}
-
-							.case {
-								.vertical-center;
-								position: relative;
-							}
-						}
-					}
-
-					.board-area {
-						.grow-width(1);
-
-						.board-frame-wrapper {
-							height: 100%;
-							margin: 0 auto;
-
-							display: flex;
-							flex-direction: column;
-						}
-
-						.board-joint-top-pipe, .board-joint-bottom-pipe,
-						.board-top-pipe, .board-bottom-pipe {
-							width: 40px;
-							margin: 0 auto;
-						}
-
-						.board-joint-top-pipe, .board-joint-bottom-pipe {
-							.fixed-height(10px);
-						}
-
-						.board-joint-top-pipe {
-							background-image: url(image/pipe-joint-top.png);
-						}
-
-						.board-joint-bottom-pipe {
-							background-image: url(image/pipe-joint-bottom.png);
-						}
-
-						.board-top-pipe, .board-bottom-pipe {
-							.grow-height(1);
-							background-image: url(image/pipe-vertical.png);
-							background-size: 100% 100%;
-						}
-
-						.board-top-pipe, .board-bottom-pipe {
-							.grow-height(1);
-						}
-
-						.board-frame {
-							width: 100%;
-
-							.fixed-height(0);
-
-							display: flex;
-							flex-direction: column;
-
-							position: relative;
-
-							border-style: solid;
-							border-width: 25px;
-							border-image: url(image/frame.png) 25 repeat;
-
-							.clock-area {
-								position: absolute;
-								top: calc(~"100% + 25px");
-								right: -25px;
-
-								padding: 3px 4px 4px;
-
-								border: 2px outset #ff920e;
-								border-top: none;
-								border-bottom-right-radius: 6px;
-								border-bottom-left-radius: 6px;
-
-								background: #fbae36;
-								color: #fffdf7;
-								font-size: 16px;
-								font-weight: bold;
-								font-family: Arial;
-								line-height: 1;
-
-								.clock-icon {
-									display: inline-block;
-									width: 16px;
-									height: 16px;
-									background-image: inline('image/clock-icon.svg');
-									vertical-align: text-top;
-									margin-right: .2em;
-								}
-
-								.clock-value {
-									vertical-align: bottom;
-								}
-							}
-						}
-
-						.board-wrap {
-							background-color: #e4b67c;
-
-							.block {
-								position: relative;
-							}
-
-							.block::after {
-								content: '';
-
-								position: absolute;
-								top: 0;
-								left: 0;
-								right: 0;
-								bottom: 0;
-
-								border: 1px dotted rgba(0, 0, 0, .3);
-								pointer-events: none;
-							}
-						}
+						border: 1px dotted rgba(0, 0, 0, .3);
+						pointer-events: none;
 					}
 				}
 			}

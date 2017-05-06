@@ -70,46 +70,13 @@ html
 					.screen.game-screen
 						.stage.layer.stage-layer
 							.upper-area
-								.pipe-area
-									.upper-pipe-area
-										.left-corner-pipe
-										.left-pipe
-										.center-pipe
-										.right-pipe
-										.right-corner-pipe
-									.case-board-area
-										.case-pipe-area
-											.case-joint-top-pipe
-											.case-top-pipe
-											.case-area
-												.case
-													.inputs
-													.arrows
-													.outputs
-														.correct-outputs
-														.user-outputs
-											.case-bottom-pipe
-											.case-joint-bottom-pipe
-										.board-area
-											.board-frame-wrapper
-												.board-joint-top-pipe
-												.board-top-pipe
-												.board-frame
-													.board-wrap
-														.board
-															.rows
-															.data-layer
-													.clock-area
-														span.clock-icon
-														span.clock-value 0
-												.board-bottom-pipe
-												.board-joint-bottom-pipe
-									.downer-pipe-area
-										.left-corner-pipe
-										.left-pipe
-										.center-pipe
-										.right-pipe
-										.right-corner-pipe
+								svg.board-area(viewBox='0 0 300 300')
+									rect.board-frame
+									g.board
+									g.data-layer
+									g.clock
+										image.clock-icon
+										text.clock-value 0
 								.panel-area
 							.downer-area
 								.left-area
