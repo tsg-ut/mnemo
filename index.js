@@ -2309,7 +2309,7 @@ $(function () {
 	new Game(stageConfigs);
 });
 
-},{"../stages":486,"./analytics":1,"./game":9,"./util":13,"core-js/es5":17,"core-js/es6":18,"jquery":290,"querystring":300}],11:[function(require,module,exports){
+},{"../stages":487,"./analytics":1,"./game":9,"./util":13,"core-js/es5":17,"core-js/es6":18,"jquery":290,"querystring":300}],11:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3315,7 +3315,7 @@ module.exports.validateSubmission = function (submission) {
 	return { pass: true, clocks: maxClock, blocks: board.weighedBlockCount };
 };
 
-},{"../stages":486,"./block-configs":3,"./board":6,"./util":13,"assert":15}],15:[function(require,module,exports){
+},{"../stages":487,"./block-configs":3,"./board":6,"./util":13,"assert":15}],15:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -44324,6 +44324,79 @@ module.exports = {
 'use strict';
 
 module.exports = {
+	name: 'fibonacci-hard',
+	version: 1,
+	parts: {
+		wireI: null,
+		wireL: null,
+		wireT: null,
+		wireX: null,
+		wireXdot: null,
+		'times-2': null,
+		'times-3': null,
+		'times-10': null,
+		'plus-1': null,
+		'plus-2': null,
+		'minus-1': null,
+		'minus-2': null,
+		'const-0': null,
+		'const-1': null,
+		'const-2': null,
+		'const-10': null,
+		add: null,
+		sub: null,
+		div: null,
+		mul: null,
+		pow: null
+	},
+	inputX: 7,
+	outputX: 7,
+	input: [null, null, null, 25],
+	output: [null, null, null, 75025],
+	ioGenerator: function ioGenerator(random) {
+		var fibonacci = [1, 1];
+
+		for (var i = 2; i < 30; i++) {
+			fibonacci.push(fibonacci[fibonacci.length - 1] + fibonacci[fibonacci.length - 2]);
+		}
+
+		var candidates = Array.from({ length: 13 }, function (item, index) {
+			return index + 12;
+		}); // 12..24
+		var inputs = [];
+
+		// Shuffle array and take heading 3
+		var index1 = Math.floor(random() * 13);
+		inputs.push(candidates[index1]);
+		candidates[index1] = candidates[0];
+
+		var index2 = Math.floor(random() * 12) + 1;
+		inputs.push(candidates[index2]);
+		candidates[index2] = candidates[1];
+
+		var index3 = Math.floor(random() * 11) + 2;
+		inputs.push(candidates[index3]);
+
+		inputs.sort(function (a, b) {
+			return a - b;
+		});
+
+		return {
+			input: [inputs[0], inputs[1], inputs[2], 25],
+			output: [fibonacci[inputs[0] - 1], fibonacci[inputs[1] - 1], fibonacci[inputs[2] - 1], fibonacci[24]]
+		};
+	},
+	width: 15,
+	height: 15,
+	clockLimit: 50,
+	statement: 'n番目のフィボナッチ数を計算してみよう!',
+	title: 'フィボナッチ数 -hard-'
+};
+
+},{}],485:[function(require,module,exports){
+'use strict';
+
+module.exports = {
 	name: 'fibonacci',
 	version: 3,
 	parts: {
@@ -44390,7 +44463,7 @@ module.exports = {
 	title: 'フィボナッチ数'
 };
 
-},{}],485:[function(require,module,exports){
+},{}],486:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -44486,14 +44559,14 @@ module.exports = {
 	title: '最大公約数'
 };
 
-},{}],486:[function(require,module,exports){
+},{}],487:[function(require,module,exports){
 'use strict';
 
 /* eslint global-require: 'off' */
 
-module.exports = [require('./wire01.js'), require('./calc01.js'), require('./calc02.js'), require('./calc03.js'), require('./calc04.js'), require('./calc05.js'), require('./calc06.js'), require('./make-minus-one-easy.js'), require('./division-easy.js'), require('./sixth-power.js'), require('./remainder.js'), require('./plus-32.js'), require('./conditional01.js'), require('./conditional02.js'), require('./conditional03.js'), require('./factorial.js'), require('./parity.js'), require('./fibonacci.js'), require('./bivariation01.js'), require('./power-easy.js'), require('./power-hard.js'), require('./division-hard.js'), require('./gcd.js'), require('./lcm.js'), require('./make-minus-one-med.js'), require('./make-minus-one-hard.js'), require('./sqrt-easy.js'), require('./sqrt-hard.js'), require('./complement-of-2.js'), require('./binarian-easy.js'), require('./perfect-number.js'), require('./reversal.js'), require('./msd.js'), require('./mod3-hard.js'), require('./max.js'), require('./the-fifth-max.js'), require('./100.js'), require('./100-again.js'), require('./1000.js'), require('./plus-32-hard.js'), require('./xor.js'), require('./2017.js'), require('./repeat-self.js')];
+module.exports = [require('./wire01.js'), require('./calc01.js'), require('./calc02.js'), require('./calc03.js'), require('./calc04.js'), require('./calc05.js'), require('./calc06.js'), require('./make-minus-one-easy.js'), require('./division-easy.js'), require('./sixth-power.js'), require('./remainder.js'), require('./plus-32.js'), require('./conditional01.js'), require('./conditional02.js'), require('./conditional03.js'), require('./factorial.js'), require('./parity.js'), require('./fibonacci.js'), require('./bivariation01.js'), require('./power-easy.js'), require('./power-hard.js'), require('./division-hard.js'), require('./gcd.js'), require('./lcm.js'), require('./make-minus-one-med.js'), require('./make-minus-one-hard.js'), require('./sqrt-easy.js'), require('./sqrt-hard.js'), require('./complement-of-2.js'), require('./binarian-easy.js'), require('./perfect-number.js'), require('./reversal.js'), require('./msd.js'), require('./mod3-hard.js'), require('./max.js'), require('./the-fifth-max.js'), require('./100.js'), require('./100-again.js'), require('./1000.js'), require('./plus-32-hard.js'), require('./xor.js'), require('./2017.js'), require('./repeat-self.js'), require('./fibonacci-hard.js')];
 
-},{"./100-again.js":465,"./100.js":466,"./1000.js":467,"./2017.js":468,"./binarian-easy.js":469,"./bivariation01.js":470,"./calc01.js":471,"./calc02.js":472,"./calc03.js":473,"./calc04.js":474,"./calc05.js":475,"./calc06.js":476,"./complement-of-2.js":477,"./conditional01.js":478,"./conditional02.js":479,"./conditional03.js":480,"./division-easy.js":481,"./division-hard.js":482,"./factorial.js":483,"./fibonacci.js":484,"./gcd.js":485,"./lcm.js":487,"./make-minus-one-easy.js":488,"./make-minus-one-hard.js":489,"./make-minus-one-med.js":490,"./max.js":491,"./mod3-hard.js":492,"./msd.js":493,"./parity.js":494,"./perfect-number.js":495,"./plus-32-hard.js":496,"./plus-32.js":497,"./power-easy.js":498,"./power-hard.js":499,"./remainder.js":500,"./repeat-self.js":501,"./reversal.js":502,"./sixth-power.js":503,"./sqrt-easy.js":504,"./sqrt-hard.js":505,"./the-fifth-max.js":506,"./wire01.js":507,"./xor.js":508}],487:[function(require,module,exports){
+},{"./100-again.js":465,"./100.js":466,"./1000.js":467,"./2017.js":468,"./binarian-easy.js":469,"./bivariation01.js":470,"./calc01.js":471,"./calc02.js":472,"./calc03.js":473,"./calc04.js":474,"./calc05.js":475,"./calc06.js":476,"./complement-of-2.js":477,"./conditional01.js":478,"./conditional02.js":479,"./conditional03.js":480,"./division-easy.js":481,"./division-hard.js":482,"./factorial.js":483,"./fibonacci-hard.js":484,"./fibonacci.js":485,"./gcd.js":486,"./lcm.js":488,"./make-minus-one-easy.js":489,"./make-minus-one-hard.js":490,"./make-minus-one-med.js":491,"./max.js":492,"./mod3-hard.js":493,"./msd.js":494,"./parity.js":495,"./perfect-number.js":496,"./plus-32-hard.js":497,"./plus-32.js":498,"./power-easy.js":499,"./power-hard.js":500,"./remainder.js":501,"./repeat-self.js":502,"./reversal.js":503,"./sixth-power.js":504,"./sqrt-easy.js":505,"./sqrt-hard.js":506,"./the-fifth-max.js":507,"./wire01.js":508,"./xor.js":509}],488:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -44597,7 +44670,7 @@ module.exports = {
 	title: '最小公倍数'
 };
 
-},{}],488:[function(require,module,exports){
+},{}],489:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44629,7 +44702,7 @@ module.exports = {
 	title: '-1を作ろう -easy-'
 };
 
-},{}],489:[function(require,module,exports){
+},{}],490:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44659,7 +44732,7 @@ module.exports = {
 	title: '-1を作ろう -hard-'
 };
 
-},{}],490:[function(require,module,exports){
+},{}],491:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44688,7 +44761,7 @@ module.exports = {
 	title: '-1を作ろう -med-'
 };
 
-},{}],491:[function(require,module,exports){
+},{}],492:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44723,7 +44796,7 @@ module.exports = {
 	title: '最大値'
 };
 
-},{}],492:[function(require,module,exports){
+},{}],493:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44792,7 +44865,7 @@ module.exports = {
 	title: 'mod3 -hard-'
 };
 
-},{}],493:[function(require,module,exports){
+},{}],494:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44868,7 +44941,7 @@ module.exports = {
 	title: '最上位の桁'
 };
 
-},{}],494:[function(require,module,exports){
+},{}],495:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44958,7 +45031,7 @@ module.exports = {
 	title: 'パリティ'
 };
 
-},{}],495:[function(require,module,exports){
+},{}],496:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45013,7 +45086,7 @@ module.exports = {
 	title: '完全数'
 };
 
-},{}],496:[function(require,module,exports){
+},{}],497:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45043,7 +45116,7 @@ module.exports = {
 	title: '32を足してみよう-hard-'
 };
 
-},{}],497:[function(require,module,exports){
+},{}],498:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45075,7 +45148,7 @@ module.exports = {
 	title: '32を足してみよう'
 };
 
-},{}],498:[function(require,module,exports){
+},{}],499:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45119,7 +45192,7 @@ module.exports = {
 	title: '累乗 -easy-'
 };
 
-},{}],499:[function(require,module,exports){
+},{}],500:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45193,7 +45266,7 @@ module.exports = {
 	title: '累乗 -hard-'
 };
 
-},{}],500:[function(require,module,exports){
+},{}],501:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45225,7 +45298,7 @@ module.exports = {
 	title: '余りの計算'
 };
 
-},{}],501:[function(require,module,exports){
+},{}],502:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45290,7 +45363,7 @@ module.exports = {
 	title: '自己反復'
 };
 
-},{}],502:[function(require,module,exports){
+},{}],503:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45345,7 +45418,7 @@ module.exports = {
 	title: '反転'
 };
 
-},{}],503:[function(require,module,exports){
+},{}],504:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45377,7 +45450,7 @@ module.exports = {
 	title: '6乗'
 };
 
-},{}],504:[function(require,module,exports){
+},{}],505:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45449,7 +45522,7 @@ module.exports = {
 	title: '平方根 -easy-'
 };
 
-},{}],505:[function(require,module,exports){
+},{}],506:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45514,7 +45587,7 @@ module.exports = {
 	title: '平方根 -hard-'
 };
 
-},{}],506:[function(require,module,exports){
+},{}],507:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45576,7 +45649,7 @@ module.exports = {
 	title: '中央値'
 };
 
-},{}],507:[function(require,module,exports){
+},{}],508:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45597,7 +45670,7 @@ module.exports = {
 	modal: '01'
 };
 
-},{}],508:[function(require,module,exports){
+},{}],509:[function(require,module,exports){
 'use strict';
 
 module.exports = {
