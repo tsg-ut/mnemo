@@ -49,7 +49,7 @@
   },
   "homepage": "https://github.com/tsg-ut/mnemo#readme",
   "devDependencies": {
-    "autoprefixer": "^6.4.0",
+    "autoprefixer": "^7.0.0",
     "babel-eslint": "^7.1.1",
     "babel-plugin-transform-class-properties": "^6.23.0",
     "babel-plugin-transform-inline-environment-variables": "^6.8.0",
