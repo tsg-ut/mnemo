@@ -274,4 +274,4 @@ describe 'Stage Data' ->
       expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
         output is fibonacci-calc input
 
-      expect io.input.3 .to.equal 25
+      expect io.input.3 .to.equal 30

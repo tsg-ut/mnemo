@@ -394,6 +394,17 @@ module.exports = {
 		},
 		weight: 3
 	},
+	sqrt: {
+		type: 'calc',
+		func: function func(n) {
+			return n < 0 ? 0 : Math.floor(Math.sqrt(n));
+		},
+		io: {
+			plugs: ['top', 'bottom']
+		},
+		weight: 2,
+		rotatable: true
+	},
 	'bitshift-left': {
 		type: 'calc2',
 		func: function func(a, b) {
@@ -44325,7 +44336,7 @@ module.exports = {
 
 module.exports = {
 	name: 'fibonacci-hard',
-	version: 1,
+	version: 2,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44335,6 +44346,9 @@ module.exports = {
 		'times-2': null,
 		'times-3': null,
 		'times-10': null,
+		'div-2': null,
+		'div-3': null,
+		'div-10': null,
 		'plus-1': null,
 		'plus-2': null,
 		'minus-1': null,
@@ -44347,12 +44361,13 @@ module.exports = {
 		sub: null,
 		div: null,
 		mul: null,
-		pow: null
+		pow: null,
+		sqrt: null
 	},
-	inputX: 7,
-	outputX: 7,
-	input: [null, null, null, 25],
-	output: [null, null, null, 75025],
+	inputX: 6,
+	outputX: 6,
+	input: [null, null, null, 30],
+	output: [null, null, null, 832040],
 	ioGenerator: function ioGenerator(random) {
 		var fibonacci = [1, 1];
 
@@ -44360,21 +44375,21 @@ module.exports = {
 			fibonacci.push(fibonacci[fibonacci.length - 1] + fibonacci[fibonacci.length - 2]);
 		}
 
-		var candidates = Array.from({ length: 13 }, function (item, index) {
+		var candidates = Array.from({ length: 18 }, function (item, index) {
 			return index + 12;
-		}); // 12..24
+		}); // 12..29
 		var inputs = [];
 
 		// Shuffle array and take heading 3
-		var index1 = Math.floor(random() * 13);
+		var index1 = Math.floor(random() * 18);
 		inputs.push(candidates[index1]);
 		candidates[index1] = candidates[0];
 
-		var index2 = Math.floor(random() * 12) + 1;
+		var index2 = Math.floor(random() * 17) + 1;
 		inputs.push(candidates[index2]);
 		candidates[index2] = candidates[1];
 
-		var index3 = Math.floor(random() * 11) + 2;
+		var index3 = Math.floor(random() * 16) + 2;
 		inputs.push(candidates[index3]);
 
 		inputs.sort(function (a, b) {
@@ -44382,12 +44397,12 @@ module.exports = {
 		});
 
 		return {
-			input: [inputs[0], inputs[1], inputs[2], 25],
-			output: [fibonacci[inputs[0] - 1], fibonacci[inputs[1] - 1], fibonacci[inputs[2] - 1], fibonacci[24]]
+			input: [inputs[0], inputs[1], inputs[2], 30],
+			output: [fibonacci[inputs[0] - 1], fibonacci[inputs[1] - 1], fibonacci[inputs[2] - 1], fibonacci[29]]
 		};
 	},
-	width: 15,
-	height: 15,
+	width: 13,
+	height: 13,
 	clockLimit: 50,
 	statement: 'n番目のフィボナッチ数を計算してみよう!',
 	title: 'フィボナッチ数 -hard-'
