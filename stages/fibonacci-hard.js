@@ -35,7 +35,7 @@ module.exports = {
 	ioGenerator: (random) => {
 		const fibonacci = [1, 1];
 
-		for (let i = 2; i < 29; i++) {
+		for (let i = 2; i < 30; i++) {
 			fibonacci.push(fibonacci[fibonacci.length - 1] + fibonacci[fibonacci.length - 2]);
 		}
 
@@ -61,13 +61,13 @@ module.exports = {
 				inputs[0],
 				inputs[1],
 				inputs[2],
-				25,
+				30,
 			],
 			output: [
 				fibonacci[inputs[0] - 1],
 				fibonacci[inputs[1] - 1],
 				fibonacci[inputs[2] - 1],
-				fibonacci[24],
+				fibonacci[29],
 			],
 		};
 	},
