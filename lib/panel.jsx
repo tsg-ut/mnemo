@@ -1,9 +1,10 @@
 const assert = require('assert');
 const React = require('react');
+const PropTypes = require('prop-types');
 
 class Panel extends React.Component {
 	static propTypes = {
-		parts: React.PropTypes.object.isRequired,
+		parts: PropTypes.object.isRequired,
 	}
 
 	constructor(props, state) {
