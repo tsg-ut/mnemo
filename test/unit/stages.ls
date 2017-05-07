@@ -21,6 +21,7 @@ require! {
   '../../stages/mod3-hard'
   '../../stages/repeat-self'
   '../../stages/fibonacci-hard'
+  '../../stages/factorization'
 }
 
 chai.use chai-things
@@ -65,6 +66,14 @@ conditional2-calc = (x) ->
   else if x is 6
     18
   else x
+
+factorization-calc = (n) ->
+  ret = 0
+  for i from 2 to n - 1
+    if n % i is 0
+       ret = i
+       break
+  ret
 
 describe 'Stage Data' ->
   before-each ->
@@ -275,3 +284,15 @@ describe 'Stage Data' ->
         output is fibonacci-calc input
 
       expect io.input.3 .to.equal 30
+
+  describe 'factorization stage' ->
+    It 'generates factorization' ->
+      io = factorization.io-generator @random
+
+      expect io .to.satisfy io-spec
+
+      expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
+        output is factorization-calc input
+
+      expect io.input.3 .to.equal 211
+      expect io.input.4 .to.equal 221
