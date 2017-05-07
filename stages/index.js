@@ -45,4 +45,5 @@ module.exports = [
 	require('./2017.js'),
 	require('./repeat-self.js'),
 	require('./fibonacci-hard.js'),
+	require('./factorization.js'),
 ];
