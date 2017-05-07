@@ -68,12 +68,10 @@ conditional2-calc = (x) ->
   else x
 
 factorization-calc = (n) ->
-  ret = 0
   for i from 2 to n - 1
     if n % i is 0
-       ret = i
-       break
-  ret
+      return i
+  0
 
 describe 'Stage Data' ->
   before-each ->

@@ -10,20 +10,11 @@ module.exports = {
 		'times-2': null,
 		'times-3': null,
 		'times-10': null,
-		'div-2': null,
-		'div-3': null,
-		'div-10': null,
 		'plus-1': null,
-		'plus-2': null,
 		'minus-1': null,
-		'minus-2': null,
-		log10: null,
-		log2: null,
 		'const-0': null,
 		'const-1': null,
 		'const-2': null,
-		'const-3': null,
-		'const-10': null,
 		add: null,
 		sub: null,
 		div: null,
@@ -32,18 +23,12 @@ module.exports = {
 		pow: null,
 		log: null,
 		sqrt: null,
-		'bitshift-left': null,
-		'bitshift-right': null,
-		'bitwise-and': null,
-		'bitwise-or': null,
-		'bitwise-xor': null,
 		equal: null,
 		neq: null,
 		gt: null,
 		geqq: null,
 		lt: null,
 		leqq: null,
-		'c-contact': null,
 		conditional: null,
 		transistor: null,
 		diode: null,
@@ -56,14 +41,14 @@ module.exports = {
 		const numbers = [0, 0, 0];
 		const primes = [2];
 		for (let i = 3; i < 256; i++) {
-			let flag = -1;
+			let flag = null;
 			for (const prime of primes) {
 				if (i % prime === 0) {
 					flag = prime;
 					break;
 				}
 			}
-			if (flag === -1) {
+			if (flag === null) {
 				numbers.push(0);
 				primes.push(i);
 			} else {
