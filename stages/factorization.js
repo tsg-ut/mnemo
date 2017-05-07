@@ -55,7 +55,7 @@ module.exports = {
 	ioGenerator: (random) => {
 		const numbers = [0, 0, 0];
 		const primes = [2];
-		for (let i = 3; i < 65536; i++) {
+		for (let i = 3; i < 256; i++) {
 			let flag = -1;
 			for (const prime of primes) {
 				if (i % prime === 0) {
