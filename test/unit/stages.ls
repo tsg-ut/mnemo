@@ -22,6 +22,7 @@ require! {
   '../../stages/repeat-self'
   '../../stages/fibonacci-hard'
   '../../stages/factorization'
+  '../../stages/spaceship'
 }
 
 chai.use chai-things
@@ -72,6 +73,8 @@ factorization-calc = (n) ->
     if n % i is 0
       return i
   0
+
+spaceship-calc = (a, b) -> Math.sign a - b
 
 describe 'Stage Data' ->
   before-each ->
@@ -294,3 +297,16 @@ describe 'Stage Data' ->
 
       expect io.input.3 .to.equal 211
       expect io.input.4 .to.equal 221
+
+  describe 'spaceship stage' ->
+    It 'generates spaceship' ->
+      io = spaceship.io-generator @random
+
+      expect io .to.satisfy io-spec
+
+      expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
+        output is spaceship-calc ...input
+
+      expect io.output.0 .to.equal 0
+      expect io.output.1 .to.equal -1
+      expect io.output.2 .to.equal 1
