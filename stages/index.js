@@ -46,4 +46,5 @@ module.exports = [
 	require('./repeat-self.js'),
 	require('./fibonacci-hard.js'),
 	require('./factorization.js'),
+	require('./spaceship.js'),
 ];
