@@ -44,4 +44,7 @@ module.exports = [
 	require('./xor.js'),
 	require('./2017.js'),
 	require('./repeat-self.js'),
+	require('./fibonacci-hard.js'),
+	require('./factorization.js'),
+	require('./spaceship.js'),
 ];
