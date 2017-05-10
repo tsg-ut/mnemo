@@ -96,7 +96,7 @@
     "replace": "^0.3.0",
     "sequelize-cli": "^2.4.0",
     "sqlite3": "^3.1.4",
-    "uglify-js": "^2.8.22",
+    "uglify-js": "^3.0.0",
     "umzug": "^1.11.0",
     "watchify": "^3.7.0"
   },
