@@ -86,7 +86,7 @@
     "normalize.css": "^7.0.0",
     "postcss-assets": "^4.1.0",
     "postcss-cli": "^4.0.0",
-    "postcss-flexbugs-fixes": "^2.0.0",
+    "postcss-flexbugs-fixes": "^3.0.0",
     "postcss-font-magician": "^1.5.0",
     "prop-types": "^15.5.8",
     "pug-cli": "^1.0.0-alpha6",
