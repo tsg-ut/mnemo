@@ -1,4 +1,3 @@
-const $ = require('jquery');
 const DataElement = require('./data-element');
 const Board = require('./board');
 const React = require('react');
@@ -11,14 +10,14 @@ class BoardElement extends React.Component {
 		clockLimit: PropTypes.number.isRequired,
 		inputX: PropTypes.number.isRequired,
 		outputX: PropTypes.number.isRequired,
+		onClickBlock: PropTypes.func.isRequired,
 	}
 
 	constructor(props, state) {
 		super(props, state);
 
-		const {stage, board} = this.props;
+		const {board} = this.props;
 
-		this.stage = stage;
 		this.board = board;
 
 		this._board = new Board({
@@ -29,16 +28,15 @@ class BoardElement extends React.Component {
 			outputX: this.props.outputX,
 		}, this.blockSize);
 
-		this.$board = stage.$stage.find('.board');
 		this.dataElements = new WeakMap();
 
-		if (typeof stage.config.inputX === 'number') {
-			this.inputBlockX = [stage.config.inputX];
+		if (typeof this.props.inputX === 'number') {
+			this.inputBlockX = [this.props.inputX];
 		} else {
-			this.inputBlockX = stage.config.inputX;
+			this.inputBlockX = this.props.inputX;
 		}
 		this.inputBlockY = 0;
-		this.outputBlockX = stage.config.outputX;
+		this.outputBlockX = this.props.outputX;
 		this.outputBlockY = this.props.height - 1;
 
 		this.animations = [];
@@ -83,6 +81,10 @@ class BoardElement extends React.Component {
 
 			this.animations.push(animation);
 		});
+
+		this.state = {
+			blocks: this._board.getBlocks(),
+		};
 	}
 
 	get inputBlock() {
@@ -94,20 +96,25 @@ class BoardElement extends React.Component {
 	}
 
 	getBlock(x, y) {
-		return this.$board.find('.block').filter((index, element) => (
-			$(element).data('x') === x && $(element).data('y') === y
-		));
+		return this._board.getBlock(x, y);
 	}
 
 	placeBlock({x, y, type, rotate}) {
-		this.getBlock(x, y).attr('data-type', type).attr('data-rotate', rotate * 90);
-		this.board.placeBlock({x, y, type, rotate});
+		this._board.placeBlock({x, y, type, rotate});
+		this.setState({
+			blocks: this._board.getBlocks(),
+		});
 	}
 
 	eraseData() {
 		this.dataElements.forEach((dataElement) => {
 			dataElement.fadeOut();
 		});
+	}
+
+	handleClickBlock = (x, y, event) => {
+		event.preventDefault();
+		return this.props.onClickBlock({x, y, type: event.type});
 	}
 
 	render() {
@@ -129,7 +136,34 @@ class BoardElement extends React.Component {
 									height="50"
 									x={x * 50}
 									y={y * 50}
+									onClick={this.handleClickBlock.bind(this, x, y)}
+									onContextMenu={this.handleClickBlock.bind(this, x, y)}
 								/>
+							))
+						))
+					}
+				</g>
+				{/* block layer */}
+				<g>
+					{
+						this.state.blocks.map((row, y) => (
+							row.map((block, x) => (
+								(block.config.name !== 'empty') && (
+									<image
+										key={y * this.props.width + x}
+										className="block"
+										width="50"
+										height="50"
+										x={x * 50}
+										y={y * 50}
+										href={`image/${block.config.name}.png`}
+										transform={`rotate(${block.rotate * 90})`}
+										style={{
+											transformOrigin: 'center',
+											pointerEvents: 'none',
+										}}
+									/>
+								)
 							))
 						))
 					}

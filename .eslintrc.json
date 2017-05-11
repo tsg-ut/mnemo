@@ -241,6 +241,7 @@
         ],
         "prefer-arrow-callback": "error",
         "prefer-const": "error",
+        "prefer-promise-reject-errors": "error",
         "prefer-reflect": "off",
         "prefer-rest-params": "warn",
         "prefer-spread": "error",
