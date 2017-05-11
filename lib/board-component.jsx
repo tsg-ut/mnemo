@@ -30,7 +30,7 @@ class BoardElement extends React.Component {
 		}, this.blockSize);
 
 		this.$board = stage.$stage.find('.board');
-		this.dataElements = [];
+		this.dataElements = new WeakMap();
 
 		if (typeof stage.config.inputX === 'number') {
 			this.inputBlockX = [stage.config.inputX];
@@ -118,20 +118,24 @@ class BoardElement extends React.Component {
 					width={this.props.width * 50}
 					height={this.props.height * 50}
 				/>
-				<g>{
-					Array.from({length: this.props.height}, (_, y) => (
-						Array.from({length: this.props.width}, (_, x) => (
-							<rect
-								key={y * this.props.width + x}
-								className="block-border"
-								width="50"
-								height="50"
-								x={x * 50}
-								y={y * 50}
-							/>
+				<g>
+					{
+						Array.from({length: this.props.height}, (_, y) => (
+							Array.from({length: this.props.width}, (_, x) => (
+								<rect
+									key={y * this.props.width + x}
+									className="block-border"
+									width="50"
+									height="50"
+									x={x * 50}
+									y={y * 50}
+								/>
+							))
 						))
-					))
-				}</g>
+					}
+				</g>
+				{/* data layer */}
+				<g/>
 			</svg>
 		);
 	}
