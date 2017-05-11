@@ -1,5 +1,6 @@
 const $ = require('jquery');
 const DataElement = require('./data-element');
+const Board = require('./board');
 const React = require('react');
 const PropTypes = require('prop-types');
 
@@ -7,6 +8,9 @@ class BoardElement extends React.Component {
 	static propTypes = {
 		width: PropTypes.number.isRequired,
 		height: PropTypes.number.isRequired,
+		clockLimit: PropTypes.number.isRequired,
+		inputX: PropTypes.number.isRequired,
+		outputX: PropTypes.number.isRequired,
 	}
 
 	constructor(props, state) {
@@ -16,6 +20,14 @@ class BoardElement extends React.Component {
 
 		this.stage = stage;
 		this.board = board;
+
+		this._board = new Board({
+			height: this.props.height,
+			width: this.props.width,
+			clockLimit: this.props.clockLimit,
+			inputX: this.props.inputX,
+			outputX: this.props.outputX,
+		}, this.blockSize);
 
 		this.$board = stage.$stage.find('.board');
 		this.dataElements = [];
