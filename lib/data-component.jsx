@@ -1,7 +1,7 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const GSAP = require('react-gsap-enhancer');
-const {TimelineMax} = require('gsap');
+const {TweenMax} = require('gsap');
 const {toCSS} = require('./util');
 
 class DataElement extends React.Component {
@@ -9,17 +9,6 @@ class DataElement extends React.Component {
 		x: PropTypes.number.isRequired,
 		y: PropTypes.number.isRequired,
 		value: PropTypes.number.isRequired,
-	}
-
-	componentDidMount() {
-		this.addAnimation(({target}) => {
-			const box = target.find({name: 'data'})
-
-			return new TimelineMax({repeat: -1})
-			.to(box, 1, {scale: 1.23, y: '+=120'})
-			.to(box, 1, {scale: 1, y: '-=120'})
-			.to(box, 1, {rotation: 90}, 1);
-		});
 	}
 
 	kill() {
@@ -44,23 +33,32 @@ class DataElement extends React.Component {
 		return this.$data.animate(toCSS(coordinate), 400, 'linear').promise();
 	}
 
+	handleClick = () => {
+		this.addAnimation(({target}) => {
+			const box = target.find({name: 'wrap'});
+			return TweenMax.to(box, 0.5, {rotation: '+=360', transformOrigin: 'center center'});
+		});
+	}
+
 	render() {
 		return (
-			<g transform={`translate(${this.props.x}, ${this.props.y})`}>
-				<rect name="data" x="-8" y="-8" rx="3" width="16" height="16" fill="darkorange"/>
-				<text x="0" y="0" fontSize="12" fill="white" textAnchor="middle" dominantBaseline="central">
-					{
-						do {
-							if (this.props.value === Infinity) {
-								'∞';
-							} else if (this.props.value === -Infinity) {
-								'-∞';
-							} else {
-								this.props.value;
+			<g transform={`translate(${this.props.x}, ${this.props.y})`} onClick={this.handleClick}>
+				<g name="wrap">
+					<rect x="-9" y="-8" rx="3" width="18" height="16" fill="darkorange"/>
+					<text x="0" y="0" fontSize="12" fill="white" textAnchor="middle" dominantBaseline="central">
+						{
+							do {
+								if (this.props.value === Infinity) {
+									'∞';
+								} else if (this.props.value === -Infinity) {
+									'-∞';
+								} else {
+									this.props.value;
+								}
 							}
 						}
-					}
-				</text>
+					</text>
+				</g>
 			</g>
 		);
 	}
