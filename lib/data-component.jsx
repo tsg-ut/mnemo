@@ -1,10 +1,25 @@
-const {toCSS} = require('./util');
 const React = require('react');
 const PropTypes = require('prop-types');
+const GSAP = require('react-gsap-enhancer');
+const {TimelineMax} = require('gsap');
+const {toCSS} = require('./util');
 
 class DataElement extends React.Component {
 	static propTypes = {
+		x: PropTypes.number.isRequired,
+		y: PropTypes.number.isRequired,
 		value: PropTypes.number.isRequired,
+	}
+
+	componentDidMount() {
+		this.addAnimation(({target}) => {
+			const box = target.find({name: 'data'})
+
+			return new TimelineMax({repeat: -1})
+			.to(box, 1, {scale: 1.23, y: '+=120'})
+			.to(box, 1, {scale: 1, y: '-=120'})
+			.to(box, 1, {rotation: 90}, 1);
+		});
 	}
 
 	kill() {
@@ -31,9 +46,9 @@ class DataElement extends React.Component {
 
 	render() {
 		return (
-			<g>
-				<rect x="0" y="0" width="10" height="10" fill="orange"/>
-				<text x="0" y="0" fontSize="12" fill="white" textAnchor="middle">
+			<g transform={`translate(${this.props.x}, ${this.props.y})`}>
+				<rect name="data" x="-8" y="-8" rx="3" width="16" height="16" fill="darkorange"/>
+				<text x="0" y="0" fontSize="12" fill="white" textAnchor="middle" dominantBaseline="central">
 					{
 						do {
 							if (this.props.value === Infinity) {
@@ -51,4 +66,4 @@ class DataElement extends React.Component {
 	}
 }
 
-module.exports = DataElement;
+module.exports = GSAP.default()(DataElement);

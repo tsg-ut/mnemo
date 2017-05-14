@@ -176,7 +176,7 @@ class BoardElement extends React.Component {
 				{/* data layer */}
 				<g>
 					{
-						<DataComponont value="34"/>
+						<DataComponont value={34} x={75} y={75}/>
 					}
 				</g>
 			</svg>
