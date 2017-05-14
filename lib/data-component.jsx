@@ -1,15 +1,20 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const GSAP = require('react-gsap-enhancer');
-const {TweenMax} = require('gsap');
-const {toCSS} = require('./util');
+const {TweenLite, Back} = require('gsap');
+const {toCSS, noop} = require('./util');
 
 class DataElement extends React.Component {
 	static propTypes = {
 		x: PropTypes.number.isRequired,
 		y: PropTypes.number.isRequired,
 		value: PropTypes.number.isRequired,
+		onMount: PropTypes.func,
 	}
+
+	static defaultProps = {
+		onMount: noop,
+	};
 
 	kill() {
 		this.$data.remove();
@@ -36,7 +41,11 @@ class DataElement extends React.Component {
 	handleClick = () => {
 		this.addAnimation(({target}) => {
 			const box = target.find({name: 'wrap'});
-			return TweenMax.to(box, 0.5, {rotation: '+=360', transformOrigin: 'center center'});
+			return TweenLite.to(box, 0.5, {
+				rotation: '+=360',
+				transformOrigin: 'center center',
+				ease: Back.easeOut.config(1.7),
+			});
 		});
 	}
 
