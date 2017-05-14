@@ -1,7 +1,9 @@
-const DataComponont = require('./data-component');
-const Board = require('./board');
 const React = require('react');
 const PropTypes = require('prop-types');
+const DataComponont = require('./data-component');
+const Board = require('./board');
+const DataComponent = require('./data-component');
+const {id} = require('./util');
 
 class BoardElement extends React.Component {
 	static propTypes = {
@@ -118,8 +120,13 @@ class BoardElement extends React.Component {
 		return this.props.onClickBlock({x, y, type: event.type});
 	}
 
-	execute(data) {
-		this.board.input(data);
+	execute(value) {
+		const dataList = this._board.input(value);
+		const flattenedDataList = dataList.reduce((a, b) => a.concat(b), []);
+
+		this.setState({
+			data: flattenedDataList,
+		});
 	}
 
 	render() {
@@ -175,9 +182,11 @@ class BoardElement extends React.Component {
 				</g>
 				{/* data layer */}
 				<g>
-					<DataComponont value={34} x={75} y={75}/>
-					<DataComponont value={34} x={25} y={25}/>
-					<DataComponont value={34} x={125} y={125}/>
+					{
+						this.state.data.map((datum) => (
+							<DataComponent key={id(datum)} value={datum.value} x={datum.x} y={datum.y} direction="top"/>
+						))
+					}
 				</g>
 			</svg>
 		);
