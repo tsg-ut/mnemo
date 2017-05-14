@@ -4,7 +4,7 @@ const GSAP = require('react-gsap-enhancer');
 const {TweenLite, Back} = require('gsap');
 const {toCSS, noop} = require('./util');
 
-class DataElement extends React.Component {
+class DataComponent extends React.Component {
 	static propTypes = {
 		x: PropTypes.number.isRequired,
 		y: PropTypes.number.isRequired,
@@ -70,4 +70,4 @@ class DataElement extends React.Component {
 	}
 }
 
-module.exports = GSAP.default()(DataElement);
+module.exports = GSAP.default()(DataComponent);

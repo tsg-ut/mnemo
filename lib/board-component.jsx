@@ -1,11 +1,11 @@
 const React = require('react');
 const PropTypes = require('prop-types');
-const DataComponont = require('./data-component');
 const Board = require('./board');
 const DataComponent = require('./data-component');
+const BlockComponent = require('./block-component');
 const {id} = require('./util');
 
-class BoardElement extends React.Component {
+class BoardComponent extends React.Component {
 	static propTypes = {
 		width: PropTypes.number.isRequired,
 		height: PropTypes.number.isRequired,
@@ -71,7 +71,7 @@ class BoardElement extends React.Component {
 							continue;
 						}
 
-						new DataComponont(this, data, block.center);
+						new DataComponent(this, data, block.center);
 
 						const promise = data.element.animate(block[direction]);
 						outputAnimations.push(promise);
@@ -139,52 +139,18 @@ class BoardElement extends React.Component {
 				/>
 				<g>
 					{
-						Array.from({length: this.props.height}, (_, y) => (
-							Array.from({length: this.props.width}, (_, x) => (
-								<rect
-									key={y * this.props.width + x}
-									className="block-border"
-									width="50"
-									height="50"
-									x={x * 50}
-									y={y * 50}
-									onClick={this.handleClickBlock.bind(this, x, y)}
-									onContextMenu={this.handleClickBlock.bind(this, x, y)}
+						this.state.blocks.map((row) => (
+							row.map((block) => (
+								<BlockComponent
+									key={id(block)}
+									block={block}
+									x={block.x}
+									y={block.y}
+									rotate={block.rotate}
+									name={block.name}
+									onClick={this.handleClickBlock.bind(this, block.x, block.y)}
 								/>
 							))
-						))
-					}
-				</g>
-				{/* block layer */}
-				<g>
-					{
-						this.state.blocks.map((row, y) => (
-							row.map((block, x) => (
-								(block.config.name !== 'empty') && (
-									<image
-										key={y * this.props.width + x}
-										className="block"
-										width="50"
-										height="50"
-										x={x * 50}
-										y={y * 50}
-										href={`image/${block.config.name}.png`}
-										transform={`rotate(${block.rotate * 90})`}
-										style={{
-											transformOrigin: 'center',
-											pointerEvents: 'none',
-										}}
-									/>
-								)
-							))
-						))
-					}
-				</g>
-				{/* data layer */}
-				<g>
-					{
-						this.state.data.map((datum) => (
-							<DataComponent key={id(datum)} value={datum.value} x={datum.x} y={datum.y} direction="top"/>
 						))
 					}
 				</g>
@@ -193,4 +159,4 @@ class BoardElement extends React.Component {
 	}
 }
 
-module.exports = BoardElement;
+module.exports = BoardComponent;
