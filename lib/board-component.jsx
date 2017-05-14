@@ -1,4 +1,4 @@
-const DataElement = require('./data-element');
+const DataComponont = require('./data-component');
 const Board = require('./board');
 const React = require('react');
 const PropTypes = require('prop-types');
@@ -69,7 +69,7 @@ class BoardElement extends React.Component {
 							continue;
 						}
 
-						new DataElement(this, data, block.center);
+						new DataComponont(this, data, block.center);
 
 						const promise = data.element.animate(block[direction]);
 						outputAnimations.push(promise);
@@ -84,6 +84,7 @@ class BoardElement extends React.Component {
 
 		this.state = {
 			blocks: this._board.getBlocks(),
+			data: [],
 		};
 	}
 
@@ -115,6 +116,10 @@ class BoardElement extends React.Component {
 	handleClickBlock = (x, y, event) => {
 		event.preventDefault();
 		return this.props.onClickBlock({x, y, type: event.type});
+	}
+
+	execute(data) {
+		this.board.input(data);
 	}
 
 	render() {
@@ -169,7 +174,11 @@ class BoardElement extends React.Component {
 					}
 				</g>
 				{/* data layer */}
-				<g/>
+				<g>
+					{
+						<DataComponont value="34"/>
+					}
+				</g>
 			</svg>
 		);
 	}
