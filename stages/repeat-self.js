@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'repeat-self',
-	version: 1,
+	version: 2,
 	parts: {
 		wireI: null,
 		wireL: null,
