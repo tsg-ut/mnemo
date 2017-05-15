@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'spaceship',
-	version: 1,
+	version: 2,
 	title: '宇宙船',
 	statement: '右の数より左の数が大きいなら1を、左の数より右の数が大きいなら-1を、同じなら0を出力しよう！',
 	parts: {

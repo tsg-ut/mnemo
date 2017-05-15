@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'max',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,

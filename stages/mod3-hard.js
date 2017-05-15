@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'mod3-hard',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null,
 		wireL: null,
