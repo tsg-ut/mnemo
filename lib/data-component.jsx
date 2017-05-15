@@ -1,20 +1,31 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const GSAP = require('react-gsap-enhancer');
-const {TweenLite, Back} = require('gsap');
-const {toCSS, noop} = require('./util');
+const assert = require('assert');
+const {TweenLite, Back, Power0} = require('gsap');
+const {toCSS} = require('./util');
+const {BLOCK_SIZE} = require('./constants');
 
 class DataComponent extends React.Component {
 	static propTypes = {
-		x: PropTypes.number.isRequired,
-		y: PropTypes.number.isRequired,
+		direction: PropTypes.string.isRequired,
+		isInward: PropTypes.bool.isRequired,
 		value: PropTypes.number.isRequired,
-		onMount: PropTypes.func,
+		onAnimationComplete: PropTypes.func.isRequired,
 	}
 
-	static defaultProps = {
-		onMount: noop,
-	};
+	componentDidMount() {
+		this.addAnimation(({target}) => (
+			TweenLite.to(target, 0.4, {
+				y: `+=${BLOCK_SIZE / 2}`,
+				transformOrigin: 'center center',
+				ease: Power0.easeNone,
+				onComplete: () => {
+					this.props.onAnimationComplete();
+				},
+			})
+		));
+	}
 
 	kill() {
 		this.$data.remove();
@@ -48,11 +59,38 @@ class DataComponent extends React.Component {
 		));
 	}
 
+	getInitialTransform = () => (
+		do {
+			if (this.props.isInward) {
+				if (this.props.direction === 'top') {
+					`translate(${BLOCK_SIZE / 2}, 0)`;
+				} else if (this.props.direction === 'right') {
+					`translate(${BLOCK_SIZE}, ${BLOCK_SIZE / 2})`;
+				} else if (this.props.direction === 'left') {
+					`translate(0, ${BLOCK_SIZE / 2})`;
+				} else if (this.props.direction === 'bottom') {
+					`translate(${BLOCK_SIZE / 2}, ${BLOCK_SIZE})`;
+				} else {
+					assert(false);
+				}
+			} else {
+				`translate(${BLOCK_SIZE / 2}, ${BLOCK_SIZE / 2})`;
+			}
+		}
+	)
+
 	render() {
 		return (
-			<g transform={`translate(${this.props.x}, ${this.props.y})`} onClick={this.handleClick}>
+			<g transform={this.getInitialTransform()} onClick={this.handleClick}>
 				<rect x="-9" y="-8" rx="3" width="18" height="16" fill="darkorange"/>
-				<text x="0" y="0" fontSize="12" fill="white" textAnchor="middle" dominantBaseline="central">
+				<text
+					x="0"
+					y="0"
+					fontSize="12"
+					fill="white"
+					textAnchor="middle"
+					dominantBaseline="central"
+				>
 					{
 						do {
 							if (this.props.value === Infinity) {

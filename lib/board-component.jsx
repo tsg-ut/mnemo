@@ -30,7 +30,7 @@ class BoardComponent extends React.Component {
 			outputX: this.props.outputX,
 		}, this.blockSize);
 
-		this.dataElements = new WeakMap();
+		this.dataAnimationPromises = new WeakMap();
 
 		if (typeof this.props.inputX === 'number') {
 			this.inputBlockX = [this.props.inputX];
@@ -86,7 +86,6 @@ class BoardComponent extends React.Component {
 
 		this.state = {
 			blocks: this._board.getBlocks(),
-			data: [],
 		};
 	}
 
@@ -120,13 +119,17 @@ class BoardComponent extends React.Component {
 		return this.props.onClickBlock({x, y, type: event.type});
 	}
 
-	execute(value) {
-		const dataList = this._board.input(value);
-		const flattenedDataList = dataList.reduce((a, b) => a.concat(b), []);
+	handleDataAnimationComplete = (data) => {
+		console.log(data);
+	}
 
-		this.setState({
-			data: flattenedDataList,
-		});
+	execute(value) {
+		this._board.input(value);
+		this.clockUp();
+	}
+
+	clockUp() {
+
 	}
 
 	render() {
@@ -149,6 +152,7 @@ class BoardComponent extends React.Component {
 									rotate={block.rotate}
 									name={block.name}
 									onClick={this.handleClickBlock.bind(this, block.x, block.y)}
+									onDataAnimationComplete={this.handleDataAnimationComplete}
 								/>
 							))
 						))
