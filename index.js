@@ -192,7 +192,7 @@ module.exports = {
 	'div-2': {
 		type: 'calc',
 		func: function func(n) {
-			return (n - n % 2) / 2;
+			return Math.round((n - n % 2) / 2);
 		},
 
 		io: {
@@ -204,7 +204,7 @@ module.exports = {
 	'div-3': {
 		type: 'calc',
 		func: function func(n) {
-			return (n - n % 3) / 3;
+			return Math.round((n - n % 3) / 3);
 		},
 		io: {
 			plugs: ['top', 'bottom']
@@ -215,7 +215,7 @@ module.exports = {
 	'div-10': {
 		type: 'calc',
 		func: function func(n) {
-			return (n - n % 10) / 10;
+			return Math.round((n - n % 10) / 10);
 		},
 		io: {
 			plugs: ['top', 'bottom']
@@ -350,7 +350,7 @@ module.exports = {
 			if (b === 0) {
 				return a / b;
 			}
-			return (a - a % b) / b;
+			return Math.round((a - a % b) / b);
 		},
 		io: {
 			in: ['left', 'right'],
@@ -21575,11 +21575,14 @@ module.exports = checkPropTypes;
 
 var emptyFunction = require('fbjs/lib/emptyFunction');
 var invariant = require('fbjs/lib/invariant');
+var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');
 
 module.exports = function() {
-  // Important!
-  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
-  function shim() {
+  function shim(props, propName, componentName, location, propFullName, secret) {
+    if (secret === ReactPropTypesSecret) {
+      // It is still safe when called from React.
+      return;
+    }
     invariant(
       false,
       'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
@@ -21591,6 +21594,8 @@ module.exports = function() {
   function getShim() {
     return shim;
   };
+  // Important!
+  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
   var ReactPropTypes = {
     array: shim,
     bool: shim,
@@ -21617,7 +21622,7 @@ module.exports = function() {
   return ReactPropTypes;
 };
 
-},{"fbjs/lib/emptyFunction":273,"fbjs/lib/invariant":281}],295:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":297,"fbjs/lib/emptyFunction":273,"fbjs/lib/invariant":281}],295:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -43657,7 +43662,7 @@ function hasOwnProperty(obj, prop) {
 
 module.exports = {
 	name: '100-again',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -43684,7 +43689,7 @@ module.exports = {
 
 module.exports = {
 	name: '100',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -43708,7 +43713,7 @@ module.exports = {
 
 module.exports = {
 	name: '1000',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -43735,7 +43740,7 @@ module.exports = {
 
 module.exports = {
 	name: '2017',
-	version: 1,
+	version: 2,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -43766,7 +43771,7 @@ module.exports = {
 
 module.exports = {
 	name: 'binarian-easy',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -43821,7 +43826,7 @@ module.exports = {
 
 module.exports = {
 	name: 'bivariation01',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -43857,7 +43862,7 @@ module.exports = {
 
 module.exports = {
 	name: 'calc01',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -43885,7 +43890,7 @@ module.exports = {
 
 module.exports = {
 	name: 'calc02',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -43910,7 +43915,7 @@ module.exports = {
 
 module.exports = {
 	name: 'calc03',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -43946,7 +43951,7 @@ module.exports = {
 
 module.exports = {
 	name: 'calc04',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		'times-2': null,
@@ -43971,7 +43976,7 @@ module.exports = {
 
 module.exports = {
 	name: 'calc05',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		'times-2': 1,
@@ -43993,7 +43998,7 @@ module.exports = {
 
 module.exports = {
 	name: 'calc06',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44017,7 +44022,7 @@ module.exports = {
 
 module.exports = {
 	name: 'complement-of-2',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44072,7 +44077,7 @@ module.exports = {
 
 module.exports = {
 	name: 'conditional01',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44120,7 +44125,7 @@ module.exports = {
 
 module.exports = {
 	name: 'conditional02',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44170,7 +44175,7 @@ module.exports = {
 
 module.exports = {
 	name: 'conditional03',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44235,7 +44240,7 @@ module.exports = {
 
 module.exports = {
 	name: 'division-easy',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44267,7 +44272,7 @@ module.exports = {
 
 module.exports = {
 	name: 'division-hard',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44293,7 +44298,7 @@ module.exports = {
 
 module.exports = {
 	name: 'factorial',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44361,7 +44366,7 @@ module.exports = {
 
 module.exports = {
 	name: 'factorization',
-	version: 1,
+	version: 2,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44476,7 +44481,7 @@ module.exports = {
 
 module.exports = {
 	name: 'fibonacci-hard',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44553,7 +44558,7 @@ module.exports = {
 
 module.exports = {
 	name: 'fibonacci',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44625,7 +44630,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 module.exports = {
 	name: 'gcd',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44728,7 +44733,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 module.exports = {
 	name: 'lcm',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44830,7 +44835,7 @@ module.exports = {
 
 module.exports = {
 	name: 'make-minus-one-easy',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44862,7 +44867,7 @@ module.exports = {
 
 module.exports = {
 	name: 'make-minus-one-hard',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44892,7 +44897,7 @@ module.exports = {
 
 module.exports = {
 	name: 'make-minus-one-med',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44921,7 +44926,7 @@ module.exports = {
 
 module.exports = {
 	name: 'max',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44956,7 +44961,7 @@ module.exports = {
 
 module.exports = {
 	name: 'mod3-hard',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -45025,7 +45030,7 @@ module.exports = {
 
 module.exports = {
 	name: 'msd',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -45101,7 +45106,7 @@ module.exports = {
 
 module.exports = {
 	name: 'parity',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -45191,7 +45196,7 @@ module.exports = {
 
 module.exports = {
 	name: 'perfect-number',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -45246,7 +45251,7 @@ module.exports = {
 
 module.exports = {
 	name: 'plus-32-hard',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -45276,7 +45281,7 @@ module.exports = {
 
 module.exports = {
 	name: 'plus-32',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -45308,7 +45313,7 @@ module.exports = {
 
 module.exports = {
 	name: 'power-easy',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -45352,7 +45357,7 @@ module.exports = {
 
 module.exports = {
 	name: 'power-hard',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -45426,7 +45431,7 @@ module.exports = {
 
 module.exports = {
 	name: 'remainder',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -45458,7 +45463,7 @@ module.exports = {
 
 module.exports = {
 	name: 'repeat-self',
-	version: 1,
+	version: 2,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -45523,7 +45528,7 @@ module.exports = {
 
 module.exports = {
 	name: 'reversal',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -45578,7 +45583,7 @@ module.exports = {
 
 module.exports = {
 	name: 'sixth-power',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -45612,7 +45617,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 module.exports = {
 	name: 'spaceship',
-	version: 1,
+	version: 2,
 	title: '宇宙船',
 	statement: '右の数より左の数が大きいなら1を、左の数より右の数が大きいなら-1を、同じなら0を出力しよう！',
 	parts: {
@@ -45707,7 +45712,7 @@ module.exports = {
 
 module.exports = {
 	name: 'sqrt-easy',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -45779,7 +45784,7 @@ module.exports = {
 
 module.exports = {
 	name: 'sqrt-hard',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -45844,7 +45849,7 @@ module.exports = {
 
 module.exports = {
 	name: 'the-fifth-max',
-	version: 2,
+	version: 3,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -45906,7 +45911,7 @@ module.exports = {
 
 module.exports = {
 	name: 'wire01',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null
 	},
@@ -45927,7 +45932,7 @@ module.exports = {
 
 module.exports = {
 	name: 'xor',
-	version: 1,
+	version: 2,
 	parts: {
 		wireI: null,
 		wireL: null,

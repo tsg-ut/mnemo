@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'factorial',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null,
 		wireL: null,
