@@ -2,6 +2,7 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const GSAP = require('react-gsap-enhancer');
 const assert = require('assert');
+// TODO: scoped require
 const {TweenLite, Back, Power0} = require('gsap');
 const {toCSS} = require('./util');
 const {BLOCK_SIZE} = require('./constants');
