@@ -1,5 +1,5 @@
 module.exports = {
-	name: 'addition-easy',
+	name: 'addition-med',
 	version: 1,
 	parts: {
 		wireI: null,
