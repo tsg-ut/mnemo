@@ -47,4 +47,5 @@ module.exports = [
 	require('./fibonacci-hard.js'),
 	require('./factorization.js'),
 	require('./spaceship.js'),
+	require('./addition-med.js'),
 ];
