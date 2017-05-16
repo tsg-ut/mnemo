@@ -6,6 +6,7 @@ const {id} = require('./util');
 
 class BoardComponent extends React.Component {
 	static propTypes = {
+		executing: PropTypes.bool.isRequired, // TODO: implement
 		width: PropTypes.number.isRequired,
 		height: PropTypes.number.isRequired,
 		clockLimit: PropTypes.number.isRequired,
@@ -46,6 +47,17 @@ class BoardComponent extends React.Component {
 			showClockLimit: false,
 			showDataLimit: false,
 		};
+	}
+
+	// TODO: implement
+	componentWillReceiveProps(nextProps) {
+		if (!this.props.executing && nextProps.executing) {
+			this.execute();
+		}
+
+		if (this.props.executing && !nextProps.executing) {
+			this.halt();
+		}
 	}
 
 	get inputBlock() {
