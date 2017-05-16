@@ -420,6 +420,15 @@ describe 'Block' ->
         out:
           bottom: -Infinity
 
+    It 'can output integer for large numbers' ->
+      io-test do
+        type: \div
+        in:
+          left: 130e100
+          right: 18e100
+        out:
+          bottom: 7
+
   describe 'pow block' ->
     It 'powers left by right and send it to bottom' ->
       io-test do

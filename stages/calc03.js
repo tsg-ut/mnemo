@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'calc03',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null,
 		wireL: null,

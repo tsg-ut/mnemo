@@ -1,6 +1,6 @@
 module.exports = {
 	name: '2017',
-	version: 1,
+	version: 2,
 	parts: {
 		wireI: null,
 		wireL: null,
