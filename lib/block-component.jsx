@@ -101,7 +101,10 @@ class BlockComponent extends React.Component {
 
 	render() {
 		return (
-			<g transform={`translate(${this.props.x * BLOCK_SIZE}, ${this.props.y * BLOCK_SIZE})`} onClick={this.handleClick}>
+			<g
+				transform={`translate(${this.props.x * BLOCK_SIZE}, ${this.props.y * BLOCK_SIZE})`}
+				onClick={this.handleClick}
+			>
 				<rect
 					className="block-border"
 					width={BLOCK_SIZE}

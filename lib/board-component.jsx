@@ -122,8 +122,10 @@ class BoardComponent extends React.Component {
 		return this.props.onClickBlock({x, y, type: event.type});
 	}
 
-	handlePassAnimationComplete = (data) => {
-		console.log(data);
+	handlePassAnimationComplete = (passEvent) => {
+		if (this.passAnimationResolvers.has(passEvent)) {
+			this.passAnimationResolvers.get(passEvent)();
+		}
 	}
 
 	execute(value) {
