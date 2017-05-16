@@ -30,7 +30,7 @@ class BoardComponent extends React.Component {
 			outputX: this.props.outputX,
 		}, this.blockSize);
 
-		this.dataAnimationPromises = new WeakMap();
+		this.passAnimationResolvers = new WeakMap();
 
 		if (typeof this.props.inputX === 'number') {
 			this.inputBlockX = [this.props.inputX];
@@ -86,6 +86,9 @@ class BoardComponent extends React.Component {
 
 		this.state = {
 			blocks: this._board.getBlocks(),
+			clocks: this._board.clocks,
+			showClockLimit: false,
+			showDataLimit: false,
 		};
 	}
 
@@ -119,7 +122,7 @@ class BoardComponent extends React.Component {
 		return this.props.onClickBlock({x, y, type: event.type});
 	}
 
-	handleDataAnimationComplete = (data) => {
+	handlePassAnimationComplete = (data) => {
 		console.log(data);
 	}
 
@@ -129,7 +132,53 @@ class BoardComponent extends React.Component {
 	}
 
 	clockUp() {
+		const passAnimations = [];
 
+		this.board.step({
+			onPass: (passEvent) => {
+				passAnimations.push(new Promise((resolve) => {
+					this.passAnimationResolvers.set(passEvent, resolve);
+				}));
+			},
+		});
+
+		this.setState({
+			clocks: this._board.clock,
+		});
+
+		if (this.board.status !== 'executing') {
+			return;
+		}
+
+		Promise.all(passAnimations).then(() => {
+			this._board.pass();
+
+			if (this._board.status !== 'executing') {
+				return;
+			}
+
+			if (this._board.clock >= this._board.clockLimit) {
+				this._board.halt();
+
+				this.setState({
+					showClockLimit: true,
+				});
+
+				return;
+			}
+
+			if (this.board.dataCount > 100) {
+				this.board.halt();
+
+				this.setState({
+					showDataLimit: true,
+				});
+
+				return;
+			}
+
+			this.clockUp();
+		});
 	}
 
 	render() {
@@ -152,7 +201,7 @@ class BoardComponent extends React.Component {
 									rotate={block.rotate}
 									name={block.name}
 									onClick={this.handleClickBlock.bind(this, block.x, block.y)}
-									onDataAnimationComplete={this.handleDataAnimationComplete}
+									onPassAnimationComplete={this.handlePassAnimationComplete}
 								/>
 							))
 						))

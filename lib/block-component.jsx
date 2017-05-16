@@ -12,22 +12,92 @@ class BlockComponent extends React.Component {
 		name: PropTypes.string.isRequired,
 		block: PropTypes.object.isRequired,
 		onClick: PropTypes.func.isRequired,
-		onDataAnimationComplete: PropTypes.func.isRequired,
+		onPassAnimationComplete: PropTypes.func.isRequired,
 	}
 
 	constructor(props, state) {
 		super(props, state);
 
+		this.dataAnimationResolvers = new WeakMap();
+
 		this.props.block.on('get', ({direction, data}) => {
 			this.setState({
-				data: this.state.data.concat([{direction, data}]),
+				inputData: this.state.data.concat([{direction, data}]),
+			});
+		});
+
+		this.props.block.on('pass', (passEvent) => {
+			const inputAnimations = [];
+
+			for (const [direction, data] of passEvent.in.entries()) {
+				// MEMO: Immutable.js使いたい
+				this.setState({
+					animatingData: this.state.animatingData.concat([{
+						direction,
+						data,
+						isInward: true,
+					}]),
+					inputData: this.state.inputData.filter((inputData) => data !== inputData.data),
+				});
+
+				inputAnimations.push(new Promise((resolve) => {
+					this.dataAnimationResolvers.set(data, resolve);
+				}));
+			}
+
+			// MEMO: async/await使いたい
+			Promise.all(inputAnimations).then(() => {
+				const outputAnimations = [];
+
+				for (const data of passEvent.in.values()) {
+					this.setState({
+						animatingData: this.state.animatingData.filter((animatingData) => (
+							data !== animatingData.data
+						)),
+					});
+				}
+
+				for (const [direction, data] of passEvent.out.entries()) {
+					this.setState({
+						animatingData: this.state.animatingData.concat([{
+							direction,
+							data,
+							isInward: false,
+						}]),
+					});
+
+					outputAnimations.push(new Promise((resolve) => {
+						this.dataAnimationResolvers.set(data, resolve);
+					}));
+				}
+
+				return Promise.all(outputAnimations);
+			}).then(() => {
+				for (const [direction, data] of passEvent.out.entries()) {
+					this.setState({
+						animatingData: this.state.animatingData.filter((animatingData) => (
+							data !== animatingData.data
+						)),
+						outputData: this.state.outputData.concat([{direction, data}]),
+					});
+				}
+
+				this.props.onPassAnimationComplete(passEvent);
 			});
 		});
 
 		this.state = {
-			data: [],
+			inputData: [], // Data in inputQueue
+			outputData: [], // Data in outputQueue
+			animatingData: [], // Data in animation
 		};
 	}
+
+	handleDataAnimationComplete = (data) => {
+		if (this.dataAnimationResolvers.has(data)) {
+			this.dataAnimationResolvers.get(data)();
+		}
+	};
 
 	render() {
 		return (
@@ -67,7 +137,7 @@ class BlockComponent extends React.Component {
 								direction={direction}
 								isInward={true}
 								value={data.value}
-								onAnimationComplete={this.props.onDataAnimationComplete.bind(null, data)}
+								onAnimationComplete={this.handleDataAnimationComplete}
 							/>
 						))
 					}
