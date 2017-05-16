@@ -1,7 +1,6 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const Board = require('./board');
-const DataComponent = require('./data-component');
 const BlockComponent = require('./block-component');
 const {id} = require('./util');
 
@@ -13,14 +12,12 @@ class BoardComponent extends React.Component {
 		inputX: PropTypes.number.isRequired,
 		outputX: PropTypes.number.isRequired,
 		onClickBlock: PropTypes.func.isRequired,
+		onOutput: PropTypes.func.isRequired,
+		onHalt: PropTypes.func.isRequired,
 	}
 
 	constructor(props, state) {
 		super(props, state);
-
-		const {board} = this.props;
-
-		this.board = board;
 
 		this._board = new Board({
 			height: this.props.height,
@@ -42,47 +39,6 @@ class BoardComponent extends React.Component {
 		this.outputBlockY = this.props.height - 1;
 
 		this.animations = [];
-
-		this.board.on('erase', (block, data) => {
-			if (data.element) {
-				data.element.fadeOut();
-			}
-		});
-
-		this.board.on('pass', (block, io) => {
-			const inputAnimations = [];
-			const outputAnimations = [];
-
-			for (const data of io.in.values()) {
-				if (data.element) {
-					const promise = data.element.animate(block.center);
-					inputAnimations.push(promise);
-				}
-			}
-
-			const animation = Promise.all(inputAnimations).then(() => {
-				if (this.board.status === 'executing') {
-					for (const data of io.in.values()) {
-						data.element.kill();
-					}
-
-					for (const [direction, data] of io.out.entries()) {
-						if (!block.outputQueues.get(direction).includes(data)) {
-							continue;
-						}
-
-						new DataComponent(this, data, block.center);
-
-						const promise = data.element.animate(block[direction]);
-						outputAnimations.push(promise);
-					}
-				}
-
-				return Promise.all(outputAnimations);
-			});
-
-			this.animations.push(animation);
-		});
 
 		this.state = {
 			blocks: this._board.getBlocks(),
@@ -136,7 +92,7 @@ class BoardComponent extends React.Component {
 	clockUp() {
 		const passAnimations = [];
 
-		this.board.step({
+		this._board.step({
 			onPass: (passEvent) => {
 				passAnimations.push(new Promise((resolve) => {
 					this.passAnimationResolvers.set(passEvent, resolve);
@@ -148,7 +104,7 @@ class BoardComponent extends React.Component {
 			clocks: this._board.clock,
 		});
 
-		if (this.board.status !== 'executing') {
+		if (this._board.status !== 'executing') {
 			return;
 		}
 
@@ -169,8 +125,8 @@ class BoardComponent extends React.Component {
 				return;
 			}
 
-			if (this.board.dataCount > 100) {
-				this.board.halt();
+			if (this._board.dataCount > 100) {
+				this._board.halt();
 
 				this.setState({
 					showDataLimit: true,
