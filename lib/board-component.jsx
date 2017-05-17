@@ -121,7 +121,7 @@ class BoardComponent extends React.Component {
 		}
 
 		Promise.all(passAnimations).then(() => {
-			this._board.pass();
+			this._board.hand();
 
 			if (this._board.status !== 'executing') {
 				return;
