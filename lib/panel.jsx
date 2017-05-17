@@ -73,7 +73,7 @@ class Panel extends React.Component {
 		}
 	}
 
-	onClickBlock = (event) => {
+	handleClickBlock = (event) => {
 		this.setState({
 			selected: event.target.getAttribute('data-type'),
 		});
@@ -86,11 +86,12 @@ class Panel extends React.Component {
 					<div
 						key={name}
 						className="block"
-						onClick={this.onClickBlock}
+						onClick={this.handleClickBlock}
 						data-type={name}
 						{...(
 							this.state.selected === name ? {'data-selected': 'data-selected'} : {}
-						)}>
+						)}
+					>
 						<div className="count">
 							{count === null ? '∞' : count}
 						</div>

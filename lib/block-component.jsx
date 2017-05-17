@@ -22,7 +22,11 @@ class BlockComponent extends React.Component {
 
 		this.props.block.on('get', ({direction, data}) => {
 			this.setState({
-				inputData: this.state.data.concat([{direction, data}]),
+				inputData: this.state.inputData.concat([{
+					direction,
+					data,
+					isErasing: false,
+				}]),
 			});
 		});
 
@@ -36,6 +40,7 @@ class BlockComponent extends React.Component {
 						direction,
 						data,
 						isInward: true,
+						isErasing: false,
 					}]),
 					inputData: this.state.inputData.filter((inputData) => data !== inputData.data),
 				});
@@ -63,6 +68,7 @@ class BlockComponent extends React.Component {
 							direction,
 							data,
 							isInward: false,
+							isErasing: false,
 						}]),
 					});
 
@@ -78,12 +84,28 @@ class BlockComponent extends React.Component {
 						animatingData: this.state.animatingData.filter((animatingData) => (
 							data !== animatingData.data
 						)),
-						outputData: this.state.outputData.concat([{direction, data}]),
+						outputData: this.state.outputData.concat([{
+							direction,
+							data,
+							isErasing: false,
+						}]),
 					});
 				}
 
 				this.props.onPassAnimationComplete(passEvent);
 			});
+		});
+
+		this.props.block.on('hand', (data) => {
+			this.setState({
+				outputData: this.state.outputData.filter((outputData) => (
+					data !== outputData.data
+				)),
+			});
+		});
+
+		this.props.block.on('erase', (data) => {
+
 		});
 
 		this.state = {
@@ -97,6 +119,14 @@ class BlockComponent extends React.Component {
 		if (this.dataAnimationResolvers.has(data)) {
 			this.dataAnimationResolvers.get(data)();
 		}
+	};
+
+	handleDataEraseAnimationComplete = (data) => {
+		this.setState({
+			inputData: this.state.inputData.filter((inputData) => inputData.data !== data),
+			animatingData: this.state.animatingData.filter((animatingData) => animatingData.data !== data),
+			outputData: this.state.outputData.filter((outputData) => outputData.data !== data),
+		});
 	};
 
 	render() {
@@ -133,17 +163,44 @@ class BlockComponent extends React.Component {
 				}
 				{/* data layer */}
 				<g>
-					{
-						this.state.data.map(({direction, data}) => (
+					{[
+						...(this.state.inputData.map(({direction, data, isErasing}) => (
 							<DataComponent
 								key={id(data)}
 								direction={direction}
 								isInward={true}
+								isAnimating={false}
+								isErasing={isErasing}
 								value={data.value}
-								onAnimationComplete={this.handleDataAnimationComplete}
+								onAnimationComplete={this.handleDataAnimationComplete.bind(null, data)}
+								onEraseAnimationComplete={this.handleDataEraseAnimationComplete.bind(null, data)}
 							/>
-						))
-					}
+						))),
+						...(this.state.animatingData.map(({direction, data, isInward, isErasing}) => (
+							<DataComponent
+								key={id(data)}
+								direction={direction}
+								isInward={isInward}
+								isAnimating={true}
+								isErasing={isErasing}
+								value={data.value}
+								onAnimationComplete={this.handleDataAnimationComplete.bind(null, data)}
+								onEraseAnimationComplete={this.handleDataEraseAnimationComplete.bind(null, data)}
+							/>
+						))),
+						...(this.state.outputData.map(({direction, data, isErasing}) => (
+							<DataComponent
+								key={id(data)}
+								direction={direction}
+								isInward={false}
+								isAnimating={false}
+								isErasing={isErasing}
+								value={data.value}
+								onAnimationComplete={this.handleDataAnimationComplete.bind(null, data)}
+								onEraseAnimationComplete={this.handleDataEraseAnimationComplete.bind(null, data)}
+							/>
+						))),
+					]}
 				</g>
 			</g>
 		);

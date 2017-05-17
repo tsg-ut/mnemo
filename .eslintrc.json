@@ -296,7 +296,7 @@
         "react/display-name": "error",
         "react/forbid-component-props": "error",
         "react/forbid-elements": "error",
-        "react/forbid-prop-types": "error",
+        "react/forbid-prop-types": "warn",
         "react/forbid-foreign-prop-types": "error",
         "react/no-array-index-key": "error",
         "react/no-children-prop": "error",

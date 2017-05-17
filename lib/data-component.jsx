@@ -4,50 +4,72 @@ const GSAP = require('react-gsap-enhancer');
 const assert = require('assert');
 // TODO: scoped require
 const {TweenLite, Back, Power0} = require('gsap');
-const {toCSS} = require('./util');
 const {BLOCK_SIZE} = require('./constants');
 
 class DataComponent extends React.Component {
 	static propTypes = {
 		direction: PropTypes.string.isRequired,
 		isInward: PropTypes.bool.isRequired,
+		isAnimating: PropTypes.bool.isRequired,
+		isErasing: PropTypes.bool.isRequired,
 		value: PropTypes.number.isRequired,
 		onAnimationComplete: PropTypes.func.isRequired,
+		onEraseAnimationComplete: PropTypes.func.isRequired,
 	}
 
 	componentDidMount() {
+		if (this.props.isAnimating) {
+			this.handleStartAnimation();
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (!this.props.isAnimating && nextProps.isAnimating) {
+			this.handleStartAnimation();
+		}
+
+		if (this.props.isAnimating && !nextProps.isAnimating) {
+			this.handleStopAnimation();
+		}
+	}
+
+	handleStartAnimation = () => {
 		this.addAnimation(({target}) => (
-			TweenLite.to(target, 0.4, {
-				y: `+=${BLOCK_SIZE / 2}`,
+			TweenLite.to(target, 0.4, Object.assign({
 				transformOrigin: 'center center',
 				ease: Power0.easeNone,
 				onComplete: () => {
 					this.props.onAnimationComplete();
 				},
-			})
+			}, this.getAnimationProperties(do {
+				if (this.props.isInward) {
+					if (this.props.direction === 'top') {
+						'down';
+					} else if (this.props.direction === 'right') {
+						'left';
+					} else if (this.props.direction === 'left') {
+						'right';
+					} else if (this.props.direction === 'bottom') {
+						'up';
+					}
+				} else {
+					if (this.props.direction === 'top') {
+						'up';
+					} else if (this.props.direction === 'right') {
+						'right';
+					} else if (this.props.direction === 'left') {
+						'left';
+					} else if (this.props.direction === 'bottom') {
+						'down';
+					}
+				}
+			})))
 		));
 	}
 
-	kill() {
-		this.$data.remove();
+	// TODO: implement
+	handleStopAnimation = () => {
 
-		const index = this.boardElement.dataElements.indexOf(this);
-		if (index !== -1) {
-			this.boardElement.dataElements.splice(index, 1);
-		}
-	}
-
-	fadeOut() {
-		this.$data.stop(true, false);
-		this.$data.hide({
-			duration: 500,
-			queue: false,
-			complete: () => this.kill(),
-		});
-	}
-
-	animate(coordinate) {
-		return this.$data.animate(toCSS(coordinate), 400, 'linear').promise();
 	}
 
 	handleClick = () => {
@@ -58,6 +80,23 @@ class DataComponent extends React.Component {
 				ease: Back.easeOut.config(1.7),
 			})
 		));
+	}
+
+	getAnimationProperties = (direction) => {
+		if (direction === 'down') {
+			return {y: `+=${BLOCK_SIZE / 2}`};
+		}
+
+		if (direction === 'right') {
+			return {x: `+=${BLOCK_SIZE / 2}`};
+		}
+
+		if (direction === 'left') {
+			return {x: `-=${BLOCK_SIZE / 2}`};
+		}
+
+		assert(direction === 'up');
+		return {y: `-=${BLOCK_SIZE / 2}`};
 	}
 
 	getInitialTransform = () => (

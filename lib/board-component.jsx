@@ -6,7 +6,7 @@ const {id} = require('./util');
 
 class BoardComponent extends React.Component {
 	static propTypes = {
-		executing: PropTypes.bool.isRequired, // TODO: implement
+		isExecuting: PropTypes.bool, // TODO: implement
 		width: PropTypes.number.isRequired,
 		height: PropTypes.number.isRequired,
 		clockLimit: PropTypes.number.isRequired,
