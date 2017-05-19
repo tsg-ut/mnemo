@@ -1,5 +1,8 @@
 const React = require('react');
 const PropTypes = require('prop-types');
+const Hammer = require('react-hammerjs');
+const {INPUT_MOVE, INPUT_END} = require('hammerjs');
+const Measure = require('react-measure');
 const Board = require('./board');
 const BlockComponent = require('./block-component');
 const {id} = require('./util');
@@ -42,11 +45,16 @@ class BoardComponent extends React.Component {
 
 		this.animations = [];
 
+		this.backgroundDimensions = null;
+
 		this.state = {
 			blocks: this._board.getBlocks(),
 			clocks: this._board.clocks,
 			showClockLimit: false,
 			showDataLimit: false,
+			isPanning: false,
+			panDistance: null,
+			panAngle: null,
 		};
 	}
 
@@ -152,6 +160,54 @@ class BoardComponent extends React.Component {
 		});
 	}
 
+	handlePan = (event) => {
+		event.preventDefault();
+
+		if (event.eventType === INPUT_MOVE) {
+			this.setState({
+				isPanning: true,
+				panDistance: event.distance,
+				panAngle: event.angle,
+			});
+		} else if (event.eventType === INPUT_END) {
+			// TODO
+		}
+	}
+
+	handleMeasureBackground = (dimensions) => {
+		this.backgroundDimensions = dimensions;
+	}
+
+	getViewBox = () => {
+		const borderSize = 25;
+		const boardWidth = this.props.width * BLOCK_SIZE;
+		const boardHeight = this.props.height * BLOCK_SIZE;
+		const boardOuterWidth = borderSize * 2 + boardWidth;
+		const boardOuterHeight = borderSize * 2 + boardHeight;
+
+		if (this.state.isPanning) {
+			let scale = 1;
+
+			if (this.backgroundDimensions !== null) {
+				scale = this.props.width * BLOCK_SIZE / this.backgroundDimensions.width;
+			}
+
+			return [
+				-boardOuterWidth / 2 - this.state.panDistance * Math.cos(this.state.panAngle / 180 * Math.PI) * scale,
+				-boardOuterHeight / 2 - this.state.panDistance * Math.sin(this.state.panAngle / 180 * Math.PI) * scale,
+				boardOuterWidth,
+				boardOuterHeight,
+			].join(' ');
+		}
+
+		return [
+			-boardOuterWidth / 2,
+			-boardOuterHeight / 2,
+			boardOuterWidth,
+			boardOuterHeight,
+		].join(' ');
+	}
+
 	render() {
 		const borderSize = 25;
 		const boardWidth = this.props.width * BLOCK_SIZE;
@@ -160,151 +216,147 @@ class BoardComponent extends React.Component {
 		const boardOuterHeight = borderSize * 2 + boardHeight;
 
 		return (
-			<svg
-				className="board-svg"
-				viewBox={[
-					-boardOuterWidth / 2,
-					-boardOuterHeight / 2,
-					boardOuterWidth,
-					boardOuterHeight,
-				].join(' ')}
-			>
-				{/* board + board-border */}
-				<g transform={`translate(${-boardOuterWidth / 2}, ${-boardOuterHeight / 2})`}>
-					{/* board-border */}
-					<g>
-						{/* top-left */}
-						<image
-							x="0"
-							y="0"
-							width={borderSize}
-							height={borderSize}
-							href="image/frame-topleft.png"
-						/>
-						{/* top */}
-						<image
-							x={borderSize}
-							y="0"
-							width={boardWidth}
-							height={borderSize}
-							preserveAspectRatio="none"
-							href="image/frame-top.png"
-						/>
-						{/* top-right */}
-						<image
-							x={borderSize + boardWidth}
-							y="0"
-							width={borderSize}
-							height={borderSize}
-							href="image/frame-topright.png"
-						/>
-						{/* left */}
-						<image
-							x="0"
-							y={borderSize}
-							width={borderSize}
-							height={boardHeight}
-							preserveAspectRatio="none"
-							href="image/frame-left.png"
-						/>
-						{/* right */}
-						<image
-							x={borderSize + boardWidth}
-							y={borderSize}
-							width={borderSize}
-							height={boardHeight}
-							preserveAspectRatio="none"
-							href="image/frame-right.png"
-						/>
-						{/* bottom-left */}
-						<image
-							x="0"
-							y={borderSize + boardHeight}
-							width={borderSize}
-							height={borderSize}
-							href="image/frame-bottomleft.png"
-						/>
-						{/* bottom */}
-						<image
-							x={borderSize}
-							y={borderSize + boardHeight}
-							width={boardWidth}
-							height={borderSize}
-							preserveAspectRatio="none"
-							href="image/frame-bottom.png"
-						/>
-						{/* bottom-right */}
-						<image
-							x={borderSize + boardWidth}
-							y={borderSize + boardHeight}
-							width={borderSize}
-							height={borderSize}
-							href="image/frame-bottomright.png"
-						/>
-					</g>
-					{/* board */}
-					<g transform={`translate(${borderSize}, ${borderSize})`}>
-						<rect
-							className="board-background"
-							width={this.props.width * BLOCK_SIZE}
-							height={this.props.height * BLOCK_SIZE}
-						/>
+			<Hammer onPan={this.handlePan}>
+				<svg className="board-svg" viewBox={this.getViewBox()}>
+					{/* board + board-border */}
+					<g transform={`translate(${-boardOuterWidth / 2}, ${-boardOuterHeight / 2})`}>
+						{/* board-border */}
 						<g>
-							{/* Because of the limitation of React (cannot render sibling elements)
-								and SVG (first element always rendered first), blocks renderings are
-								located here. They must be inside BlockComponent, though... */}
-							{
-								this.state.blocks.map((row) => (
-									row.map((block) => (
-										<g key={id(block)}>
-											<rect
-												className="block-border"
-												width={BLOCK_SIZE}
-												height={BLOCK_SIZE}
-												x={block.x * BLOCK_SIZE}
-												y={block.y * BLOCK_SIZE}
+							{/* top-left */}
+							<image
+								x="0"
+								y="0"
+								width={borderSize}
+								height={borderSize}
+								href="image/frame-topleft.png"
+							/>
+							{/* top */}
+							<image
+								x={borderSize}
+								y="0"
+								width={boardWidth}
+								height={borderSize}
+								preserveAspectRatio="none"
+								href="image/frame-top.png"
+							/>
+							{/* top-right */}
+							<image
+								x={borderSize + boardWidth}
+								y="0"
+								width={borderSize}
+								height={borderSize}
+								href="image/frame-topright.png"
+							/>
+							{/* left */}
+							<image
+								x="0"
+								y={borderSize}
+								width={borderSize}
+								height={boardHeight}
+								preserveAspectRatio="none"
+								href="image/frame-left.png"
+							/>
+							{/* right */}
+							<image
+								x={borderSize + boardWidth}
+								y={borderSize}
+								width={borderSize}
+								height={boardHeight}
+								preserveAspectRatio="none"
+								href="image/frame-right.png"
+							/>
+							{/* bottom-left */}
+							<image
+								x="0"
+								y={borderSize + boardHeight}
+								width={borderSize}
+								height={borderSize}
+								href="image/frame-bottomleft.png"
+							/>
+							{/* bottom */}
+							<image
+								x={borderSize}
+								y={borderSize + boardHeight}
+								width={boardWidth}
+								height={borderSize}
+								preserveAspectRatio="none"
+								href="image/frame-bottom.png"
+							/>
+							{/* bottom-right */}
+							<image
+								x={borderSize + boardWidth}
+								y={borderSize + boardHeight}
+								width={borderSize}
+								height={borderSize}
+								href="image/frame-bottomright.png"
+							/>
+						</g>
+						{/* board */}
+						<g transform={`translate(${borderSize}, ${borderSize})`}>
+							<Measure onMeasure={this.handleMeasureBackground}>
+								<rect
+									className="board-background"
+									width={this.props.width * BLOCK_SIZE}
+									height={this.props.height * BLOCK_SIZE}
+								/>
+							</Measure>
+							<g>
+								{/* Because of the limitation of React (cannot render sibling elements)
+									and SVG (first element always rendered first), blocks renderings are
+									located here. They must be inside BlockComponent, though... */}
+								{
+									this.state.blocks.map((row) => (
+										row.map((block) => (
+											<g key={id(block)}>
+												<rect
+													className="block-border"
+													width={BLOCK_SIZE}
+													height={BLOCK_SIZE}
+													x={block.x * BLOCK_SIZE}
+													y={block.y * BLOCK_SIZE}
+												/>
+												{
+													(block.name !== 'empty') && (
+														<image
+															className="block"
+															width={BLOCK_SIZE}
+															height={BLOCK_SIZE}
+															x={block.x * BLOCK_SIZE}
+															y={block.y * BLOCK_SIZE}
+															href={`image/${block.name}.png`}
+															transform={`rotate(${block.rotate * 90})`}
+															style={{
+																transformOrigin: 'center',
+																pointerEvents: 'none',
+															}}
+														/>
+													)
+												}
+											</g>
+										))
+									))
+								}
+							</g>
+							<g>
+								{
+									this.state.blocks.map((row) => (
+										row.map((block) => (
+											<BlockComponent
+												key={id(block)}
+												block={block}
+												x={block.x}
+												y={block.y}
+												onClick={this.handleClickBlock}
+												onPassAnimationComplete={this.handlePassAnimationComplete}
 											/>
-											{
-												(block.name !== 'empty') && (
-													<image
-														className="block"
-														width={BLOCK_SIZE}
-														height={BLOCK_SIZE}
-														x={block.x * BLOCK_SIZE}
-														y={block.y * BLOCK_SIZE}
-														href={`image/${block.name}.png`}
-														transform={`rotate(${block.rotate * 90})`}
-														style={{
-															transformOrigin: 'center',
-															pointerEvents: 'none',
-														}}
-													/>
-												)
-											}
-										</g>
+										))
 									))
-								))
-							}
-						</g>
-						<g>
-							{
-								this.state.blocks.map((row) => (
-									row.map((block) => (
-										<BlockComponent
-											key={id(block)}
-											block={block}
-											x={block.x}
-											y={block.y}
-											onClick={this.handleClickBlock}
-											onPassAnimationComplete={this.handlePassAnimationComplete}
-										/>
-									))
-								))
-							}
+								}
+							</g>
 						</g>
 					</g>
-				</g>
-			</svg>
+				</svg>
+			</Hammer>
 		);
 	}
 }
