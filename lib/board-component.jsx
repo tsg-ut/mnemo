@@ -3,6 +3,7 @@ const PropTypes = require('prop-types');
 const Board = require('./board');
 const BlockComponent = require('./block-component');
 const {id} = require('./util');
+const {BLOCK_SIZE} = require('./constants');
 
 class BoardComponent extends React.Component {
 	static propTypes = {
@@ -159,6 +160,43 @@ class BoardComponent extends React.Component {
 					width={this.props.width * 50}
 					height={this.props.height * 50}
 				/>
+				<g>
+					{/* Because of the limitation of React (cannot render sibling elements)
+						and SVG (first element always rendered first), blocks renderings are
+						located here. They must be inside BlockComponent, though... */}
+					{
+						this.state.blocks.map((row) => (
+							row.map((block) => (
+								<g key={id(block)}>
+									<rect
+										className="block-border"
+										width={BLOCK_SIZE}
+										height={BLOCK_SIZE}
+										x={block.x * BLOCK_SIZE}
+										y={block.y * BLOCK_SIZE}
+									/>
+									{
+										(block.name !== 'empty') && (
+											<image
+												className="block"
+												width={BLOCK_SIZE}
+												height={BLOCK_SIZE}
+												x={block.x * BLOCK_SIZE}
+												y={block.y * BLOCK_SIZE}
+												href={`image/${block.name}.png`}
+												transform={`rotate(${block.rotate * 90})`}
+												style={{
+													transformOrigin: 'center',
+													pointerEvents: 'none',
+												}}
+											/>
+										)
+									}
+								</g>
+							))
+						))
+					}
+				</g>
 				<g>
 					{
 						this.state.blocks.map((row) => (

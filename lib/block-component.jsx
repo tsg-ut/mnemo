@@ -135,32 +135,17 @@ class BlockComponent extends React.Component {
 				transform={`translate(${this.props.x * BLOCK_SIZE}, ${this.props.y * BLOCK_SIZE})`}
 				onClick={this.handleClick}
 			>
+				{/* click event capture */}
 				<rect
-					className="block-border"
+					className="block-click-capture"
 					width={BLOCK_SIZE}
 					height={BLOCK_SIZE}
 					x="0"
 					y="0"
+					fill="transparent"
 					onClick={this.props.onClick}
 					onContextMenu={this.props.onClick}
 				/>
-				{
-					(this.props.name !== 'empty') && (
-						<image
-							className="block"
-							width={BLOCK_SIZE}
-							height={BLOCK_SIZE}
-							x="0"
-							y="0"
-							href={`image/${this.props.name}.png`}
-							transform={`rotate(${this.props.rotate * 90})`}
-							style={{
-								transformOrigin: 'center',
-								pointerEvents: 'none',
-							}}
-						/>
-					)
-				}
 				{/* data layer */}
 				<g>
 					{[
