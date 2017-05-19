@@ -21,6 +21,10 @@ class DataComponent extends React.Component {
 		if (this.props.isAnimating) {
 			this.handleStartAnimation();
 		}
+
+		if (this.props.isErasing) {
+			this.handleStartErasion();
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -30,6 +34,14 @@ class DataComponent extends React.Component {
 
 		if (this.props.isAnimating && !nextProps.isAnimating) {
 			this.handleStopAnimation();
+		}
+
+		if (!this.props.isErasing && nextProps.isErasing) {
+			this.handleStartErasion();
+		}
+
+		if (this.props.isErasing && !nextProps.isErasing) {
+			this.handleStopErasion();
 		}
 	}
 
@@ -70,6 +82,24 @@ class DataComponent extends React.Component {
 	// TODO: implement
 	handleStopAnimation = () => {
 
+	}
+
+	handleStartErasion = () => {
+		this.addAnimation(({target}) => (
+			TweenLite.to(target, 0.4, Object.assign({
+				transformOrigin: 'center center',
+				ease: Power0.easeNone,
+				scale: 2,
+				opacity: 0,
+				onComplete: () => {
+					this.props.onEraseAnimationComplete();
+				},
+			}))
+		));
+	}
+
+	// TODO: implement
+	handleStopErasion = () => {
 	}
 
 	getAnimationProperties = (direction) => {

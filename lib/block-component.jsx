@@ -103,7 +103,29 @@ class BlockComponent extends React.Component {
 		});
 
 		this.props.block.on('erase', (data) => {
+			this.state.inputData.forEach((inputData) => {
+				if (inputData.data === data) {
+					inputData.isErasing = true;
+				}
+			});
 
+			this.state.animatingData.forEach((animatingData) => {
+				if (animatingData.data === data) {
+					animatingData.isErasing = true;
+				}
+			});
+
+			this.state.outputData.forEach((outputData) => {
+				if (outputData.data === data) {
+					outputData.isErasing = true;
+				}
+			});
+
+			this.setState({
+				inputData: this.state.inputData,
+				animatingData: this.state.animatingData,
+				outputData: this.state.outputData,
+			});
 		});
 
 		this.state = {
