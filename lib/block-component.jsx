@@ -8,8 +8,6 @@ class BlockComponent extends React.Component {
 	static propTypes = {
 		x: PropTypes.number.isRequired,
 		y: PropTypes.number.isRequired,
-		rotate: PropTypes.number.isRequired,
-		name: PropTypes.string.isRequired,
 		block: PropTypes.object.isRequired,
 		onClick: PropTypes.func.isRequired,
 		onPassAnimationComplete: PropTypes.func.isRequired,

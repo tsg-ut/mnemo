@@ -160,7 +160,15 @@ class BoardComponent extends React.Component {
 		const boardOuterHeight = borderSize * 2 + boardHeight;
 
 		return (
-			<svg className="board-svg" viewBox="-150 -150 300 300">
+			<svg
+				className="board-svg"
+				viewBox={[
+					-boardOuterWidth / 2,
+					-boardOuterHeight / 2,
+					boardOuterWidth,
+					boardOuterHeight,
+				].join(' ')}
+			>
 				{/* board + board-border */}
 				<g transform={`translate(${-boardOuterWidth / 2}, ${-boardOuterHeight / 2})`}>
 					{/* board-border */}
@@ -287,8 +295,6 @@ class BoardComponent extends React.Component {
 											block={block}
 											x={block.x}
 											y={block.y}
-											rotate={block.rotate}
-											name={block.name}
 											onClick={this.handleClickBlock}
 											onPassAnimationComplete={this.handlePassAnimationComplete}
 										/>
