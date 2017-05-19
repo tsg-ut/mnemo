@@ -86,7 +86,7 @@ class BoardComponent extends React.Component {
 		});
 	}
 
-	handleClickBlock = (x, y, event) => {
+	handleClickBlock = (event, x, y) => {
 		event.preventDefault();
 		return this.props.onClickBlock({x, y, type: event.type});
 	}
@@ -153,67 +153,150 @@ class BoardComponent extends React.Component {
 	}
 
 	render() {
+		const borderSize = 25;
+		const boardWidth = this.props.width * BLOCK_SIZE;
+		const boardHeight = this.props.height * BLOCK_SIZE;
+		const boardOuterWidth = borderSize * 2 + boardWidth;
+		const boardOuterHeight = borderSize * 2 + boardHeight;
+
 		return (
-			<svg className="board-svg" viewBox="-150 -150 450 450">
-				<rect
-					className="board-background"
-					width={this.props.width * 50}
-					height={this.props.height * 50}
-				/>
-				<g>
-					{/* Because of the limitation of React (cannot render sibling elements)
-						and SVG (first element always rendered first), blocks renderings are
-						located here. They must be inside BlockComponent, though... */}
-					{
-						this.state.blocks.map((row) => (
-							row.map((block) => (
-								<g key={id(block)}>
-									<rect
-										className="block-border"
-										width={BLOCK_SIZE}
-										height={BLOCK_SIZE}
-										x={block.x * BLOCK_SIZE}
-										y={block.y * BLOCK_SIZE}
-									/>
-									{
-										(block.name !== 'empty') && (
-											<image
-												className="block"
+			<svg className="board-svg" viewBox="-150 -150 300 300">
+				{/* board + board-border */}
+				<g transform={`translate(${-boardOuterWidth / 2}, ${-boardOuterHeight / 2})`}>
+					{/* board-border */}
+					<g>
+						{/* top-left */}
+						<image
+							x="0"
+							y="0"
+							width={borderSize}
+							height={borderSize}
+							href="image/frame-topleft.png"
+						/>
+						{/* top */}
+						<image
+							x={borderSize}
+							y="0"
+							width={boardWidth}
+							height={borderSize}
+							preserveAspectRatio="none"
+							href="image/frame-top.png"
+						/>
+						{/* top-right */}
+						<image
+							x={borderSize + boardWidth}
+							y="0"
+							width={borderSize}
+							height={borderSize}
+							href="image/frame-topright.png"
+						/>
+						{/* left */}
+						<image
+							x="0"
+							y={borderSize}
+							width={borderSize}
+							height={boardHeight}
+							preserveAspectRatio="none"
+							href="image/frame-left.png"
+						/>
+						{/* right */}
+						<image
+							x={borderSize + boardWidth}
+							y={borderSize}
+							width={borderSize}
+							height={boardHeight}
+							preserveAspectRatio="none"
+							href="image/frame-right.png"
+						/>
+						{/* bottom-left */}
+						<image
+							x="0"
+							y={borderSize + boardHeight}
+							width={borderSize}
+							height={borderSize}
+							href="image/frame-bottomleft.png"
+						/>
+						{/* bottom */}
+						<image
+							x={borderSize}
+							y={borderSize + boardHeight}
+							width={boardWidth}
+							height={borderSize}
+							preserveAspectRatio="none"
+							href="image/frame-bottom.png"
+						/>
+						{/* bottom-right */}
+						<image
+							x={borderSize + boardWidth}
+							y={borderSize + boardHeight}
+							width={borderSize}
+							height={borderSize}
+							href="image/frame-bottomright.png"
+						/>
+					</g>
+					{/* board */}
+					<g transform={`translate(${borderSize}, ${borderSize})`}>
+						<rect
+							className="board-background"
+							width={this.props.width * BLOCK_SIZE}
+							height={this.props.height * BLOCK_SIZE}
+						/>
+						<g>
+							{/* Because of the limitation of React (cannot render sibling elements)
+								and SVG (first element always rendered first), blocks renderings are
+								located here. They must be inside BlockComponent, though... */}
+							{
+								this.state.blocks.map((row) => (
+									row.map((block) => (
+										<g key={id(block)}>
+											<rect
+												className="block-border"
 												width={BLOCK_SIZE}
 												height={BLOCK_SIZE}
 												x={block.x * BLOCK_SIZE}
 												y={block.y * BLOCK_SIZE}
-												href={`image/${block.name}.png`}
-												transform={`rotate(${block.rotate * 90})`}
-												style={{
-													transformOrigin: 'center',
-													pointerEvents: 'none',
-												}}
 											/>
-										)
-									}
-								</g>
-							))
-						))
-					}
-				</g>
-				<g>
-					{
-						this.state.blocks.map((row) => (
-							row.map((block) => (
-								<BlockComponent
-									key={id(block)}
-									block={block}
-									x={block.x}
-									y={block.y}
-									rotate={block.rotate}
-									name={block.name}
-									onClick={this.handleClickBlock.bind(this, block.x, block.y)}
-									onPassAnimationComplete={this.handlePassAnimationComplete}
-								/>
-							))
-						))
-					}
+											{
+												(block.name !== 'empty') && (
+													<image
+														className="block"
+														width={BLOCK_SIZE}
+														height={BLOCK_SIZE}
+														x={block.x * BLOCK_SIZE}
+														y={block.y * BLOCK_SIZE}
+														href={`image/${block.name}.png`}
+														transform={`rotate(${block.rotate * 90})`}
+														style={{
+															transformOrigin: 'center',
+															pointerEvents: 'none',
+														}}
+													/>
+												)
+											}
+										</g>
+									))
+								))
+							}
+						</g>
+						<g>
+							{
+								this.state.blocks.map((row) => (
+									row.map((block) => (
+										<BlockComponent
+											key={id(block)}
+											block={block}
+											x={block.x}
+											y={block.y}
+											rotate={block.rotate}
+											name={block.name}
+											onClick={this.handleClickBlock}
+											onPassAnimationComplete={this.handlePassAnimationComplete}
+										/>
+									))
+								))
+							}
+						</g>
+					</g>
 				</g>
 			</svg>
 		);

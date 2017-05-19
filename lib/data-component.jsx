@@ -3,7 +3,7 @@ const PropTypes = require('prop-types');
 const GSAP = require('react-gsap-enhancer');
 const assert = require('assert');
 // TODO: scoped require
-const {TweenLite, Back, Power0} = require('gsap');
+const {TweenLite, Power0} = require('gsap');
 const {BLOCK_SIZE} = require('./constants');
 
 class DataComponent extends React.Component {
@@ -72,16 +72,6 @@ class DataComponent extends React.Component {
 
 	}
 
-	handleClick = () => {
-		this.addAnimation(({target}) => (
-			TweenLite.to(target, 0.5, {
-				rotation: '+=360',
-				transformOrigin: 'center center',
-				ease: Back.easeOut.config(1.7),
-			})
-		));
-	}
-
 	getAnimationProperties = (direction) => {
 		if (direction === 'down') {
 			return {y: `+=${BLOCK_SIZE / 2}`};
@@ -121,7 +111,7 @@ class DataComponent extends React.Component {
 
 	render() {
 		return (
-			<g transform={this.getInitialTransform()} onClick={this.handleClick}>
+			<g transform={this.getInitialTransform()}>
 				<rect x="-9" y="-8" rx="3" width="18" height="16" fill="darkorange"/>
 				<text
 					x="0"

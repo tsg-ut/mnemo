@@ -119,7 +119,7 @@ class BlockComponent extends React.Component {
 		if (this.dataAnimationResolvers.has(data)) {
 			this.dataAnimationResolvers.get(data)();
 		}
-	};
+	}
 
 	handleDataEraseAnimationComplete = (data) => {
 		this.setState({
@@ -127,13 +127,16 @@ class BlockComponent extends React.Component {
 			animatingData: this.state.animatingData.filter((animatingData) => animatingData.data !== data),
 			outputData: this.state.outputData.filter((outputData) => outputData.data !== data),
 		});
-	};
+	}
+
+	handleClick = (event) => (
+		this.props.onClick(event, this.props.x, this.props.y)
+	)
 
 	render() {
 		return (
 			<g
 				transform={`translate(${this.props.x * BLOCK_SIZE}, ${this.props.y * BLOCK_SIZE})`}
-				onClick={this.handleClick}
 			>
 				{/* click event capture */}
 				<rect
@@ -143,7 +146,7 @@ class BlockComponent extends React.Component {
 					x="0"
 					y="0"
 					fill="transparent"
-					onClick={this.props.onClick}
+					onClick={this.handleClick}
 					onContextMenu={this.props.onClick}
 				/>
 				{/* data layer */}
