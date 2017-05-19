@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'gcd',
-	version: 4,
+	version: 5,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -55,15 +55,31 @@ module.exports = {
 			return gcd([b, a % b]);
 		};
 
-		const inputs = Array.from({length: 3}, () => {
-			const factors = [2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 5, 5, 5, 7, 7, 11, 13, 17];
+		const inputs = [];
 
-			shuffleArray(factors);
-			const valueA = factors.slice(0, 4).reduce((a, b) => a * b);
-			const valueB = factors.slice(4, 8).reduce((a, b) => a * b);
+		const factors1 = [2, 2, 3, 3, 3, 3, 3, 3, 5, 5, 5, 7, 7, 11, 13, 17];
 
-			return [valueA, valueB];
-		});
+		shuffleArray(factors1);
+		const valueA1 = factors1.slice(0, 3).reduce((a, b) => a * b) * 2;
+		const valueB1 = factors1.slice(3, 6).reduce((a, b) => a * b) * 2;
+
+		inputs.push([valueA1, valueB1]);
+
+		const factors2 = [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 5, 7, 7, 11, 13, 17];
+
+		shuffleArray(factors2);
+		const valueA2 = factors2.slice(0, 4).reduce((a, b) => a * b) * 5;
+		const valueB2 = factors2.slice(4, 8).reduce((a, b) => a * b) * 5;
+
+		inputs.push([valueA2, valueB2]);
+
+		const factors3 = [1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 5, 11, 11, 13, 13, 17];
+
+		shuffleArray(factors3);
+		const valueA3 = factors3.slice(0, 3).reduce((a, b) => a * b) * 7;
+		const valueB3 = factors3.slice(3, 6).reduce((a, b) => a * b) * 7;
+
+		inputs.push([valueA3, valueB3]);
 
 		inputs.sort((a, b) => gcd(b) - gcd(a));
 
