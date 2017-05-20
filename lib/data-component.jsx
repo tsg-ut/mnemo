@@ -53,35 +53,12 @@ class DataComponent extends React.Component {
 				onComplete: () => {
 					this.props.onAnimationComplete();
 				},
-			}, this.getAnimationProperties(do {
-				if (this.props.isInward) {
-					if (this.props.direction === 'top') {
-						'down';
-					} else if (this.props.direction === 'right') {
-						'left';
-					} else if (this.props.direction === 'left') {
-						'right';
-					} else if (this.props.direction === 'bottom') {
-						'up';
-					}
-				} else {
-					if (this.props.direction === 'top') {
-						'up';
-					} else if (this.props.direction === 'right') {
-						'right';
-					} else if (this.props.direction === 'left') {
-						'left';
-					} else if (this.props.direction === 'bottom') {
-						'down';
-					}
-				}
-			})))
+			}, this.getAnimationProperties()))
 		));
 	}
 
 	// TODO: implement
 	handleStopAnimation = () => {
-
 	}
 
 	handleStartErasion = () => {
@@ -103,41 +80,71 @@ class DataComponent extends React.Component {
 	}
 
 	getAnimationProperties = (direction) => {
-		if (direction === 'down') {
-			return {y: `+=${BLOCK_SIZE / 2}`};
+		if (this.props.isInward) {
+			if (this.props.direction === 'top') {
+				return {y: `+=${BLOCK_SIZE / 2}`};
+			}
+
+			if (this.props.direction === 'right') {
+				return {x: `-=${BLOCK_SIZE / 2}`};
+			}
+
+			if (this.props.direction === 'left') {
+				return {x: `+=${BLOCK_SIZE / 2}`};
+			}
+
+			assert(this.props.direction === 'bottom');
+			return {y: `-=${BLOCK_SIZE / 2}`};
 		}
 
-		if (direction === 'right') {
+		if (this.props.direction === 'top') {
+			return {y: `-=${BLOCK_SIZE / 2}`};
+		}
+
+		if (this.props.direction === 'right') {
 			return {x: `+=${BLOCK_SIZE / 2}`};
 		}
 
-		if (direction === 'left') {
+		if (this.props.direction === 'left') {
 			return {x: `-=${BLOCK_SIZE / 2}`};
 		}
 
-		assert(direction === 'up');
-		return {y: `-=${BLOCK_SIZE / 2}`};
+		assert(this.props.direction === 'bottom');
+		return {y: `+=${BLOCK_SIZE / 2}`};
 	}
 
-	getInitialTransform = () => (
-		do {
-			if (this.props.isInward) {
-				if (this.props.direction === 'top') {
-					`translate(${BLOCK_SIZE / 2}, 0)`;
-				} else if (this.props.direction === 'right') {
-					`translate(${BLOCK_SIZE}, ${BLOCK_SIZE / 2})`;
-				} else if (this.props.direction === 'left') {
-					`translate(0, ${BLOCK_SIZE / 2})`;
-				} else if (this.props.direction === 'bottom') {
-					`translate(${BLOCK_SIZE / 2}, ${BLOCK_SIZE})`;
-				} else {
-					assert(false);
-				}
-			} else {
-				`translate(${BLOCK_SIZE / 2}, ${BLOCK_SIZE / 2})`;
-			}
+	getDisplayValue = () => {
+		if (this.props.value === Infinity) {
+			return '∞';
 		}
-	)
+
+		if (this.props.value === -Infinity) {
+			return '-∞';
+		}
+
+		return this.props.value;
+	}
+
+	getInitialTransform = () => {
+		if (this.props.isInward) {
+			if (this.props.direction === 'top') {
+				return `translate(${BLOCK_SIZE / 2}, 0)`;
+			}
+
+			if (this.props.direction === 'right') {
+				return `translate(${BLOCK_SIZE}, ${BLOCK_SIZE / 2})`;
+			}
+
+			if (this.props.direction === 'left') {
+				return `translate(0, ${BLOCK_SIZE / 2})`;
+			}
+
+			assert(this.props.direction === 'bottom');
+			return `translate(${BLOCK_SIZE / 2}, ${BLOCK_SIZE})`;
+		}
+
+		return `translate(${BLOCK_SIZE / 2}, ${BLOCK_SIZE / 2})`;
+	}
 
 	render() {
 		return (
@@ -151,17 +158,7 @@ class DataComponent extends React.Component {
 					textAnchor="middle"
 					dominantBaseline="central"
 				>
-					{
-						do {
-							if (this.props.value === Infinity) {
-								'∞';
-							} else if (this.props.value === -Infinity) {
-								'-∞';
-							} else {
-								this.props.value;
-							}
-						}
-					}
+					{this.getDisplayValue()}
 				</text>
 			</g>
 		);
