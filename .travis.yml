@@ -34,7 +34,7 @@ script:
   - yarn test:api
 
 after_success:
-  - yarn coveralls
+  - yarn codecov
   - bash bin/deploy.sh
 
 cache:
