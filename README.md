@@ -1,14 +1,15 @@
 # MNEMO
 
 [![Build Status][travis-image]][travis-url]
-[![Coverage Status][coveralls-image]][coveralls-url]
+[![Coverage Status][codecov-image]][codecov-url]
 [![Code Climate][codeclimate-image]][codeclimate-url]
 [![Greenkeeper badge][greenkeeper-image]][greenkeeper-url]
 
 [travis-url]: https://travis-ci.org/tsg-ut/mnemo
 [travis-image]: https://travis-ci.org/tsg-ut/mnemo.svg?branch=master
-[coveralls-url]: https://coveralls.io/github/tsg-ut/mnemo?branch=master
-[coveralls-image]: https://coveralls.io/repos/github/tsg-ut/mnemo/badge.svg?branch=master
+[codecov-url]: https://codecov.io/gh/tsg-ut/mnemo
+[codecov-image]: https://codecov.io/gh/tsg-ut/mnemo/branch/master/graph/badge.svg
+[codecov-graph]: https://codecov.io/gh/tsg-ut/mnemo/branch/master/graphs/tree.svg
 [codeclimate-url]: https://codeclimate.com/github/tsg-ut/mnemo
 [codeclimate-image]: https://codeclimate.com/github/tsg-ut/mnemo/badges/gpa.svg
 [greenkeeper-url]: https://greenkeeper.io/
@@ -19,6 +20,10 @@
 MNEMOは、TSGが制作しているプログラミング風ゲームです。
 
 ## [最新ビルド](https://mnemo.pro/)
+
+## カバレッジ
+
+[![Coverage Graph][codecov-graph]][codecov-url]
 
 ## 開発に必要なもの
 
