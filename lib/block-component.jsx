@@ -167,7 +167,7 @@ class BlockComponent extends React.Component {
 					y="0"
 					fill="transparent"
 					onClick={this.handleClick}
-					onContextMenu={this.props.onClick}
+					onContextMenu={this.handleClick}
 				/>
 				{/* data layer */}
 				<g>

@@ -53,8 +53,9 @@ class BoardComponent extends React.Component {
 			showClockLimit: false,
 			showDataLimit: false,
 			isPanning: false,
-			panDistance: null,
-			panAngle: null,
+			panDistance: 0,
+			panAngle: 0,
+			scale: 1,
 		};
 	}
 
@@ -174,6 +175,18 @@ class BoardComponent extends React.Component {
 		}
 	}
 
+	handlePinch = (event) => {
+		event.preventDefault();
+
+		if (event.eventType === INPUT_MOVE) {
+			this.setState({
+				scale: event.scale,
+			});
+		} else if (event.eventType === INPUT_END) {
+			// TODO
+		}
+	}
+
 	handleMeasureBackground = (dimensions) => {
 		this.backgroundDimensions = dimensions;
 	}
@@ -197,7 +210,7 @@ class BoardComponent extends React.Component {
 				-boardOuterHeight / 2 - this.state.panDistance * Math.sin(this.state.panAngle / 180 * Math.PI) * scale,
 				boardOuterWidth,
 				boardOuterHeight,
-			].join(' ');
+			].map((value) => value / this.state.scale).join(' ');
 		}
 
 		return [
@@ -205,7 +218,7 @@ class BoardComponent extends React.Component {
 			-boardOuterHeight / 2,
 			boardOuterWidth,
 			boardOuterHeight,
-		].join(' ');
+		].map((value) => value / this.state.scale).join(' ');
 	}
 
 	render() {
@@ -216,7 +229,15 @@ class BoardComponent extends React.Component {
 		const boardOuterHeight = borderSize * 2 + boardHeight;
 
 		return (
-			<Hammer onPan={this.handlePan}>
+			<Hammer
+				onPan={this.handlePan}
+				onPinch={this.handlePinch}
+				options={{
+					recognizers: {
+						pinch: {enable: true},
+					},
+				}}
+			>
 				<svg className="board-svg" viewBox={this.getViewBox()}>
 					{/* board + board-border */}
 					<g transform={`translate(${-boardOuterWidth / 2}, ${-boardOuterHeight / 2})`}>
