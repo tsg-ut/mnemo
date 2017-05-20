@@ -9,7 +9,7 @@
 [travis-image]: https://travis-ci.org/tsg-ut/mnemo.svg?branch=master
 [codecov-url]: https://codecov.io/gh/tsg-ut/mnemo
 [codecov-image]: https://codecov.io/gh/tsg-ut/mnemo/branch/master/graph/badge.svg
-[codecov-graph]: https://codecov.io/gh/tsg-ut/mnemo/branch/master/graphs/tree.svg
+[codecov-graph]: https://codecov.io/gh/tsg-ut/mnemo/branch/master/graphs/tree.svg?width=888&height=150
 [codeclimate-url]: https://codeclimate.com/github/tsg-ut/mnemo
 [codeclimate-image]: https://codeclimate.com/github/tsg-ut/mnemo/badges/gpa.svg
 [greenkeeper-url]: https://greenkeeper.io/
