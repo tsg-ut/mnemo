@@ -44672,7 +44672,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 module.exports = {
 	name: 'gcd',
-	version: 4,
+	version: 5,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -44731,19 +44731,43 @@ module.exports = {
 			return gcd([b, a % b]);
 		};
 
-		var inputs = Array.from({ length: 3 }, function () {
-			var factors = [2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 5, 5, 5, 7, 7, 11, 13, 17];
+		var inputs = [];
 
-			shuffleArray(factors);
-			var valueA = factors.slice(0, 4).reduce(function (a, b) {
-				return a * b;
-			});
-			var valueB = factors.slice(4, 8).reduce(function (a, b) {
-				return a * b;
-			});
+		var factors1 = [2, 2, 3, 3, 3, 3, 3, 3, 5, 5, 5, 7, 7, 11, 13, 17];
 
-			return [valueA, valueB];
-		});
+		shuffleArray(factors1);
+		var valueA1 = factors1.slice(0, 3).reduce(function (a, b) {
+			return a * b;
+		}) * 2;
+		var valueB1 = factors1.slice(3, 6).reduce(function (a, b) {
+			return a * b;
+		}) * 2;
+
+		inputs.push([valueA1, valueB1]);
+
+		var factors2 = [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 5, 7, 7, 11, 13, 17];
+
+		shuffleArray(factors2);
+		var valueA2 = factors2.slice(0, 4).reduce(function (a, b) {
+			return a * b;
+		}) * 5;
+		var valueB2 = factors2.slice(4, 8).reduce(function (a, b) {
+			return a * b;
+		}) * 5;
+
+		inputs.push([valueA2, valueB2]);
+
+		var factors3 = [1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 5, 11, 11, 13, 13, 17];
+
+		shuffleArray(factors3);
+		var valueA3 = factors3.slice(0, 3).reduce(function (a, b) {
+			return a * b;
+		}) * 7;
+		var valueB3 = factors3.slice(3, 6).reduce(function (a, b) {
+			return a * b;
+		}) * 7;
+
+		inputs.push([valueA3, valueB3]);
 
 		inputs.sort(function (a, b) {
 			return gcd(b) - gcd(a);
