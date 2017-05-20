@@ -6,8 +6,6 @@ It = global.it
 
 describe 'Game Screen' ->
   describe 'Stage 1' ->
-    @retries 5
-
     before ->
       @nightmare
       .refresh!
