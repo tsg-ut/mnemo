@@ -19,14 +19,14 @@ const inputColors = [
 
 class BoardComponent extends React.Component {
 	static propTypes = {
-		isExecuting: PropTypes.bool, // TODO: implement
+		isExecuting: PropTypes.bool.isRequired, // TODO: implement
 		width: PropTypes.number.isRequired,
 		height: PropTypes.number.isRequired,
 		clockLimit: PropTypes.number.isRequired,
 		inputX: PropTypes.number.isRequired,
 		outputX: PropTypes.number.isRequired,
-		input: PropTypes.arrayOf(PropTypes.number),
-		output: PropTypes.arrayOf(PropTypes.number),
+		input: PropTypes.arrayOf(PropTypes.number).isRequired,
+		output: PropTypes.arrayOf(PropTypes.number).isRequired,
 		onClickBlock: PropTypes.func.isRequired,
 		onOutput: PropTypes.func.isRequired,
 		onHalt: PropTypes.func.isRequired,
@@ -74,11 +74,11 @@ class BoardComponent extends React.Component {
 
 	// TODO: implement
 	componentWillReceiveProps(nextProps) {
-		if (!this.props.executing && nextProps.executing) {
+		if (!this.props.isExecuting && nextProps.isExecuting) {
 			this.execute();
 		}
 
-		if (this.props.executing && !nextProps.executing) {
+		if (this.props.isExecuting && !nextProps.isExecuting) {
 			this.halt();
 		}
 	}
