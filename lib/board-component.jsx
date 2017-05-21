@@ -243,7 +243,7 @@ class BoardComponent extends React.Component {
 	}
 
 	getIOWirePathData = ({startX, endX, head, tail}) => {
-		const pathLength = 40;
+		const pathLength = 30;
 		const curveLength = pathLength * 0.9;
 
 		return Path()
@@ -261,6 +261,7 @@ class BoardComponent extends React.Component {
 		const boardOuterWidth = borderSize * 2 + boardWidth;
 		const boardOuterHeight = borderSize * 2 + boardHeight;
 		const inputAreaWidth = this.props.input.length * 200 - 50;
+		const outputAreaWidth = this.props.output.length * 200 - 50;
 
 		return (
 			<Hammer
@@ -284,6 +285,8 @@ class BoardComponent extends React.Component {
 											height="50"
 											rx="8"
 											fill={inputColors[index % inputColors.length].toString()}
+											stroke={inputColors[index % inputColors.length].toString()}
+											strokeWidth="3"
 										/>
 										<text
 											x="75"
@@ -303,7 +306,7 @@ class BoardComponent extends React.Component {
 											startX: -inputAreaWidth / 2 + index * 200 + 75,
 											endX: (index - (this.props.input.length - 1) / 2) * 10,
 											head: 0,
-											tail: 30,
+											tail: 20,
 										})}
 										transform={`translate(0, 50)`}
 										fill="none"
@@ -450,6 +453,70 @@ class BoardComponent extends React.Component {
 								}
 							</g>
 						</g>
+					</g>
+					{/* outputs */}
+					<g transform={`translate(0, ${boardOuterHeight / 2})`}>
+						{
+							this.props.output.map((output, index) => (
+								<g key={index}>
+									<path
+										d={this.getIOWirePathData({
+											startX: (index - (this.props.output.length - 1) / 2) * 10,
+											endX: -outputAreaWidth / 2 + index * 200 + 75,
+											head: 20,
+											tail: 0,
+										})}
+										fill="none"
+										strokeWidth="5"
+										stroke={inputColors[index % inputColors.length].toString()}
+									/>
+									<g transform={`translate(${-outputAreaWidth / 2 + index * 200}, 50)`}>
+										<rect
+											width="150"
+											height="50"
+											rx="8"
+											fill="white"
+											stroke={inputColors[index % inputColors.length].toString()}
+											strokeWidth="3"
+										/>
+										<text
+											x="75"
+											y="25"
+											fontSize="30"
+											fontFamily="'Exo 2'"
+											fontWeight="900"
+											fill="white"
+											textAnchor="middle"
+											dominantBaseline="central"
+										>
+											{output}
+										</text>
+									</g>
+									<g transform={`translate(${-outputAreaWidth / 2 + index * 200}, 110)`}>
+										<rect
+											width="150"
+											height="50"
+											rx="8"
+											fill={inputColors[index % inputColors.length].toString()}
+											stroke={inputColors[index % inputColors.length].toString()}
+											strokeWidth="3"
+										/>
+										<text
+											x="75"
+											y="25"
+											fontSize="30"
+											fontFamily="'Exo 2'"
+											fontWeight="900"
+											fill="white"
+											textAnchor="middle"
+											dominantBaseline="central"
+										>
+											{output}
+										</text>
+									</g>
+								</g>
+							))
+						}
 					</g>
 				</svg>
 			</Hammer>
