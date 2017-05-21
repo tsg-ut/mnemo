@@ -298,7 +298,7 @@
         "react/forbid-elements": "error",
         "react/forbid-prop-types": "warn",
         "react/forbid-foreign-prop-types": "error",
-        "react/no-array-index-key": "error",
+        "react/no-array-index-key": "off",
         "react/no-children-prop": "error",
         "react/no-danger": "error",
         "react/no-danger-with-children": "error",

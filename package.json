@@ -65,6 +65,7 @@
     "chai-things": "^0.2.0",
     "chokidar-cli": "^1.2.0",
     "codecov": "^2.2.0",
+    "color": "^1.0.3",
     "concurrently": "^3.3.0",
     "cross-env": "^5.0.0",
     "cssnano": "^3.10.0",
@@ -103,6 +104,7 @@
     "replace": "^0.3.0",
     "sequelize-cli": "^2.4.0",
     "sqlite3": "^3.1.4",
+    "svg-path-generator": "^1.1.0",
     "uglify-js": "^2.8.22",
     "umzug": "^2.0.1",
     "watchify": "^3.7.0"

@@ -3,10 +3,19 @@ const PropTypes = require('prop-types');
 const Hammer = require('react-hammerjs');
 const {INPUT_MOVE, INPUT_END} = require('hammerjs');
 const Measure = require('react-measure');
+const color = require('color');
+const Path = require('svg-path-generator');
 const Board = require('./board');
 const BlockComponent = require('./block-component');
 const {id} = require('./util');
 const {BLOCK_SIZE} = require('./constants');
+
+const inputColors = [
+	color('#de3131'), // red
+	color('#4527a8'), // blue
+	color('#1c6925'), // green
+	color('#db40cd'), // pink
+];
 
 class BoardComponent extends React.Component {
 	static propTypes = {
@@ -16,6 +25,8 @@ class BoardComponent extends React.Component {
 		clockLimit: PropTypes.number.isRequired,
 		inputX: PropTypes.number.isRequired,
 		outputX: PropTypes.number.isRequired,
+		input: PropTypes.arrayOf(PropTypes.number),
+		output: PropTypes.arrayOf(PropTypes.number),
 		onClickBlock: PropTypes.func.isRequired,
 		onOutput: PropTypes.func.isRequired,
 		onHalt: PropTypes.func.isRequired,
@@ -231,12 +242,25 @@ class BoardComponent extends React.Component {
 		].map((value) => value / this.state.scale).join(' ');
 	}
 
+	getIOWirePathData = ({startX, endX, head, tail}) => {
+		const pathLength = 40;
+		const curveLength = pathLength * 0.9;
+
+		return Path()
+		.moveTo(startX, 0)
+		.relative().lineTo(0, head)
+		.relative().curveTo(0, curveLength, endX - startX, pathLength - curveLength, endX - startX, pathLength)
+		.relative().lineTo(0, tail)
+		.end();
+	}
+
 	render() {
 		const borderSize = 25;
 		const boardWidth = this.props.width * BLOCK_SIZE;
 		const boardHeight = this.props.height * BLOCK_SIZE;
 		const boardOuterWidth = borderSize * 2 + boardWidth;
 		const boardOuterHeight = borderSize * 2 + boardHeight;
+		const inputAreaWidth = this.props.input.length * 200 - 50;
 
 		return (
 			<Hammer
@@ -249,6 +273,47 @@ class BoardComponent extends React.Component {
 				}}
 			>
 				<svg className="board-svg" viewBox={this.getViewBox()} onWheel={this.handleWheel}>
+					{/* inputs */}
+					<g transform={`translate(0, ${-boardOuterHeight / 2 - 100})`}>
+						{
+							this.props.input.map((input, index) => (
+								<g key={index}>
+									<g transform={`translate(${-inputAreaWidth / 2 + index * 200}, 0)`}>
+										<rect
+											width="150"
+											height="50"
+											rx="8"
+											fill={inputColors[index % inputColors.length].toString()}
+										/>
+										<text
+											x="75"
+											y="25"
+											fontSize="30"
+											fontFamily="'Exo 2'"
+											fontWeight="900"
+											fill="white"
+											textAnchor="middle"
+											dominantBaseline="central"
+										>
+											{input}
+										</text>
+									</g>
+									<path
+										d={this.getIOWirePathData({
+											startX: -inputAreaWidth / 2 + index * 200 + 75,
+											endX: (index - (this.props.input.length - 1) / 2) * 10,
+											head: 0,
+											tail: 30,
+										})}
+										transform={`translate(0, 50)`}
+										fill="none"
+										strokeWidth="5"
+										stroke={inputColors[index % inputColors.length].toString()}
+									/>
+								</g>
+							))
+						}
+					</g>
 					{/* board + board-border */}
 					<g transform={`translate(${-boardOuterWidth / 2}, ${-boardOuterHeight / 2})`}>
 						{/* board-border */}
