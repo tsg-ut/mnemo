@@ -55,6 +55,8 @@ class BoardComponent extends React.Component {
 			isPanning: false,
 			panDistance: 0,
 			panAngle: 0,
+			pinchCenterX: 0,
+			pinchCenterY: 0,
 			scale: 1,
 		};
 	}
@@ -187,6 +189,14 @@ class BoardComponent extends React.Component {
 		}
 	}
 
+	handleWheel = (event) => {
+		const direction = (event.deltaY > 0) ? 1 : -1;
+
+		this.setState({
+			scale: this.state.scale * (1.0 + 0.1 * direction),
+		});
+	}
+
 	handleMeasureBackground = (dimensions) => {
 		this.backgroundDimensions = dimensions;
 	}
@@ -238,7 +248,7 @@ class BoardComponent extends React.Component {
 					},
 				}}
 			>
-				<svg className="board-svg" viewBox={this.getViewBox()}>
+				<svg className="board-svg" viewBox={this.getViewBox()} onWheel={this.handleWheel}>
 					{/* board + board-border */}
 					<g transform={`translate(${-boardOuterWidth / 2}, ${-boardOuterHeight / 2})`}>
 						{/* board-border */}
