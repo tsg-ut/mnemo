@@ -201,11 +201,15 @@ class BoardComponent extends React.Component {
 	}
 
 	handleWheel = (event) => {
-		const direction = (event.deltaY > 0) ? 1 : -1;
+		const direction = (event.deltaY > 0) ? -1 : 1;
 
 		this.setState({
 			scale: this.state.scale * (1.0 + 0.1 * direction),
 		});
+	}
+
+	handleDragStart = (event) => {
+		event.preventDefault();
 	}
 
 	handleMeasureBackground = (dimensions) => {
@@ -271,9 +275,15 @@ class BoardComponent extends React.Component {
 					recognizers: {
 						pinch: {enable: true},
 					},
+					preventDefault: true,
 				}}
 			>
-				<svg className="board-svg" viewBox={this.getViewBox()} onWheel={this.handleWheel}>
+				<svg
+					className="board-svg"
+					viewBox={this.getViewBox()}
+					onWheel={this.handleWheel}
+					onDragStart={this.handleDragStart}
+				>
 					{/* inputs */}
 					<g transform={`translate(0, ${-boardOuterHeight / 2 - 100})`}>
 						{
@@ -400,9 +410,10 @@ class BoardComponent extends React.Component {
 								/>
 							</Measure>
 							<g>
-								{/* Because of the limitation of React (cannot render sibling elements)
-									and SVG (first element always rendered first), blocks renderings are
-									located here. They must be inside BlockComponent, though... */}
+								{/* Because of the limitation of React (cannot render sibling
+									elements) and SVG (first element always rendered first),
+									blocks renderings are located here.
+									They must be inside BlockComponent, though... */}
 								{
 									this.state.blocks.map((row) => (
 										row.map((block) => (
@@ -426,6 +437,8 @@ class BoardComponent extends React.Component {
 															transform={`rotate(${block.rotate * 90})`}
 															style={{
 																transformOrigin: 'center',
+																// Enabled from FF55
+																transformBox: 'fill-box',
 																pointerEvents: 'none',
 															}}
 														/>
