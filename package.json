@@ -14,7 +14,7 @@
     "build": "concurrently \"npm run browserify\" \"npm run pug\" \"npm run less\"",
     "browserify:production": "cross-env NODE_ENV=production npm run browserify && uglifyjs index.js --in-source-map index.js.map --mangle --compress --output index.min.js --source-map index.min.js.map",
     "pug:production": "cross-env NODE_ENV=production pug index.pug",
-    "less:production": "cross-env NODE_ENV=production lessc index.less | postcss --use postcss-assets --use postcss-font-magician --postcss-font-magician.protocol=https: --use postcss-flexbugs-fixes --use autoprefixer --use cssnano > index.min.css",
+    "less:production": "cross-env NODE_ENV=production lessc index.less | postcss --use postcss-assets --use postcss-font-magician --postcss-font-magician.protocol=https: --use postcss-flexbugs-fixes --use autoprefixer --use cssnano --map -o index.min.css",
     "build:production": "concurrently \"npm run browserify:production\" \"npm run pug:production\" \"npm run less:production\"",
     "serve": "http-server -p 8080 -o -s",
     "watch:js": "watchify lib/index.js --debug --verbose -t [ babelify --presets [ es2015 react ] --plugins [ transform-inline-environment-variables transform-class-properties ] ] --extension js --extension jsx -o \"exorcist index.js.map > index.js\"",
