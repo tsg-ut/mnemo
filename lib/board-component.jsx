@@ -313,7 +313,7 @@ class BoardComponent extends React.Component {
 											textAnchor="middle"
 											dominantBaseline="central"
 										>
-											{input}
+											{input === null ? '???' : input}
 										</text>
 									</g>
 									<path
@@ -529,7 +529,7 @@ class BoardComponent extends React.Component {
 											textAnchor="middle"
 											dominantBaseline="central"
 										>
-											{output}
+											{output === null ? '???' : output}
 										</text>
 									</g>
 								</g>
