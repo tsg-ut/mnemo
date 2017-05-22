@@ -98,6 +98,8 @@ button {
 	right: 0;
 	bottom: 0;
 
+	height: 100%;
+
 	z-index: 0;
 }
 
@@ -183,6 +185,7 @@ button {
 
 	.screens {
 		display: inline-flex;
+		height: 100%;
 
 		transition: transform .8s cubic-bezier(0, 0.75, 0.3, 1);
 
@@ -192,7 +195,7 @@ button {
 
 		.screen {
 			.fixed-width(100vw);
-			height: 100vh;
+			height: 100%;
 			position: relative;
 
 			&.menu-screen {
@@ -445,6 +448,10 @@ button {
 			.controls-area {
 				.fixed-width(420px);
 				position: relative;
+
+				.mobile({
+					flex: 1 1 0;
+				});
 			}
 		}
 	}
