@@ -218,6 +218,8 @@ class BoardComponent extends React.Component {
 
 	getViewBox = () => {
 		const borderSize = 25;
+		const inputHeight = 120;
+		const outputHeight = 170;
 		const boardWidth = this.props.width * BLOCK_SIZE;
 		const boardHeight = this.props.height * BLOCK_SIZE;
 		const boardOuterWidth = borderSize * 2 + boardWidth;
@@ -231,18 +233,21 @@ class BoardComponent extends React.Component {
 			}
 
 			return [
-				-boardOuterWidth / 2 - this.state.panDistance * Math.cos(this.state.panAngle / 180 * Math.PI) * scale,
-				-boardOuterHeight / 2 - this.state.panDistance * Math.sin(this.state.panAngle / 180 * Math.PI) * scale,
+				-boardOuterWidth / 2 -
+					this.state.panDistance * Math.cos(this.state.panAngle / 180 * Math.PI) * scale,
+				-boardOuterHeight / 2 -
+					this.state.panDistance * Math.sin(this.state.panAngle / 180 * Math.PI) * scale -
+					inputHeight,
 				boardOuterWidth,
-				boardOuterHeight,
+				boardOuterHeight + inputHeight + outputHeight,
 			].map((value) => value / this.state.scale).join(' ');
 		}
 
 		return [
 			-boardOuterWidth / 2,
-			-boardOuterHeight / 2,
+			-boardOuterHeight / 2 - inputHeight,
 			boardOuterWidth,
-			boardOuterHeight,
+			boardOuterHeight + inputHeight + outputHeight,
 		].map((value) => value / this.state.scale).join(' ');
 	}
 
