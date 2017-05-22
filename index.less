@@ -22,6 +22,12 @@
 	width: 0;
 }
 
+.mobile(@rules) {
+	@media screen and (orientation: portrait) {
+		@rules();
+	}
+}
+
 .vertical-center {
 	position: absolute;
 	top: 50%;
@@ -59,6 +65,12 @@ button {
 	font-family: inherit;
 	cursor: pointer;
 }
+
+.mobile({
+	.github-fork-ribbon {
+		display: none;
+	}
+});
 
 .github-fork-ribbon::before {
 	background-color: #284fbd;
@@ -183,16 +195,29 @@ button {
 			height: 100vh;
 			position: relative;
 
+			&.menu-screen {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				overflow-y: scroll;
+			}
+
 			.menu {
 				width: 800px;
+				margin: auto;
 
-				position: absolute;
-				top: 40%;
-				left: 50%;
-				transform: translate(-50%, -50%);
+				.mobile({
+					width: 100%;
+				});
 
 				.row {
 					text-align: center;
+				}
+
+				.logo {
+					.mobile({
+						max-width: 90%;
+					});
 				}
 
 				.tsg-credit {
@@ -225,6 +250,10 @@ button {
 					&:hover {
 						background: rgba(61, 128, 42, 0.6);
 					}
+
+					.mobile({
+						font-size: 10vw;
+					});
 				}
 
 				button.small {
@@ -238,8 +267,16 @@ button {
 
 					column-count: 3;
 
+					.mobile({
+						column-count: 1;
+					});
+
 					display: none;
 					&.active { display: block; }
+
+					.mobile({
+						margin: 0 24px;
+					});
 
 					.stage-name {
 						margin-left: 1em;
@@ -253,6 +290,19 @@ button {
 						position: relative;
 						cursor: pointer;
 
+						.mobile({
+							margin: 3px 0;
+							padding: 5px 11px;
+							border-radius: 5px;
+							border: 2px solid #0071ac;
+
+							background: rgba(255, 255, 255, 0.47);
+
+							color: #373737;
+							font-size: 20px;
+							font-family: sans-serif;
+						});
+
 						&::before {
 							content: '';
 
@@ -263,10 +313,14 @@ button {
 							right: calc(~"100% + 0.3em");
 
 							border-top: 6px solid transparent;
-							border-left: 12px dotted black;
+							border-left: 12px dotted #222;
 							border-bottom: 6px solid transparent;
 
 							transition: transform .5s ease-out;
+
+							.mobile({
+								content: none;
+							});
 						}
 
 						&:hover::before {
@@ -283,6 +337,11 @@ button {
 
 					display: none;
 					&.active { display: block; }
+
+					.mobile({
+						width: auto;
+						margin: 0 35px;
+					});
 
 					a {
 						&, &:visited {
@@ -308,17 +367,31 @@ button {
 
 			display: flex;
 
+			.mobile({
+				flex-direction: column;
+			});
+
 			.panel-area {
 				.fixed-width(160px);
 				user-select: none;
 
 				display: flex;
+
+				.mobile({
+					.fixed-height(80px);
+					width: auto;
+				});
 			}
 
 			.board-area {
 				flex: 1 0 0;
 				width: 0;
 				user-select: none;
+
+				.mobile({
+					width: auto;
+					height: 0;
+				});
 
 				.board-svg {
 					width: 100%;
@@ -343,11 +416,18 @@ button {
 
 		.downer-area {
 			.fixed-height(150px);
+			.mobile({
+				.fixed-height(100px);
+			});
 
 			display: flex;
 
 			.left-area, .right-area {
 				.grow-width(1);
+
+				.mobile({
+					display: none;
+				});
 			}
 
 			.left-area {
@@ -387,15 +467,26 @@ button {
 			left: 50%;
 			transform: translate(-50%, -50%);
 
+			.mobile({
+				width: calc(~"100% - 20px");
+			});
+
 			.close {
 				width: 102px;
 				height: 102px;
 
 				background-image: url(image/close.png);
+				background-size: cover;
 
 				position: absolute;
 				top: -30px;
 				right: -30px;
+
+				.mobile({
+					width: 80px;
+					height: 80px;
+					right: -10px;
+				});
 			}
 
 			.modal-content {
@@ -407,8 +498,15 @@ button {
 				text-align: center;
 				font-size: 24px;
 
+				.mobile({
+					padding: 20px;
+					font-size: 18px;
+					line-height: 1.5;
+				});
+
 				img {
 					vertical-align: -50%;
+					max-width: 100%;
 				}
 
 				.close-content {
@@ -1166,11 +1264,25 @@ button {
 
 		min-width: 50px;
 
+		.mobile({
+			display: flex;
+			margin: 0 10px;
+			width: 100%;
+			overflow-x: auto;
+			overflow-y: hidden;
+		});
+
 		.block {
 			background-color: white;
 			border: none;
 			position: relative;
 			margin-bottom: 25px;
+
+			.mobile({
+				flex: 0 0 auto;
+				margin-right: 10px;
+				margin-bottom: 0;
+			});
 
 			&[data-selected]::after {
 				content: '';
@@ -1214,6 +1326,13 @@ button {
 
 		.vertical-center;
 
+		.mobile({
+			width: 300px;
+			margin: 0 auto;
+			position: relative;
+			padding: 0 10px;
+		});
+
 		&::before {
 			@height: 70px;
 			content: '';
@@ -1228,6 +1347,12 @@ button {
 			background: white;
 			border-radius: 12px;
 			z-index: -1;
+
+			.mobile({
+				@height: 60px;
+				height: @height;
+				top: (@button-height - @height) / 2;
+			});
 		}
 
 		display: flex;
@@ -1237,12 +1362,23 @@ button {
 		& > button {
 			width: 50px;
 			height: 50px;
+			background-size: contain;
 
 			flex: 0 0 auto;
+
+			.mobile({
+				width: 40px;
+				height: 40px;
+			});
 
 			&.execute, &.stop {
 				width: 100px;
 				height: 100px;
+
+				.mobile({
+					width: 80px;
+					height: 80px;
+				});
 			}
 		}
 
@@ -1250,7 +1386,7 @@ button {
 		.-(@i: length(@buttons)) when (@i > 0) {
 			@button: extract(@buttons, @i);
 			& > button.@{button} {
-				background: url('image/control-button-@{button}.png');
+				background-image: url('image/control-button-@{button}.png');
 			}
 			.-((@i - 1));
 		} .-;
