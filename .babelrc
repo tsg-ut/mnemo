@@ -2,7 +2,19 @@
 	env: {
 		browser: {
 			presets: [
-				'es2015',
+				['env', {
+					targets: {
+						browsers: [
+							'last 2 Chrome versions',
+							'last 2 Firefox versions',
+							'ie 11',
+							'last 2 edge versions',
+							'Safari >= 10',
+							'iOS >= 10',
+						],
+					},
+					useBuiltIns: true,
+				}],
 				'react',
 			],
 			plugins: [
@@ -10,7 +22,7 @@
 				'transform-class-properties',
 			],
 		},
-		react_test: {
+		react: {
 			presets: [
 				'react',
 			],
