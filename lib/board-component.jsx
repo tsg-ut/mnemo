@@ -258,7 +258,10 @@ class BoardComponent extends React.Component {
 		return Path()
 		.moveTo(startX, 0)
 		.relative().lineTo(0, head)
-		.relative().curveTo(0, curveLength, endX - startX, pathLength - curveLength, endX - startX, pathLength)
+		.relative().curveTo(
+			0, curveLength,
+			endX - startX, pathLength - curveLength,
+			endX - startX, pathLength)
 		.relative().lineTo(0, tail)
 		.end();
 	}

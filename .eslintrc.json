@@ -339,7 +339,7 @@
         "react/jsx-indent-props": ["error", "tab"],
         "react/jsx-key": "error",
         "react/jsx-max-props-per-line": ["error", {"when": "multiline"}],
-        "react/jsx-no-bind": "warn",
+        "react/jsx-no-bind": "error",
         "react/jsx-no-comment-textnodes": "error",
         "react/jsx-no-duplicate-props": "error",
         "react/jsx-no-literals": "error",
