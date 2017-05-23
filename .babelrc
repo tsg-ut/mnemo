@@ -1,0 +1,22 @@
+{
+	env: {
+		browser: {
+			presets: [
+				'es2015',
+				'react',
+			],
+			plugins: [
+				'transform-inline-environment-variables',
+				'transform-class-properties',
+			],
+		},
+		react_test: {
+			presets: [
+				'react',
+			],
+			plugins: [
+				'transform-class-properties',
+			],
+		},
+	},
+}
