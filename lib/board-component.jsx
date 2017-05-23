@@ -124,7 +124,7 @@ class BoardComponent extends React.Component {
 		this.clockUp();
 	}
 
-	clockUp() {
+	async clockUp() {
 		const passAnimations = [];
 
 		this._board.step({
@@ -143,35 +143,35 @@ class BoardComponent extends React.Component {
 			return;
 		}
 
-		Promise.all(passAnimations).then(() => {
-			this._board.hand();
+		await Promise.all(passAnimations);
 
-			if (this._board.status !== 'executing') {
-				return;
-			}
+		this._board.hand();
 
-			if (this._board.clock >= this._board.clockLimit) {
-				this._board.halt();
+		if (this._board.status !== 'executing') {
+			return;
+		}
 
-				this.setState({
-					showClockLimit: true,
-				});
+		if (this._board.clock >= this._board.clockLimit) {
+			this._board.halt();
 
-				return;
-			}
+			this.setState({
+				showClockLimit: true,
+			});
 
-			if (this._board.dataCount > 100) {
-				this._board.halt();
+			return;
+		}
 
-				this.setState({
-					showDataLimit: true,
-				});
+		if (this._board.dataCount > 100) {
+			this._board.halt();
 
-				return;
-			}
+			this.setState({
+				showDataLimit: true,
+			});
 
-			this.clockUp();
-		});
+			return;
+		}
+
+		this.clockUp();
 	}
 
 	handlePan = (event) => {

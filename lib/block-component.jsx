@@ -28,7 +28,7 @@ class BlockComponent extends React.Component {
 			});
 		});
 
-		this.props.block.on('pass', (passEvent) => {
+		this.props.block.on('pass', async (passEvent) => {
 			const inputAnimations = [];
 
 			for (const [direction, data] of passEvent.in.entries()) {
@@ -48,50 +48,49 @@ class BlockComponent extends React.Component {
 				}));
 			}
 
-			// MEMO: async/await使いたい
-			Promise.all(inputAnimations).then(() => {
-				const outputAnimations = [];
+			await Promise.all(inputAnimations);
 
-				for (const data of passEvent.in.values()) {
-					this.setState({
-						animatingData: this.state.animatingData.filter((animatingData) => (
-							data !== animatingData.data
-						)),
-					});
-				}
+			const outputAnimations = [];
 
-				for (const [direction, data] of passEvent.out.entries()) {
-					this.setState({
-						animatingData: this.state.animatingData.concat([{
-							direction,
-							data,
-							isInward: false,
-							isErasing: false,
-						}]),
-					});
+			for (const data of passEvent.in.values()) {
+				this.setState({
+					animatingData: this.state.animatingData.filter((animatingData) => (
+						data !== animatingData.data
+					)),
+				});
+			}
 
-					outputAnimations.push(new Promise((resolve) => {
-						this.dataAnimationResolvers.set(data, resolve);
-					}));
-				}
+			for (const [direction, data] of passEvent.out.entries()) {
+				this.setState({
+					animatingData: this.state.animatingData.concat([{
+						direction,
+						data,
+						isInward: false,
+						isErasing: false,
+					}]),
+				});
 
-				return Promise.all(outputAnimations);
-			}).then(() => {
-				for (const [direction, data] of passEvent.out.entries()) {
-					this.setState({
-						animatingData: this.state.animatingData.filter((animatingData) => (
-							data !== animatingData.data
-						)),
-						outputData: this.state.outputData.concat([{
-							direction,
-							data,
-							isErasing: false,
-						}]),
-					});
-				}
+				outputAnimations.push(new Promise((resolve) => {
+					this.dataAnimationResolvers.set(data, resolve);
+				}));
+			}
 
-				this.props.onPassAnimationComplete(passEvent);
-			});
+			await Promise.all(outputAnimations);
+
+			for (const [direction, data] of passEvent.out.entries()) {
+				this.setState({
+					animatingData: this.state.animatingData.filter((animatingData) => (
+						data !== animatingData.data
+					)),
+					outputData: this.state.outputData.concat([{
+						direction,
+						data,
+						isErasing: false,
+					}]),
+				});
+			}
+
+			this.props.onPassAnimationComplete(passEvent);
 		});
 
 		this.props.block.on('hand', (data) => {
