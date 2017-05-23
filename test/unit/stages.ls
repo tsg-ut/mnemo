@@ -3,8 +3,7 @@ require! {
   'chai-things'
   mathjs # as reference implementation
   seedrandom
-  'core-js/es5'
-  'core-js/es6'
+  'core-js'
   '../../stages/calc03'
   '../../stages/conditional01'
   '../../stages/conditional02'
