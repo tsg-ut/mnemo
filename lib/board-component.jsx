@@ -23,9 +23,9 @@ class BoardComponent extends React.Component {
 		width: PropTypes.number.isRequired,
 		height: PropTypes.number.isRequired,
 		clockLimit: PropTypes.number.isRequired,
-		inputX: PropTypes.number.isRequired,
+		inputX: PropTypes.arrayOf(PropTypes.number).isRequired,
 		outputX: PropTypes.number.isRequired,
-		input: PropTypes.arrayOf(PropTypes.number).isRequired,
+		input: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))).isRequired,
 		output: PropTypes.arrayOf(PropTypes.number).isRequired,
 		onClickBlock: PropTypes.func.isRequired,
 		onOutput: PropTypes.func.isRequired,
@@ -35,7 +35,7 @@ class BoardComponent extends React.Component {
 	constructor(props, state) {
 		super(props, state);
 
-		this._board = new Board({
+		this.board = new Board({
 			height: this.props.height,
 			width: this.props.width,
 			clockLimit: this.props.clockLimit,
@@ -59,8 +59,8 @@ class BoardComponent extends React.Component {
 		this.backgroundDimensions = null;
 
 		this.state = {
-			blocks: this._board.getBlocks(),
-			clocks: this._board.clocks,
+			blocks: this.board.getBlocks(),
+			clocks: this.board.clocks,
 			showClockLimit: false,
 			showDataLimit: false,
 			isPanning: false,
@@ -92,20 +92,73 @@ class BoardComponent extends React.Component {
 	}
 
 	getBlock(x, y) {
-		return this._board.getBlock(x, y);
+		return this.board.getBlock(x, y);
 	}
 
 	placeBlock({x, y, type, rotate}) {
-		this._board.placeBlock({x, y, type, rotate});
+		this.board.placeBlock({x, y, type, rotate});
 		this.setState({
-			blocks: this._board.getBlocks(),
+			blocks: this.board.getBlocks(),
 		});
 	}
 
-	eraseData() {
-		this.dataElements.forEach((dataElement) => {
-			dataElement.fadeOut();
+	execute(value) {
+		this.board.input(value);
+		this.clockUp();
+	}
+
+	halt() {
+
+	}
+
+	clockUp = async () => {
+		const passAnimations = [];
+
+		this.board.step({
+			onPass: (passEvent) => {
+				passAnimations.push(new Promise((resolve) => {
+					this.passAnimationResolvers.set(passEvent, resolve);
+				}));
+			},
 		});
+
+		this.setState({
+			clocks: this.board.clock,
+		});
+
+		if (this.board.status !== 'executing') {
+			return;
+		}
+
+		await Promise.all(passAnimations);
+
+		this.board.hand();
+
+		if (this.board.status !== 'executing') {
+			return;
+		}
+
+		if (this.board.clock >= this.board.clockLimit) {
+			this.board.halt();
+
+			this.setState({
+				showClockLimit: true,
+			});
+
+			return;
+		}
+
+		if (this.board.dataCount > 100) {
+			this.board.halt();
+
+			this.setState({
+				showDataLimit: true,
+			});
+
+			return;
+		}
+
+		this.clockUp();
 	}
 
 	handleClickBlock = (event, x, y) => {
@@ -117,61 +170,6 @@ class BoardComponent extends React.Component {
 		if (this.passAnimationResolvers.has(passEvent)) {
 			this.passAnimationResolvers.get(passEvent)();
 		}
-	}
-
-	execute(value) {
-		this._board.input(value);
-		this.clockUp();
-	}
-
-	async clockUp() {
-		const passAnimations = [];
-
-		this._board.step({
-			onPass: (passEvent) => {
-				passAnimations.push(new Promise((resolve) => {
-					this.passAnimationResolvers.set(passEvent, resolve);
-				}));
-			},
-		});
-
-		this.setState({
-			clocks: this._board.clock,
-		});
-
-		if (this._board.status !== 'executing') {
-			return;
-		}
-
-		await Promise.all(passAnimations);
-
-		this._board.hand();
-
-		if (this._board.status !== 'executing') {
-			return;
-		}
-
-		if (this._board.clock >= this._board.clockLimit) {
-			this._board.halt();
-
-			this.setState({
-				showClockLimit: true,
-			});
-
-			return;
-		}
-
-		if (this._board.dataCount > 100) {
-			this._board.halt();
-
-			this.setState({
-				showDataLimit: true,
-			});
-
-			return;
-		}
-
-		this.clockUp();
 	}
 
 	handlePan = (event) => {

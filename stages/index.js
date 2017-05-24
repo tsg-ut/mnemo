@@ -1,6 +1,6 @@
 /* eslint global-require: 'off' */
 
-module.exports = [
+const stages = [
 	require('./wire01.js'),
 	require('./calc01.js'),
 	require('./calc02.js'),
@@ -49,3 +49,30 @@ module.exports = [
 	require('./spaceship.js'),
 	require('./addition-med.js'),
 ];
+
+// Normalize stage data
+module.exports = stages.map((stage) => {
+	if (!Array.isArray(stage.inputX)) {
+		stage.inputX = [stage.inputX];
+	}
+
+	stage.input = stage.input.map((input) => {
+		let inputDataArrays = input;
+
+		if (!Array.isArray(inputDataArrays)) {
+			inputDataArrays = [inputDataArrays];
+		}
+
+		return inputDataArrays.map((inputData) => {
+			let inputDataArray = inputData;
+
+			if (!Array.isArray(inputDataArray)) {
+				inputDataArray = [inputDataArray];
+			}
+
+			return inputDataArray;
+		});
+	});
+
+	return stage;
+});
