@@ -2,7 +2,6 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const GSAP = require('react-gsap-enhancer');
 const assert = require('assert');
-// TODO: scoped require
 const {TweenLite, Power0} = require('gsap');
 const {BLOCK_SIZE} = require('./constants');
 
@@ -46,7 +45,7 @@ class DataComponent extends React.Component {
 	}
 
 	handleStartAnimation = () => {
-		this.addAnimation(({target}) => (
+		this.animation = this.addAnimation(({target}) => (
 			TweenLite.to(target, 0.4, Object.assign({
 				transformOrigin: 'center center',
 				ease: Power0.easeNone,
@@ -57,12 +56,12 @@ class DataComponent extends React.Component {
 		));
 	}
 
-	// TODO: implement
 	handleStopAnimation = () => {
+		this.animation.pause();
 	}
 
 	handleStartErasion = () => {
-		this.addAnimation(({target}) => (
+		this.erasion = this.addAnimation(({target}) => (
 			TweenLite.to(target, 0.4, Object.assign({
 				transformOrigin: 'center center',
 				ease: Power0.easeNone,
@@ -75,11 +74,11 @@ class DataComponent extends React.Component {
 		));
 	}
 
-	// TODO: implement
 	handleStopErasion = () => {
+		this.erasion.pause();
 	}
 
-	getAnimationProperties = (direction) => {
+	getAnimationProperties = () => {
 		if (this.props.isInward) {
 			if (this.props.direction === 'top') {
 				return {y: `+=${BLOCK_SIZE / 2}`};
