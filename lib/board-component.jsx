@@ -5,6 +5,7 @@ const {INPUT_MOVE, INPUT_END} = require('hammerjs');
 const Measure = require('react-measure');
 const color = require('color');
 const Path = require('svg-path-generator');
+const assert = require('assert');
 const Board = require('./board');
 const BlockComponent = require('./block-component');
 const {id} = require('./util');
@@ -19,21 +20,29 @@ const inputColors = [
 
 class BoardComponent extends React.Component {
 	static propTypes = {
-		isExecuting: PropTypes.bool.isRequired, // TODO: implement
+		status: PropTypes.string.isRequired,
 		width: PropTypes.number.isRequired,
 		height: PropTypes.number.isRequired,
 		clockLimit: PropTypes.number.isRequired,
 		inputX: PropTypes.arrayOf(PropTypes.number).isRequired,
 		outputX: PropTypes.number.isRequired,
 		input: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))).isRequired,
+		currentInput: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
 		output: PropTypes.arrayOf(PropTypes.number).isRequired,
 		onClickBlock: PropTypes.func.isRequired,
 		onOutput: PropTypes.func.isRequired,
 		onHalt: PropTypes.func.isRequired,
 	}
 
+	static defaultProps = {
+		currentInput: null,
+	}
+
 	constructor(props, state) {
 		super(props, state);
+
+		// Currently, initial status should be always 'stop'
+		assert(props.status === 'stop');
 
 		this.board = new Board({
 			height: this.props.height,
@@ -72,14 +81,16 @@ class BoardComponent extends React.Component {
 		};
 	}
 
-	// TODO: implement
 	componentWillReceiveProps(nextProps) {
-		if (!this.props.isExecuting && nextProps.isExecuting) {
-			this.execute();
+		if (this.props.status === 'stop') {
+			assert(nextProps.status === 'executing');
+			this.execute(nextProps.currentInput);
 		}
 
-		if (this.props.isExecuting && !nextProps.isExecuting) {
-			this.halt();
+		if (this.props.status === 'executing') {
+			if (nextProps.status === 'stop') {
+				this.halt();
+			}
 		}
 	}
 
