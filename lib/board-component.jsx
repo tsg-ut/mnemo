@@ -119,7 +119,7 @@ class BoardComponent extends React.Component {
 	}
 
 	halt() {
-
+		this.board.halt();
 	}
 
 	clockUp = async () => {
@@ -475,6 +475,7 @@ class BoardComponent extends React.Component {
 												block={block}
 												x={block.x}
 												y={block.y}
+												status={this.props.status}
 												onClick={this.handleClickBlock}
 												onPassAnimationComplete={this.handlePassAnimationComplete}
 											/>

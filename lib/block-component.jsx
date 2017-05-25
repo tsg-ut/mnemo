@@ -8,7 +8,10 @@ class BlockComponent extends React.Component {
 	static propTypes = {
 		x: PropTypes.number.isRequired,
 		y: PropTypes.number.isRequired,
-		block: PropTypes.object.isRequired,
+		status: PropTypes.string.isRequired,
+		block: PropTypes.shape({
+			on: PropTypes.func.isRequired,
+		}).isRequired,
 		onClick: PropTypes.func.isRequired,
 		onPassAnimationComplete: PropTypes.func.isRequired,
 	}
@@ -132,6 +135,26 @@ class BlockComponent extends React.Component {
 			outputData: [], // Data in outputQueue
 			animatingData: [], // Data in animation
 		};
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (this.props.status !== 'stop' && nextProps.status === 'stop') {
+			this.handleStop();
+		}
+	}
+
+	handleStop() {
+		[this.state.inputData, this.state.animatingData, this.state.outputData].forEach((data) => {
+			data.forEach((datum) => {
+				datum.isErasing = true;
+			});
+		});
+
+		this.setState({
+			inputData: this.state.inputData,
+			animatingData: this.state.animatingData,
+			outputData: this.state.outputData,
+		});
 	}
 
 	handleDataAnimationComplete = (data) => {

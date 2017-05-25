@@ -61,6 +61,10 @@ class DataComponent extends React.Component {
 	}
 
 	handleStartErasion = () => {
+		if (this.animation) {
+			this.animation.pause();
+		}
+
 		this.erasion = this.addAnimation(({target}) => (
 			TweenLite.to(target, 0.4, Object.assign({
 				transformOrigin: 'center center',
