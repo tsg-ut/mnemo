@@ -52,6 +52,8 @@ class BoardComponent extends React.Component {
 			outputX: this.props.outputX,
 		}, this.blockSize);
 
+		this.board.on('output', this.handleBoardOutput);
+
 		this.passAnimationResolvers = new WeakMap();
 
 		if (typeof this.props.inputX === 'number') {
@@ -170,6 +172,10 @@ class BoardComponent extends React.Component {
 		}
 
 		this.clockUp();
+	}
+
+	handleBoardOutput = (value) => {
+		this.props.onOutput(value);
 	}
 
 	handleClickBlock = (event, x, y) => {
@@ -516,7 +522,7 @@ class BoardComponent extends React.Component {
 											fontSize="30"
 											fontFamily="'Exo 2'"
 											fontWeight="900"
-											fill="white"
+											fill="#333"
 											textAnchor="middle"
 											dominantBaseline="central"
 										>

@@ -2,7 +2,7 @@ const assert = require('assert');
 const React = require('react');
 const PropTypes = require('prop-types');
 
-class Panel extends React.Component {
+class PanelComponent extends React.Component {
 	static propTypes = {
 		parts: PropTypes.object.isRequired,
 	}
@@ -102,4 +102,4 @@ class Panel extends React.Component {
 	}
 }
 
-module.exports = Panel;
+module.exports = PanelComponent;
