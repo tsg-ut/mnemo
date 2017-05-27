@@ -29,6 +29,8 @@ class BoardComponent extends React.Component {
 		input: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))).isRequired,
 		currentInput: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
 		output: PropTypes.arrayOf(PropTypes.number).isRequired,
+		userOutput: PropTypes.arrayOf(PropTypes.number).isRequired,
+		userOutputCorrectness: PropTypes.arrayOf(PropTypes.bool).isRequired,
 		onClickBlock: PropTypes.func.isRequired,
 		onOutput: PropTypes.func.isRequired,
 		onHalt: PropTypes.func.isRequired,
@@ -106,6 +108,10 @@ class BoardComponent extends React.Component {
 
 	getBlock(x, y) {
 		return this.board.getBlock(x, y);
+	}
+
+	getClock() {
+		return this.board.clock;
 	}
 
 	placeBlock({x, y, type, rotate}) {
@@ -526,7 +532,7 @@ class BoardComponent extends React.Component {
 											textAnchor="middle"
 											dominantBaseline="central"
 										>
-											{output}
+											{this.props.userOutput[index] === null ? '' : this.props.userOutput[index]}
 										</text>
 									</g>
 									<g transform={`translate(${-outputAreaWidth / 2 + index * 200}, 110)`}>
