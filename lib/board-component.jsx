@@ -34,6 +34,7 @@ class BoardComponent extends React.Component {
 		onClickBlock: PropTypes.func.isRequired,
 		onOutput: PropTypes.func.isRequired,
 		onHalt: PropTypes.func.isRequired,
+		onPaused: PropTypes.func.isRequired,
 	}
 
 	static defaultProps = {
@@ -55,6 +56,8 @@ class BoardComponent extends React.Component {
 		}, this.blockSize);
 
 		this.board.on('output', this.handleBoardOutput);
+		this.board.on('halt', this.handleBoardHalt);
+		this.board.on('paused', this.handleBoardPaused);
 
 		this.passAnimationResolvers = new WeakMap();
 
@@ -185,6 +188,14 @@ class BoardComponent extends React.Component {
 
 	handleBoardOutput = (value) => {
 		this.props.onOutput(value);
+	}
+
+	handleBoardHalt = () => {
+		this.props.onHalt();
+	}
+
+	handleBoardPaused = () => {
+		this.props.onPaused();
 	}
 
 	handleClickBlock = (event, x, y) => {
