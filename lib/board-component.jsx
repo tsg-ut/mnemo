@@ -87,8 +87,11 @@ class BoardComponent extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (this.props.status === 'stop') {
-			assert(nextProps.status === 'executing');
-			this.execute(nextProps.currentInput);
+			assert(nextProps.status !== 'pause');
+
+			if (nextProps.status === 'executing') {
+				this.execute(nextProps.currentInput);
+			}
 		}
 
 		if (this.props.status === 'executing') {
@@ -347,7 +350,7 @@ class BoardComponent extends React.Component {
 											head: 0,
 											tail: 20,
 										})}
-										transform={`translate(0, 50)`}
+										transform={'translate(0, 50)'}
 										fill="none"
 										strokeWidth="5"
 										stroke={inputColors[index % inputColors.length].toString()}
