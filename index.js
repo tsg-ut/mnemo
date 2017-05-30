@@ -2508,7 +2508,7 @@ $(function () {
 	new Game(stageConfigs);
 });
 
-},{"../stages":427,"./analytics":1,"./game":9,"./util":13,"core-js/modules/es6.array.copy-within":119,"core-js/modules/es6.array.fill":120,"core-js/modules/es6.array.find":122,"core-js/modules/es6.array.find-index":121,"core-js/modules/es6.array.from":123,"core-js/modules/es6.array.iterator":124,"core-js/modules/es6.array.of":125,"core-js/modules/es6.function.name":126,"core-js/modules/es6.map":127,"core-js/modules/es6.math.acosh":128,"core-js/modules/es6.math.asinh":129,"core-js/modules/es6.math.atanh":130,"core-js/modules/es6.math.cbrt":131,"core-js/modules/es6.math.clz32":132,"core-js/modules/es6.math.cosh":133,"core-js/modules/es6.math.expm1":134,"core-js/modules/es6.math.fround":135,"core-js/modules/es6.math.hypot":136,"core-js/modules/es6.math.imul":137,"core-js/modules/es6.math.log10":138,"core-js/modules/es6.math.log1p":139,"core-js/modules/es6.math.log2":140,"core-js/modules/es6.math.sign":141,"core-js/modules/es6.math.sinh":142,"core-js/modules/es6.math.tanh":143,"core-js/modules/es6.math.trunc":144,"core-js/modules/es6.number.epsilon":145,"core-js/modules/es6.number.is-finite":146,"core-js/modules/es6.number.is-integer":147,"core-js/modules/es6.number.is-nan":148,"core-js/modules/es6.number.is-safe-integer":149,"core-js/modules/es6.number.max-safe-integer":150,"core-js/modules/es6.number.min-safe-integer":151,"core-js/modules/es6.object.assign":152,"core-js/modules/es6.object.is":153,"core-js/modules/es6.promise":154,"core-js/modules/es6.reflect.apply":155,"core-js/modules/es6.reflect.construct":156,"core-js/modules/es6.reflect.define-property":157,"core-js/modules/es6.reflect.delete-property":158,"core-js/modules/es6.reflect.get":161,"core-js/modules/es6.reflect.get-own-property-descriptor":159,"core-js/modules/es6.reflect.get-prototype-of":160,"core-js/modules/es6.reflect.has":162,"core-js/modules/es6.reflect.is-extensible":163,"core-js/modules/es6.reflect.own-keys":164,"core-js/modules/es6.reflect.prevent-extensions":165,"core-js/modules/es6.reflect.set":167,"core-js/modules/es6.reflect.set-prototype-of":166,"core-js/modules/es6.regexp.flags":168,"core-js/modules/es6.regexp.match":169,"core-js/modules/es6.regexp.replace":170,"core-js/modules/es6.regexp.search":171,"core-js/modules/es6.regexp.split":172,"core-js/modules/es6.set":173,"core-js/modules/es6.string.code-point-at":174,"core-js/modules/es6.string.ends-with":175,"core-js/modules/es6.string.from-code-point":176,"core-js/modules/es6.string.includes":177,"core-js/modules/es6.string.raw":178,"core-js/modules/es6.string.repeat":179,"core-js/modules/es6.string.starts-with":180,"core-js/modules/es6.symbol":181,"core-js/modules/es6.typed.array-buffer":182,"core-js/modules/es6.typed.float32-array":183,"core-js/modules/es6.typed.float64-array":184,"core-js/modules/es6.typed.int16-array":185,"core-js/modules/es6.typed.int32-array":186,"core-js/modules/es6.typed.int8-array":187,"core-js/modules/es6.typed.uint16-array":188,"core-js/modules/es6.typed.uint32-array":189,"core-js/modules/es6.typed.uint8-array":190,"core-js/modules/es6.typed.uint8-clamped-array":191,"core-js/modules/es6.weak-map":192,"core-js/modules/es6.weak-set":193,"core-js/modules/es7.array.includes":194,"core-js/modules/es7.object.entries":195,"core-js/modules/es7.object.get-own-property-descriptors":196,"core-js/modules/es7.object.values":197,"core-js/modules/es7.string.pad-end":198,"core-js/modules/es7.string.pad-start":199,"core-js/modules/web.dom.iterable":200,"core-js/modules/web.immediate":201,"core-js/modules/web.timers":202,"jquery":228,"querystring":238,"regenerator-runtime/runtime":391}],11:[function(require,module,exports){
+},{"../stages":428,"./analytics":1,"./game":9,"./util":13,"core-js/modules/es6.array.copy-within":119,"core-js/modules/es6.array.fill":120,"core-js/modules/es6.array.find":122,"core-js/modules/es6.array.find-index":121,"core-js/modules/es6.array.from":123,"core-js/modules/es6.array.iterator":124,"core-js/modules/es6.array.of":125,"core-js/modules/es6.function.name":126,"core-js/modules/es6.map":127,"core-js/modules/es6.math.acosh":128,"core-js/modules/es6.math.asinh":129,"core-js/modules/es6.math.atanh":130,"core-js/modules/es6.math.cbrt":131,"core-js/modules/es6.math.clz32":132,"core-js/modules/es6.math.cosh":133,"core-js/modules/es6.math.expm1":134,"core-js/modules/es6.math.fround":135,"core-js/modules/es6.math.hypot":136,"core-js/modules/es6.math.imul":137,"core-js/modules/es6.math.log10":138,"core-js/modules/es6.math.log1p":139,"core-js/modules/es6.math.log2":140,"core-js/modules/es6.math.sign":141,"core-js/modules/es6.math.sinh":142,"core-js/modules/es6.math.tanh":143,"core-js/modules/es6.math.trunc":144,"core-js/modules/es6.number.epsilon":145,"core-js/modules/es6.number.is-finite":146,"core-js/modules/es6.number.is-integer":147,"core-js/modules/es6.number.is-nan":148,"core-js/modules/es6.number.is-safe-integer":149,"core-js/modules/es6.number.max-safe-integer":150,"core-js/modules/es6.number.min-safe-integer":151,"core-js/modules/es6.object.assign":152,"core-js/modules/es6.object.is":153,"core-js/modules/es6.promise":154,"core-js/modules/es6.reflect.apply":155,"core-js/modules/es6.reflect.construct":156,"core-js/modules/es6.reflect.define-property":157,"core-js/modules/es6.reflect.delete-property":158,"core-js/modules/es6.reflect.get":161,"core-js/modules/es6.reflect.get-own-property-descriptor":159,"core-js/modules/es6.reflect.get-prototype-of":160,"core-js/modules/es6.reflect.has":162,"core-js/modules/es6.reflect.is-extensible":163,"core-js/modules/es6.reflect.own-keys":164,"core-js/modules/es6.reflect.prevent-extensions":165,"core-js/modules/es6.reflect.set":167,"core-js/modules/es6.reflect.set-prototype-of":166,"core-js/modules/es6.regexp.flags":168,"core-js/modules/es6.regexp.match":169,"core-js/modules/es6.regexp.replace":170,"core-js/modules/es6.regexp.search":171,"core-js/modules/es6.regexp.split":172,"core-js/modules/es6.set":173,"core-js/modules/es6.string.code-point-at":174,"core-js/modules/es6.string.ends-with":175,"core-js/modules/es6.string.from-code-point":176,"core-js/modules/es6.string.includes":177,"core-js/modules/es6.string.raw":178,"core-js/modules/es6.string.repeat":179,"core-js/modules/es6.string.starts-with":180,"core-js/modules/es6.symbol":181,"core-js/modules/es6.typed.array-buffer":182,"core-js/modules/es6.typed.float32-array":183,"core-js/modules/es6.typed.float64-array":184,"core-js/modules/es6.typed.int16-array":185,"core-js/modules/es6.typed.int32-array":186,"core-js/modules/es6.typed.int8-array":187,"core-js/modules/es6.typed.uint16-array":188,"core-js/modules/es6.typed.uint32-array":189,"core-js/modules/es6.typed.uint8-array":190,"core-js/modules/es6.typed.uint8-clamped-array":191,"core-js/modules/es6.weak-map":192,"core-js/modules/es6.weak-set":193,"core-js/modules/es7.array.includes":194,"core-js/modules/es7.object.entries":195,"core-js/modules/es7.object.get-own-property-descriptors":196,"core-js/modules/es7.object.values":197,"core-js/modules/es7.string.pad-end":198,"core-js/modules/es7.string.pad-start":199,"core-js/modules/web.dom.iterable":200,"core-js/modules/web.immediate":201,"core-js/modules/web.timers":202,"jquery":228,"querystring":238,"regenerator-runtime/runtime":391}],11:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3520,7 +3520,7 @@ module.exports.validateSubmission = function (submission) {
 	return { pass: true, clocks: maxClock, blocks: board.weighedBlockCount };
 };
 
-},{"../stages":427,"./block-configs":3,"./board":6,"./util":13,"assert":15}],15:[function(require,module,exports){
+},{"../stages":428,"./block-configs":3,"./board":6,"./util":13,"assert":15}],15:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -42944,6 +42944,98 @@ module.exports = {
 'use strict';
 
 module.exports = {
+	name: '10000th-digit',
+	version: 1,
+	parts: {
+		wireI: null,
+		wireL: null,
+		wireT: null,
+		wireX: null,
+		wireXdot: null,
+		'times-2': null,
+		'times-3': null,
+		'times-10': null,
+		'div-2': null,
+		'div-3': null,
+		'div-10': null,
+		'plus-1': null,
+		'plus-2': null,
+		'minus-1': null,
+		'minus-2': null,
+		'const-0': null,
+		'const-1': null,
+		'const-2': null,
+		'const-3': null,
+		'const-10': null,
+		add: null,
+		sub: null,
+		div: null,
+		mul: null,
+		mod: null,
+		pow: null,
+		'bitshift-left': null,
+		'bitshift-right': null,
+		'bitwise-and': null,
+		'bitwise-or': null,
+		'bitwise-xor': null,
+		equal: null,
+		neq: null,
+		gt: null,
+		geqq: null,
+		lt: null,
+		leqq: null,
+		diode: null,
+		conditional: null,
+		transistor: null
+	},
+	inputX: 6,
+	outputX: 6,
+	input: [null, null, null, 61],
+	output: [null, null, null, 3],
+	ioGenerator: function ioGenerator(random) {
+		var calc = function calc(p) {
+			var reminder = 1;
+			for (var i = 0; i < 10000 - 1; i++) {
+				reminder = reminder * 10 % p;
+			}
+			return Math.floor(reminder * 10 / p);
+		};
+
+		var candidates = [7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59];
+		var inputs = [];
+
+		// Shuffle array and take heading 3
+		var index1 = Math.floor(random() * 14);
+		inputs.push(candidates[index1]);
+		candidates[index1] = candidates[0];
+
+		var index2 = Math.floor(random() * 13) + 1;
+		inputs.push(candidates[index2]);
+		candidates[index2] = candidates[1];
+
+		var index3 = Math.floor(random() * 12) + 2;
+		inputs.push(candidates[index3]);
+
+		inputs.sort(function (a, b) {
+			return a - b;
+		});
+
+		return {
+			input: [inputs[0], inputs[1], inputs[2], 61],
+			output: [calc(inputs[0]), calc(inputs[1]), calc(inputs[2]), 3]
+		};
+	},
+	width: 13,
+	height: 13,
+	clockLimit: 1000,
+	statement: '7以上の素数pに対して、1/pの小数点以下10000桁目の数字を求めてみよう！',
+	title: '10000桁目'
+};
+
+},{}],407:[function(require,module,exports){
+'use strict';
+
+module.exports = {
 	name: '2017',
 	version: 2,
 	parts: {
@@ -42971,7 +43063,7 @@ module.exports = {
 	title: '2017'
 };
 
-},{}],407:[function(require,module,exports){
+},{}],408:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43013,7 +43105,7 @@ module.exports = {
 	title: '足し算 -med-'
 };
 
-},{}],408:[function(require,module,exports){
+},{}],409:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43068,7 +43160,7 @@ module.exports = {
 	title: 'バイナリアン -easy-'
 };
 
-},{}],409:[function(require,module,exports){
+},{}],410:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43104,7 +43196,7 @@ module.exports = {
 	title: '2変数 -基本-'
 };
 
-},{}],410:[function(require,module,exports){
+},{}],411:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43132,7 +43224,7 @@ module.exports = {
 	modal: '02'
 };
 
-},{}],411:[function(require,module,exports){
+},{}],412:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43157,7 +43249,7 @@ module.exports = {
 	modal: '03'
 };
 
-},{}],412:[function(require,module,exports){
+},{}],413:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43193,7 +43285,7 @@ module.exports = {
 	title: '四則演算 -基本- 3'
 };
 
-},{}],413:[function(require,module,exports){
+},{}],414:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43218,7 +43310,7 @@ module.exports = {
 	title: '四則演算 -基本- 4'
 };
 
-},{}],414:[function(require,module,exports){
+},{}],415:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43240,7 +43332,7 @@ module.exports = {
 	title: '四則演算 -基本- 5'
 };
 
-},{}],415:[function(require,module,exports){
+},{}],416:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43264,7 +43356,7 @@ module.exports = {
 	modal: '04'
 };
 
-},{}],416:[function(require,module,exports){
+},{}],417:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43319,7 +43411,7 @@ module.exports = {
 	title: '2の補数'
 };
 
-},{}],417:[function(require,module,exports){
+},{}],418:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43367,7 +43459,7 @@ module.exports = {
 	modal: 'conditionals'
 };
 
-},{}],418:[function(require,module,exports){
+},{}],419:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43417,7 +43509,7 @@ module.exports = {
 	title: '条件分岐 -基本- 2'
 };
 
-},{}],419:[function(require,module,exports){
+},{}],420:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43482,7 +43574,7 @@ module.exports = {
 	title: '条件分岐 -基本- 3'
 };
 
-},{}],420:[function(require,module,exports){
+},{}],421:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43514,7 +43606,7 @@ module.exports = {
 	title: '割り算 -easy-'
 };
 
-},{}],421:[function(require,module,exports){
+},{}],422:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43540,7 +43632,7 @@ module.exports = {
 	title: '割り算 -hard-'
 };
 
-},{}],422:[function(require,module,exports){
+},{}],423:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43608,7 +43700,7 @@ module.exports = {
 	title: '階乗'
 };
 
-},{}],423:[function(require,module,exports){
+},{}],424:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43723,7 +43815,7 @@ module.exports = {
 	title: '因数分解'
 };
 
-},{}],424:[function(require,module,exports){
+},{}],425:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43800,7 +43892,7 @@ module.exports = {
 	title: 'フィボナッチ数 -hard-'
 };
 
-},{}],425:[function(require,module,exports){
+},{}],426:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -43870,7 +43962,7 @@ module.exports = {
 	title: 'フィボナッチ数'
 };
 
-},{}],426:[function(require,module,exports){
+},{}],427:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -43990,14 +44082,14 @@ module.exports = {
 	title: '最大公約数'
 };
 
-},{}],427:[function(require,module,exports){
+},{}],428:[function(require,module,exports){
 'use strict';
 
 /* eslint global-require: 'off' */
 
-module.exports = [require('./wire01.js'), require('./calc01.js'), require('./calc02.js'), require('./calc03.js'), require('./calc04.js'), require('./calc05.js'), require('./calc06.js'), require('./make-minus-one-easy.js'), require('./division-easy.js'), require('./sixth-power.js'), require('./remainder.js'), require('./plus-32.js'), require('./conditional01.js'), require('./conditional02.js'), require('./conditional03.js'), require('./factorial.js'), require('./parity.js'), require('./fibonacci.js'), require('./bivariation01.js'), require('./power-easy.js'), require('./power-hard.js'), require('./division-hard.js'), require('./gcd.js'), require('./lcm.js'), require('./make-minus-one-med.js'), require('./make-minus-one-hard.js'), require('./sqrt-easy.js'), require('./sqrt-hard.js'), require('./complement-of-2.js'), require('./binarian-easy.js'), require('./perfect-number.js'), require('./reversal.js'), require('./msd.js'), require('./mod3-hard.js'), require('./max.js'), require('./the-fifth-max.js'), require('./100.js'), require('./100-again.js'), require('./1000.js'), require('./plus-32-hard.js'), require('./xor.js'), require('./2017.js'), require('./repeat-self.js'), require('./fibonacci-hard.js'), require('./factorization.js'), require('./spaceship.js'), require('./addition-med.js')];
+module.exports = [require('./wire01.js'), require('./calc01.js'), require('./calc02.js'), require('./calc03.js'), require('./calc04.js'), require('./calc05.js'), require('./calc06.js'), require('./make-minus-one-easy.js'), require('./division-easy.js'), require('./sixth-power.js'), require('./remainder.js'), require('./plus-32.js'), require('./conditional01.js'), require('./conditional02.js'), require('./conditional03.js'), require('./factorial.js'), require('./parity.js'), require('./fibonacci.js'), require('./bivariation01.js'), require('./power-easy.js'), require('./power-hard.js'), require('./division-hard.js'), require('./gcd.js'), require('./lcm.js'), require('./make-minus-one-med.js'), require('./make-minus-one-hard.js'), require('./sqrt-easy.js'), require('./sqrt-hard.js'), require('./complement-of-2.js'), require('./binarian-easy.js'), require('./perfect-number.js'), require('./reversal.js'), require('./msd.js'), require('./mod3-hard.js'), require('./max.js'), require('./the-fifth-max.js'), require('./100.js'), require('./100-again.js'), require('./1000.js'), require('./plus-32-hard.js'), require('./xor.js'), require('./2017.js'), require('./repeat-self.js'), require('./fibonacci-hard.js'), require('./factorization.js'), require('./spaceship.js'), require('./addition-med.js'), require('./10000th-digit.js')];
 
-},{"./100-again.js":403,"./100.js":404,"./1000.js":405,"./2017.js":406,"./addition-med.js":407,"./binarian-easy.js":408,"./bivariation01.js":409,"./calc01.js":410,"./calc02.js":411,"./calc03.js":412,"./calc04.js":413,"./calc05.js":414,"./calc06.js":415,"./complement-of-2.js":416,"./conditional01.js":417,"./conditional02.js":418,"./conditional03.js":419,"./division-easy.js":420,"./division-hard.js":421,"./factorial.js":422,"./factorization.js":423,"./fibonacci-hard.js":424,"./fibonacci.js":425,"./gcd.js":426,"./lcm.js":428,"./make-minus-one-easy.js":429,"./make-minus-one-hard.js":430,"./make-minus-one-med.js":431,"./max.js":432,"./mod3-hard.js":433,"./msd.js":434,"./parity.js":435,"./perfect-number.js":436,"./plus-32-hard.js":437,"./plus-32.js":438,"./power-easy.js":439,"./power-hard.js":440,"./remainder.js":441,"./repeat-self.js":442,"./reversal.js":443,"./sixth-power.js":444,"./spaceship.js":445,"./sqrt-easy.js":446,"./sqrt-hard.js":447,"./the-fifth-max.js":448,"./wire01.js":449,"./xor.js":450}],428:[function(require,module,exports){
+},{"./100-again.js":403,"./100.js":404,"./1000.js":405,"./10000th-digit.js":406,"./2017.js":407,"./addition-med.js":408,"./binarian-easy.js":409,"./bivariation01.js":410,"./calc01.js":411,"./calc02.js":412,"./calc03.js":413,"./calc04.js":414,"./calc05.js":415,"./calc06.js":416,"./complement-of-2.js":417,"./conditional01.js":418,"./conditional02.js":419,"./conditional03.js":420,"./division-easy.js":421,"./division-hard.js":422,"./factorial.js":423,"./factorization.js":424,"./fibonacci-hard.js":425,"./fibonacci.js":426,"./gcd.js":427,"./lcm.js":429,"./make-minus-one-easy.js":430,"./make-minus-one-hard.js":431,"./make-minus-one-med.js":432,"./max.js":433,"./mod3-hard.js":434,"./msd.js":435,"./parity.js":436,"./perfect-number.js":437,"./plus-32-hard.js":438,"./plus-32.js":439,"./power-easy.js":440,"./power-hard.js":441,"./remainder.js":442,"./repeat-self.js":443,"./reversal.js":444,"./sixth-power.js":445,"./spaceship.js":446,"./sqrt-easy.js":447,"./sqrt-hard.js":448,"./the-fifth-max.js":449,"./wire01.js":450,"./xor.js":451}],429:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -44101,7 +44193,7 @@ module.exports = {
 	title: '最小公倍数'
 };
 
-},{}],429:[function(require,module,exports){
+},{}],430:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44133,7 +44225,7 @@ module.exports = {
 	title: '-1を作ろう -easy-'
 };
 
-},{}],430:[function(require,module,exports){
+},{}],431:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44163,7 +44255,7 @@ module.exports = {
 	title: '-1を作ろう -hard-'
 };
 
-},{}],431:[function(require,module,exports){
+},{}],432:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44192,7 +44284,7 @@ module.exports = {
 	title: '-1を作ろう -med-'
 };
 
-},{}],432:[function(require,module,exports){
+},{}],433:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44227,7 +44319,7 @@ module.exports = {
 	title: '最大値'
 };
 
-},{}],433:[function(require,module,exports){
+},{}],434:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44296,7 +44388,7 @@ module.exports = {
 	title: 'mod3 -hard-'
 };
 
-},{}],434:[function(require,module,exports){
+},{}],435:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44372,7 +44464,7 @@ module.exports = {
 	title: '最上位の桁'
 };
 
-},{}],435:[function(require,module,exports){
+},{}],436:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44462,7 +44554,7 @@ module.exports = {
 	title: 'パリティ'
 };
 
-},{}],436:[function(require,module,exports){
+},{}],437:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44517,7 +44609,7 @@ module.exports = {
 	title: '完全数'
 };
 
-},{}],437:[function(require,module,exports){
+},{}],438:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44547,7 +44639,7 @@ module.exports = {
 	title: '32を足してみよう-hard-'
 };
 
-},{}],438:[function(require,module,exports){
+},{}],439:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44579,7 +44671,7 @@ module.exports = {
 	title: '32を足してみよう'
 };
 
-},{}],439:[function(require,module,exports){
+},{}],440:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44623,7 +44715,7 @@ module.exports = {
 	title: '累乗 -easy-'
 };
 
-},{}],440:[function(require,module,exports){
+},{}],441:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44697,7 +44789,7 @@ module.exports = {
 	title: '累乗 -hard-'
 };
 
-},{}],441:[function(require,module,exports){
+},{}],442:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44729,7 +44821,7 @@ module.exports = {
 	title: '余りの計算'
 };
 
-},{}],442:[function(require,module,exports){
+},{}],443:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44794,7 +44886,7 @@ module.exports = {
 	title: '自己反復'
 };
 
-},{}],443:[function(require,module,exports){
+},{}],444:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44849,7 +44941,7 @@ module.exports = {
 	title: '反転'
 };
 
-},{}],444:[function(require,module,exports){
+},{}],445:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -44881,7 +44973,7 @@ module.exports = {
 	title: '6乗'
 };
 
-},{}],445:[function(require,module,exports){
+},{}],446:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -44978,7 +45070,7 @@ module.exports = {
 	}
 };
 
-},{}],446:[function(require,module,exports){
+},{}],447:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45050,7 +45142,7 @@ module.exports = {
 	title: '平方根 -easy-'
 };
 
-},{}],447:[function(require,module,exports){
+},{}],448:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45115,7 +45207,7 @@ module.exports = {
 	title: '平方根 -hard-'
 };
 
-},{}],448:[function(require,module,exports){
+},{}],449:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45177,7 +45269,7 @@ module.exports = {
 	title: '中央値'
 };
 
-},{}],449:[function(require,module,exports){
+},{}],450:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45198,7 +45290,7 @@ module.exports = {
 	modal: '01'
 };
 
-},{}],450:[function(require,module,exports){
+},{}],451:[function(require,module,exports){
 'use strict';
 
 module.exports = {
