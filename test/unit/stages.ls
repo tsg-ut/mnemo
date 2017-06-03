@@ -22,6 +22,7 @@ require! {
   '../../stages/fibonacci-hard'
   '../../stages/factorization'
   '../../stages/spaceship'
+  '../../stages/10000th-digit': ten-thousandth-digit
 }
 
 chai.use chai-things
@@ -74,6 +75,11 @@ factorization-calc = (n) ->
   0
 
 spaceship-calc = (a, b) -> Math.sign a - b
+
+ten-thousandth-digit-calc = (n) ->
+  mathjs.config precision: 20000
+  x = mathjs.divide mathjs.bignumber(1), mathjs.bignumber(n)
+  return x.to-string!split '.' .1.9999 |> parse-int
 
 describe 'Stage Data' ->
   before-each ->
@@ -309,3 +315,19 @@ describe 'Stage Data' ->
       expect io.output.0 .to.equal 0
       expect io.output.1 .to.equal -1
       expect io.output.2 .to.equal 1
+
+  describe '10000th-digit stage' ->
+    It 'generates 10000th-digit' ->
+      io = ten-thousandth-digit.io-generator @random
+
+      expect io .to.satisfy io-spec
+
+      # Uniqueness of output
+      unique-output = Array.from new Set io.output
+      expect io.output .to.deep.equal unique-output
+
+      expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
+        mathjs.is-prime input
+        and output is ten-thousandth-digit-calc input
+
+      expect io.input.4 .to.equal 107
