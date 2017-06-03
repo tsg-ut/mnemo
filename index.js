@@ -42945,7 +42945,7 @@ module.exports = {
 
 module.exports = {
 	name: '10000th-digit',
-	version: 1,
+	version: 2,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -42990,39 +42990,71 @@ module.exports = {
 	},
 	inputX: 6,
 	outputX: 6,
-	input: [null, null, null, 61],
-	output: [null, null, null, 3],
+	input: [null, null, null, null, 107],
+	output: [null, null, null, null, 3],
 	ioGenerator: function ioGenerator(random) {
+		var iterations = function iterations(n) {
+			return 10000 % (n - 1) === 0 ? n - 1 : 10000 % (n - 1);
+		};
+
 		var calc = function calc(p) {
 			var reminder = 1;
-			for (var i = 0; i < 10000 - 1; i++) {
+			for (var i = 0; i < iterations(p) - 1; i++) {
 				reminder = reminder * 10 % p;
 			}
 			return Math.floor(reminder * 10 / p);
 		};
 
-		var candidates = [7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59];
+		var candidates = [7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103,
+		// 107
+		109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179].filter(function (n) {
+			return iterations(n) <= 36;
+		});
+
 		var inputs = [];
 
-		// Shuffle array and take heading 3
-		var index1 = Math.floor(random() * 14);
-		inputs.push(candidates[index1]);
-		candidates[index1] = candidates[0];
+		// Take input which takes at least 24 iterations
+		var heavyInputs = candidates.filter(function (n) {
+			return iterations(n) >= 24 && calc(n) !== 3;
+		});
+		inputs.push(heavyInputs[Math.floor(random() * heavyInputs.length)]);
 
-		var index2 = Math.floor(random() * 13) + 1;
-		inputs.push(candidates[index2]);
-		candidates[index2] = candidates[1];
+		// Generate outputMap
+		var outputMap = new Map();
+		candidates.forEach(function (n) {
+			if (!outputMap.has(calc(n))) {
+				outputMap.set(calc(n), []);
+			}
+			outputMap.get(calc(n)).push(n);
+		});
 
-		var index3 = Math.floor(random() * 12) + 2;
-		inputs.push(candidates[index3]);
+		var outputCandidates = Array.from(outputMap.keys()).filter(function (n) {
+			return n !== 3 && n !== calc(inputs[0]);
+		});
+
+		// Take unique outputs by 3 and get corresponding inputs
+
+		var index1 = Math.floor(random() * outputCandidates.length);
+		var inputCandidates1 = outputMap.get(outputCandidates[index1]);
+		inputs.push(inputCandidates1[Math.floor(random() * inputCandidates1.length)]);
+		outputCandidates[index1] = outputCandidates[0];
+
+		var index2 = Math.floor(random() * (outputCandidates.length - 1)) + 1;
+		var inputCandidates2 = outputMap.get(outputCandidates[index2]);
+		inputs.push(inputCandidates2[Math.floor(random() * inputCandidates2.length)]);
+		outputCandidates[index2] = outputCandidates[1];
+
+		var index3 = Math.floor(random() * (outputCandidates.length - 2)) + 2;
+		var inputCandidates3 = outputMap.get(outputCandidates[index3]);
+		inputs.push(inputCandidates3[Math.floor(random() * inputCandidates3.length)]);
 
 		inputs.sort(function (a, b) {
 			return a - b;
 		});
 
 		return {
-			input: [inputs[0], inputs[1], inputs[2], 61],
-			output: [calc(inputs[0]), calc(inputs[1]), calc(inputs[2]), 3]
+			input: [inputs[0], inputs[1], inputs[2], inputs[3], 107],
+			output: [calc(inputs[0]), calc(inputs[1]), calc(inputs[2]), calc(inputs[3]), 3]
 		};
 	},
 	width: 13,

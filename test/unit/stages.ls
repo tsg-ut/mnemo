@@ -323,8 +323,12 @@ describe 'Stage Data' ->
 
       expect io .to.satisfy io-spec
 
+      # Uniqueness of output
+      unique-output = Array.from new Set io.output
+      expect io.output .to.deep.equal unique-output
+
       expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
         mathjs.is-prime input
         and output is ten-thousandth-digit-calc input
 
-      expect io.input.3 .to.equal 61
+      expect io.input.4 .to.equal 107
