@@ -209,7 +209,7 @@ router.post('/:stage/submissions', async (req, res) => {
 		💯Score: ${score}
 		⏹️Blocks: ${blocks}
 		🕒Clocks: ${clocks}
-	`.replace(/([@#]|http|ftp)/g, '').replace(/^(d )+/, '');
+	`.replace(/([@#.])/g, '$1 ').replace(/^(d )+/, '');
 
 	twitter.tweet({
 		status: Array.from(tweetText).slice(0, 140).join(''),
