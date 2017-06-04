@@ -33,11 +33,9 @@ let transaction = null;
 // Execute all migrations
 before(() => umzug.up());
 
-beforeEach(() => (
-	sequelize.transaction().then((newTransaction) => {
-		transaction = newTransaction;
-	})
-));
+beforeEach(async () => {
+	transaction = await sequelize.transaction();
+});
 
 afterEach(() => (
 	transaction.rollback()
@@ -45,8 +43,8 @@ afterEach(() => (
 
 describe('/stages', () => {
 	describe('GET /stages', () => {
-		it('retuns JSON of the stage array', () => (
-			Stages.bulkCreate([{
+		it('retuns JSON of the stage array', async () => {
+			await Stages.bulkCreate([{
 				name: 'stage1',
 				migratedVersion: 1,
 			}, {
@@ -55,36 +53,36 @@ describe('/stages', () => {
 			}, {
 				name: 'stage3',
 				migratedVersion: 3,
-			}], {transaction}).then(() => (
-				chai.request(app).get('/stages')
-			)).then((res) => {
-				expect(res).to.have.status(200);
-				expect(res).to.be.json;
-				expect(res.body).to.be.an('array');
-				expect(res.body).to.have.length(3);
+			}], {transaction});
 
-				res.body.forEach((stage) => {
-					expect(stage).to.have.property('id');
-					expect(stage).to.have.property('name');
-				});
-			})
-		));
+			const res = await chai.request(app).get('/stages');
+
+			expect(res).to.have.status(200);
+			expect(res).to.be.json;
+			expect(res.body).to.be.an('array');
+			expect(res.body).to.have.length(3);
+
+			res.body.forEach((stage) => {
+				expect(stage).to.have.property('id');
+				expect(stage).to.have.property('name');
+			});
+		});
 	});
 
 	describe('GET /stages/:stage', () => {
-		it('retuns JSON of the stage information', () => (
-			Stages.bulkCreate([{
+		it('retuns JSON of the stage information', async () => {
+			await Stages.bulkCreate([{
 				name: 'wire01',
 				migratedVersion: 2,
-			}], {transaction}).then(() => (
-				chai.request(app).get('/stages/wire01')
-			)).then((res) => {
-				expect(res).to.have.status(200);
-				expect(res).to.be.json;
-				expect(res.body).to.have.property('id');
-				expect(res.body).to.have.property('name', 'wire01');
-			})
-		));
+			}], {transaction});
+
+			const res = await chai.request(app).get('/stages/wire01');
+
+			expect(res).to.have.status(200);
+			expect(res).to.be.json;
+			expect(res.body).to.have.property('id');
+			expect(res.body).to.have.property('name', 'wire01');
+		});
 	});
 
 	describe('GET /stages/:stage/submissions', () => {
@@ -105,133 +103,133 @@ describe('/stages', () => {
 			rotate: 0,
 		}]);
 
-		it('retuns JSON of the correctly ordered submissions', () => (
-			Stages.create({
+		it('retuns JSON of the correctly ordered submissions', async () => {
+			const stage = await Stages.create({
 				name: 'wire01',
 				migratedVersion: 2,
-			}, {transaction}).then((stage) => (
-				Submissions.bulkCreate([{
-					name: 'kurgm',
-					board,
-					score: 5000,
-					blocks: 3,
-					clocks: 3,
-					stageId: stage.id,
-					version: 2,
-					createdAt: now,
-					updatedAt: now,
-				}, {
-					name: 'moratorium08',
-					board,
-					score: 10000,
-					blocks: 3,
-					clocks: 3,
-					stageId: stage.id,
-					version: 2,
-					createdAt: now,
-					updatedAt: now,
-				}, {
-					name: 'Yosshi999',
-					board,
-					score: 5000,
-					blocks: 3,
-					clocks: 3,
-					stageId: stage.id,
-					version: 2,
-					createdAt: yesterday,
-					updatedAt: yesterday,
-				}, {
-					name: 'hakatashi',
-					board,
-					score: 10000,
-					blocks: 3,
-					clocks: 3,
-					stageId: stage.id,
-					version: 2,
-					createdAt: yesterday,
-					updatedAt: yesterday,
-				}], {transaction})
-			)).then(() => (
-				chai.request(app).get('/stages/wire01/submissions')
-			)).then((res) => {
-				expect(res).to.have.status(200);
-				expect(res).to.be.json;
-				expect(res.body).to.be.an('array');
-				expect(res.body).to.have.length(4);
-				expect(res.body[0].name).to.equal('hakatashi');
-				expect(res.body[1].name).to.equal('moratorium08');
-				expect(res.body[2].name).to.equal('Yosshi999');
-				expect(res.body[3].name).to.equal('kurgm');
+			}, {transaction});
 
-				res.body.forEach((submission) => {
-					expect(submission).to.have.property('name');
-					expect(submission).to.have.property('score');
-					// Should not leak the board information ;)
-					expect(submission).to.not.have.property('board');
-				});
-			})
-		));
+			await Submissions.bulkCreate([{
+				name: 'kurgm',
+				board,
+				score: 5000,
+				blocks: 3,
+				clocks: 3,
+				stageId: stage.id,
+				version: 2,
+				createdAt: now,
+				updatedAt: now,
+			}, {
+				name: 'moratorium08',
+				board,
+				score: 10000,
+				blocks: 3,
+				clocks: 3,
+				stageId: stage.id,
+				version: 2,
+				createdAt: now,
+				updatedAt: now,
+			}, {
+				name: 'Yosshi999',
+				board,
+				score: 5000,
+				blocks: 3,
+				clocks: 3,
+				stageId: stage.id,
+				version: 2,
+				createdAt: yesterday,
+				updatedAt: yesterday,
+			}, {
+				name: 'hakatashi',
+				board,
+				score: 10000,
+				blocks: 3,
+				clocks: 3,
+				stageId: stage.id,
+				version: 2,
+				createdAt: yesterday,
+				updatedAt: yesterday,
+			}], {transaction});
 
-		it('only lists submissions with the migrated version', () => (
-			Stages.create({
+			const res = await chai.request(app).get('/stages/wire01/submissions');
+
+			expect(res).to.have.status(200);
+			expect(res).to.be.json;
+			expect(res.body).to.be.an('array');
+			expect(res.body).to.have.length(4);
+			expect(res.body[0].name).to.equal('hakatashi');
+			expect(res.body[1].name).to.equal('moratorium08');
+			expect(res.body[2].name).to.equal('Yosshi999');
+			expect(res.body[3].name).to.equal('kurgm');
+
+			res.body.forEach((submission) => {
+				expect(submission).to.have.property('name');
+				expect(submission).to.have.property('score');
+				// Should not leak the board information ;)
+				expect(submission).to.not.have.property('board');
+			});
+		});
+
+		it('only lists submissions with the migrated version', async () => {
+			const stage = await Stages.create({
 				name: 'wire01',
 				migratedVersion: 3,
-			}, {transaction}).then((stage) => (
-				Submissions.bulkCreate([{
-					name: 'satos',
-					board,
-					score: 10000,
-					blocks: 3,
-					clocks: 3,
-					stageId: stage.id,
-					version: 2,
-				}, {
-					name: 'cookies',
-					board,
-					score: 10000,
-					blocks: 3,
-					clocks: 3,
-					stageId: stage.id,
-					version: 3,
-				}, {
-					name: 'gasin',
-					board,
-					score: 10000,
-					blocks: 3,
-					clocks: 3,
-					stageId: stage.id,
-					version: 4,
-				}], {transaction})
-			)).then(() => (
-				chai.request(app).get('/stages/wire01/submissions')
-			)).then((res) => {
-				expect(res).to.have.status(200);
-				expect(res.body).to.have.length(1);
-				expect(res.body[0].name).to.equal('cookies');
-			})
-		));
+			}, {transaction});
 
-		it('limits returned submissions to 20', () => (
-			Stages.create({
+			await Submissions.bulkCreate([{
+				name: 'satos',
+				board,
+				score: 10000,
+				blocks: 3,
+				clocks: 3,
+				stageId: stage.id,
+				version: 2,
+			}, {
+				name: 'cookies',
+				board,
+				score: 10000,
+				blocks: 3,
+				clocks: 3,
+				stageId: stage.id,
+				version: 3,
+			}, {
+				name: 'gasin',
+				board,
+				score: 10000,
+				blocks: 3,
+				clocks: 3,
+				stageId: stage.id,
+				version: 4,
+			}], {transaction});
+
+			const res = await chai.request(app).get('/stages/wire01/submissions');
+
+			expect(res).to.have.status(200);
+			expect(res.body).to.have.length(1);
+			expect(res.body[0].name).to.equal('cookies');
+		});
+
+		it('limits returned submissions to 20', async () => {
+			const stage = await Stages.create({
 				name: 'wire01',
 				migratedVersion: 2,
-			}, {transaction}).then((stage) => (
-				Submissions.bulkCreate(Array.from({length: 100}, (item, index) => ({
-					name: `user${index}`,
-					board,
-					score: 10000,
-					blocks: 3,
-					clocks: 3,
-					stageId: stage.id,
-					version: 2,
-				})), {transaction})
-			)).then(() => (
-				chai.request(app).get('/stages/wire01/submissions')
-			)).then((res) => {
-				expect(res).to.have.status(200);
-				expect(res.body).to.have.length(20);
-			})
-		));
+			}, {transaction});
+
+			await Submissions.bulkCreate(Array.from({length: 100}, (item, index) => ({
+				name: `user${index}`,
+				board,
+				score: 10000,
+				blocks: 3,
+				clocks: 3,
+				stageId: stage.id,
+				version: 2,
+			})), {transaction});
+
+			const res = await chai.request(app).get('/stages/wire01/submissions');
+
+			expect(res).to.have.status(200);
+			expect(res.body).to.have.length(20);
+		});
 	});
 
 	describe('POST /stages/:stage/submissions', () => {
@@ -276,93 +274,92 @@ describe('/stages', () => {
 			rotate: 0,
 		}];
 
-		beforeEach(() => (
-			Stages.create({
+		beforeEach(async () => {
+			stage = await Stages.create({
 				name: 'wire01',
 				migratedVersion: 1,
-			}).then((newStage) => {
-				stage = newStage;
-			})
-		));
+			});
+		});
 
-		it('creates new submission data if the submission is valid', () => (
-			chai.request(app).post('/stages/wire01/submissions').send({
+		it('creates new submission data if the submission is valid', async () => {
+			const res = await chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'satos',
 				board: validBoard,
-			}).then((res) => {
-				expect(res).to.have.status(200);
-				expect(res).to.be.json;
-				expect(res.body.name).to.equal('satos');
-				expect(res.body.score).to.equal(10000);
-				expect(res.body.blocks).to.equal(3);
-				expect(res.body.version).to.equal(wire01.version);
+			});
+			expect(res).to.have.status(200);
+			expect(res).to.be.json;
+			expect(res.body.name).to.equal('satos');
+			expect(res.body.score).to.equal(10000);
+			expect(res.body.blocks).to.equal(3);
+			expect(res.body.version).to.equal(wire01.version);
 
-				return Submissions.findOne({
-					order: 'createdAt DESC',
-				});
-			}).then((submission) => {
-				expect(submission).to.not.be.null;
-				expect(submission.name).to.equal('satos');
-				expect(submission.score).to.equal(10000);
-			})
-		));
+			const submission = await Submissions.findOne({
+				order: 'createdAt DESC',
+			});
 
-		it('reports error when the submission with higher score is existing', () => (
-			chai.request(app).post('/stages/wire01/submissions').send({
+			expect(submission).to.not.be.null;
+			expect(submission.name).to.equal('satos');
+			expect(submission.score).to.equal(10000);
+		});
+
+		it('reports error when the submission with higher score is existing', async () => {
+			await chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'hakatashi',
 				board: validBoard,
-			}).then(() => (
-				chai.request(app).post('/stages/wire01/submissions').send({
+			});
+
+			try {
+				await chai.request(app).post('/stages/wire01/submissions').send({
 					name: 'hakatashi',
 					board: lowerScoreBoard,
-				})
-			)).then(() => {
+				});
 				expect.fail();
-			}).catch((res) => {
+			} catch (res) {
 				expect(res).to.have.status(400);
-			})
-		));
+			}
+		});
 
-		it('rejects submission with empty name', () => (
-			chai.request(app).post('/stages/wire01/submissions').send({
-				name: '',
-				board: validBoard,
-			}).then(() => {
+		it('rejects submission with empty name', async () => {
+			try {
+				await chai.request(app).post('/stages/wire01/submissions').send({
+					name: '',
+					board: validBoard,
+				});
 				expect.fail();
-			}).catch((res) => {
+			} catch (res) {
 				expect(res).to.not.have.status(200);
-			})
-		));
+			}
+		});
 
-		it('updates record when the submission score is higher than existing one', () => (
-			chai.request(app).post('/stages/wire01/submissions').send({
+		it('updates record when the submission score is higher than existing one', async () => {
+			await chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'kurgm',
 				board: lowerScoreBoard,
-			}).then(() => (
-				chai.request(app).post('/stages/wire01/submissions').send({
+			});
+
+			const res = await chai.request(app).post('/stages/wire01/submissions').send({
+				name: 'kurgm',
+				board: validBoard,
+			});
+
+			expect(res).to.have.status(200);
+			expect(res).to.be.json;
+			expect(res.body.score).to.equal(10000);
+			expect(res.body.blocks).to.equal(3);
+
+			const submissions = await Submissions.findAll({
+				where: {
 					name: 'kurgm',
-					board: validBoard,
-				})
-			)).then((res) => {
-				expect(res).to.have.status(200);
-				expect(res).to.be.json;
-				expect(res.body.score).to.equal(10000);
-				expect(res.body.blocks).to.equal(3);
+				},
+			});
 
-				return Submissions.findAll({
-					where: {
-						name: 'kurgm',
-					},
-				});
-			}).then((submissions) => {
-				expect(submissions).to.have.length(1);
-				expect(submissions[0].score).to.equal(10000);
-				expect(submissions[0].blocks).to.equal(3);
-			})
-		));
+			expect(submissions).to.have.length(1);
+			expect(submissions[0].score).to.equal(10000);
+			expect(submissions[0].blocks).to.equal(3);
+		});
 
-		it('updates record when existing submission version is outdated', () => (
-			Submissions.create({
+		it('updates record when existing submission version is outdated', async () => {
+			await Submissions.create({
 				name: 'cookies',
 				board: JSON.stringify(validBoard),
 				score: 10000,
@@ -370,27 +367,27 @@ describe('/stages', () => {
 				clocks: 3,
 				version: 1,
 				stageId: stage.id,
-			}).then(() => (
-				chai.request(app).post('/stages/wire01/submissions').send({
-					name: 'cookies',
-					board: lowerScoreBoard,
-				})
-			)).then((res) => {
-				expect(res).to.have.status(200);
-				expect(res).to.be.json;
-				expect(res.body.score).to.be.below(10000);
-				expect(res.body.blocks).to.equal(4);
+			});
 
-				return Submissions.findAll({
-					where: {
-						name: 'cookies',
-					},
-				});
-			}).then((submissions) => {
-				expect(submissions).to.have.length(1);
-				expect(submissions[0].score).to.be.below(10000);
-				expect(submissions[0].blocks).to.equal(4);
-			})
-		));
+			const res = await chai.request(app).post('/stages/wire01/submissions').send({
+				name: 'cookies',
+				board: lowerScoreBoard,
+			});
+
+			expect(res).to.have.status(200);
+			expect(res).to.be.json;
+			expect(res.body.score).to.be.below(10000);
+			expect(res.body.blocks).to.equal(4);
+
+			const submissions = await Submissions.findAll({
+				where: {
+					name: 'cookies',
+				},
+			});
+
+			expect(submissions).to.have.length(1);
+			expect(submissions[0].score).to.be.below(10000);
+			expect(submissions[0].blocks).to.equal(4);
+		});
 	});
 });
