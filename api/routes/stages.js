@@ -210,7 +210,7 @@ router.post('/:stage/submissions', async (req, res) => {
 			💯Score: ${score}
 			⏹️Blocks: ${blocks}
 			🕒Clocks: ${clocks}
-		`.trim().replace(/([@#.])/g, '$1 ').replace(/^(d |m |dm )+/i, '')}
+		`.trim().replace(/([@#.])/g, '$1 ').replace(/^((d|m|dm)\s+)+/i, '')}
 		#MNEMO
 	`;
 
