@@ -104,6 +104,7 @@
   "dependencies": {
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
+    "common-tags": "^1.4.0",
     "core-js": "^2.4.1",
     "cors": "^2.8.1",
     "express": "^4.14.0",
@@ -113,6 +114,7 @@
     "node-slack": "^0.0.7",
     "pg": "^6.1.0",
     "regenerator-runtime": "^0.10.0",
+    "request": "^2.81.0",
     "seedrandom": "^2.4.2",
     "sequelize": "^3.24.3"
   }
