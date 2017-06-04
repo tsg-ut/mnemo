@@ -1,42 +1,44 @@
 const assert = require('assert');
-const express = require('express');
-const router = express.Router();
+const {stripIndents} = require('common-tags');
+const Router = require('express-promise-router');
+const router = Router();
 
 const Stages = require('../models/stage');
 const Submissions = require('../models/submission');
+const slack = require('../utils/slack');
+const twitter = require('../utils/twitter');
 
 const {validateSubmission, calculateScore} = require('../../lib/validator');
 const stageData = require('../../stages');
 
-router.get('/', (req, res) => {
-	Stages.findAll().then((stages) => {
-		res.json(stages);
-	});
+router.get('/', async (req, res) => {
+	const stages = await Stages.findAll();
+	res.json(stages);
 });
 
-router.get('/:stage', (req, res) => {
+router.get('/:stage', async (req, res) => {
 	const stageName = req.params.stage;
 
-	Stages.findOne({
+	const stage = await Stages.findOne({
 		where: {
 			name: stageName,
 		},
-	}).then((stage) => {
-		if (stage === null) {
-			res.status(404).json({
-				error: true,
-				message: 'not found',
-			});
-		} else {
-			res.json(stage);
-		}
 	});
+
+	if (stage === null) {
+		res.status(404).json({
+			error: true,
+			message: 'not found',
+		});
+	} else {
+		res.json(stage);
+	}
 });
 
-router.get('/:stage/submissions', (req, res) => {
+router.get('/:stage/submissions', async (req, res) => {
 	const stageName = req.params.stage;
 
-	Submissions.findAll({
+	const submissions = await Submissions.findAll({
 		include: [{
 			model: Stages,
 			where: {
@@ -51,22 +53,22 @@ router.get('/:stage/submissions', (req, res) => {
 			['updatedAt', 'ASC'],
 		],
 		limit: 20,
-	}).then((submissions) => {
-		const data = submissions.map((submission) => ({
-			name: submission.name,
-			score: submission.score,
-			blocks: submission.blocks,
-			clocks: submission.clocks,
-		}));
-
-		res.json(data);
 	});
+
+	const data = submissions.map((submission) => ({
+		name: submission.name,
+		score: submission.score,
+		blocks: submission.blocks,
+		clocks: submission.clocks,
+	}));
+
+	res.json(data);
 });
 
-router.post('/:stage/submissions', (req, res) => {
+router.post('/:stage/submissions', async (req, res) => {
 	const stageName = req.params.stage;
 
-	Promise.all([
+	const [stage, existingSubmission] = await Promise.all([
 		Stages.findOne({
 			where: {
 				name: stageName,
@@ -86,94 +88,136 @@ router.post('/:stage/submissions', (req, res) => {
 				['score', 'DESC'],
 			],
 		}),
-	]).then(([stage, existingSubmission]) => {
-		const submissionData = req.body;
+	]);
 
-		if (stage === null) {
-			res.status(404).json({
-				error: true,
-				message: 'stage not found',
-			});
-			return;
-		}
+	const submissionData = req.body;
 
-		submissionData.stage = stageName;
+	if (stage === null) {
+		res.status(404).json({
+			error: true,
+			message: 'stage not found',
+		});
+		return;
+	}
 
-		const {pass, message, blocks, clocks} = validateSubmission(submissionData);
+	submissionData.stage = stageName;
 
-		if (!pass) {
+	const {pass, message, blocks, clocks} = validateSubmission(submissionData);
+
+	if (!pass) {
+		res.status(400).json({
+			error: true,
+			message,
+		});
+		return;
+	}
+
+	const stageDatum = stageData.find((s) => s.name === stageName);
+
+	const score = calculateScore({
+		clocks,
+		blocks,
+		stage: stageDatum,
+	});
+
+	if (existingSubmission) {
+		if (score <= existingSubmission.score && stageDatum.version <= existingSubmission.version) {
 			res.status(400).json({
 				error: true,
-				message,
+				message: 'user name existing',
 			});
 			return;
 		}
 
-		const stageDatum = stageData.find((s) => s.name === stageName);
-
-		const score = calculateScore({
-			clocks,
+		const [count] = await Submissions.update({
+			name: req.body.name,
+			board: JSON.stringify(req.body.board),
+			score,
 			blocks,
-			stage: stageDatum,
+			clocks,
+			version: stageDatum.version,
+			stageId: stage.id,
+		}, {
+			where: {
+				name: req.body.name,
+				stageId: stage.id,
+			},
 		});
 
-		if (existingSubmission) {
-			if (score <= existingSubmission.score && stageDatum.version <= existingSubmission.version) {
-				res.status(400).json({
-					error: true,
-					message: 'user name existing',
-				});
-				return;
-			}
+		assert.strictEqual(count, 1);
 
-			Submissions.update({
+		const submission = await Submissions.findOne({
+			where: {
 				name: req.body.name,
-				board: JSON.stringify(req.body.board),
-				score,
-				blocks,
-				clocks,
-				version: stageDatum.version,
 				stageId: stage.id,
-			}, {
-				where: {
-					name: req.body.name,
-					stageId: stage.id,
+			},
+		});
+
+		res.json(submission);
+	} else {
+		// If no previous submission is existing
+		const submission = await Submissions.create({
+			name: req.body.name,
+			board: JSON.stringify(req.body.board),
+			score,
+			blocks,
+			clocks,
+			version: stageDatum.version,
+			stageId: stage.id,
+		});
+
+		res.json(submission);
+	}
+
+	// Slack notification
+
+	const submissions = await Submissions.findAll({
+		include: [{
+			model: Stages,
+			where: {
+				name: stageName,
+				migratedVersion: {
+					$col: 'submissions.version',
 				},
-			}).then(([count]) => {
-				assert.strictEqual(count, 1);
-				return Submissions.findOne({
-					where: {
-						name: req.body.name,
-						stageId: stage.id,
-					},
-				});
-			}).then((submission) => {
-				res.json(submission);
-			}).catch((error) => {
-				res.status(500).json({
-					error: true,
-					message: error.message,
-				});
-			});
-		} else {
-			// If no previous submission is existing
-			Submissions.create({
-				name: req.body.name,
-				board: JSON.stringify(req.body.board),
-				score,
-				blocks,
-				clocks,
-				version: stageDatum.version,
-				stageId: stage.id,
-			}).then((submission) => {
-				res.json(submission);
-			}).catch((error) => {
-				res.status(500).json({
-					error: true,
-					message: error.message,
-				});
-			});
-		}
+			},
+		}],
+		order: [
+			['score', 'DESC'],
+			['updatedAt', 'ASC'],
+		],
+	});
+
+	const rank = submissions.findIndex((submission) => submission.name === req.body.name);
+	const surroundingSubmissions = submissions.map((submission, index) => (
+		[index, submission]
+	)).slice(rank - 1, rank + 2);
+
+	slack.send({
+		text: `*${req.body.name}* さんがステージ「${stageDatum.title}」を *${score}点* でクリアしました！`,
+		attachments: surroundingSubmissions.map(([submissionRank, submission]) => (
+			{
+				text: `#${submissionRank + 1} ${submission.name}: ${submission.score}pts (${submission.blocks} blocks, ${submission.clocks} clocks)`,
+				color: (submissionRank === rank) ? 'good' : null,
+			}
+		)),
+	});
+
+	const tweetText = stripIndents`
+		${stripIndents`
+			“${req.body.name}”さんがステージ「${stageDatum.title}」をクリアしました！
+			${rank + 1}位にランクイン！
+
+			💯Score: ${score}
+			⏹️Blocks: ${blocks}
+			🕒Clocks: ${clocks}
+		`.trim().replace(/([@＠#＃.．])/g, '$1 ')}
+		#MNEMO
+	`;
+
+	twitter.tweet({
+		status: Array.from(tweetText).slice(0, 140).join(''),
+		// eslint-disable-next-line camelcase
+		enable_dm_commands: false,
 	});
 });
 
