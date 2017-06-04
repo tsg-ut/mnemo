@@ -267,6 +267,23 @@ describe('/stages', () => {
 			rotate: 0,
 		}];
 
+		const invalidBoard = [{
+			x: 1,
+			y: 0,
+			type: 'wireI',
+			rotate: 0,
+		}, {
+			x: 1,
+			y: 1,
+			type: 'wireI',
+			rotate: 1,
+		}, {
+			x: 1,
+			y: 2,
+			type: 'wireI',
+			rotate: 0,
+		}];
+
 		const lowerScoreBoard = [{
 			x: 1,
 			y: 0,
@@ -295,6 +312,30 @@ describe('/stages', () => {
 				migratedVersion: wire01.version,
 			});
 			slackMock.send = nop;
+		});
+
+		it('reports 404 error when attempted to submit to unknown stage', async () => {
+			try {
+				await chai.request(app).post('/stages/hoge/submissions').send({
+					name: 'hakatashi',
+					board: validBoard,
+				});
+				expect.fail();
+			} catch (res) {
+				expect(res).to.have.status(404);
+			}
+		});
+
+		it('reports 400 error when attempted to post invalid board', async () => {
+			try {
+				await chai.request(app).post('/stages/wire01/submissions').send({
+					name: 'hakatashi',
+					board: invalidBoard,
+				});
+				expect.fail();
+			} catch (res) {
+				expect(res).to.have.status(400);
+			}
 		});
 
 		it('creates new submission data if the submission is valid', async () => {
