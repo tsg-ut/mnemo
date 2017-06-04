@@ -204,13 +204,13 @@ router.post('/:stage/submissions', async (req, res) => {
 
 	const tweetText = stripIndents`
 		${stripIndents`
-			${req.body.name}さんがステージ「${stageDatum.title}」をクリアしました！
+			“${req.body.name}”さんがステージ「${stageDatum.title}」をクリアしました！
 			${rank + 1}位にランクイン！
 
 			💯Score: ${score}
 			⏹️Blocks: ${blocks}
 			🕒Clocks: ${clocks}
-		`.trim().replace(/([@#.])/g, '$1 ').replace(/^((d|m|dm)\s+)+/i, '')}
+		`.trim().replace(/([@#.])/g, '$1 ')}
 		#MNEMO
 	`;
 
