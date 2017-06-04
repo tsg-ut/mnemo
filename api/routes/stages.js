@@ -210,12 +210,14 @@ router.post('/:stage/submissions', async (req, res) => {
 			💯Score: ${score}
 			⏹️Blocks: ${blocks}
 			🕒Clocks: ${clocks}
-		`.trim().replace(/([@#.])/g, '$1 ')}
+		`.trim().replace(/([@＠#＃.．])/g, '$1 ')}
 		#MNEMO
 	`;
 
 	twitter.tweet({
 		status: Array.from(tweetText).slice(0, 140).join(''),
+		// eslint-disable-next-line camelcase
+		enable_dm_commands: false,
 	});
 });
 
