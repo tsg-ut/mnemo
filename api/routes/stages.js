@@ -1,5 +1,5 @@
 const assert = require('assert');
-const {stripIndent} = require('common-tags');
+const {stripIndents} = require('common-tags');
 const Router = require('express-promise-router');
 const router = Router();
 
@@ -202,16 +202,17 @@ router.post('/:stage/submissions', async (req, res) => {
 		)),
 	});
 
-	const tweetText = stripIndent`
-		${req.body.name}さんがステージ「${stageDatum.title}」をクリアしました！
-		${rank + 1}位にランクイン！
+	const tweetText = stripIndents`
+		${stripIndents`
+			${req.body.name}さんがステージ「${stageDatum.title}」をクリアしました！
+			${rank + 1}位にランクイン！
 
-		💯Score: ${score}
-		⏹️Blocks: ${blocks}
-		🕒Clocks: ${clocks}
-
+			💯Score: ${score}
+			⏹️Blocks: ${blocks}
+			🕒Clocks: ${clocks}
+		`.trim().replace(/([@#.])/g, '$1 ').replace(/^(d |m |dm )+/i, '')}
 		#MNEMO
-	`.replace(/([@#.])/g, '$1 ').replace(/^(d |m |dm )+/i, '');
+	`;
 
 	twitter.tweet({
 		status: Array.from(tweetText).slice(0, 140).join(''),
