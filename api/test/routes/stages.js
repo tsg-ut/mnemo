@@ -4,11 +4,13 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const Umzug = require('umzug');
+const mockery = require('mockery');
 const app = require('../../');
 const sequelize = require('../../models');
 const Stages = require('../../models/stage');
 const Submissions = require('../../models/submission');
 const stageData = require('../../../stages');
+const {nop} = require('../../../lib/util');
 const wire01 = stageData.find((stageDatum) => stageDatum.name === 'wire01');
 
 const umzug = new Umzug({
@@ -31,15 +33,25 @@ const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000);
 let transaction = null;
 
 // Execute all migrations
-before(() => umzug.up());
+before(async () => {
+	await umzug.up();
+	mockery.enable({
+		warnOnUnregistered: false,
+	});
+});
 
 beforeEach(async () => {
 	transaction = await sequelize.transaction();
 });
 
-afterEach(() => (
-	transaction.rollback()
-));
+afterEach(async () => {
+	await transaction.rollback();
+	mockery.deregisterAll();
+});
+
+after(() => {
+	mockery.disable();
+});
 
 describe('/stages', () => {
 	describe('GET /stages', () => {
@@ -279,6 +291,10 @@ describe('/stages', () => {
 				name: 'wire01',
 				migratedVersion: 1,
 			});
+
+			mockery.registerMock('../utils/slack', {
+				send: nop,
+			});
 		});
 
 		it('creates new submission data if the submission is valid', async () => {
@@ -388,6 +404,25 @@ describe('/stages', () => {
 			expect(submissions).to.have.length(1);
 			expect(submissions[0].score).to.be.below(10000);
 			expect(submissions[0].blocks).to.equal(4);
+		});
+
+		it('posts to slack when successful submission was sent', async () => {
+			const promise = new Promise((resolve) => {
+				mockery.registerMock('../../utils/slack', {
+					send: ({text}) => {
+						expect(text).to.include('kurgm');
+						expect(text).to.include('10000');
+						resolve();
+					},
+				});
+			});
+
+			await chai.request(app).post('/stages/wire01/submissions').send({
+				name: 'kurgm',
+				board: validBoard,
+			});
+
+			await promise;
 		});
 	});
 });
