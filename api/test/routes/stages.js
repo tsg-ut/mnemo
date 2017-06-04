@@ -292,7 +292,7 @@ describe('/stages', () => {
 		beforeEach(async () => {
 			stage = await Stages.create({
 				name: 'wire01',
-				migratedVersion: 1,
+				migratedVersion: wire01.version,
 			});
 			slackMock.send = nop;
 		});
@@ -408,10 +408,11 @@ describe('/stages', () => {
 
 		it('posts to slack when successful submission was sent', async () => {
 			const promise = new Promise((resolve, reject) => {
-				slackMock.send = ({text}) => {
+				slackMock.send = ({text, attachments}) => {
 					try {
 						expect(text).to.include('kurgm');
 						expect(text).to.include('10000');
+						expect(attachments).to.have.lengthOf(1);
 						resolve();
 					} catch (error) {
 						reject(error);

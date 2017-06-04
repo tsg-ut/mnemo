@@ -4,6 +4,7 @@ const router = Router();
 
 const Stages = require('../models/stage');
 const Submissions = require('../models/submission');
+const slack = require('../utils/slack');
 
 const {validateSubmission, calculateScore} = require('../../lib/validator');
 const stageData = require('../../stages');
@@ -165,6 +166,38 @@ router.post('/:stage/submissions', async (req, res) => {
 
 		res.json(submission);
 	}
+
+	// Slack notification
+
+	const submissions = await Submissions.findAll({
+		include: [{
+			model: Stages,
+			where: {
+				name: stageName,
+				migratedVersion: {
+					$col: 'submissions.version',
+				},
+			},
+		}],
+		order: [
+			['score', 'DESC'],
+			['updatedAt', 'ASC'],
+		],
+	});
+
+	const rank = submissions.findIndex((submission) => submission.name === req.body.name);
+
+	slack.send({
+		text: `*${req.body.name}* さんがステージ「${stageDatum.title}」を *${score}点* でクリアしました！`,
+		attachments: submissions.map((submission, index) => (
+			[index, submission]
+		)).slice(rank - 1, rank + 2).map(([submissionRank, submission]) => (
+			{
+				text: `#${submissionRank + 1} ${submission.name}: ${submission.score}pts (${submission.blocks} blocks, ${submission.clocks} clocks)`,
+				color: (submissionRank === rank) ? 'good' : null,
+			}
+		)),
+	});
 });
 
 module.exports = router;
