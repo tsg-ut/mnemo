@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": "^6.9.1"
+    "node": "^8.0.0"
   },
   "scripts": {
     "normalize-map": "replace \"lib\\\\\\\\\\\\\\\\\" \"lib/\" index.js.map",
@@ -74,7 +74,7 @@
     "fetch-ponyfill": "^4.0.0",
     "file-url": "^2.0.0",
     "github-fork-ribbon-css": "^0.2.1",
-    "istanbul": "^0.4.5",
+    "istanbul": "next",
     "jquery": "^3.0.0",
     "less": "^2.7.1",
     "mathjs": "^3.8.0",
@@ -82,6 +82,7 @@
     "mocha-logger": "^1.0.4",
     "mochify": "^3.1.0",
     "mochify-istanbul": "^2.4.1",
+    "mockery": "^2.0.0",
     "nightmare": "^2.8.1",
     "normalize.css": "^7.0.0",
     "postcss-assets": "^4.1.0",
@@ -106,8 +107,10 @@
     "core-js": "^2.4.1",
     "cors": "^2.8.1",
     "express": "^4.14.0",
+    "express-promise-router": "^1.1.1",
     "forcedomain": "^0.8.0",
     "lcov-result-merger": "^1.2.0",
+    "node-slack": "^0.0.7",
     "pg": "^6.1.0",
     "regenerator-runtime": "^0.10.0",
     "seedrandom": "^2.4.2",
