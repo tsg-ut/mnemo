@@ -1,10 +1,12 @@
 const assert = require('assert');
+const {stripIndent} = require('common-tags');
 const Router = require('express-promise-router');
 const router = Router();
 
 const Stages = require('../models/stage');
 const Submissions = require('../models/submission');
 const slack = require('../utils/slack');
+const twitter = require('../utils/twitter');
 
 const {validateSubmission, calculateScore} = require('../../lib/validator');
 const stageData = require('../../stages');
@@ -186,17 +188,31 @@ router.post('/:stage/submissions', async (req, res) => {
 	});
 
 	const rank = submissions.findIndex((submission) => submission.name === req.body.name);
+	const surroundingSubmissions = submissions.map((submission, index) => (
+		[index, submission]
+	)).slice(rank - 1, rank + 2);
 
 	slack.send({
 		text: `*${req.body.name}* さんがステージ「${stageDatum.title}」を *${score}点* でクリアしました！`,
-		attachments: submissions.map((submission, index) => (
-			[index, submission]
-		)).slice(rank - 1, rank + 2).map(([submissionRank, submission]) => (
+		attachments: surroundingSubmissions.map(([submissionRank, submission]) => (
 			{
 				text: `#${submissionRank + 1} ${submission.name}: ${submission.score}pts (${submission.blocks} blocks, ${submission.clocks} clocks)`,
 				color: (submissionRank === rank) ? 'good' : null,
 			}
 		)),
+	});
+
+	const tweetText = stripIndent`
+		${req.body.name}さんがステージ「${stageDatum.title}」をクリアしました！
+		${rank + 1}位にランクイン！
+
+		💯Score: ${score}
+		⏹️Blocks: ${blocks}
+		🕒Clocks: ${clocks}
+	`.replace(/([@#.])/g, '$1 ').replace(/^(d )+/, '');
+
+	twitter.tweet({
+		status: Array.from(tweetText).slice(0, 140).join(''),
 	});
 });
 

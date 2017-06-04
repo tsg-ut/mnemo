@@ -7,7 +7,9 @@ const Umzug = require('umzug');
 
 const mockery = require('mockery');
 const slackMock = {};
+const twitterMock = {};
 mockery.registerMock('../utils/slack', slackMock);
+mockery.registerMock('../utils/twitter', twitterMock);
 mockery.enable({
 	warnOnUnregistered: false,
 });
@@ -312,6 +314,7 @@ describe('/stages', () => {
 				migratedVersion: wire01.version,
 			});
 			slackMock.send = nop;
+			twitterMock.tweet = nop;
 		});
 
 		it('reports 404 error when attempted to submit to unknown stage', async () => {
@@ -454,6 +457,27 @@ describe('/stages', () => {
 						expect(text).to.include('kurgm');
 						expect(text).to.include('10000');
 						expect(attachments).to.have.lengthOf(1);
+						resolve();
+					} catch (error) {
+						reject(error);
+					}
+				};
+			});
+
+			await chai.request(app).post('/stages/wire01/submissions').send({
+				name: 'kurgm',
+				board: validBoard,
+			});
+
+			await promise;
+		});
+
+		it('posts to twitter when successful submission was sent', async () => {
+			const promise = new Promise((resolve, reject) => {
+				twitterMock.tweet = ({status}) => {
+					try {
+						expect(status).to.include('kurgm');
+						expect(status).to.include('10000');
 						resolve();
 					} catch (error) {
 						reject(error);

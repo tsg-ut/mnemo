@@ -3273,6 +3273,9 @@ module.exports.isMac = function () {
 	return navigator.platform.toLowerCase().startsWith('mac');
 };
 
+// eslint-disable-next-line no-empty-function
+module.exports.nop = function () {};
+
 },{"regenerator-runtime/runtime":391}],14:[function(require,module,exports){
 'use strict';
 
