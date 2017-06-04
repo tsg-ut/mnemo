@@ -209,7 +209,9 @@ router.post('/:stage/submissions', async (req, res) => {
 		💯Score: ${score}
 		⏹️Blocks: ${blocks}
 		🕒Clocks: ${clocks}
-	`.replace(/([@#.])/g, '$1 ').replace(/^(d )+/, '');
+
+		#MNEMO
+	`.replace(/([@#.])/g, '$1 ').replace(/^(d |m |dm )+/i, '');
 
 	twitter.tweet({
 		status: Array.from(tweetText).slice(0, 140).join(''),
