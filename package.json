@@ -58,7 +58,7 @@
     "babelify": "^7.3.0",
     "browserify": "^14.0.0",
     "browserify-livescript": "^0.2.3",
-    "chai": "^3.5.0",
+    "chai": "^4.0.2",
     "chai-enzyme": "^0.7.0",
     "chai-http": "^3.0.0",
     "chai-things": "^0.2.0",
