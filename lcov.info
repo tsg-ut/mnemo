@@ -944,7 +944,7 @@ DA:16,0
 DA:19,1
 DA:20,45
 DA:21,1
-DA:24,105
+DA:24,107
 DA:26,44
 DA:27,1
 DA:30,43
@@ -1124,6 +1124,12 @@ SF:/home/travis/build/tsg-ut/mnemo/stages/perfect-number.js
 DA:1,1
 end_of_record
 SF:/home/travis/build/tsg-ut/mnemo/stages/reversal.js
+DA:1,1
+end_of_record
+SF:/home/travis/build/tsg-ut/mnemo/stages/seq01.js
+DA:1,1
+end_of_record
+SF:/home/travis/build/tsg-ut/mnemo/stages/seq02.js
 DA:1,1
 end_of_record
 SF:/home/travis/build/tsg-ut/mnemo/stages/max.js

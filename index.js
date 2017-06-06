@@ -44122,9 +44122,9 @@ module.exports = {
 
 /* eslint global-require: 'off' */
 
-module.exports = [require('./wire01.js'), require('./calc01.js'), require('./calc02.js'), require('./calc03.js'), require('./calc04.js'), require('./calc05.js'), require('./calc06.js'), require('./make-minus-one-easy.js'), require('./division-easy.js'), require('./sixth-power.js'), require('./remainder.js'), require('./plus-32.js'), require('./conditional01.js'), require('./conditional02.js'), require('./conditional03.js'), require('./factorial.js'), require('./parity.js'), require('./fibonacci.js'), require('./bivariation01.js'), require('./power-easy.js'), require('./power-hard.js'), require('./division-hard.js'), require('./gcd.js'), require('./lcm.js'), require('./make-minus-one-med.js'), require('./make-minus-one-hard.js'), require('./sqrt-easy.js'), require('./sqrt-hard.js'), require('./complement-of-2.js'), require('./binarian-easy.js'), require('./perfect-number.js'), require('./reversal.js'), require('./msd.js'), require('./mod3-hard.js'), require('./max.js'), require('./the-fifth-max.js'), require('./100.js'), require('./100-again.js'), require('./1000.js'), require('./plus-32-hard.js'), require('./xor.js'), require('./2017.js'), require('./repeat-self.js'), require('./fibonacci-hard.js'), require('./factorization.js'), require('./spaceship.js'), require('./addition-med.js'), require('./10000th-digit.js')];
+module.exports = [require('./wire01.js'), require('./calc01.js'), require('./calc02.js'), require('./calc03.js'), require('./calc04.js'), require('./calc05.js'), require('./calc06.js'), require('./make-minus-one-easy.js'), require('./division-easy.js'), require('./sixth-power.js'), require('./remainder.js'), require('./plus-32.js'), require('./conditional01.js'), require('./conditional02.js'), require('./conditional03.js'), require('./factorial.js'), require('./parity.js'), require('./fibonacci.js'), require('./bivariation01.js'), require('./power-easy.js'), require('./power-hard.js'), require('./division-hard.js'), require('./gcd.js'), require('./lcm.js'), require('./make-minus-one-med.js'), require('./make-minus-one-hard.js'), require('./sqrt-easy.js'), require('./sqrt-hard.js'), require('./complement-of-2.js'), require('./binarian-easy.js'), require('./perfect-number.js'), require('./reversal.js'), require('./msd.js'), require('./mod3-hard.js'), require('./seq01.js'), require('./seq02.js'), require('./max.js'), require('./the-fifth-max.js'), require('./100.js'), require('./100-again.js'), require('./1000.js'), require('./plus-32-hard.js'), require('./xor.js'), require('./2017.js'), require('./repeat-self.js'), require('./fibonacci-hard.js'), require('./factorization.js'), require('./spaceship.js'), require('./addition-med.js'), require('./10000th-digit.js')];
 
-},{"./100-again.js":403,"./100.js":404,"./1000.js":405,"./10000th-digit.js":406,"./2017.js":407,"./addition-med.js":408,"./binarian-easy.js":409,"./bivariation01.js":410,"./calc01.js":411,"./calc02.js":412,"./calc03.js":413,"./calc04.js":414,"./calc05.js":415,"./calc06.js":416,"./complement-of-2.js":417,"./conditional01.js":418,"./conditional02.js":419,"./conditional03.js":420,"./division-easy.js":421,"./division-hard.js":422,"./factorial.js":423,"./factorization.js":424,"./fibonacci-hard.js":425,"./fibonacci.js":426,"./gcd.js":427,"./lcm.js":429,"./make-minus-one-easy.js":430,"./make-minus-one-hard.js":431,"./make-minus-one-med.js":432,"./max.js":433,"./mod3-hard.js":434,"./msd.js":435,"./parity.js":436,"./perfect-number.js":437,"./plus-32-hard.js":438,"./plus-32.js":439,"./power-easy.js":440,"./power-hard.js":441,"./remainder.js":442,"./repeat-self.js":443,"./reversal.js":444,"./sixth-power.js":445,"./spaceship.js":446,"./sqrt-easy.js":447,"./sqrt-hard.js":448,"./the-fifth-max.js":449,"./wire01.js":450,"./xor.js":451}],429:[function(require,module,exports){
+},{"./100-again.js":403,"./100.js":404,"./1000.js":405,"./10000th-digit.js":406,"./2017.js":407,"./addition-med.js":408,"./binarian-easy.js":409,"./bivariation01.js":410,"./calc01.js":411,"./calc02.js":412,"./calc03.js":413,"./calc04.js":414,"./calc05.js":415,"./calc06.js":416,"./complement-of-2.js":417,"./conditional01.js":418,"./conditional02.js":419,"./conditional03.js":420,"./division-easy.js":421,"./division-hard.js":422,"./factorial.js":423,"./factorization.js":424,"./fibonacci-hard.js":425,"./fibonacci.js":426,"./gcd.js":427,"./lcm.js":429,"./make-minus-one-easy.js":430,"./make-minus-one-hard.js":431,"./make-minus-one-med.js":432,"./max.js":433,"./mod3-hard.js":434,"./msd.js":435,"./parity.js":436,"./perfect-number.js":437,"./plus-32-hard.js":438,"./plus-32.js":439,"./power-easy.js":440,"./power-hard.js":441,"./remainder.js":442,"./repeat-self.js":443,"./reversal.js":444,"./seq01.js":445,"./seq02.js":446,"./sixth-power.js":447,"./spaceship.js":448,"./sqrt-easy.js":449,"./sqrt-hard.js":450,"./the-fifth-max.js":451,"./wire01.js":452,"./xor.js":453}],429:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -44980,6 +44980,76 @@ module.exports = {
 'use strict';
 
 module.exports = {
+	name: 'seq01',
+	version: 1,
+	parts: {
+		wireI: null,
+		wireL: null,
+		wireT: null,
+		wireX: null,
+		'const-0': null,
+		'minus-1': null,
+		add: null,
+		equal: null,
+		neq: null,
+		gt: null,
+		geqq: null,
+		lt: null,
+		leqq: null,
+		conditional: null,
+		transistor: null,
+		diode: null
+	},
+	inputX: [4, 6],
+	outputX: 5,
+	input: [[3, [1, 2, 3]], [4, [3, 2, 1, 3]], [10, [68, 11, 85, 53, 14, 96, 88, 61, 21, 57]], [30, [26, 23, 43, 48, 2, 7, 16, 69, 16, 3, 41, 3, 17, 39, 98, 65, 77, 52, 89, 31, 37, 49, 15, 46, 2, 53, 74, 83, 8, 93]]],
+	output: [6, 9, 554, 1225],
+	width: 11,
+	height: 11,
+	clockLimit: 500,
+	statement: '配列の値を全て足してみよう',
+	title: '配列 -基本- 1'
+};
+
+},{}],446:[function(require,module,exports){
+'use strict';
+
+module.exports = {
+	name: 'seq02',
+	version: 1,
+	parts: {
+		wireI: null,
+		wireL: null,
+		wireT: null,
+		wireX: null,
+		'const-0': null,
+		'minus-1': null,
+		equal: null,
+		neq: null,
+		gt: null,
+		geqq: null,
+		lt: null,
+		leqq: null,
+		'c-contact': null,
+		conditional: null,
+		transistor: null,
+		diode: null
+	},
+	inputX: [4, 6],
+	outputX: 5,
+	input: [[3, [1, 2, 3]], [4, [3, 2, 1, 3]], [10, [68, 11, 85, 53, 14, 96, 88, 61, 21, 57]], [30, [26, 23, 43, 48, 2, 7, 16, 69, 16, 3, 41, 3, 17, 39, 98, 65, 77, 52, 89, 31, 37, 49, 15, 46, 2, 53, 74, 83, 8, 93]]],
+	output: [3, 3, 57, 93],
+	width: 11,
+	height: 11,
+	clockLimit: 500,
+	statement: '配列の一番最後の値を取り出してみよう!',
+	title: '配列 -基本- 2'
+};
+
+},{}],447:[function(require,module,exports){
+'use strict';
+
+module.exports = {
 	name: 'sixth-power',
 	version: 3,
 	parts: {
@@ -45008,7 +45078,7 @@ module.exports = {
 	title: '6乗'
 };
 
-},{}],446:[function(require,module,exports){
+},{}],448:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -45105,7 +45175,7 @@ module.exports = {
 	}
 };
 
-},{}],447:[function(require,module,exports){
+},{}],449:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45177,7 +45247,7 @@ module.exports = {
 	title: '平方根 -easy-'
 };
 
-},{}],448:[function(require,module,exports){
+},{}],450:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45242,7 +45312,7 @@ module.exports = {
 	title: '平方根 -hard-'
 };
 
-},{}],449:[function(require,module,exports){
+},{}],451:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45304,7 +45374,7 @@ module.exports = {
 	title: '中央値'
 };
 
-},{}],450:[function(require,module,exports){
+},{}],452:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -45325,7 +45395,7 @@ module.exports = {
 	modal: '01'
 };
 
-},{}],451:[function(require,module,exports){
+},{}],453:[function(require,module,exports){
 'use strict';
 
 module.exports = {
