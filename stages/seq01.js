@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'seq01',
+	version: 1,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -100,6 +101,7 @@ module.exports = {
 	],
 	width: 11,
 	height: 11,
+	clockLimit: 500,
 	statement: '配列の値を全て足してみよう',
 	title: '配列 -基本- 1',
 };

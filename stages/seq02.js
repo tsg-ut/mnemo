@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'seq02',
+	version: 1,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -100,6 +101,7 @@ module.exports = {
 	],
 	width: 11,
 	height: 11,
+	clockLimit: 500,
 	statement: '配列の一番最後の値を取り出してみよう!',
 	title: '配列 -基本- 2',
 };
