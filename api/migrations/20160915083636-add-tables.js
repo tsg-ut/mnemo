@@ -1,5 +1,21 @@
 module.exports = {
-	up: (queryInterface, Sequelize) => Promise.all([
+	up: (queryInterface, Sequelize) => queryInterface.createTable('stages', {
+		id: {
+			type: Sequelize.INTEGER,
+			primaryKey: true,
+			autoIncrement: true,
+		},
+		name: {
+			type: Sequelize.TEXT,
+			allowNull: false,
+		},
+		createdAt: {
+			type: Sequelize.DATE,
+		},
+		updatedAt: {
+			type: Sequelize.DATE,
+		},
+	}, {charset: 'utf8mb4'}).then(() => (
 		queryInterface.createTable('submissions', {
 			id: {
 				type: Sequelize.INTEGER,
@@ -19,6 +35,14 @@ module.exports = {
 				type: Sequelize.TEXT,
 				allowNull: false,
 			},
+			blocks: {
+				type: Sequelize.INTEGER,
+				allowNull: false,
+			},
+			clocks: {
+				type: Sequelize.INTEGER,
+				allowNull: false,
+			},
 			score: {
 				type: Sequelize.INTEGER,
 				allowNull: false,
@@ -30,34 +54,8 @@ module.exports = {
 					key: 'id',
 				},
 			},
-		}, {charset: 'utf8mb4'}),
-
-		queryInterface.createTable('stages', {
-			id: {
-				type: Sequelize.INTEGER,
-				primaryKey: true,
-				autoIncrement: true,
-			},
-			width: {
-				type: Sequelize.INTEGER,
-				allowNull: false,
-			},
-			height: {
-				type: Sequelize.INTEGER,
-				allowNull: false,
-			},
-			name: {
-				type: Sequelize.TEXT,
-				allowNull: false,
-			},
-			createdAt: {
-				type: Sequelize.DATE,
-			},
-			updatedAt: {
-				type: Sequelize.DATE,
-			},
-		}, {charset: 'utf8mb4'}),
-	]),
+		}, {charset: 'utf8mb4'})
+	)),
 
 	down: (queryInterface) => Promise.all([
 		queryInterface.dropTable('submissions'),

@@ -1,5 +1,6 @@
 @import (inline) 'node_modules/normalize.css/normalize.css';
 @import (inline) 'node_modules/github-fork-ribbon-css/gh-fork-ribbon.css';
+@import (inline) 'modals/anim.css';
 
 .fixed-height(@height) {
 	flex: 0 0 @height;
@@ -29,9 +30,17 @@
 
 @font-face {
 	font-family: infinity;
-	src: url('image/infinity.woff') format('woff');
+	src: inline('image/infinity.woff') format('woff');
 	font-weight: 900;
 	font-style: normal;
+}
+
+@font-face {
+	font-family: 'FontAwesome';
+	src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	unicode-range: U+F099;
 }
 
 html, body, .container {
@@ -39,6 +48,7 @@ html, body, .container {
 	padding: 0;
 	width: 100%;
 	height: 100%;
+	color: #333;
 }
 
 button {
@@ -52,6 +62,18 @@ button {
 
 .github-fork-ribbon::before {
 	background-color: #284fbd;
+}
+
+.fa {
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	font-smoothing: antialiased;
+}
+
+.fa-twitter:before {
+	content: "\f099";
 }
 
 .layer {
@@ -170,11 +192,20 @@ button {
 				transform: translate(-50%, -50%);
 
 				.row {
-				    text-align: center;
+					text-align: center;
 				}
 
-				.logo {
-					margin-bottom: 48px;
+				.tsg-credit {
+					color: white;
+					font-size: 26px;
+					font-weight: bold;
+					margin-bottom: 20px;
+				}
+
+				.tsg-logo {
+					vertical-align: -50%;
+					width: 100px;
+					margin-left: 0.3em;
 				}
 
 				button.big {
@@ -273,6 +304,7 @@ button {
 		.upper-area {
 			flex: 1 0 0;
 			height: 0;
+			min-height: 0; // Fix firefox flex bug http://stackoverflow.com/a/28639686
 
 			display: flex;
 
@@ -473,66 +505,14 @@ button {
 
 							position: relative;
 
-							.top, .bottom {
-								.fixed-height(25px);
-							}
-
-							.middle {
-								.grow-height(1);
-							}
-
-							.top, .bottom, .middle {
-								display: flex;
-
-								.left, .right {
-									.fixed-width(25px);
-								}
-
-								.center {
-									.grow-width(1);
-								}
-							}
-
-							.top .left {
-								background-image: url(image/frame-topleft.png);
-							}
-
-							.top .center {
-								background-image: url(image/frame-top.png);
-								background-size: 100% 100%;
-							}
-
-							.top .right {
-								background-image: url(image/frame-topright.png);
-							}
-
-							.middle .left {
-								background-image: url(image/frame-left.png);
-								background-size: 100% 100%;
-							}
-
-							.middle .right {
-								background-image: url(image/frame-right.png);
-								background-size: 100% 100%;
-							}
-
-							.bottom .left {
-								background-image: url(image/frame-bottomleft.png);
-							}
-
-							.bottom .center {
-								background-image: url(image/frame-bottom.png);
-								background-size: 100% 100%;
-							}
-
-							.bottom .right {
-								background-image: url(image/frame-bottomright.png);
-							}
+							border-style: solid;
+							border-width: 25px;
+							border-image: url(image/frame.png) 25 repeat;
 
 							.clock-area {
 								position: absolute;
-								top: 100%;
-								right: 0;
+								top: calc(~"100% + 25px");
+								right: -25px;
 
 								padding: 3px 4px 4px;
 
@@ -552,7 +532,7 @@ button {
 									display: inline-block;
 									width: 16px;
 									height: 16px;
-									background-image: url(image/clock-icon.png);
+									background-image: inline('image/clock-icon.svg');
 									vertical-align: text-top;
 									margin-right: .2em;
 								}
@@ -597,6 +577,18 @@ button {
 				.grow-width(1);
 			}
 
+			.left-area {
+				position: relative;
+
+				.tsg-logo {
+					position: absolute;
+					left: 50px;
+					top: 50%;
+					transform: translateY(-50%);
+					width: 160px;
+				}
+			}
+
 			.controls-area {
 				.fixed-width(420px);
 				position: relative;
@@ -605,12 +597,14 @@ button {
 	}
 
 	.modal-layer {
+		z-index: 1;
 		pointer-events: none;
 
 		.modal {
+			display: none;
 			pointer-events: initial;
 			width: 80%;
-			background: url("http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/restaurant_icons.png");
+			background: url(image/restaurant_icons.png);
 			color: #333;
 			box-sizing: border-box;
 			border-radius: 30px;
@@ -639,6 +633,533 @@ button {
 				box-sizing: border-box;
 				text-align: center;
 				font-size: 24px;
+
+				img {
+					vertical-align: -50%;
+				}
+
+				.close-content {
+					color: white;
+					background: #f9841d;
+					line-height: 2em;
+					padding: 0 2em;
+					font-size: 36px;
+					font-weight: bold;
+					border-radius: 0.3em;
+				}
+			}
+		}
+	}
+
+	.result-layer {
+		pointer-events: none;
+
+		.result {
+			display: none;
+			position: absolute;
+			top: 50%;
+			left: 0;
+			right: 0;
+			font-size: 30px;
+			transform: translateY(-50%);
+			pointer-events: all;
+
+			.result-head {
+				display: flex;
+				justify-content: center;
+
+				.clear {
+					width: width('image/clear.svg', 2);
+					height: height('image/clear.svg', 2);
+					background: inline('image/clear.svg');
+					background-size: size('image/clear.svg', 2);
+
+					animation: 1.5s clear-animate cubic-bezier(0, 0, 0, 1);
+
+					@y-distance: 200px;
+
+					@keyframes clear-animate {
+						0% {
+							opacity: 0;
+							transform: scale(3) translateY(@y-distance);
+							transform-origin: 50% calc(~"50% + "@y-distance);
+						}
+						30% {
+							opacity: 1;
+							transform: scale(1) translateY(@y-distance);
+							transform-origin: 50% calc(~"50% + "@y-distance);
+						}
+						70% {
+							transform: scale(1) translateY(@y-distance);
+							animation-timing-function: ease;
+						}
+						100% {
+							transform: scale(1);
+							transform-origin: 50% 50%;
+						}
+					}
+				}
+			}
+
+			.stats {
+				display: flex;
+				justify-content: center;
+				position: relative;
+				margin-top: 20px;
+
+				color: #222;
+				font-family: 'Exo 2';
+				font-weight: 900;
+				line-height: 1.5;
+				font-size: 42px;
+
+				overflow: hidden;
+
+				// Background that can animate :)
+				&::before {
+					@overrap: 15%;
+					content: '';
+					display: block;
+					position: absolute;
+
+					top: 0;
+					left: 100%;
+					bottom: 0;
+					width: 100% + @overrap;
+
+					background: linear-gradient(
+						90deg,
+						rgba(255, 255, 255, 0),
+						rgba(255, 255, 255, 0.7) percentage(@overrap / (100% + @overrap)),
+						rgba(255, 255, 255, 0.7)
+					);
+
+					animation: 0.5s 1.3s stats-animate forwards;
+
+					@keyframes stats-animate {
+						from {left: 100%}
+						to {left: -@overrap}
+					}
+
+					z-index: -1;
+				}
+
+				& > div {
+					margin: 0 0.5em;
+					width: 3.5em;
+					opacity: 0;
+
+					white-space: nowrap;
+
+					animation: 0.5s 1.2s stats-div-animate forwards;
+
+					@keyframes stats-div-animate {
+						from {opacity: 0}
+						to {opacity: 1}
+					}
+
+					&::before {
+						width: 1.2em;
+						height: 1.2em;
+						display: inline-block;
+						vertical-align: -10%;
+						margin-right: 0.3em;
+					}
+
+					&.clocks::before {
+						content: inline('image/clock-icon.svg');
+					}
+
+					&.blocks::before {
+						content: url('image/conditional.png');
+					}
+				}
+			}
+
+			.score-window {
+				width: 100%;
+				max-width: 600px;
+				background: #EEE;
+				border: #222 2px solid;
+				color: white;
+				position: relative;
+				text-align: center;
+				margin: 30px auto;
+				padding: 10px;
+				z-index: 0;
+				opacity: 0;
+
+				animation: 0.5s 1.4s score-window-animate forwards;
+
+				@keyframes score-window-animate {
+					from {
+						opacity: 0;
+						transform: translateY(30px);
+					}
+					to {
+						opacity: 1;
+						transform: translateY(0);
+					}
+				}
+
+				&::before {
+					content: '';
+					position: absolute;
+					@margin: 3px;
+					top: @margin;
+					left: @margin;
+					right: @margin;
+					bottom: @margin;
+
+					border: #222 2px solid;
+					background: repeating-linear-gradient(-45deg, #333, #333 10px, #444 10px, #444 20px);
+					z-index: -1;
+				}
+
+				.score {
+					line-height: 2em;
+					font-size: 22px;
+					margin: 10px 0;
+
+					.score-value {
+						width: 3em;
+						display: inline-block;
+						text-align: right;
+						font-family: 'Exo 2', sans-serif;
+						font-weight: 900;
+						font-size: 60px;
+						margin-left: 0.3em;
+					}
+				}
+
+				.name {
+					display: block;
+					margin: 5px auto;
+					border-radius: 4px;
+					background: white;
+					color: #333;
+					border: none;
+					outline: none;
+					padding: 7px 12px;
+					font-size: 18px;
+					width: 15em;
+				}
+
+				.register {
+					border-radius: 5px;
+					background: #555;
+					color: white;
+					display: block;
+					margin: 12px auto;
+					font-size: 20px;
+					padding: 0.5em 1em;
+
+					&[disabled] {
+						opacity: 0.5;
+						cursor: wait;
+
+						&.error {
+							opacity: 1;
+							background: #f91919;
+							cursor: default;
+						}
+
+						&.success {
+							opacity: 1;
+							background: #4698b7;
+							cursor: default;
+						}
+					}
+				}
+
+				.tweet {
+					display: block;
+
+					width: 160px;
+					margin: 12px auto;
+					padding: 0.3em 1em;
+					border-radius: 5px;
+
+					background: #3f94ef;
+
+					color: white;
+					font-size: 16px;
+					text-decoration: none;
+				}
+			}
+
+			.block-area {
+				display: flex;
+				justify-content: center;
+				margin-top: 1em;
+
+				button {
+					width: 240px;
+					height: 2em;
+					margin: 0 15px;
+
+					border-radius: 12px;
+
+					color: white;
+					line-height: 2em;
+					font-size: 30px;
+					font-weight: bold;
+
+					opacity: 0;
+
+					animation: 0.5s 1.6s result-button-animate forwards;
+
+					@keyframes result-button-animate {
+						from {
+							opacity: 0;
+							transform: translateY(30px);
+						}
+						to {
+							opacity: 1;
+							transform: translateY(0);
+						}
+					}
+
+					&.close {
+						background: #4e4e4e;
+					}
+
+					&.next {
+						background: #354fd6;
+					}
+				}
+			}
+		}
+
+		.limit {
+			display: none;
+			position: absolute;
+
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+
+			width: 100%;
+			max-width: 600px;
+			padding: 20px 0px;
+			border-width: 10px;
+			border-style: ridge;
+			border-radius: 10px;
+
+			font-size: 30px;
+			text-align: center;
+
+			pointer-events: all;
+
+			animation: 1s limit-animate steps(1, end);
+
+			@keyframes limit-animate {
+				0% {opacity: 1}
+				25% {opacity: 0}
+				50% {opacity: 1}
+				75% {opacity: 0}
+				100% {opacity: 1}
+			}
+
+			.head {
+				font-weight: bold;
+				font-size: 50px;
+				font-family: 'Exo 2';
+			}
+
+			.message {
+				font-size: 18px;
+				line-height: 2;
+			}
+
+			.ok {
+				color: white;
+				line-height: 1.5em;
+				padding: 0 2em;
+				font-size: 28px;
+				font-weight: bold;
+				border-radius: 0.3em;
+				margin-top: 0.5em;
+			}
+
+			&.clock-limit {
+				background: #1f0000;
+				border-color: #ff2e2e;
+				color: #ff2e2e;
+
+				.ok {
+					background: #ff2e2e;
+				}
+			}
+
+			&.data-limit {
+				background: #1f1600;
+				border-color: #bd8c14;
+				color: #bd8c14;
+
+				.ok {
+					background: #bd8c14;
+				}
+			}
+		}
+
+		.ranking {
+			display: none;
+			pointer-events: initial;
+
+			position: absolute;
+			top: 50%;
+			left: 50%;
+
+			border: #222 6px solid;
+			padding: 1em 0;
+
+			transform: translate(-50%, -50%);
+			background: repeating-linear-gradient(-45deg, #333, #333 10px, #444 10px, #444 20px);
+			color: wheat;
+			width: calc(~"100% - 30px");
+			max-width: 500px;
+			max-height: calc(~"100% - 80px");
+			overflow-y: auto;
+
+			animation: 0.5s ranking-animate;
+
+			@keyframes ranking-animate {
+				from {
+					transform: translate(-50%, calc(-50% + 100px));
+					opacity: 0;
+				}
+				to {
+					transform: translate(-50%, -50%);
+					opacity: 1;
+				}
+			}
+
+			.head {
+				text-align: center;
+				font-size: 24px;
+				font-weight: bold;
+
+				.stage-name {
+					color: #fbff43;
+				}
+			}
+
+			&.loading .ranks {
+				height: 200px;
+				background-image: inline('image/ring.svg');
+				background-repeat: no-repeat;
+				background-position: center;
+
+				.rank, & > * {
+					display: none;
+				}
+			}
+
+			.ranks {
+				padding: 0;
+				counter-reset: rank-index;
+
+				.rank {
+					display: flex;
+					padding: 0 0.5em;
+					color: #333;
+					font-weight: bold;
+					font-size: 24px;
+					line-height: 1.5;
+					counter-increment: rank-index;
+
+					&:nth-child(2n) {
+						background: rgba(255, 255, 255, 0.5);
+					}
+
+					&:nth-child(2n+1) {
+						background: rgba(255, 255, 255, 0.7);
+					}
+
+					&::before {
+						width: 1.5em;
+						text-align: center;
+						font-size: 24px;
+					}
+
+					&:first-child::before {
+						content: '';
+						background-image: inline('image/crown.svg');
+						background-size: 80%;
+						background-position: center;
+						background-repeat: no-repeat;
+					}
+
+					&:nth-child(n+2)::before {
+						content: counter(rank-index);
+						font-family: 'Exo 2', sans-serif;
+						font-weight: 900;
+					}
+
+					.name {
+						flex: 1 1 0;
+						text-overflow: ellipsis;
+						overflow: hidden;
+						margin-left: 0.5em;
+						font-size: 20px;
+						line-height: 36px;
+					}
+
+					.data {
+						display: flex;
+						font-family: 'Exo 2', sans-serif;
+						font-weight: 900;
+
+						& > * {
+							margin-right: 0.5em;
+
+							&::before {
+								content: '';
+								width: 0.8em;
+								height: 0.8em;
+								display: inline-block;
+								vertical-align: -5%;
+								margin-right: 0.1em;
+								background-size: contain;
+							}
+						}
+
+						.clocks::before {
+							background-image: inline('image/clock-icon.svg');
+						}
+
+						.blocks::before {
+							background-image: url('image/conditional.png');
+						}
+					}
+
+					.score {
+						flex: 0 0 4.5em;
+						font-family: 'Exo 2', sans-serif;
+						font-weight: 900;
+						text-align: right;
+
+						&::after {
+							content: 'pt';
+						}
+					}
+				}
+			}
+
+			.close {
+				display: block;
+
+				margin: 0 auto;
+				padding: 0 2em;
+				border-radius: 0.3em;
+
+				background: #5f5f5f;
+
+				line-height: 2em;
+				color: white;
+				font-size: 24px;
+				font-weight: bold;
 			}
 		}
 	}
@@ -778,6 +1299,12 @@ button {
 				background: darkorange;
 				transform: translate(-50%, -50%);
 				color: white;
+
+				font-family: infinity, sans-serif;
+
+				html.mac &, html.ios & {
+					font-family: sans-serif;
+				}
 			}
 		}
 	}
@@ -810,9 +1337,24 @@ button {
 		&[data-rotate='270']::before {
 			transform: rotate(270deg);
 		}
-		@blocks-rotatable: wireI, wireL, wireT, diode;
-		@blocks-rotate-back-wireI: times-2, add-3, times-3, plus-1, plus-2, minus-1, minus-2, div-2, div-3, const-0, const-1, const-2;
-		@blocks-norotate: wireXdot, add, sub, mul, div,  c-contact, conditional, transistor, wireX, pow, mod, bitshift-left, bitshift-right, bitwise-and, bitwise-or, bitwise-xor, equal, neq, gt, geqq, lt, leqq;
+		@blocks-rotatable: wireI, wireL, wireT, diode, c-contact, transistor;
+		@blocks-rotate-back-wireI:
+			add-3,
+			times-2, times-3, times-10,
+			plus-1, plus-2,
+			minus-1, minus-2,
+			div-2, div-3, div-10,
+			const-0, const-1, const-2, const-3, const-10,
+			log10, log2, sqrt,
+			not;
+		@blocks-norotate:
+			wireXdot, wireX,
+			add, sub, mul, div,
+			conditional,
+			pow, log, mod,
+			bitshift-left, bitshift-right, bitwise-and, bitwise-or, bitwise-xor,
+			equal, neq, gt, geqq, lt, leqq,
+			and, or, nand, nor, xor;
 
 		.-r(@i: length(@blocks-rotatable)) when (@i > 0) {
 			@name: extract(@blocks-rotatable, @i);
@@ -841,7 +1383,8 @@ button {
 	}
 
 	.panel {
-		overflow: auto;
+		overflow-x: auto;
+		overflow-y: scroll;
 		padding: 8px;
 		margin: 30px 0;
 		background: #ffa32e;
@@ -856,7 +1399,7 @@ button {
 			position: relative;
 			margin-bottom: 25px;
 
-			&[selected]::after {
+			&[data-selected]::after {
 				content: '';
 
 				position: absolute;
@@ -874,9 +1417,13 @@ button {
 				top: 100%;
 				right: 0;
 
-				font-family: 'Exo 2', infinity, sans-serif;
+				font-family: infinity, 'Exo 2', sans-serif;
 				font-weight: 900;
 				color: darkred;
+
+				html.mac &, html.ios & {
+					font-family: 'Exo 2', infinity, sans-serif;
+				}
 
 				pointer-events: none;
 

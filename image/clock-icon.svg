@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.21 15.21">
+    <title>
+        clock-icon
+    </title>
+    <circle cx="7.6" cy="7.6" r="6.6" fill="#fff"/>
+    <path d="M7.6 2A5.6 5.6 0 1 1 2 7.6 5.61 5.61 0 0 1 7.6 2m0-2a7.6 7.6 0 1 0 7.6 7.6A7.6 7.6 0 0 0 7.6 0z" fill="#2b1e00"/>
+    <path fill="none" stroke="#543600" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M7.6 3.41V7.6h3.37"/>
+</svg>

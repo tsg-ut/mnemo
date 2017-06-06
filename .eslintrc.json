@@ -5,7 +5,14 @@
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "plugins": ["react"],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
     "rules": {
         "accessor-pairs": "error",
         "array-bracket-spacing": [
@@ -51,7 +58,10 @@
         "consistent-this": "error",
         "curly": "error",
         "default-case": "off",
-        "dot-location": "error",
+        "dot-location": [
+            "error",
+            "property"
+        ],
         "dot-notation": "error",
         "eol-last": "error",
         "eqeqeq": "error",
@@ -61,7 +71,13 @@
             "never"
         ],
         "func-style": "error",
-        "generator-star-spacing": "error",
+        "generator-star-spacing": [
+            "error",
+            {
+                "before": false,
+                "after": true
+            }
+        ],
         "global-require": "error",
         "guard-for-in": "warn",
         "handle-callback-err": "error",
@@ -114,6 +130,10 @@
         "no-bitwise": "off",
         "no-caller": "error",
         "no-catch-shadow": "error",
+        "no-constant-condition": [
+            "error",
+            { "checkLoops" : false }
+        ],
         "no-confusing-arrow": "off",
         "no-continue": "off",
         "no-div-regex": "error",
@@ -135,7 +155,7 @@
             "error",
             "functions"
         ],
-        "no-invalid-this": "error",
+        "no-invalid-this": "off",
         "no-iterator": "error",
         "no-label-var": "error",
         "no-labels": "error",

@@ -170,6 +170,13 @@ describe 'Block' ->
         in: top: 334
         out: bottom: 1002
 
+  describe 'times-10 block' ->
+    It 'converts data by multiplying 10' ->
+      io-test do
+        type: \times-10
+        in: top: 334
+        out: bottom: 3340
+
   describe 'plus-1 block' ->
     It 'converts data by adding 1' ->
       io-test do
@@ -222,6 +229,25 @@ describe 'Block' ->
         in: top: -17
         out: bottom: -5
 
+  describe 'div-10 block' ->
+    It 'converts data by dividing by 10' ->
+      io-test do
+        type: \div-10
+        in: top: 330
+        out: bottom: 33
+
+    It 'omits remainder of the division' ->
+      io-test do
+        type: \div-10
+        in: top: 334
+        out: bottom: 33
+
+    It 'rounds remainder into zero' ->
+      io-test do
+        type: \div-10
+        in: top: -334
+        out: bottom: -33
+
   describe 'minus-1 block' ->
     It 'converts data by subtracting 1' ->
       io-test do
@@ -235,6 +261,62 @@ describe 'Block' ->
         type: \minus-2
         in: top: 334
         out: bottom: 332
+
+  describe 'log10 block' ->
+    It 'converts data into the logarithm of it with base 10' ->
+      io-test do
+        type: \log10
+        in: top: 100
+        out: bottom: 2
+
+    It 'truncates decimal places' ->
+      io-test do
+        type: \log10
+        in: top: 334
+        out: bottom: 2
+
+    It 'calculates log_10 1000 correctly' ->
+      io-test do
+        type: \log10
+        in: top: 1000
+        out: bottom: 3
+
+    It 'calculates log_10 1e15 correctly' ->
+      io-test do
+        type: \log10
+        in: top: 1e15
+        out: bottom: 15
+
+    It 'calculates log_10 (1e15 - 1) correctly' ->
+      io-test do
+        type: \log10
+        in: top: 1e15 - 1
+        out: bottom: 14
+
+    It 'ignores sign of input data' ->
+      io-test do
+        type: \log10
+        in: top: -334
+        out: bottom: 2
+
+  describe 'log2 block' ->
+    It 'converts data into the logarithm of it with base 2' ->
+      io-test do
+        type: \log2
+        in: top: 1024
+        out: bottom: 10
+
+    It 'truncates decimal places' ->
+      io-test do
+        type: \log2
+        in: top: 334
+        out: bottom: 8
+
+    It 'ignores sign of input data' ->
+      io-test do
+        type: \log2
+        in: top: -334
+        out: bottom: 8
 
   describe 'const-0 block' ->
     It 'converts any input data into 0' ->
@@ -256,6 +338,20 @@ describe 'Block' ->
         type: \const-2
         in: top: 334
         out: bottom: 2
+
+  describe 'const-3 block' ->
+    It 'converts any input data into 3' ->
+      io-test do
+        type: \const-3
+        in: top: 334
+        out: bottom: 3
+
+  describe 'const-10 block' ->
+    It 'converts any input data into 10' ->
+      io-test do
+        type: \const-10
+        in: top: 334
+        out: bottom: 10
 
   describe 'add block' ->
     It 'adds up left and right and send it to bottom' ->
@@ -323,6 +419,16 @@ describe 'Block' ->
           right: -0
         out:
           bottom: -Infinity
+
+    It 'can output integer for large numbers' ->
+      io-test do
+        type: \div
+        in:
+          left: 130e100
+          right: 18e100
+        out:
+          bottom: 7
+
   describe 'pow block' ->
     It 'powers left by right and send it to bottom' ->
       io-test do
@@ -341,6 +447,7 @@ describe 'Block' ->
           right: -3
         out:
           bottom: 0
+
     It 'deletes numbers after the decimal point' ->
       io-test do
         type: \pow
@@ -350,3 +457,378 @@ describe 'Block' ->
         out:
           bottom: 0
 
+    It 'returns 1 when left is 1 and right is an infinity' ->
+      io-test do
+        type: \pow
+        in:
+          left: 1
+          right: Infinity
+        out:
+          bottom: 1
+
+    It 'returns infinity when left is an infinity and right is 1' ->
+       io-test do
+        type: \pow
+        in:
+          left: Infinity
+          right: 1
+        out:
+          bottom: Infinity
+
+    It 'returns -infinity when left is -0 and right is -1' ->
+      io-test do
+        type: \pow
+        in:
+          left: -0
+          right: -1
+        out:
+          bottom: -Infinity
+
+  describe 'log block' ->
+    It 'sends to bottom the logarithm of right with base of left' ->
+      io-test do
+        type: \log
+        in:
+          left: 3
+          right: 81
+        out:
+          bottom: 4
+
+    It 'truncates decimal places' ->
+      io-test do
+        type: \log
+        in:
+          left: 4
+          right: 33
+        out:
+          bottom: 2
+
+    It 'calculates log_10 1000 correctly' ->
+      io-test do
+        type: \log
+        in:
+          left: 10
+          right: 1000
+        out:
+          bottom: 3
+
+    It 'calculates log_10 Infinity correctly' ->
+      io-test do
+        type: \log
+        in:
+          left: 10
+          right: Infinity
+        out:
+          bottom: Infinity
+
+    It 'calculates log_Infinity 10 correctly' ->
+      io-test do
+        type: \log
+        in:
+          left: Infinity
+          right: 10
+        out:
+          bottom: 0
+
+    It 'returns -Infinity when right is 0' ->
+      io-test do
+        type: \log
+        in:
+          left: 334
+          right: 0
+        out:
+          bottom: -Infinity
+
+    It 'ignores signs of input data' ->
+      io-test do
+        type: \log
+        in:
+          left: -4
+          right: -33
+        out:
+          bottom: 2
+
+  describe 'c-contact block' ->
+    context 'without rotation' ->
+      It 'receives nonzero data from top and sends 1 to right' ->
+        io-test do
+          type: \c-contact
+          in: top: 334
+          out: right: 1
+
+      It 'receives zero from top and sends 1 to left' ->
+        io-test do
+          type: \c-contact
+          in: top: 0
+          out: left: 1
+
+    context 'with 90deg rotated' ->
+      It 'receives nonzero data from right and sends 1 to bottom' ->
+        io-test do
+          type: \c-contact
+          rotate: 1
+          in: right: 334
+          out: bottom: 1
+
+      It 'receives zero from right and sends 1 to top' ->
+        io-test do
+          type: \c-contact
+          rotate: 1
+          in: right: 0
+          out: top: 1
+
+  describe 'transistor block' ->
+    context 'without rotation' ->
+      It 'receives nonzero data from top and conveys data from left to right' ->
+        io-test do
+          type: \transistor
+          in:
+            top: 33
+            left: 4
+          out:
+            right: 4
+
+      It 'receives zero from top and conveys data from left to bottom' ->
+        io-test do
+          type: \transistor
+          in:
+            top: 0
+            left: 334
+          out:
+            bottom: 334
+
+    context 'with 90deg rotated' ->
+      It 'receives nonzero data from right and conveys data from top to bottom' ->
+        io-test do
+          type: \transistor
+          rotate: 1
+          in:
+            top: 33
+            right: 4
+          out:
+            bottom: 33
+
+  describe 'and block' ->
+    It 'calculates logical and' ->
+      io-test do
+        type: \and
+        in:
+          left: 0
+          right: 0
+        out:
+          bottom: 0
+
+      io-test do
+        type: \and
+        in:
+          left: 1
+          right: 0
+        out:
+          bottom: 0
+
+      io-test do
+        type: \and
+        in:
+          left: 0
+          right: 1
+        out:
+          bottom: 0
+
+      io-test do
+        type: \and
+        in:
+          left: 1
+          right: 1
+        out:
+          bottom: 1
+
+  describe 'or block' ->
+    It 'calculates logical or' ->
+      io-test do
+        type: \or
+        in:
+          left: 0
+          right: 0
+        out:
+          bottom: 0
+
+      io-test do
+        type: \or
+        in:
+          left: 1
+          right: 0
+        out:
+          bottom: 1
+
+      io-test do
+        type: \or
+        in:
+          left: 0
+          right: 1
+        out:
+          bottom: 1
+
+      io-test do
+        type: \or
+        in:
+          left: 1
+          right: 1
+        out:
+          bottom: 1
+
+  describe 'nand block' ->
+    It 'calculates logical nand' ->
+      io-test do
+        type: \nand
+        in:
+          left: 0
+          right: 0
+        out:
+          bottom: 1
+
+      io-test do
+        type: \nand
+        in:
+          left: 1
+          right: 0
+        out:
+          bottom: 1
+
+      io-test do
+        type: \nand
+        in:
+          left: 0
+          right: 1
+        out:
+          bottom: 1
+
+      io-test do
+        type: \nand
+        in:
+          left: 1
+          right: 1
+        out:
+          bottom: 0
+
+  describe 'nor block' ->
+    It 'calculates logical nor' ->
+      io-test do
+        type: \nor
+        in:
+          left: 0
+          right: 0
+        out:
+          bottom: 1
+
+      io-test do
+        type: \nor
+        in:
+          left: 1
+          right: 0
+        out:
+          bottom: 0
+
+      io-test do
+        type: \nor
+        in:
+          left: 0
+          right: 1
+        out:
+          bottom: 0
+
+      io-test do
+        type: \nor
+        in:
+          left: 1
+          right: 1
+        out:
+          bottom: 0
+
+  describe 'xor block' ->
+    It 'calculates logical xor' ->
+      io-test do
+        type: \xor
+        in:
+          left: 0
+          right: 0
+        out:
+          bottom: 0
+
+      io-test do
+        type: \xor
+        in:
+          left: 1
+          right: 0
+        out:
+          bottom: 1
+
+      io-test do
+        type: \xor
+        in:
+          left: 0
+          right: 1
+        out:
+          bottom: 1
+
+      io-test do
+        type: \xor
+        in:
+          left: 1
+          right: 1
+        out:
+          bottom: 0
+
+  describe 'not block' ->
+    It 'calculates logical not' ->
+      io-test do
+        type: \not
+        in: top: 0
+        out: bottom: 1
+
+      io-test do
+        type: \not
+        in: top: 1
+        out: bottom: 0
+
+  describe 'sqrt block' ->
+    It 'calculates square root' ->
+      io-test do
+        type: \sqrt
+        in: top: 1
+        out: bottom: 1
+
+      io-test do
+        type: \sqrt
+        in: top: 80
+        out: bottom: 8
+
+      io-test do
+        type: \sqrt
+        in: top: 81
+        out: bottom: 9
+
+      io-test do
+        type: \sqrt
+        in: top: 334
+        out: bottom: 18
+
+      io-test do
+        type: \sqrt
+        in: top: Infinity
+        out: bottom: Infinity
+
+    It 'returns zero when negative numbers were given' ->
+      io-test do
+        type: \sqrt
+        in: top: 0
+        out: bottom: 0
+
+      io-test do
+        type: \sqrt
+        in: top: -334
+        out: bottom: 0
+
+      io-test do
+        type: \sqrt
+        in: top: -Infinity
+        out: bottom: 0

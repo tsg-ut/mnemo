@@ -3,8 +3,14 @@ const sequelize = require('./');
 
 const Stage = sequelize.define('stages', {
 	name: Sequelize.TEXT,
-	width: Sequelize.INTEGER,
-	height: Sequelize.INTEGER,
+	migratedVersion: {
+		type: Sequelize.INTEGER,
+		allowNull: false,
+		defaultValue: 1,
+		validate: {
+			min: 1,
+		},
+	},
 });
 
 module.exports = Stage;

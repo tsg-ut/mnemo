@@ -9,13 +9,10 @@
     "username": "",
     "password": "",
     "dialect": "sqlite",
-    "storage": "db-test.sqlite3"
+    "storage": ":memory:",
+    "logging": false
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "mnemo",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "use_env_variable": "DATABASE_URL"
   }
 }

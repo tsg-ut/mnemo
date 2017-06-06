@@ -1,15 +1,31 @@
 doctype
 html
 	head
-		meta(charset="utf-8")
-		meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
-		title MNEMO
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=1200')
+		title MNEMO プログラミング風パズルゲーム
+		meta(name='description', content='MNEMO(ニーモ)は、ブラウザ上で遊べるパズルゲームです。小学生からガチプログラマーまで。めざせランキング制覇。')
+		// meta keywords は全く必要ないらしいけど、一応と言うか念のため
+		meta(name='keywords', content='パズル,ゲーム,プログラミング,MNEMO,ニーモ')
+		meta(property='fb:app_id', content='1864540247116178')
+		meta(property='og:title', content='MNEMO プログラミング風パズルゲーム')
+		meta(property='og:type', content='website')
+		meta(property='og:url', content='https://mnemo.pro/')
+		meta(property='og:image', content='https://mnemo.pro/image/ogimage.png')
+		meta(property='og:description', content='MNEMO(ニーモ)は、ブラウザ上で遊べるパズルゲームです。小学生からガチプログラマーまで。めざせランキング制覇。')
+		meta(property='og:site_name', content='MNEMO')
+		meta(name='twitter:card', content='summary')
+		meta(name='twitter:site', content='@tsg_ut')
+		meta(name='twitter:creator', content='@tsg_ut')
+		meta(name='twitter:title', content='MNEMO プログラミング風パズルゲーム')
+		meta(name='twitter:description', content='MNEMO(ニーモ)は、ブラウザ上で遊べるパズルゲームです。小学生からガチプログラマーまで。めざせランキング制覇。')
+		meta(name='twitter:image', content='https://mnemo.pro/image/ogimage.png')
 		script if (location.hostname === 'mnemo.pro' && location.protocol === 'http:') location.protocol = 'https:';
 		if process.env.NODE_ENV === 'production'
-			script(src="index.min.js", charset="utf-8")
+			script(src="index.min.js", charset="utf-8", async)
 			link(href="index.min.css", rel="stylesheet")
 		else
-			script(src="index.js", charset="utf-8")
+			script(src="index.js", charset="utf-8", async)
 			link(href="index.css", rel="stylesheet")
 	body
 		a.github-fork-ribbon(href='https://github.com/tsg-ut/mnemo', title='Fork me on GitHub', target='_blank') Fork me on GitHub
@@ -22,7 +38,11 @@ html
 					.screen.menu-screen
 						.menu
 							.row
-								img.logo(src = 'image/logo-slim.png')
+								img.logo(src='image/logo-slim.png')
+							.row.tsg-credit
+								| by
+								a(href='http://tsg.ne.jp/', target='_blank')
+									img.tsg-logo(src='image/tsg.png')
 							.row
 								button.big.start はじめる
 							.row
@@ -75,21 +95,10 @@ html
 												.board-joint-top-pipe
 												.board-top-pipe
 												.board-frame
-													.top
-														.left
-														.center
-														.right
-													.middle
-														.left
-														.center.board-wrap
-															.board
-																.rows
-																.data-layer
-														.right
-													.bottom
-														.left
-														.center
-														.right
+													.board-wrap
+														.board
+															.rows
+															.data-layer
 													.clock-area
 														span.clock-icon
 														span.clock-value 0
@@ -102,9 +111,10 @@ html
 										.right-pipe
 										.right-corner-pipe
 								.panel-area
-									.panel
 							.downer-area
 								.left-area
+									a(href='http://tsg.ne.jp/', target='_blank')
+										img.tsg-logo(src='image/tsg.png')
 								.controls-area
 									.controls
 										button.exit(type = 'button')
@@ -117,22 +127,57 @@ html
 									.statement-area
 										.mission MISSION
 										.statement
+						.layer.result-layer
+							.result
+								.result-head
+									.clear
+								.stats
+									.clocks 0
+									.blocks 0
+								.score-window
+									.score
+										| スコア
+										= ' '
+										span.score-value
+									input.name(placeholder='名前')
+									button.register ランキングに登録する
+									a.tweet(target='_blank')
+										i.fa.fa-twitter
+										| Twitterでつぶやく
+								.block-area
+									button.close 閉じる
+									button.next 次のステージへ
+							.limit.clock-limit
+								.head Clock Limit Exceeded!
+								.message
+									| 実行時間が制約(
+									strong.limit-value
+									| )を超えたため、停止しました。
+								button.ok OK
+							.limit.data-limit
+								.head Data Limit Exceeded!
+								.message
+									| データ数が制約(
+									strong.limit-value 100
+									| )を超えたため、停止しました。
+								button.ok OK
+							.ranking.loading
+								.head
+									| ステージ「
+									span.stage-name 余りの計算
+									| 」のランキング
+								ol.ranks
+								button.close 閉じる
 						.layer.modal-layer
-							.modal
-								button.close
-								.modal-content
-									img(src='image/logo.png')
-
-									p プログラミング体験パズルゲーム、MNEMO(ニーモ)をお遊びいただき、ありがとうございます!
-									p このゲームの目的はパネルに表示されている数を、下の数に変換することです。
-
-									img(src='image/modal/01/case.png')
-
-									p 百聞は一見にしかず! まずはボードの上と下をパイプでつないでみましょう。
-									p ボードをクリックするとパイプを配置できます。
-
-									img(src='image/modal/01/board.png')
-
-									p 準備ができたら、下の実行ボタンを押してください。
-
-									img(src='image/modal/01/control.png')
+							- const modals = ['01', '02', '03', '04', 'conditionals']
+							each modal in modals
+								.modal(class=modal)
+									button.close
+									.modal-content
+										case modal
+											when '01': include modals/01/content.pug
+											when '02': include modals/02/content.pug
+											when '03': include modals/03/content.pug
+											when '04': include modals/04/content.pug
+											when 'conditionals': include modals/conditionals/content.pug
+										button.close-content OK

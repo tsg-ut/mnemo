@@ -8,6 +8,8 @@ require! {
 It = global.it
 
 describe 'Application' ->
+  @retries 5
+
   before ->
     @timeout 10000
 

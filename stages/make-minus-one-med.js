@@ -1,0 +1,33 @@
+module.exports = {
+	name: 'make-minus-one-med',
+	version: 3,
+	parts: {
+		wireI: null,
+		wireL: null,
+		wireT: null,
+		'times-2': null,
+		'times-3': null,
+		'plus-1': null,
+		'plus-2': null,
+		equal: null,
+		add: null,
+		mul: null,
+	},
+	inputX: 2,
+	outputX: 2,
+	input: [
+		-1,
+		-2,
+		-3,
+	],
+	output: [
+		-1,
+		-1,
+		-1,
+	],
+	width: 5,
+	height: 10,
+	clockLimit: 50,
+	statement: 'より少ない演算子で入力全てを-1に出力する回路を作ろう（一般的でなく、入力全てさえ正解すれば良い）',
+	title: '-1を作ろう -med-',
+};

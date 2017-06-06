@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/css" href="../anim.css"?>
+<svg width="50" height="50" viewPort="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<image xlink:href="https://mnemo.pro/image/conditional.png" x="0" y="0" width="50" height="50"/>
+	<g class="data-in-top">
+		<rect x="-8" y="-10" width="16" height="20" rx="5" ry="5" fill="#ff8c00"/>
+		<text x="0" y="7" text-anchor="middle" font-size="14" font-weight="bold" fill="white">0</text>
+	</g>
+	<g class="data-in-left">
+		<rect x="-8" y="-10" width="16" height="20" rx="5" ry="5" fill="#ff8c00"/>
+		<text x="0" y="7" text-anchor="middle" font-size="14" font-weight="bold" fill="white">3</text>
+	</g>
+	<g class="data-in-right">
+		<rect x="-8" y="-10" width="16" height="20" rx="5" ry="5" fill="#ff8c00"/>
+		<text x="0" y="7" text-anchor="middle" font-size="14" font-weight="bold" fill="white">7</text>
+	</g>
+	<g class="data-out-bottom">
+		<rect x="-8" y="-10" width="16" height="20" rx="5" ry="5" fill="#ff8c00"/>
+		<text x="0" y="7" text-anchor="middle" font-size="14" font-weight="bold" fill="white">7</text>
+	</g>
+</svg>
