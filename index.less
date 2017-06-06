@@ -1473,7 +1473,7 @@ button {
 			}
 		}
 
-		@buttons: exit, ranking, execute, stop, rapid, step;
+		@buttons: exit, ranking, execute, stop, rapid, save, step;
 		.-(@i: length(@buttons)) when (@i > 0) {
 			@button: extract(@buttons, @i);
 			& > button.@{button} {
