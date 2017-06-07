@@ -354,7 +354,9 @@ describe('/stages', () => {
 			expect(res.body.version).to.equal(wire01.version);
 
 			const submission = await Submissions.findOne({
-				order: 'createdAt DESC',
+				order: [
+					['createdAt', 'DESC'],
+				],
 			});
 
 			expect(submission).to.not.be.null;
