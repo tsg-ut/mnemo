@@ -190,6 +190,7 @@ class BlockComponent extends React.Component {
 					fill="transparent"
 					onClick={this.handleClick}
 					onContextMenu={this.handleClick}
+					cursor="pointer"
 				/>
 				{/* data layer */}
 				<g>

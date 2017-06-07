@@ -527,28 +527,6 @@ class BoardComponent extends React.Component {
 										strokeWidth="5"
 										stroke={inputColors[index % inputColors.length].toString()}
 									/>
-									<g transform={`translate(${-outputAreaWidth / 2 + index * 200}, 50)`}>
-										<rect
-											width="150"
-											height="50"
-											rx="8"
-											fill="white"
-											stroke={inputColors[index % inputColors.length].toString()}
-											strokeWidth="3"
-										/>
-										<text
-											x="75"
-											y="25"
-											fontSize="30"
-											fontFamily="'Exo 2'"
-											fontWeight="900"
-											fill="#333"
-											textAnchor="middle"
-											dominantBaseline="central"
-										>
-											{this.props.userOutput[index] === null ? '' : this.props.userOutput[index]}
-										</text>
-									</g>
 									<g transform={`translate(${-outputAreaWidth / 2 + index * 200}, 110)`}>
 										<rect
 											width="150"
@@ -570,6 +548,67 @@ class BoardComponent extends React.Component {
 										>
 											{output === null ? '???' : output}
 										</text>
+									</g>
+									<g transform={`translate(${-outputAreaWidth / 2 + index * 200}, 50)`}>
+										<rect
+											width="150"
+											height="50"
+											rx="8"
+											fill="white"
+											stroke={inputColors[index % inputColors.length].toString()}
+											strokeWidth="3"
+										/>
+										{this.props.userOutputCorrectness[index] === true && (
+											<g transform="translate(75, 25)" className="correctness">
+												<circle
+													cx="0"
+													cy="0"
+													r="35"
+													fill="none"
+													stroke="red"
+													strokeWidth="14"
+												/>
+											</g>
+										)}
+										{this.props.userOutputCorrectness[index] === false && (
+											<g transform="translate(75, 25)" className="correctness">
+												<line
+													x1="-30"
+													y1="-30"
+													x2="30"
+													y2="30"
+													fill="none"
+													stroke="blue"
+													strokeWidth="14"
+												/>
+												<line
+													x1="30"
+													y1="-30"
+													x2="-30"
+													y2="30"
+													fill="none"
+													stroke="blue"
+													strokeWidth="14"
+												/>
+											</g>
+										)}
+										{this.props.userOutput[index] !== null && (
+											<text
+												x="75"
+												y="25"
+												fontSize="30"
+												fontFamily="'Exo 2'"
+												fontWeight="900"
+												fill="#333"
+												textAnchor="middle"
+												dominantBaseline="central"
+												style={{
+													textShadow: '0 0 15px white',
+												}}
+											>
+												{this.props.userOutput[index]}
+											</text>
+										)}
 									</g>
 								</g>
 							))
