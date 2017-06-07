@@ -116,6 +116,6 @@
     "regenerator-runtime": "^0.10.0",
     "request": "^2.81.0",
     "seedrandom": "^2.4.2",
-    "sequelize": "^3.24.3"
+    "sequelize": "^4.0.0"
   }
 }
