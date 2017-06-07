@@ -65,57 +65,129 @@ module.exports = {
 		[
 			5,
 			[
-				0,
-				1,
-				-1,
-				2,
-				-2,
+				null,
+				null,
+				null,
+				null,
+				null,
 			],
 		],
 		[
 			7,
 			[
-				51,
-				90,
-				20,
-				30,
-				1,
-				60,
-				81,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
 			],
 		],
 		[
 			7,
 			[
-				67,
-				90,
-				46,
-				99,
-				59,
-				23,
-				66,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
 			],
 		],
 		[
 			7,
 			[
-				22,
-				89,
-				48,
-				20,
-				88,
-				39,
-				22,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
 			],
 		],
 	],
 	output: [
 		3,
-		0,
-		51,
-		66,
-		39,
+		null,
+		null,
+		null,
+		null,
 	],
+	ioGenerator: (random) => {
+		const getMedian = (input) => input.slice(0).sort((a, b) => a - b)[(input.length - 1) / 2];
+
+		const isMedianUnique = (input) => {
+			const median = getMedian(input);
+			let count = 0;
+			input.forEach((x) => {
+				if (x === median) {
+					count++;
+				}
+			});
+			return count === 1;
+		};
+
+		const inputs = [
+			[1, 2, 3, 4, 5],
+		];
+
+		// 5 numbers in -5..5
+		inputs.push((() => {
+			let input = null;
+
+			do {
+				input = Array.from({length: 5}, () => -5 + Math.floor(random() * 11));
+			} while (!isMedianUnique(input));
+
+			return input;
+		})());
+
+		// 7 numbers in 1..100
+		inputs.push((() => {
+			let input = null;
+
+			do {
+				input = Array.from({length: 7}, () => 1 + Math.floor(random() * 100));
+			} while (!isMedianUnique(input));
+
+			return input;
+		})());
+
+		// 7 numbers in 0..49
+		inputs.push((() => {
+			let input = null;
+
+			do {
+				input = Array.from({length: 7}, () => Math.floor(random() * 50));
+			} while (!isMedianUnique(input));
+
+			return input;
+		})());
+
+		// 7 numbers in 50..99, the median is at last
+		inputs.push((() => {
+			let input = null;
+
+			do {
+				input = Array.from({length: 7}, () => 50 + Math.floor(random() * 50));
+			} while (!isMedianUnique(input));
+
+			// Swap the median and the last
+			const median = getMedian(input);
+			input[input.indexOf(median)] = input[6];
+			input[6] = median;
+
+			return input;
+		})());
+
+		return {
+			input: inputs.map((input) => [input.length, input]),
+			output: inputs.map((input) => getMedian(input)),
+		};
+	},
 	width: 31,
 	height: 31,
 	clockLimit: 2000,
