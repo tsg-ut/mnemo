@@ -595,6 +595,32 @@ button {
 			}
 		}
 	}
+	.save-panel-layer {
+		z-index: 1;
+		pointer-events: none;
+		.save-panel {
+			display: none;
+			pointer-events: initial;
+			width: 80%;
+			background: url(image/restaurant_icons.png);
+			color: #333;
+			box-sizing: border-box;
+			border-radius: 30px;
+			position: absolute;
+			max-height: 80vh;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			.save {
+				width: 102px;
+				height: 102px;
+
+				position: absolute;
+				top: -30px;
+				right: -30px;
+			}
+		}
+	}
 
 	.modal-layer {
 		z-index: 1;
