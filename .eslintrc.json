@@ -186,7 +186,14 @@
         "no-restricted-globals": "error",
         "no-restricted-imports": "error",
         "no-restricted-modules": "error",
-        "no-restricted-syntax": "error",
+        "no-restricted-syntax": [
+            "error",
+            "BinaryExpression[operator='in']",
+            "EmptyStatement",
+            "ForInStatement",
+            "LabeledStatement",
+            "WithStatement"
+        ],
         "no-return-assign": "error",
         "no-script-url": "error",
         "no-self-compare": "error",
@@ -347,7 +354,6 @@
         "react/jsx-no-undef": "error",
         "react/jsx-pascal-case": "error",
         "react/jsx-sort-props": "off",
-        "react/jsx-space-before-closing": ["error", "never"],
         "react/jsx-tag-spacing": ["error", {"beforeSelfClosing": "never"}],
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",

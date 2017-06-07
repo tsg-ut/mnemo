@@ -47,10 +47,6 @@ class DataComponent extends React.Component {
 		if (!this.props.isRapid && nextProps.isRapid) {
 			this.handleStartRapid();
 		}
-
-		if (this.props.isRapid && !nextProps.isRapid) {
-			this.handleStopRapid();
-		}
 	}
 
 	handleStartAnimation = () => {
@@ -87,7 +83,9 @@ class DataComponent extends React.Component {
 				scale: 2,
 				opacity: 0,
 				onComplete: () => {
-					this.props.onEraseAnimationComplete();
+					setTimeout(() => {
+						this.props.onEraseAnimationComplete();
+					}, 0);
 				},
 			}))
 		));
@@ -105,10 +103,6 @@ class DataComponent extends React.Component {
 		if (this.erasion) {
 			this.erasion.seek(this.erasion.duration(), false);
 		}
-	}
-
-	handleStopRapid() {
-
 	}
 
 	getAnimationProperties = () => {
