@@ -35,6 +35,7 @@ class BoardComponent extends React.Component {
 		onOutput: PropTypes.func.isRequired,
 		onHalt: PropTypes.func.isRequired,
 		onPaused: PropTypes.func.isRequired,
+		isRapid: PropTypes.bool.isRequired,
 	}
 
 	static defaultProps = {
@@ -504,6 +505,7 @@ class BoardComponent extends React.Component {
 												status={this.props.status}
 												onClick={this.handleClickBlock}
 												onPassAnimationComplete={this.handlePassAnimationComplete}
+												isRapid={this.props.isRapid}
 											/>
 										))
 									))

@@ -14,6 +14,7 @@ class DataComponent extends React.Component {
 		value: PropTypes.number.isRequired,
 		onAnimationComplete: PropTypes.func.isRequired,
 		onEraseAnimationComplete: PropTypes.func.isRequired,
+		isRapid: PropTypes.bool.isRequired,
 	}
 
 	componentDidMount() {
@@ -42,15 +43,27 @@ class DataComponent extends React.Component {
 		if (this.props.isErasing && !nextProps.isErasing) {
 			this.handleStopErasion();
 		}
+
+		if (!this.props.isRapid && nextProps.isRapid) {
+			this.handleStartRapid();
+		}
+
+		if (this.props.isRapid && !nextProps.isRapid) {
+			this.handleStopRapid();
+		}
 	}
 
 	handleStartAnimation = () => {
+		const duration = this.props.isRapid ? 0 : 0.4;
+
 		this.animation = this.addAnimation(({target}) => (
-			TweenLite.to(target, 0.4, Object.assign({
+			TweenLite.to(target, duration, Object.assign({
 				transformOrigin: 'center center',
 				ease: Power0.easeNone,
 				onComplete: () => {
-					this.props.onAnimationComplete();
+					setTimeout(() => {
+						this.props.onAnimationComplete();
+					}, 0);
 				},
 			}, this.getAnimationProperties()))
 		));
@@ -65,8 +78,10 @@ class DataComponent extends React.Component {
 			this.animation.pause();
 		}
 
+		const duration = this.props.isRapid ? 0 : 0.4;
+
 		this.erasion = this.addAnimation(({target}) => (
-			TweenLite.to(target, 0.4, Object.assign({
+			TweenLite.to(target, duration, Object.assign({
 				transformOrigin: 'center center',
 				ease: Power0.easeNone,
 				scale: 2,
@@ -80,6 +95,20 @@ class DataComponent extends React.Component {
 
 	handleStopErasion = () => {
 		this.erasion.pause();
+	}
+
+	handleStartRapid() {
+		if (this.animation) {
+			this.animation.seek(this.animation.duration(), false);
+		}
+
+		if (this.erasion) {
+			this.erasion.seek(this.erasion.duration(), false);
+		}
+	}
+
+	handleStopRapid() {
+
 	}
 
 	getAnimationProperties = () => {

@@ -14,6 +14,7 @@ class BlockComponent extends React.Component {
 		}).isRequired,
 		onClick: PropTypes.func.isRequired,
 		onPassAnimationComplete: PropTypes.func.isRequired,
+		isRapid: PropTypes.bool.isRequired,
 	}
 
 	constructor(props, state) {
@@ -205,6 +206,7 @@ class BlockComponent extends React.Component {
 								value={data.value}
 								onAnimationComplete={this.handleDataAnimationComplete.bind(null, data)}
 								onEraseAnimationComplete={this.handleDataEraseAnimationComplete.bind(null, data)}
+								isRapid={this.props.isRapid}
 							/>
 						))),
 						...(this.state.animatingData.map(({direction, data, isInward, isErasing}) => (
@@ -217,6 +219,7 @@ class BlockComponent extends React.Component {
 								value={data.value}
 								onAnimationComplete={this.handleDataAnimationComplete.bind(null, data)}
 								onEraseAnimationComplete={this.handleDataEraseAnimationComplete.bind(null, data)}
+								isRapid={this.props.isRapid}
 							/>
 						))),
 						...(this.state.outputData.map(({direction, data, isErasing}) => (
@@ -229,6 +232,7 @@ class BlockComponent extends React.Component {
 								value={data.value}
 								onAnimationComplete={this.handleDataAnimationComplete.bind(null, data)}
 								onEraseAnimationComplete={this.handleDataEraseAnimationComplete.bind(null, data)}
+								isRapid={this.props.isRapid}
 							/>
 						))),
 					]}
