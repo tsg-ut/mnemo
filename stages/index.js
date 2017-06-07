@@ -35,6 +35,8 @@ const stages = [
 	require('./reversal.js'),
 	require('./msd.js'),
 	require('./mod3-hard.js'),
+	require('./seq01.js'),
+	require('./seq02.js'),
 	require('./max.js'),
 	require('./the-fifth-max.js'),
 	require('./100.js'),
