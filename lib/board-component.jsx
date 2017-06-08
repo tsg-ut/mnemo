@@ -113,6 +113,42 @@ class BoardComponent extends React.Component {
 		return this.getBlock(this.outputBlockX, this.outputBlockY);
 	}
 
+	get _borderSize() {
+		return 25;
+	}
+
+	get _boardWidth() {
+		return this.props.width * BLOCK_SIZE;
+	}
+
+	get _boardHeight() {
+		return this.props.width * BLOCK_SIZE;
+	}
+
+	get _inputHeight() {
+		return 120;
+	}
+
+	get _outputHeight() {
+		return 170;
+	}
+
+	get _boardOuterWidth() {
+		return this._borderSize * 2 + this._boardWidth;
+	}
+
+	get _boardOuterHeight() {
+		return this._borderSize * 2 + this._boardWidth;
+	}
+
+	get _inputAreaWidth() {
+		return this.props.input.length * 200 - 50;
+	}
+
+	get _outputAreaWidth() {
+		return this.props.output.length * 200 - 50;
+	}
+
 	getBlock(x, y) {
 		return this.board.getBlock(x, y);
 	}
@@ -257,14 +293,6 @@ class BoardComponent extends React.Component {
 	}
 
 	getViewBox = () => {
-		const borderSize = 25;
-		const inputHeight = 120;
-		const outputHeight = 170;
-		const boardWidth = this.props.width * BLOCK_SIZE;
-		const boardHeight = this.props.height * BLOCK_SIZE;
-		const boardOuterWidth = borderSize * 2 + boardWidth;
-		const boardOuterHeight = borderSize * 2 + boardHeight;
-
 		if (this.state.isPanning) {
 			let scale = 1;
 
@@ -273,21 +301,21 @@ class BoardComponent extends React.Component {
 			}
 
 			return [
-				-boardOuterWidth / 2 -
+				-this._boardOuterWidth / 2 -
 					this.state.panDistance * Math.cos(this.state.panAngle / 180 * Math.PI) * scale,
-				-boardOuterHeight / 2 -
+				-this._boardOuterHeight / 2 -
 					this.state.panDistance * Math.sin(this.state.panAngle / 180 * Math.PI) * scale -
-					inputHeight,
-				boardOuterWidth,
-				boardOuterHeight + inputHeight + outputHeight,
+					this._inputHeight,
+				this._boardOuterWidth,
+				this._boardOuterHeight + this._inputHeight + this._outputHeight,
 			].map((value) => value / this.state.scale).join(' ');
 		}
 
 		return [
-			-boardOuterWidth / 2,
-			-boardOuterHeight / 2 - inputHeight,
-			boardOuterWidth,
-			boardOuterHeight + inputHeight + outputHeight,
+			-this._boardOuterWidth / 2,
+			-this._boardOuterHeight / 2 - this._inputHeight,
+			this._boardOuterWidth,
+			this._boardOuterHeight + this._inputHeight + this._outputHeight,
 		].map((value) => value / this.state.scale).join(' ');
 	}
 
@@ -307,14 +335,6 @@ class BoardComponent extends React.Component {
 	}
 
 	render() {
-		const borderSize = 25;
-		const boardWidth = this.props.width * BLOCK_SIZE;
-		const boardHeight = this.props.height * BLOCK_SIZE;
-		const boardOuterWidth = borderSize * 2 + boardWidth;
-		const boardOuterHeight = borderSize * 2 + boardHeight;
-		const inputAreaWidth = this.props.input.length * 200 - 50;
-		const outputAreaWidth = this.props.output.length * 200 - 50;
-
 		return (
 			<Hammer
 				onPan={this.handlePan}
@@ -333,123 +353,84 @@ class BoardComponent extends React.Component {
 					onDragStart={this.handleDragStart}
 				>
 					{/* inputs */}
-					<g transform={`translate(0, ${-boardOuterHeight / 2 - 100})`}>
-						{
-							this.props.input.map((input, index) => (
-								<g key={index}>
-									<g transform={`translate(${-inputAreaWidth / 2 + index * 200}, 0)`}>
-										<rect
-											width="150"
-											height="50"
-											rx="8"
-											fill={inputColors[index % inputColors.length].toString()}
-											stroke={inputColors[index % inputColors.length].toString()}
-											strokeWidth="3"
-										/>
-										<text
-											x="75"
-											y="25"
-											fontSize="30"
-											fontFamily="'Exo 2'"
-											fontWeight="900"
-											fill="white"
-											textAnchor="middle"
-											dominantBaseline="central"
-										>
-											{input === null ? '???' : input}
-										</text>
-									</g>
-									<path
-										d={this.getIOWirePathData({
-											startX: -inputAreaWidth / 2 + index * 200 + 75,
-											endX: (index - (this.props.input.length - 1) / 2) * 10,
-											head: 0,
-											tail: 20,
-										})}
-										transform={'translate(0, 50)'}
-										fill="none"
-										strokeWidth="5"
-										stroke={inputColors[index % inputColors.length].toString()}
-									/>
-								</g>
-							))
-						}
+					<g transform={`translate(0, ${-this._boardOuterHeight / 2 - 100})`}>
+						{this.renderInputs()}
 					</g>
 					{/* board + board-border */}
-					<g transform={`translate(${-boardOuterWidth / 2}, ${-boardOuterHeight / 2})`}>
+					<g transform={`translate(${-this._boardOuterWidth / 2}, ${-this._boardOuterHeight / 2})`}>
 						{/* board-border */}
 						<g>
 							{/* top-left */}
 							<image
 								x="0"
 								y="0"
-								width={borderSize}
-								height={borderSize}
+								width={this._borderSize}
+								height={this._borderSize}
 								href="image/frame-topleft.png"
 							/>
 							{/* top */}
 							<image
-								x={borderSize}
+								x={this._borderSize}
 								y="0"
-								width={boardWidth}
-								height={borderSize}
+								width={this._boardWidth}
+								height={this._borderSize}
 								preserveAspectRatio="none"
 								href="image/frame-top.png"
 							/>
 							{/* top-right */}
 							<image
-								x={borderSize + boardWidth}
+								x={this._borderSize + this._boardWidth}
 								y="0"
-								width={borderSize}
-								height={borderSize}
+								width={this._borderSize}
+								height={this._borderSize}
 								href="image/frame-topright.png"
 							/>
 							{/* left */}
 							<image
 								x="0"
-								y={borderSize}
-								width={borderSize}
-								height={boardHeight}
+								y={this._borderSize}
+								width={this._borderSize}
+								height={this._boardHeight}
 								preserveAspectRatio="none"
 								href="image/frame-left.png"
 							/>
 							{/* right */}
 							<image
-								x={borderSize + boardWidth}
-								y={borderSize}
-								width={borderSize}
-								height={boardHeight}
+								x={this._borderSize + this._boardWidth}
+								y={this._borderSize}
+								width={this._borderSize}
+								height={this._boardHeight}
 								preserveAspectRatio="none"
 								href="image/frame-right.png"
 							/>
 							{/* bottom-left */}
 							<image
 								x="0"
-								y={borderSize + boardHeight}
-								width={borderSize}
-								height={borderSize}
+								y={this._borderSize + this._boardHeight}
+								width={this._borderSize}
+								height={this._borderSize}
 								href="image/frame-bottomleft.png"
 							/>
 							{/* bottom */}
 							<image
-								x={borderSize}
-								y={borderSize + boardHeight}
-								width={boardWidth}
-								height={borderSize}
+								x={this._borderSize}
+								y={this._borderSize + this._boardHeight}
+								width={this._boardWidth}
+								height={this._borderSize}
 								preserveAspectRatio="none"
 								href="image/frame-bottom.png"
 							/>
 							{/* bottom-right */}
 							<image
-								x={borderSize + boardWidth}
-								y={borderSize + boardHeight}
-								width={borderSize}
-								height={borderSize}
+								x={this._borderSize + this._boardWidth}
+								y={this._borderSize + this._boardHeight}
+								width={this._borderSize}
+								height={this._borderSize}
 								href="image/frame-bottomright.png"
 							/>
 						</g>
 						{/* board */}
-						<g transform={`translate(${borderSize}, ${borderSize})`}>
+						<g transform={`translate(${this._borderSize}, ${this._borderSize})`}>
 							<Measure onMeasure={this.handleMeasureBackground}>
 								<rect
 									className="board-background"
@@ -458,64 +439,7 @@ class BoardComponent extends React.Component {
 								/>
 							</Measure>
 							<g>
-								{/* Because of the limitation of React (cannot render sibling
-									elements) and SVG (first element always rendered first),
-									blocks renderings are located here.
-									They must be inside BlockComponent, though... */}
-								{
-									this.state.blocks.map((row) => (
-										row.map((block) => (
-											<g key={id(block)}>
-												<rect
-													className="block-border"
-													width={BLOCK_SIZE}
-													height={BLOCK_SIZE}
-													x={block.x * BLOCK_SIZE}
-													y={block.y * BLOCK_SIZE}
-												/>
-												{block.config.onRotatableWire && (
-													<image
-														className="block"
-														width={BLOCK_SIZE}
-														height={BLOCK_SIZE}
-														x={block.x * BLOCK_SIZE}
-														y={block.y * BLOCK_SIZE}
-														href="image/wireI.png"
-														transform={`rotate(${block.rotate * 90})`}
-														style={{
-															transformOrigin: 'center',
-															// Enabled from FF55
-															transformBox: 'fill-box',
-															pointerEvents: 'none',
-														}}
-													/>
-												)}
-												{
-													(block.name !== 'empty') && (
-														<image
-															className="block"
-															width={BLOCK_SIZE}
-															height={BLOCK_SIZE}
-															x={block.x * BLOCK_SIZE}
-															y={block.y * BLOCK_SIZE}
-															href={`image/${block.name}.png`}
-															{...(
-																!block.config.onRotatableWire &&
-																{transform: `rotate(${block.rotate * 90})`}
-															)}
-															style={{
-																transformOrigin: 'center',
-																// Enabled from FF55
-																transformBox: 'fill-box',
-																pointerEvents: 'none',
-															}}
-														/>
-													)
-												}
-											</g>
-										))
-									))
-								}
+								{this.renderBlocks()}
 							</g>
 							<g>
 								{
@@ -538,112 +462,216 @@ class BoardComponent extends React.Component {
 						</g>
 					</g>
 					{/* outputs */}
-					<g transform={`translate(0, ${boardOuterHeight / 2})`}>
-						{
-							this.props.output.map((output, index) => (
-								<g key={index}>
-									<path
-										d={this.getIOWirePathData({
-											startX: (index - (this.props.output.length - 1) / 2) * 10,
-											endX: -outputAreaWidth / 2 + index * 200 + 75,
-											head: 20,
-											tail: 0,
-										})}
-										fill="none"
-										strokeWidth="5"
-										stroke={inputColors[index % inputColors.length].toString()}
-									/>
-									<g transform={`translate(${-outputAreaWidth / 2 + index * 200}, 110)`}>
-										<rect
-											width="150"
-											height="50"
-											rx="8"
-											fill={inputColors[index % inputColors.length].toString()}
-											stroke={inputColors[index % inputColors.length].toString()}
-											strokeWidth="3"
-										/>
-										<text
-											x="75"
-											y="25"
-											fontSize="30"
-											fontFamily="'Exo 2'"
-											fontWeight="900"
-											fill="white"
-											textAnchor="middle"
-											dominantBaseline="central"
-										>
-											{output === null ? '???' : output}
-										</text>
-									</g>
-									<g transform={`translate(${-outputAreaWidth / 2 + index * 200}, 50)`}>
-										<rect
-											width="150"
-											height="50"
-											rx="8"
-											fill="white"
-											stroke={inputColors[index % inputColors.length].toString()}
-											strokeWidth="3"
-										/>
-										{this.props.userOutputCorrectness[index] === true && (
-											<g transform="translate(75, 25)" className="correctness">
-												<circle
-													cx="0"
-													cy="0"
-													r="35"
-													fill="none"
-													stroke="red"
-													strokeWidth="14"
-												/>
-											</g>
-										)}
-										{this.props.userOutputCorrectness[index] === false && (
-											<g transform="translate(75, 25)" className="correctness">
-												<line
-													x1="-30"
-													y1="-30"
-													x2="30"
-													y2="30"
-													fill="none"
-													stroke="blue"
-													strokeWidth="14"
-												/>
-												<line
-													x1="30"
-													y1="-30"
-													x2="-30"
-													y2="30"
-													fill="none"
-													stroke="blue"
-													strokeWidth="14"
-												/>
-											</g>
-										)}
-										{this.props.userOutput[index] !== null && (
-											<text
-												x="75"
-												y="25"
-												fontSize="30"
-												fontFamily="'Exo 2'"
-												fontWeight="900"
-												fill="#333"
-												textAnchor="middle"
-												dominantBaseline="central"
-												style={{
-													textShadow: '0 0 15px white',
-												}}
-											>
-												{this.props.userOutput[index]}
-											</text>
-										)}
-									</g>
-								</g>
-							))
-						}
+					<g transform={`translate(0, ${this._boardOuterHeight / 2})`}>
+						{this.renderOutputs()}
 					</g>
 				</svg>
 			</Hammer>
 		);
 	}
+
+	renderInputs = () => (
+		this.props.input.map((input, index) => (
+			<g key={index}>
+				<g transform={`translate(${-this._inputAreaWidth / 2 + index * 200}, 0)`}>
+					<rect
+						width="150"
+						height="50"
+						rx="8"
+						fill={inputColors[index % inputColors.length].toString()}
+						stroke={inputColors[index % inputColors.length].toString()}
+						strokeWidth="3"
+					/>
+					<text
+						x="75"
+						y="25"
+						fontSize="30"
+						fontFamily="'Exo 2'"
+						fontWeight="900"
+						fill="white"
+						textAnchor="middle"
+						dominantBaseline="central"
+					>
+						{input === null ? '???' : input}
+					</text>
+				</g>
+				<path
+					d={this.getIOWirePathData({
+						startX: -this._inputAreaWidth / 2 + index * 200 + 75,
+						endX: (index - (this.props.input.length - 1) / 2) * 10,
+						head: 0,
+						tail: 20,
+					})}
+					transform={'translate(0, 50)'}
+					fill="none"
+					strokeWidth="5"
+					stroke={inputColors[index % inputColors.length].toString()}
+				/>
+			</g>
+		))
+	)
+
+	/*
+		Because of the limitation of React (cannot render sibling
+		elements) and SVG (first element always rendered first),
+		blocks renderings are located here.
+		They must be inside BlockComponent, though...
+	*/
+	renderBlocks = () => (
+		this.state.blocks.map((row) => (
+			row.map((block) => (
+				<g key={id(block)}>
+					<rect
+						className="block-border"
+						width={BLOCK_SIZE}
+						height={BLOCK_SIZE}
+						x={block.x * BLOCK_SIZE}
+						y={block.y * BLOCK_SIZE}
+					/>
+					{block.config.onRotatableWire && (
+						<image
+							className="block"
+							width={BLOCK_SIZE}
+							height={BLOCK_SIZE}
+							x={block.x * BLOCK_SIZE}
+							y={block.y * BLOCK_SIZE}
+							href="image/wireI.png"
+							transform={`rotate(${block.rotate * 90})`}
+							style={{
+								transformOrigin: 'center',
+								// Enabled from FF55
+								transformBox: 'fill-box',
+								pointerEvents: 'none',
+							}}
+						/>
+					)}
+					{
+						(block.name !== 'empty') && (
+							<image
+								className="block"
+								width={BLOCK_SIZE}
+								height={BLOCK_SIZE}
+								x={block.x * BLOCK_SIZE}
+								y={block.y * BLOCK_SIZE}
+								href={`image/${block.name}.png`}
+								{...(
+									!block.config.onRotatableWire &&
+									{transform: `rotate(${block.rotate * 90})`}
+								)}
+								style={{
+									transformOrigin: 'center',
+									// Enabled from FF55
+									transformBox: 'fill-box',
+									pointerEvents: 'none',
+								}}
+							/>
+						)
+					}
+				</g>
+			))
+		))
+	)
+
+	renderOutputs = () => (
+		this.props.output.map((output, index) => (
+			<g key={index}>
+				<path
+					d={this.getIOWirePathData({
+						startX: (index - (this.props.output.length - 1) / 2) * 10,
+						endX: -this._outputAreaWidth / 2 + index * 200 + 75,
+						head: 20,
+						tail: 0,
+					})}
+					fill="none"
+					strokeWidth="5"
+					stroke={inputColors[index % inputColors.length].toString()}
+				/>
+				<g transform={`translate(${-this._outputAreaWidth / 2 + index * 200}, 110)`}>
+					<rect
+						width="150"
+						height="50"
+						rx="8"
+						fill={inputColors[index % inputColors.length].toString()}
+						stroke={inputColors[index % inputColors.length].toString()}
+						strokeWidth="3"
+					/>
+					<text
+						x="75"
+						y="25"
+						fontSize="30"
+						fontFamily="'Exo 2'"
+						fontWeight="900"
+						fill="white"
+						textAnchor="middle"
+						dominantBaseline="central"
+					>
+						{output === null ? '???' : output}
+					</text>
+				</g>
+				<g transform={`translate(${-this._outputAreaWidth / 2 + index * 200}, 50)`}>
+					<rect
+						width="150"
+						height="50"
+						rx="8"
+						fill="white"
+						stroke={inputColors[index % inputColors.length].toString()}
+						strokeWidth="3"
+					/>
+					{this.props.userOutputCorrectness[index] === true && (
+						<g transform="translate(75, 25)" className="correctness">
+							<circle
+								cx="0"
+								cy="0"
+								r="35"
+								fill="none"
+								stroke="red"
+								strokeWidth="14"
+							/>
+						</g>
+					)}
+					{this.props.userOutputCorrectness[index] === false && (
+						<g transform="translate(75, 25)" className="correctness">
+							<line
+								x1="-30"
+								y1="-30"
+								x2="30"
+								y2="30"
+								fill="none"
+								stroke="blue"
+								strokeWidth="14"
+							/>
+							<line
+								x1="30"
+								y1="-30"
+								x2="-30"
+								y2="30"
+								fill="none"
+								stroke="blue"
+								strokeWidth="14"
+							/>
+						</g>
+					)}
+					{this.props.userOutput[index] !== null && (
+						<text
+							x="75"
+							y="25"
+							fontSize="30"
+							fontFamily="'Exo 2'"
+							fontWeight="900"
+							fill="#333"
+							textAnchor="middle"
+							dominantBaseline="central"
+							style={{
+								textShadow: '0 0 15px white',
+							}}
+						>
+							{this.props.userOutput[index]}
+						</text>
+					)}
+				</g>
+			</g>
+		))
+	)
 }
 
 module.exports = BoardComponent;

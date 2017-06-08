@@ -331,7 +331,7 @@
         "react/require-optimization": "error",
         "react/require-render-return": "error",
         "react/self-closing-comp": "error",
-        "react/sort-comp": "error",
+        "react/sort-comp": "off",
         "react/sort-prop-types": "off",
         "react/style-prop-object": "error",
         "react/void-dom-elements-no-children": "error",
