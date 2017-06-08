@@ -557,6 +557,8 @@ button {
 		pointer-events: none;
 
 		.result {
+			@mobile-margin: 15px;
+
 			display: none;
 			position: absolute;
 			top: 50%;
@@ -575,6 +577,14 @@ button {
 					height: height('image/clear.svg', 2);
 					background: inline('image/clear.svg');
 					background-size: size('image/clear.svg', 2);
+
+					.mobile({
+						width: 80%;
+						background-size: contain;
+						background-position: center;
+						background-repeat: no-repeat;
+						height: 100px;
+					});
 
 					animation: 1.5s clear-animate cubic-bezier(0, 0, 0, 1);
 
@@ -616,6 +626,11 @@ button {
 				font-size: 42px;
 
 				overflow: hidden;
+
+				.mobile({
+					font-size: 32px;
+					margin-top: @mobile-margin;
+				});
 
 				// Background that can animate :)
 				&::before {
@@ -661,33 +676,37 @@ button {
 					}
 
 					&::before {
+						content: '';
 						width: 1.2em;
 						height: 1.2em;
 						display: inline-block;
 						vertical-align: -10%;
 						margin-right: 0.3em;
+						background-size: contain;
 					}
 
 					&.clocks::before {
-						content: inline('image/clock-icon.svg');
+						background-image: inline('image/clock-icon.svg');
 					}
 
 					&.blocks::before {
-						content: url('image/conditional.png');
+						background-image: url('image/conditional.png');
 					}
 				}
 			}
 
 			.score-window {
-				width: 100%;
-				max-width: 600px;
-				background: #EEE;
-				border: #222 2px solid;
-				color: white;
 				position: relative;
-				text-align: center;
+				width: calc(~"100% - 40px");
+				max-width: 600px;
+
 				margin: 30px auto;
 				padding: 10px;
+				border: #222 2px solid;
+
+				background: #EEE;
+				color: white;
+				text-align: center;
 				z-index: 0;
 				opacity: 0;
 
@@ -704,6 +723,10 @@ button {
 					}
 				}
 
+				.mobile({
+					margin: @mobile-margin auto;
+				});
+
 				&::before {
 					content: '';
 					position: absolute;
@@ -719,42 +742,56 @@ button {
 				}
 
 				.score {
-					line-height: 2em;
-					font-size: 22px;
 					margin: 10px 0;
 
+					line-height: 2em;
+					font-size: 22px;
+
+					.mobile({
+						font-size: 16px;
+					});
+
 					.score-value {
-						width: 3em;
 						display: inline-block;
+						width: 3em;
+						margin-left: 0.3em;
+
 						text-align: right;
 						font-family: 'Exo 2', sans-serif;
 						font-weight: 900;
-						font-size: 60px;
-						margin-left: 0.3em;
+						font-size: 280%;
 					}
 				}
 
 				.name {
 					display: block;
+					width: 15em;
+
 					margin: 5px auto;
+					padding: 7px 12px;
+					border: none;
 					border-radius: 4px;
+					outline: none;
+
 					background: white;
 					color: #333;
-					border: none;
-					outline: none;
-					padding: 7px 12px;
 					font-size: 18px;
-					width: 15em;
+
+					.mobile({
+						width: auto;
+					});
 				}
 
 				.register {
-					border-radius: 5px;
-					background: #555;
-					color: white;
 					display: block;
 					margin: 12px auto;
-					font-size: 20px;
 					padding: 0.5em 1em;
+
+					border-radius: 5px;
+
+					background: #555;
+					color: white;
+					font-size: 20px;
 
 					&[disabled] {
 						opacity: 0.5;
@@ -795,6 +832,10 @@ button {
 				justify-content: center;
 				margin-top: 1em;
 
+				.mobile({
+					margin-top: @mobile-margin;
+				});
+
 				button {
 					width: 240px;
 					height: 2em;
@@ -810,6 +851,12 @@ button {
 					opacity: 0;
 
 					animation: 0.5s 1.6s result-button-animate forwards;
+
+					.mobile({
+						font-size: 18px;
+						height: 3em;
+						line-height: 3em;
+					});
 
 					@keyframes result-button-animate {
 						from {
