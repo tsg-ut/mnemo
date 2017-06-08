@@ -122,7 +122,7 @@ class BoardComponent extends React.Component {
 	}
 
 	get _boardHeight() {
-		return this.props.width * BLOCK_SIZE;
+		return this.props.height * BLOCK_SIZE;
 	}
 
 	get _inputHeight() {
@@ -138,7 +138,7 @@ class BoardComponent extends React.Component {
 	}
 
 	get _boardOuterHeight() {
-		return this._borderSize * 2 + this._boardWidth;
+		return this._borderSize * 2 + this._boardHeight;
 	}
 
 	get _inputAreaWidth() {
