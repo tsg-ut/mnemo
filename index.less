@@ -558,7 +558,7 @@ button {
 		pointer-events: none;
 
 		.result {
-			@mobile-margin: 15px;
+			@mobile-margin: 10px;
 
 			display: none;
 			position: absolute;
@@ -794,6 +794,10 @@ button {
 					color: white;
 					font-size: 20px;
 
+					.mobile({
+						font-size: 18px;
+					});
+
 					&[disabled] {
 						opacity: 0.5;
 						cursor: wait;
@@ -855,8 +859,8 @@ button {
 
 					.mobile({
 						font-size: 18px;
-						height: 3em;
-						line-height: 3em;
+						height: 2.2em;
+						line-height: 2.2em;
 					});
 
 					@keyframes result-button-animate {

@@ -473,6 +473,23 @@ class BoardComponent extends React.Component {
 													x={block.x * BLOCK_SIZE}
 													y={block.y * BLOCK_SIZE}
 												/>
+												{block.config.onRotatableWire && (
+													<image
+														className="block"
+														width={BLOCK_SIZE}
+														height={BLOCK_SIZE}
+														x={block.x * BLOCK_SIZE}
+														y={block.y * BLOCK_SIZE}
+														href="image/wireI.png"
+														transform={`rotate(${block.rotate * 90})`}
+														style={{
+															transformOrigin: 'center',
+															// Enabled from FF55
+															transformBox: 'fill-box',
+															pointerEvents: 'none',
+														}}
+													/>
+												)}
 												{
 													(block.name !== 'empty') && (
 														<image
@@ -482,7 +499,10 @@ class BoardComponent extends React.Component {
 															x={block.x * BLOCK_SIZE}
 															y={block.y * BLOCK_SIZE}
 															href={`image/${block.name}.png`}
-															transform={`rotate(${block.rotate * 90})`}
+															{...(
+																!block.config.onRotatableWire &&
+																{transform: `rotate(${block.rotate * 90})`}
+															)}
 															style={{
 																transformOrigin: 'center',
 																// Enabled from FF55
