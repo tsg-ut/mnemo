@@ -121,6 +121,10 @@ class BoardComponent extends React.Component {
 		return this.board.clock;
 	}
 
+	getWeighedBlockCount() {
+		return this.board.weighedBlockCount;
+	}
+
 	placeBlock({x, y, type, rotate}) {
 		this.board.placeBlock({x, y, type, rotate});
 		this.setState({
