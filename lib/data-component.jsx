@@ -12,6 +12,7 @@ class DataComponent extends React.Component {
 		isAnimating: PropTypes.bool.isRequired,
 		isErasing: PropTypes.bool.isRequired,
 		value: PropTypes.number.isRequired,
+		data: PropTypes.object.isRequired,
 		onAnimationComplete: PropTypes.func.isRequired,
 		onEraseAnimationComplete: PropTypes.func.isRequired,
 		isRapid: PropTypes.bool.isRequired,
@@ -58,7 +59,7 @@ class DataComponent extends React.Component {
 				ease: Power0.easeNone,
 				onComplete: () => {
 					setTimeout(() => {
-						this.props.onAnimationComplete();
+						this.props.onAnimationComplete(this.props.data);
 					}, 0);
 				},
 			}, this.getAnimationProperties()))
@@ -84,7 +85,7 @@ class DataComponent extends React.Component {
 				opacity: 0,
 				onComplete: () => {
 					setTimeout(() => {
-						this.props.onEraseAnimationComplete();
+						this.props.onEraseAnimationComplete(this.props.data);
 					}, 0);
 				},
 			}))

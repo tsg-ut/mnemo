@@ -204,8 +204,9 @@ class BlockComponent extends React.Component {
 								isAnimating={false}
 								isErasing={isErasing}
 								value={data.value}
-								onAnimationComplete={this.handleDataAnimationComplete.bind(null, data)}
-								onEraseAnimationComplete={this.handleDataEraseAnimationComplete.bind(null, data)}
+								data={data}
+								onAnimationComplete={this.handleDataAnimationComplete}
+								onEraseAnimationComplete={this.handleDataEraseAnimationComplete}
 								isRapid={this.props.isRapid}
 							/>
 						))),
@@ -217,8 +218,9 @@ class BlockComponent extends React.Component {
 								isAnimating={true}
 								isErasing={isErasing}
 								value={data.value}
-								onAnimationComplete={this.handleDataAnimationComplete.bind(null, data)}
-								onEraseAnimationComplete={this.handleDataEraseAnimationComplete.bind(null, data)}
+								data={data}
+								onAnimationComplete={this.handleDataAnimationComplete}
+								onEraseAnimationComplete={this.handleDataEraseAnimationComplete}
 								isRapid={this.props.isRapid}
 							/>
 						))),
@@ -230,8 +232,9 @@ class BlockComponent extends React.Component {
 								isAnimating={false}
 								isErasing={isErasing}
 								value={data.value}
-								onAnimationComplete={this.handleDataAnimationComplete.bind(null, data)}
-								onEraseAnimationComplete={this.handleDataEraseAnimationComplete.bind(null, data)}
+								data={data}
+								onAnimationComplete={this.handleDataAnimationComplete}
+								onEraseAnimationComplete={this.handleDataEraseAnimationComplete}
 								isRapid={this.props.isRapid}
 							/>
 						))),
