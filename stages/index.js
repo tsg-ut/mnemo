@@ -1,5 +1,7 @@
 /* eslint global-require: 'off' */
 
+const {normalizeStageInput} = require('../lib/util');
+
 const stages = [
 	require('./wire01.js'),
 	require('./calc01.js'),
@@ -59,23 +61,7 @@ module.exports = stages.map((stage) => {
 		stage.inputX = [stage.inputX];
 	}
 
-	stage.input = stage.input.map((input) => {
-		let inputDataArrays = input;
-
-		if (!Array.isArray(inputDataArrays)) {
-			inputDataArrays = [inputDataArrays];
-		}
-
-		return inputDataArrays.map((inputData) => {
-			let inputDataArray = inputData;
-
-			if (!Array.isArray(inputDataArray)) {
-				inputDataArray = [inputDataArray];
-			}
-
-			return inputDataArray;
-		});
-	});
+	stage.input = normalizeStageInput(stage.input);
 
 	return stage;
 });

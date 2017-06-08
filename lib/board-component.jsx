@@ -105,14 +105,6 @@ class BoardComponent extends React.Component {
 		}
 	}
 
-	get inputBlock() {
-		return this.inputBlockX.map((x) => this.getBlock(x, this.inputBlockY));
-	}
-
-	get outputBlock() {
-		return this.getBlock(this.outputBlockX, this.outputBlockY);
-	}
-
 	get _borderSize() {
 		return 25;
 	}
@@ -159,6 +151,10 @@ class BoardComponent extends React.Component {
 
 	getWeighedBlockCount() {
 		return this.board.weighedBlockCount;
+	}
+
+	getSeededRandom() {
+		return this.board.getSeededRandom();
 	}
 
 	placeBlock({x, y, type, rotate}) {
