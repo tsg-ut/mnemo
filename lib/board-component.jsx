@@ -176,7 +176,15 @@ class BoardComponent extends React.Component {
 		});
 	}
 
-	execute(value) {
+	execute = (value) => {
+		// Reset scale on start executing
+		const {offsetX, offsetY, scale} = this.normalizeScaleAndOffset({
+			offsetX: this.state.offsetX,
+			offsetY: this.state.offsetY,
+			scale: 1,
+		});
+		this.setState({offsetX, offsetY, scale});
+
 		this.board.input(value);
 		this.clockUp();
 	}
