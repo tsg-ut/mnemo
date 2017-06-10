@@ -1,6 +1,23 @@
 {
 	env: {
-		browser: {
+		debug: {
+			presets: [
+				['env', {
+					targets: {
+						browsers: [
+							'last 2 Chrome versions',
+						],
+					},
+					useBuiltIns: true,
+				}],
+				'react',
+			],
+			plugins: [
+				'transform-inline-environment-variables',
+				'transform-class-properties',
+			],
+		},
+		production: {
 			presets: [
 				['env', {
 					targets: {
@@ -20,6 +37,7 @@
 			plugins: [
 				'transform-inline-environment-variables',
 				'transform-class-properties',
+				'transform-react-remove-prop-types',
 			],
 		},
 		react: {
