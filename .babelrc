@@ -46,6 +46,7 @@
 			],
 			plugins: [
 				'transform-class-properties',
+				'transform-async-to-generator',
 			],
 		},
 	},

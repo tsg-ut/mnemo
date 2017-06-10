@@ -2,7 +2,7 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const {id} = require('./util');
 const {BLOCK_SIZE} = require('./constants');
-const DataComponent = require('./data-component');
+const DataComponent = require('./data-component.jsx');
 
 class BlockComponent extends React.Component {
 	static propTypes = {

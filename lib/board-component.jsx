@@ -1,13 +1,13 @@
 const React = require('react');
 const PropTypes = require('prop-types');
 const Hammer = require('react-hammerjs');
-const {INPUT_MOVE, INPUT_END} = require('hammerjs');
+const {INPUT_MOVE, INPUT_END} = (typeof window === 'undefined') ? {} : require('hammerjs');
 const {default: Measure} = require('react-measure');
 const color = require('color');
 const Path = require('svg-path-generator');
 const assert = require('assert');
 const Board = require('./board');
-const BlockComponent = require('./block-component');
+const BlockComponent = require('./block-component.jsx');
 const {id} = require('./util');
 const {BLOCK_SIZE} = require('./constants');
 
