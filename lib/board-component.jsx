@@ -2,7 +2,7 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const Hammer = require('react-hammerjs');
 const {INPUT_MOVE, INPUT_END} = require('hammerjs');
-const Measure = require('react-measure');
+const {default: Measure} = require('react-measure');
 const color = require('color');
 const Path = require('svg-path-generator');
 const assert = require('assert');
@@ -81,10 +81,14 @@ class BoardComponent extends React.Component {
 			showClockLimit: false,
 			showDataLimit: false,
 			isPanning: false,
+			isPinch: false,
 			panDistance: 0,
 			panAngle: 0,
 			pinchCenterX: 0,
 			pinchCenterY: 0,
+			pinchScale: 1,
+			offsetX: 0,
+			offsetY: 0,
 			scale: 1,
 		};
 	}
@@ -125,12 +129,20 @@ class BoardComponent extends React.Component {
 		return 170;
 	}
 
-	get _boardOuterWidth() {
+	get _boardBorderWidth() {
 		return this._borderSize * 2 + this._boardWidth;
 	}
 
-	get _boardOuterHeight() {
+	get _boardBorderHeight() {
 		return this._borderSize * 2 + this._boardHeight;
+	}
+
+	get _boardOuterWidth() {
+		return Math.max(this._borderSize * 2 + this._boardWidth, this._inputAreaWidth);
+	}
+
+	get _boardOuterHeight() {
+		return this._borderSize * 2 + this._boardHeight + this._inputHeight + this._outputHeight;
 	}
 
 	get _inputAreaWidth() {
@@ -223,6 +235,23 @@ class BoardComponent extends React.Component {
 		this.clockUp();
 	}
 
+	normalizeScaleAndOffset = ({offsetX, offsetY, scale}) => {
+		const maxScale = Math.max(this._boardOuterWidth, this._boardOuterHeight) / (BLOCK_SIZE * 2);
+		const normalizedScale = Math.max(1, Math.min(scale, maxScale));
+
+		const maxOffsetX = (this._boardOuterWidth - this._boardOuterWidth / normalizedScale) / 2;
+		const normalizedOffsetX = Math.max(-maxOffsetX, Math.min(offsetX, maxOffsetX));
+
+		const maxOffsetY = (this._boardOuterHeight - this._boardOuterHeight / normalizedScale) / 2;
+		const normalizedOffsetY = Math.max(-maxOffsetY, Math.min(offsetY, maxOffsetY));
+
+		return {
+			scale: normalizedScale,
+			offsetX: normalizedOffsetX,
+			offsetY: normalizedOffsetY,
+		};
+	}
+
 	handleBoardOutput = (value) => {
 		this.props.onOutput(value);
 	}
@@ -249,14 +278,30 @@ class BoardComponent extends React.Component {
 	handlePan = (event) => {
 		event.preventDefault();
 
+		const distance = this.backgroundDimensions === null
+			? event.distance
+			: event.distance / (this.backgroundDimensions.width / this._boardWidth);
+		const angle = event.angle / 180 * Math.PI;
+
 		if (event.eventType === INPUT_MOVE) {
 			this.setState({
 				isPanning: true,
-				panDistance: event.distance,
-				panAngle: event.angle,
+				panDistance: distance,
+				panAngle: angle,
 			});
 		} else if (event.eventType === INPUT_END) {
-			// TODO
+			const {offsetX, offsetY, scale} = this.normalizeScaleAndOffset({
+				offsetX: this.state.offsetX - distance * Math.cos(angle),
+				offsetY: this.state.offsetY - distance * Math.sin(angle),
+				scale: this.state.scale,
+			});
+
+			this.setState({
+				isPanning: false,
+				offsetX,
+				offsetY,
+				scale,
+			});
 		}
 	}
 
@@ -265,19 +310,47 @@ class BoardComponent extends React.Component {
 
 		if (event.eventType === INPUT_MOVE) {
 			this.setState({
-				scale: event.scale,
+				isPinching: true,
+				pinchScale: event.scale,
 			});
 		} else if (event.eventType === INPUT_END) {
-			// TODO
+			const {offsetX, offsetY, scale} = this.normalizeScaleAndOffset({
+				offsetX: this.state.offsetX,
+				offsetY: this.state.offsetY,
+				scale: this.state.scale * this.state.pinchScale,
+			});
+
+			this.setState({
+				isPinching: false,
+				offsetX,
+				offsetY,
+				scale,
+			});
+
+			if (this.measureComponent) {
+				this.measureComponent.measure();
+			}
 		}
 	}
 
 	handleWheel = (event) => {
 		const direction = (event.deltaY > 0) ? -1 : 1;
 
-		this.setState({
+		const {offsetX, offsetY, scale} = this.normalizeScaleAndOffset({
+			offsetX: this.state.offsetX,
+			offsetY: this.state.offsetY,
 			scale: this.state.scale * (1.0 + 0.1 * direction),
 		});
+
+		this.setState({
+			offsetX,
+			offsetY,
+			scale,
+		});
+
+		if (this.measureComponent) {
+			this.measureComponent.measure();
+		}
 	}
 
 	handleDragStart = (event) => {
@@ -285,34 +358,33 @@ class BoardComponent extends React.Component {
 	}
 
 	handleMeasureBackground = (dimensions) => {
-		this.backgroundDimensions = dimensions;
+		this.backgroundDimensions = dimensions.bounds;
 	}
 
 	getViewBox = () => {
-		if (this.state.isPanning) {
-			let scale = 1;
+		const {offsetX, offsetY, scale} = this.normalizeScaleAndOffset({
+			offsetX: this.state.isPanning
+				? this.state.offsetX - this.state.panDistance * Math.cos(this.state.panAngle)
+				: this.state.offsetX,
+			offsetY: this.state.isPanning
+				? this.state.offsetY - this.state.panDistance * Math.sin(this.state.panAngle)
+				: this.state.offsetY,
+			scale: this.state.isPinching
+				? this.state.scale * this.state.pinchScale
+				: this.state.scale,
+		});
 
-			if (this.backgroundDimensions !== null) {
-				scale = this.props.width * BLOCK_SIZE / this.backgroundDimensions.width;
-			}
+		const normalOffsetY = (this._outputHeight - this._inputHeight) / 2;
 
-			return [
-				-this._boardOuterWidth / 2 -
-					this.state.panDistance * Math.cos(this.state.panAngle / 180 * Math.PI) * scale,
-				-this._boardOuterHeight / 2 -
-					this.state.panDistance * Math.sin(this.state.panAngle / 180 * Math.PI) * scale -
-					this._inputHeight,
-				this._boardOuterWidth,
-				this._boardOuterHeight + this._inputHeight + this._outputHeight,
-			].map((value) => value / this.state.scale).join(' ');
-		}
+		const viewBoxWidth = this._boardOuterWidth / scale;
+		const viewBoxHeight = this._boardOuterHeight / scale;
 
 		return [
-			-this._boardOuterWidth / 2,
-			-this._boardOuterHeight / 2 - this._inputHeight,
-			this._boardOuterWidth,
-			this._boardOuterHeight + this._inputHeight + this._outputHeight,
-		].map((value) => value / this.state.scale).join(' ');
+			-viewBoxWidth / 2 + offsetX,
+			-viewBoxHeight / 2 + offsetY + normalOffsetY,
+			viewBoxWidth,
+			viewBoxHeight,
+		];
 	}
 
 	getIOWirePathData = ({startX, endX, head, tail}) => {
@@ -349,11 +421,11 @@ class BoardComponent extends React.Component {
 					onDragStart={this.handleDragStart}
 				>
 					{/* inputs */}
-					<g transform={`translate(0, ${-this._boardOuterHeight / 2 - 100})`}>
+					<g transform={`translate(0, ${-this._boardBorderHeight / 2 - 100})`}>
 						{this.renderInputs()}
 					</g>
 					{/* board + board-border */}
-					<g transform={`translate(${-this._boardOuterWidth / 2}, ${-this._boardOuterHeight / 2})`}>
+					<g transform={`translate(${-this._boardBorderWidth / 2}, ${-this._boardBorderHeight / 2})`}>
 						{/* board-border */}
 						<g>
 							{/* top-left */}
@@ -427,12 +499,21 @@ class BoardComponent extends React.Component {
 						</g>
 						{/* board */}
 						<g transform={`translate(${this._borderSize}, ${this._borderSize})`}>
-							<Measure onMeasure={this.handleMeasureBackground}>
-								<rect
-									className="board-background"
-									width={this.props.width * BLOCK_SIZE}
-									height={this.props.height * BLOCK_SIZE}
-								/>
+							<Measure
+								ref={(ref) => {
+									this.measureComponent = ref;
+								}}
+								onResize={this.handleMeasureBackground}
+								bounds={true}
+							>
+								{({measureRef}) => (
+									<rect
+										ref={measureRef}
+										className="board-background"
+										width={this.props.width * BLOCK_SIZE}
+										height={this.props.height * BLOCK_SIZE}
+									/>
+								)}
 							</Measure>
 							<g>
 								{this.renderBlocks()}
@@ -458,7 +539,7 @@ class BoardComponent extends React.Component {
 						</g>
 					</g>
 					{/* outputs */}
-					<g transform={`translate(0, ${this._boardOuterHeight / 2})`}>
+					<g transform={`translate(0, ${this._boardBorderHeight / 2})`}>
 						{this.renderOutputs()}
 					</g>
 				</svg>

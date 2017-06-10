@@ -132,7 +132,7 @@
         "no-catch-shadow": "error",
         "no-constant-condition": [
             "error",
-            { "checkLoops" : false }
+            {"checkLoops": false }
         ],
         "no-confusing-arrow": "off",
         "no-continue": "off",
@@ -346,7 +346,7 @@
         "react/jsx-indent-props": ["error", "tab"],
         "react/jsx-key": "error",
         "react/jsx-max-props-per-line": ["error", {"when": "multiline"}],
-        "react/jsx-no-bind": "error",
+        "react/jsx-no-bind": ["error", {"ignoreRefs": true}],
         "react/jsx-no-comment-textnodes": "error",
         "react/jsx-no-duplicate-props": "error",
         "react/jsx-no-literals": "error",
