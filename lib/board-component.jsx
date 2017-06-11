@@ -27,7 +27,7 @@ class BoardComponent extends React.Component {
 		inputX: PropTypes.arrayOf(PropTypes.number).isRequired,
 		outputX: PropTypes.number.isRequired,
 		input: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))).isRequired,
-		currentInput: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
+		currentInputIndex: PropTypes.number,
 		output: PropTypes.arrayOf(PropTypes.number).isRequired,
 		userOutput: PropTypes.arrayOf(PropTypes.number).isRequired,
 		userOutputCorrectness: PropTypes.arrayOf(PropTypes.bool).isRequired,
@@ -39,7 +39,7 @@ class BoardComponent extends React.Component {
 	}
 
 	static defaultProps = {
-		currentInput: null,
+		currentInputIndex: null,
 	}
 
 	constructor(props, state) {
@@ -99,7 +99,7 @@ class BoardComponent extends React.Component {
 			assert(nextProps.status !== 'pause');
 
 			if (nextProps.status === 'executing') {
-				this.execute(nextProps.currentInput);
+				this.execute(nextProps.input[nextProps.currentInputIndex]);
 			}
 		}
 
@@ -414,6 +414,14 @@ class BoardComponent extends React.Component {
 		.end();
 	}
 
+	getInputColor = (index) => {
+		if (this.props.currentInputIndex !== null && this.props.currentInputIndex !== index) {
+			return 'gray';
+		}
+
+		return inputColors[index % inputColors.length].toString();
+	}
+
 	render() {
 		return (
 			<Hammer
@@ -568,9 +576,12 @@ class BoardComponent extends React.Component {
 						width="150"
 						height="50"
 						rx="8"
-						fill={inputColors[index % inputColors.length].toString()}
-						stroke={inputColors[index % inputColors.length].toString()}
+						fill={this.getInputColor(index)}
+						stroke={this.getInputColor(index)}
 						strokeWidth="3"
+						style={{
+							transition: 'fill 0.3s ease, stroke 0.3s ease',
+						}}
 					/>
 					<text
 						x="75"
@@ -595,7 +606,10 @@ class BoardComponent extends React.Component {
 					transform={'translate(0, 50)'}
 					fill="none"
 					strokeWidth="5"
-					stroke={inputColors[index % inputColors.length].toString()}
+					stroke={this.getInputColor(index)}
+					style={{
+						transition: 'stroke 0.3s ease',
+					}}
 				/>
 			</g>
 		))
@@ -674,16 +688,22 @@ class BoardComponent extends React.Component {
 					})}
 					fill="none"
 					strokeWidth="5"
-					stroke={inputColors[index % inputColors.length].toString()}
+					stroke={this.getInputColor(index)}
+					style={{
+						transition: 'stroke 0.3s ease',
+					}}
 				/>
 				<g transform={`translate(${-this._outputAreaWidth / 2 + index * 200}, 110)`}>
 					<rect
 						width="150"
 						height="50"
 						rx="8"
-						fill={inputColors[index % inputColors.length].toString()}
-						stroke={inputColors[index % inputColors.length].toString()}
+						fill={this.getInputColor(index)}
+						stroke={this.getInputColor(index)}
 						strokeWidth="3"
+						style={{
+							transition: 'fill 0.3s ease, stroke 0.3s ease',
+						}}
 					/>
 					<text
 						x="75"
@@ -704,8 +724,11 @@ class BoardComponent extends React.Component {
 						height="50"
 						rx="8"
 						fill="white"
-						stroke={inputColors[index % inputColors.length].toString()}
+						stroke={this.getInputColor(index)}
 						strokeWidth="3"
+						style={{
+							transition: 'stroke 0.3s ease',
+						}}
 					/>
 					{this.props.userOutputCorrectness[index] === true && (
 						<g transform="translate(75, 25)" className="correctness">
