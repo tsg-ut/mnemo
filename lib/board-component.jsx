@@ -36,6 +36,7 @@ class BoardComponent extends React.Component {
 		onHalt: PropTypes.func.isRequired,
 		onPaused: PropTypes.func.isRequired,
 		isRapid: PropTypes.bool.isRequired,
+		isForced: PropTypes.bool.isRequired,
 	}
 
 	static defaultProps = {
@@ -105,7 +106,7 @@ class BoardComponent extends React.Component {
 
 		if (this.props.status === 'executing') {
 			if (nextProps.status === 'stop') {
-				this.halt();
+				this.halt({force: nextProps.isForced});
 			}
 		}
 	}
@@ -190,8 +191,10 @@ class BoardComponent extends React.Component {
 		this.clockUp();
 	}
 
-	halt() {
-		this.board.halt();
+	halt({force}) {
+		if (force) {
+			this.board.halt();
+		}
 	}
 
 	clockUp = async () => {
