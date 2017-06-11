@@ -18,6 +18,7 @@ require! {
   '../../stages/sqrt-hard'
   '../../stages/msd'
   '../../stages/mod3-hard'
+  '../../stages/the-fifth-max'
   '../../stages/repeat-self'
   '../../stages/fibonacci-hard'
   '../../stages/factorization'
@@ -52,6 +53,13 @@ io-spec = ({input, output}) ->
   expect output .to.all.satisfy integrality
 
   expect input .to.have.length output.length
+
+io-spec-seq = ({input, output}) ->
+  expect {input, output} .to.satisfy io-spec
+
+  expect input .to.all.satisfy (i) ->
+    expect i .to.be.an \array .that.has.length-of 2
+    expect i.1 .to.be.an \array .that.has.length-of i.0
 
 sum-of-digits = (n) -> n.to-string!split '' .map (parse-int _, 10) .reduce (+)
 
@@ -267,6 +275,24 @@ describe 'Stage Data' ->
       expect io.output.0 .to.equal 0
       expect io.output.1 .to.equal 1
       expect io.output.2 .to.equal 2
+
+  describe 'the-fifth-max stage' ->
+    It 'generates medians' ->
+      io = the-fifth-max.io-generator @random
+
+      expect io .to.satisfy io-spec-seq
+
+      expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
+        output is mathjs.median input.1 and input.1.filter (is output) .length is 1
+
+      expect io.input.0 .to.deep.equal [5, [1, 2, 3, 4, 5]]
+
+      expect io.input.1.0 .to.equal 5
+      expect io.input.2.0 .to.equal 7
+      expect io.input.3.0 .to.equal 7
+      expect io.input.4.0 .to.equal 7
+
+      expect io.input.4.1.6 .to.equal mathjs.median io.input.4.1
 
   describe 'repeat-self stage' ->
     It 'generates valid io' ->
