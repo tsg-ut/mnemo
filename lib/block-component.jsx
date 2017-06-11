@@ -15,6 +15,11 @@ class BlockComponent extends React.Component {
 		onClick: PropTypes.func.isRequired,
 		onPassAnimationComplete: PropTypes.func.isRequired,
 		isRapid: PropTypes.bool.isRequired,
+		viewBoxScale: PropTypes.number,
+	}
+
+	static defaultProps = {
+		viewBoxScale: null,
 	}
 
 	constructor(props, state) {
@@ -208,6 +213,7 @@ class BlockComponent extends React.Component {
 								onAnimationComplete={this.handleDataAnimationComplete}
 								onEraseAnimationComplete={this.handleDataEraseAnimationComplete}
 								isRapid={this.props.isRapid}
+								viewBoxScale={this.props.viewBoxScale}
 							/>
 						))),
 						...(this.state.animatingData.map(({direction, data, isInward, isErasing}) => (
@@ -222,6 +228,7 @@ class BlockComponent extends React.Component {
 								onAnimationComplete={this.handleDataAnimationComplete}
 								onEraseAnimationComplete={this.handleDataEraseAnimationComplete}
 								isRapid={this.props.isRapid}
+								viewBoxScale={this.props.viewBoxScale}
 							/>
 						))),
 						...(this.state.outputData.map(({direction, data, isErasing}) => (
@@ -236,6 +243,7 @@ class BlockComponent extends React.Component {
 								onAnimationComplete={this.handleDataAnimationComplete}
 								onEraseAnimationComplete={this.handleDataEraseAnimationComplete}
 								isRapid={this.props.isRapid}
+								viewBoxScale={this.props.viewBoxScale}
 							/>
 						))),
 					]}

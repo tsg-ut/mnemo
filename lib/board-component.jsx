@@ -90,6 +90,7 @@ class BoardComponent extends React.Component {
 			offsetX: 0,
 			offsetY: 0,
 			scale: 1,
+			viewBoxScale: null,
 		};
 	}
 
@@ -286,9 +287,9 @@ class BoardComponent extends React.Component {
 	handlePan = (event) => {
 		event.preventDefault();
 
-		const distance = this.backgroundDimensions === null
+		const distance = this.state.viewBoxScale === null
 			? event.distance
-			: event.distance / (this.backgroundDimensions.width / this._boardWidth);
+			: event.distance / this.state.viewBoxScale;
 		const angle = event.angle / 180 * Math.PI;
 
 		if (event.eventType === INPUT_MOVE) {
@@ -367,6 +368,9 @@ class BoardComponent extends React.Component {
 
 	handleMeasureBackground = (dimensions) => {
 		this.backgroundDimensions = dimensions.bounds;
+		this.setState({
+			viewBoxScale: this.backgroundDimensions.width / this._boardWidth,
+		});
 	}
 
 	getViewBox = () => {
@@ -539,6 +543,7 @@ class BoardComponent extends React.Component {
 												onClick={this.handleClickBlock}
 												onPassAnimationComplete={this.handlePassAnimationComplete}
 												isRapid={this.props.isRapid}
+												viewBoxScale={this.state.viewBoxScale}
 											/>
 										))
 									))

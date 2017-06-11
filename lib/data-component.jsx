@@ -3,6 +3,7 @@ const PropTypes = require('prop-types');
 const GSAP = require('react-gsap-enhancer');
 const assert = require('assert');
 const {TweenLite, Power0} = require('gsap');
+const {default: Measure} = require('react-measure');
 const {BLOCK_SIZE} = require('./constants');
 
 class DataComponent extends React.Component {
@@ -12,10 +13,25 @@ class DataComponent extends React.Component {
 		isAnimating: PropTypes.bool.isRequired,
 		isErasing: PropTypes.bool.isRequired,
 		value: PropTypes.number.isRequired,
+		// props.data should only be used in callback
+		// eslint-disable-next-line react/forbid-prop-types
 		data: PropTypes.object.isRequired,
 		onAnimationComplete: PropTypes.func.isRequired,
 		onEraseAnimationComplete: PropTypes.func.isRequired,
 		isRapid: PropTypes.bool.isRequired,
+		viewBoxScale: PropTypes.number,
+	}
+
+	static defaultProps = {
+		viewBoxScale: null,
+	}
+
+	constructor(props, state) {
+		super(props, state);
+
+		this.state = {
+			valueDimensions: null,
+		};
 	}
 
 	componentDidMount() {
@@ -96,13 +112,21 @@ class DataComponent extends React.Component {
 		this.erasion.pause();
 	}
 
-	handleStartRapid() {
+	handleStartRapid = () => {
 		if (this.animation) {
 			this.animation.seek(this.animation.duration(), false);
 		}
 
 		if (this.erasion) {
 			this.erasion.seek(this.erasion.duration(), false);
+		}
+	}
+
+	handleMeasureValue = (dimensions) => {
+		if (!this.props.isErasing) {
+			this.setState({
+				valueDimensions: dimensions.bounds,
+			});
 		}
 	}
 
@@ -149,7 +173,7 @@ class DataComponent extends React.Component {
 			return '-∞';
 		}
 
-		return this.props.value;
+		return this.props.value.toString();
 	}
 
 	getInitialTransform = () => {
@@ -173,20 +197,41 @@ class DataComponent extends React.Component {
 		return `translate(${BLOCK_SIZE / 2}, ${BLOCK_SIZE / 2})`;
 	}
 
+	getRectangleWidth = () => (
+		(this.state.valueDimensions !== null && this.props.viewBoxScale !== null)
+		? this.state.valueDimensions.width / this.props.viewBoxScale + 4
+		: (this.getDisplayValue().length * 8 + 4)
+	)
+
 	render() {
 		return (
 			<g transform={this.getInitialTransform()}>
-				<rect x="-9" y="-8" rx="3" width="18" height="16" fill="darkorange"/>
-				<text
-					x="0"
-					y="0"
-					fontSize="12"
-					fill="white"
-					textAnchor="middle"
-					dominantBaseline="central"
+				<rect
+					x={-this.getRectangleWidth() / 2}
+					y="-8"
+					rx="3"
+					width={this.getRectangleWidth()}
+					height="16"
+					fill="darkorange"
+				/>
+				<Measure
+					onResize={this.handleMeasureValue}
+					bounds={true}
 				>
-					{this.getDisplayValue()}
-				</text>
+					{({measureRef}) => (
+						<text
+							ref={measureRef}
+							x="0"
+							y="0"
+							fontSize="12"
+							fill="white"
+							textAnchor="middle"
+							dominantBaseline="central"
+						>
+							{this.getDisplayValue()}
+						</text>
+					)}
+				</Measure>
 			</g>
 		);
 	}

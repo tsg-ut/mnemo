@@ -9,6 +9,9 @@
 						],
 					},
 					useBuiltIns: true,
+					include: [
+						'transform-es2015-classes',
+					],
 				}],
 				'react',
 			],
