@@ -8,6 +8,7 @@ const Path = require('svg-path-generator');
 const assert = require('assert');
 const Board = require('./board');
 const BlockComponent = require('./block-component.jsx');
+const IOComponent = require('./io-component.jsx');
 const {id} = require('./util');
 const {BLOCK_SIZE} = require('./constants');
 
@@ -376,6 +377,24 @@ class BoardComponent extends React.Component {
 		});
 	}
 
+	handleMeasureIO = ({type, dimensions}) => {
+		this.setState({
+
+		});
+	}
+
+	handleMeasureInput = (dimensions) => {
+		this.handleMeasureIO({type: 'input', dimensions});
+	}
+
+	handleMeasureOutput = (dimensions) => {
+		this.handleMeasureIO({type: 'output', dimensions});
+	}
+
+	handleMeasureUserOutput = (dimensions) => {
+		this.handleMeasureIO({type: 'user_output', dimensions});
+	}
+
 	getViewBox = () => {
 		const {offsetX, offsetY, scale} = this.normalizeScaleAndOffset({
 			offsetX: this.state.isPanning
@@ -574,31 +593,15 @@ class BoardComponent extends React.Component {
 	renderInputs = () => (
 		this.props.input.map((input, index) => (
 			<g key={index}>
-				<g transform={`translate(${-this._inputAreaWidth / 2 + index * 200}, 0)`}>
-					<rect
-						width="150"
-						height="50"
-						rx="8"
-						fill={this.getInputColor(index)}
-						stroke={this.getInputColor(index)}
-						strokeWidth="3"
-						style={{
-							transition: 'fill 0.3s ease, stroke 0.3s ease',
-						}}
-					/>
-					<text
-						x="75"
-						y="25"
-						fontSize="30"
-						fontFamily="'Exo 2'"
-						fontWeight="900"
-						fill="white"
-						textAnchor="middle"
-						dominantBaseline="central"
-					>
-						{input === null ? '???' : input}
-					</text>
-				</g>
+				<IOComponent
+					x={-this._inputAreaWidth / 2 + index * 200}
+					y={0}
+					value={input}
+					correctness={null}
+					color={this.getInputColor(index)}
+					filled={true}
+					nullable={false}
+				/>
 				<path
 					d={this.getIOWirePathData({
 						startX: -this._inputAreaWidth / 2 + index * 200 + 75,
@@ -696,95 +699,24 @@ class BoardComponent extends React.Component {
 						transition: 'stroke 0.3s ease',
 					}}
 				/>
-				<g transform={`translate(${-this._outputAreaWidth / 2 + index * 200}, 110)`}>
-					<rect
-						width="150"
-						height="50"
-						rx="8"
-						fill={this.getInputColor(index)}
-						stroke={this.getInputColor(index)}
-						strokeWidth="3"
-						style={{
-							transition: 'fill 0.3s ease, stroke 0.3s ease',
-						}}
-					/>
-					<text
-						x="75"
-						y="25"
-						fontSize="30"
-						fontFamily="'Exo 2'"
-						fontWeight="900"
-						fill="white"
-						textAnchor="middle"
-						dominantBaseline="central"
-					>
-						{output === null ? '???' : output}
-					</text>
-				</g>
-				<g transform={`translate(${-this._outputAreaWidth / 2 + index * 200}, 50)`}>
-					<rect
-						width="150"
-						height="50"
-						rx="8"
-						fill="white"
-						stroke={this.getInputColor(index)}
-						strokeWidth="3"
-						style={{
-							transition: 'stroke 0.3s ease',
-						}}
-					/>
-					{this.props.userOutputCorrectness[index] === true && (
-						<g transform="translate(75, 25)" className="correctness">
-							<circle
-								cx="0"
-								cy="0"
-								r="35"
-								fill="none"
-								stroke="red"
-								strokeWidth="14"
-							/>
-						</g>
-					)}
-					{this.props.userOutputCorrectness[index] === false && (
-						<g transform="translate(75, 25)" className="correctness">
-							<line
-								x1="-30"
-								y1="-30"
-								x2="30"
-								y2="30"
-								fill="none"
-								stroke="blue"
-								strokeWidth="14"
-							/>
-							<line
-								x1="30"
-								y1="-30"
-								x2="-30"
-								y2="30"
-								fill="none"
-								stroke="blue"
-								strokeWidth="14"
-							/>
-						</g>
-					)}
-					{this.props.userOutput[index] !== null && (
-						<text
-							x="75"
-							y="25"
-							fontSize="30"
-							fontFamily="'Exo 2'"
-							fontWeight="900"
-							fill="#333"
-							textAnchor="middle"
-							dominantBaseline="central"
-							style={{
-								textShadow: '0 0 15px white',
-							}}
-						>
-							{this.props.userOutput[index]}
-						</text>
-					)}
-				</g>
+				<IOComponent
+					x={-this._outputAreaWidth / 2 + index * 200}
+					y={110}
+					value={output}
+					correctness={null}
+					color={this.getInputColor(index)}
+					filled={true}
+					nullable={false}
+				/>
+				<IOComponent
+					x={-this._outputAreaWidth / 2 + index * 200}
+					y={50}
+					value={this.props.userOutput[index]}
+					correctness={this.props.userOutputCorrectness[index]}
+					color={this.getInputColor(index)}
+					filled={false}
+					nullable={true}
+				/>
 			</g>
 		))
 	)
