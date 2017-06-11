@@ -1,11 +1,15 @@
 const React = require('react');
 const PropTypes = require('prop-types');
+const {trimAfter} = require('./util');
 
 class IOComponent extends React.Component {
 	static propTypes = {
 		x: PropTypes.number.isRequired,
 		y: PropTypes.number.isRequired,
-		value: PropTypes.string,
+		value: PropTypes.oneOfType([
+			PropTypes.arrayOf(PropTypes.number),
+			PropTypes.number,
+		]),
 		correctness: PropTypes.bool,
 		color: PropTypes.string.isRequired,
 		filled: PropTypes.bool.isRequired,
@@ -17,6 +21,32 @@ class IOComponent extends React.Component {
 		correctness: null,
 		filled: false,
 		nullable: false,
+	}
+
+	getDisplayValue = () => {
+		if (Array.isArray(this.props.value)) {
+			if (this.props.value.length === 1 && this.props.value[0] === null) {
+				return '???';
+			}
+
+			return trimAfter(this.props.value.map((value) => {
+				if (value === null) {
+					return '?';
+				}
+
+				return value.toString();
+			}).join(','), 10);
+		}
+
+		if (this.props.nullable && this.props.value === null) {
+			return null;
+		}
+
+		if (this.props.value === null) {
+			return '???';
+		}
+
+		return this.props.value.toString();
 	}
 
 	render() {
@@ -67,7 +97,7 @@ class IOComponent extends React.Component {
 						/>
 					</g>
 				)}
-				{(!this.props.nullable || this.props.value !== null) && (
+				{this.getDisplayValue() !== null && (
 					<text
 						x="75"
 						y="25"
@@ -81,7 +111,7 @@ class IOComponent extends React.Component {
 							textShadow: this.props.filled ? '' : '0 0 15px white',
 						}}
 					>
-						{this.props.value === null ? '???' : this.props.value}
+						{this.getDisplayValue()}
 					</text>
 				)}
 			</g>

@@ -598,7 +598,7 @@ class BoardComponent extends React.Component {
 								<IOComponent
 									x={x}
 									y={0}
-									value={inputs.join(',')}
+									value={inputs}
 									correctness={null}
 									color={this.getInputColor(index)}
 									filled={true}
