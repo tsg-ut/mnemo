@@ -121,13 +121,7 @@ module.exports = {
 
 		const isMedianUnique = (input) => {
 			const median = getMedian(input);
-			let count = 0;
-			input.forEach((x) => {
-				if (x === median) {
-					count++;
-				}
-			});
-			return count === 1;
+			return input.filter((x) => x === median).length === 1;
 		};
 
 		const inputs = [
@@ -135,40 +129,40 @@ module.exports = {
 		];
 
 		// 5 numbers in -5..5
-		inputs.push((() => {
+		{
 			let input = null;
 
 			do {
 				input = Array.from({length: 5}, () => -5 + Math.floor(random() * 11));
 			} while (!isMedianUnique(input));
 
-			return input;
-		})());
+			inputs.push(input);
+		}
 
 		// 7 numbers in 1..100
-		inputs.push((() => {
+		{
 			let input = null;
 
 			do {
 				input = Array.from({length: 7}, () => 1 + Math.floor(random() * 100));
 			} while (!isMedianUnique(input));
 
-			return input;
-		})());
+			inputs.push(input);
+		}
 
 		// 7 numbers in 0..49
-		inputs.push((() => {
+		{
 			let input = null;
 
 			do {
 				input = Array.from({length: 7}, () => Math.floor(random() * 50));
 			} while (!isMedianUnique(input));
 
-			return input;
-		})());
+			inputs.push(input);
+		}
 
 		// 7 numbers in 50..99, the median is at last
-		inputs.push((() => {
+		{
 			let input = null;
 
 			do {
@@ -180,8 +174,8 @@ module.exports = {
 			input[input.indexOf(median)] = input[6];
 			input[6] = median;
 
-			return input;
-		})());
+			inputs.push(input);
+		}
 
 		return {
 			input: inputs.map((input) => [input.length, input]),
