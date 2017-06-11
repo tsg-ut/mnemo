@@ -2903,11 +2903,16 @@ var Stage = function () {
 					inputString = input.toString();
 				} else {
 					inputString = input.map(function (x) {
+						if (x === null) {
+							return '???';
+						}
 						if (typeof x === 'number') {
 							return x.toString();
 						}
 
-						return '[' + x.join(',') + ']';
+						return '[' + x.map(function (y) {
+							return y === null ? '?' : y;
+						}).join(',') + ']';
 					}).join(', ');
 				}
 
@@ -45317,7 +45322,7 @@ module.exports = {
 
 module.exports = {
 	name: 'the-fifth-max',
-	version: 3,
+	version: 4,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -45365,8 +45370,90 @@ module.exports = {
 	},
 	inputX: [14, 16],
 	outputX: 15,
-	input: [[5, [1, 2, 3, 4, 5]], [5, [0, 1, -1, 2, -2]], [7, [51, 90, 20, 30, 1, 60, 81]], [7, [67, 90, 46, 99, 59, 23, 66]], [7, [22, 89, 48, 20, 88, 39, 22]]],
-	output: [3, 0, 51, 66, 39],
+	input: [[5, [1, 2, 3, 4, 5]], [5, [null, null, null, null, null]], [7, [null, null, null, null, null, null, null]], [7, [null, null, null, null, null, null, null]], [7, [null, null, null, null, null, null, null]]],
+	output: [3, null, null, null, null],
+	ioGenerator: function ioGenerator(random) {
+		var getMedian = function getMedian(input) {
+			return input.slice(0).sort(function (a, b) {
+				return a - b;
+			})[(input.length - 1) / 2];
+		};
+
+		var isMedianUnique = function isMedianUnique(input) {
+			var median = getMedian(input);
+			return input.filter(function (x) {
+				return x === median;
+			}).length === 1;
+		};
+
+		var inputs = [[1, 2, 3, 4, 5]];
+
+		// 5 numbers in -5..5
+		{
+			var input = null;
+
+			do {
+				input = Array.from({ length: 5 }, function () {
+					return -5 + Math.floor(random() * 11);
+				});
+			} while (!isMedianUnique(input));
+
+			inputs.push(input);
+		}
+
+		// 7 numbers in 1..100
+		{
+			var _input = null;
+
+			do {
+				_input = Array.from({ length: 7 }, function () {
+					return 1 + Math.floor(random() * 100);
+				});
+			} while (!isMedianUnique(_input));
+
+			inputs.push(_input);
+		}
+
+		// 7 numbers in 0..49
+		{
+			var _input2 = null;
+
+			do {
+				_input2 = Array.from({ length: 7 }, function () {
+					return Math.floor(random() * 50);
+				});
+			} while (!isMedianUnique(_input2));
+
+			inputs.push(_input2);
+		}
+
+		// 7 numbers in 50..99, the median is at last
+		{
+			var _input3 = null;
+
+			do {
+				_input3 = Array.from({ length: 7 }, function () {
+					return 50 + Math.floor(random() * 50);
+				});
+			} while (!isMedianUnique(_input3));
+
+			// Swap the median and the last
+			var median = getMedian(_input3);
+			_input3[_input3.indexOf(median)] = _input3[6];
+			_input3[6] = median;
+
+			inputs.push(_input3);
+		}
+
+		return {
+			input: inputs.map(function (input) {
+				return [input.length, input];
+			}),
+			output: inputs.map(function (input) {
+				return getMedian(input);
+			})
+		};
+	},
 	width: 31,
 	height: 31,
 	clockLimit: 2000,
