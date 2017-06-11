@@ -9,7 +9,7 @@ const assert = require('assert');
 const Board = require('./board');
 const BlockComponent = require('./block-component.jsx');
 const IOComponent = require('./io-component.jsx');
-const {id} = require('./util');
+const {id, sum} = require('./util');
 const {BLOCK_SIZE} = require('./constants');
 
 const inputColors = [
@@ -64,11 +64,6 @@ class BoardComponent extends React.Component {
 
 		this.passAnimationResolvers = new WeakMap();
 
-		if (typeof this.props.inputX === 'number') {
-			this.inputBlockX = [this.props.inputX];
-		} else {
-			this.inputBlockX = this.props.inputX;
-		}
 		this.inputBlockY = 0;
 		this.outputBlockX = this.props.outputX;
 		this.outputBlockY = this.props.height - 1;
@@ -149,7 +144,8 @@ class BoardComponent extends React.Component {
 	}
 
 	get _inputAreaWidth() {
-		return this.props.input.length * 200 - 50;
+		const inputComponentSize = sum(this.props.input.map((inputList) => inputList.length));
+		return inputComponentSize * 200 - 50;
 	}
 
 	get _outputAreaWidth() {
@@ -591,32 +587,42 @@ class BoardComponent extends React.Component {
 	}
 
 	renderInputs = () => (
-		this.props.input.map((input, index) => (
+		this.props.input.map((inputsList, index) => (
 			<g key={index}>
-				<IOComponent
-					x={-this._inputAreaWidth / 2 + index * 200}
-					y={0}
-					value={input}
-					correctness={null}
-					color={this.getInputColor(index)}
-					filled={true}
-					nullable={false}
-				/>
-				<path
-					d={this.getIOWirePathData({
-						startX: -this._inputAreaWidth / 2 + index * 200 + 75,
-						endX: (index - (this.props.input.length - 1) / 2) * 10,
-						head: 0,
-						tail: 20,
-					})}
-					transform={'translate(0, 50)'}
-					fill="none"
-					strokeWidth="5"
-					stroke={this.getInputColor(index)}
-					style={{
-						transition: 'stroke 0.3s ease',
-					}}
-				/>
+				{
+					inputsList.map((inputs, inputsIndex) => {
+						const x = -this._inputAreaWidth / 2 + (index * inputsList.length + inputsIndex) * 200;
+
+						return (
+							<g key={inputsIndex}>
+								<IOComponent
+									x={x}
+									y={0}
+									value={inputs.join(',')}
+									correctness={null}
+									color={this.getInputColor(index)}
+									filled={true}
+									nullable={false}
+								/>
+								<path
+									d={this.getIOWirePathData({
+										startX: x + 75,
+										endX: (this.props.inputX[inputsIndex] - this.props.width / 2 + 0.5) * BLOCK_SIZE + (index - (this.props.input.length - 1) / 2) * 10,
+										head: 0,
+										tail: 20,
+									})}
+									transform={'translate(0, 50)'}
+									fill="none"
+									strokeWidth="5"
+									stroke={this.getInputColor(index)}
+									style={{
+										transition: 'stroke 0.3s ease',
+									}}
+								/>
+							</g>
+						);
+					})
+				}
 			</g>
 		))
 	)
