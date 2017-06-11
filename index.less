@@ -379,6 +379,24 @@ button {
 				flex-direction: column;
 			});
 
+			.statement-area {
+				display: none;
+
+				.mobile({
+					display: block;
+					margin: 0;
+					text-align: right;
+					z-index: 1;
+
+					.statement {
+						display: inline-block;
+						margin-top: 5px;
+
+						font-size: 12px;
+					}
+				});
+			}
+
 			.panel-area {
 				.fixed-width(160px);
 				user-select: none;
