@@ -608,7 +608,7 @@ button {
 					position: absolute;
 					width: 250px;
 					height: 250px;
-					bottom: 17%;
+					bottom: 125px;
 					left: calc(~'50% + 173px');
 					transform: translateX(-50%);
 					border-radius: 6px;
@@ -1595,7 +1595,7 @@ button {
 			}
 		}
 
-		@buttons: exit, ranking, execute, stop, rapid, save, step;
+		@buttons: exit, ranking, execute, stop, rapid, save;
 		.-(@i: length(@buttons)) when (@i > 0) {
 			@button: extract(@buttons, @i);
 			& > button.@{button} {
