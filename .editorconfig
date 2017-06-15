@@ -1,0 +1,14 @@
+[*]
+insert_final_newline = true
+charset = utf-8
+
+[*.{js,jsx,pug,less}]
+indent_style = tab
+
+[*.json]
+indent_style = space
+indent_size = 4
+
+[*.ls,{package.json,.travis.yml}]
+indent_style = space
+indent_size = 2
