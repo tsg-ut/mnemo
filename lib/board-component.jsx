@@ -3,7 +3,6 @@ const PropTypes = require('prop-types');
 const Hammer = require('react-hammerjs');
 const {INPUT_MOVE, INPUT_END} = (typeof window === 'undefined') ? {} : require('hammerjs');
 const {default: Measure} = require('react-measure');
-const color = require('color');
 const Path = require('svg-path-generator');
 const assert = require('assert');
 const Board = require('./board');
@@ -13,10 +12,10 @@ const {id, sum} = require('./util');
 const {BLOCK_SIZE} = require('./constants');
 
 const inputColors = [
-	color('#de3131'), // red
-	color('#4527a8'), // blue
-	color('#1c6925'), // green
-	color('#db40cd'), // pink
+	'#de3131', // red
+	'#4527a8', // blue
+	'#1c6925', // green
+	'#db40cd', // pink
 ];
 
 class BoardComponent extends React.Component {
@@ -437,7 +436,7 @@ class BoardComponent extends React.Component {
 			return 'gray';
 		}
 
-		return inputColors[index % inputColors.length].toString();
+		return inputColors[index % inputColors.length];
 	}
 
 	render() {
