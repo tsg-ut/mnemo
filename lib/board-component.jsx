@@ -90,18 +90,18 @@ class BoardComponent extends React.Component {
 		};
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (this.props.status === 'stop') {
-			assert(nextProps.status !== 'pause');
+	componentDidUpdate(prevProps) {
+		if (prevProps.status === 'stop') {
+			assert(this.props.status !== 'pause');
 
-			if (nextProps.status === 'executing') {
-				this.execute(nextProps.input[nextProps.currentInputIndex]);
+			if (this.props.status === 'executing') {
+				this.execute(this.props.input[this.props.currentInputIndex]);
 			}
 		}
 
-		if (this.props.status === 'executing') {
-			if (nextProps.status === 'stop') {
-				this.halt({force: nextProps.isForced});
+		if (prevProps.status === 'executing') {
+			if (this.props.status === 'stop') {
+				this.halt({force: this.props.isForced});
 			}
 		}
 	}

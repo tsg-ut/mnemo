@@ -32,7 +32,7 @@ class BlockComponent extends React.Component {
 				inputData: this.state.inputData.concat([{
 					direction,
 					data,
-					isErasing: false,
+					isErasing: this.props.status === 'stop',
 				}]),
 			});
 		});
@@ -47,7 +47,7 @@ class BlockComponent extends React.Component {
 						direction,
 						data,
 						isInward: true,
-						isErasing: false,
+						isErasing: this.props.status === 'stop',
 					}]),
 					inputData: this.state.inputData.filter((inputData) => data !== inputData.data),
 				});
@@ -75,7 +75,7 @@ class BlockComponent extends React.Component {
 						direction,
 						data,
 						isInward: false,
-						isErasing: false,
+						isErasing: this.props.status === 'stop',
 					}]),
 				});
 
@@ -94,7 +94,7 @@ class BlockComponent extends React.Component {
 					outputData: this.state.outputData.concat([{
 						direction,
 						data,
-						isErasing: false,
+						isErasing: this.props.status === 'stop',
 					}]),
 				});
 			}
