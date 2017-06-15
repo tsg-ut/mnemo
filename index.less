@@ -453,6 +453,34 @@ button {
 						}
 					}
 				}
+
+				.clock-area {
+					display: inline-block;
+					padding: 0 3px;
+
+					background-color: #fbae36;
+
+					border: 1.5px outset #ff920e;
+					border-top: none;
+					border-bottom-right-radius: 3px;
+					border-bottom-left-radius: 3px;
+
+					color: white;
+					font-weight: bold;
+					font-size: 10px;
+					line-height: 1.4em;
+					white-space: pre;
+
+					&::before {
+						content: '';
+						display: inline-block;
+						width: 12px;
+						height: 12px;
+						background-image: inline('image/clock-icon.svg');
+						vertical-align: -15%;
+						margin-right: .2em;
+					}
+				}
 			}
 		}
 

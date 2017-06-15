@@ -74,7 +74,7 @@ class BoardComponent extends React.Component {
 
 		this.state = {
 			blocks: this.board.getBlocks(),
-			clocks: this.board.clocks,
+			clocks: 0,
 			showClockLimit: false,
 			showDataLimit: false,
 			isPanning: false,
@@ -535,6 +535,12 @@ class BoardComponent extends React.Component {
 								href="image/frame-bottomright.png"
 							/>
 						</g>
+						{/* clocks */}
+						<foreignObject transform={`translate(0, ${this._boardBorderHeight})`} fontSize="0">
+							<div className="clock-area">
+								{this.state.clocks}/{this.props.clockLimit}
+							</div>
+						</foreignObject>
 						{/* board */}
 						<g transform={`translate(${this._borderSize}, ${this._borderSize})`}>
 							<Measure
