@@ -949,6 +949,7 @@ button {
 
 			font-size: 30px;
 			text-align: center;
+			color: #2f2f2f;
 
 			pointer-events: all;
 
@@ -975,32 +976,33 @@ button {
 			}
 
 			.ok {
-				color: white;
-				line-height: 1.5em;
 				padding: 0 2em;
-				font-size: 28px;
-				font-weight: bold;
 				border-radius: 0.3em;
 				margin-top: 0.5em;
+
+				background: darkorange;
+
+				font-size: 28px;
+				font-weight: bold;
+				color: white;
+				line-height: 1.5em;
 			}
 
 			&.clock-limit {
-				background: #1f0000;
-				border-color: #ff2e2e;
-				color: #ff2e2e;
+				background: #ffdedb;
+				border-color: #ff7f7f;
 
-				.ok {
-					background: #ff2e2e;
+				.head {
+					color: #ff2e2e;
 				}
 			}
 
 			&.data-limit {
-				background: #1f1600;
-				border-color: #bd8c14;
-				color: #bd8c14;
+				background: #fffddb;
+				border-color: #ffc57f;
 
-				.ok {
-					background: #bd8c14;
+				.head {
+					color: #988618;
 				}
 			}
 		}
