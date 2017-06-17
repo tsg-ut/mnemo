@@ -35,6 +35,8 @@ class BoardComponent extends React.Component {
 		onOutput: PropTypes.func.isRequired,
 		onHalt: PropTypes.func.isRequired,
 		onPaused: PropTypes.func.isRequired,
+		onDataLimitExceeded: PropTypes.func.isRequired,
+		onClockLimitExceeded: PropTypes.func.isRequired,
 		isRapid: PropTypes.bool.isRequired,
 		isForced: PropTypes.bool.isRequired,
 	}
@@ -74,8 +76,6 @@ class BoardComponent extends React.Component {
 		this.state = {
 			blocks: this.board.getBlocks(),
 			clocks: 0,
-			showClockLimit: false,
-			showDataLimit: false,
 			isPanning: false,
 			isPinch: false,
 			panDistance: 0,
@@ -222,20 +222,14 @@ class BoardComponent extends React.Component {
 
 		if (this.board.clock >= this.board.clockLimit) {
 			this.board.halt();
-
-			this.setState({
-				showClockLimit: true,
-			});
+			this.props.onClockLimitExceeded(this.board.clockLimit);
 
 			return;
 		}
 
 		if (this.board.dataCount > 100) {
 			this.board.halt();
-
-			this.setState({
-				showDataLimit: true,
-			});
+			this.props.onDataLimitExceeded();
 
 			return;
 		}

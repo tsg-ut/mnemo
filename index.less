@@ -939,9 +939,10 @@ button {
 			left: 50%;
 			transform: translate(-50%, -50%);
 
-			width: 100%;
-			max-width: 600px;
-			padding: 20px 0px;
+			width: 600px;
+			max-width: calc(~"100% - 32px");
+			padding: 20px 10px;
+			box-sizing: border-box;
 			border-width: 10px;
 			border-style: ridge;
 			border-radius: 10px;
@@ -970,6 +971,7 @@ button {
 			.message {
 				font-size: 18px;
 				line-height: 2;
+				white-space: nowrap;
 			}
 
 			.ok {
