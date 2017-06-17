@@ -372,12 +372,6 @@ class BoardComponent extends React.Component {
 		});
 	}
 
-	handleMeasureIO = ({type, dimensions}) => {
-		this.setState({
-
-		});
-	}
-
 	handleMeasureInput = (dimensions) => {
 		this.handleMeasureIO({type: 'input', dimensions});
 	}
