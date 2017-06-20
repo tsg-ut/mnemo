@@ -459,7 +459,7 @@ class BoardComponent extends React.Component {
 								y="0"
 								width={this._borderSize}
 								height={this._borderSize}
-								href="image/frame-topleft.png"
+								xlinkHref="image/frame-topleft.png"
 							/>
 							{/* top */}
 							<image
@@ -468,7 +468,7 @@ class BoardComponent extends React.Component {
 								width={this._boardWidth}
 								height={this._borderSize}
 								preserveAspectRatio="none"
-								href="image/frame-top.png"
+								xlinkHref="image/frame-top.png"
 							/>
 							{/* top-right */}
 							<image
@@ -476,7 +476,7 @@ class BoardComponent extends React.Component {
 								y="0"
 								width={this._borderSize}
 								height={this._borderSize}
-								href="image/frame-topright.png"
+								xlinkHref="image/frame-topright.png"
 							/>
 							{/* left */}
 							<image
@@ -485,7 +485,7 @@ class BoardComponent extends React.Component {
 								width={this._borderSize}
 								height={this._boardHeight}
 								preserveAspectRatio="none"
-								href="image/frame-left.png"
+								xlinkHref="image/frame-left.png"
 							/>
 							{/* right */}
 							<image
@@ -494,7 +494,7 @@ class BoardComponent extends React.Component {
 								width={this._borderSize}
 								height={this._boardHeight}
 								preserveAspectRatio="none"
-								href="image/frame-right.png"
+								xlinkHref="image/frame-right.png"
 							/>
 							{/* bottom-left */}
 							<image
@@ -502,7 +502,7 @@ class BoardComponent extends React.Component {
 								y={this._borderSize + this._boardHeight}
 								width={this._borderSize}
 								height={this._borderSize}
-								href="image/frame-bottomleft.png"
+								xlinkHref="image/frame-bottomleft.png"
 							/>
 							{/* bottom */}
 							<image
@@ -511,7 +511,7 @@ class BoardComponent extends React.Component {
 								width={this._boardWidth}
 								height={this._borderSize}
 								preserveAspectRatio="none"
-								href="image/frame-bottom.png"
+								xlinkHref="image/frame-bottom.png"
 							/>
 							{/* bottom-right */}
 							<image
@@ -519,7 +519,7 @@ class BoardComponent extends React.Component {
 								y={this._borderSize + this._boardHeight}
 								width={this._borderSize}
 								height={this._borderSize}
-								href="image/frame-bottomright.png"
+								xlinkHref="image/frame-bottomright.png"
 							/>
 						</g>
 						{/* clocks */}
@@ -644,7 +644,7 @@ class BoardComponent extends React.Component {
 							height={BLOCK_SIZE}
 							x={block.x * BLOCK_SIZE}
 							y={block.y * BLOCK_SIZE}
-							href="image/wireI.png"
+							xlinkHref="image/wireI.png"
 							transform={`rotate(${block.rotate * 90})`}
 							style={{
 								transformOrigin: 'center',
@@ -662,7 +662,7 @@ class BoardComponent extends React.Component {
 								height={BLOCK_SIZE}
 								x={block.x * BLOCK_SIZE}
 								y={block.y * BLOCK_SIZE}
-								href={`image/${block.name}.png`}
+								xlinkHref={`image/${block.name}.png`}
 								{...(
 									!block.config.onRotatableWire &&
 									{transform: `rotate(${block.rotate * 90})`}
