@@ -523,7 +523,12 @@ class BoardComponent extends React.Component {
 							/>
 						</g>
 						{/* clocks */}
-						<foreignObject transform={`translate(0, ${this._boardBorderHeight})`} fontSize="0">
+						<foreignObject
+							transform={`translate(0, ${this._boardBorderHeight})`}
+							height="100%"
+							width="100%"
+							fontSize="0"
+						>
 							<div className="clock-area">
 								{this.state.clocks}/{this.props.clockLimit}
 							</div>
