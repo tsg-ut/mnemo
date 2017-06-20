@@ -598,118 +598,128 @@ button {
 				position: relative;
 			}
 
-			.save-panel-area {
-				display: none;
-				z-index: 1;
+			.save-area-wrapper {
+				flex: 0 0 auto;
 
-				.save-balloon {
-					display: flex;
-					flex-direction: column;
-					position: absolute;
-					width: 250px;
-					height: 250px;
-					bottom: 125px;
-					left: calc(~'50% + 173px');
-					transform: translateX(-50%);
-					border-radius: 6px;
-					background: white;
+				.save {
+					background: url('image/control-button-save.png');
+					width: 50px;
+					height: 50px;
+				}
 
-					&::before {
-						content: '';
-						border-left: solid 10px transparent;
-						border-top: solid 10px white;
-						border-right: solid 10px transparent;
+				.save-panel-area {
+					display: none;
+					z-index: 1;
+
+					.save-balloon {
+						display: flex;
+						flex-direction: column;
 						position: absolute;
-						top: 100%;
-						left: 50%;
+						width: 250px;
+						height: 250px;
+						bottom: 100%;
+						left: calc(~'50% + 173px');
 						transform: translateX(-50%);
-					}
+						border-radius: 6px;
+						background: white;
 
-					.entry-wrapper {
-						flex: 1 1 0;
-						overflow-y: scroll;
-						width: 100%;
-						padding: 5px 5px 20px 5px;
-						box-sizing: border-box;
-
-						.saved-entries {
-							list-style: none;
-							padding-left: 0;
-							margin: 0;
+						&::before {
+							content: '';
+							border-left: solid 10px transparent;
+							border-top: solid 10px white;
+							border-right: solid 10px transparent;
+							position: absolute;
+							top: 100%;
+							left: 50%;
+							transform: translateX(-50%);
 						}
 
-						.saved-item {
-							display: flex;
-							margin: 0 0 10px 0;
-						}
-
-						.timestamp {
+						.entry-wrapper {
 							flex: 1 1 0;
-							position: relative;
-							padding: 6px 0px 6px 5px;
-							border-bottom-left-radius: 10px;
-							border-top-left-radius: 10px;
-							color: white;
-							font-size: 18px;
-							text-align: left;
-							background: linear-gradient(#FFAD3F, #FF9A12);
-							box-shadow: 0px 3px 0px #EA660E;
-							cursor: pointer;
+							overflow-y: scroll;
+							width: 100%;
+							padding: 5px 5px 20px 5px;
+							box-sizing: border-box;
 
-							&:hover {
-								box-shadow: 0px 1px 0px #EA660E;
-								transform: translateY(2px);
+							.saved-entries {
+								list-style: none;
+								padding-left: 0;
+								margin: 0;
 							}
 
-							&:active {
-								background: #633e0b;
+							.saved-item {
+								display: flex;
+								margin: 0 0 10px 0;
+							}
+
+							.timestamp {
+								flex: 1 1 0;
+								position: relative;
+								padding: 6px 0px 6px 5px;
+								border-bottom-left-radius: 10px;
+								border-top-left-radius: 10px;
+								color: white;
+								font-size: 18px;
+								text-align: left;
+								background: linear-gradient(#FFAD3F, #FF9A12);
+								box-shadow: 0px 3px 0px #EA660E;
+								cursor: pointer;
+
+								&:hover {
+									box-shadow: 0px 1px 0px #EA660E;
+									transform: translateY(2px);
+								}
+
+								&:active {
+									background: #633e0b;
+								}
+							}
+
+							.delete {
+								flex: 0 1 15%;
+								padding: 4px 0;
+								border-bottom-right-radius: 10px;
+								border-top-right-radius: 10px;
+								font-size: 25px;
+								color: white;
+								background: linear-gradient(#FF6E51, #FF4C28);
+								box-shadow: 0px 3px 0px #EA660E;
+								cursor: pointer;
+
+								&:hover {
+									box-shadow: 0px 1px 0px #EA660E;
+									transform: translateY(2px);
+								}
+
+								&:active {
+									background: #4f1102;
+								}
 							}
 						}
 
-						.delete {
-							flex: 0 1 15%;
-							padding: 4px 0;
-							border-bottom-right-radius: 10px;
-							border-top-right-radius: 10px;
-							font-size: 25px;
-							color: white;
-							background: linear-gradient(#FF6E51, #FF4C28);
-							box-shadow: 0px 3px 0px #EA660E;
-							cursor: pointer;
+						.save-button-wrapper{
+							flex: 0 1 13%;
+							padding: 5px 0;
 
-							&:hover {
-								box-shadow: 0px 1px 0px #EA660E;
-								transform: translateY(2px);
-							}
+							.save-entry {
+								width: 60%;
+								margin: 0 20%;
+								padding: 6px 0;
+								border-radius: 8px;
+								font-size: 22px;
+								color: white;
+								background: linear-gradient(#FF7B36, #FA5B09);
+								box-shadow: 0 3px 0 #AE2700;
+								cursor: pointer;
 
-							&:active {
-								background: #4f1102;
-							}
-						}
-					}
+								&:hover {
+									box-shadow: 0 2px 0 #AE2700;
+									transform: translateY(2px);
+								}
 
-					.save-button-wrapper{
-						flex: 0 1 13%;
-						padding: 5px 0;
-
-						.save-entry {
-							width: 60%;
-							margin: 0 20%;
-							padding: 6px 0;
-							border-radius: 8px;
-							font-size: 22px;
-							color: white;
-							background: linear-gradient(#FF7B36, #FA5B09);
-							box-shadow: 0 3px 0 #AE2700;
-							cursor: pointer;
-
-							&:hover {
-								box-shadow: 0 2px 0 #AE2700;
-								transform: translateY(2px);
-							}
-
-							&:active {
-								background: #633e0b;
+								&:active {
+									background: #633e0b;
+								}
 							}
 						}
 					}
@@ -1595,7 +1605,7 @@ button {
 			}
 		}
 
-		@buttons: exit, ranking, execute, stop, rapid, save;
+		@buttons: exit, ranking, execute, stop, rapid;
 		.-(@i: length(@buttons)) when (@i > 0) {
 			@button: extract(@buttons, @i);
 			& > button.@{button} {
