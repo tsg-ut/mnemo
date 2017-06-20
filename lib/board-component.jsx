@@ -650,8 +650,8 @@ class BoardComponent extends React.Component {
 							x={block.x * BLOCK_SIZE}
 							y={block.y * BLOCK_SIZE}
 							xlinkHref="image/wireI.png"
-							transform={`rotate(${block.rotate * 90})`}
 							style={{
+								transform: `rotate(${block.rotate * 90}deg)`,
 								transformOrigin: 'center',
 								// Enabled from FF55
 								transformBox: 'fill-box',
@@ -668,11 +668,8 @@ class BoardComponent extends React.Component {
 								x={block.x * BLOCK_SIZE}
 								y={block.y * BLOCK_SIZE}
 								xlinkHref={`image/${block.name}.png`}
-								{...(
-									!block.config.onRotatableWire &&
-									{transform: `rotate(${block.rotate * 90})`}
-								)}
 								style={{
+									transform: block.config.onRotatableWire ? 'none' : `rotate(${block.rotate * 90}deg)`,
 									transformOrigin: 'center',
 									// Enabled from FF55
 									transformBox: 'fill-box',
