@@ -600,6 +600,7 @@ button {
 
 			.save-area-wrapper {
 				flex: 0 0 auto;
+				position: relative;
 
 				.save {
 					background: url('image/control-button-save.png');
@@ -618,7 +619,8 @@ button {
 						width: 250px;
 						height: 250px;
 						bottom: 100%;
-						left: calc(~'50% + 173px');
+						left: 50%;
+						margin: 30px 0;
 						transform: translateX(-50%);
 						border-radius: 6px;
 						background: white;
@@ -649,7 +651,7 @@ button {
 
 							.saved-item {
 								display: flex;
-								margin: 0 0 10px 0;
+								margin: 0 0 13px 0;
 							}
 
 							.timestamp {
@@ -703,7 +705,7 @@ button {
 
 							.save-entry {
 								width: 60%;
-								margin: 0 20%;
+								margin: 6px 20%;
 								padding: 6px 0;
 								border-radius: 8px;
 								font-size: 22px;
