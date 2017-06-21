@@ -2228,55 +2228,6 @@ var Game = function () {
 			$('.result').hide();
 		}
 	}, {
-		key: 'saveStage',
-		value: function saveStage() {
-			var boardData = this.currentStage.board.boardData;
-			var stageName = this.configs[this.stageIndex].name;
-			var timestamp = Date.now();
-			var item = localStorage.getItem('boardData');
-			var properties = [];
-			if (item !== null) {
-				properties = JSON.parse(localStorage.getItem('boardData'));
-			}
-			properties.push({ stageName: stageName, timestamp: timestamp, boardData: boardData });
-			try {
-				localStorage.setItem('boardData', JSON.stringify(properties));
-				return true;
-			} catch (error) {
-				return false;
-			}
-		}
-	}, {
-		key: 'getStageIndexFromName',
-		value: function getStageIndexFromName(name) {
-			return this.configs.findIndex(function (config) {
-				return name === config.name;
-			});
-		}
-	}, {
-		key: 'loadStage',
-		value: function loadStage(stageName, timestamp) {
-			var item = localStorage.getItem('boardData');
-			var properties = JSON.parse(item);
-
-			var index = properties.findIndex(function (property) {
-				return property.stageName === stageName && property.timestamp === timestamp;
-			});
-
-			if (index === -1) {
-				return;
-			}
-			var boardData = properties[index].boardData;
-
-			if (stageName === this.configs[this.stageIndex].name && this.currentStage !== null) {
-				this.currentStage.clearBoard();
-			} else {
-				this.exitStage();
-				this.startStage(this.getStageIndexFromName(stageName));
-			}
-			this.currentStage.makeBoard(boardData);
-		}
-	}, {
 		key: 'exitStage',
 		value: function exitStage() {
 			this.currentStage.exit();
@@ -2677,6 +2628,9 @@ var DataElement = require('./data-element');
 var Panel = require('./panel');
 var api = require('./api');
 
+var _require = require('./util'),
+    translateDateFromUnixTime = _require.translateDateFromUnixTime;
+
 var params = querystring.parse(location.search.slice(1));
 
 var Stage = function () {
@@ -2701,6 +2655,7 @@ var Stage = function () {
 		this.$ranking = this.$stage.siblings('.result-layer').find('.ranking');
 		this.$result = this.$stage.siblings('.result-layer').find('.result');
 
+		this.$savePanel = this.$stage.find('.save-panel-area');
 		this.updateStyles();
 		this.updateClockElement();
 
@@ -2786,6 +2741,18 @@ var Stage = function () {
 				_this.execute();
 			}
 		});
+		this.$savePanel.find('button.save-entry').click(function () {
+			var flag = _this.saveStage();
+			if (!flag) {
+				alert('セーブに失敗しました');
+			}
+			_this.updateSaveEntries();
+		});
+
+		this.$stage.find('button.save').click(function () {
+			_this.updateSaveEntries();
+			_this.$savePanel.toggle();
+		});
 
 		this.updateIoFields();
 
@@ -2802,6 +2769,119 @@ var Stage = function () {
 	}
 
 	_createClass(Stage, [{
+		key: 'saveStage',
+		value: function saveStage() {
+			var boardData = this.board.boardData;
+			var stageName = this.config.name;
+			var timestamp = Date.now();
+			var item = localStorage.getItem('boardData');
+			var properties = [];
+			if (item !== null) {
+				properties = JSON.parse(item);
+			}
+			properties.push({ stageName: stageName, timestamp: timestamp, boardData: boardData });
+			try {
+				localStorage.setItem('boardData', JSON.stringify(properties));
+				return true;
+			} catch (error) {
+				return false;
+			}
+		}
+	}, {
+		key: 'loadStage',
+		value: function loadStage(timestamp) {
+			var _this2 = this;
+
+			var item = localStorage.getItem('boardData');
+			var properties = JSON.parse(item);
+
+			var index = properties.findIndex(function (property) {
+				return property.stageName === _this2.config.name && property.timestamp === timestamp;
+			});
+
+			if (index === -1) {
+				return;
+			}
+			var boardData = properties[index].boardData;
+
+			this.clearBoard();
+			this.makeBoard(boardData);
+		}
+	}, {
+		key: 'getSaveEntries',
+		value: function getSaveEntries() {
+			var _this3 = this;
+
+			var item = localStorage.getItem('boardData');
+			if (item === null) {
+				return [];
+			}
+			var properties = JSON.parse(item);
+			return properties.filter(function (prop) {
+				return _this3.config.name === prop.stageName;
+			});
+		}
+	}, {
+		key: 'removeSaveEntry',
+		value: function removeSaveEntry(timestamp) {
+			var _this4 = this;
+
+			var item = localStorage.getItem('boardData');
+			var properties = [];
+			if (item !== null) {
+				properties = JSON.parse(item);
+			}
+			var index = properties.findIndex(function (property) {
+				return property.stageName === _this4.config.name && property.timestamp === timestamp;
+			});
+
+			assert(index !== -1);
+
+			properties.splice(index, 1);
+			try {
+				localStorage.setItem('boardData', JSON.stringify(properties));
+				return true;
+			} catch (error) {
+				return false;
+			}
+		}
+	}, {
+		key: 'updateSaveEntries',
+		value: function updateSaveEntries() {
+			var _this5 = this;
+
+			var entries = this.getSaveEntries();
+			this.$savePanel.find('.saved-entries').empty().append(entries.map(function (entry) {
+				return $('<li/>', {
+					class: 'saved-item'
+				}).append([$('<button/>', {
+					class: 'timestamp',
+					text: translateDateFromUnixTime(entry.timestamp)
+				}), $('<button/>', {
+					class: 'delete'
+				}).append($('<i/>', {
+					class: 'fa fa-times',
+					'aria-hidden': 'true'
+				}))]);
+			}));
+			this.$savePanel.find('.timestamp').each(function (index, element) {
+				var $timestampButton = $(element);
+				var entry = entries[index];
+				$timestampButton.click(function () {
+					_this5.loadStage(entry.timestamp);
+					_this5.updateSaveEntries();
+				});
+			});
+			this.$savePanel.find('.delete').each(function (index, element) {
+				var $delButton = $(element);
+				var entry = entries[index];
+				$delButton.click(function () {
+					_this5.removeSaveEntry(entry.timestamp);
+					_this5.updateSaveEntries();
+				});
+			});
+		}
+	}, {
 		key: 'exit',
 		value: function exit() {
 			ReactDOM.unmountComponentAtNode(this.$stage.find('.panel-area').get(0));
@@ -2835,12 +2915,12 @@ var Stage = function () {
 	}, {
 		key: 'executeCase',
 		value: function executeCase() {
-			var _this2 = this;
+			var _this6 = this;
 
 			var inputs = this.board.input(this.config.input[this.caseIndex]);
 			inputs.forEach(function (input, index) {
 				input.forEach(function (value) {
-					new DataElement(_this2.boardElement, value, _this2.board.inputBlock[index].top);
+					new DataElement(_this6.boardElement, value, _this6.board.inputBlock[index].top);
 				});
 			});
 
@@ -2852,41 +2932,41 @@ var Stage = function () {
 	}, {
 		key: 'clockUp',
 		value: function clockUp() {
-			var _this3 = this;
+			var _this7 = this;
 
 			this.board.step();
 			this.updateClockElement();
 
 			if (this.board.status === 'executing') {
 				Promise.all(this.boardElement.animations).then(function () {
-					_this3.boardElement.animations = [];
-					_this3.board.pass();
+					_this7.boardElement.animations = [];
+					_this7.board.pass();
 
-					if (_this3.board.status === 'executing') {
-						if (_this3.board.clock >= _this3.board.clockLimit) {
-							_this3.board.halt();
+					if (_this7.board.status === 'executing') {
+						if (_this7.board.clock >= _this7.board.clockLimit) {
+							_this7.board.halt();
 							$.fx.off = params.fx === 'off';
 
-							var $clockLimit = _this3.$stage.siblings('.result-layer').find('.clock-limit');
+							var $clockLimit = _this7.$stage.siblings('.result-layer').find('.clock-limit');
 
-							$clockLimit.find('.limit-value').text(_this3.board.clockLimit);
+							$clockLimit.find('.limit-value').text(_this7.board.clockLimit);
 							$clockLimit.show();
 
 							return;
 						}
 
-						if (_this3.board.dataCount > 100) {
-							_this3.board.halt();
+						if (_this7.board.dataCount > 100) {
+							_this7.board.halt();
 							$.fx.off = params.fx === 'off';
 
-							var $dataLimit = _this3.$stage.siblings('.result-layer').find('.data-limit');
+							var $dataLimit = _this7.$stage.siblings('.result-layer').find('.data-limit');
 
 							$dataLimit.show();
 
 							return;
 						}
 
-						_this3.clockUp();
+						_this7.clockUp();
 					}
 				});
 			}
@@ -3039,7 +3119,7 @@ var Stage = function () {
 	}, {
 		key: 'onRegister',
 		value: function onRegister(event) {
-			var _this4 = this;
+			var _this8 = this;
 
 			var registrationStartTime = Date.now();
 
@@ -3058,17 +3138,17 @@ var Stage = function () {
 
 				if (data.error) {
 					if (data.message === 'user name existing') {
-						_this4.$result.find('.register').text('すでに登録されています').addClass('success');
+						_this8.$result.find('.register').text('すでに登録されています').addClass('success');
 						ga('send', 'event', 'stage', 'register ranking', 'duplicated', registrationDuration);
 					} else {
-						_this4.$result.find('.register').text('エラーが発生しました').addClass('error');
+						_this8.$result.find('.register').text('エラーが発生しました').addClass('error');
 						ga('send', 'event', 'stage', 'register ranking', 'errored', registrationDuration);
 					}
 
 					return;
 				}
 
-				_this4.$result.find('.register').text('登録しました!!').addClass('success');
+				_this8.$result.find('.register').text('登録しました!!').addClass('success');
 
 				ga('send', 'event', 'stage', 'register ranking', 'succeeded', registrationDuration);
 			});
@@ -3076,22 +3156,22 @@ var Stage = function () {
 	}, {
 		key: 'clearBoard',
 		value: function clearBoard() {
-			var _this5 = this;
+			var _this9 = this;
 
 			this.board.blocks.forEach(function (row, x) {
 				row.forEach(function (block, y) {
-					_this5.takeAndPlace(x, y, 'empty');
+					_this9.takeAndPlace(x, y, 'empty');
 				});
 			});
 		}
 	}, {
 		key: 'makeBoard',
 		value: function makeBoard(board) {
-			var _this6 = this;
+			var _this10 = this;
 
 			board.forEach(function (block) {
 				for (var i = 0; i < block.rotate + 1; i++) {
-					_this6.takeAndPlace(block.x, block.y, block.type);
+					_this10.takeAndPlace(block.x, block.y, block.type);
 				}
 			});
 		}
@@ -3139,7 +3219,7 @@ var Stage = function () {
 
 module.exports = Stage;
 
-},{"./api":2,"./board":6,"./board-element":5,"./data-element":7,"./panel":11,"assert":15,"jquery":229,"querystring":240,"react":393,"react-dom":241}],13:[function(require,module,exports){
+},{"./api":2,"./board":6,"./board-element":5,"./data-element":7,"./panel":11,"./util":13,"assert":15,"jquery":229,"querystring":240,"react":393,"react-dom":241}],13:[function(require,module,exports){
 'use strict';
 
 require('regenerator-runtime/runtime');
@@ -3262,6 +3342,17 @@ module.exports.log = function (a, b) {
 		}
 	}
 	return lower;
+};
+
+module.exports.translateDateFromUnixTime = function (unixtime) {
+	var date = new Date(unixtime);
+	var year = date.getFullYear();
+	var month = ('0' + (date.getMonth() + 1)).slice(-2);
+	var day = ('0' + date.getDate()).slice(-2);
+	var hour = ('0' + date.getHours()).slice(-2);
+	var minute = ('0' + date.getMinutes()).slice(-2);
+	var seconds = ('0' + date.getSeconds()).slice(-2);
+	return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + seconds;
 };
 
 module.exports.floorTowardsZero = function (decimal) {
