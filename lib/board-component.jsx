@@ -151,8 +151,14 @@ class BoardComponent extends React.Component {
 		return this.props.output.length * 200 - 50;
 	}
 
+	// TODO: publicなメソッドを殺したい
+
 	getBlock(x, y) {
 		return this.board.getBlock(x, y);
+	}
+
+	getBoardData() {
+		return this.board.boardData;
 	}
 
 	getClock() {
