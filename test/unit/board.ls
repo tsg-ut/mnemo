@@ -30,7 +30,7 @@ describe 'Board' ->
 
     for x from 0 til 4
       @board.step!
-      @board.pass!
+      @board.hand!
 
   describe 'constructor' ->
     It 'creates height x width numbers of empty blocks' ->
@@ -63,7 +63,7 @@ describe 'Board' ->
       expect @board.data-exists .to.be.true
       @board.step!
       expect @board.data-exists .to.be.true
-      @board.pass!
+      @board.hand!
       expect @board.data-exists .to.be.true
       @board.step!
       expect @board.data-exists .to.be.false
