@@ -7,14 +7,10 @@ module.exports = {
 	inputX: 1,
 	outputX: 1,
 	input: [
-		4,
 		10,
-		7,
 	],
 	output: [
-		4,
 		10,
-		7,
 	],
 	width: 3,
 	height: 3,

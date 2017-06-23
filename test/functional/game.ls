@@ -19,7 +19,7 @@ describe 'Game Screen' ->
       .evaluate -> document.query-selector '.screens' .classList.contains 'gaming'
       .then -> expect it .to.be.true
 
-    It 'can place blocks' ->
+    It.skip 'can place blocks' ->
       @nightmare
       .click '.panel > .block[data-type=wireI]'
       .click '.board .block[data-x="1"][data-y="0"]'
@@ -38,14 +38,14 @@ describe 'Game Screen' ->
       .then ->
         expect it .to.equal '0'
 
-    It 'fails when executed' ->
+    It.skip 'fails when executed' ->
       @nightmare
       .click 'button.execute'
       .wait -> document.query-selector-all '.data' .length is 0
       .evaluate -> document.query-selector '.statement' .text-content
       .then -> expect it .to.equal '入り口と出口をつなげてみよう!'
 
-    It 'succeeds when placed more blocks correctly' ->
+    It.skip 'succeeds when placed more blocks correctly' ->
       @nightmare
       .click '.panel > .block[data-type=wireI]'
       .click '.board .block[data-x="1"][data-y="1"]'

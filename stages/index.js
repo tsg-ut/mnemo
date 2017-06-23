@@ -1,6 +1,8 @@
 /* eslint global-require: 'off' */
 
-module.exports = [
+const {normalizeStageInput} = require('../lib/util');
+
+const stages = [
 	require('./wire01.js'),
 	require('./calc01.js'),
 	require('./calc02.js'),
@@ -52,3 +54,14 @@ module.exports = [
 	require('./addition-med.js'),
 	require('./10000th-digit.js'),
 ];
+
+// Normalize stage data
+module.exports = stages.map((stage) => {
+	if (!Array.isArray(stage.inputX)) {
+		stage.inputX = [stage.inputX];
+	}
+
+	stage.input = normalizeStageInput(stage.input);
+
+	return stage;
+});

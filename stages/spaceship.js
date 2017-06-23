@@ -37,7 +37,7 @@ module.exports = {
 	inputX: [2, 4],
 	outputX: 3,
 	clockLimit: 100,
-	input: [null, null, null, null, null],
+	input: [[null, null], [null, null], [null, null], [null, null], [null, null]],
 	output: [0, -1, 1, null, null],
 	ioGenerator: (random) => {
 		const candidates = Array.from({length: 99}, (item, index) => index + 1); // 1..100

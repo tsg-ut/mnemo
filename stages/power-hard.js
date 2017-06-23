@@ -40,7 +40,7 @@ module.exports = {
 	},
 	inputX: [6, 8],
 	outputX: 7,
-	input: [null, null, [2, 35]],
+	input: [[null, null], [null, null], [2, 35]],
 	output: [null, null, 34359738368],
 	ioGenerator: (random) => {
 		// 5..20 or -5..-20
