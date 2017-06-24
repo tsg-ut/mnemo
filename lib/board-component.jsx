@@ -415,14 +415,14 @@ class BoardComponent extends React.Component {
 		const curveLength = pathLength * 0.9;
 
 		return Path()
-		.moveTo(startX, 0)
-		.relative().lineTo(0, head)
-		.relative().curveTo(
-			0, curveLength,
-			endX - startX, pathLength - curveLength,
-			endX - startX, pathLength)
-		.relative().lineTo(0, tail)
-		.end();
+			.moveTo(startX, 0)
+			.relative().lineTo(0, head)
+			.relative().curveTo(
+				0, curveLength,
+				endX - startX, pathLength - curveLength,
+				endX - startX, pathLength)
+			.relative().lineTo(0, tail)
+			.end();
 	}
 
 	getInputColor = (index) => {
@@ -665,25 +665,23 @@ class BoardComponent extends React.Component {
 							}}
 						/>
 					)}
-					{
-						(block.name !== 'empty') && (
-							<image
-								className="block"
-								width={BLOCK_SIZE}
-								height={BLOCK_SIZE}
-								x={block.x * BLOCK_SIZE}
-								y={block.y * BLOCK_SIZE}
-								xlinkHref={`image/${block.name}.png`}
-								style={{
-									transform: block.config.onRotatableWire ? 'none' : `rotate(${block.rotate * 90}deg)`,
-									transformOrigin: 'center',
-									// Enabled from FF55
-									transformBox: 'fill-box',
-									pointerEvents: 'none',
-								}}
-							/>
-						)
-					}
+					{(block.name !== 'empty') && (
+						<image
+							className="block"
+							width={BLOCK_SIZE}
+							height={BLOCK_SIZE}
+							x={block.x * BLOCK_SIZE}
+							y={block.y * BLOCK_SIZE}
+							xlinkHref={`image/${block.name}.png`}
+							style={{
+								transform: block.config.onRotatableWire ? 'none' : `rotate(${block.rotate * 90}deg)`,
+								transformOrigin: 'center',
+								// Enabled from FF55
+								transformBox: 'fill-box',
+								pointerEvents: 'none',
+							}}
+						/>
+					)}
 				</g>
 			))
 		))
