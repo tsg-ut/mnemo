@@ -96,3 +96,9 @@ npm run functional
 ```sh
 npm run lint
 ```
+
+#### Lintエラーを自動修復
+
+```sh
+npm run lint -- --fix
+```

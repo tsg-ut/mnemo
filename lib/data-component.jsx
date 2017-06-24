@@ -199,8 +199,8 @@ class DataComponent extends React.Component {
 
 	getRectangleWidth = () => (
 		(this.state.valueDimensions !== null && this.props.viewBoxScale !== null)
-		? this.state.valueDimensions.width / this.props.viewBoxScale + 4
-		: (this.getDisplayValue().length * 6 + 4)
+			? this.state.valueDimensions.width / this.props.viewBoxScale + 4
+			: (this.getDisplayValue().length * 6 + 4)
 	)
 
 	render() {
