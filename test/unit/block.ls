@@ -155,6 +155,96 @@ describe 'Block' ->
           top: 334
           left: 334
 
+  describe 'JunctionR block' ->
+    context 'without rotation' ->
+      It 'conveys data from top to right' ->
+        io-test do
+          type: \junctionR
+          in:
+            top: 334
+          out:
+            right: 334
+
+      It 'conveys data from left to right' ->
+        io-test do
+          type: \junctionR
+          in:
+            left: 334
+          out:
+            right: 334
+
+      It 'conveys data from right to top and left' ->
+        io-test do
+          type: \junctionR
+          in:
+            right: 334
+          out:
+            top: 334
+            left: 334
+
+    context 'with 90deg rotated' ->
+      It 'conveys data from bottom to top and right' ->
+        io-test do
+          type: \junctionR
+          rotate: 1
+          in:
+            bottom: 334
+          out:
+            top: 334
+            right: 334
+
+  describe 'JunctionL block' ->
+    It 'conveys data from top to left' ->
+      io-test do
+        type: \junctionL
+        in:
+          top: 334
+        out:
+          left: 334
+
+    It 'conveys data from right to left' ->
+      io-test do
+        type: \junctionL
+        in:
+          right: 334
+        out:
+          left: 334
+
+    It 'conveys data from left to top and right' ->
+      io-test do
+        type: \junctionL
+        in:
+          left: 334
+        out:
+          top: 334
+          right: 334
+
+  describe 'JunctionT block' ->
+    It 'conveys data from top to left and right' ->
+      io-test do
+        type: \junctionT
+        in:
+          top: 334
+        out:
+          left: 334
+          right: 334
+
+    It 'conveys data from right to top' ->
+      io-test do
+        type: \junctionT
+        in:
+          right: 334
+        out:
+          top: 334
+
+    It 'conveys data from left to top' ->
+      io-test do
+        type: \junctionT
+        in:
+          left: 334
+        out:
+          top: 334
+
   describe 'times-2 block' ->
     It 'converts data by multiplying 2' ->
       io-test do
