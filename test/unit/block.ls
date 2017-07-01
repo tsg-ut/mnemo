@@ -182,6 +182,21 @@ describe 'Block' ->
             top: 334
             left: 334
 
+      It 'erases any data put on the bottom' ->
+        @board.place-block x: 0, y: 0, type: \junctionR, rotate: 0
+        @block = @board.get-block 0, 0
+
+        resolve, reject <~ new Promise _
+
+        data = new Data @board, 334
+        @block.input 'bottom', data
+
+        @block.on 'erase' (erased-data) ->
+          expect erased-data .to.equal data
+          resolve!
+
+        @block.step!
+
     context 'with 90deg rotated' ->
       It 'conveys data from bottom to top and right' ->
         io-test do
