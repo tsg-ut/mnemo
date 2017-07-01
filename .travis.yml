@@ -19,6 +19,8 @@ addons:
       - yarn
 
 before_install:
+  - which uglifyjs || echo nope
+  - uglifyjs --version || echo nope
   - export PATH=/usr/bin:$PATH
   - export DISPLAY=':99.0'
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
@@ -29,7 +31,13 @@ install:
   - touch yarn.lock
   - yarn upgrade --no-lockfile
 
+after_install:
+  - which uglifyjs || echo nope
+  - uglifyjs --version || echo nope
+
 script:
+  - which uglifyjs || echo nope
+  - uglifyjs --version || echo nope
   - yarn build:production
   - yarn test
   - yarn test:api
