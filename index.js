@@ -659,9 +659,52 @@ module.exports = {
 		rotatable: false
 	},
 	wireX: {
-		type: 'wireX',
-		io: {},
+		type: 'wireF',
+		io: {
+			flow: {
+				top: ['bottom'],
+				bottom: ['top'],
+				left: ['right'],
+				right: ['left']
+			}
+		},
 		weight: 1
+	},
+	junctionR: {
+		type: 'wireF',
+		io: {
+			flow: {
+				top: ['right'],
+				left: ['right'],
+				right: ['top', 'left']
+			}
+		},
+		weight: 2,
+		rotatable: true
+	},
+	junctionL: {
+		type: 'wireF',
+		io: {
+			flow: {
+				top: ['left'],
+				right: ['left'],
+				left: ['top', 'right']
+			}
+		},
+		weight: 2,
+		rotatable: true
+	},
+	junctionT: {
+		type: 'wireF',
+		io: {
+			flow: {
+				top: ['left', 'right'],
+				right: ['top'],
+				left: ['top']
+			}
+		},
+		weight: 2,
+		rotatable: true
 	},
 	'times-2': {
 		type: 'calc',
@@ -1262,6 +1305,16 @@ var Block = function (_EventEmitter) {
 			_this.rotatedPlugs = _this.config.io.plugs.map(function (direction) {
 				return _this.rotatedDirection(direction);
 			});
+		} else if (_this.config.type === 'wireF') {
+			_this.rotatedFlow = {};
+			var directions = ['top', 'right', 'bottom', 'left'];
+			directions.forEach(function (from) {
+				if (_this.config.io.flow[from]) {
+					_this.rotatedFlow[_this.rotatedDirection(from)] = _this.config.io.flow[from].map(function (to) {
+						return _this.rotatedDirection(to);
+					});
+				}
+			});
 		}
 		return _this;
 	}
@@ -1610,14 +1663,8 @@ var Block = function (_EventEmitter) {
 
 						break;
 					}
-				case 'wireX':
+				case 'wireF':
 					{
-						var oppositeDirection = {
-							top: 'bottom',
-							bottom: 'top',
-							left: 'right',
-							right: 'left'
-						};
 						var _iteratorNormalCompletion6 = true;
 						var _didIteratorError6 = false;
 						var _iteratorError6 = undefined;
@@ -1631,21 +1678,34 @@ var Block = function (_EventEmitter) {
 								var _source4 = _ref10[0];
 								var _queue5 = _ref10[1];
 
-								var _destination2 = oppositeDirection[_source4];
+								if (_queue5.length === 0) {
+									continue;
+								}
 
-								// When data exists in pluged direction
-								if (_queue5.length !== 0) {
-									var _data8 = _queue5.shift();
+								if (this.rotatedFlow[_source4]) {
+									(function () {
+										// When data exists in the starting direction of some flow
+										var destinations = _this2.rotatedFlow[_source4];
+										var data = _queue5.shift();
 
-									// pass through
-									var _input2 = new Map([[_source4, _data8]]);
+										var input = new Map([[_source4, data]]);
+										var output = new Map();
 
-									var _outData = new Data(this.board, _data8.value);
-									this.outputQueues.get(_destination2).push(_outData);
-									var _output2 = new Map([[_destination2, _outData]]);
+										destinations.forEach(function (direction) {
+											var outData = new Data(_this2.board, data.value);
+											_this2.outputQueues.get(direction).push(outData);
+											output.set(direction, outData);
+										});
 
-									this.emit('pass', new PassEvent({ in: _input2, out: _output2 }));
-									this.outputExists = true;
+										_this2.emit('pass', new PassEvent({ in: input, out: output }));
+										_this2.outputExists = true;
+									})();
+								} else {
+									// Erase data otherwise
+									while (_queue5.length) {
+										var _data8 = _queue5.shift();
+										this.emit('erase', _data8);
+									}
 								}
 							}
 						} catch (err) {
@@ -12727,8 +12787,8 @@ module.exports = warning;
 },{}],232:[function(require,module,exports){
 (function (global){
 /*!
- * VERSION: 1.20.0
- * DATE: 2017-06-27
+ * VERSION: 1.20.2
+ * DATE: 2017-06-30
  * UPDATES AND DOCS AT: http://greensock.com
  * 
  * Includes all of the following: TweenLite, TweenMax, TimelineLite, TimelineMax, EasePack, CSSPlugin, RoundPropsPlugin, BezierPlugin, AttrPlugin, DirectionalRotationPlugin
@@ -12778,7 +12838,7 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 			p = TweenMax.prototype = TweenLite.to({}, 0.1, {}),
 			_blankArray = [];
 
-		TweenMax.version = "1.20.0";
+		TweenMax.version = "1.20.2";
 		p.constructor = TweenMax;
 		p.kill()._gc = false;
 		TweenMax.killTweensOf = TweenMax.killDelayedCallsTo = TweenLite.killTweensOf;
@@ -13428,7 +13488,7 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 			},
 			p = TimelineLite.prototype = new SimpleTimeline();
 
-		TimelineLite.version = "1.20.0";
+		TimelineLite.version = "1.20.2";
 		p.constructor = TimelineLite;
 		p.kill()._gc = p._forcingPlayhead = p._hasPause = false;
 
@@ -14164,7 +14224,7 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 
 		p.constructor = TimelineMax;
 		p.kill()._gc = false;
-		TimelineMax.version = "1.20.0";
+		TimelineMax.version = "1.20.2";
 
 		p.invalidate = function() {
 			this._yoyo = (this.vars.yoyo === true);
@@ -14333,7 +14393,7 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 					}
 				}
 
-				if (this._hasPause && !this._forcingPlayhead && !suppressEvents && time < dur) {
+				if (this._hasPause && !this._forcingPlayhead && !suppressEvents) {
 					time = this._time;
 					if (time >= prevTime || (this._repeat && prevCycle !== this._cycle)) {
 						tween = this._first;
@@ -14352,7 +14412,7 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 							tween = tween._prev;
 						}
 					}
-					if (pauseTween) {
+					if (pauseTween && pauseTween._startTime < dur) {
 						this._time = time = pauseTween._startTime;
 						this._totalTime = time + (this._cycle * (this._totalDuration + this._repeatDelay));
 					}
@@ -19671,7 +19731,7 @@ if (_gsScope._gsDefine) { _gsScope._gsQueue.pop()(); } //necessary in case Tween
 		p._firstPT = p._targets = p._overwrittenProps = p._startAt = null;
 		p._notifyPluginsOfEnabled = p._lazy = false;
 
-		TweenLite.version = "1.20.0";
+		TweenLite.version = "1.20.2";
 		TweenLite.defaultEase = p._ease = new Ease(null, null, 1, 1);
 		TweenLite.defaultOverwrite = "auto";
 		TweenLite.ticker = _ticker;
