@@ -3515,6 +3515,8 @@ var Game = function () {
 			_this.closeResult();
 
 			$('.screens').removeClass('gaming');
+			$('.github-fork-ribbon').show();
+
 			_this.currentStage = null;
 		};
 
@@ -3610,6 +3612,7 @@ var Game = function () {
 			this.stageIndex = index;
 			$('.screens').addClass('gaming');
 			$('.result-layer .limit').hide();
+			$('.github-fork-ribbon').hide();
 
 			ga('send', 'event', 'stage', 'start stage', this.currentStage.config.title);
 
