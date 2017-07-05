@@ -17,4 +17,7 @@ module.exports = (env = {}) => ({
 	plugins: [
 		...(env.production ? [new BabiliPlugin()] : []),
 	],
+	devServer: {
+		watchContentBase: true,
+	},
 });
