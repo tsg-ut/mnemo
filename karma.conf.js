@@ -26,7 +26,13 @@ module.exports = (config) => {
 				'react/lib/ExecutionEnvironment',
 			],
 		},
-		reporters: ['spec'],
+		reporters: ['spec', 'coverage'],
+		coverageReporter: {
+			dir: 'coverage',
+			reporters: [
+				{type: 'lcov', subdir: 'lcov'},
+			],
+		},
 		port: 9876,
 		colors: true,
 		logLevel: config.LOG_INFO,
