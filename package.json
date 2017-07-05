@@ -13,7 +13,7 @@
     "less": "lessc index.less | postcss --use postcss-assets --use postcss-font-magician --postcss-font-magician.protocol=https: ---use postcss-flexbugs-fixes --use autoprefixer > index.css",
     "build": "concurrently \"npm run browserify\" \"npm run pug\" \"npm run less\"",
     "browserify:debug": "cross-env BABEL_ENV=debug npm run browserify",
-    "browserify:production": "cross-env NODE_ENV=production BABEL_ENV=production npm run browserify && uglifyjs index.js --mangle --compress --output index.min.js --source-map content=index.js.map,filename=index.min.js.map,url=index.min.js.map",
+    "browserify:production": "cross-env NODE_ENV=production BABEL_ENV=production npm run browserify && node node_modules/uglify-js/bin/uglifyjs index.js --mangle --compress --output index.min.js --source-map content=index.js.map,filename=index.min.js.map,url=index.min.js.map",
     "pug:production": "cross-env NODE_ENV=production pug index.pug",
     "less:production": "cross-env NODE_ENV=production lessc index.less | postcss --use postcss-assets --use postcss-font-magician --postcss-font-magician.protocol=https: --use postcss-flexbugs-fixes --use autoprefixer --use cssnano --map -o index.min.css",
     "build:production": "concurrently \"npm run browserify:production\" \"npm run pug:production\" \"npm run less:production\"",

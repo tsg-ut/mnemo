@@ -4932,13 +4932,12 @@ module.exports.log = function (a, b) {
 
 module.exports.translateDateFromUnixTime = function (unixtime) {
 	var date = new Date(unixtime);
-	date.setTime(date.getTime() + (date.getTimezoneOffset() + 9 * 60) * 60 * 1000);
-	var year = date.getFullYear();
-	var month = ('0' + (date.getMonth() + 1)).slice(-2);
-	var day = ('0' + date.getDate()).slice(-2);
-	var hour = ('0' + date.getHours()).slice(-2);
-	var minute = ('0' + date.getMinutes()).slice(-2);
-	var seconds = ('0' + date.getSeconds()).slice(-2);
+	var year = date.getFullYear().toString().padStart(4, '0');
+	var month = (date.getMonth() + 1).toString().padStart(2, '0');
+	var day = date.getDate().toString().padStart(2, '0');
+	var hour = date.getHours().toString().padStart(2, '0');
+	var minute = date.getMinutes().toString().padStart(2, '0');
+	var seconds = date.getSeconds().toString().padStart(2, '0');
 	return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + seconds;
 };
 
