@@ -23,6 +23,9 @@ module.exports = (config) => {
 					loader: 'livescript-loader',
 				}],
 			},
+			resolve: {
+				mainFields: ['browser', 'main'],
+			},
 			externals: [
 				'react-addons-test-utils',
 				'react/lib/ReactContext',

@@ -20,4 +20,7 @@ module.exports = (env = {}) => ({
 	devServer: {
 		watchContentBase: true,
 	},
+	resolve: {
+		mainFields: ['browser', 'main'],
+	},
 });
