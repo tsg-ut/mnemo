@@ -60,9 +60,6 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.5",
     "babel-preset-env": "^1.5.1",
     "babel-preset-react": "^6.23.0",
-    "babelify": "^7.3.0",
-    "browserify": "^14.0.0",
-    "browserify-livescript": "^0.2.3",
     "chai": "^4.0.2",
     "chai-enzyme": "^0.8.0",
     "chai-http": "^3.0.0",
@@ -75,7 +72,6 @@
     "enzyme": "^2.7.1",
     "eslint": "^4.1.0",
     "eslint-plugin-react": "^7.0.0",
-    "exorcist": "^0.4.0",
     "fetch-ponyfill": "^4.0.0",
     "file-url": "^2.0.0",
     "github-fork-ribbon-css": "^0.2.1",
@@ -89,8 +85,6 @@
     "mathjs": "^3.8.0",
     "mocha": "^3.3.0",
     "mocha-logger": "^1.0.4",
-    "mochify": "^3.1.0",
-    "mochify-istanbul": "^2.4.1",
     "mockery": "^2.0.0",
     "nightmare": "^2.8.1",
     "normalize.css": "^7.0.0",
@@ -111,8 +105,7 @@
     "sqlite3": "^3.1.4",
     "svg-path-generator": "^1.1.0",
     "uglify-js": "^3.0.11",
-    "umzug": "^2.0.1",
-    "watchify": "^3.7.0"
+    "umzug": "^2.0.1"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
