@@ -1,3 +1,5 @@
+const {SourceMapDevToolPlugin} = require('webpack');
+
 module.exports = (config) => {
 	config.set({
 		basePath: '',
@@ -7,9 +9,10 @@ module.exports = (config) => {
 		],
 		exclude: [],
 		preprocessors: {
-			'**/*.@(js|jsx|ls)': ['webpack'],
+			'**/*.@(js|jsx|ls)': ['webpack', 'sourcemap'],
 		},
 		webpack: {
+			devtool: 'inline-source-map',
 			module: {
 				loaders: [{
 					test: /\.jsx?$/,
@@ -24,6 +27,13 @@ module.exports = (config) => {
 				'react-addons-test-utils',
 				'react/lib/ReactContext',
 				'react/lib/ExecutionEnvironment',
+			],
+			plugins: [
+				// https://github.com/webpack-contrib/karma-webpack/issues/109#issuecomment-224961264
+				new SourceMapDevToolPlugin({
+					filename: null,
+					test: /\.(ls|js|jsx)($|\?)/i,
+				}),
 			],
 		},
 		reporters: ['spec', 'coverage'],
