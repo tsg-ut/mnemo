@@ -19,41 +19,17 @@ addons:
       - yarn
 
 before_install:
-  - which uglifyjs || echo nope
-  - uglifyjs --version || echo nope
-  - npm ls uglify-js || echo nope
-  - yarn list uglify-js || echo nope
-  - cat node_modules/uglify-js/package.json || echo nope
-  - node_modules/.bin/uglifyjs --version || echo nope
   - export PATH=/usr/bin:$PATH
-  - which uglifyjs || echo nope
-  - uglifyjs --version || echo nope
-  - npm ls uglify-js || echo nope
-  - yarn list uglify-js || echo nope
-  - cat node_modules/uglify-js/package.json || echo nope
-  - node_modules/.bin/uglifyjs --version || echo nope
   - export DISPLAY=':99.0'
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
 
 # yarn upgrade will also install missing packages as well
 install:
-  - which uglifyjs || echo nope
-  - uglifyjs --version || echo nope
-  - npm ls uglify-js || echo nope
-  - yarn list uglify-js || echo nope
-  - cat node_modules/uglify-js/package.json || echo nope
-  - node_modules/.bin/uglifyjs --version || echo nope
   # Yarn needs lockfile to exist even if --no-lockfile option is provided. So... fake lockfile *puke*
   - touch yarn.lock
   - yarn upgrade --no-lockfile
 
 script:
-  - which uglifyjs || echo nope
-  - uglifyjs --version || echo nope
-  - npm ls uglify-js || echo nope
-  - yarn list uglify-js || echo nope
-  - cat node_modules/uglify-js/package.json || echo nope
-  - node_modules/.bin/uglifyjs --version || echo nope
   - yarn build:production
   - yarn test
   - yarn test:api
