@@ -22,11 +22,11 @@
     "watch:pug": "chokidar \"*.pug\" \"modals/*/*\" -c \"npm run pug\"",
     "watch:less": "chokidar \"*.less\" -c \"npm run less\"",
     "watch": "concurrently \"npm run watch:js\" \"npm run watch:map\" \"npm run watch:pug\" \"npm run watch:less\" \"npm run serve\" \"npm run live\"",
+    "unit:mocha": "cross-env BABEL_ENV=test mocha-webpack --webpack-config webpack.config-mocha.js \"test/unit/*\"",
     "unit:karma": "cross-env BABEL_ENV=test karma start",
-    "unit:mocha": "cross-env MOCHIFY=true mochify \"test/unit/*.ls\" --node --reporter spec --extension ls --extension js --transform browserify-livescript --plugin [ mochify-istanbul --exclude \"**/+(test|node_modules)/**/*\" --report text --report text-summary --report lcovonly --dir coverage/node ]",
-    "unit": "npm run unit:karma && npm run unit:mocha",
+    "unit": "npm run unit:mocha && npm run unit:karma",
     "functional": "mocha \"test/functional/index.ls\" --reporter spec --compilers ls:livescript",
-    "codecov": "lcov-result-merger \"{coverage/node/lcov.info,coverage/react/lcov.info,api/coverage/lcov.info}\" > lcov.info && codecov -f lcov.info",
+    "codecov": "lcov-result-merger \"{coverage/lcov/lcov.info,api/coverage/lcov.info}\" > lcov.info && codecov -f lcov.info",
     "lint": "eslint \"{lib,api,stages,test}/**/*.{js,jsx}\" --ignore-pattern \"lib/analytics.js\" --ignore-pattern \"api/coverage/**/*.js\"",
     "test": "npm run unit && npm run functional && npm run lint",
     "api:init": "cd api && sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
@@ -116,7 +116,8 @@
     "svg-path-generator": "^1.1.0",
     "umzug": "^2.0.1",
     "webpack": "^3.0.0",
-    "webpack-dev-server": "^2.5.0"
+    "webpack-dev-server": "^2.5.0",
+    "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {
     "bluebird": "^3.4.6",

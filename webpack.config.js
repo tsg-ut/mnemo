@@ -12,9 +12,6 @@ module.exports = (env = {}) => ({
 			test: /\.jsx?$/,
 			loader: 'babel-loader',
 			exclude: /node_modules/,
-		}, {
-			test: /\.ls$/,
-			loader: 'livescript-loader',
 		}],
 	},
 	plugins: [

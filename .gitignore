@@ -112,3 +112,4 @@ Temporary Items
 *.map
 *.sqlite3
 !/modals/anim.css
+.tmp
