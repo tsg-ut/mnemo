@@ -8,7 +8,7 @@
   },
   "scripts": {
     "normalize-map": "replace \"lib\\\\\\\\\\\\\\\\\" \"lib/\" index.js.map",
-    "browserify": "cross-env BABEL_ENV=production browserify lib/index.js --debug -t babelify --extension js --extension jsx | exorcist index.js.map > index.js && npm run normalize-map",
+    "browserify": "cross-env browserify lib/index.js --debug -t babelify --extension js --extension jsx | exorcist index.js.map > index.js && npm run normalize-map",
     "pug": "pug index.pug",
     "less": "lessc index.less | postcss --use postcss-assets --use postcss-font-magician --postcss-font-magician.protocol=https: ---use postcss-flexbugs-fixes --use autoprefixer > index.css",
     "build": "concurrently \"npm run browserify\" \"npm run pug\" \"npm run less\"",
