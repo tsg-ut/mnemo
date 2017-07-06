@@ -47,28 +47,44 @@ APIのセットアップ・ビルド・テストは[api/README.md](api/README.md
 npm run build
 ```
 
+#### 本番ビルド
+
+```sh
+npm run build:production
+```
+
 ### JavaScriptだけビルド
 
 ```sh
-npm run browserify
+npm run js
 ```
 
 ### HTMLだけビルド
 
 ```sh
-npm run pug
+npm run html
 ```
 
 ### CSSだけビルド
 
 ```sh
-npm run less
+npm run css
+```
+
+## 開発モード
+
+手元にローカルサーバーを立ち上げ、変更があると自動でリビルドしブラウザを再読込してくれるモード。
+
+```sh
+npm run dev
 ```
 
 ### 自動リビルド
 
 ```sh
-npm run watch
+npm run watch:js
+npm run watch:html
+npm run watch:css
 ```
 
 ## テスト
@@ -83,6 +99,13 @@ npm test
 
 ```sh
 npm run unit
+```
+
+#### watchモード
+
+```sh
+npm run unit:karma -- --auto-watch --no-single-run
+npm run unit:mocha -- --watch # なぜか動かない
 ```
 
 ### 機能テストだけ実行
