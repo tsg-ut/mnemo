@@ -11,7 +11,7 @@ describe 'Application' ->
   @retries 5
 
   before ->
-    @timeout 10000
+    @timeout 30000
 
     start-time = Date.now!
 
@@ -20,6 +20,12 @@ describe 'Application' ->
       width: 1600
       height: 900
       center: true
+
+    @nightmare.on 'console', (type, text) ->
+      switch type
+        | \log \arguments => mocha-logger.log text
+        | \warn => mocha-logger.pending text
+        | \error => mocha-logger.error text
 
     @nightmare
     .goto file-url('index.html') + '?fx=off'
