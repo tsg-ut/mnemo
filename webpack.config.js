@@ -1,4 +1,5 @@
 const BabiliPlugin = require('babili-webpack-plugin');
+const {DefinePlugin} = require('webpack');
 
 module.exports = (env = {}) => ({
 	entry: './lib/index.js',
@@ -15,7 +16,14 @@ module.exports = (env = {}) => ({
 		}],
 	},
 	plugins: [
-		...(env.production ? [new BabiliPlugin()] : []),
+		...(env.production ? [
+			new DefinePlugin({
+				'process.env': {
+					NODE_ENV: JSON.stringify('production'),
+				},
+			}),
+			new BabiliPlugin(),
+		] : []),
 	],
 	devServer: {
 		watchContentBase: true,
