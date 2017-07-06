@@ -43,13 +43,25 @@
 				'transform-react-remove-prop-types',
 			],
 		},
-		react: {
+		test: {
 			presets: [
+				['env', {
+					targets: {
+						browsers: [
+							'last 2 Chrome versions',
+						],
+					},
+					useBuiltIns: true,
+					include: [
+						'transform-es2015-classes',
+					],
+				}],
 				'react',
 			],
 			plugins: [
+				'transform-inline-environment-variables',
 				'transform-class-properties',
-				'transform-async-to-generator',
+				'istanbul',
 			],
 		},
 	},
