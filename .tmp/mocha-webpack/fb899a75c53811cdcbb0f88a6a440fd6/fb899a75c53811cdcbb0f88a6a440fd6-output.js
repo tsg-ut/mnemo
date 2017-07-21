@@ -2079,49 +2079,49 @@ var cov_11optkyd8f = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_11optkyd8f.s[0];
+cov_11optkyd8f.s[0]++;
 __webpack_require__(40);
 
 // Check the equality of two arrays *as sets*
-++cov_11optkyd8f.s[1];
+cov_11optkyd8f.s[1]++;
 module.exports.arrayEquals = (arrayA, arrayB) => {
-	++cov_11optkyd8f.f[0];
+	cov_11optkyd8f.f[0]++;
 
-	const setA = (++cov_11optkyd8f.s[2], new Set(arrayA));
-	const setB = (++cov_11optkyd8f.s[3], new Set(arrayB));
+	const setA = (cov_11optkyd8f.s[2]++, new Set(arrayA));
+	const setB = (cov_11optkyd8f.s[3]++, new Set(arrayB));
 
-	++cov_11optkyd8f.s[4];
+	cov_11optkyd8f.s[4]++;
 	if (setA.size !== setB.size) {
-		++cov_11optkyd8f.b[0][0];
-		++cov_11optkyd8f.s[5];
+		cov_11optkyd8f.b[0][0]++;
+		cov_11optkyd8f.s[5]++;
 
 		return false;
 	} else {
-		++cov_11optkyd8f.b[0][1];
+		cov_11optkyd8f.b[0][1]++;
 	}
 
-	++cov_11optkyd8f.s[6];
+	cov_11optkyd8f.s[6]++;
 	for (const item of setA) {
-		++cov_11optkyd8f.s[7];
+		cov_11optkyd8f.s[7]++;
 
 		if (!setB.has(item)) {
-			++cov_11optkyd8f.b[1][0];
-			++cov_11optkyd8f.s[8];
+			cov_11optkyd8f.b[1][0]++;
+			cov_11optkyd8f.s[8]++;
 
 			return false;
 		} else {
-			++cov_11optkyd8f.b[1][1];
+			cov_11optkyd8f.b[1][1]++;
 		}
 	}
 
-	++cov_11optkyd8f.s[9];
+	cov_11optkyd8f.s[9]++;
 	return true;
 };
 
-++cov_11optkyd8f.s[10];
+cov_11optkyd8f.s[10]++;
 module.exports.toCSS = coordinate => {
-	++cov_11optkyd8f.f[1];
-	++cov_11optkyd8f.s[11];
+	cov_11optkyd8f.f[1]++;
+	cov_11optkyd8f.s[11]++;
 	return {
 		left: `${coordinate.x}px`,
 		top: `${coordinate.y}px`
@@ -2129,17 +2129,17 @@ module.exports.toCSS = coordinate => {
 };
 
 // Promisified setTimeout
-++cov_11optkyd8f.s[12];
+cov_11optkyd8f.s[12]++;
 module.exports.wait = time => {
-	++cov_11optkyd8f.f[2];
-	++cov_11optkyd8f.s[13];
+	cov_11optkyd8f.f[2]++;
+	cov_11optkyd8f.s[13]++;
 	return new Promise(resolve => {
-		++cov_11optkyd8f.f[3];
-		++cov_11optkyd8f.s[14];
+		cov_11optkyd8f.f[3]++;
+		cov_11optkyd8f.s[14]++;
 
 		setTimeout(() => {
-			++cov_11optkyd8f.f[4];
-			++cov_11optkyd8f.s[15];
+			cov_11optkyd8f.f[4]++;
+			cov_11optkyd8f.s[15]++;
 
 			resolve();
 		}, time);
@@ -2147,236 +2147,236 @@ module.exports.wait = time => {
 };
 
 // https://gist.github.com/bellbind/353819de43bf694fba3b
-++cov_11optkyd8f.s[16];
+cov_11optkyd8f.s[16]++;
 module.exports.zip = function* (...values) {
-	++cov_11optkyd8f.f[5];
+	cov_11optkyd8f.f[5]++;
 
-	const iterators = (++cov_11optkyd8f.s[17], Array.from(values, value => {
-		++cov_11optkyd8f.f[6];
-		++cov_11optkyd8f.s[18];
+	const iterators = (cov_11optkyd8f.s[17]++, Array.from(values, value => {
+		cov_11optkyd8f.f[6]++;
+		cov_11optkyd8f.s[18]++;
 		return value[Symbol.iterator]();
 	}));
-	let nexts = (++cov_11optkyd8f.s[19], iterators.map(iterator => {
-		++cov_11optkyd8f.f[7];
-		++cov_11optkyd8f.s[20];
+	let nexts = (cov_11optkyd8f.s[19]++, iterators.map(iterator => {
+		cov_11optkyd8f.f[7]++;
+		cov_11optkyd8f.s[20]++;
 		return iterator.next();
 	}));
 
-	++cov_11optkyd8f.s[21];
+	cov_11optkyd8f.s[21]++;
 	while (nexts.every(next => {
-		++cov_11optkyd8f.f[8];
-		++cov_11optkyd8f.s[22];
+		cov_11optkyd8f.f[8]++;
+		cov_11optkyd8f.s[22]++;
 		return !next.done;
 	})) {
-		++cov_11optkyd8f.s[23];
+		cov_11optkyd8f.s[23]++;
 
 		yield nexts.map(next => {
-			++cov_11optkyd8f.f[9];
-			++cov_11optkyd8f.s[24];
+			cov_11optkyd8f.f[9]++;
+			cov_11optkyd8f.s[24]++;
 			return next.value;
 		});
-		++cov_11optkyd8f.s[25];
+		cov_11optkyd8f.s[25]++;
 		nexts = iterators.map(iterator => {
-			++cov_11optkyd8f.f[10];
-			++cov_11optkyd8f.s[26];
+			cov_11optkyd8f.f[10]++;
+			cov_11optkyd8f.s[26]++;
 			return iterator.next();
 		});
 	}
 };
 
-++cov_11optkyd8f.s[27];
+cov_11optkyd8f.s[27]++;
 module.exports.log = (a, b) => {
-	++cov_11optkyd8f.f[11];
-	++cov_11optkyd8f.s[28];
+	cov_11optkyd8f.f[11]++;
+	cov_11optkyd8f.s[28]++;
 
-	if ((++cov_11optkyd8f.b[3][0], a <= 0) || (++cov_11optkyd8f.b[3][1], a === 1) || (++cov_11optkyd8f.b[3][2], b <= 0) || (++cov_11optkyd8f.b[3][3], a === Infinity) && (++cov_11optkyd8f.b[3][4], b === Infinity)) {
-		++cov_11optkyd8f.b[2][0];
-		++cov_11optkyd8f.s[29];
+	if ((cov_11optkyd8f.b[3][0]++, a <= 0) || (cov_11optkyd8f.b[3][1]++, a === 1) || (cov_11optkyd8f.b[3][2]++, b <= 0) || (cov_11optkyd8f.b[3][3]++, a === Infinity) && (cov_11optkyd8f.b[3][4]++, b === Infinity)) {
+		cov_11optkyd8f.b[2][0]++;
+		cov_11optkyd8f.s[29]++;
 
 		return NaN;
 	} else {
-		++cov_11optkyd8f.b[2][1];
+		cov_11optkyd8f.b[2][1]++;
 	}
 
-	let lower = (++cov_11optkyd8f.s[30], 0);
-	let upper = (++cov_11optkyd8f.s[31], b);
+	let lower = (cov_11optkyd8f.s[30]++, 0);
+	let upper = (cov_11optkyd8f.s[31]++, b);
 
-	++cov_11optkyd8f.s[32];
+	cov_11optkyd8f.s[32]++;
 	while (upper - lower > 1) {
-		const mid = (++cov_11optkyd8f.s[33], Math.floor((lower + upper) / 2));
-		++cov_11optkyd8f.s[34];
+		const mid = (cov_11optkyd8f.s[33]++, Math.floor((lower + upper) / 2));
+		cov_11optkyd8f.s[34]++;
 		if (Math.pow(a, mid) <= b) {
-			++cov_11optkyd8f.b[4][0];
-			++cov_11optkyd8f.s[35];
+			cov_11optkyd8f.b[4][0]++;
+			cov_11optkyd8f.s[35]++;
 
 			lower = mid;
 		} else {
-			++cov_11optkyd8f.b[4][1];
-			++cov_11optkyd8f.s[36];
+			cov_11optkyd8f.b[4][1]++;
+			cov_11optkyd8f.s[36]++;
 
 			upper = mid;
 		}
 	}
-	++cov_11optkyd8f.s[37];
+	cov_11optkyd8f.s[37]++;
 	return lower;
 };
 
-++cov_11optkyd8f.s[38];
+cov_11optkyd8f.s[38]++;
 module.exports.translateDateFromUnixTime = unixtime => {
-	++cov_11optkyd8f.f[12];
+	cov_11optkyd8f.f[12]++;
 
-	const date = (++cov_11optkyd8f.s[39], new Date(unixtime));
-	const year = (++cov_11optkyd8f.s[40], date.getFullYear().toString().padStart(4, '0'));
-	const month = (++cov_11optkyd8f.s[41], (date.getMonth() + 1).toString().padStart(2, '0'));
-	const day = (++cov_11optkyd8f.s[42], date.getDate().toString().padStart(2, '0'));
-	const hour = (++cov_11optkyd8f.s[43], date.getHours().toString().padStart(2, '0'));
-	const minute = (++cov_11optkyd8f.s[44], date.getMinutes().toString().padStart(2, '0'));
-	const seconds = (++cov_11optkyd8f.s[45], date.getSeconds().toString().padStart(2, '0'));
-	++cov_11optkyd8f.s[46];
+	const date = (cov_11optkyd8f.s[39]++, new Date(unixtime));
+	const year = (cov_11optkyd8f.s[40]++, date.getFullYear().toString().padStart(4, '0'));
+	const month = (cov_11optkyd8f.s[41]++, (date.getMonth() + 1).toString().padStart(2, '0'));
+	const day = (cov_11optkyd8f.s[42]++, date.getDate().toString().padStart(2, '0'));
+	const hour = (cov_11optkyd8f.s[43]++, date.getHours().toString().padStart(2, '0'));
+	const minute = (cov_11optkyd8f.s[44]++, date.getMinutes().toString().padStart(2, '0'));
+	const seconds = (cov_11optkyd8f.s[45]++, date.getSeconds().toString().padStart(2, '0'));
+	cov_11optkyd8f.s[46]++;
 	return `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
 };
 
-++cov_11optkyd8f.s[47];
+cov_11optkyd8f.s[47]++;
 module.exports.floorTowardsZero = decimal => {
-	++cov_11optkyd8f.f[13];
-	++cov_11optkyd8f.s[48];
-	return 0 < decimal ? (++cov_11optkyd8f.b[5][0], Math.floor(decimal)) : (++cov_11optkyd8f.b[5][1], Math.ceil(decimal));
+	cov_11optkyd8f.f[13]++;
+	cov_11optkyd8f.s[48]++;
+	return 0 < decimal ? (cov_11optkyd8f.b[5][0]++, Math.floor(decimal)) : (cov_11optkyd8f.b[5][1]++, Math.ceil(decimal));
 };
 
 // http://stackoverflow.com/a/9039885
-++cov_11optkyd8f.s[49];
+cov_11optkyd8f.s[49]++;
 module.exports.isiOS = () => {
-	++cov_11optkyd8f.f[14];
-	++cov_11optkyd8f.s[50];
-	return (++cov_11optkyd8f.b[6][0], navigator.userAgent.match(/iPad|iPhone|iPod/)) && (++cov_11optkyd8f.b[6][1], !window.MSStream);
+	cov_11optkyd8f.f[14]++;
+	cov_11optkyd8f.s[50]++;
+	return (cov_11optkyd8f.b[6][0]++, navigator.userAgent.match(/iPad|iPhone|iPod/)) && (cov_11optkyd8f.b[6][1]++, !window.MSStream);
 };
 
 // http://stackoverflow.com/a/11752084
-++cov_11optkyd8f.s[51];
+cov_11optkyd8f.s[51]++;
 module.exports.isMac = () => {
-	++cov_11optkyd8f.f[15];
-	++cov_11optkyd8f.s[52];
+	cov_11optkyd8f.f[15]++;
+	cov_11optkyd8f.s[52]++;
 	return navigator.platform.toLowerCase().startsWith('mac');
 };
 
 // https://stackoverflow.com/a/3540295
-++cov_11optkyd8f.s[53];
+cov_11optkyd8f.s[53]++;
 module.exports.isMobile = () => {
-	++cov_11optkyd8f.f[16];
-	++cov_11optkyd8f.s[54];
+	cov_11optkyd8f.f[16]++;
+	cov_11optkyd8f.s[54]++;
 	return navigator.userAgent.match(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i);
 };
 
 // eslint-disable-next-line no-empty-function
-++cov_11optkyd8f.s[55];
+cov_11optkyd8f.s[55]++;
 module.exports.noop = () => {
-	++cov_11optkyd8f.f[17];
+	cov_11optkyd8f.f[17]++;
 };
 
 // Assign unique ids for native objects
 // Works like id() of python
 // http://stackoverflow.com/a/43963612
-++cov_11optkyd8f.s[56];
+cov_11optkyd8f.s[56]++;
 module.exports.id = (() => {
-	++cov_11optkyd8f.f[18];
+	cov_11optkyd8f.f[18]++;
 
-	let currentId = (++cov_11optkyd8f.s[57], 0);
-	const map = (++cov_11optkyd8f.s[58], new WeakMap());
+	let currentId = (cov_11optkyd8f.s[57]++, 0);
+	const map = (cov_11optkyd8f.s[58]++, new WeakMap());
 
-	++cov_11optkyd8f.s[59];
+	cov_11optkyd8f.s[59]++;
 	return object => {
-		++cov_11optkyd8f.f[19];
-		++cov_11optkyd8f.s[60];
+		cov_11optkyd8f.f[19]++;
+		cov_11optkyd8f.s[60]++;
 
 		if (!map.has(object)) {
-			++cov_11optkyd8f.b[7][0];
-			++cov_11optkyd8f.s[61];
+			cov_11optkyd8f.b[7][0]++;
+			cov_11optkyd8f.s[61]++;
 
 			map.set(object, ++currentId);
 		} else {
-			++cov_11optkyd8f.b[7][1];
+			cov_11optkyd8f.b[7][1]++;
 		}
 
-		++cov_11optkyd8f.s[62];
+		cov_11optkyd8f.s[62]++;
 		return map.get(object);
 	};
 })();
 
 // eslint-disable-next-line no-empty-function
-++cov_11optkyd8f.s[63];
+cov_11optkyd8f.s[63]++;
 module.exports.nop = () => {
-	++cov_11optkyd8f.f[20];
+	cov_11optkyd8f.f[20]++;
 };
 
-++cov_11optkyd8f.s[64];
+cov_11optkyd8f.s[64]++;
 module.exports.normalizeStageInput = inputs => {
-	++cov_11optkyd8f.f[21];
-	++cov_11optkyd8f.s[65];
+	cov_11optkyd8f.f[21]++;
+	cov_11optkyd8f.s[65]++;
 	return inputs.map(input => {
-		++cov_11optkyd8f.f[22];
+		cov_11optkyd8f.f[22]++;
 
-		let inputDataArrays = (++cov_11optkyd8f.s[66], input);
+		let inputDataArrays = (cov_11optkyd8f.s[66]++, input);
 
-		++cov_11optkyd8f.s[67];
+		cov_11optkyd8f.s[67]++;
 		if (!Array.isArray(inputDataArrays)) {
-			++cov_11optkyd8f.b[8][0];
-			++cov_11optkyd8f.s[68];
+			cov_11optkyd8f.b[8][0]++;
+			cov_11optkyd8f.s[68]++;
 
 			inputDataArrays = [inputDataArrays];
 		} else {
-			++cov_11optkyd8f.b[8][1];
+			cov_11optkyd8f.b[8][1]++;
 		}
 
-		++cov_11optkyd8f.s[69];
+		cov_11optkyd8f.s[69]++;
 		return inputDataArrays.map(inputData => {
-			++cov_11optkyd8f.f[23];
+			cov_11optkyd8f.f[23]++;
 
-			let inputDataArray = (++cov_11optkyd8f.s[70], inputData);
+			let inputDataArray = (cov_11optkyd8f.s[70]++, inputData);
 
-			++cov_11optkyd8f.s[71];
+			cov_11optkyd8f.s[71]++;
 			if (!Array.isArray(inputDataArray)) {
-				++cov_11optkyd8f.b[9][0];
-				++cov_11optkyd8f.s[72];
+				cov_11optkyd8f.b[9][0]++;
+				cov_11optkyd8f.s[72]++;
 
 				inputDataArray = [inputDataArray];
 			} else {
-				++cov_11optkyd8f.b[9][1];
+				cov_11optkyd8f.b[9][1]++;
 			}
 
-			++cov_11optkyd8f.s[73];
+			cov_11optkyd8f.s[73]++;
 			return inputDataArray;
 		});
 	});
 };
 
-++cov_11optkyd8f.s[74];
+cov_11optkyd8f.s[74]++;
 module.exports.sum = array => {
-	++cov_11optkyd8f.f[24];
-	++cov_11optkyd8f.s[75];
+	cov_11optkyd8f.f[24]++;
+	cov_11optkyd8f.s[75]++;
 	return array.reduce((previous, current) => {
-		++cov_11optkyd8f.f[25];
-		++cov_11optkyd8f.s[76];
+		cov_11optkyd8f.f[25]++;
+		cov_11optkyd8f.s[76]++;
 		return previous + current;
 	}, 0);
 };
 
-++cov_11optkyd8f.s[77];
+cov_11optkyd8f.s[77]++;
 module.exports.trimAfter = (string, length) => {
-	++cov_11optkyd8f.f[26];
+	cov_11optkyd8f.f[26]++;
 
-	const chars = (++cov_11optkyd8f.s[78], Array.from(string));
+	const chars = (cov_11optkyd8f.s[78]++, Array.from(string));
 
-	++cov_11optkyd8f.s[79];
+	cov_11optkyd8f.s[79]++;
 	if (chars.length > length) {
-		++cov_11optkyd8f.b[10][0];
-		++cov_11optkyd8f.s[80];
+		cov_11optkyd8f.b[10][0]++;
+		cov_11optkyd8f.s[80]++;
 
 		return `${chars.slice(0, length).join('')}…`;
 	} else {
-		++cov_11optkyd8f.b[10][1];
+		cov_11optkyd8f.b[10][1]++;
 	}
 
-	++cov_11optkyd8f.s[81];
+	cov_11optkyd8f.s[81]++;
 	return chars;
 };
 
@@ -5898,12 +5898,12 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-const Block = (++cov_1yjylxz6z1.s[0], __webpack_require__(7));
-const Data = (++cov_1yjylxz6z1.s[1], __webpack_require__(8));
-const blockConfigs = (++cov_1yjylxz6z1.s[2], __webpack_require__(15));
-const { nop } = (++cov_1yjylxz6z1.s[3], __webpack_require__(0));
-const EventEmitter = (++cov_1yjylxz6z1.s[4], __webpack_require__(14));
-const seedrandom = (++cov_1yjylxz6z1.s[5], __webpack_require__(9));
+const Block = (cov_1yjylxz6z1.s[0]++, __webpack_require__(7));
+const Data = (cov_1yjylxz6z1.s[1]++, __webpack_require__(8));
+const blockConfigs = (cov_1yjylxz6z1.s[2]++, __webpack_require__(15));
+const { nop } = (cov_1yjylxz6z1.s[3]++, __webpack_require__(0));
+const EventEmitter = (cov_1yjylxz6z1.s[4]++, __webpack_require__(14));
+const seedrandom = (cov_1yjylxz6z1.s[5]++, __webpack_require__(9));
 
 let Board = function (_EventEmitter) {
 	_inherits(Board, _EventEmitter);
@@ -5911,71 +5911,71 @@ let Board = function (_EventEmitter) {
 	function Board(config) {
 		_classCallCheck(this, Board);
 
-		++cov_1yjylxz6z1.f[0];
-		++cov_1yjylxz6z1.s[6];
+		cov_1yjylxz6z1.f[0]++;
+		cov_1yjylxz6z1.s[6]++;
 
 		var _this = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this));
 
-		++cov_1yjylxz6z1.s[7];
+		cov_1yjylxz6z1.s[7]++;
 
 
 		_this.height = config.height;
-		++cov_1yjylxz6z1.s[8];
+		cov_1yjylxz6z1.s[8]++;
 		_this.width = config.width;
-		++cov_1yjylxz6z1.s[9];
+		cov_1yjylxz6z1.s[9]++;
 		_this.clockLimit = config.clockLimit;
 
-		++cov_1yjylxz6z1.s[10];
+		cov_1yjylxz6z1.s[10]++;
 		_this.status = 'stop';
-		++cov_1yjylxz6z1.s[11];
+		cov_1yjylxz6z1.s[11]++;
 		_this.clock = 0;
-		++cov_1yjylxz6z1.s[12];
+		cov_1yjylxz6z1.s[12]++;
 		_this.outputValue = null;
 
-		++cov_1yjylxz6z1.s[13];
+		cov_1yjylxz6z1.s[13]++;
 		_this.blocks = [];
-		++cov_1yjylxz6z1.s[14];
+		cov_1yjylxz6z1.s[14]++;
 		for (let i = 0; i < _this.height; i++) {
-			const row = (++cov_1yjylxz6z1.s[15], []);
-			++cov_1yjylxz6z1.s[16];
+			const row = (cov_1yjylxz6z1.s[15]++, []);
+			cov_1yjylxz6z1.s[16]++;
 			_this.blocks.push(row);
 
-			++cov_1yjylxz6z1.s[17];
+			cov_1yjylxz6z1.s[17]++;
 			for (let j = 0; j < _this.width; j++) {
-				++cov_1yjylxz6z1.s[18];
+				cov_1yjylxz6z1.s[18]++;
 
 				row.push(null);
 			}
 		}
 
-		++cov_1yjylxz6z1.s[19];
+		cov_1yjylxz6z1.s[19]++;
 		for (let x = 0; x < _this.width; x++) {
-			++cov_1yjylxz6z1.s[20];
+			cov_1yjylxz6z1.s[20]++;
 
 			for (let y = 0; y < _this.height; y++) {
-				++cov_1yjylxz6z1.s[21];
+				cov_1yjylxz6z1.s[21]++;
 
 				_this.placeBlock({ x, y, type: 'empty' });
 			}
 		}
 
-		++cov_1yjylxz6z1.s[22];
+		cov_1yjylxz6z1.s[22]++;
 		if (typeof config.inputX === 'number') {
-			++cov_1yjylxz6z1.b[0][0];
-			++cov_1yjylxz6z1.s[23];
+			cov_1yjylxz6z1.b[0][0]++;
+			cov_1yjylxz6z1.s[23]++;
 
 			_this.inputBlockX = [config.inputX];
 		} else {
-			++cov_1yjylxz6z1.b[0][1];
-			++cov_1yjylxz6z1.s[24];
+			cov_1yjylxz6z1.b[0][1]++;
+			cov_1yjylxz6z1.s[24]++;
 
 			_this.inputBlockX = config.inputX;
 		}
-		++cov_1yjylxz6z1.s[25];
+		cov_1yjylxz6z1.s[25]++;
 		_this.inputBlockY = 0;
-		++cov_1yjylxz6z1.s[26];
+		cov_1yjylxz6z1.s[26]++;
 		_this.outputBlockX = config.outputX;
-		++cov_1yjylxz6z1.s[27];
+		cov_1yjylxz6z1.s[27]++;
 		_this.outputBlockY = config.height - 1;
 		return _this;
 	}
@@ -5983,31 +5983,31 @@ let Board = function (_EventEmitter) {
 	_createClass(Board, [{
 		key: 'getBlock',
 		value: function getBlock(x, y) {
-			++cov_1yjylxz6z1.f[14];
-			++cov_1yjylxz6z1.s[66];
+			cov_1yjylxz6z1.f[14]++;
+			cov_1yjylxz6z1.s[66]++;
 
 			return this.blocks[y][x];
 		}
 	}, {
 		key: 'getBlocks',
 		value: function getBlocks() {
-			++cov_1yjylxz6z1.f[15];
-			++cov_1yjylxz6z1.s[67];
+			cov_1yjylxz6z1.f[15]++;
+			cov_1yjylxz6z1.s[67]++;
 
 			return this.blocks;
 		}
 	}, {
 		key: 'forBlocks',
 		value: function forBlocks(callback) {
-			++cov_1yjylxz6z1.f[16];
-			++cov_1yjylxz6z1.s[68];
+			cov_1yjylxz6z1.f[16]++;
+			cov_1yjylxz6z1.s[68]++;
 
 			for (let y = 0; y < this.height; y++) {
-				++cov_1yjylxz6z1.s[69];
+				cov_1yjylxz6z1.s[69]++;
 
 				for (let x = 0; x < this.width; x++) {
-					const block = (++cov_1yjylxz6z1.s[70], this.getBlock(x, y));
-					++cov_1yjylxz6z1.s[71];
+					const block = (cov_1yjylxz6z1.s[70]++, this.getBlock(x, y));
+					cov_1yjylxz6z1.s[71]++;
 					callback.call(this, block, x, y);
 				}
 			}
@@ -6015,62 +6015,62 @@ let Board = function (_EventEmitter) {
 	}, {
 		key: 'getSeededRandom',
 		value: function getSeededRandom() {
-			++cov_1yjylxz6z1.f[17];
+			cov_1yjylxz6z1.f[17]++;
 
 			// Use arrays instead of objects in seeded JSON. Objects cannot be serialized uniquely.
-			const blocks = (++cov_1yjylxz6z1.s[72], []);
+			const blocks = (cov_1yjylxz6z1.s[72]++, []);
 
-			++cov_1yjylxz6z1.s[73];
+			cov_1yjylxz6z1.s[73]++;
 			this.forBlocks((block, x, y) => {
-				++cov_1yjylxz6z1.f[18];
-				++cov_1yjylxz6z1.s[74];
+				cov_1yjylxz6z1.f[18]++;
+				cov_1yjylxz6z1.s[74]++;
 
 				if (block.config.name !== 'empty') {
-					++cov_1yjylxz6z1.b[7][0];
-					++cov_1yjylxz6z1.s[75];
+					cov_1yjylxz6z1.b[7][0]++;
+					cov_1yjylxz6z1.s[75]++;
 
 					blocks.push([x, y, block.config.name, block.rotate]);
 				} else {
-					++cov_1yjylxz6z1.b[7][1];
+					cov_1yjylxz6z1.b[7][1]++;
 				}
 			});
 
-			const seed = (++cov_1yjylxz6z1.s[76], JSON.stringify(blocks));
-			const random = (++cov_1yjylxz6z1.s[77], seedrandom(seed));
-			++cov_1yjylxz6z1.s[78];
+			const seed = (cov_1yjylxz6z1.s[76]++, JSON.stringify(blocks));
+			const random = (cov_1yjylxz6z1.s[77]++, seedrandom(seed));
+			cov_1yjylxz6z1.s[78]++;
 			return random;
 		}
 	}, {
 		key: 'placeBlock',
 		value: function placeBlock({ x, y, type, rotate }) {
-			++cov_1yjylxz6z1.f[19];
+			cov_1yjylxz6z1.f[19]++;
 
-			const config = (++cov_1yjylxz6z1.s[79], Object.assign({}, blockConfigs[type]));
-			++cov_1yjylxz6z1.s[80];
+			const config = (cov_1yjylxz6z1.s[79]++, Object.assign({}, blockConfigs[type]));
+			cov_1yjylxz6z1.s[80]++;
 			config.x = x;
-			++cov_1yjylxz6z1.s[81];
+			cov_1yjylxz6z1.s[81]++;
 			config.y = y;
-			++cov_1yjylxz6z1.s[82];
+			cov_1yjylxz6z1.s[82]++;
 			config.rotate = rotate;
-			++cov_1yjylxz6z1.s[83];
+			cov_1yjylxz6z1.s[83]++;
 			config.name = type;
 
-			const block = (++cov_1yjylxz6z1.s[84], new Block(this, config));
-			++cov_1yjylxz6z1.s[85];
+			const block = (cov_1yjylxz6z1.s[84]++, new Block(this, config));
+			cov_1yjylxz6z1.s[85]++;
 			block.on('erase', data => {
-				++cov_1yjylxz6z1.f[20];
-				++cov_1yjylxz6z1.s[86];
+				cov_1yjylxz6z1.f[20]++;
+				cov_1yjylxz6z1.s[86]++;
 
 				this.emit('erase', block, data);
 			});
-			++cov_1yjylxz6z1.s[87];
+			cov_1yjylxz6z1.s[87]++;
 			block.on('pass', passEvent => {
-				++cov_1yjylxz6z1.f[21];
-				++cov_1yjylxz6z1.s[88];
+				cov_1yjylxz6z1.f[21]++;
+				cov_1yjylxz6z1.s[88]++;
 
 				this.emit('pass', block, passEvent);
 			});
-			++cov_1yjylxz6z1.s[89];
+			cov_1yjylxz6z1.s[89]++;
 			this.blocks[y][x] = block;
 		}
 
@@ -6080,117 +6080,117 @@ let Board = function (_EventEmitter) {
 	}, {
 		key: 'run',
 		value: function run(inputValue) {
-			++cov_1yjylxz6z1.f[22];
-			++cov_1yjylxz6z1.s[90];
+			cov_1yjylxz6z1.f[22]++;
+			cov_1yjylxz6z1.s[90]++;
 
 			this.input(inputValue);
 
-			++cov_1yjylxz6z1.s[91];
+			cov_1yjylxz6z1.s[91]++;
 			const clockUp = () => {
-				++cov_1yjylxz6z1.f[23];
-				++cov_1yjylxz6z1.s[92];
+				cov_1yjylxz6z1.f[23]++;
+				cov_1yjylxz6z1.s[92]++;
 
 				while (true) {
-					++cov_1yjylxz6z1.s[93];
+					cov_1yjylxz6z1.s[93]++;
 
 					this.step();
 
-					++cov_1yjylxz6z1.s[94];
-					if ((++cov_1yjylxz6z1.b[9][0], this.status === 'stop') || (++cov_1yjylxz6z1.b[9][1], this.status === 'paused')) {
-						++cov_1yjylxz6z1.b[8][0];
-						++cov_1yjylxz6z1.s[95];
+					cov_1yjylxz6z1.s[94]++;
+					if ((cov_1yjylxz6z1.b[9][0]++, this.status === 'stop') || (cov_1yjylxz6z1.b[9][1]++, this.status === 'paused')) {
+						cov_1yjylxz6z1.b[8][0]++;
+						cov_1yjylxz6z1.s[95]++;
 
 						return null;
 					} else {
-						++cov_1yjylxz6z1.b[8][1];
+						cov_1yjylxz6z1.b[8][1]++;
 					}
 
-					++cov_1yjylxz6z1.s[96];
+					cov_1yjylxz6z1.s[96]++;
 					this.hand();
 
-					++cov_1yjylxz6z1.s[97];
-					if ((++cov_1yjylxz6z1.b[11][0], this.status === 'stop') || (++cov_1yjylxz6z1.b[11][1], this.status === 'paused')) {
-						++cov_1yjylxz6z1.b[10][0];
-						++cov_1yjylxz6z1.s[98];
+					cov_1yjylxz6z1.s[97]++;
+					if ((cov_1yjylxz6z1.b[11][0]++, this.status === 'stop') || (cov_1yjylxz6z1.b[11][1]++, this.status === 'paused')) {
+						cov_1yjylxz6z1.b[10][0]++;
+						cov_1yjylxz6z1.s[98]++;
 
 						return null;
 					} else {
-						++cov_1yjylxz6z1.b[10][1];
+						cov_1yjylxz6z1.b[10][1]++;
 					}
 
-					++cov_1yjylxz6z1.s[99];
+					cov_1yjylxz6z1.s[99]++;
 					if (this.clock >= this.clockLimit) {
-						++cov_1yjylxz6z1.b[12][0];
-						++cov_1yjylxz6z1.s[100];
+						cov_1yjylxz6z1.b[12][0]++;
+						cov_1yjylxz6z1.s[100]++;
 
 						return null;
 					} else {
-						++cov_1yjylxz6z1.b[12][1];
+						cov_1yjylxz6z1.b[12][1]++;
 					}
 
-					++cov_1yjylxz6z1.s[101];
+					cov_1yjylxz6z1.s[101]++;
 					if (this.dataCount >= 100) {
-						++cov_1yjylxz6z1.b[13][0];
-						++cov_1yjylxz6z1.s[102];
+						cov_1yjylxz6z1.b[13][0]++;
+						cov_1yjylxz6z1.s[102]++;
 
 						return null;
 					} else {
-						++cov_1yjylxz6z1.b[13][1];
+						cov_1yjylxz6z1.b[13][1]++;
 					}
 				}
 			};
 
-			++cov_1yjylxz6z1.s[103];
+			cov_1yjylxz6z1.s[103]++;
 			clockUp();
 		}
 	}, {
 		key: 'input',
 		value: function input(value) {
-			++cov_1yjylxz6z1.f[24];
+			cov_1yjylxz6z1.f[24]++;
 
-			const newValueArray = (++cov_1yjylxz6z1.s[104], typeof value === 'number' ? (++cov_1yjylxz6z1.b[14][0], [value]) : (++cov_1yjylxz6z1.b[14][1], value));
-			const inputData = (++cov_1yjylxz6z1.s[105], newValueArray.map((v, i) => {
-				++cov_1yjylxz6z1.f[25];
+			const newValueArray = (cov_1yjylxz6z1.s[104]++, typeof value === 'number' ? (cov_1yjylxz6z1.b[14][0]++, [value]) : (cov_1yjylxz6z1.b[14][1]++, value));
+			const inputData = (cov_1yjylxz6z1.s[105]++, newValueArray.map((v, i) => {
+				cov_1yjylxz6z1.f[25]++;
 
-				const inputs = (++cov_1yjylxz6z1.s[106], typeof v === 'number' ? (++cov_1yjylxz6z1.b[15][0], [v]) : (++cov_1yjylxz6z1.b[15][1], v));
-				const newDatas = (++cov_1yjylxz6z1.s[107], inputs.map(x => {
-					++cov_1yjylxz6z1.f[26];
+				const inputs = (cov_1yjylxz6z1.s[106]++, typeof v === 'number' ? (cov_1yjylxz6z1.b[15][0]++, [v]) : (cov_1yjylxz6z1.b[15][1]++, v));
+				const newDatas = (cov_1yjylxz6z1.s[107]++, inputs.map(x => {
+					cov_1yjylxz6z1.f[26]++;
 
-					const newData = (++cov_1yjylxz6z1.s[108], new Data(this, x, this.inputBlockX[i], this.inputBlockY));
-					++cov_1yjylxz6z1.s[109];
+					const newData = (cov_1yjylxz6z1.s[108]++, new Data(this, x, this.inputBlockX[i], this.inputBlockY));
+					cov_1yjylxz6z1.s[109]++;
 					this.inputBlock[i].input('top', newData);
-					++cov_1yjylxz6z1.s[110];
+					cov_1yjylxz6z1.s[110]++;
 					return newData;
 				}));
-				++cov_1yjylxz6z1.s[111];
+				cov_1yjylxz6z1.s[111]++;
 				return newDatas;
 			}));
 
-			++cov_1yjylxz6z1.s[112];
+			cov_1yjylxz6z1.s[112]++;
 			this.status = 'executing';
-			++cov_1yjylxz6z1.s[113];
+			cov_1yjylxz6z1.s[113]++;
 			this.clock = 0;
-			++cov_1yjylxz6z1.s[114];
+			cov_1yjylxz6z1.s[114]++;
 			this.outputValue = null;
 
-			++cov_1yjylxz6z1.s[115];
+			cov_1yjylxz6z1.s[115]++;
 			return inputData;
 		}
 	}, {
 		key: 'output',
 		value: function output(value) {
-			++cov_1yjylxz6z1.f[27];
-			++cov_1yjylxz6z1.s[116];
+			cov_1yjylxz6z1.f[27]++;
+			cov_1yjylxz6z1.s[116]++;
 
 			this.halt();
-			++cov_1yjylxz6z1.s[117];
+			cov_1yjylxz6z1.s[117]++;
 			this.outputValue = value;
 
 			// Wait for the next tick to successfully break the clockUp loop
-			++cov_1yjylxz6z1.s[118];
+			cov_1yjylxz6z1.s[118]++;
 			process.nextTick(() => {
-				++cov_1yjylxz6z1.f[28];
-				++cov_1yjylxz6z1.s[119];
+				cov_1yjylxz6z1.f[28]++;
+				cov_1yjylxz6z1.s[119]++;
 
 				this.emit('output', value);
 			});
@@ -6198,282 +6198,282 @@ let Board = function (_EventEmitter) {
 	}, {
 		key: 'clearData',
 		value: function clearData() {
-			++cov_1yjylxz6z1.f[29];
-			++cov_1yjylxz6z1.s[120];
+			cov_1yjylxz6z1.f[29]++;
+			cov_1yjylxz6z1.s[120]++;
 
 			this.forBlocks(block => {
-				++cov_1yjylxz6z1.f[30];
-				++cov_1yjylxz6z1.s[121];
+				cov_1yjylxz6z1.f[30]++;
+				cov_1yjylxz6z1.s[121]++;
 				return block.clearData();
 			});
 		}
 	}, {
 		key: 'step',
-		value: function step({ onPass = (++cov_1yjylxz6z1.b[17][0], nop) } = (++cov_1yjylxz6z1.b[16][0], {})) {
-			++cov_1yjylxz6z1.f[31];
-			++cov_1yjylxz6z1.s[122];
+		value: function step({ onPass = (cov_1yjylxz6z1.b[17][0]++, nop) } = (cov_1yjylxz6z1.b[16][0]++, {})) {
+			cov_1yjylxz6z1.f[31]++;
+			cov_1yjylxz6z1.s[122]++;
 
 			const onBlockPass = passEvent => {
-				++cov_1yjylxz6z1.f[32];
-				++cov_1yjylxz6z1.s[123];
+				cov_1yjylxz6z1.f[32]++;
+				cov_1yjylxz6z1.s[123]++;
 
 				if (onPass) {
-					++cov_1yjylxz6z1.b[18][0];
-					++cov_1yjylxz6z1.s[124];
+					cov_1yjylxz6z1.b[18][0]++;
+					cov_1yjylxz6z1.s[124]++;
 
 					onPass(passEvent);
 				} else {
-					++cov_1yjylxz6z1.b[18][1];
+					cov_1yjylxz6z1.b[18][1]++;
 				}
 			};
 
-			++cov_1yjylxz6z1.s[125];
+			cov_1yjylxz6z1.s[125]++;
 			this.forBlocks(block => {
-				++cov_1yjylxz6z1.f[33];
-				++cov_1yjylxz6z1.s[126];
+				cov_1yjylxz6z1.f[33]++;
+				cov_1yjylxz6z1.s[126]++;
 
 				block.on('pass', onBlockPass);
-				++cov_1yjylxz6z1.s[127];
+				cov_1yjylxz6z1.s[127]++;
 				block.step();
-				++cov_1yjylxz6z1.s[128];
+				cov_1yjylxz6z1.s[128]++;
 				block.removeListener('pass', onBlockPass);
 			});
 
-			++cov_1yjylxz6z1.s[129];
+			cov_1yjylxz6z1.s[129]++;
 			this.clock++;
 
-			let outputExists = (++cov_1yjylxz6z1.s[130], false);
-			++cov_1yjylxz6z1.s[131];
+			let outputExists = (cov_1yjylxz6z1.s[130]++, false);
+			cov_1yjylxz6z1.s[131]++;
 			this.forBlocks(block => {
-				++cov_1yjylxz6z1.f[34];
-				++cov_1yjylxz6z1.s[132];
+				cov_1yjylxz6z1.f[34]++;
+				cov_1yjylxz6z1.s[132]++;
 
-				outputExists = (++cov_1yjylxz6z1.b[19][0], block.outputExists) || (++cov_1yjylxz6z1.b[19][1], outputExists);
+				outputExists = (cov_1yjylxz6z1.b[19][0]++, block.outputExists) || (cov_1yjylxz6z1.b[19][1]++, outputExists);
 			});
 
-			++cov_1yjylxz6z1.s[133];
+			cov_1yjylxz6z1.s[133]++;
 			if (!outputExists) {
-				++cov_1yjylxz6z1.b[20][0];
-				++cov_1yjylxz6z1.s[134];
+				cov_1yjylxz6z1.b[20][0]++;
+				cov_1yjylxz6z1.s[134]++;
 
 				if (this.dataExists) {
-					++cov_1yjylxz6z1.b[21][0];
-					++cov_1yjylxz6z1.s[135];
+					cov_1yjylxz6z1.b[21][0]++;
+					cov_1yjylxz6z1.s[135]++;
 
 					this.pause();
 				} else {
-					++cov_1yjylxz6z1.b[21][1];
-					++cov_1yjylxz6z1.s[136];
+					cov_1yjylxz6z1.b[21][1]++;
+					cov_1yjylxz6z1.s[136]++;
 
 					this.halt();
 				}
 			} else {
-				++cov_1yjylxz6z1.b[20][1];
+				cov_1yjylxz6z1.b[20][1]++;
 			}
 		}
 	}, {
 		key: 'hand',
 		value: function hand() {
-			++cov_1yjylxz6z1.f[35];
-			++cov_1yjylxz6z1.s[137];
+			cov_1yjylxz6z1.f[35]++;
+			cov_1yjylxz6z1.s[137]++;
 
 			this.forBlocks(block => {
-				++cov_1yjylxz6z1.f[36];
-				++cov_1yjylxz6z1.s[138];
+				cov_1yjylxz6z1.f[36]++;
+				cov_1yjylxz6z1.s[138]++;
 				return block.hand();
 			});
 
-			let inputExists = (++cov_1yjylxz6z1.s[139], false);
-			++cov_1yjylxz6z1.s[140];
+			let inputExists = (cov_1yjylxz6z1.s[139]++, false);
+			cov_1yjylxz6z1.s[140]++;
 			this.forBlocks(block => {
-				++cov_1yjylxz6z1.f[37];
-				++cov_1yjylxz6z1.s[141];
+				cov_1yjylxz6z1.f[37]++;
+				cov_1yjylxz6z1.s[141]++;
 
-				inputExists = (++cov_1yjylxz6z1.b[22][0], block.inputExists) || (++cov_1yjylxz6z1.b[22][1], inputExists);
+				inputExists = (cov_1yjylxz6z1.b[22][0]++, block.inputExists) || (cov_1yjylxz6z1.b[22][1]++, inputExists);
 			});
 
-			++cov_1yjylxz6z1.s[142];
+			cov_1yjylxz6z1.s[142]++;
 			if (!inputExists) {
-				++cov_1yjylxz6z1.b[23][0];
-				++cov_1yjylxz6z1.s[143];
+				cov_1yjylxz6z1.b[23][0]++;
+				cov_1yjylxz6z1.s[143]++;
 
 				this.halt();
 			} else {
-				++cov_1yjylxz6z1.b[23][1];
+				cov_1yjylxz6z1.b[23][1]++;
 			}
 		}
 	}, {
 		key: 'halt',
 		value: function halt() {
-			++cov_1yjylxz6z1.f[38];
-			++cov_1yjylxz6z1.s[144];
+			cov_1yjylxz6z1.f[38]++;
+			cov_1yjylxz6z1.s[144]++;
 
 			this.status = 'stop';
-			++cov_1yjylxz6z1.s[145];
+			cov_1yjylxz6z1.s[145]++;
 			this.clearData();
-			++cov_1yjylxz6z1.s[146];
+			cov_1yjylxz6z1.s[146]++;
 			this.emit('halt');
 		}
 	}, {
 		key: 'pause',
 		value: function pause() {
-			++cov_1yjylxz6z1.f[39];
-			++cov_1yjylxz6z1.s[147];
+			cov_1yjylxz6z1.f[39]++;
+			cov_1yjylxz6z1.s[147]++;
 
 			this.status = 'paused';
-			++cov_1yjylxz6z1.s[148];
+			cov_1yjylxz6z1.s[148]++;
 			this.emit('paused');
 		}
 	}, {
 		key: 'inputBlock',
 		get: function () {
-			++cov_1yjylxz6z1.f[1];
-			++cov_1yjylxz6z1.s[28];
+			cov_1yjylxz6z1.f[1]++;
+			cov_1yjylxz6z1.s[28]++;
 
 			return this.inputBlockX.map(x => {
-				++cov_1yjylxz6z1.f[2];
-				++cov_1yjylxz6z1.s[29];
+				cov_1yjylxz6z1.f[2]++;
+				cov_1yjylxz6z1.s[29]++;
 				return this.blocks[this.inputBlockY][x];
 			});
 		}
 	}, {
 		key: 'outputBlock',
 		get: function () {
-			++cov_1yjylxz6z1.f[3];
-			++cov_1yjylxz6z1.s[30];
+			cov_1yjylxz6z1.f[3]++;
+			cov_1yjylxz6z1.s[30]++;
 
 			return this.blocks[this.outputBlockY][this.outputBlockX];
 		}
 	}, {
 		key: 'blockCount',
 		get: function () {
-			++cov_1yjylxz6z1.f[4];
+			cov_1yjylxz6z1.f[4]++;
 
-			let count = (++cov_1yjylxz6z1.s[31], 0);
+			let count = (cov_1yjylxz6z1.s[31]++, 0);
 
-			++cov_1yjylxz6z1.s[32];
+			cov_1yjylxz6z1.s[32]++;
 			this.forBlocks(block => {
-				++cov_1yjylxz6z1.f[5];
-				++cov_1yjylxz6z1.s[33];
+				cov_1yjylxz6z1.f[5]++;
+				cov_1yjylxz6z1.s[33]++;
 
 				if (block.config.name !== 'empty') {
-					++cov_1yjylxz6z1.b[1][0];
-					++cov_1yjylxz6z1.s[34];
+					cov_1yjylxz6z1.b[1][0]++;
+					cov_1yjylxz6z1.s[34]++;
 
 					count++;
 				} else {
-					++cov_1yjylxz6z1.b[1][1];
+					cov_1yjylxz6z1.b[1][1]++;
 				}
 			});
 
-			++cov_1yjylxz6z1.s[35];
+			cov_1yjylxz6z1.s[35]++;
 			return count;
 		}
 	}, {
 		key: 'weighedBlockCount',
 		get: function () {
-			++cov_1yjylxz6z1.f[6];
+			cov_1yjylxz6z1.f[6]++;
 
-			let count = (++cov_1yjylxz6z1.s[36], 0);
+			let count = (cov_1yjylxz6z1.s[36]++, 0);
 
-			++cov_1yjylxz6z1.s[37];
+			cov_1yjylxz6z1.s[37]++;
 			this.forBlocks(block => {
-				++cov_1yjylxz6z1.f[7];
-				++cov_1yjylxz6z1.s[38];
+				cov_1yjylxz6z1.f[7]++;
+				cov_1yjylxz6z1.s[38]++;
 
 				if (block.config.name !== 'empty') {
-					++cov_1yjylxz6z1.b[2][0];
-					++cov_1yjylxz6z1.s[39];
+					cov_1yjylxz6z1.b[2][0]++;
+					cov_1yjylxz6z1.s[39]++;
 
 					count += block.config.weight;
 				} else {
-					++cov_1yjylxz6z1.b[2][1];
+					cov_1yjylxz6z1.b[2][1]++;
 				}
 			});
 
-			++cov_1yjylxz6z1.s[40];
+			cov_1yjylxz6z1.s[40]++;
 			return count;
 		}
 	}, {
 		key: 'dataCount',
 		get: function () {
-			++cov_1yjylxz6z1.f[8];
+			cov_1yjylxz6z1.f[8]++;
 
-			let count = (++cov_1yjylxz6z1.s[41], 0);
+			let count = (cov_1yjylxz6z1.s[41]++, 0);
 
-			++cov_1yjylxz6z1.s[42];
+			cov_1yjylxz6z1.s[42]++;
 			this.forBlocks(block => {
-				++cov_1yjylxz6z1.f[9];
-				++cov_1yjylxz6z1.s[43];
+				cov_1yjylxz6z1.f[9]++;
+				cov_1yjylxz6z1.s[43]++;
 
 				for (const queue of block.inputQueues.values()) {
-					++cov_1yjylxz6z1.s[44];
+					cov_1yjylxz6z1.s[44]++;
 
 					count += queue.length;
 				}
-				++cov_1yjylxz6z1.s[45];
+				cov_1yjylxz6z1.s[45]++;
 				for (const queue of block.outputQueues.values()) {
-					++cov_1yjylxz6z1.s[46];
+					cov_1yjylxz6z1.s[46]++;
 
 					count += queue.length;
 				}
 			});
 
-			++cov_1yjylxz6z1.s[47];
+			cov_1yjylxz6z1.s[47]++;
 			return count;
 		}
 	}, {
 		key: 'dataExists',
 		get: function () {
-			++cov_1yjylxz6z1.f[10];
+			cov_1yjylxz6z1.f[10]++;
 
-			let res = (++cov_1yjylxz6z1.s[48], false);
-			++cov_1yjylxz6z1.s[49];
+			let res = (cov_1yjylxz6z1.s[48]++, false);
+			cov_1yjylxz6z1.s[49]++;
 			this.forBlocks(block => {
-				++cov_1yjylxz6z1.f[11];
-				++cov_1yjylxz6z1.s[50];
+				cov_1yjylxz6z1.f[11]++;
+				cov_1yjylxz6z1.s[50]++;
 
 				if (res === true) {
-					++cov_1yjylxz6z1.b[3][0];
-					++cov_1yjylxz6z1.s[51];
+					cov_1yjylxz6z1.b[3][0]++;
+					cov_1yjylxz6z1.s[51]++;
 
 					return;
 				} else {
-					++cov_1yjylxz6z1.b[3][1];
+					cov_1yjylxz6z1.b[3][1]++;
 				}
-				++cov_1yjylxz6z1.s[52];
+				cov_1yjylxz6z1.s[52]++;
 				for (const queue of block.inputQueues.values()) {
-					++cov_1yjylxz6z1.s[53];
+					cov_1yjylxz6z1.s[53]++;
 
 					if (queue.length > 0) {
-						++cov_1yjylxz6z1.b[4][0];
-						++cov_1yjylxz6z1.s[54];
+						cov_1yjylxz6z1.b[4][0]++;
+						cov_1yjylxz6z1.s[54]++;
 
 						res = true;
-						++cov_1yjylxz6z1.s[55];
+						cov_1yjylxz6z1.s[55]++;
 						return;
 					} else {
-						++cov_1yjylxz6z1.b[4][1];
+						cov_1yjylxz6z1.b[4][1]++;
 					}
 				}
-				++cov_1yjylxz6z1.s[56];
+				cov_1yjylxz6z1.s[56]++;
 				for (const queue of block.outputQueues.values()) {
-					++cov_1yjylxz6z1.s[57];
+					cov_1yjylxz6z1.s[57]++;
 
 					if (queue.length > 0) {
-						++cov_1yjylxz6z1.b[5][0];
-						++cov_1yjylxz6z1.s[58];
+						cov_1yjylxz6z1.b[5][0]++;
+						cov_1yjylxz6z1.s[58]++;
 
 						res = true;
-						++cov_1yjylxz6z1.s[59];
+						cov_1yjylxz6z1.s[59]++;
 						return;
 					} else {
-						++cov_1yjylxz6z1.b[5][1];
+						cov_1yjylxz6z1.b[5][1]++;
 					}
 				}
 			});
 
-			++cov_1yjylxz6z1.s[60];
+			cov_1yjylxz6z1.s[60]++;
 			return res;
 		}
 
@@ -6482,18 +6482,18 @@ let Board = function (_EventEmitter) {
 	}, {
 		key: 'boardData',
 		get: function () {
-			++cov_1yjylxz6z1.f[12];
+			cov_1yjylxz6z1.f[12]++;
 
-			const blocks = (++cov_1yjylxz6z1.s[61], []);
+			const blocks = (cov_1yjylxz6z1.s[61]++, []);
 
-			++cov_1yjylxz6z1.s[62];
+			cov_1yjylxz6z1.s[62]++;
 			this.forBlocks((block, x, y) => {
-				++cov_1yjylxz6z1.f[13];
-				++cov_1yjylxz6z1.s[63];
+				cov_1yjylxz6z1.f[13]++;
+				cov_1yjylxz6z1.s[63]++;
 
 				if (block.config.name !== 'empty') {
-					++cov_1yjylxz6z1.b[6][0];
-					++cov_1yjylxz6z1.s[64];
+					cov_1yjylxz6z1.b[6][0]++;
+					cov_1yjylxz6z1.s[64]++;
 
 					blocks.push({
 						x,
@@ -6502,11 +6502,11 @@ let Board = function (_EventEmitter) {
 						rotate: block.rotate
 					});
 				} else {
-					++cov_1yjylxz6z1.b[6][1];
+					cov_1yjylxz6z1.b[6][1]++;
 				}
 			});
 
-			++cov_1yjylxz6z1.s[65];
+			cov_1yjylxz6z1.s[65]++;
 			return blocks;
 		}
 	}]);
@@ -6514,7 +6514,7 @@ let Board = function (_EventEmitter) {
 	return Board;
 }(EventEmitter);
 
-++cov_1yjylxz6z1.s[149];
+cov_1yjylxz6z1.s[149]++;
 
 
 module.exports = Board;
@@ -6564,7 +6564,7 @@ var cov_1dvpv5fa9x = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_1dvpv5fa9x.s[0];
+cov_1dvpv5fa9x.s[0]++;
 module.exports = {
 	BLOCK_SIZE: 50
 };
@@ -10290,9 +10290,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-const EventEmitter = (++cov_1z4y9sbun.s[0], __webpack_require__(14));
-const Data = (++cov_1z4y9sbun.s[1], __webpack_require__(8));
-const PassEvent = (++cov_1z4y9sbun.s[2], __webpack_require__(44));
+const EventEmitter = (cov_1z4y9sbun.s[0]++, __webpack_require__(14));
+const Data = (cov_1z4y9sbun.s[1]++, __webpack_require__(8));
+const PassEvent = (cov_1z4y9sbun.s[2]++, __webpack_require__(44));
 
 let Block = function (_EventEmitter) {
 	_inherits(Block, _EventEmitter);
@@ -10300,72 +10300,72 @@ let Block = function (_EventEmitter) {
 	function Block(board, config) {
 		_classCallCheck(this, Block);
 
-		++cov_1z4y9sbun.f[0];
-		++cov_1z4y9sbun.s[3];
+		cov_1z4y9sbun.f[0]++;
+		cov_1z4y9sbun.s[3]++;
 
 		var _this = _possibleConstructorReturn(this, (Block.__proto__ || Object.getPrototypeOf(Block)).call(this));
 
-		++cov_1z4y9sbun.s[4];
+		cov_1z4y9sbun.s[4]++;
 
 		_this.board = board;
-		++cov_1z4y9sbun.s[5];
+		cov_1z4y9sbun.s[5]++;
 		_this.x = config.x;
-		++cov_1z4y9sbun.s[6];
+		cov_1z4y9sbun.s[6]++;
 		_this.y = config.y;
-		++cov_1z4y9sbun.s[7];
-		_this.rotate = (++cov_1z4y9sbun.b[0][0], config.rotate) || (++cov_1z4y9sbun.b[0][1], 0);
-		++cov_1z4y9sbun.s[8];
+		cov_1z4y9sbun.s[7]++;
+		_this.rotate = (cov_1z4y9sbun.b[0][0]++, config.rotate) || (cov_1z4y9sbun.b[0][1]++, 0);
+		cov_1z4y9sbun.s[8]++;
 		_this.name = config.name;
-		++cov_1z4y9sbun.s[9];
+		cov_1z4y9sbun.s[9]++;
 		_this.config = config;
-		++cov_1z4y9sbun.s[10];
+		cov_1z4y9sbun.s[10]++;
 		_this.inputExists = false; // indicates whether self has input
-		++cov_1z4y9sbun.s[11];
+		cov_1z4y9sbun.s[11]++;
 		_this.outputExists = false; // indicates whether self has anything as output now
-		++cov_1z4y9sbun.s[12];
+		cov_1z4y9sbun.s[12]++;
 		_this.inputQueues = new Map([['top', []], ['left', []], ['right', []], ['bottom', []]]);
 
-		++cov_1z4y9sbun.s[13];
+		cov_1z4y9sbun.s[13]++;
 		_this.outputQueues = new Map([['top', []], ['left', []], ['right', []], ['bottom', []]]);
-		++cov_1z4y9sbun.s[14];
-		if ((++cov_1z4y9sbun.b[2][0], _this.config.type === 'wire') || (++cov_1z4y9sbun.b[2][1], _this.config.type === 'calc')) {
-			++cov_1z4y9sbun.b[1][0];
-			++cov_1z4y9sbun.s[15];
+		cov_1z4y9sbun.s[14]++;
+		if ((cov_1z4y9sbun.b[2][0]++, _this.config.type === 'wire') || (cov_1z4y9sbun.b[2][1]++, _this.config.type === 'calc')) {
+			cov_1z4y9sbun.b[1][0]++;
+			cov_1z4y9sbun.s[15]++;
 
 			_this.rotatedPlugs = _this.config.io.plugs.map(direction => {
-				++cov_1z4y9sbun.f[1];
-				++cov_1z4y9sbun.s[16];
+				cov_1z4y9sbun.f[1]++;
+				cov_1z4y9sbun.s[16]++;
 				return _this.rotatedDirection(direction);
 			});
 		} else {
-				++cov_1z4y9sbun.b[1][1];
-				++cov_1z4y9sbun.s[17];
+				cov_1z4y9sbun.b[1][1]++;
+				cov_1z4y9sbun.s[17]++;
 				if (_this.config.type === 'wireF') {
-					++cov_1z4y9sbun.b[3][0];
-					++cov_1z4y9sbun.s[18];
+					cov_1z4y9sbun.b[3][0]++;
+					cov_1z4y9sbun.s[18]++;
 
 					_this.rotatedFlow = {};
-					const directions = (++cov_1z4y9sbun.s[19], ['top', 'right', 'bottom', 'left']);
-					++cov_1z4y9sbun.s[20];
+					const directions = (cov_1z4y9sbun.s[19]++, ['top', 'right', 'bottom', 'left']);
+					cov_1z4y9sbun.s[20]++;
 					directions.forEach(from => {
-						++cov_1z4y9sbun.f[2];
-						++cov_1z4y9sbun.s[21];
+						cov_1z4y9sbun.f[2]++;
+						cov_1z4y9sbun.s[21]++;
 
 						if (_this.config.io.flow[from]) {
-							++cov_1z4y9sbun.b[4][0];
-							++cov_1z4y9sbun.s[22];
+							cov_1z4y9sbun.b[4][0]++;
+							cov_1z4y9sbun.s[22]++;
 
 							_this.rotatedFlow[_this.rotatedDirection(from)] = _this.config.io.flow[from].map(to => {
-								++cov_1z4y9sbun.f[3];
-								++cov_1z4y9sbun.s[23];
+								cov_1z4y9sbun.f[3]++;
+								cov_1z4y9sbun.s[23]++;
 								return _this.rotatedDirection(to);
 							});
 						} else {
-							++cov_1z4y9sbun.b[4][1];
+							cov_1z4y9sbun.b[4][1]++;
 						}
 					});
 				} else {
-					++cov_1z4y9sbun.b[3][1];
+					cov_1z4y9sbun.b[3][1]++;
 				}
 			}return _this;
 	}
@@ -10373,394 +10373,394 @@ let Block = function (_EventEmitter) {
 	_createClass(Block, [{
 		key: 'rotatedDirection',
 		value: function rotatedDirection(direction) {
-			++cov_1z4y9sbun.f[4];
-			++cov_1z4y9sbun.s[24];
+			cov_1z4y9sbun.f[4]++;
+			cov_1z4y9sbun.s[24]++;
 
 			if (!this.config.rotatable) {
-				++cov_1z4y9sbun.b[5][0];
-				++cov_1z4y9sbun.s[25];
+				cov_1z4y9sbun.b[5][0]++;
+				cov_1z4y9sbun.s[25]++;
 
 				return direction;
 			} else {
-				++cov_1z4y9sbun.b[5][1];
+				cov_1z4y9sbun.b[5][1]++;
 			}
 
-			const directions = (++cov_1z4y9sbun.s[26], ['top', 'right', 'bottom', 'left']);
-			++cov_1z4y9sbun.s[27];
+			const directions = (cov_1z4y9sbun.s[26]++, ['top', 'right', 'bottom', 'left']);
+			cov_1z4y9sbun.s[27]++;
 			return directions[(directions.indexOf(direction) + this.rotate) % 4];
 		}
 	}, {
 		key: 'input',
 		value: function input(position, data) {
-			++cov_1z4y9sbun.f[5];
-			++cov_1z4y9sbun.s[28];
+			cov_1z4y9sbun.f[5]++;
+			cov_1z4y9sbun.s[28]++;
 
 			this.inputExists = true;
-			++cov_1z4y9sbun.s[29];
+			cov_1z4y9sbun.s[29]++;
 			this.inputQueues.get(position).push(data);
-			++cov_1z4y9sbun.s[30];
+			cov_1z4y9sbun.s[30]++;
 			this.emit('get', { direction: position, data });
 		}
 	}, {
 		key: 'step',
 		value: function step() {
-			++cov_1z4y9sbun.f[6];
-			++cov_1z4y9sbun.s[31];
+			cov_1z4y9sbun.f[6]++;
+			cov_1z4y9sbun.s[31]++;
 
 			this.inputExists = false;
 
-			++cov_1z4y9sbun.s[32];
+			cov_1z4y9sbun.s[32]++;
 			switch (this.config.type) {
 				case 'empty':
-					++cov_1z4y9sbun.b[6][0];
+					cov_1z4y9sbun.b[6][0]++;
 					{
-						++cov_1z4y9sbun.s[33];
+						cov_1z4y9sbun.s[33]++;
 
 						// Erase all data passed to the empty block
 						for (const queue of this.inputQueues.values()) {
-							++cov_1z4y9sbun.s[34];
+							cov_1z4y9sbun.s[34]++;
 
 							while (queue.length) {
-								const data = (++cov_1z4y9sbun.s[35], queue.shift());
-								++cov_1z4y9sbun.s[36];
+								const data = (cov_1z4y9sbun.s[35]++, queue.shift());
+								cov_1z4y9sbun.s[36]++;
 								this.emit('erase', data);
 							}
 						}
-						++cov_1z4y9sbun.s[37];
+						cov_1z4y9sbun.s[37]++;
 						break;
 					}
 				case 'wire':
-					++cov_1z4y9sbun.b[6][1];
+					cov_1z4y9sbun.b[6][1]++;
 					{
-						++cov_1z4y9sbun.s[38];
+						cov_1z4y9sbun.s[38]++;
 
 						for (const [source, queue] of this.inputQueues.entries()) {
-							++cov_1z4y9sbun.s[39];
+							cov_1z4y9sbun.s[39]++;
 
 							// When data exists in pluged direction
 							if (queue.length === 0) {
-								++cov_1z4y9sbun.b[7][0];
-								++cov_1z4y9sbun.s[40];
+								cov_1z4y9sbun.b[7][0]++;
+								cov_1z4y9sbun.s[40]++;
 
 								continue;
 							} else {
-								++cov_1z4y9sbun.b[7][1];
+								cov_1z4y9sbun.b[7][1]++;
 							}
-							++cov_1z4y9sbun.s[41];
+							cov_1z4y9sbun.s[41]++;
 							if (this.rotatedPlugs.includes(source)) {
-								++cov_1z4y9sbun.b[8][0];
+								cov_1z4y9sbun.b[8][0]++;
 
-								const destinations = (++cov_1z4y9sbun.s[42], this.rotatedPlugs.filter(direction => {
-									++cov_1z4y9sbun.f[7];
-									++cov_1z4y9sbun.s[43];
+								const destinations = (cov_1z4y9sbun.s[42]++, this.rotatedPlugs.filter(direction => {
+									cov_1z4y9sbun.f[7]++;
+									cov_1z4y9sbun.s[43]++;
 									return direction !== source;
 								}));
-								const data = (++cov_1z4y9sbun.s[44], queue.shift());
+								const data = (cov_1z4y9sbun.s[44]++, queue.shift());
 
 								// pass through
-								const input = (++cov_1z4y9sbun.s[45], new Map([[source, data]]));
+								const input = (cov_1z4y9sbun.s[45]++, new Map([[source, data]]));
 
-								const output = (++cov_1z4y9sbun.s[46], new Map());
-								++cov_1z4y9sbun.s[47];
+								const output = (cov_1z4y9sbun.s[46]++, new Map());
+								cov_1z4y9sbun.s[47]++;
 								destinations.forEach(direction => {
-									++cov_1z4y9sbun.f[8];
+									cov_1z4y9sbun.f[8]++;
 
-									const outData = (++cov_1z4y9sbun.s[48], new Data(this.board, data.value));
-									++cov_1z4y9sbun.s[49];
+									const outData = (cov_1z4y9sbun.s[48]++, new Data(this.board, data.value));
+									cov_1z4y9sbun.s[49]++;
 									this.outputQueues.get(direction).push(outData);
-									++cov_1z4y9sbun.s[50];
+									cov_1z4y9sbun.s[50]++;
 									output.set(direction, outData);
 								});
 
-								++cov_1z4y9sbun.s[51];
+								cov_1z4y9sbun.s[51]++;
 								this.emit('pass', new PassEvent({ in: input, out: output }));
-								++cov_1z4y9sbun.s[52];
+								cov_1z4y9sbun.s[52]++;
 								this.outputExists = true;
 							} else {
-								++cov_1z4y9sbun.b[8][1];
-								++cov_1z4y9sbun.s[53];
+								cov_1z4y9sbun.b[8][1]++;
+								cov_1z4y9sbun.s[53]++;
 
 								// Erase data when data exists in non-pluged direction
 								while (queue.length) {
-									const data = (++cov_1z4y9sbun.s[54], queue.shift());
-									++cov_1z4y9sbun.s[55];
+									const data = (cov_1z4y9sbun.s[54]++, queue.shift());
+									cov_1z4y9sbun.s[55]++;
 									this.emit('erase', data);
 								}
 							}
 						}
-						++cov_1z4y9sbun.s[56];
+						cov_1z4y9sbun.s[56]++;
 						break;
 					}
 				case 'calc':
-					++cov_1z4y9sbun.b[6][2];
+					cov_1z4y9sbun.b[6][2]++;
 					{
-						++cov_1z4y9sbun.s[57];
+						cov_1z4y9sbun.s[57]++;
 
 						for (const [source, queue] of this.inputQueues.entries()) {
-							++cov_1z4y9sbun.s[58];
+							cov_1z4y9sbun.s[58]++;
 
 							// When data exists in pluged direction
-							if ((++cov_1z4y9sbun.b[10][0], queue.length !== 0) && (++cov_1z4y9sbun.b[10][1], this.rotatedPlugs.includes(source))) {
-								++cov_1z4y9sbun.b[9][0];
+							if ((cov_1z4y9sbun.b[10][0]++, queue.length !== 0) && (cov_1z4y9sbun.b[10][1]++, this.rotatedPlugs.includes(source))) {
+								cov_1z4y9sbun.b[9][0]++;
 
-								const destinations = (++cov_1z4y9sbun.s[59], this.rotatedPlugs.filter(direction => {
-									++cov_1z4y9sbun.f[9];
-									++cov_1z4y9sbun.s[60];
+								const destinations = (cov_1z4y9sbun.s[59]++, this.rotatedPlugs.filter(direction => {
+									cov_1z4y9sbun.f[9]++;
+									cov_1z4y9sbun.s[60]++;
 									return direction !== source;
 								}));
-								const data = (++cov_1z4y9sbun.s[61], queue.shift());
+								const data = (cov_1z4y9sbun.s[61]++, queue.shift());
 
 								// Calculate and pass through
-								const input = (++cov_1z4y9sbun.s[62], new Map([[source, data]]));
+								const input = (cov_1z4y9sbun.s[62]++, new Map([[source, data]]));
 
-								const output = (++cov_1z4y9sbun.s[63], new Map());
-								++cov_1z4y9sbun.s[64];
+								const output = (cov_1z4y9sbun.s[63]++, new Map());
+								cov_1z4y9sbun.s[64]++;
 								destinations.forEach(direction => {
-									++cov_1z4y9sbun.f[10];
+									cov_1z4y9sbun.f[10]++;
 
-									const value = (++cov_1z4y9sbun.s[65], this.config.func(data.value));
-									const outData = (++cov_1z4y9sbun.s[66], new Data(this.board, isNaN(value) ? (++cov_1z4y9sbun.b[11][0], 0) : (++cov_1z4y9sbun.b[11][1], value)));
-									++cov_1z4y9sbun.s[67];
+									const value = (cov_1z4y9sbun.s[65]++, this.config.func(data.value));
+									const outData = (cov_1z4y9sbun.s[66]++, new Data(this.board, isNaN(value) ? (cov_1z4y9sbun.b[11][0]++, 0) : (cov_1z4y9sbun.b[11][1]++, value)));
+									cov_1z4y9sbun.s[67]++;
 									this.outputQueues.get(direction).push(outData);
-									++cov_1z4y9sbun.s[68];
+									cov_1z4y9sbun.s[68]++;
 									output.set(direction, outData);
 								});
 
-								++cov_1z4y9sbun.s[69];
+								cov_1z4y9sbun.s[69]++;
 								this.emit('pass', new PassEvent({ in: input, out: output }));
-								++cov_1z4y9sbun.s[70];
+								cov_1z4y9sbun.s[70]++;
 								this.outputExists = true;
 							} else {
-								++cov_1z4y9sbun.b[9][1];
+								cov_1z4y9sbun.b[9][1]++;
 							}
 
 							// Erase data when data exists in non-pluged direction
-							++cov_1z4y9sbun.s[71];
+							cov_1z4y9sbun.s[71]++;
 							if (!this.rotatedPlugs.includes(source)) {
-								++cov_1z4y9sbun.b[12][0];
-								++cov_1z4y9sbun.s[72];
+								cov_1z4y9sbun.b[12][0]++;
+								cov_1z4y9sbun.s[72]++;
 
 								while (queue.length) {
-									const data = (++cov_1z4y9sbun.s[73], queue.shift());
-									++cov_1z4y9sbun.s[74];
+									const data = (cov_1z4y9sbun.s[73]++, queue.shift());
+									cov_1z4y9sbun.s[74]++;
 									this.emit('erase', data);
 								}
 							} else {
-								++cov_1z4y9sbun.b[12][1];
+								cov_1z4y9sbun.b[12][1]++;
 							}
 						}
-						++cov_1z4y9sbun.s[75];
+						cov_1z4y9sbun.s[75]++;
 						break;
 					}
 				case 'calc2':
-					++cov_1z4y9sbun.b[6][3];
+					cov_1z4y9sbun.b[6][3]++;
 					{
-						const sources = (++cov_1z4y9sbun.s[76], this.config.io.in.map(direction => {
-							++cov_1z4y9sbun.f[11];
-							++cov_1z4y9sbun.s[77];
+						const sources = (cov_1z4y9sbun.s[76]++, this.config.io.in.map(direction => {
+							cov_1z4y9sbun.f[11]++;
+							cov_1z4y9sbun.s[77]++;
 							return this.rotatedDirection(direction);
 						}));
-						const destination = (++cov_1z4y9sbun.s[78], this.rotatedDirection(this.config.io.out));
+						const destination = (cov_1z4y9sbun.s[78]++, this.rotatedDirection(this.config.io.out));
 
 						// Execute calculation when all inputs are satisfied
-						++cov_1z4y9sbun.s[79];
+						cov_1z4y9sbun.s[79]++;
 						if (sources.every(source => {
-							++cov_1z4y9sbun.f[12];
-							++cov_1z4y9sbun.s[80];
+							cov_1z4y9sbun.f[12]++;
+							cov_1z4y9sbun.s[80]++;
 							return this.inputQueues.get(source).length > 0;
 						})) {
-							++cov_1z4y9sbun.b[13][0];
+							cov_1z4y9sbun.b[13][0]++;
 
-							const datas = (++cov_1z4y9sbun.s[81], []);
+							const datas = (cov_1z4y9sbun.s[81]++, []);
 
 							// Calculate and pass through
-							const input = (++cov_1z4y9sbun.s[82], new Map());
-							++cov_1z4y9sbun.s[83];
+							const input = (cov_1z4y9sbun.s[82]++, new Map());
+							cov_1z4y9sbun.s[83]++;
 							sources.forEach(source => {
-								++cov_1z4y9sbun.f[13];
+								cov_1z4y9sbun.f[13]++;
 
-								const data = (++cov_1z4y9sbun.s[84], this.inputQueues.get(source).shift());
-								++cov_1z4y9sbun.s[85];
+								const data = (cov_1z4y9sbun.s[84]++, this.inputQueues.get(source).shift());
+								cov_1z4y9sbun.s[85]++;
 								input.set(source, data);
-								++cov_1z4y9sbun.s[86];
+								cov_1z4y9sbun.s[86]++;
 								datas.push(data);
 							});
 
-							const value = (++cov_1z4y9sbun.s[87], this.config.func(...datas.map(data => {
-								++cov_1z4y9sbun.f[14];
-								++cov_1z4y9sbun.s[88];
+							const value = (cov_1z4y9sbun.s[87]++, this.config.func(...datas.map(data => {
+								cov_1z4y9sbun.f[14]++;
+								cov_1z4y9sbun.s[88]++;
 								return data.value;
 							})));
-							const outData = (++cov_1z4y9sbun.s[89], new Data(this.board, isNaN(value) ? (++cov_1z4y9sbun.b[14][0], 0) : (++cov_1z4y9sbun.b[14][1], value)));
-							++cov_1z4y9sbun.s[90];
+							const outData = (cov_1z4y9sbun.s[89]++, new Data(this.board, isNaN(value) ? (cov_1z4y9sbun.b[14][0]++, 0) : (cov_1z4y9sbun.b[14][1]++, value)));
+							cov_1z4y9sbun.s[90]++;
 							this.outputQueues.get(destination).push(outData);
-							const output = (++cov_1z4y9sbun.s[91], new Map([[destination, outData]]));
+							const output = (cov_1z4y9sbun.s[91]++, new Map([[destination, outData]]));
 
-							++cov_1z4y9sbun.s[92];
+							cov_1z4y9sbun.s[92]++;
 							this.emit('pass', new PassEvent({ in: input, out: output }));
-							++cov_1z4y9sbun.s[93];
+							cov_1z4y9sbun.s[93]++;
 							this.outputExists = true;
 						} else {
-							++cov_1z4y9sbun.b[13][1];
+							cov_1z4y9sbun.b[13][1]++;
 						}
 
 						// Erase data when data exists in non-pluged direction
-						++cov_1z4y9sbun.s[94];
+						cov_1z4y9sbun.s[94]++;
 						for (const [source, queue] of this.inputQueues.entries()) {
-							++cov_1z4y9sbun.s[95];
+							cov_1z4y9sbun.s[95]++;
 
 							if (!sources.includes(source)) {
-								++cov_1z4y9sbun.b[15][0];
-								++cov_1z4y9sbun.s[96];
+								cov_1z4y9sbun.b[15][0]++;
+								cov_1z4y9sbun.s[96]++;
 
 								while (queue.length) {
-									const data = (++cov_1z4y9sbun.s[97], queue.shift());
-									++cov_1z4y9sbun.s[98];
+									const data = (cov_1z4y9sbun.s[97]++, queue.shift());
+									cov_1z4y9sbun.s[98]++;
 									this.emit('erase', data);
 								}
 							} else {
-								++cov_1z4y9sbun.b[15][1];
+								cov_1z4y9sbun.b[15][1]++;
 							}
 						}
-						++cov_1z4y9sbun.s[99];
+						cov_1z4y9sbun.s[99]++;
 						break;
 					}
 				case 'calc-switch':
-					++cov_1z4y9sbun.b[6][4];
+					cov_1z4y9sbun.b[6][4]++;
 					{
-						const sources = (++cov_1z4y9sbun.s[100], this.config.io.in.map(direction => {
-							++cov_1z4y9sbun.f[15];
-							++cov_1z4y9sbun.s[101];
+						const sources = (cov_1z4y9sbun.s[100]++, this.config.io.in.map(direction => {
+							cov_1z4y9sbun.f[15]++;
+							cov_1z4y9sbun.s[101]++;
 							return this.rotatedDirection(direction);
 						}));
-						const destinations = (++cov_1z4y9sbun.s[102], this.config.io.out.map(direction => {
-							++cov_1z4y9sbun.f[16];
-							++cov_1z4y9sbun.s[103];
+						const destinations = (cov_1z4y9sbun.s[102]++, this.config.io.out.map(direction => {
+							cov_1z4y9sbun.f[16]++;
+							cov_1z4y9sbun.s[103]++;
 							return this.rotatedDirection(direction);
 						}));
 
 						// Execute calculation when all inputs are satisfied
-						++cov_1z4y9sbun.s[104];
+						cov_1z4y9sbun.s[104]++;
 						if (sources.every(source => {
-							++cov_1z4y9sbun.f[17];
-							++cov_1z4y9sbun.s[105];
+							cov_1z4y9sbun.f[17]++;
+							cov_1z4y9sbun.s[105]++;
 							return this.inputQueues.get(source).length > 0;
 						})) {
-							++cov_1z4y9sbun.b[16][0];
+							cov_1z4y9sbun.b[16][0]++;
 
-							const datas = (++cov_1z4y9sbun.s[106], []);
+							const datas = (cov_1z4y9sbun.s[106]++, []);
 
 							// Calculate and pass through
-							const input = (++cov_1z4y9sbun.s[107], new Map());
-							++cov_1z4y9sbun.s[108];
+							const input = (cov_1z4y9sbun.s[107]++, new Map());
+							cov_1z4y9sbun.s[108]++;
 							sources.forEach(source => {
-								++cov_1z4y9sbun.f[18];
+								cov_1z4y9sbun.f[18]++;
 
-								const data = (++cov_1z4y9sbun.s[109], this.inputQueues.get(source).shift());
-								++cov_1z4y9sbun.s[110];
+								const data = (cov_1z4y9sbun.s[109]++, this.inputQueues.get(source).shift());
+								cov_1z4y9sbun.s[110]++;
 								input.set(source, data);
-								++cov_1z4y9sbun.s[111];
+								cov_1z4y9sbun.s[111]++;
 								datas.push(data);
 							});
 
-							const values = (++cov_1z4y9sbun.s[112], datas.map(data => {
-								++cov_1z4y9sbun.f[19];
-								++cov_1z4y9sbun.s[113];
+							const values = (cov_1z4y9sbun.s[112]++, datas.map(data => {
+								cov_1z4y9sbun.f[19]++;
+								cov_1z4y9sbun.s[113]++;
 								return data.value;
 							}));
-							const { directionIndex, value } = (++cov_1z4y9sbun.s[114], this.config.func(...values));
+							const { directionIndex, value } = (cov_1z4y9sbun.s[114]++, this.config.func(...values));
 
-							const data = (++cov_1z4y9sbun.s[115], new Data(this.board, isNaN(value) ? (++cov_1z4y9sbun.b[17][0], 0) : (++cov_1z4y9sbun.b[17][1], value)));
-							const destination = (++cov_1z4y9sbun.s[116], destinations[directionIndex]);
-							++cov_1z4y9sbun.s[117];
+							const data = (cov_1z4y9sbun.s[115]++, new Data(this.board, isNaN(value) ? (cov_1z4y9sbun.b[17][0]++, 0) : (cov_1z4y9sbun.b[17][1]++, value)));
+							const destination = (cov_1z4y9sbun.s[116]++, destinations[directionIndex]);
+							cov_1z4y9sbun.s[117]++;
 							this.outputQueues.get(destination).push(data);
-							const output = (++cov_1z4y9sbun.s[118], new Map([[destination, data]]));
+							const output = (cov_1z4y9sbun.s[118]++, new Map([[destination, data]]));
 
-							++cov_1z4y9sbun.s[119];
+							cov_1z4y9sbun.s[119]++;
 							this.emit('pass', new PassEvent({ in: input, out: output }));
-							++cov_1z4y9sbun.s[120];
+							cov_1z4y9sbun.s[120]++;
 							this.outputExists = true;
 						} else {
-							++cov_1z4y9sbun.b[16][1];
+							cov_1z4y9sbun.b[16][1]++;
 						}
 
 						// Erase data when data exists in non-pluged direction
-						++cov_1z4y9sbun.s[121];
+						cov_1z4y9sbun.s[121]++;
 						for (const [source, queue] of this.inputQueues.entries()) {
-							++cov_1z4y9sbun.s[122];
+							cov_1z4y9sbun.s[122]++;
 
 							if (!sources.includes(source)) {
-								++cov_1z4y9sbun.b[18][0];
-								++cov_1z4y9sbun.s[123];
+								cov_1z4y9sbun.b[18][0]++;
+								cov_1z4y9sbun.s[123]++;
 
 								while (queue.length) {
-									const data = (++cov_1z4y9sbun.s[124], queue.shift());
-									++cov_1z4y9sbun.s[125];
+									const data = (cov_1z4y9sbun.s[124]++, queue.shift());
+									cov_1z4y9sbun.s[125]++;
 									this.emit('erase', data);
 								}
 							} else {
-								++cov_1z4y9sbun.b[18][1];
+								cov_1z4y9sbun.b[18][1]++;
 							}
 						}
-						++cov_1z4y9sbun.s[126];
+						cov_1z4y9sbun.s[126]++;
 						break;
 					}
 				case 'wireF':
-					++cov_1z4y9sbun.b[6][5];
+					cov_1z4y9sbun.b[6][5]++;
 					{
-						++cov_1z4y9sbun.s[127];
+						cov_1z4y9sbun.s[127]++;
 
 						for (const [source, queue] of this.inputQueues.entries()) {
-							++cov_1z4y9sbun.s[128];
+							cov_1z4y9sbun.s[128]++;
 
 							if (queue.length === 0) {
-								++cov_1z4y9sbun.b[19][0];
-								++cov_1z4y9sbun.s[129];
+								cov_1z4y9sbun.b[19][0]++;
+								cov_1z4y9sbun.s[129]++;
 
 								continue;
 							} else {
-								++cov_1z4y9sbun.b[19][1];
+								cov_1z4y9sbun.b[19][1]++;
 							}
 
-							++cov_1z4y9sbun.s[130];
+							cov_1z4y9sbun.s[130]++;
 							if (this.rotatedFlow[source]) {
-								++cov_1z4y9sbun.b[20][0];
+								cov_1z4y9sbun.b[20][0]++;
 
 								// When data exists in the starting direction of some flow
-								const destinations = (++cov_1z4y9sbun.s[131], this.rotatedFlow[source]);
-								const data = (++cov_1z4y9sbun.s[132], queue.shift());
+								const destinations = (cov_1z4y9sbun.s[131]++, this.rotatedFlow[source]);
+								const data = (cov_1z4y9sbun.s[132]++, queue.shift());
 
-								const input = (++cov_1z4y9sbun.s[133], new Map([[source, data]]));
-								const output = (++cov_1z4y9sbun.s[134], new Map());
+								const input = (cov_1z4y9sbun.s[133]++, new Map([[source, data]]));
+								const output = (cov_1z4y9sbun.s[134]++, new Map());
 
-								++cov_1z4y9sbun.s[135];
+								cov_1z4y9sbun.s[135]++;
 								destinations.forEach(direction => {
-									++cov_1z4y9sbun.f[20];
+									cov_1z4y9sbun.f[20]++;
 
-									const outData = (++cov_1z4y9sbun.s[136], new Data(this.board, data.value));
-									++cov_1z4y9sbun.s[137];
+									const outData = (cov_1z4y9sbun.s[136]++, new Data(this.board, data.value));
+									cov_1z4y9sbun.s[137]++;
 									this.outputQueues.get(direction).push(outData);
-									++cov_1z4y9sbun.s[138];
+									cov_1z4y9sbun.s[138]++;
 									output.set(direction, outData);
 								});
 
-								++cov_1z4y9sbun.s[139];
+								cov_1z4y9sbun.s[139]++;
 								this.emit('pass', new PassEvent({ in: input, out: output }));
-								++cov_1z4y9sbun.s[140];
+								cov_1z4y9sbun.s[140]++;
 								this.outputExists = true;
 							} else {
-								++cov_1z4y9sbun.b[20][1];
-								++cov_1z4y9sbun.s[141];
+								cov_1z4y9sbun.b[20][1]++;
+								cov_1z4y9sbun.s[141]++;
 
 								// Erase data otherwise
 								while (queue.length) {
-									const data = (++cov_1z4y9sbun.s[142], queue.shift());
-									++cov_1z4y9sbun.s[143];
+									const data = (cov_1z4y9sbun.s[142]++, queue.shift());
+									cov_1z4y9sbun.s[143]++;
 									this.emit('erase', data);
 								}
 							}
 						}
-						++cov_1z4y9sbun.s[144];
+						cov_1z4y9sbun.s[144]++;
 						break;
 					}
 			}
@@ -10768,18 +10768,18 @@ let Block = function (_EventEmitter) {
 	}, {
 		key: 'hand',
 		value: function hand() {
-			++cov_1z4y9sbun.f[21];
-			++cov_1z4y9sbun.s[145];
+			cov_1z4y9sbun.f[21]++;
+			cov_1z4y9sbun.s[145]++;
 
 			this.outputExists = false;
 
-			++cov_1z4y9sbun.s[146];
+			cov_1z4y9sbun.s[146]++;
 			for (const [direction, queue] of this.outputQueues.entries()) {
-				++cov_1z4y9sbun.s[147];
+				cov_1z4y9sbun.s[147]++;
 
 				while (queue.length) {
-					const data = (++cov_1z4y9sbun.s[148], queue.shift());
-					++cov_1z4y9sbun.s[149];
+					const data = (cov_1z4y9sbun.s[148]++, queue.shift());
+					cov_1z4y9sbun.s[149]++;
 					this.handTo(direction, data);
 				}
 			}
@@ -10787,123 +10787,123 @@ let Block = function (_EventEmitter) {
 	}, {
 		key: 'handTo',
 		value: function handTo(direction, data) {
-			++cov_1z4y9sbun.f[22];
-			++cov_1z4y9sbun.s[150];
+			cov_1z4y9sbun.f[22]++;
+			cov_1z4y9sbun.s[150]++;
 
-			if ((++cov_1z4y9sbun.b[22][0], direction === 'bottom') && (++cov_1z4y9sbun.b[22][1], this.y + 1 === this.board.height) && (++cov_1z4y9sbun.b[22][2], this.x === this.board.outputBlockX)) {
-				++cov_1z4y9sbun.b[21][0];
-				++cov_1z4y9sbun.s[151];
+			if ((cov_1z4y9sbun.b[22][0]++, direction === 'bottom') && (cov_1z4y9sbun.b[22][1]++, this.y + 1 === this.board.height) && (cov_1z4y9sbun.b[22][2]++, this.x === this.board.outputBlockX)) {
+				cov_1z4y9sbun.b[21][0]++;
+				cov_1z4y9sbun.s[151]++;
 
 				this.board.output(data.value);
-				++cov_1z4y9sbun.s[152];
+				cov_1z4y9sbun.s[152]++;
 				this.emit('erase', data);
-				++cov_1z4y9sbun.s[153];
+				cov_1z4y9sbun.s[153]++;
 				return;
 			} else {
-				++cov_1z4y9sbun.b[21][1];
+				cov_1z4y9sbun.b[21][1]++;
 			}
 
-			++cov_1z4y9sbun.s[154];
+			cov_1z4y9sbun.s[154]++;
 			switch (direction) {
 				case 'top':
-					++cov_1z4y9sbun.b[23][0];
-					++cov_1z4y9sbun.s[155];
+					cov_1z4y9sbun.b[23][0]++;
+					cov_1z4y9sbun.s[155]++;
 
 					if (0 <= this.y - 1) {
-						++cov_1z4y9sbun.b[24][0];
+						cov_1z4y9sbun.b[24][0]++;
 
-						const nextBlock = (++cov_1z4y9sbun.s[156], this.board.getBlock(this.x, this.y - 1));
-						++cov_1z4y9sbun.s[157];
+						const nextBlock = (cov_1z4y9sbun.s[156]++, this.board.getBlock(this.x, this.y - 1));
+						cov_1z4y9sbun.s[157]++;
 						nextBlock.input('bottom', data);
-						++cov_1z4y9sbun.s[158];
+						cov_1z4y9sbun.s[158]++;
 						this.emit('hand', data);
 					} else {
-						++cov_1z4y9sbun.b[24][1];
-						++cov_1z4y9sbun.s[159];
+						cov_1z4y9sbun.b[24][1]++;
+						cov_1z4y9sbun.s[159]++;
 
 						this.emit('erase', data);
 					}
-					++cov_1z4y9sbun.s[160];
+					cov_1z4y9sbun.s[160]++;
 					break;
 				case 'bottom':
-					++cov_1z4y9sbun.b[23][1];
-					++cov_1z4y9sbun.s[161];
+					cov_1z4y9sbun.b[23][1]++;
+					cov_1z4y9sbun.s[161]++;
 
 					if (this.board.height > this.y + 1) {
-						++cov_1z4y9sbun.b[25][0];
+						cov_1z4y9sbun.b[25][0]++;
 
-						const nextBlock = (++cov_1z4y9sbun.s[162], this.board.getBlock(this.x, this.y + 1));
-						++cov_1z4y9sbun.s[163];
+						const nextBlock = (cov_1z4y9sbun.s[162]++, this.board.getBlock(this.x, this.y + 1));
+						cov_1z4y9sbun.s[163]++;
 						nextBlock.input('top', data);
-						++cov_1z4y9sbun.s[164];
+						cov_1z4y9sbun.s[164]++;
 						this.emit('hand', data);
 					} else {
-						++cov_1z4y9sbun.b[25][1];
-						++cov_1z4y9sbun.s[165];
+						cov_1z4y9sbun.b[25][1]++;
+						cov_1z4y9sbun.s[165]++;
 
 						this.emit('erase', data);
 					}
-					++cov_1z4y9sbun.s[166];
+					cov_1z4y9sbun.s[166]++;
 					break;
 				case 'left':
-					++cov_1z4y9sbun.b[23][2];
-					++cov_1z4y9sbun.s[167];
+					cov_1z4y9sbun.b[23][2]++;
+					cov_1z4y9sbun.s[167]++;
 
 					if (0 <= this.x - 1) {
-						++cov_1z4y9sbun.b[26][0];
+						cov_1z4y9sbun.b[26][0]++;
 
-						const nextBlock = (++cov_1z4y9sbun.s[168], this.board.getBlock(this.x - 1, this.y));
-						++cov_1z4y9sbun.s[169];
+						const nextBlock = (cov_1z4y9sbun.s[168]++, this.board.getBlock(this.x - 1, this.y));
+						cov_1z4y9sbun.s[169]++;
 						nextBlock.input('right', data);
-						++cov_1z4y9sbun.s[170];
+						cov_1z4y9sbun.s[170]++;
 						this.emit('hand', data);
 					} else {
-						++cov_1z4y9sbun.b[26][1];
-						++cov_1z4y9sbun.s[171];
+						cov_1z4y9sbun.b[26][1]++;
+						cov_1z4y9sbun.s[171]++;
 
 						this.emit('erase', data);
 					}
-					++cov_1z4y9sbun.s[172];
+					cov_1z4y9sbun.s[172]++;
 					break;
 				case 'right':
-					++cov_1z4y9sbun.b[23][3];
-					++cov_1z4y9sbun.s[173];
+					cov_1z4y9sbun.b[23][3]++;
+					cov_1z4y9sbun.s[173]++;
 
 					if (this.board.width > this.x + 1) {
-						++cov_1z4y9sbun.b[27][0];
+						cov_1z4y9sbun.b[27][0]++;
 
-						const nextBlock = (++cov_1z4y9sbun.s[174], this.board.getBlock(this.x + 1, this.y));
-						++cov_1z4y9sbun.s[175];
+						const nextBlock = (cov_1z4y9sbun.s[174]++, this.board.getBlock(this.x + 1, this.y));
+						cov_1z4y9sbun.s[175]++;
 						nextBlock.input('left', data);
-						++cov_1z4y9sbun.s[176];
+						cov_1z4y9sbun.s[176]++;
 						this.emit('hand', data);
 					} else {
-						++cov_1z4y9sbun.b[27][1];
-						++cov_1z4y9sbun.s[177];
+						cov_1z4y9sbun.b[27][1]++;
+						cov_1z4y9sbun.s[177]++;
 
 						this.emit('erase', data);
 					}
-					++cov_1z4y9sbun.s[178];
+					cov_1z4y9sbun.s[178]++;
 					break;
 			}
 		}
 	}, {
 		key: 'clearData',
 		value: function clearData() {
-			++cov_1z4y9sbun.f[23];
-			++cov_1z4y9sbun.s[179];
+			cov_1z4y9sbun.f[23]++;
+			cov_1z4y9sbun.s[179]++;
 
 			// Erase data when data exists in non-pluged direction
 			[this.inputQueues, this.outputQueues].forEach(queues => {
-				++cov_1z4y9sbun.f[24];
-				++cov_1z4y9sbun.s[180];
+				cov_1z4y9sbun.f[24]++;
+				cov_1z4y9sbun.s[180]++;
 
 				for (const queue of queues.values()) {
-					++cov_1z4y9sbun.s[181];
+					cov_1z4y9sbun.s[181]++;
 
 					while (queue.length) {
-						const data = (++cov_1z4y9sbun.s[182], queue.shift());
-						++cov_1z4y9sbun.s[183];
+						const data = (cov_1z4y9sbun.s[182]++, queue.shift());
+						cov_1z4y9sbun.s[183]++;
 						this.emit('erase', data);
 					}
 				}
@@ -10914,7 +10914,7 @@ let Block = function (_EventEmitter) {
 	return Block;
 }(EventEmitter);
 
-++cov_1z4y9sbun.s[184];
+cov_1z4y9sbun.s[184]++;
 
 
 module.exports = Block;
@@ -11040,19 +11040,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 let Data = function Data(board /* TODO: 消したい */, value, x, y) {
 	_classCallCheck(this, Data);
 
-	++cov_3nwn9tagi.f[0];
-	++cov_3nwn9tagi.s[0];
+	cov_3nwn9tagi.f[0]++;
+	cov_3nwn9tagi.s[0]++;
 
 	this.board = board;
-	++cov_3nwn9tagi.s[1];
+	cov_3nwn9tagi.s[1]++;
 	this.value = value;
-	++cov_3nwn9tagi.s[2];
+	cov_3nwn9tagi.s[2]++;
 	this.x = x;
-	++cov_3nwn9tagi.s[3];
+	cov_3nwn9tagi.s[3]++;
 	this.y = y;
 };
 
-++cov_3nwn9tagi.s[4];
+cov_3nwn9tagi.s[4]++;
 
 
 module.exports = Data;
@@ -12706,11 +12706,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-const React = (++cov_2j2kn154i4.s[0], __webpack_require__(1));
-const PropTypes = (++cov_2j2kn154i4.s[1], __webpack_require__(3));
-const { id } = (++cov_2j2kn154i4.s[2], __webpack_require__(0));
-const { BLOCK_SIZE } = (++cov_2j2kn154i4.s[3], __webpack_require__(6));
-const DataComponent = (++cov_2j2kn154i4.s[4], __webpack_require__(11));
+const React = (cov_2j2kn154i4.s[0]++, __webpack_require__(1));
+const PropTypes = (cov_2j2kn154i4.s[1]++, __webpack_require__(3));
+const { id } = (cov_2j2kn154i4.s[2]++, __webpack_require__(0));
+const { BLOCK_SIZE } = (cov_2j2kn154i4.s[3]++, __webpack_require__(6));
+const DataComponent = (cov_2j2kn154i4.s[4]++, __webpack_require__(11));
 
 let BlockComponent = function (_React$Component) {
 	_inherits(BlockComponent, _React$Component);
@@ -12718,63 +12718,63 @@ let BlockComponent = function (_React$Component) {
 	function BlockComponent(props, state) {
 		_classCallCheck(this, BlockComponent);
 
-		++cov_2j2kn154i4.f[0];
-		++cov_2j2kn154i4.s[5];
+		cov_2j2kn154i4.f[0]++;
+		cov_2j2kn154i4.s[5]++;
 
 		var _this = _possibleConstructorReturn(this, (BlockComponent.__proto__ || Object.getPrototypeOf(BlockComponent)).call(this, props, state));
 
 		_this.handleDataAnimationComplete = data => {
-			++cov_2j2kn154i4.f[18];
-			++cov_2j2kn154i4.s[51];
+			cov_2j2kn154i4.f[18]++;
+			cov_2j2kn154i4.s[51]++;
 
 			if (_this.dataAnimationResolvers.has(data)) {
-				++cov_2j2kn154i4.b[5][0];
-				++cov_2j2kn154i4.s[52];
+				cov_2j2kn154i4.b[5][0]++;
+				cov_2j2kn154i4.s[52]++;
 
 				_this.dataAnimationResolvers.get(data)();
 			} else {
-				++cov_2j2kn154i4.b[5][1];
+				cov_2j2kn154i4.b[5][1]++;
 			}
 		};
 
 		_this.handleDataEraseAnimationComplete = data => {
-			++cov_2j2kn154i4.f[19];
-			++cov_2j2kn154i4.s[53];
+			cov_2j2kn154i4.f[19]++;
+			cov_2j2kn154i4.s[53]++;
 
 			_this.setState({
 				inputData: _this.state.inputData.filter(inputData => {
-					++cov_2j2kn154i4.f[20];
-					++cov_2j2kn154i4.s[54];
+					cov_2j2kn154i4.f[20]++;
+					cov_2j2kn154i4.s[54]++;
 					return inputData.data !== data;
 				}),
 				animatingData: _this.state.animatingData.filter(animatingData => {
-					++cov_2j2kn154i4.f[21];
-					++cov_2j2kn154i4.s[55];
+					cov_2j2kn154i4.f[21]++;
+					cov_2j2kn154i4.s[55]++;
 					return animatingData.data !== data;
 				}),
 				outputData: _this.state.outputData.filter(outputData => {
-					++cov_2j2kn154i4.f[22];
-					++cov_2j2kn154i4.s[56];
+					cov_2j2kn154i4.f[22]++;
+					cov_2j2kn154i4.s[56]++;
 					return outputData.data !== data;
 				})
 			});
 		};
 
 		_this.handleClick = event => {
-			++cov_2j2kn154i4.f[23];
-			++cov_2j2kn154i4.s[57];
+			cov_2j2kn154i4.f[23]++;
+			cov_2j2kn154i4.s[57]++;
 			return _this.props.onClick(event, _this.props.x, _this.props.y);
 		};
 
-		++cov_2j2kn154i4.s[6];
+		cov_2j2kn154i4.s[6]++;
 
 
 		_this.dataAnimationResolvers = new WeakMap();
 
-		++cov_2j2kn154i4.s[7];
+		cov_2j2kn154i4.s[7]++;
 		_this.props.block.on('get', ({ direction, data }) => {
-			++cov_2j2kn154i4.f[1];
-			++cov_2j2kn154i4.s[8];
+			cov_2j2kn154i4.f[1]++;
+			cov_2j2kn154i4.s[8]++;
 
 			_this.setState({
 				inputData: _this.state.inputData.concat([{
@@ -12785,15 +12785,15 @@ let BlockComponent = function (_React$Component) {
 			});
 		});
 
-		++cov_2j2kn154i4.s[9];
+		cov_2j2kn154i4.s[9]++;
 		_this.props.block.on('pass', async passEvent => {
-			++cov_2j2kn154i4.f[2];
+			cov_2j2kn154i4.f[2]++;
 
-			const inputAnimations = (++cov_2j2kn154i4.s[10], []);
+			const inputAnimations = (cov_2j2kn154i4.s[10]++, []);
 
-			++cov_2j2kn154i4.s[11];
+			cov_2j2kn154i4.s[11]++;
 			for (const [direction, data] of passEvent.in.entries()) {
-				++cov_2j2kn154i4.s[12];
+				cov_2j2kn154i4.s[12]++;
 
 				// MEMO: Immutable.js使いたい
 				_this.setState({
@@ -12804,42 +12804,42 @@ let BlockComponent = function (_React$Component) {
 						isErasing: _this.props.status === 'stop'
 					}]),
 					inputData: _this.state.inputData.filter(inputData => {
-						++cov_2j2kn154i4.f[3];
-						++cov_2j2kn154i4.s[13];
+						cov_2j2kn154i4.f[3]++;
+						cov_2j2kn154i4.s[13]++;
 						return data !== inputData.data;
 					})
 				});
 
-				++cov_2j2kn154i4.s[14];
+				cov_2j2kn154i4.s[14]++;
 				inputAnimations.push(new Promise(resolve => {
-					++cov_2j2kn154i4.f[4];
-					++cov_2j2kn154i4.s[15];
+					cov_2j2kn154i4.f[4]++;
+					cov_2j2kn154i4.s[15]++;
 
 					_this.dataAnimationResolvers.set(data, resolve);
 				}));
 			}
 
-			++cov_2j2kn154i4.s[16];
+			cov_2j2kn154i4.s[16]++;
 			await Promise.all(inputAnimations);
 
-			const outputAnimations = (++cov_2j2kn154i4.s[17], []);
+			const outputAnimations = (cov_2j2kn154i4.s[17]++, []);
 
-			++cov_2j2kn154i4.s[18];
+			cov_2j2kn154i4.s[18]++;
 			for (const data of passEvent.in.values()) {
-				++cov_2j2kn154i4.s[19];
+				cov_2j2kn154i4.s[19]++;
 
 				_this.setState({
 					animatingData: _this.state.animatingData.filter(animatingData => {
-						++cov_2j2kn154i4.f[5];
-						++cov_2j2kn154i4.s[20];
+						cov_2j2kn154i4.f[5]++;
+						cov_2j2kn154i4.s[20]++;
 						return data !== animatingData.data;
 					})
 				});
 			}
 
-			++cov_2j2kn154i4.s[21];
+			cov_2j2kn154i4.s[21]++;
 			for (const [direction, data] of passEvent.out.entries()) {
-				++cov_2j2kn154i4.s[22];
+				cov_2j2kn154i4.s[22]++;
 
 				_this.setState({
 					animatingData: _this.state.animatingData.concat([{
@@ -12850,26 +12850,26 @@ let BlockComponent = function (_React$Component) {
 					}])
 				});
 
-				++cov_2j2kn154i4.s[23];
+				cov_2j2kn154i4.s[23]++;
 				outputAnimations.push(new Promise(resolve => {
-					++cov_2j2kn154i4.f[6];
-					++cov_2j2kn154i4.s[24];
+					cov_2j2kn154i4.f[6]++;
+					cov_2j2kn154i4.s[24]++;
 
 					_this.dataAnimationResolvers.set(data, resolve);
 				}));
 			}
 
-			++cov_2j2kn154i4.s[25];
+			cov_2j2kn154i4.s[25]++;
 			await Promise.all(outputAnimations);
 
-			++cov_2j2kn154i4.s[26];
+			cov_2j2kn154i4.s[26]++;
 			for (const [direction, data] of passEvent.out.entries()) {
-				++cov_2j2kn154i4.s[27];
+				cov_2j2kn154i4.s[27]++;
 
 				_this.setState({
 					animatingData: _this.state.animatingData.filter(animatingData => {
-						++cov_2j2kn154i4.f[7];
-						++cov_2j2kn154i4.s[28];
+						cov_2j2kn154i4.f[7]++;
+						cov_2j2kn154i4.s[28]++;
 						return data !== animatingData.data;
 					}),
 					outputData: _this.state.outputData.concat([{
@@ -12880,74 +12880,74 @@ let BlockComponent = function (_React$Component) {
 				});
 			}
 
-			++cov_2j2kn154i4.s[29];
+			cov_2j2kn154i4.s[29]++;
 			_this.props.onPassAnimationComplete(passEvent);
 		});
 
-		++cov_2j2kn154i4.s[30];
+		cov_2j2kn154i4.s[30]++;
 		_this.props.block.on('hand', data => {
-			++cov_2j2kn154i4.f[8];
-			++cov_2j2kn154i4.s[31];
+			cov_2j2kn154i4.f[8]++;
+			cov_2j2kn154i4.s[31]++;
 
 			_this.setState({
 				outputData: _this.state.outputData.filter(outputData => {
-					++cov_2j2kn154i4.f[9];
-					++cov_2j2kn154i4.s[32];
+					cov_2j2kn154i4.f[9]++;
+					cov_2j2kn154i4.s[32]++;
 					return data !== outputData.data;
 				})
 			});
 		});
 
-		++cov_2j2kn154i4.s[33];
+		cov_2j2kn154i4.s[33]++;
 		_this.props.block.on('erase', data => {
-			++cov_2j2kn154i4.f[10];
-			++cov_2j2kn154i4.s[34];
+			cov_2j2kn154i4.f[10]++;
+			cov_2j2kn154i4.s[34]++;
 
 			_this.state.inputData.forEach(inputData => {
-				++cov_2j2kn154i4.f[11];
-				++cov_2j2kn154i4.s[35];
+				cov_2j2kn154i4.f[11]++;
+				cov_2j2kn154i4.s[35]++;
 
 				if (inputData.data === data) {
-					++cov_2j2kn154i4.b[0][0];
-					++cov_2j2kn154i4.s[36];
+					cov_2j2kn154i4.b[0][0]++;
+					cov_2j2kn154i4.s[36]++;
 
 					inputData.isErasing = true;
 				} else {
-					++cov_2j2kn154i4.b[0][1];
+					cov_2j2kn154i4.b[0][1]++;
 				}
 			});
 
-			++cov_2j2kn154i4.s[37];
+			cov_2j2kn154i4.s[37]++;
 			_this.state.animatingData.forEach(animatingData => {
-				++cov_2j2kn154i4.f[12];
-				++cov_2j2kn154i4.s[38];
+				cov_2j2kn154i4.f[12]++;
+				cov_2j2kn154i4.s[38]++;
 
 				if (animatingData.data === data) {
-					++cov_2j2kn154i4.b[1][0];
-					++cov_2j2kn154i4.s[39];
+					cov_2j2kn154i4.b[1][0]++;
+					cov_2j2kn154i4.s[39]++;
 
 					animatingData.isErasing = true;
 				} else {
-					++cov_2j2kn154i4.b[1][1];
+					cov_2j2kn154i4.b[1][1]++;
 				}
 			});
 
-			++cov_2j2kn154i4.s[40];
+			cov_2j2kn154i4.s[40]++;
 			_this.state.outputData.forEach(outputData => {
-				++cov_2j2kn154i4.f[13];
-				++cov_2j2kn154i4.s[41];
+				cov_2j2kn154i4.f[13]++;
+				cov_2j2kn154i4.s[41]++;
 
 				if (outputData.data === data) {
-					++cov_2j2kn154i4.b[2][0];
-					++cov_2j2kn154i4.s[42];
+					cov_2j2kn154i4.b[2][0]++;
+					cov_2j2kn154i4.s[42]++;
 
 					outputData.isErasing = true;
 				} else {
-					++cov_2j2kn154i4.b[2][1];
+					cov_2j2kn154i4.b[2][1]++;
 				}
 			});
 
-			++cov_2j2kn154i4.s[43];
+			cov_2j2kn154i4.s[43]++;
 			_this.setState({
 				inputData: _this.state.inputData,
 				animatingData: _this.state.animatingData,
@@ -12955,7 +12955,7 @@ let BlockComponent = function (_React$Component) {
 			});
 		});
 
-		++cov_2j2kn154i4.s[44];
+		cov_2j2kn154i4.s[44]++;
 		_this.state = {
 			inputData: [], // Data in inputQueue
 			outputData: [], // Data in outputQueue
@@ -12967,37 +12967,37 @@ let BlockComponent = function (_React$Component) {
 	_createClass(BlockComponent, [{
 		key: 'componentWillReceiveProps',
 		value: function componentWillReceiveProps(nextProps) {
-			++cov_2j2kn154i4.f[14];
-			++cov_2j2kn154i4.s[45];
+			cov_2j2kn154i4.f[14]++;
+			cov_2j2kn154i4.s[45]++;
 
-			if ((++cov_2j2kn154i4.b[4][0], this.props.status !== 'stop') && (++cov_2j2kn154i4.b[4][1], nextProps.status === 'stop')) {
-				++cov_2j2kn154i4.b[3][0];
-				++cov_2j2kn154i4.s[46];
+			if ((cov_2j2kn154i4.b[4][0]++, this.props.status !== 'stop') && (cov_2j2kn154i4.b[4][1]++, nextProps.status === 'stop')) {
+				cov_2j2kn154i4.b[3][0]++;
+				cov_2j2kn154i4.s[46]++;
 
 				this.handleStop();
 			} else {
-				++cov_2j2kn154i4.b[3][1];
+				cov_2j2kn154i4.b[3][1]++;
 			}
 		}
 	}, {
 		key: 'handleStop',
 		value: function handleStop() {
-			++cov_2j2kn154i4.f[15];
-			++cov_2j2kn154i4.s[47];
+			cov_2j2kn154i4.f[15]++;
+			cov_2j2kn154i4.s[47]++;
 
 			[this.state.inputData, this.state.animatingData, this.state.outputData].forEach(data => {
-				++cov_2j2kn154i4.f[16];
-				++cov_2j2kn154i4.s[48];
+				cov_2j2kn154i4.f[16]++;
+				cov_2j2kn154i4.s[48]++;
 
 				data.forEach(datum => {
-					++cov_2j2kn154i4.f[17];
-					++cov_2j2kn154i4.s[49];
+					cov_2j2kn154i4.f[17]++;
+					cov_2j2kn154i4.s[49]++;
 
 					datum.isErasing = true;
 				});
 			});
 
-			++cov_2j2kn154i4.s[50];
+			cov_2j2kn154i4.s[50]++;
 			this.setState({
 				inputData: this.state.inputData,
 				animatingData: this.state.animatingData,
@@ -13007,8 +13007,8 @@ let BlockComponent = function (_React$Component) {
 	}, {
 		key: 'render',
 		value: function render() {
-			++cov_2j2kn154i4.f[24];
-			++cov_2j2kn154i4.s[58];
+			cov_2j2kn154i4.f[24]++;
+			cov_2j2kn154i4.s[58]++;
 
 			return React.createElement(
 				'g',
@@ -13030,8 +13030,8 @@ let BlockComponent = function (_React$Component) {
 					'g',
 					null,
 					[...this.state.inputData.map(({ direction, data, isErasing }) => {
-						++cov_2j2kn154i4.f[25];
-						++cov_2j2kn154i4.s[59];
+						cov_2j2kn154i4.f[25]++;
+						cov_2j2kn154i4.s[59]++;
 						return React.createElement(DataComponent, {
 							key: id(data),
 							direction: direction,
@@ -13046,8 +13046,8 @@ let BlockComponent = function (_React$Component) {
 							viewBoxScale: this.props.viewBoxScale
 						});
 					}), ...this.state.animatingData.map(({ direction, data, isInward, isErasing }) => {
-						++cov_2j2kn154i4.f[26];
-						++cov_2j2kn154i4.s[60];
+						cov_2j2kn154i4.f[26]++;
+						cov_2j2kn154i4.s[60]++;
 						return React.createElement(DataComponent, {
 							key: id(data),
 							direction: direction,
@@ -13062,8 +13062,8 @@ let BlockComponent = function (_React$Component) {
 							viewBoxScale: this.props.viewBoxScale
 						});
 					}), ...this.state.outputData.map(({ direction, data, isErasing }) => {
-						++cov_2j2kn154i4.f[27];
-						++cov_2j2kn154i4.s[61];
+						cov_2j2kn154i4.f[27]++;
+						cov_2j2kn154i4.s[61]++;
 						return React.createElement(DataComponent, {
 							key: id(data),
 							direction: direction,
@@ -13101,7 +13101,7 @@ BlockComponent.propTypes = {
 BlockComponent.defaultProps = {
 	viewBoxScale: null
 };
-++cov_2j2kn154i4.s[62];
+cov_2j2kn154i4.s[62]++;
 
 
 module.exports = BlockComponent;
@@ -15668,13 +15668,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-const React = (++cov_t26kee1gv.s[0], __webpack_require__(1));
-const PropTypes = (++cov_t26kee1gv.s[1], __webpack_require__(3));
-const GSAP = (++cov_t26kee1gv.s[2], __webpack_require__(41));
-const assert = (++cov_t26kee1gv.s[3], __webpack_require__(4));
-const { TweenLite, Power0 } = (++cov_t26kee1gv.s[4], __webpack_require__(42));
-const { default: Measure } = (++cov_t26kee1gv.s[5], __webpack_require__(12));
-const { BLOCK_SIZE } = (++cov_t26kee1gv.s[6], __webpack_require__(6));
+const React = (cov_t26kee1gv.s[0]++, __webpack_require__(1));
+const PropTypes = (cov_t26kee1gv.s[1]++, __webpack_require__(3));
+const GSAP = (cov_t26kee1gv.s[2]++, __webpack_require__(41));
+const assert = (cov_t26kee1gv.s[3]++, __webpack_require__(4));
+const { TweenLite, Power0 } = (cov_t26kee1gv.s[4]++, __webpack_require__(42));
+const { default: Measure } = (cov_t26kee1gv.s[5]++, __webpack_require__(12));
+const { BLOCK_SIZE } = (cov_t26kee1gv.s[6]++, __webpack_require__(6));
 
 let DataComponent = function (_React$Component) {
 	_inherits(DataComponent, _React$Component);
@@ -15682,30 +15682,30 @@ let DataComponent = function (_React$Component) {
 	function DataComponent(props, state) {
 		_classCallCheck(this, DataComponent);
 
-		++cov_t26kee1gv.f[0];
-		++cov_t26kee1gv.s[7];
+		cov_t26kee1gv.f[0]++;
+		cov_t26kee1gv.s[7]++;
 
 		var _this = _possibleConstructorReturn(this, (DataComponent.__proto__ || Object.getPrototypeOf(DataComponent)).call(this, props, state));
 
 		_this.handleStartAnimation = () => {
-			++cov_t26kee1gv.f[3];
+			cov_t26kee1gv.f[3]++;
 
-			const duration = (++cov_t26kee1gv.s[23], _this.props.isRapid ? (++cov_t26kee1gv.b[12][0], 0) : (++cov_t26kee1gv.b[12][1], 0.4));
+			const duration = (cov_t26kee1gv.s[23]++, _this.props.isRapid ? (cov_t26kee1gv.b[12][0]++, 0) : (cov_t26kee1gv.b[12][1]++, 0.4));
 
-			++cov_t26kee1gv.s[24];
+			cov_t26kee1gv.s[24]++;
 			_this.animation = _this.addAnimation(({ target }) => {
-				++cov_t26kee1gv.f[4];
-				++cov_t26kee1gv.s[25];
+				cov_t26kee1gv.f[4]++;
+				cov_t26kee1gv.s[25]++;
 				return TweenLite.to(target, duration, Object.assign({
 					transformOrigin: 'center center',
 					ease: Power0.easeNone,
 					onComplete: () => {
-						++cov_t26kee1gv.f[5];
-						++cov_t26kee1gv.s[26];
+						cov_t26kee1gv.f[5]++;
+						cov_t26kee1gv.s[26]++;
 
 						setTimeout(() => {
-							++cov_t26kee1gv.f[6];
-							++cov_t26kee1gv.s[27];
+							cov_t26kee1gv.f[6]++;
+							cov_t26kee1gv.s[27]++;
 
 							_this.props.onAnimationComplete(_this.props.data);
 						}, 0);
@@ -15715,43 +15715,43 @@ let DataComponent = function (_React$Component) {
 		};
 
 		_this.handleStopAnimation = () => {
-			++cov_t26kee1gv.f[7];
-			++cov_t26kee1gv.s[28];
+			cov_t26kee1gv.f[7]++;
+			cov_t26kee1gv.s[28]++;
 
 			_this.animation.pause();
 		};
 
 		_this.handleStartErasion = () => {
-			++cov_t26kee1gv.f[8];
-			++cov_t26kee1gv.s[29];
+			cov_t26kee1gv.f[8]++;
+			cov_t26kee1gv.s[29]++;
 
 			if (_this.animation) {
-				++cov_t26kee1gv.b[13][0];
-				++cov_t26kee1gv.s[30];
+				cov_t26kee1gv.b[13][0]++;
+				cov_t26kee1gv.s[30]++;
 
 				_this.animation.pause();
 			} else {
-				++cov_t26kee1gv.b[13][1];
+				cov_t26kee1gv.b[13][1]++;
 			}
 
-			const duration = (++cov_t26kee1gv.s[31], _this.props.isRapid ? (++cov_t26kee1gv.b[14][0], 0) : (++cov_t26kee1gv.b[14][1], 0.4));
+			const duration = (cov_t26kee1gv.s[31]++, _this.props.isRapid ? (cov_t26kee1gv.b[14][0]++, 0) : (cov_t26kee1gv.b[14][1]++, 0.4));
 
-			++cov_t26kee1gv.s[32];
+			cov_t26kee1gv.s[32]++;
 			_this.erasion = _this.addAnimation(({ target }) => {
-				++cov_t26kee1gv.f[9];
-				++cov_t26kee1gv.s[33];
+				cov_t26kee1gv.f[9]++;
+				cov_t26kee1gv.s[33]++;
 				return TweenLite.to(target, duration, Object.assign({
 					transformOrigin: 'center center',
 					ease: Power0.easeNone,
 					scale: 2,
 					opacity: 0,
 					onComplete: () => {
-						++cov_t26kee1gv.f[10];
-						++cov_t26kee1gv.s[34];
+						cov_t26kee1gv.f[10]++;
+						cov_t26kee1gv.s[34]++;
 
 						setTimeout(() => {
-							++cov_t26kee1gv.f[11];
-							++cov_t26kee1gv.s[35];
+							cov_t26kee1gv.f[11]++;
+							cov_t26kee1gv.s[35]++;
 
 							_this.props.onEraseAnimationComplete(_this.props.data);
 						}, 0);
@@ -15761,216 +15761,216 @@ let DataComponent = function (_React$Component) {
 		};
 
 		_this.handleStopErasion = () => {
-			++cov_t26kee1gv.f[12];
-			++cov_t26kee1gv.s[36];
+			cov_t26kee1gv.f[12]++;
+			cov_t26kee1gv.s[36]++;
 
 			_this.erasion.pause();
 		};
 
 		_this.handleStartRapid = () => {
-			++cov_t26kee1gv.f[13];
-			++cov_t26kee1gv.s[37];
+			cov_t26kee1gv.f[13]++;
+			cov_t26kee1gv.s[37]++;
 
 			if (_this.animation) {
-				++cov_t26kee1gv.b[15][0];
-				++cov_t26kee1gv.s[38];
+				cov_t26kee1gv.b[15][0]++;
+				cov_t26kee1gv.s[38]++;
 
 				_this.animation.seek(_this.animation.duration(), false);
 			} else {
-				++cov_t26kee1gv.b[15][1];
+				cov_t26kee1gv.b[15][1]++;
 			}
 
-			++cov_t26kee1gv.s[39];
+			cov_t26kee1gv.s[39]++;
 			if (_this.erasion) {
-				++cov_t26kee1gv.b[16][0];
-				++cov_t26kee1gv.s[40];
+				cov_t26kee1gv.b[16][0]++;
+				cov_t26kee1gv.s[40]++;
 
 				_this.erasion.seek(_this.erasion.duration(), false);
 			} else {
-				++cov_t26kee1gv.b[16][1];
+				cov_t26kee1gv.b[16][1]++;
 			}
 		};
 
 		_this.handleMeasureValue = dimensions => {
-			++cov_t26kee1gv.f[14];
-			++cov_t26kee1gv.s[41];
+			cov_t26kee1gv.f[14]++;
+			cov_t26kee1gv.s[41]++;
 
 			if (!_this.props.isErasing) {
-				++cov_t26kee1gv.b[17][0];
-				++cov_t26kee1gv.s[42];
+				cov_t26kee1gv.b[17][0]++;
+				cov_t26kee1gv.s[42]++;
 
 				_this.setState({
 					valueDimensions: dimensions.bounds
 				});
 			} else {
-				++cov_t26kee1gv.b[17][1];
+				cov_t26kee1gv.b[17][1]++;
 			}
 		};
 
 		_this.getAnimationProperties = () => {
-			++cov_t26kee1gv.f[15];
-			++cov_t26kee1gv.s[43];
+			cov_t26kee1gv.f[15]++;
+			cov_t26kee1gv.s[43]++;
 
 			if (_this.props.isInward) {
-				++cov_t26kee1gv.b[18][0];
-				++cov_t26kee1gv.s[44];
+				cov_t26kee1gv.b[18][0]++;
+				cov_t26kee1gv.s[44]++;
 
 				if (_this.props.direction === 'top') {
-					++cov_t26kee1gv.b[19][0];
-					++cov_t26kee1gv.s[45];
+					cov_t26kee1gv.b[19][0]++;
+					cov_t26kee1gv.s[45]++;
 
 					return { y: `+=${BLOCK_SIZE / 2}` };
 				} else {
-					++cov_t26kee1gv.b[19][1];
+					cov_t26kee1gv.b[19][1]++;
 				}
 
-				++cov_t26kee1gv.s[46];
+				cov_t26kee1gv.s[46]++;
 				if (_this.props.direction === 'right') {
-					++cov_t26kee1gv.b[20][0];
-					++cov_t26kee1gv.s[47];
+					cov_t26kee1gv.b[20][0]++;
+					cov_t26kee1gv.s[47]++;
 
 					return { x: `-=${BLOCK_SIZE / 2}` };
 				} else {
-					++cov_t26kee1gv.b[20][1];
+					cov_t26kee1gv.b[20][1]++;
 				}
 
-				++cov_t26kee1gv.s[48];
+				cov_t26kee1gv.s[48]++;
 				if (_this.props.direction === 'left') {
-					++cov_t26kee1gv.b[21][0];
-					++cov_t26kee1gv.s[49];
+					cov_t26kee1gv.b[21][0]++;
+					cov_t26kee1gv.s[49]++;
 
 					return { x: `+=${BLOCK_SIZE / 2}` };
 				} else {
-					++cov_t26kee1gv.b[21][1];
+					cov_t26kee1gv.b[21][1]++;
 				}
 
-				++cov_t26kee1gv.s[50];
+				cov_t26kee1gv.s[50]++;
 				assert(_this.props.direction === 'bottom');
-				++cov_t26kee1gv.s[51];
+				cov_t26kee1gv.s[51]++;
 				return { y: `-=${BLOCK_SIZE / 2}` };
 			} else {
-				++cov_t26kee1gv.b[18][1];
+				cov_t26kee1gv.b[18][1]++;
 			}
 
-			++cov_t26kee1gv.s[52];
+			cov_t26kee1gv.s[52]++;
 			if (_this.props.direction === 'top') {
-				++cov_t26kee1gv.b[22][0];
-				++cov_t26kee1gv.s[53];
+				cov_t26kee1gv.b[22][0]++;
+				cov_t26kee1gv.s[53]++;
 
 				return { y: `-=${BLOCK_SIZE / 2}` };
 			} else {
-				++cov_t26kee1gv.b[22][1];
+				cov_t26kee1gv.b[22][1]++;
 			}
 
-			++cov_t26kee1gv.s[54];
+			cov_t26kee1gv.s[54]++;
 			if (_this.props.direction === 'right') {
-				++cov_t26kee1gv.b[23][0];
-				++cov_t26kee1gv.s[55];
+				cov_t26kee1gv.b[23][0]++;
+				cov_t26kee1gv.s[55]++;
 
 				return { x: `+=${BLOCK_SIZE / 2}` };
 			} else {
-				++cov_t26kee1gv.b[23][1];
+				cov_t26kee1gv.b[23][1]++;
 			}
 
-			++cov_t26kee1gv.s[56];
+			cov_t26kee1gv.s[56]++;
 			if (_this.props.direction === 'left') {
-				++cov_t26kee1gv.b[24][0];
-				++cov_t26kee1gv.s[57];
+				cov_t26kee1gv.b[24][0]++;
+				cov_t26kee1gv.s[57]++;
 
 				return { x: `-=${BLOCK_SIZE / 2}` };
 			} else {
-				++cov_t26kee1gv.b[24][1];
+				cov_t26kee1gv.b[24][1]++;
 			}
 
-			++cov_t26kee1gv.s[58];
+			cov_t26kee1gv.s[58]++;
 			assert(_this.props.direction === 'bottom');
-			++cov_t26kee1gv.s[59];
+			cov_t26kee1gv.s[59]++;
 			return { y: `+=${BLOCK_SIZE / 2}` };
 		};
 
 		_this.getDisplayValue = () => {
-			++cov_t26kee1gv.f[16];
-			++cov_t26kee1gv.s[60];
+			cov_t26kee1gv.f[16]++;
+			cov_t26kee1gv.s[60]++;
 
 			if (_this.props.value === Infinity) {
-				++cov_t26kee1gv.b[25][0];
-				++cov_t26kee1gv.s[61];
+				cov_t26kee1gv.b[25][0]++;
+				cov_t26kee1gv.s[61]++;
 
 				return '∞';
 			} else {
-				++cov_t26kee1gv.b[25][1];
+				cov_t26kee1gv.b[25][1]++;
 			}
 
-			++cov_t26kee1gv.s[62];
+			cov_t26kee1gv.s[62]++;
 			if (_this.props.value === -Infinity) {
-				++cov_t26kee1gv.b[26][0];
-				++cov_t26kee1gv.s[63];
+				cov_t26kee1gv.b[26][0]++;
+				cov_t26kee1gv.s[63]++;
 
 				return '-∞';
 			} else {
-				++cov_t26kee1gv.b[26][1];
+				cov_t26kee1gv.b[26][1]++;
 			}
 
-			++cov_t26kee1gv.s[64];
+			cov_t26kee1gv.s[64]++;
 			return _this.props.value.toString();
 		};
 
 		_this.getInitialTransform = () => {
-			++cov_t26kee1gv.f[17];
-			++cov_t26kee1gv.s[65];
+			cov_t26kee1gv.f[17]++;
+			cov_t26kee1gv.s[65]++;
 
 			if (_this.props.isInward) {
-				++cov_t26kee1gv.b[27][0];
-				++cov_t26kee1gv.s[66];
+				cov_t26kee1gv.b[27][0]++;
+				cov_t26kee1gv.s[66]++;
 
 				if (_this.props.direction === 'top') {
-					++cov_t26kee1gv.b[28][0];
-					++cov_t26kee1gv.s[67];
+					cov_t26kee1gv.b[28][0]++;
+					cov_t26kee1gv.s[67]++;
 
 					return `translate(${BLOCK_SIZE / 2}, 0)`;
 				} else {
-					++cov_t26kee1gv.b[28][1];
+					cov_t26kee1gv.b[28][1]++;
 				}
 
-				++cov_t26kee1gv.s[68];
+				cov_t26kee1gv.s[68]++;
 				if (_this.props.direction === 'right') {
-					++cov_t26kee1gv.b[29][0];
-					++cov_t26kee1gv.s[69];
+					cov_t26kee1gv.b[29][0]++;
+					cov_t26kee1gv.s[69]++;
 
 					return `translate(${BLOCK_SIZE}, ${BLOCK_SIZE / 2})`;
 				} else {
-					++cov_t26kee1gv.b[29][1];
+					cov_t26kee1gv.b[29][1]++;
 				}
 
-				++cov_t26kee1gv.s[70];
+				cov_t26kee1gv.s[70]++;
 				if (_this.props.direction === 'left') {
-					++cov_t26kee1gv.b[30][0];
-					++cov_t26kee1gv.s[71];
+					cov_t26kee1gv.b[30][0]++;
+					cov_t26kee1gv.s[71]++;
 
 					return `translate(0, ${BLOCK_SIZE / 2})`;
 				} else {
-					++cov_t26kee1gv.b[30][1];
+					cov_t26kee1gv.b[30][1]++;
 				}
 
-				++cov_t26kee1gv.s[72];
+				cov_t26kee1gv.s[72]++;
 				assert(_this.props.direction === 'bottom');
-				++cov_t26kee1gv.s[73];
+				cov_t26kee1gv.s[73]++;
 				return `translate(${BLOCK_SIZE / 2}, ${BLOCK_SIZE})`;
 			} else {
-				++cov_t26kee1gv.b[27][1];
+				cov_t26kee1gv.b[27][1]++;
 			}
 
-			++cov_t26kee1gv.s[74];
+			cov_t26kee1gv.s[74]++;
 			return `translate(${BLOCK_SIZE / 2}, ${BLOCK_SIZE / 2})`;
 		};
 
 		_this.getRectangleWidth = () => {
-			++cov_t26kee1gv.f[18];
-			++cov_t26kee1gv.s[75];
-			return (++cov_t26kee1gv.b[32][0], _this.state.valueDimensions !== null) && (++cov_t26kee1gv.b[32][1], _this.props.viewBoxScale !== null) ? (++cov_t26kee1gv.b[31][0], _this.state.valueDimensions.width / _this.props.viewBoxScale + 4) : (++cov_t26kee1gv.b[31][1], _this.getDisplayValue().length * 6 + 4);
+			cov_t26kee1gv.f[18]++;
+			cov_t26kee1gv.s[75]++;
+			return (cov_t26kee1gv.b[32][0]++, _this.state.valueDimensions !== null) && (cov_t26kee1gv.b[32][1]++, _this.props.viewBoxScale !== null) ? (cov_t26kee1gv.b[31][0]++, _this.state.valueDimensions.width / _this.props.viewBoxScale + 4) : (cov_t26kee1gv.b[31][1]++, _this.getDisplayValue().length * 6 + 4);
 		};
 
-		++cov_t26kee1gv.s[8];
+		cov_t26kee1gv.s[8]++;
 
 
 		_this.state = {
@@ -15982,88 +15982,88 @@ let DataComponent = function (_React$Component) {
 	_createClass(DataComponent, [{
 		key: 'componentDidMount',
 		value: function componentDidMount() {
-			++cov_t26kee1gv.f[1];
-			++cov_t26kee1gv.s[9];
+			cov_t26kee1gv.f[1]++;
+			cov_t26kee1gv.s[9]++;
 
 			if (this.props.isAnimating) {
-				++cov_t26kee1gv.b[0][0];
-				++cov_t26kee1gv.s[10];
+				cov_t26kee1gv.b[0][0]++;
+				cov_t26kee1gv.s[10]++;
 
 				this.handleStartAnimation();
 			} else {
-				++cov_t26kee1gv.b[0][1];
+				cov_t26kee1gv.b[0][1]++;
 			}
 
-			++cov_t26kee1gv.s[11];
+			cov_t26kee1gv.s[11]++;
 			if (this.props.isErasing) {
-				++cov_t26kee1gv.b[1][0];
-				++cov_t26kee1gv.s[12];
+				cov_t26kee1gv.b[1][0]++;
+				cov_t26kee1gv.s[12]++;
 
 				this.handleStartErasion();
 			} else {
-				++cov_t26kee1gv.b[1][1];
+				cov_t26kee1gv.b[1][1]++;
 			}
 		}
 	}, {
 		key: 'componentWillReceiveProps',
 		value: function componentWillReceiveProps(nextProps) {
-			++cov_t26kee1gv.f[2];
-			++cov_t26kee1gv.s[13];
+			cov_t26kee1gv.f[2]++;
+			cov_t26kee1gv.s[13]++;
 
-			if ((++cov_t26kee1gv.b[3][0], !this.props.isAnimating) && (++cov_t26kee1gv.b[3][1], nextProps.isAnimating)) {
-				++cov_t26kee1gv.b[2][0];
-				++cov_t26kee1gv.s[14];
+			if ((cov_t26kee1gv.b[3][0]++, !this.props.isAnimating) && (cov_t26kee1gv.b[3][1]++, nextProps.isAnimating)) {
+				cov_t26kee1gv.b[2][0]++;
+				cov_t26kee1gv.s[14]++;
 
 				this.handleStartAnimation();
 			} else {
-				++cov_t26kee1gv.b[2][1];
+				cov_t26kee1gv.b[2][1]++;
 			}
 
-			++cov_t26kee1gv.s[15];
-			if ((++cov_t26kee1gv.b[5][0], this.props.isAnimating) && (++cov_t26kee1gv.b[5][1], !nextProps.isAnimating)) {
-				++cov_t26kee1gv.b[4][0];
-				++cov_t26kee1gv.s[16];
+			cov_t26kee1gv.s[15]++;
+			if ((cov_t26kee1gv.b[5][0]++, this.props.isAnimating) && (cov_t26kee1gv.b[5][1]++, !nextProps.isAnimating)) {
+				cov_t26kee1gv.b[4][0]++;
+				cov_t26kee1gv.s[16]++;
 
 				this.handleStopAnimation();
 			} else {
-				++cov_t26kee1gv.b[4][1];
+				cov_t26kee1gv.b[4][1]++;
 			}
 
-			++cov_t26kee1gv.s[17];
-			if ((++cov_t26kee1gv.b[7][0], !this.props.isErasing) && (++cov_t26kee1gv.b[7][1], nextProps.isErasing)) {
-				++cov_t26kee1gv.b[6][0];
-				++cov_t26kee1gv.s[18];
+			cov_t26kee1gv.s[17]++;
+			if ((cov_t26kee1gv.b[7][0]++, !this.props.isErasing) && (cov_t26kee1gv.b[7][1]++, nextProps.isErasing)) {
+				cov_t26kee1gv.b[6][0]++;
+				cov_t26kee1gv.s[18]++;
 
 				this.handleStartErasion();
 			} else {
-				++cov_t26kee1gv.b[6][1];
+				cov_t26kee1gv.b[6][1]++;
 			}
 
-			++cov_t26kee1gv.s[19];
-			if ((++cov_t26kee1gv.b[9][0], this.props.isErasing) && (++cov_t26kee1gv.b[9][1], !nextProps.isErasing)) {
-				++cov_t26kee1gv.b[8][0];
-				++cov_t26kee1gv.s[20];
+			cov_t26kee1gv.s[19]++;
+			if ((cov_t26kee1gv.b[9][0]++, this.props.isErasing) && (cov_t26kee1gv.b[9][1]++, !nextProps.isErasing)) {
+				cov_t26kee1gv.b[8][0]++;
+				cov_t26kee1gv.s[20]++;
 
 				this.handleStopErasion();
 			} else {
-				++cov_t26kee1gv.b[8][1];
+				cov_t26kee1gv.b[8][1]++;
 			}
 
-			++cov_t26kee1gv.s[21];
-			if ((++cov_t26kee1gv.b[11][0], !this.props.isRapid) && (++cov_t26kee1gv.b[11][1], nextProps.isRapid)) {
-				++cov_t26kee1gv.b[10][0];
-				++cov_t26kee1gv.s[22];
+			cov_t26kee1gv.s[21]++;
+			if ((cov_t26kee1gv.b[11][0]++, !this.props.isRapid) && (cov_t26kee1gv.b[11][1]++, nextProps.isRapid)) {
+				cov_t26kee1gv.b[10][0]++;
+				cov_t26kee1gv.s[22]++;
 
 				this.handleStartRapid();
 			} else {
-				++cov_t26kee1gv.b[10][1];
+				cov_t26kee1gv.b[10][1]++;
 			}
 		}
 	}, {
 		key: 'render',
 		value: function render() {
-			++cov_t26kee1gv.f[19];
-			++cov_t26kee1gv.s[76];
+			cov_t26kee1gv.f[19]++;
+			cov_t26kee1gv.s[76]++;
 
 			return React.createElement(
 				'g',
@@ -16083,8 +16083,8 @@ let DataComponent = function (_React$Component) {
 						bounds: true
 					},
 					({ measureRef }) => {
-						++cov_t26kee1gv.f[20];
-						++cov_t26kee1gv.s[77];
+						cov_t26kee1gv.f[20]++;
+						cov_t26kee1gv.s[77]++;
 						return React.createElement(
 							'text',
 							{
@@ -16124,7 +16124,7 @@ DataComponent.propTypes = {
 DataComponent.defaultProps = {
 	viewBoxScale: null
 };
-++cov_t26kee1gv.s[78];
+cov_t26kee1gv.s[78]++;
 
 
 module.exports = GSAP.default()(DataComponent);
@@ -18836,9 +18836,9 @@ var cov_r1c3k38rd = function () {
 	return coverage[path] = coverageData;
 }();
 
-const util = (++cov_r1c3k38rd.s[0], __webpack_require__(0));
+const util = (cov_r1c3k38rd.s[0]++, __webpack_require__(0));
 
-++cov_r1c3k38rd.s[1];
+cov_r1c3k38rd.s[1]++;
 module.exports = {
 	empty: {
 		type: 'empty',
@@ -18927,8 +18927,8 @@ module.exports = {
 	'times-2': {
 		type: 'calc',
 		func: n => {
-			++cov_r1c3k38rd.f[0];
-			++cov_r1c3k38rd.s[2];
+			cov_r1c3k38rd.f[0]++;
+			cov_r1c3k38rd.s[2]++;
 			return n * 2;
 		},
 		io: {
@@ -18941,8 +18941,8 @@ module.exports = {
 	'times-3': {
 		type: 'calc',
 		func: n => {
-			++cov_r1c3k38rd.f[1];
-			++cov_r1c3k38rd.s[3];
+			cov_r1c3k38rd.f[1]++;
+			cov_r1c3k38rd.s[3]++;
 			return n * 3;
 		},
 		io: {
@@ -18955,8 +18955,8 @@ module.exports = {
 	'times-10': {
 		type: 'calc',
 		func: n => {
-			++cov_r1c3k38rd.f[2];
-			++cov_r1c3k38rd.s[4];
+			cov_r1c3k38rd.f[2]++;
+			cov_r1c3k38rd.s[4]++;
 			return n * 10;
 		},
 		io: {
@@ -18969,8 +18969,8 @@ module.exports = {
 	'add-3': {
 		type: 'calc',
 		func: n => {
-			++cov_r1c3k38rd.f[3];
-			++cov_r1c3k38rd.s[5];
+			cov_r1c3k38rd.f[3]++;
+			cov_r1c3k38rd.s[5]++;
 			return n + 3;
 		},
 		io: {
@@ -18983,8 +18983,8 @@ module.exports = {
 	'plus-1': {
 		type: 'calc',
 		func: n => {
-			++cov_r1c3k38rd.f[4];
-			++cov_r1c3k38rd.s[6];
+			cov_r1c3k38rd.f[4]++;
+			cov_r1c3k38rd.s[6]++;
 			return n + 1;
 		},
 		io: {
@@ -18997,8 +18997,8 @@ module.exports = {
 	'plus-2': {
 		type: 'calc',
 		func: n => {
-			++cov_r1c3k38rd.f[5];
-			++cov_r1c3k38rd.s[7];
+			cov_r1c3k38rd.f[5]++;
+			cov_r1c3k38rd.s[7]++;
 			return n + 2;
 		},
 		io: {
@@ -19011,8 +19011,8 @@ module.exports = {
 	'minus-1': {
 		type: 'calc',
 		func: n => {
-			++cov_r1c3k38rd.f[6];
-			++cov_r1c3k38rd.s[8];
+			cov_r1c3k38rd.f[6]++;
+			cov_r1c3k38rd.s[8]++;
 			return n - 1;
 		},
 		io: {
@@ -19025,8 +19025,8 @@ module.exports = {
 	'div-2': {
 		type: 'calc',
 		func: n => {
-			++cov_r1c3k38rd.f[7];
-			++cov_r1c3k38rd.s[9];
+			cov_r1c3k38rd.f[7]++;
+			cov_r1c3k38rd.s[9]++;
 			return Math.round((n - n % 2) / 2);
 		},
 
@@ -19040,8 +19040,8 @@ module.exports = {
 	'div-3': {
 		type: 'calc',
 		func: n => {
-			++cov_r1c3k38rd.f[8];
-			++cov_r1c3k38rd.s[10];
+			cov_r1c3k38rd.f[8]++;
+			cov_r1c3k38rd.s[10]++;
 			return Math.round((n - n % 3) / 3);
 		},
 		io: {
@@ -19054,8 +19054,8 @@ module.exports = {
 	'div-10': {
 		type: 'calc',
 		func: n => {
-			++cov_r1c3k38rd.f[9];
-			++cov_r1c3k38rd.s[11];
+			cov_r1c3k38rd.f[9]++;
+			cov_r1c3k38rd.s[11]++;
 			return Math.round((n - n % 10) / 10);
 		},
 		io: {
@@ -19068,8 +19068,8 @@ module.exports = {
 	'minus-2': {
 		type: 'calc',
 		func: n => {
-			++cov_r1c3k38rd.f[10];
-			++cov_r1c3k38rd.s[12];
+			cov_r1c3k38rd.f[10]++;
+			cov_r1c3k38rd.s[12]++;
 			return n - 2;
 		},
 		io: {
@@ -19082,9 +19082,9 @@ module.exports = {
 	log10: {
 		type: 'calc',
 		func: n => {
-			++cov_r1c3k38rd.f[11];
-			++cov_r1c3k38rd.s[13];
-			return n === 0 ? (++cov_r1c3k38rd.b[0][0], -Infinity) : (++cov_r1c3k38rd.b[0][1], util.log(10, Math.abs(n)));
+			cov_r1c3k38rd.f[11]++;
+			cov_r1c3k38rd.s[13]++;
+			return n === 0 ? (cov_r1c3k38rd.b[0][0]++, -Infinity) : (cov_r1c3k38rd.b[0][1]++, util.log(10, Math.abs(n)));
 		},
 		io: {
 			plugs: ['top', 'bottom']
@@ -19096,9 +19096,9 @@ module.exports = {
 	log2: {
 		type: 'calc',
 		func: n => {
-			++cov_r1c3k38rd.f[12];
-			++cov_r1c3k38rd.s[14];
-			return n === 0 ? (++cov_r1c3k38rd.b[1][0], -Infinity) : (++cov_r1c3k38rd.b[1][1], util.log(2, Math.abs(n)));
+			cov_r1c3k38rd.f[12]++;
+			cov_r1c3k38rd.s[14]++;
+			return n === 0 ? (cov_r1c3k38rd.b[1][0]++, -Infinity) : (cov_r1c3k38rd.b[1][1]++, util.log(2, Math.abs(n)));
 		},
 		io: {
 			plugs: ['top', 'bottom']
@@ -19110,8 +19110,8 @@ module.exports = {
 	'const-0': {
 		type: 'calc',
 		func: () => {
-			++cov_r1c3k38rd.f[13];
-			++cov_r1c3k38rd.s[15];
+			cov_r1c3k38rd.f[13]++;
+			cov_r1c3k38rd.s[15]++;
 			return 0;
 		},
 		io: {
@@ -19124,8 +19124,8 @@ module.exports = {
 	'const-1': {
 		type: 'calc',
 		func: () => {
-			++cov_r1c3k38rd.f[14];
-			++cov_r1c3k38rd.s[16];
+			cov_r1c3k38rd.f[14]++;
+			cov_r1c3k38rd.s[16]++;
 			return 1;
 		},
 		io: {
@@ -19138,8 +19138,8 @@ module.exports = {
 	'const-2': {
 		type: 'calc',
 		func: () => {
-			++cov_r1c3k38rd.f[15];
-			++cov_r1c3k38rd.s[17];
+			cov_r1c3k38rd.f[15]++;
+			cov_r1c3k38rd.s[17]++;
 			return 2;
 		},
 		io: {
@@ -19152,8 +19152,8 @@ module.exports = {
 	'const-3': {
 		type: 'calc',
 		func: () => {
-			++cov_r1c3k38rd.f[16];
-			++cov_r1c3k38rd.s[18];
+			cov_r1c3k38rd.f[16]++;
+			cov_r1c3k38rd.s[18]++;
 			return 3;
 		},
 		io: {
@@ -19166,8 +19166,8 @@ module.exports = {
 	'const-10': {
 		type: 'calc',
 		func: () => {
-			++cov_r1c3k38rd.f[17];
-			++cov_r1c3k38rd.s[19];
+			cov_r1c3k38rd.f[17]++;
+			cov_r1c3k38rd.s[19]++;
 			return 10;
 		},
 		io: {
@@ -19180,8 +19180,8 @@ module.exports = {
 	add: {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[18];
-			++cov_r1c3k38rd.s[20];
+			cov_r1c3k38rd.f[18]++;
+			cov_r1c3k38rd.s[20]++;
 			return a + b;
 		},
 		io: {
@@ -19193,8 +19193,8 @@ module.exports = {
 	sub: {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[19];
-			++cov_r1c3k38rd.s[21];
+			cov_r1c3k38rd.f[19]++;
+			cov_r1c3k38rd.s[21]++;
 			return a - b;
 		},
 		io: {
@@ -19206,8 +19206,8 @@ module.exports = {
 	mul: {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[20];
-			++cov_r1c3k38rd.s[22];
+			cov_r1c3k38rd.f[20]++;
+			cov_r1c3k38rd.s[22]++;
 			return a * b;
 		},
 		io: {
@@ -19219,18 +19219,18 @@ module.exports = {
 	div: {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[21];
-			++cov_r1c3k38rd.s[23];
+			cov_r1c3k38rd.f[21]++;
+			cov_r1c3k38rd.s[23]++;
 
 			if (b === 0) {
-				++cov_r1c3k38rd.b[2][0];
-				++cov_r1c3k38rd.s[24];
+				cov_r1c3k38rd.b[2][0]++;
+				cov_r1c3k38rd.s[24]++;
 
 				return a / b;
 			} else {
-				++cov_r1c3k38rd.b[2][1];
+				cov_r1c3k38rd.b[2][1]++;
 			}
-			++cov_r1c3k38rd.s[25];
+			cov_r1c3k38rd.s[25]++;
 			return Math.round((a - a % b) / b);
 		},
 		io: {
@@ -19242,8 +19242,8 @@ module.exports = {
 	mod: {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[22];
-			++cov_r1c3k38rd.s[26];
+			cov_r1c3k38rd.f[22]++;
+			cov_r1c3k38rd.s[26]++;
 			return a % b;
 		},
 		io: {
@@ -19255,18 +19255,18 @@ module.exports = {
 	pow: {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[23];
-			++cov_r1c3k38rd.s[27];
+			cov_r1c3k38rd.f[23]++;
+			cov_r1c3k38rd.s[27]++;
 
-			if ((++cov_r1c3k38rd.b[4][0], a === 1) && ((++cov_r1c3k38rd.b[4][1], b === Infinity) || (++cov_r1c3k38rd.b[4][2], b === -Infinity))) {
-				++cov_r1c3k38rd.b[3][0];
-				++cov_r1c3k38rd.s[28];
+			if ((cov_r1c3k38rd.b[4][0]++, a === 1) && ((cov_r1c3k38rd.b[4][1]++, b === Infinity) || (cov_r1c3k38rd.b[4][2]++, b === -Infinity))) {
+				cov_r1c3k38rd.b[3][0]++;
+				cov_r1c3k38rd.s[28]++;
 
 				return 1;
 			} else {
-				++cov_r1c3k38rd.b[3][1];
+				cov_r1c3k38rd.b[3][1]++;
 			}
-			++cov_r1c3k38rd.s[29];
+			cov_r1c3k38rd.s[29]++;
 			return util.floorTowardsZero(Math.pow(a, b));
 		},
 		io: {
@@ -19278,9 +19278,9 @@ module.exports = {
 	log: {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[24];
-			++cov_r1c3k38rd.s[30];
-			return b === 0 ? (++cov_r1c3k38rd.b[5][0], -Infinity) : (++cov_r1c3k38rd.b[5][1], util.log(Math.abs(a), Math.abs(b)));
+			cov_r1c3k38rd.f[24]++;
+			cov_r1c3k38rd.s[30]++;
+			return b === 0 ? (cov_r1c3k38rd.b[5][0]++, -Infinity) : (cov_r1c3k38rd.b[5][1]++, util.log(Math.abs(a), Math.abs(b)));
 		},
 		io: {
 			in: ['left', 'right'],
@@ -19291,9 +19291,9 @@ module.exports = {
 	sqrt: {
 		type: 'calc',
 		func: n => {
-			++cov_r1c3k38rd.f[25];
-			++cov_r1c3k38rd.s[31];
-			return n < 0 ? (++cov_r1c3k38rd.b[6][0], 0) : (++cov_r1c3k38rd.b[6][1], Math.floor(Math.sqrt(n)));
+			cov_r1c3k38rd.f[25]++;
+			cov_r1c3k38rd.s[31]++;
+			return n < 0 ? (cov_r1c3k38rd.b[6][0]++, 0) : (cov_r1c3k38rd.b[6][1]++, Math.floor(Math.sqrt(n)));
 		},
 		io: {
 			plugs: ['top', 'bottom']
@@ -19305,8 +19305,8 @@ module.exports = {
 	'bitshift-left': {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[26];
-			++cov_r1c3k38rd.s[32];
+			cov_r1c3k38rd.f[26]++;
+			cov_r1c3k38rd.s[32]++;
 			return a << b;
 		},
 		io: {
@@ -19318,8 +19318,8 @@ module.exports = {
 	'bitshift-right': {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[27];
-			++cov_r1c3k38rd.s[33];
+			cov_r1c3k38rd.f[27]++;
+			cov_r1c3k38rd.s[33]++;
 			return a >> b;
 		},
 		io: {
@@ -19331,8 +19331,8 @@ module.exports = {
 	'bitwise-and': {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[28];
-			++cov_r1c3k38rd.s[34];
+			cov_r1c3k38rd.f[28]++;
+			cov_r1c3k38rd.s[34]++;
 			return a & b;
 		},
 		io: {
@@ -19344,8 +19344,8 @@ module.exports = {
 	'bitwise-or': {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[29];
-			++cov_r1c3k38rd.s[35];
+			cov_r1c3k38rd.f[29]++;
+			cov_r1c3k38rd.s[35]++;
 			return a | b;
 		},
 		io: {
@@ -19357,8 +19357,8 @@ module.exports = {
 	'bitwise-xor': {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[30];
-			++cov_r1c3k38rd.s[36];
+			cov_r1c3k38rd.f[30]++;
+			cov_r1c3k38rd.s[36]++;
 			return a ^ b;
 		},
 		io: {
@@ -19370,9 +19370,9 @@ module.exports = {
 	equal: {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[31];
-			++cov_r1c3k38rd.s[37];
-			return a === b ? (++cov_r1c3k38rd.b[7][0], 1) : (++cov_r1c3k38rd.b[7][1], 0);
+			cov_r1c3k38rd.f[31]++;
+			cov_r1c3k38rd.s[37]++;
+			return a === b ? (cov_r1c3k38rd.b[7][0]++, 1) : (cov_r1c3k38rd.b[7][1]++, 0);
 		},
 		io: {
 			in: ['left', 'right'],
@@ -19384,9 +19384,9 @@ module.exports = {
 		type: 'calc2',
 		// eslint-disable-next-line no-negated-condition
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[32];
-			++cov_r1c3k38rd.s[38];
-			return a !== b ? (++cov_r1c3k38rd.b[8][0], 1) : (++cov_r1c3k38rd.b[8][1], 0);
+			cov_r1c3k38rd.f[32]++;
+			cov_r1c3k38rd.s[38]++;
+			return a !== b ? (cov_r1c3k38rd.b[8][0]++, 1) : (cov_r1c3k38rd.b[8][1]++, 0);
 		},
 		io: {
 			in: ['left', 'right'],
@@ -19397,9 +19397,9 @@ module.exports = {
 	gt: {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[33];
-			++cov_r1c3k38rd.s[39];
-			return a > b ? (++cov_r1c3k38rd.b[9][0], 1) : (++cov_r1c3k38rd.b[9][1], 0);
+			cov_r1c3k38rd.f[33]++;
+			cov_r1c3k38rd.s[39]++;
+			return a > b ? (cov_r1c3k38rd.b[9][0]++, 1) : (cov_r1c3k38rd.b[9][1]++, 0);
 		},
 		io: {
 			in: ['left', 'right'],
@@ -19410,9 +19410,9 @@ module.exports = {
 	geqq: {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[34];
-			++cov_r1c3k38rd.s[40];
-			return a >= b ? (++cov_r1c3k38rd.b[10][0], 1) : (++cov_r1c3k38rd.b[10][1], 0);
+			cov_r1c3k38rd.f[34]++;
+			cov_r1c3k38rd.s[40]++;
+			return a >= b ? (cov_r1c3k38rd.b[10][0]++, 1) : (cov_r1c3k38rd.b[10][1]++, 0);
 		},
 		io: {
 			in: ['left', 'right'],
@@ -19423,9 +19423,9 @@ module.exports = {
 	lt: {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[35];
-			++cov_r1c3k38rd.s[41];
-			return a < b ? (++cov_r1c3k38rd.b[11][0], 1) : (++cov_r1c3k38rd.b[11][1], 0);
+			cov_r1c3k38rd.f[35]++;
+			cov_r1c3k38rd.s[41]++;
+			return a < b ? (cov_r1c3k38rd.b[11][0]++, 1) : (cov_r1c3k38rd.b[11][1]++, 0);
 		},
 		io: {
 			in: ['left', 'right'],
@@ -19436,9 +19436,9 @@ module.exports = {
 	leqq: {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[36];
-			++cov_r1c3k38rd.s[42];
-			return a <= b ? (++cov_r1c3k38rd.b[12][0], 1) : (++cov_r1c3k38rd.b[12][1], 0);
+			cov_r1c3k38rd.f[36]++;
+			cov_r1c3k38rd.s[42]++;
+			return a <= b ? (cov_r1c3k38rd.b[12][0]++, 1) : (cov_r1c3k38rd.b[12][1]++, 0);
 		},
 		io: {
 			in: ['left', 'right'],
@@ -19449,9 +19449,9 @@ module.exports = {
 	conditional: {
 		type: 'calc2',
 		func: (a, b, c) => {
-			++cov_r1c3k38rd.f[37];
-			++cov_r1c3k38rd.s[43];
-			return a ? (++cov_r1c3k38rd.b[13][0], b) : (++cov_r1c3k38rd.b[13][1], c);
+			cov_r1c3k38rd.f[37]++;
+			cov_r1c3k38rd.s[43]++;
+			return a ? (cov_r1c3k38rd.b[13][0]++, b) : (cov_r1c3k38rd.b[13][1]++, c);
 		},
 		io: {
 			in: ['top', 'left', 'right'],
@@ -19462,8 +19462,8 @@ module.exports = {
 	diode: {
 		type: 'calc2',
 		func: a => {
-			++cov_r1c3k38rd.f[38];
-			++cov_r1c3k38rd.s[44];
+			cov_r1c3k38rd.f[38]++;
+			cov_r1c3k38rd.s[44]++;
 			return a;
 		},
 		io: {
@@ -19476,10 +19476,10 @@ module.exports = {
 	'c-contact': {
 		type: 'calc-switch',
 		func: a => {
-			++cov_r1c3k38rd.f[39];
-			++cov_r1c3k38rd.s[45];
+			cov_r1c3k38rd.f[39]++;
+			cov_r1c3k38rd.s[45]++;
 			return {
-				directionIndex: a ? (++cov_r1c3k38rd.b[14][0], 1) : (++cov_r1c3k38rd.b[14][1], 0),
+				directionIndex: a ? (cov_r1c3k38rd.b[14][0]++, 1) : (cov_r1c3k38rd.b[14][1]++, 0),
 				value: 1
 			};
 		},
@@ -19493,10 +19493,10 @@ module.exports = {
 	transistor: {
 		type: 'calc-switch',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[40];
-			++cov_r1c3k38rd.s[46];
+			cov_r1c3k38rd.f[40]++;
+			cov_r1c3k38rd.s[46]++;
 			return {
-				directionIndex: a ? (++cov_r1c3k38rd.b[15][0], 1) : (++cov_r1c3k38rd.b[15][1], 0),
+				directionIndex: a ? (cov_r1c3k38rd.b[15][0]++, 1) : (cov_r1c3k38rd.b[15][1]++, 0),
 				value: b
 			};
 		},
@@ -19510,9 +19510,9 @@ module.exports = {
 	and: {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[41];
-			++cov_r1c3k38rd.s[47];
-			return (++cov_r1c3k38rd.b[17][0], a !== 0) && (++cov_r1c3k38rd.b[17][1], b !== 0) ? (++cov_r1c3k38rd.b[16][0], 1) : (++cov_r1c3k38rd.b[16][1], 0);
+			cov_r1c3k38rd.f[41]++;
+			cov_r1c3k38rd.s[47]++;
+			return (cov_r1c3k38rd.b[17][0]++, a !== 0) && (cov_r1c3k38rd.b[17][1]++, b !== 0) ? (cov_r1c3k38rd.b[16][0]++, 1) : (cov_r1c3k38rd.b[16][1]++, 0);
 		},
 		io: {
 			in: ['left', 'right'],
@@ -19523,9 +19523,9 @@ module.exports = {
 	or: {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[42];
-			++cov_r1c3k38rd.s[48];
-			return (++cov_r1c3k38rd.b[19][0], a !== 0) || (++cov_r1c3k38rd.b[19][1], b !== 0) ? (++cov_r1c3k38rd.b[18][0], 1) : (++cov_r1c3k38rd.b[18][1], 0);
+			cov_r1c3k38rd.f[42]++;
+			cov_r1c3k38rd.s[48]++;
+			return (cov_r1c3k38rd.b[19][0]++, a !== 0) || (cov_r1c3k38rd.b[19][1]++, b !== 0) ? (cov_r1c3k38rd.b[18][0]++, 1) : (cov_r1c3k38rd.b[18][1]++, 0);
 		},
 		io: {
 			in: ['left', 'right'],
@@ -19536,9 +19536,9 @@ module.exports = {
 	nand: {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[43];
-			++cov_r1c3k38rd.s[49];
-			return (++cov_r1c3k38rd.b[21][0], a !== 0) && (++cov_r1c3k38rd.b[21][1], b !== 0) ? (++cov_r1c3k38rd.b[20][0], 0) : (++cov_r1c3k38rd.b[20][1], 1);
+			cov_r1c3k38rd.f[43]++;
+			cov_r1c3k38rd.s[49]++;
+			return (cov_r1c3k38rd.b[21][0]++, a !== 0) && (cov_r1c3k38rd.b[21][1]++, b !== 0) ? (cov_r1c3k38rd.b[20][0]++, 0) : (cov_r1c3k38rd.b[20][1]++, 1);
 		},
 		io: {
 			in: ['left', 'right'],
@@ -19549,9 +19549,9 @@ module.exports = {
 	nor: {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[44];
-			++cov_r1c3k38rd.s[50];
-			return (++cov_r1c3k38rd.b[23][0], a !== 0) || (++cov_r1c3k38rd.b[23][1], b !== 0) ? (++cov_r1c3k38rd.b[22][0], 0) : (++cov_r1c3k38rd.b[22][1], 1);
+			cov_r1c3k38rd.f[44]++;
+			cov_r1c3k38rd.s[50]++;
+			return (cov_r1c3k38rd.b[23][0]++, a !== 0) || (cov_r1c3k38rd.b[23][1]++, b !== 0) ? (cov_r1c3k38rd.b[22][0]++, 0) : (cov_r1c3k38rd.b[22][1]++, 1);
 		},
 		io: {
 			in: ['left', 'right'],
@@ -19562,9 +19562,9 @@ module.exports = {
 	not: {
 		type: 'calc2',
 		func: a => {
-			++cov_r1c3k38rd.f[45];
-			++cov_r1c3k38rd.s[51];
-			return a === 0 ? (++cov_r1c3k38rd.b[24][0], 1) : (++cov_r1c3k38rd.b[24][1], 0);
+			cov_r1c3k38rd.f[45]++;
+			cov_r1c3k38rd.s[51]++;
+			return a === 0 ? (cov_r1c3k38rd.b[24][0]++, 1) : (cov_r1c3k38rd.b[24][1]++, 0);
 		},
 		io: {
 			in: ['top'],
@@ -19577,9 +19577,9 @@ module.exports = {
 	xor: {
 		type: 'calc2',
 		func: (a, b) => {
-			++cov_r1c3k38rd.f[46];
-			++cov_r1c3k38rd.s[52];
-			return a !== 0 ^ b !== 0 ? (++cov_r1c3k38rd.b[25][0], 1) : (++cov_r1c3k38rd.b[25][1], 0);
+			cov_r1c3k38rd.f[46]++;
+			cov_r1c3k38rd.s[52]++;
+			return a !== 0 ^ b !== 0 ? (cov_r1c3k38rd.b[25][0]++, 1) : (cov_r1c3k38rd.b[25][1]++, 0);
 		},
 		io: {
 			in: ['left', 'right'],
@@ -20339,9 +20339,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-const React = (++cov_1ad1ro6evu.s[0], __webpack_require__(1));
-const PropTypes = (++cov_1ad1ro6evu.s[1], __webpack_require__(3));
-const { trimAfter } = (++cov_1ad1ro6evu.s[2], __webpack_require__(0));
+const React = (cov_1ad1ro6evu.s[0]++, __webpack_require__(1));
+const PropTypes = (cov_1ad1ro6evu.s[1]++, __webpack_require__(3));
+const { trimAfter } = (cov_1ad1ro6evu.s[2]++, __webpack_require__(0));
 
 let IOComponent = function (_React$Component) {
 	_inherits(IOComponent, _React$Component);
@@ -20352,64 +20352,64 @@ let IOComponent = function (_React$Component) {
 		_classCallCheck(this, IOComponent);
 
 		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (IOComponent.__proto__ || Object.getPrototypeOf(IOComponent)).call(this, ...args)), _this), _this.getDisplayValue = () => {
-			++cov_1ad1ro6evu.f[0];
-			++cov_1ad1ro6evu.s[3];
+			cov_1ad1ro6evu.f[0]++;
+			cov_1ad1ro6evu.s[3]++;
 
 			if (Array.isArray(_this.props.value)) {
-				++cov_1ad1ro6evu.b[0][0];
-				++cov_1ad1ro6evu.s[4];
+				cov_1ad1ro6evu.b[0][0]++;
+				cov_1ad1ro6evu.s[4]++;
 
-				if ((++cov_1ad1ro6evu.b[2][0], _this.props.value.length === 1) && (++cov_1ad1ro6evu.b[2][1], _this.props.value[0] === null)) {
-					++cov_1ad1ro6evu.b[1][0];
-					++cov_1ad1ro6evu.s[5];
+				if ((cov_1ad1ro6evu.b[2][0]++, _this.props.value.length === 1) && (cov_1ad1ro6evu.b[2][1]++, _this.props.value[0] === null)) {
+					cov_1ad1ro6evu.b[1][0]++;
+					cov_1ad1ro6evu.s[5]++;
 
 					return '???';
 				} else {
-					++cov_1ad1ro6evu.b[1][1];
+					cov_1ad1ro6evu.b[1][1]++;
 				}
 
-				++cov_1ad1ro6evu.s[6];
+				cov_1ad1ro6evu.s[6]++;
 				return trimAfter(_this.props.value.map(value => {
-					++cov_1ad1ro6evu.f[1];
-					++cov_1ad1ro6evu.s[7];
+					cov_1ad1ro6evu.f[1]++;
+					cov_1ad1ro6evu.s[7]++;
 
 					if (value === null) {
-						++cov_1ad1ro6evu.b[3][0];
-						++cov_1ad1ro6evu.s[8];
+						cov_1ad1ro6evu.b[3][0]++;
+						cov_1ad1ro6evu.s[8]++;
 
 						return '?';
 					} else {
-						++cov_1ad1ro6evu.b[3][1];
+						cov_1ad1ro6evu.b[3][1]++;
 					}
 
-					++cov_1ad1ro6evu.s[9];
+					cov_1ad1ro6evu.s[9]++;
 					return value.toString();
 				}).join(','), 10);
 			} else {
-				++cov_1ad1ro6evu.b[0][1];
+				cov_1ad1ro6evu.b[0][1]++;
 			}
 
-			++cov_1ad1ro6evu.s[10];
-			if ((++cov_1ad1ro6evu.b[5][0], _this.props.nullable) && (++cov_1ad1ro6evu.b[5][1], _this.props.value === null)) {
-				++cov_1ad1ro6evu.b[4][0];
-				++cov_1ad1ro6evu.s[11];
+			cov_1ad1ro6evu.s[10]++;
+			if ((cov_1ad1ro6evu.b[5][0]++, _this.props.nullable) && (cov_1ad1ro6evu.b[5][1]++, _this.props.value === null)) {
+				cov_1ad1ro6evu.b[4][0]++;
+				cov_1ad1ro6evu.s[11]++;
 
 				return null;
 			} else {
-				++cov_1ad1ro6evu.b[4][1];
+				cov_1ad1ro6evu.b[4][1]++;
 			}
 
-			++cov_1ad1ro6evu.s[12];
+			cov_1ad1ro6evu.s[12]++;
 			if (_this.props.value === null) {
-				++cov_1ad1ro6evu.b[6][0];
-				++cov_1ad1ro6evu.s[13];
+				cov_1ad1ro6evu.b[6][0]++;
+				cov_1ad1ro6evu.s[13]++;
 
 				return '???';
 			} else {
-				++cov_1ad1ro6evu.b[6][1];
+				cov_1ad1ro6evu.b[6][1]++;
 			}
 
-			++cov_1ad1ro6evu.s[14];
+			cov_1ad1ro6evu.s[14]++;
 			return _this.props.value.toString();
 		}, _temp), _possibleConstructorReturn(_this, _ret);
 	}
@@ -20417,8 +20417,8 @@ let IOComponent = function (_React$Component) {
 	_createClass(IOComponent, [{
 		key: 'render',
 		value: function render() {
-			++cov_1ad1ro6evu.f[2];
-			++cov_1ad1ro6evu.s[15];
+			cov_1ad1ro6evu.f[2]++;
+			cov_1ad1ro6evu.s[15]++;
 
 			return React.createElement(
 				'g',
@@ -20427,14 +20427,14 @@ let IOComponent = function (_React$Component) {
 					width: '150',
 					height: '50',
 					rx: '8',
-					fill: this.props.filled ? (++cov_1ad1ro6evu.b[7][0], this.props.color) : (++cov_1ad1ro6evu.b[7][1], 'white'),
+					fill: this.props.filled ? (cov_1ad1ro6evu.b[7][0]++, this.props.color) : (cov_1ad1ro6evu.b[7][1]++, 'white'),
 					stroke: this.props.color,
 					strokeWidth: '3',
 					style: {
 						transition: 'fill 0.3s ease, stroke 0.3s ease'
 					}
 				}),
-				(++cov_1ad1ro6evu.b[8][0], this.props.correctness === true) && (++cov_1ad1ro6evu.b[8][1], React.createElement(
+				(cov_1ad1ro6evu.b[8][0]++, this.props.correctness === true) && (cov_1ad1ro6evu.b[8][1]++, React.createElement(
 					'g',
 					{ transform: 'translate(75, 25)', className: 'correctness' },
 					React.createElement('circle', {
@@ -20446,7 +20446,7 @@ let IOComponent = function (_React$Component) {
 						strokeWidth: '14'
 					})
 				)),
-				(++cov_1ad1ro6evu.b[9][0], this.props.correctness === false) && (++cov_1ad1ro6evu.b[9][1], React.createElement(
+				(cov_1ad1ro6evu.b[9][0]++, this.props.correctness === false) && (cov_1ad1ro6evu.b[9][1]++, React.createElement(
 					'g',
 					{ transform: 'translate(75, 25)', className: 'correctness' },
 					React.createElement('line', {
@@ -20468,7 +20468,7 @@ let IOComponent = function (_React$Component) {
 						strokeWidth: '14'
 					})
 				)),
-				(++cov_1ad1ro6evu.b[10][0], this.getDisplayValue() !== null) && (++cov_1ad1ro6evu.b[10][1], React.createElement(
+				(cov_1ad1ro6evu.b[10][0]++, this.getDisplayValue() !== null) && (cov_1ad1ro6evu.b[10][1]++, React.createElement(
 					'text',
 					{
 						x: '75',
@@ -20476,11 +20476,11 @@ let IOComponent = function (_React$Component) {
 						fontSize: '30',
 						fontFamily: '\'Exo 2\'',
 						fontWeight: '900',
-						fill: this.props.filled ? (++cov_1ad1ro6evu.b[11][0], 'white') : (++cov_1ad1ro6evu.b[11][1], '#333'),
+						fill: this.props.filled ? (cov_1ad1ro6evu.b[11][0]++, 'white') : (cov_1ad1ro6evu.b[11][1]++, '#333'),
 						textAnchor: 'middle',
 						dominantBaseline: 'central',
 						style: {
-							textShadow: this.props.filled ? (++cov_1ad1ro6evu.b[12][0], '') : (++cov_1ad1ro6evu.b[12][1], '0 0 15px white')
+							textShadow: this.props.filled ? (cov_1ad1ro6evu.b[12][0]++, '') : (cov_1ad1ro6evu.b[12][1]++, '0 0 15px white')
 						}
 					},
 					this.getDisplayValue()
@@ -20507,7 +20507,7 @@ IOComponent.defaultProps = {
 	filled: false,
 	nullable: false
 };
-++cov_1ad1ro6evu.s[16];
+cov_1ad1ro6evu.s[16]++;
 
 
 module.exports = IOComponent;
@@ -20617,7 +20617,7 @@ var cov_11elel9nbw = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_11elel9nbw.s[0];
+cov_11elel9nbw.s[0]++;
 module.exports = {
 	name: 'calc03',
 	version: 4,
@@ -20636,12 +20636,12 @@ module.exports = {
 	input: [1, 3, null],
 	output: [6, 18, null],
 	ioGenerator: random => {
-		++cov_11elel9nbw.f[0];
+		cov_11elel9nbw.f[0]++;
 
-		const input = (++cov_11elel9nbw.s[1], 5 + Math.floor(random() * 10));
-		const output = (++cov_11elel9nbw.s[2], input * 6);
+		const input = (cov_11elel9nbw.s[1]++, 5 + Math.floor(random() * 10));
+		const output = (cov_11elel9nbw.s[2]++, input * 6);
 
-		++cov_11elel9nbw.s[3];
+		cov_11elel9nbw.s[3]++;
 		return {
 			input: [1, 3, input],
 			output: [6, 18, output]
@@ -20851,7 +20851,7 @@ var cov_2bnj0yni8d = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_2bnj0yni8d.s[0];
+cov_2bnj0yni8d.s[0]++;
 module.exports = {
 	name: 'conditional01',
 	version: 4,
@@ -20878,15 +20878,15 @@ module.exports = {
 	input: [5, -10, null, null],
 	output: [15, -20, null, null],
 	ioGenerator: random => {
-		++cov_2bnj0yni8d.f[0];
+		cov_2bnj0yni8d.f[0]++;
 
-		const input1 = (++cov_2bnj0yni8d.s[1], Math.floor(random() * 200));
-		const output1 = (++cov_2bnj0yni8d.s[2], input1 % 2 === 0 ? (++cov_2bnj0yni8d.b[0][0], 2 * input1) : (++cov_2bnj0yni8d.b[0][1], 3 * input1));
+		const input1 = (cov_2bnj0yni8d.s[1]++, Math.floor(random() * 200));
+		const output1 = (cov_2bnj0yni8d.s[2]++, input1 % 2 === 0 ? (cov_2bnj0yni8d.b[0][0]++, 2 * input1) : (cov_2bnj0yni8d.b[0][1]++, 3 * input1));
 
-		const input2 = (++cov_2bnj0yni8d.s[3], Math.floor(random() * 200));
-		const output2 = (++cov_2bnj0yni8d.s[4], input2 % 2 === 0 ? (++cov_2bnj0yni8d.b[1][0], 2 * input2) : (++cov_2bnj0yni8d.b[1][1], 3 * input2));
+		const input2 = (cov_2bnj0yni8d.s[3]++, Math.floor(random() * 200));
+		const output2 = (cov_2bnj0yni8d.s[4]++, input2 % 2 === 0 ? (cov_2bnj0yni8d.b[1][0]++, 2 * input2) : (cov_2bnj0yni8d.b[1][1]++, 3 * input2));
 
-		++cov_2bnj0yni8d.s[5];
+		cov_2bnj0yni8d.s[5]++;
 		return {
 			input: [5, -10, input1, input2],
 			output: [15, -20, output1, output2]
@@ -21124,7 +21124,7 @@ var cov_m4vo606hi = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_m4vo606hi.s[0];
+cov_m4vo606hi.s[0]++;
 module.exports = {
 	name: 'conditional02',
 	version: 4,
@@ -21151,22 +21151,22 @@ module.exports = {
 	input: [5, 6, null, null],
 	output: [10, 18, null, null],
 	ioGenerator: random => {
-		++cov_m4vo606hi.f[0];
+		cov_m4vo606hi.f[0]++;
 
-		const candidates = (++cov_m4vo606hi.s[1], Array.from({ length: 200 }, (item, index) => {
-			++cov_m4vo606hi.f[1];
-			++cov_m4vo606hi.s[2];
+		const candidates = (cov_m4vo606hi.s[1]++, Array.from({ length: 200 }, (item, index) => {
+			cov_m4vo606hi.f[1]++;
+			cov_m4vo606hi.s[2]++;
 			return index + 1;
 		}).filter(val => {
-			++cov_m4vo606hi.f[2];
-			++cov_m4vo606hi.s[3];
-			return (++cov_m4vo606hi.b[0][0], val !== 5) && (++cov_m4vo606hi.b[0][1], val !== 6);
+			cov_m4vo606hi.f[2]++;
+			cov_m4vo606hi.s[3]++;
+			return (cov_m4vo606hi.b[0][0]++, val !== 5) && (cov_m4vo606hi.b[0][1]++, val !== 6);
 		}));
 
-		const input1 = (++cov_m4vo606hi.s[4], candidates[Math.floor(random() * candidates.length)]);
-		const input2 = (++cov_m4vo606hi.s[5], candidates[Math.floor(random() * candidates.length)]);
+		const input1 = (cov_m4vo606hi.s[4]++, candidates[Math.floor(random() * candidates.length)]);
+		const input2 = (cov_m4vo606hi.s[5]++, candidates[Math.floor(random() * candidates.length)]);
 
-		++cov_m4vo606hi.s[6];
+		cov_m4vo606hi.s[6]++;
 		return {
 			input: [5, 6, input1, input2],
 			output: [10, 18, input1, input2]
@@ -21466,7 +21466,7 @@ var cov_2euy1qhpez = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_2euy1qhpez.s[0];
+cov_2euy1qhpez.s[0]++;
 module.exports = {
 	name: 'conditional03',
 	version: 4,
@@ -21494,42 +21494,42 @@ module.exports = {
 	input: [5, 3, null, null, null],
 	output: [0, 5, null, null, null],
 	ioGenerator: random => {
-		++cov_2euy1qhpez.f[0];
+		cov_2euy1qhpez.f[0]++;
 
-		const candidates = (++cov_2euy1qhpez.s[1], [0, 1, 2, 4, 6]);
-		const inputs = (++cov_2euy1qhpez.s[2], []);
+		const candidates = (cov_2euy1qhpez.s[1]++, [0, 1, 2, 4, 6]);
+		const inputs = (cov_2euy1qhpez.s[2]++, []);
 
 		// Shuffle array and take heading 3
-		const index1 = (++cov_2euy1qhpez.s[3], Math.floor(random() * 5));
-		++cov_2euy1qhpez.s[4];
+		const index1 = (cov_2euy1qhpez.s[3]++, Math.floor(random() * 5));
+		cov_2euy1qhpez.s[4]++;
 		inputs.push(candidates[index1]);
-		++cov_2euy1qhpez.s[5];
+		cov_2euy1qhpez.s[5]++;
 		candidates[index1] = candidates[0];
 
-		const index2 = (++cov_2euy1qhpez.s[6], Math.floor(random() * 4) + 1);
-		++cov_2euy1qhpez.s[7];
+		const index2 = (cov_2euy1qhpez.s[6]++, Math.floor(random() * 4) + 1);
+		cov_2euy1qhpez.s[7]++;
 		inputs.push(candidates[index2]);
-		++cov_2euy1qhpez.s[8];
+		cov_2euy1qhpez.s[8]++;
 		candidates[index2] = candidates[1];
 
-		const index3 = (++cov_2euy1qhpez.s[9], Math.floor(random() * 3) + 2);
-		++cov_2euy1qhpez.s[10];
+		const index3 = (cov_2euy1qhpez.s[9]++, Math.floor(random() * 3) + 2);
+		cov_2euy1qhpez.s[10]++;
 		inputs.push(candidates[index3]);
 
-		++cov_2euy1qhpez.s[11];
+		cov_2euy1qhpez.s[11]++;
 		inputs.sort((a, b) => {
-			++cov_2euy1qhpez.f[1];
-			++cov_2euy1qhpez.s[12];
+			cov_2euy1qhpez.f[1]++;
+			cov_2euy1qhpez.s[12]++;
 			return a - b;
 		});
 
-		const outputs = (++cov_2euy1qhpez.s[13], inputs.map(input => {
-			++cov_2euy1qhpez.f[2];
-			++cov_2euy1qhpez.s[14];
+		const outputs = (cov_2euy1qhpez.s[13]++, inputs.map(input => {
+			cov_2euy1qhpez.f[2]++;
+			cov_2euy1qhpez.s[14]++;
 			return (input + 2) % 7;
 		}));
 
-		++cov_2euy1qhpez.s[15];
+		cov_2euy1qhpez.s[15]++;
 		return {
 			input: [5, 3, inputs[0], inputs[1], inputs[2]],
 			output: [0, 5, outputs[0], outputs[1], outputs[2]]
@@ -21901,7 +21901,7 @@ var cov_1ab29os9qv = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_1ab29os9qv.s[0];
+cov_1ab29os9qv.s[0]++;
 module.exports = {
 	name: 'factorial',
 	version: 4,
@@ -21930,47 +21930,47 @@ module.exports = {
 	input: [null, null, null, 15],
 	output: [null, null, null, 1307674368000],
 	ioGenerator: random => {
-		++cov_1ab29os9qv.f[0];
+		cov_1ab29os9qv.f[0]++;
 
-		const candidates = (++cov_1ab29os9qv.s[1], Array.from({ length: 13 }, (item, index) => {
-			++cov_1ab29os9qv.f[1];
-			++cov_1ab29os9qv.s[2];
+		const candidates = (cov_1ab29os9qv.s[1]++, Array.from({ length: 13 }, (item, index) => {
+			cov_1ab29os9qv.f[1]++;
+			cov_1ab29os9qv.s[2]++;
 			return index + 2;
 		})); // 2..14
-		const inputs = (++cov_1ab29os9qv.s[3], []);
+		const inputs = (cov_1ab29os9qv.s[3]++, []);
 
 		// Shuffle array and take heading 3
-		const index1 = (++cov_1ab29os9qv.s[4], Math.floor(random() * 13));
-		++cov_1ab29os9qv.s[5];
+		const index1 = (cov_1ab29os9qv.s[4]++, Math.floor(random() * 13));
+		cov_1ab29os9qv.s[5]++;
 		inputs.push(candidates[index1]);
-		++cov_1ab29os9qv.s[6];
+		cov_1ab29os9qv.s[6]++;
 		candidates[index1] = candidates[0];
 
-		const index2 = (++cov_1ab29os9qv.s[7], Math.floor(random() * 12) + 1);
-		++cov_1ab29os9qv.s[8];
+		const index2 = (cov_1ab29os9qv.s[7]++, Math.floor(random() * 12) + 1);
+		cov_1ab29os9qv.s[8]++;
 		inputs.push(candidates[index2]);
-		++cov_1ab29os9qv.s[9];
+		cov_1ab29os9qv.s[9]++;
 		candidates[index2] = candidates[1];
 
-		const index3 = (++cov_1ab29os9qv.s[10], Math.floor(random() * 11) + 2);
-		++cov_1ab29os9qv.s[11];
+		const index3 = (cov_1ab29os9qv.s[10]++, Math.floor(random() * 11) + 2);
+		cov_1ab29os9qv.s[11]++;
 		inputs.push(candidates[index3]);
 
-		++cov_1ab29os9qv.s[12];
+		cov_1ab29os9qv.s[12]++;
 		inputs.sort((a, b) => {
-			++cov_1ab29os9qv.f[2];
-			++cov_1ab29os9qv.s[13];
+			cov_1ab29os9qv.f[2]++;
+			cov_1ab29os9qv.s[13]++;
 			return a - b;
 		});
 
-		++cov_1ab29os9qv.s[14];
+		cov_1ab29os9qv.s[14]++;
 		const factorial = n => {
-			++cov_1ab29os9qv.f[3];
-			++cov_1ab29os9qv.s[15];
-			return n === 1 ? (++cov_1ab29os9qv.b[0][0], 1) : (++cov_1ab29os9qv.b[0][1], n * factorial(n - 1));
+			cov_1ab29os9qv.f[3]++;
+			cov_1ab29os9qv.s[15]++;
+			return n === 1 ? (cov_1ab29os9qv.b[0][0]++, 1) : (cov_1ab29os9qv.b[0][1]++, n * factorial(n - 1));
 		};
 
-		++cov_1ab29os9qv.s[16];
+		cov_1ab29os9qv.s[16]++;
 		return {
 			input: [inputs[0], inputs[1], inputs[2], 15],
 			output: [factorial(inputs[0]), factorial(inputs[1]), factorial(inputs[2]), factorial(15)]
@@ -22519,7 +22519,7 @@ var cov_12cofqwyez = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_12cofqwyez.s[0];
+cov_12cofqwyez.s[0]++;
 module.exports = {
 	name: 'parity',
 	version: 4,
@@ -22548,87 +22548,87 @@ module.exports = {
 	input: [null, null, null],
 	output: [null, null, null],
 	ioGenerator: random => {
-		++cov_12cofqwyez.f[0];
-		++cov_12cofqwyez.s[1];
+		cov_12cofqwyez.f[0]++;
+		cov_12cofqwyez.s[1]++;
 
 		const sumOfDigits = n => {
-			++cov_12cofqwyez.f[1];
-			++cov_12cofqwyez.s[2];
+			cov_12cofqwyez.f[1]++;
+			cov_12cofqwyez.s[2]++;
 			return n.toString().split('').map(d => {
-				++cov_12cofqwyez.f[2];
-				++cov_12cofqwyez.s[3];
+				cov_12cofqwyez.f[2]++;
+				cov_12cofqwyez.s[3]++;
 				return parseInt(d);
 			}).reduce((a, b) => {
-				++cov_12cofqwyez.f[3];
-				++cov_12cofqwyez.s[4];
+				cov_12cofqwyez.f[3]++;
+				cov_12cofqwyez.s[4]++;
 				return a + b;
 			});
 		};
 
-		++cov_12cofqwyez.s[5];
+		cov_12cofqwyez.s[5]++;
 		const parity = n => {
-			++cov_12cofqwyez.f[4];
-			++cov_12cofqwyez.s[6];
+			cov_12cofqwyez.f[4]++;
+			cov_12cofqwyez.s[6]++;
 			return sumOfDigits(n) % 10;
 		};
 
-		const inputs = (++cov_12cofqwyez.s[7], []);
+		const inputs = (cov_12cofqwyez.s[7]++, []);
 
 		// Sum of digits is less than 10
-		++cov_12cofqwyez.s[8];
+		cov_12cofqwyez.s[8]++;
 		inputs.push((() => {
-			++cov_12cofqwyez.f[5];
+			cov_12cofqwyez.f[5]++;
 
-			let n = (++cov_12cofqwyez.s[9], null);
+			let n = (cov_12cofqwyez.s[9]++, null);
 
-			++cov_12cofqwyez.s[10];
+			cov_12cofqwyez.s[10]++;
 			do {
-				++cov_12cofqwyez.s[11];
+				cov_12cofqwyez.s[11]++;
 
 				n = 1000 + Math.floor(9000 * random());
 			} while (!(sumOfDigits(n) < 10));
 
-			++cov_12cofqwyez.s[12];
+			cov_12cofqwyez.s[12]++;
 			return n;
 		})());
 
 		// Sum of digits is less than 20
-		++cov_12cofqwyez.s[13];
+		cov_12cofqwyez.s[13]++;
 		inputs.push((() => {
-			++cov_12cofqwyez.f[6];
+			cov_12cofqwyez.f[6]++;
 
-			let n = (++cov_12cofqwyez.s[14], null);
+			let n = (cov_12cofqwyez.s[14]++, null);
 
-			++cov_12cofqwyez.s[15];
+			cov_12cofqwyez.s[15]++;
 			do {
-				++cov_12cofqwyez.s[16];
+				cov_12cofqwyez.s[16]++;
 
 				n = 1000 + Math.floor(9000 * random());
-			} while (!((++cov_12cofqwyez.b[0][0], 10 <= sumOfDigits(n)) && (++cov_12cofqwyez.b[0][1], sumOfDigits(n) < 20)));
+			} while (!((cov_12cofqwyez.b[0][0]++, 10 <= sumOfDigits(n)) && (cov_12cofqwyez.b[0][1]++, sumOfDigits(n) < 20)));
 
-			++cov_12cofqwyez.s[17];
+			cov_12cofqwyez.s[17]++;
 			return n;
 		})());
 
 		// Sum of digits is equal or greater than 20
-		++cov_12cofqwyez.s[18];
+		cov_12cofqwyez.s[18]++;
 		inputs.push((() => {
-			++cov_12cofqwyez.f[7];
+			cov_12cofqwyez.f[7]++;
 
-			let n = (++cov_12cofqwyez.s[19], null);
+			let n = (cov_12cofqwyez.s[19]++, null);
 
-			++cov_12cofqwyez.s[20];
+			cov_12cofqwyez.s[20]++;
 			do {
-				++cov_12cofqwyez.s[21];
+				cov_12cofqwyez.s[21]++;
 
 				n = 1000 + Math.floor(9000 * random());
 			} while (!(20 <= sumOfDigits(n)));
 
-			++cov_12cofqwyez.s[22];
+			cov_12cofqwyez.s[22]++;
 			return n;
 		})());
 
-		++cov_12cofqwyez.s[23];
+		cov_12cofqwyez.s[23]++;
 		return {
 			input: inputs,
 			output: inputs.map(parity)
@@ -22950,7 +22950,7 @@ var cov_mbe31dvgi = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_mbe31dvgi.s[0];
+cov_mbe31dvgi.s[0]++;
 module.exports = {
 	name: 'fibonacci',
 	version: 4,
@@ -22979,49 +22979,49 @@ module.exports = {
 	input: [null, null, null, 20],
 	output: [null, null, null, 6765],
 	ioGenerator: random => {
-		++cov_mbe31dvgi.f[0];
+		cov_mbe31dvgi.f[0]++;
 
-		const fibonacci = (++cov_mbe31dvgi.s[1], [1, 1]);
+		const fibonacci = (cov_mbe31dvgi.s[1]++, [1, 1]);
 
-		++cov_mbe31dvgi.s[2];
+		cov_mbe31dvgi.s[2]++;
 		for (let i = 2; i < 20; i++) {
-			++cov_mbe31dvgi.s[3];
+			cov_mbe31dvgi.s[3]++;
 
 			fibonacci.push(fibonacci[fibonacci.length - 1] + fibonacci[fibonacci.length - 2]);
 		}
 
-		const candidates = (++cov_mbe31dvgi.s[4], Array.from({ length: 18 }, (item, index) => {
-			++cov_mbe31dvgi.f[1];
-			++cov_mbe31dvgi.s[5];
+		const candidates = (cov_mbe31dvgi.s[4]++, Array.from({ length: 18 }, (item, index) => {
+			cov_mbe31dvgi.f[1]++;
+			cov_mbe31dvgi.s[5]++;
 			return index + 2;
 		})); // 2..19
-		const inputs = (++cov_mbe31dvgi.s[6], []);
+		const inputs = (cov_mbe31dvgi.s[6]++, []);
 
 		// Shuffle array and take heading 3
-		const index1 = (++cov_mbe31dvgi.s[7], Math.floor(random() * 18));
-		++cov_mbe31dvgi.s[8];
+		const index1 = (cov_mbe31dvgi.s[7]++, Math.floor(random() * 18));
+		cov_mbe31dvgi.s[8]++;
 		inputs.push(candidates[index1]);
-		++cov_mbe31dvgi.s[9];
+		cov_mbe31dvgi.s[9]++;
 		candidates[index1] = candidates[0];
 
-		const index2 = (++cov_mbe31dvgi.s[10], Math.floor(random() * 17) + 1);
-		++cov_mbe31dvgi.s[11];
+		const index2 = (cov_mbe31dvgi.s[10]++, Math.floor(random() * 17) + 1);
+		cov_mbe31dvgi.s[11]++;
 		inputs.push(candidates[index2]);
-		++cov_mbe31dvgi.s[12];
+		cov_mbe31dvgi.s[12]++;
 		candidates[index2] = candidates[1];
 
-		const index3 = (++cov_mbe31dvgi.s[13], Math.floor(random() * 16) + 2);
-		++cov_mbe31dvgi.s[14];
+		const index3 = (cov_mbe31dvgi.s[13]++, Math.floor(random() * 16) + 2);
+		cov_mbe31dvgi.s[14]++;
 		inputs.push(candidates[index3]);
 
-		++cov_mbe31dvgi.s[15];
+		cov_mbe31dvgi.s[15]++;
 		inputs.sort((a, b) => {
-			++cov_mbe31dvgi.f[2];
-			++cov_mbe31dvgi.s[16];
+			cov_mbe31dvgi.f[2]++;
+			cov_mbe31dvgi.s[16]++;
 			return a - b;
 		});
 
-		++cov_mbe31dvgi.s[17];
+		cov_mbe31dvgi.s[17]++;
 		return {
 			input: [inputs[0], inputs[1], inputs[2], 20],
 			output: [fibonacci[inputs[0] - 1], fibonacci[inputs[1] - 1], fibonacci[inputs[2] - 1], fibonacci[19]]
@@ -23242,7 +23242,7 @@ var cov_1ddoli7njy = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_1ddoli7njy.s[0];
+cov_1ddoli7njy.s[0]++;
 module.exports = {
 	name: 'power-hard',
 	version: 4,
@@ -23288,23 +23288,23 @@ module.exports = {
 	input: [[null, null], [null, null], [2, 35]],
 	output: [null, null, 34359738368],
 	ioGenerator: random => {
-		++cov_1ddoli7njy.f[0];
+		cov_1ddoli7njy.f[0]++;
 
 		// 5..20 or -5..-20
-		const input1Base = (++cov_1ddoli7njy.s[1], (5 + Math.floor(random() * 16)) * (random() < 0.5 ? (++cov_1ddoli7njy.b[0][0], 1) : (++cov_1ddoli7njy.b[0][1], -1)));
+		const input1Base = (cov_1ddoli7njy.s[1]++, (5 + Math.floor(random() * 16)) * (random() < 0.5 ? (cov_1ddoli7njy.b[0][0]++, 1) : (cov_1ddoli7njy.b[0][1]++, -1)));
 
 		// 2..5
-		const input1Exponent = (++cov_1ddoli7njy.s[2], 2 + Math.floor(random() * 4));
+		const input1Exponent = (cov_1ddoli7njy.s[2]++, 2 + Math.floor(random() * 4));
 
 		// 2..4 or -2..-4
-		const input2Base = (++cov_1ddoli7njy.s[3], (2 + Math.floor(random() * 3)) * (random() < 0.5 ? (++cov_1ddoli7njy.b[1][0], 1) : (++cov_1ddoli7njy.b[1][1], -1)));
+		const input2Base = (cov_1ddoli7njy.s[3]++, (2 + Math.floor(random() * 3)) * (random() < 0.5 ? (cov_1ddoli7njy.b[1][0]++, 1) : (cov_1ddoli7njy.b[1][1]++, -1)));
 
 		// The result of pow should not be greater than 1e10
-		const input2MaxExponent = (++cov_1ddoli7njy.s[4], Math.floor(Math.log(1e10) / Math.log(Math.abs(input2Base))));
+		const input2MaxExponent = (cov_1ddoli7njy.s[4]++, Math.floor(Math.log(1e10) / Math.log(Math.abs(input2Base))));
 
-		const input2Exponent = (++cov_1ddoli7njy.s[5], 10 + Math.floor(random() * (input2MaxExponent - 10 + 1)));
+		const input2Exponent = (cov_1ddoli7njy.s[5]++, 10 + Math.floor(random() * (input2MaxExponent - 10 + 1)));
 
-		++cov_1ddoli7njy.s[6];
+		cov_1ddoli7njy.s[6]++;
 		return {
 			input: [[input1Base, input1Exponent], [input2Base, input2Exponent], [2, 35]],
 			output: [Math.pow(input1Base, input1Exponent), Math.pow(input2Base, input2Exponent), Math.pow(2, 35)]
@@ -24035,7 +24035,7 @@ var cov_1ejist7n54 = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_1ejist7n54.s[0];
+cov_1ejist7n54.s[0]++;
 module.exports = {
 	name: 'gcd',
 	version: 5,
@@ -24075,106 +24075,106 @@ module.exports = {
 	input: [[null, null], [null, null], [null, null], [56, 1275]],
 	output: [null, null, null, 1],
 	ioGenerator: random => {
-		++cov_1ejist7n54.f[0];
-		++cov_1ejist7n54.s[1];
+		cov_1ejist7n54.f[0]++;
+		cov_1ejist7n54.s[1]++;
 
 		// Durstenfeld shuffle
 		const shuffleArray = array => {
-			++cov_1ejist7n54.f[1];
-			++cov_1ejist7n54.s[2];
+			cov_1ejist7n54.f[1]++;
+			cov_1ejist7n54.s[2]++;
 
 			for (let i = array.length - 1; i > 0; i--) {
-				const j = (++cov_1ejist7n54.s[3], Math.floor(random() * (i + 1)));
-				const temp = (++cov_1ejist7n54.s[4], array[i]);
-				++cov_1ejist7n54.s[5];
+				const j = (cov_1ejist7n54.s[3]++, Math.floor(random() * (i + 1)));
+				const temp = (cov_1ejist7n54.s[4]++, array[i]);
+				cov_1ejist7n54.s[5]++;
 				array[i] = array[j];
-				++cov_1ejist7n54.s[6];
+				cov_1ejist7n54.s[6]++;
 				array[j] = temp;
 			}
 		};
 
-		++cov_1ejist7n54.s[7];
+		cov_1ejist7n54.s[7]++;
 		const gcd = ([a, b]) => {
-			++cov_1ejist7n54.f[2];
-			++cov_1ejist7n54.s[8];
+			cov_1ejist7n54.f[2]++;
+			cov_1ejist7n54.s[8]++;
 
 			if (b === 0) {
-				++cov_1ejist7n54.b[0][0];
-				++cov_1ejist7n54.s[9];
+				cov_1ejist7n54.b[0][0]++;
+				cov_1ejist7n54.s[9]++;
 
 				return a;
 			} else {
-				++cov_1ejist7n54.b[0][1];
+				cov_1ejist7n54.b[0][1]++;
 			}
 
-			++cov_1ejist7n54.s[10];
+			cov_1ejist7n54.s[10]++;
 			return gcd([b, a % b]);
 		};
 
-		const inputs = (++cov_1ejist7n54.s[11], []);
+		const inputs = (cov_1ejist7n54.s[11]++, []);
 
-		const factors1 = (++cov_1ejist7n54.s[12], [2, 2, 3, 3, 3, 3, 3, 3, 5, 5, 5, 7, 7, 11, 13, 17]);
+		const factors1 = (cov_1ejist7n54.s[12]++, [2, 2, 3, 3, 3, 3, 3, 3, 5, 5, 5, 7, 7, 11, 13, 17]);
 
-		++cov_1ejist7n54.s[13];
+		cov_1ejist7n54.s[13]++;
 		shuffleArray(factors1);
-		const valueA1 = (++cov_1ejist7n54.s[14], factors1.slice(0, 3).reduce((a, b) => {
-			++cov_1ejist7n54.f[3];
-			++cov_1ejist7n54.s[15];
+		const valueA1 = (cov_1ejist7n54.s[14]++, factors1.slice(0, 3).reduce((a, b) => {
+			cov_1ejist7n54.f[3]++;
+			cov_1ejist7n54.s[15]++;
 			return a * b;
 		}) * 2);
-		const valueB1 = (++cov_1ejist7n54.s[16], factors1.slice(3, 6).reduce((a, b) => {
-			++cov_1ejist7n54.f[4];
-			++cov_1ejist7n54.s[17];
+		const valueB1 = (cov_1ejist7n54.s[16]++, factors1.slice(3, 6).reduce((a, b) => {
+			cov_1ejist7n54.f[4]++;
+			cov_1ejist7n54.s[17]++;
 			return a * b;
 		}) * 2);
 
-		++cov_1ejist7n54.s[18];
+		cov_1ejist7n54.s[18]++;
 		inputs.push([valueA1, valueB1]);
 
-		const factors2 = (++cov_1ejist7n54.s[19], [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 5, 7, 7, 11, 13, 17]);
+		const factors2 = (cov_1ejist7n54.s[19]++, [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 5, 7, 7, 11, 13, 17]);
 
-		++cov_1ejist7n54.s[20];
+		cov_1ejist7n54.s[20]++;
 		shuffleArray(factors2);
-		const valueA2 = (++cov_1ejist7n54.s[21], factors2.slice(0, 4).reduce((a, b) => {
-			++cov_1ejist7n54.f[5];
-			++cov_1ejist7n54.s[22];
+		const valueA2 = (cov_1ejist7n54.s[21]++, factors2.slice(0, 4).reduce((a, b) => {
+			cov_1ejist7n54.f[5]++;
+			cov_1ejist7n54.s[22]++;
 			return a * b;
 		}) * 5);
-		const valueB2 = (++cov_1ejist7n54.s[23], factors2.slice(4, 8).reduce((a, b) => {
-			++cov_1ejist7n54.f[6];
-			++cov_1ejist7n54.s[24];
+		const valueB2 = (cov_1ejist7n54.s[23]++, factors2.slice(4, 8).reduce((a, b) => {
+			cov_1ejist7n54.f[6]++;
+			cov_1ejist7n54.s[24]++;
 			return a * b;
 		}) * 5);
 
-		++cov_1ejist7n54.s[25];
+		cov_1ejist7n54.s[25]++;
 		inputs.push([valueA2, valueB2]);
 
-		const factors3 = (++cov_1ejist7n54.s[26], [1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 5, 11, 11, 13, 13, 17]);
+		const factors3 = (cov_1ejist7n54.s[26]++, [1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 5, 11, 11, 13, 13, 17]);
 
-		++cov_1ejist7n54.s[27];
+		cov_1ejist7n54.s[27]++;
 		shuffleArray(factors3);
-		const valueA3 = (++cov_1ejist7n54.s[28], factors3.slice(0, 3).reduce((a, b) => {
-			++cov_1ejist7n54.f[7];
-			++cov_1ejist7n54.s[29];
+		const valueA3 = (cov_1ejist7n54.s[28]++, factors3.slice(0, 3).reduce((a, b) => {
+			cov_1ejist7n54.f[7]++;
+			cov_1ejist7n54.s[29]++;
 			return a * b;
 		}) * 7);
-		const valueB3 = (++cov_1ejist7n54.s[30], factors3.slice(3, 6).reduce((a, b) => {
-			++cov_1ejist7n54.f[8];
-			++cov_1ejist7n54.s[31];
+		const valueB3 = (cov_1ejist7n54.s[30]++, factors3.slice(3, 6).reduce((a, b) => {
+			cov_1ejist7n54.f[8]++;
+			cov_1ejist7n54.s[31]++;
 			return a * b;
 		}) * 7);
 
-		++cov_1ejist7n54.s[32];
+		cov_1ejist7n54.s[32]++;
 		inputs.push([valueA3, valueB3]);
 
-		++cov_1ejist7n54.s[33];
+		cov_1ejist7n54.s[33]++;
 		inputs.sort((a, b) => {
-			++cov_1ejist7n54.f[9];
-			++cov_1ejist7n54.s[34];
+			cov_1ejist7n54.f[9]++;
+			cov_1ejist7n54.s[34]++;
 			return gcd(b) - gcd(a);
 		});
 
-		++cov_1ejist7n54.s[35];
+		cov_1ejist7n54.s[35]++;
 		return {
 			input: [inputs[0], inputs[1], inputs[2], [56, 1275]],
 			output: [gcd(inputs[0]), gcd(inputs[1]), gcd(inputs[2]), gcd([56, 1275])]
@@ -24723,7 +24723,7 @@ var cov_12xrqydk7g = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_12xrqydk7g.s[0];
+cov_12xrqydk7g.s[0]++;
 module.exports = {
 	name: 'lcm',
 	version: 4,
@@ -24763,79 +24763,79 @@ module.exports = {
 	input: [[null, null], [null, null], [null, null], [450, 756]],
 	output: [null, null, null, 18900],
 	ioGenerator: random => {
-		++cov_12xrqydk7g.f[0];
-		++cov_12xrqydk7g.s[1];
+		cov_12xrqydk7g.f[0]++;
+		cov_12xrqydk7g.s[1]++;
 
 		// Durstenfeld shuffle
 		const shuffleArray = array => {
-			++cov_12xrqydk7g.f[1];
-			++cov_12xrqydk7g.s[2];
+			cov_12xrqydk7g.f[1]++;
+			cov_12xrqydk7g.s[2]++;
 
 			for (let i = array.length - 1; i > 0; i--) {
-				const j = (++cov_12xrqydk7g.s[3], Math.floor(random() * (i + 1)));
-				const temp = (++cov_12xrqydk7g.s[4], array[i]);
-				++cov_12xrqydk7g.s[5];
+				const j = (cov_12xrqydk7g.s[3]++, Math.floor(random() * (i + 1)));
+				const temp = (cov_12xrqydk7g.s[4]++, array[i]);
+				cov_12xrqydk7g.s[5]++;
 				array[i] = array[j];
-				++cov_12xrqydk7g.s[6];
+				cov_12xrqydk7g.s[6]++;
 				array[j] = temp;
 			}
 		};
 
-		++cov_12xrqydk7g.s[7];
+		cov_12xrqydk7g.s[7]++;
 		const gcd = ([a, b]) => {
-			++cov_12xrqydk7g.f[2];
-			++cov_12xrqydk7g.s[8];
+			cov_12xrqydk7g.f[2]++;
+			cov_12xrqydk7g.s[8]++;
 
 			if (b === 0) {
-				++cov_12xrqydk7g.b[0][0];
-				++cov_12xrqydk7g.s[9];
+				cov_12xrqydk7g.b[0][0]++;
+				cov_12xrqydk7g.s[9]++;
 
 				return a;
 			} else {
-				++cov_12xrqydk7g.b[0][1];
+				cov_12xrqydk7g.b[0][1]++;
 			}
 
-			++cov_12xrqydk7g.s[10];
+			cov_12xrqydk7g.s[10]++;
 			return gcd([b, a % b]);
 		};
 
-		++cov_12xrqydk7g.s[11];
+		cov_12xrqydk7g.s[11]++;
 		const lcm = ([a, b]) => {
-			++cov_12xrqydk7g.f[3];
-			++cov_12xrqydk7g.s[12];
+			cov_12xrqydk7g.f[3]++;
+			cov_12xrqydk7g.s[12]++;
 			return a * b / gcd([a, b]);
 		};
 
-		const inputs = (++cov_12xrqydk7g.s[13], Array.from({ length: 3 }, () => {
-			++cov_12xrqydk7g.f[4];
+		const inputs = (cov_12xrqydk7g.s[13]++, Array.from({ length: 3 }, () => {
+			cov_12xrqydk7g.f[4]++;
 
-			const factors = (++cov_12xrqydk7g.s[14], [2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 5, 5, 7, 7, 11, 13]);
+			const factors = (cov_12xrqydk7g.s[14]++, [2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 5, 5, 7, 7, 11, 13]);
 
-			++cov_12xrqydk7g.s[15];
+			cov_12xrqydk7g.s[15]++;
 			shuffleArray(factors);
-			const valueA = (++cov_12xrqydk7g.s[16], factors.slice(0, 3).reduce((a, b) => {
-				++cov_12xrqydk7g.f[5];
-				++cov_12xrqydk7g.s[17];
+			const valueA = (cov_12xrqydk7g.s[16]++, factors.slice(0, 3).reduce((a, b) => {
+				cov_12xrqydk7g.f[5]++;
+				cov_12xrqydk7g.s[17]++;
 				return a * b;
 			}));
-			const valueB = (++cov_12xrqydk7g.s[18], factors.slice(3, 7).reduce((a, b) => {
-				++cov_12xrqydk7g.f[6];
-				++cov_12xrqydk7g.s[19];
+			const valueB = (cov_12xrqydk7g.s[18]++, factors.slice(3, 7).reduce((a, b) => {
+				cov_12xrqydk7g.f[6]++;
+				cov_12xrqydk7g.s[19]++;
 				return a * b;
 			}));
 
-			++cov_12xrqydk7g.s[20];
+			cov_12xrqydk7g.s[20]++;
 			return [valueA, valueB];
 		}));
 
-		++cov_12xrqydk7g.s[21];
+		cov_12xrqydk7g.s[21]++;
 		inputs.sort((a, b) => {
-			++cov_12xrqydk7g.f[7];
-			++cov_12xrqydk7g.s[22];
+			cov_12xrqydk7g.f[7]++;
+			cov_12xrqydk7g.s[22]++;
 			return lcm(a) - lcm(b);
 		});
 
-		++cov_12xrqydk7g.s[23];
+		cov_12xrqydk7g.s[23]++;
 		return {
 			input: [inputs[0], inputs[1], inputs[2], [450, 756]],
 			output: [lcm(inputs[0]), lcm(inputs[1]), lcm(inputs[2]), lcm([450, 756])]
@@ -25124,7 +25124,7 @@ var cov_33q9ycsqr = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_33q9ycsqr.s[0];
+cov_33q9ycsqr.s[0]++;
 module.exports = {
 	name: 'sqrt-easy',
 	version: 4,
@@ -25161,40 +25161,40 @@ module.exports = {
 	input: [null, null, null, 225],
 	output: [null, null, null, 15],
 	ioGenerator: random => {
-		++cov_33q9ycsqr.f[0];
+		cov_33q9ycsqr.f[0]++;
 
-		const candidates = (++cov_33q9ycsqr.s[1], Array.from({ length: 13 }, (item, index) => {
-			++cov_33q9ycsqr.f[1];
-			++cov_33q9ycsqr.s[2];
+		const candidates = (cov_33q9ycsqr.s[1]++, Array.from({ length: 13 }, (item, index) => {
+			cov_33q9ycsqr.f[1]++;
+			cov_33q9ycsqr.s[2]++;
 			return index + 2;
 		})); // 2..14
-		const outputs = (++cov_33q9ycsqr.s[3], []);
+		const outputs = (cov_33q9ycsqr.s[3]++, []);
 
 		// Shuffle array and take heading 3
-		const index1 = (++cov_33q9ycsqr.s[4], Math.floor(random() * 13));
-		++cov_33q9ycsqr.s[5];
+		const index1 = (cov_33q9ycsqr.s[4]++, Math.floor(random() * 13));
+		cov_33q9ycsqr.s[5]++;
 		outputs.push(candidates[index1]);
-		++cov_33q9ycsqr.s[6];
+		cov_33q9ycsqr.s[6]++;
 		candidates[index1] = candidates[0];
 
-		const index2 = (++cov_33q9ycsqr.s[7], Math.floor(random() * 12) + 1);
-		++cov_33q9ycsqr.s[8];
+		const index2 = (cov_33q9ycsqr.s[7]++, Math.floor(random() * 12) + 1);
+		cov_33q9ycsqr.s[8]++;
 		outputs.push(candidates[index2]);
-		++cov_33q9ycsqr.s[9];
+		cov_33q9ycsqr.s[9]++;
 		candidates[index2] = candidates[1];
 
-		const index3 = (++cov_33q9ycsqr.s[10], Math.floor(random() * 11) + 2);
-		++cov_33q9ycsqr.s[11];
+		const index3 = (cov_33q9ycsqr.s[10]++, Math.floor(random() * 11) + 2);
+		cov_33q9ycsqr.s[11]++;
 		outputs.push(candidates[index3]);
 
-		++cov_33q9ycsqr.s[12];
+		cov_33q9ycsqr.s[12]++;
 		outputs.sort((a, b) => {
-			++cov_33q9ycsqr.f[2];
-			++cov_33q9ycsqr.s[13];
+			cov_33q9ycsqr.f[2]++;
+			cov_33q9ycsqr.s[13]++;
 			return a - b;
 		});
 
-		++cov_33q9ycsqr.s[14];
+		cov_33q9ycsqr.s[14]++;
 		return {
 			input: [outputs[0] * outputs[0], outputs[1] * outputs[1], outputs[2] * outputs[2], 15 * 15],
 			output: [outputs[0], outputs[1], outputs[2], 15]
@@ -25334,7 +25334,7 @@ var cov_13qfn5o19c = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_13qfn5o19c.s[0];
+cov_13qfn5o19c.s[0]++;
 module.exports = {
 	name: 'sqrt-hard',
 	version: 4,
@@ -25380,14 +25380,14 @@ module.exports = {
 	input: [9, null, null, 26040609],
 	output: [3, null, null, 5103],
 	ioGenerator: random => {
-		++cov_13qfn5o19c.f[0];
+		cov_13qfn5o19c.f[0]++;
 
-		const out1 = (++cov_13qfn5o19c.s[1], 3);
-		const out2 = (++cov_13qfn5o19c.s[2], 10 + Math.floor(random() * 90));
-		const out3 = (++cov_13qfn5o19c.s[3], 1000 + Math.floor(random() * 4000));
-		const out4 = (++cov_13qfn5o19c.s[4], 5103);
+		const out1 = (cov_13qfn5o19c.s[1]++, 3);
+		const out2 = (cov_13qfn5o19c.s[2]++, 10 + Math.floor(random() * 90));
+		const out3 = (cov_13qfn5o19c.s[3]++, 1000 + Math.floor(random() * 4000));
+		const out4 = (cov_13qfn5o19c.s[4]++, 5103);
 
-		++cov_13qfn5o19c.s[5];
+		cov_13qfn5o19c.s[5]++;
 		return {
 			input: [out1 * out1, out2 * out2, out3 * out3, out4 * out4],
 			output: [out1, out2, out3, out4]
@@ -25621,7 +25621,7 @@ var cov_f3yf9zjlx = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_f3yf9zjlx.s[0];
+cov_f3yf9zjlx.s[0]++;
 module.exports = {
 	name: 'msd',
 	version: 4,
@@ -25667,29 +25667,29 @@ module.exports = {
 	input: [null, null, 0, 123456789],
 	output: [null, null, 0, 1],
 	ioGenerator: random => {
-		++cov_f3yf9zjlx.f[0];
+		cov_f3yf9zjlx.f[0]++;
 
-		const input1msd = (++cov_f3yf9zjlx.s[1], 1 + Math.floor(random() * 9));
-		const input1str = (++cov_f3yf9zjlx.s[2], [input1msd].concat(Array.from({
+		const input1msd = (cov_f3yf9zjlx.s[1]++, 1 + Math.floor(random() * 9));
+		const input1str = (cov_f3yf9zjlx.s[2]++, [input1msd].concat(Array.from({
 			length: 1 + Math.floor(random() * 3)
 		}, () => {
-			++cov_f3yf9zjlx.f[1];
-			++cov_f3yf9zjlx.s[3];
+			cov_f3yf9zjlx.f[1]++;
+			cov_f3yf9zjlx.s[3]++;
 			return Math.floor(random() * 10);
 		})).join(''));
-		const input1 = (++cov_f3yf9zjlx.s[4], parseInt(input1str));
+		const input1 = (cov_f3yf9zjlx.s[4]++, parseInt(input1str));
 
-		const input2msd = (++cov_f3yf9zjlx.s[5], 1 + Math.floor(random() * 9));
-		const input2str = (++cov_f3yf9zjlx.s[6], [input2msd].concat(Array.from({
+		const input2msd = (cov_f3yf9zjlx.s[5]++, 1 + Math.floor(random() * 9));
+		const input2str = (cov_f3yf9zjlx.s[6]++, [input2msd].concat(Array.from({
 			length: 3 + Math.floor(random() * 5)
 		}, () => {
-			++cov_f3yf9zjlx.f[2];
-			++cov_f3yf9zjlx.s[7];
+			cov_f3yf9zjlx.f[2]++;
+			cov_f3yf9zjlx.s[7]++;
 			return Math.floor(random() * 10);
 		})).join(''));
-		const input2 = (++cov_f3yf9zjlx.s[8], parseInt(input2str));
+		const input2 = (cov_f3yf9zjlx.s[8]++, parseInt(input2str));
 
-		++cov_f3yf9zjlx.s[9];
+		cov_f3yf9zjlx.s[9]++;
 		return {
 			input: [input1, input2, 0, 123456789],
 			output: [input1msd, input2msd, 0, 1]
@@ -25873,7 +25873,7 @@ var cov_13u6y8st3s = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_13u6y8st3s.s[0];
+cov_13u6y8st3s.s[0]++;
 module.exports = {
 	name: 'mod3-hard',
 	version: 4,
@@ -25915,22 +25915,22 @@ module.exports = {
 	input: [null, null, null, null, null],
 	output: [0, 1, 2, null, null],
 	ioGenerator: random => {
-		++cov_13u6y8st3s.f[0];
+		cov_13u6y8st3s.f[0]++;
 
-		const input1target = (++cov_13u6y8st3s.s[1], 10000000 + Math.floor(random() * 80000000));
-		const input1 = (++cov_13u6y8st3s.s[2], input1target - input1target % 3 + 0);
+		const input1target = (cov_13u6y8st3s.s[1]++, 10000000 + Math.floor(random() * 80000000));
+		const input1 = (cov_13u6y8st3s.s[2]++, input1target - input1target % 3 + 0);
 
-		const input2target = (++cov_13u6y8st3s.s[3], 10000000 + Math.floor(random() * 80000000));
-		const input2 = (++cov_13u6y8st3s.s[4], input2target - input2target % 3 + 1);
+		const input2target = (cov_13u6y8st3s.s[3]++, 10000000 + Math.floor(random() * 80000000));
+		const input2 = (cov_13u6y8st3s.s[4]++, input2target - input2target % 3 + 1);
 
-		const input3target = (++cov_13u6y8st3s.s[5], 10000000 + Math.floor(random() * 80000000));
-		const input3 = (++cov_13u6y8st3s.s[6], input3target - input3target % 3 + 2);
+		const input3target = (cov_13u6y8st3s.s[5]++, 10000000 + Math.floor(random() * 80000000));
+		const input3 = (cov_13u6y8st3s.s[6]++, input3target - input3target % 3 + 2);
 
-		const input4 = (++cov_13u6y8st3s.s[7], 10000000 + Math.floor(random() * 80000000));
+		const input4 = (cov_13u6y8st3s.s[7]++, 10000000 + Math.floor(random() * 80000000));
 
-		const input5 = (++cov_13u6y8st3s.s[8], 99990000 + Math.floor(random() * 10000));
+		const input5 = (cov_13u6y8st3s.s[8]++, 99990000 + Math.floor(random() * 10000));
 
-		++cov_13u6y8st3s.s[9];
+		cov_13u6y8st3s.s[9]++;
 		return {
 			input: [input1, input2, input3, input4, input5],
 			output: [input1 % 3, input2 % 3, input3 % 3, input4 % 3, input5 % 3]
@@ -26639,7 +26639,7 @@ var cov_3zrgrc1co = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_3zrgrc1co.s[0];
+cov_3zrgrc1co.s[0]++;
 module.exports = {
 	name: 'the-fifth-max',
 	version: 4,
@@ -26693,127 +26693,127 @@ module.exports = {
 	input: [[5, [1, 2, 3, 4, 5]], [5, [null, null, null, null, null]], [7, [null, null, null, null, null, null, null]], [7, [null, null, null, null, null, null, null]], [7, [null, null, null, null, null, null, null]]],
 	output: [3, null, null, null, null],
 	ioGenerator: random => {
-		++cov_3zrgrc1co.f[0];
-		++cov_3zrgrc1co.s[1];
+		cov_3zrgrc1co.f[0]++;
+		cov_3zrgrc1co.s[1]++;
 
 		const getMedian = input => {
-			++cov_3zrgrc1co.f[1];
-			++cov_3zrgrc1co.s[2];
+			cov_3zrgrc1co.f[1]++;
+			cov_3zrgrc1co.s[2]++;
 			return input.slice(0).sort((a, b) => {
-				++cov_3zrgrc1co.f[2];
-				++cov_3zrgrc1co.s[3];
+				cov_3zrgrc1co.f[2]++;
+				cov_3zrgrc1co.s[3]++;
 				return a - b;
 			})[(input.length - 1) / 2];
 		};
 
-		++cov_3zrgrc1co.s[4];
+		cov_3zrgrc1co.s[4]++;
 		const isMedianUnique = input => {
-			++cov_3zrgrc1co.f[3];
+			cov_3zrgrc1co.f[3]++;
 
-			const median = (++cov_3zrgrc1co.s[5], getMedian(input));
-			++cov_3zrgrc1co.s[6];
+			const median = (cov_3zrgrc1co.s[5]++, getMedian(input));
+			cov_3zrgrc1co.s[6]++;
 			return input.filter(x => {
-				++cov_3zrgrc1co.f[4];
-				++cov_3zrgrc1co.s[7];
+				cov_3zrgrc1co.f[4]++;
+				cov_3zrgrc1co.s[7]++;
 				return x === median;
 			}).length === 1;
 		};
 
-		const inputs = (++cov_3zrgrc1co.s[8], [[1, 2, 3, 4, 5]]);
+		const inputs = (cov_3zrgrc1co.s[8]++, [[1, 2, 3, 4, 5]]);
 
 		// 5 numbers in -5..5
 		{
-			let input = (++cov_3zrgrc1co.s[9], null);
+			let input = (cov_3zrgrc1co.s[9]++, null);
 
-			++cov_3zrgrc1co.s[10];
+			cov_3zrgrc1co.s[10]++;
 			do {
-				++cov_3zrgrc1co.s[11];
+				cov_3zrgrc1co.s[11]++;
 
 				input = Array.from({ length: 5 }, () => {
-					++cov_3zrgrc1co.f[5];
-					++cov_3zrgrc1co.s[12];
+					cov_3zrgrc1co.f[5]++;
+					cov_3zrgrc1co.s[12]++;
 					return -5 + Math.floor(random() * 11);
 				});
 			} while (!isMedianUnique(input));
 
-			++cov_3zrgrc1co.s[13];
+			cov_3zrgrc1co.s[13]++;
 			inputs.push(input);
 		}
 
 		// 7 numbers in 1..100
 		{
-			let input = (++cov_3zrgrc1co.s[14], null);
+			let input = (cov_3zrgrc1co.s[14]++, null);
 
-			++cov_3zrgrc1co.s[15];
+			cov_3zrgrc1co.s[15]++;
 			do {
-				++cov_3zrgrc1co.s[16];
+				cov_3zrgrc1co.s[16]++;
 
 				input = Array.from({ length: 7 }, () => {
-					++cov_3zrgrc1co.f[6];
-					++cov_3zrgrc1co.s[17];
+					cov_3zrgrc1co.f[6]++;
+					cov_3zrgrc1co.s[17]++;
 					return 1 + Math.floor(random() * 100);
 				});
 			} while (!isMedianUnique(input));
 
-			++cov_3zrgrc1co.s[18];
+			cov_3zrgrc1co.s[18]++;
 			inputs.push(input);
 		}
 
 		// 7 numbers in 0..49
 		{
-			let input = (++cov_3zrgrc1co.s[19], null);
+			let input = (cov_3zrgrc1co.s[19]++, null);
 
-			++cov_3zrgrc1co.s[20];
+			cov_3zrgrc1co.s[20]++;
 			do {
-				++cov_3zrgrc1co.s[21];
+				cov_3zrgrc1co.s[21]++;
 
 				input = Array.from({ length: 7 }, () => {
-					++cov_3zrgrc1co.f[7];
-					++cov_3zrgrc1co.s[22];
+					cov_3zrgrc1co.f[7]++;
+					cov_3zrgrc1co.s[22]++;
 					return Math.floor(random() * 50);
 				});
 			} while (!isMedianUnique(input));
 
-			++cov_3zrgrc1co.s[23];
+			cov_3zrgrc1co.s[23]++;
 			inputs.push(input);
 		}
 
 		// 7 numbers in 50..99, the median is at last
 		{
-			let input = (++cov_3zrgrc1co.s[24], null);
+			let input = (cov_3zrgrc1co.s[24]++, null);
 
-			++cov_3zrgrc1co.s[25];
+			cov_3zrgrc1co.s[25]++;
 			do {
-				++cov_3zrgrc1co.s[26];
+				cov_3zrgrc1co.s[26]++;
 
 				input = Array.from({ length: 7 }, () => {
-					++cov_3zrgrc1co.f[8];
-					++cov_3zrgrc1co.s[27];
+					cov_3zrgrc1co.f[8]++;
+					cov_3zrgrc1co.s[27]++;
 					return 50 + Math.floor(random() * 50);
 				});
 			} while (!isMedianUnique(input));
 
 			// Swap the median and the last
-			const median = (++cov_3zrgrc1co.s[28], getMedian(input));
-			++cov_3zrgrc1co.s[29];
+			const median = (cov_3zrgrc1co.s[28]++, getMedian(input));
+			cov_3zrgrc1co.s[29]++;
 			input[input.indexOf(median)] = input[6];
-			++cov_3zrgrc1co.s[30];
+			cov_3zrgrc1co.s[30]++;
 			input[6] = median;
 
-			++cov_3zrgrc1co.s[31];
+			cov_3zrgrc1co.s[31]++;
 			inputs.push(input);
 		}
 
-		++cov_3zrgrc1co.s[32];
+		cov_3zrgrc1co.s[32]++;
 		return {
 			input: inputs.map(input => {
-				++cov_3zrgrc1co.f[9];
-				++cov_3zrgrc1co.s[33];
+				cov_3zrgrc1co.f[9]++;
+				cov_3zrgrc1co.s[33]++;
 				return [input.length, input];
 			}),
 			output: inputs.map(input => {
-				++cov_3zrgrc1co.f[10];
-				++cov_3zrgrc1co.s[34];
+				cov_3zrgrc1co.f[10]++;
+				cov_3zrgrc1co.s[34]++;
 				return getMedian(input);
 			})
 		};
@@ -27068,7 +27068,7 @@ var cov_27vftubw8l = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_27vftubw8l.s[0];
+cov_27vftubw8l.s[0]++;
 module.exports = {
 	name: 'repeat-self',
 	version: 2,
@@ -27102,34 +27102,34 @@ module.exports = {
 	input: [1, null, null, 9],
 	output: [1, null, null, 999999999],
 	ioGenerator: random => {
-		++cov_27vftubw8l.f[0];
+		cov_27vftubw8l.f[0]++;
 
-		const candidates = (++cov_27vftubw8l.s[1], Array.from({ length: 7 }, (item, index) => {
-			++cov_27vftubw8l.f[1];
-			++cov_27vftubw8l.s[2];
+		const candidates = (cov_27vftubw8l.s[1]++, Array.from({ length: 7 }, (item, index) => {
+			cov_27vftubw8l.f[1]++;
+			cov_27vftubw8l.s[2]++;
 			return index + 2;
 		})); // 2..8
-		const inputs = (++cov_27vftubw8l.s[3], []);
+		const inputs = (cov_27vftubw8l.s[3]++, []);
 
 		// Shuffle array and take heading 3
-		const index1 = (++cov_27vftubw8l.s[4], Math.floor(random() * 7));
-		++cov_27vftubw8l.s[5];
+		const index1 = (cov_27vftubw8l.s[4]++, Math.floor(random() * 7));
+		cov_27vftubw8l.s[5]++;
 		inputs.push(candidates[index1]);
-		++cov_27vftubw8l.s[6];
+		cov_27vftubw8l.s[6]++;
 		candidates[index1] = candidates[0];
 
-		const index2 = (++cov_27vftubw8l.s[7], Math.floor(random() * 6) + 1);
-		++cov_27vftubw8l.s[8];
+		const index2 = (cov_27vftubw8l.s[7]++, Math.floor(random() * 6) + 1);
+		cov_27vftubw8l.s[8]++;
 		inputs.push(candidates[index2]);
 
-		++cov_27vftubw8l.s[9];
+		cov_27vftubw8l.s[9]++;
 		inputs.sort((a, b) => {
-			++cov_27vftubw8l.f[2];
-			++cov_27vftubw8l.s[10];
+			cov_27vftubw8l.f[2]++;
+			cov_27vftubw8l.s[10]++;
 			return a - b;
 		});
 
-		++cov_27vftubw8l.s[11];
+		cov_27vftubw8l.s[11]++;
 		return {
 			input: [1, inputs[0], inputs[1], 9],
 			output: [1, parseInt(inputs[0].toString().repeat(inputs[0])), parseInt(inputs[1].toString().repeat(inputs[1])), 999999999]
@@ -27451,7 +27451,7 @@ var cov_2aa5j45rp7 = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_2aa5j45rp7.s[0];
+cov_2aa5j45rp7.s[0]++;
 module.exports = {
 	name: 'fibonacci-hard',
 	version: 3,
@@ -27487,49 +27487,49 @@ module.exports = {
 	input: [null, null, null, 30],
 	output: [null, null, null, 832040],
 	ioGenerator: random => {
-		++cov_2aa5j45rp7.f[0];
+		cov_2aa5j45rp7.f[0]++;
 
-		const fibonacci = (++cov_2aa5j45rp7.s[1], [1, 1]);
+		const fibonacci = (cov_2aa5j45rp7.s[1]++, [1, 1]);
 
-		++cov_2aa5j45rp7.s[2];
+		cov_2aa5j45rp7.s[2]++;
 		for (let i = 2; i < 30; i++) {
-			++cov_2aa5j45rp7.s[3];
+			cov_2aa5j45rp7.s[3]++;
 
 			fibonacci.push(fibonacci[fibonacci.length - 1] + fibonacci[fibonacci.length - 2]);
 		}
 
-		const candidates = (++cov_2aa5j45rp7.s[4], Array.from({ length: 18 }, (item, index) => {
-			++cov_2aa5j45rp7.f[1];
-			++cov_2aa5j45rp7.s[5];
+		const candidates = (cov_2aa5j45rp7.s[4]++, Array.from({ length: 18 }, (item, index) => {
+			cov_2aa5j45rp7.f[1]++;
+			cov_2aa5j45rp7.s[5]++;
 			return index + 12;
 		})); // 12..29
-		const inputs = (++cov_2aa5j45rp7.s[6], []);
+		const inputs = (cov_2aa5j45rp7.s[6]++, []);
 
 		// Shuffle array and take heading 3
-		const index1 = (++cov_2aa5j45rp7.s[7], Math.floor(random() * 18));
-		++cov_2aa5j45rp7.s[8];
+		const index1 = (cov_2aa5j45rp7.s[7]++, Math.floor(random() * 18));
+		cov_2aa5j45rp7.s[8]++;
 		inputs.push(candidates[index1]);
-		++cov_2aa5j45rp7.s[9];
+		cov_2aa5j45rp7.s[9]++;
 		candidates[index1] = candidates[0];
 
-		const index2 = (++cov_2aa5j45rp7.s[10], Math.floor(random() * 17) + 1);
-		++cov_2aa5j45rp7.s[11];
+		const index2 = (cov_2aa5j45rp7.s[10]++, Math.floor(random() * 17) + 1);
+		cov_2aa5j45rp7.s[11]++;
 		inputs.push(candidates[index2]);
-		++cov_2aa5j45rp7.s[12];
+		cov_2aa5j45rp7.s[12]++;
 		candidates[index2] = candidates[1];
 
-		const index3 = (++cov_2aa5j45rp7.s[13], Math.floor(random() * 16) + 2);
-		++cov_2aa5j45rp7.s[14];
+		const index3 = (cov_2aa5j45rp7.s[13]++, Math.floor(random() * 16) + 2);
+		cov_2aa5j45rp7.s[14]++;
 		inputs.push(candidates[index3]);
 
-		++cov_2aa5j45rp7.s[15];
+		cov_2aa5j45rp7.s[15]++;
 		inputs.sort((a, b) => {
-			++cov_2aa5j45rp7.f[2];
-			++cov_2aa5j45rp7.s[16];
+			cov_2aa5j45rp7.f[2]++;
+			cov_2aa5j45rp7.s[16]++;
 			return a - b;
 		});
 
-		++cov_2aa5j45rp7.s[17];
+		cov_2aa5j45rp7.s[17]++;
 		return {
 			input: [inputs[0], inputs[1], inputs[2], 30],
 			output: [fibonacci[inputs[0] - 1], fibonacci[inputs[1] - 1], fibonacci[inputs[2] - 1], fibonacci[29]]
@@ -28020,7 +28020,7 @@ var cov_16pz43lyh1 = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_16pz43lyh1.s[0];
+cov_16pz43lyh1.s[0]++;
 module.exports = {
 	name: 'factorization',
 	version: 2,
@@ -28061,75 +28061,75 @@ module.exports = {
 	input: [null, null, null, 211, 221],
 	output: [null, null, null, 0, 13],
 	ioGenerator: random => {
-		++cov_16pz43lyh1.f[0];
+		cov_16pz43lyh1.f[0]++;
 
-		const numbers = (++cov_16pz43lyh1.s[1], [0, 0, 0]);
-		const primes = (++cov_16pz43lyh1.s[2], [2]);
-		++cov_16pz43lyh1.s[3];
+		const numbers = (cov_16pz43lyh1.s[1]++, [0, 0, 0]);
+		const primes = (cov_16pz43lyh1.s[2]++, [2]);
+		cov_16pz43lyh1.s[3]++;
 		for (let i = 3; i < 256; i++) {
-			let flag = (++cov_16pz43lyh1.s[4], null);
-			++cov_16pz43lyh1.s[5];
+			let flag = (cov_16pz43lyh1.s[4]++, null);
+			cov_16pz43lyh1.s[5]++;
 			for (const prime of primes) {
-				++cov_16pz43lyh1.s[6];
+				cov_16pz43lyh1.s[6]++;
 
 				if (i % prime === 0) {
-					++cov_16pz43lyh1.b[0][0];
-					++cov_16pz43lyh1.s[7];
+					cov_16pz43lyh1.b[0][0]++;
+					cov_16pz43lyh1.s[7]++;
 
 					flag = prime;
-					++cov_16pz43lyh1.s[8];
+					cov_16pz43lyh1.s[8]++;
 					break;
 				} else {
-					++cov_16pz43lyh1.b[0][1];
+					cov_16pz43lyh1.b[0][1]++;
 				}
 			}
-			++cov_16pz43lyh1.s[9];
+			cov_16pz43lyh1.s[9]++;
 			if (flag === null) {
-				++cov_16pz43lyh1.b[1][0];
-				++cov_16pz43lyh1.s[10];
+				cov_16pz43lyh1.b[1][0]++;
+				cov_16pz43lyh1.s[10]++;
 
 				numbers.push(0);
-				++cov_16pz43lyh1.s[11];
+				cov_16pz43lyh1.s[11]++;
 				primes.push(i);
 			} else {
-				++cov_16pz43lyh1.b[1][1];
-				++cov_16pz43lyh1.s[12];
+				cov_16pz43lyh1.b[1][1]++;
+				cov_16pz43lyh1.s[12]++;
 
 				numbers.push(flag);
 			}
 		}
 
-		const candidates = (++cov_16pz43lyh1.s[13], Array.from({ length: 199 }, (item, index) => {
-			++cov_16pz43lyh1.f[1];
-			++cov_16pz43lyh1.s[14];
+		const candidates = (cov_16pz43lyh1.s[13]++, Array.from({ length: 199 }, (item, index) => {
+			cov_16pz43lyh1.f[1]++;
+			cov_16pz43lyh1.s[14]++;
 			return index + 2;
 		})); // 2..200
-		const inputs = (++cov_16pz43lyh1.s[15], []);
+		const inputs = (cov_16pz43lyh1.s[15]++, []);
 
-		const index1 = (++cov_16pz43lyh1.s[16], Math.floor(random() * 30));
-		++cov_16pz43lyh1.s[17];
+		const index1 = (cov_16pz43lyh1.s[16]++, Math.floor(random() * 30));
+		cov_16pz43lyh1.s[17]++;
 		inputs.push(candidates[index1]);
-		++cov_16pz43lyh1.s[18];
+		cov_16pz43lyh1.s[18]++;
 		candidates[index1] = candidates[0];
 
-		const index2 = (++cov_16pz43lyh1.s[19], Math.floor(random() * 119) + 1);
-		++cov_16pz43lyh1.s[20];
+		const index2 = (cov_16pz43lyh1.s[19]++, Math.floor(random() * 119) + 1);
+		cov_16pz43lyh1.s[20]++;
 		inputs.push(candidates[index2]);
-		++cov_16pz43lyh1.s[21];
+		cov_16pz43lyh1.s[21]++;
 		candidates[index2] = candidates[1];
 
-		const index3 = (++cov_16pz43lyh1.s[22], Math.floor(random() * 118) + 2);
-		++cov_16pz43lyh1.s[23];
+		const index3 = (cov_16pz43lyh1.s[22]++, Math.floor(random() * 118) + 2);
+		cov_16pz43lyh1.s[23]++;
 		inputs.push(candidates[index3]);
 
-		++cov_16pz43lyh1.s[24];
+		cov_16pz43lyh1.s[24]++;
 		inputs.sort((a, b) => {
-			++cov_16pz43lyh1.f[2];
-			++cov_16pz43lyh1.s[25];
+			cov_16pz43lyh1.f[2]++;
+			cov_16pz43lyh1.s[25]++;
 			return a - b;
 		});
 
-		++cov_16pz43lyh1.s[26];
+		cov_16pz43lyh1.s[26]++;
 		return {
 			input: [inputs[0], inputs[1], inputs[2], 211, 221],
 			output: [numbers[inputs[0]], numbers[inputs[1]], numbers[inputs[2]], 0, 13]
@@ -28672,7 +28672,7 @@ var cov_w1ynyetvj = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_w1ynyetvj.s[0];
+cov_w1ynyetvj.s[0]++;
 module.exports = {
 	name: 'spaceship',
 	version: 2,
@@ -28715,69 +28715,69 @@ module.exports = {
 	input: [[null, null], [null, null], [null, null], [null, null], [null, null]],
 	output: [0, -1, 1, null, null],
 	ioGenerator: random => {
-		++cov_w1ynyetvj.f[0];
+		cov_w1ynyetvj.f[0]++;
 
-		const candidates = (++cov_w1ynyetvj.s[1], Array.from({ length: 99 }, (item, index) => {
-			++cov_w1ynyetvj.f[1];
-			++cov_w1ynyetvj.s[2];
+		const candidates = (cov_w1ynyetvj.s[1]++, Array.from({ length: 99 }, (item, index) => {
+			cov_w1ynyetvj.f[1]++;
+			cov_w1ynyetvj.s[2]++;
 			return index + 1;
 		})); // 1..100
 
-		++cov_w1ynyetvj.s[3];
+		cov_w1ynyetvj.s[3]++;
 		const swap = (index1, index2) => {
-			++cov_w1ynyetvj.f[2];
+			cov_w1ynyetvj.f[2]++;
 
-			const temp = (++cov_w1ynyetvj.s[4], candidates[index1]);
-			++cov_w1ynyetvj.s[5];
+			const temp = (cov_w1ynyetvj.s[4]++, candidates[index1]);
+			cov_w1ynyetvj.s[5]++;
 			candidates[index1] = candidates[index2];
-			++cov_w1ynyetvj.s[6];
+			cov_w1ynyetvj.s[6]++;
 			candidates[index2] = temp;
 		};
 
-		const input1 = (++cov_w1ynyetvj.s[7], candidates[Math.floor(random() * 99)]);
+		const input1 = (cov_w1ynyetvj.s[7]++, candidates[Math.floor(random() * 99)]);
 
-		const input2index1 = (++cov_w1ynyetvj.s[8], Math.floor(random() * 99));
-		++cov_w1ynyetvj.s[9];
+		const input2index1 = (cov_w1ynyetvj.s[8]++, Math.floor(random() * 99));
+		cov_w1ynyetvj.s[9]++;
 		swap(0, input2index1);
-		const input2index2 = (++cov_w1ynyetvj.s[10], Math.floor(random() * 98) + 1);
+		const input2index2 = (cov_w1ynyetvj.s[10]++, Math.floor(random() * 98) + 1);
 
-		const input2 = (++cov_w1ynyetvj.s[11], [candidates[0], candidates[input2index2]].sort((a, b) => {
-			++cov_w1ynyetvj.f[3];
-			++cov_w1ynyetvj.s[12];
+		const input2 = (cov_w1ynyetvj.s[11]++, [candidates[0], candidates[input2index2]].sort((a, b) => {
+			cov_w1ynyetvj.f[3]++;
+			cov_w1ynyetvj.s[12]++;
 			return a - b;
 		}));
 
-		const input3index1 = (++cov_w1ynyetvj.s[13], Math.floor(random() * 99));
-		++cov_w1ynyetvj.s[14];
+		const input3index1 = (cov_w1ynyetvj.s[13]++, Math.floor(random() * 99));
+		cov_w1ynyetvj.s[14]++;
 		swap(0, input3index1);
-		const input3index2 = (++cov_w1ynyetvj.s[15], Math.floor(random() * 98) + 1);
+		const input3index2 = (cov_w1ynyetvj.s[15]++, Math.floor(random() * 98) + 1);
 
-		const input3 = (++cov_w1ynyetvj.s[16], [candidates[0], candidates[input3index2]].sort((a, b) => {
-			++cov_w1ynyetvj.f[4];
-			++cov_w1ynyetvj.s[17];
+		const input3 = (cov_w1ynyetvj.s[16]++, [candidates[0], candidates[input3index2]].sort((a, b) => {
+			cov_w1ynyetvj.f[4]++;
+			cov_w1ynyetvj.s[17]++;
 			return b - a;
 		}));
 
-		const input4negative = (++cov_w1ynyetvj.s[18], -Math.floor(random() * 99) + 1);
-		const input4positive = (++cov_w1ynyetvj.s[19], Math.floor(random() * 99) + 1);
+		const input4negative = (cov_w1ynyetvj.s[18]++, -Math.floor(random() * 99) + 1);
+		const input4positive = (cov_w1ynyetvj.s[19]++, Math.floor(random() * 99) + 1);
 
-		const input4 = (++cov_w1ynyetvj.s[20], random() < 0.5 ? (++cov_w1ynyetvj.b[0][0], [input4negative, input4positive]) : (++cov_w1ynyetvj.b[0][1], [input4positive, input4negative]));
+		const input4 = (cov_w1ynyetvj.s[20]++, random() < 0.5 ? (cov_w1ynyetvj.b[0][0]++, [input4negative, input4positive]) : (cov_w1ynyetvj.b[0][1]++, [input4positive, input4negative]));
 
-		const input5index1 = (++cov_w1ynyetvj.s[21], Math.floor(random() * 99));
-		++cov_w1ynyetvj.s[22];
+		const input5index1 = (cov_w1ynyetvj.s[21]++, Math.floor(random() * 99));
+		cov_w1ynyetvj.s[22]++;
 		swap(0, input5index1);
-		const input5index2 = (++cov_w1ynyetvj.s[23], Math.floor(random() * 98) + 1);
+		const input5index2 = (cov_w1ynyetvj.s[23]++, Math.floor(random() * 98) + 1);
 
-		const input5 = (++cov_w1ynyetvj.s[24], [-candidates[0], -candidates[input5index2]]);
+		const input5 = (cov_w1ynyetvj.s[24]++, [-candidates[0], -candidates[input5index2]]);
 
-		++cov_w1ynyetvj.s[25];
+		cov_w1ynyetvj.s[25]++;
 		const spaceship = (a, b) => {
-			++cov_w1ynyetvj.f[5];
-			++cov_w1ynyetvj.s[26];
+			cov_w1ynyetvj.f[5]++;
+			cov_w1ynyetvj.s[26]++;
 			return Math.sign(a - b);
 		};
 
-		++cov_w1ynyetvj.s[27];
+		cov_w1ynyetvj.s[27]++;
 		return {
 			input: [[input1, input1], input2, input3, input4, input5],
 			output: [spaceship(input1, input1), spaceship(...input2), spaceship(...input3), spaceship(...input4), spaceship(...input5)]
@@ -29544,7 +29544,7 @@ var cov_14019hpzfg = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_14019hpzfg.s[0];
+cov_14019hpzfg.s[0]++;
 module.exports = {
 	name: '10000th-digit',
 	version: 2,
@@ -29595,103 +29595,103 @@ module.exports = {
 	input: [null, null, null, null, 107],
 	output: [null, null, null, null, 3],
 	ioGenerator: random => {
-		++cov_14019hpzfg.f[0];
-		++cov_14019hpzfg.s[1];
+		cov_14019hpzfg.f[0]++;
+		cov_14019hpzfg.s[1]++;
 
 		const iterations = n => {
-			++cov_14019hpzfg.f[1];
-			++cov_14019hpzfg.s[2];
-			return 10000 % (n - 1) === 0 ? (++cov_14019hpzfg.b[0][0], n - 1) : (++cov_14019hpzfg.b[0][1], 10000 % (n - 1));
+			cov_14019hpzfg.f[1]++;
+			cov_14019hpzfg.s[2]++;
+			return 10000 % (n - 1) === 0 ? (cov_14019hpzfg.b[0][0]++, n - 1) : (cov_14019hpzfg.b[0][1]++, 10000 % (n - 1));
 		};
 
-		++cov_14019hpzfg.s[3];
+		cov_14019hpzfg.s[3]++;
 		const calc = p => {
-			++cov_14019hpzfg.f[2];
+			cov_14019hpzfg.f[2]++;
 
-			let reminder = (++cov_14019hpzfg.s[4], 1);
-			++cov_14019hpzfg.s[5];
+			let reminder = (cov_14019hpzfg.s[4]++, 1);
+			cov_14019hpzfg.s[5]++;
 			for (let i = 0; i < iterations(p) - 1; i++) {
-				++cov_14019hpzfg.s[6];
+				cov_14019hpzfg.s[6]++;
 
 				reminder = reminder * 10 % p;
 			}
-			++cov_14019hpzfg.s[7];
+			cov_14019hpzfg.s[7]++;
 			return Math.floor(reminder * 10 / p);
 		};
 
-		const candidates = (++cov_14019hpzfg.s[8], [7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103,
+		const candidates = (cov_14019hpzfg.s[8]++, [7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103,
 		// 107
 		109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179].filter(n => {
-			++cov_14019hpzfg.f[3];
-			++cov_14019hpzfg.s[9];
+			cov_14019hpzfg.f[3]++;
+			cov_14019hpzfg.s[9]++;
 			return iterations(n) <= 36;
 		}));
 
-		const inputs = (++cov_14019hpzfg.s[10], []);
+		const inputs = (cov_14019hpzfg.s[10]++, []);
 
 		// Take input which takes at least 24 iterations
-		const heavyInputs = (++cov_14019hpzfg.s[11], candidates.filter(n => {
-			++cov_14019hpzfg.f[4];
-			++cov_14019hpzfg.s[12];
-			return (++cov_14019hpzfg.b[1][0], iterations(n) >= 24) && (++cov_14019hpzfg.b[1][1], calc(n) !== 3);
+		const heavyInputs = (cov_14019hpzfg.s[11]++, candidates.filter(n => {
+			cov_14019hpzfg.f[4]++;
+			cov_14019hpzfg.s[12]++;
+			return (cov_14019hpzfg.b[1][0]++, iterations(n) >= 24) && (cov_14019hpzfg.b[1][1]++, calc(n) !== 3);
 		}));
-		++cov_14019hpzfg.s[13];
+		cov_14019hpzfg.s[13]++;
 		inputs.push(heavyInputs[Math.floor(random() * heavyInputs.length)]);
 
 		// Generate outputMap
-		const outputMap = (++cov_14019hpzfg.s[14], new Map());
-		++cov_14019hpzfg.s[15];
+		const outputMap = (cov_14019hpzfg.s[14]++, new Map());
+		cov_14019hpzfg.s[15]++;
 		candidates.forEach(n => {
-			++cov_14019hpzfg.f[5];
-			++cov_14019hpzfg.s[16];
+			cov_14019hpzfg.f[5]++;
+			cov_14019hpzfg.s[16]++;
 
 			if (!outputMap.has(calc(n))) {
-				++cov_14019hpzfg.b[2][0];
-				++cov_14019hpzfg.s[17];
+				cov_14019hpzfg.b[2][0]++;
+				cov_14019hpzfg.s[17]++;
 
 				outputMap.set(calc(n), []);
 			} else {
-				++cov_14019hpzfg.b[2][1];
+				cov_14019hpzfg.b[2][1]++;
 			}
-			++cov_14019hpzfg.s[18];
+			cov_14019hpzfg.s[18]++;
 			outputMap.get(calc(n)).push(n);
 		});
 
-		const outputCandidates = (++cov_14019hpzfg.s[19], Array.from(outputMap.keys()).filter(n => {
-			++cov_14019hpzfg.f[6];
-			++cov_14019hpzfg.s[20];
-			return (++cov_14019hpzfg.b[3][0], n !== 3) && (++cov_14019hpzfg.b[3][1], n !== calc(inputs[0]));
+		const outputCandidates = (cov_14019hpzfg.s[19]++, Array.from(outputMap.keys()).filter(n => {
+			cov_14019hpzfg.f[6]++;
+			cov_14019hpzfg.s[20]++;
+			return (cov_14019hpzfg.b[3][0]++, n !== 3) && (cov_14019hpzfg.b[3][1]++, n !== calc(inputs[0]));
 		}));
 
 		// Take unique outputs by 3 and get corresponding inputs
 
-		const index1 = (++cov_14019hpzfg.s[21], Math.floor(random() * outputCandidates.length));
-		const inputCandidates1 = (++cov_14019hpzfg.s[22], outputMap.get(outputCandidates[index1]));
-		++cov_14019hpzfg.s[23];
+		const index1 = (cov_14019hpzfg.s[21]++, Math.floor(random() * outputCandidates.length));
+		const inputCandidates1 = (cov_14019hpzfg.s[22]++, outputMap.get(outputCandidates[index1]));
+		cov_14019hpzfg.s[23]++;
 		inputs.push(inputCandidates1[Math.floor(random() * inputCandidates1.length)]);
-		++cov_14019hpzfg.s[24];
+		cov_14019hpzfg.s[24]++;
 		outputCandidates[index1] = outputCandidates[0];
 
-		const index2 = (++cov_14019hpzfg.s[25], Math.floor(random() * (outputCandidates.length - 1)) + 1);
-		const inputCandidates2 = (++cov_14019hpzfg.s[26], outputMap.get(outputCandidates[index2]));
-		++cov_14019hpzfg.s[27];
+		const index2 = (cov_14019hpzfg.s[25]++, Math.floor(random() * (outputCandidates.length - 1)) + 1);
+		const inputCandidates2 = (cov_14019hpzfg.s[26]++, outputMap.get(outputCandidates[index2]));
+		cov_14019hpzfg.s[27]++;
 		inputs.push(inputCandidates2[Math.floor(random() * inputCandidates2.length)]);
-		++cov_14019hpzfg.s[28];
+		cov_14019hpzfg.s[28]++;
 		outputCandidates[index2] = outputCandidates[1];
 
-		const index3 = (++cov_14019hpzfg.s[29], Math.floor(random() * (outputCandidates.length - 2)) + 2);
-		const inputCandidates3 = (++cov_14019hpzfg.s[30], outputMap.get(outputCandidates[index3]));
-		++cov_14019hpzfg.s[31];
+		const index3 = (cov_14019hpzfg.s[29]++, Math.floor(random() * (outputCandidates.length - 2)) + 2);
+		const inputCandidates3 = (cov_14019hpzfg.s[30]++, outputMap.get(outputCandidates[index3]));
+		cov_14019hpzfg.s[31]++;
 		inputs.push(inputCandidates3[Math.floor(random() * inputCandidates3.length)]);
 
-		++cov_14019hpzfg.s[32];
+		cov_14019hpzfg.s[32]++;
 		inputs.sort((a, b) => {
-			++cov_14019hpzfg.f[7];
-			++cov_14019hpzfg.s[33];
+			cov_14019hpzfg.f[7]++;
+			cov_14019hpzfg.s[33]++;
 			return a - b;
 		});
 
-		++cov_14019hpzfg.s[34];
+		cov_14019hpzfg.s[34]++;
 		return {
 			input: [inputs[0], inputs[1], inputs[2], inputs[3], 107],
 			output: [calc(inputs[0]), calc(inputs[1]), calc(inputs[2]), calc(inputs[3]), 3]
@@ -29771,11 +29771,11 @@ var cov_sq4vmk9xj = function () {
     return coverage[path] = coverageData;
 }();
 
-var testsContext = (++cov_sq4vmk9xj.s[0], __webpack_require__(38));
+var testsContext = (cov_sq4vmk9xj.s[0]++, __webpack_require__(38));
 
-var runnable = (++cov_sq4vmk9xj.s[1], testsContext.keys());
+var runnable = (cov_sq4vmk9xj.s[1]++, testsContext.keys());
 
-++cov_sq4vmk9xj.s[2];
+cov_sq4vmk9xj.s[2]++;
 runnable.forEach(testsContext);
 
 /***/ }),
@@ -31363,15 +31363,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 let PassEvent = function PassEvent({ in: input, out: output }) {
 	_classCallCheck(this, PassEvent);
 
-	++cov_uchzeco8a.f[0];
-	++cov_uchzeco8a.s[0];
+	cov_uchzeco8a.f[0]++;
+	cov_uchzeco8a.s[0]++;
 
 	this.in = input;
-	++cov_uchzeco8a.s[1];
+	cov_uchzeco8a.s[1]++;
 	this.out = output;
 };
 
-++cov_uchzeco8a.s[2];
+cov_uchzeco8a.s[2]++;
 
 
 module.exports = PassEvent;
@@ -35338,20 +35338,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-const React = (++cov_9m9ln6fdi.s[0], __webpack_require__(1));
-const PropTypes = (++cov_9m9ln6fdi.s[1], __webpack_require__(3));
-const Hammer = (++cov_9m9ln6fdi.s[2], __webpack_require__(47));
-const { INPUT_MOVE, INPUT_END } = (++cov_9m9ln6fdi.s[3], typeof window === 'undefined' ? (++cov_9m9ln6fdi.b[0][0], {}) : (++cov_9m9ln6fdi.b[0][1], __webpack_require__(48)));
-const { default: Measure } = (++cov_9m9ln6fdi.s[4], __webpack_require__(12));
-const Path = (++cov_9m9ln6fdi.s[5], __webpack_require__(49));
-const assert = (++cov_9m9ln6fdi.s[6], __webpack_require__(4));
-const Board = (++cov_9m9ln6fdi.s[7], __webpack_require__(5));
-const BlockComponent = (++cov_9m9ln6fdi.s[8], __webpack_require__(10));
-const IOComponent = (++cov_9m9ln6fdi.s[9], __webpack_require__(16));
-const { id, sum } = (++cov_9m9ln6fdi.s[10], __webpack_require__(0));
-const { BLOCK_SIZE } = (++cov_9m9ln6fdi.s[11], __webpack_require__(6));
+const React = (cov_9m9ln6fdi.s[0]++, __webpack_require__(1));
+const PropTypes = (cov_9m9ln6fdi.s[1]++, __webpack_require__(3));
+const Hammer = (cov_9m9ln6fdi.s[2]++, __webpack_require__(47));
+const { INPUT_MOVE, INPUT_END } = (cov_9m9ln6fdi.s[3]++, typeof window === 'undefined' ? (cov_9m9ln6fdi.b[0][0]++, {}) : (cov_9m9ln6fdi.b[0][1]++, __webpack_require__(48)));
+const { default: Measure } = (cov_9m9ln6fdi.s[4]++, __webpack_require__(12));
+const Path = (cov_9m9ln6fdi.s[5]++, __webpack_require__(49));
+const assert = (cov_9m9ln6fdi.s[6]++, __webpack_require__(4));
+const Board = (cov_9m9ln6fdi.s[7]++, __webpack_require__(5));
+const BlockComponent = (cov_9m9ln6fdi.s[8]++, __webpack_require__(10));
+const IOComponent = (cov_9m9ln6fdi.s[9]++, __webpack_require__(16));
+const { id, sum } = (cov_9m9ln6fdi.s[10]++, __webpack_require__(0));
+const { BLOCK_SIZE } = (cov_9m9ln6fdi.s[11]++, __webpack_require__(6));
 
-const inputColors = (++cov_9m9ln6fdi.s[12], ['#de3131', // red
+const inputColors = (cov_9m9ln6fdi.s[12]++, ['#de3131', // red
 '#4527a8', // blue
 '#1c6925', // green
 '#db40cd']);
@@ -35362,128 +35362,128 @@ let BoardComponent = function (_React$Component) {
 	function BoardComponent(props, state) {
 		_classCallCheck(this, BoardComponent);
 
-		++cov_9m9ln6fdi.f[0];
-		++cov_9m9ln6fdi.s[13];
+		cov_9m9ln6fdi.f[0]++;
+		cov_9m9ln6fdi.s[13]++;
 
 		// Currently, initial status should be always 'stop'
 		var _this = _possibleConstructorReturn(this, (BoardComponent.__proto__ || Object.getPrototypeOf(BoardComponent)).call(this, props, state));
 
 		_this.execute = value => {
-			++cov_9m9ln6fdi.f[20];
+			cov_9m9ln6fdi.f[20]++;
 
 			// Reset scale on start executing
-			const { offsetX, offsetY, scale } = (++cov_9m9ln6fdi.s[53], _this.normalizeScaleAndOffset({
+			const { offsetX, offsetY, scale } = (cov_9m9ln6fdi.s[53]++, _this.normalizeScaleAndOffset({
 				offsetX: _this.state.offsetX,
 				offsetY: _this.state.offsetY,
 				scale: 1
 			}));
-			++cov_9m9ln6fdi.s[54];
+			cov_9m9ln6fdi.s[54]++;
 			_this.setState({ offsetX, offsetY, scale });
 
-			++cov_9m9ln6fdi.s[55];
+			cov_9m9ln6fdi.s[55]++;
 			_this.board.input(value);
-			++cov_9m9ln6fdi.s[56];
+			cov_9m9ln6fdi.s[56]++;
 			_this.clockUp();
 		};
 
 		_this.clockUp = async () => {
-			++cov_9m9ln6fdi.f[22];
+			cov_9m9ln6fdi.f[22]++;
 
-			const passAnimations = (++cov_9m9ln6fdi.s[59], []);
+			const passAnimations = (cov_9m9ln6fdi.s[59]++, []);
 
-			++cov_9m9ln6fdi.s[60];
+			cov_9m9ln6fdi.s[60]++;
 			_this.board.step({
 				onPass: passEvent => {
-					++cov_9m9ln6fdi.f[23];
-					++cov_9m9ln6fdi.s[61];
+					cov_9m9ln6fdi.f[23]++;
+					cov_9m9ln6fdi.s[61]++;
 
 					passAnimations.push(new Promise(resolve => {
-						++cov_9m9ln6fdi.f[24];
-						++cov_9m9ln6fdi.s[62];
+						cov_9m9ln6fdi.f[24]++;
+						cov_9m9ln6fdi.s[62]++;
 
 						_this.passAnimationResolvers.set(passEvent, resolve);
 					}));
 				}
 			});
 
-			++cov_9m9ln6fdi.s[63];
+			cov_9m9ln6fdi.s[63]++;
 			_this.setState({
 				clocks: _this.board.clock
 			});
 
-			++cov_9m9ln6fdi.s[64];
+			cov_9m9ln6fdi.s[64]++;
 			if (_this.board.status !== 'executing') {
-				++cov_9m9ln6fdi.b[6][0];
-				++cov_9m9ln6fdi.s[65];
+				cov_9m9ln6fdi.b[6][0]++;
+				cov_9m9ln6fdi.s[65]++;
 
 				return;
 			} else {
-				++cov_9m9ln6fdi.b[6][1];
+				cov_9m9ln6fdi.b[6][1]++;
 			}
 
-			++cov_9m9ln6fdi.s[66];
+			cov_9m9ln6fdi.s[66]++;
 			await Promise.all(passAnimations);
 
-			++cov_9m9ln6fdi.s[67];
+			cov_9m9ln6fdi.s[67]++;
 			_this.board.hand();
 
-			++cov_9m9ln6fdi.s[68];
+			cov_9m9ln6fdi.s[68]++;
 			if (_this.board.status !== 'executing') {
-				++cov_9m9ln6fdi.b[7][0];
-				++cov_9m9ln6fdi.s[69];
+				cov_9m9ln6fdi.b[7][0]++;
+				cov_9m9ln6fdi.s[69]++;
 
 				return;
 			} else {
-				++cov_9m9ln6fdi.b[7][1];
+				cov_9m9ln6fdi.b[7][1]++;
 			}
 
-			++cov_9m9ln6fdi.s[70];
+			cov_9m9ln6fdi.s[70]++;
 			if (_this.board.clock >= _this.board.clockLimit) {
-				++cov_9m9ln6fdi.b[8][0];
-				++cov_9m9ln6fdi.s[71];
+				cov_9m9ln6fdi.b[8][0]++;
+				cov_9m9ln6fdi.s[71]++;
 
 				_this.board.halt();
-				++cov_9m9ln6fdi.s[72];
+				cov_9m9ln6fdi.s[72]++;
 				_this.props.onClockLimitExceeded(_this.board.clockLimit);
 
-				++cov_9m9ln6fdi.s[73];
+				cov_9m9ln6fdi.s[73]++;
 				return;
 			} else {
-				++cov_9m9ln6fdi.b[8][1];
+				cov_9m9ln6fdi.b[8][1]++;
 			}
 
-			++cov_9m9ln6fdi.s[74];
+			cov_9m9ln6fdi.s[74]++;
 			if (_this.board.dataCount > 100) {
-				++cov_9m9ln6fdi.b[9][0];
-				++cov_9m9ln6fdi.s[75];
+				cov_9m9ln6fdi.b[9][0]++;
+				cov_9m9ln6fdi.s[75]++;
 
 				_this.board.halt();
-				++cov_9m9ln6fdi.s[76];
+				cov_9m9ln6fdi.s[76]++;
 				_this.props.onDataLimitExceeded();
 
-				++cov_9m9ln6fdi.s[77];
+				cov_9m9ln6fdi.s[77]++;
 				return;
 			} else {
-				++cov_9m9ln6fdi.b[9][1];
+				cov_9m9ln6fdi.b[9][1]++;
 			}
 
-			++cov_9m9ln6fdi.s[78];
+			cov_9m9ln6fdi.s[78]++;
 			_this.clockUp();
 		};
 
 		_this.normalizeScaleAndOffset = ({ offsetX, offsetY, scale }) => {
-			++cov_9m9ln6fdi.f[25];
+			cov_9m9ln6fdi.f[25]++;
 
-			const maxScale = (++cov_9m9ln6fdi.s[79], Math.max(_this._boardOuterWidth, _this._boardOuterHeight) / (BLOCK_SIZE * 2));
-			const normalizedScale = (++cov_9m9ln6fdi.s[80], Math.max(1, Math.min(scale, maxScale)));
+			const maxScale = (cov_9m9ln6fdi.s[79]++, Math.max(_this._boardOuterWidth, _this._boardOuterHeight) / (BLOCK_SIZE * 2));
+			const normalizedScale = (cov_9m9ln6fdi.s[80]++, Math.max(1, Math.min(scale, maxScale)));
 
-			const maxOffsetX = (++cov_9m9ln6fdi.s[81], (_this._boardOuterWidth - _this._boardOuterWidth / normalizedScale) / 2);
-			const normalizedOffsetX = (++cov_9m9ln6fdi.s[82], Math.max(-maxOffsetX, Math.min(offsetX, maxOffsetX)));
+			const maxOffsetX = (cov_9m9ln6fdi.s[81]++, (_this._boardOuterWidth - _this._boardOuterWidth / normalizedScale) / 2);
+			const normalizedOffsetX = (cov_9m9ln6fdi.s[82]++, Math.max(-maxOffsetX, Math.min(offsetX, maxOffsetX)));
 
-			const maxOffsetY = (++cov_9m9ln6fdi.s[83], (_this._boardOuterHeight - _this._boardOuterHeight / normalizedScale) / 2);
-			const normalizedOffsetY = (++cov_9m9ln6fdi.s[84], Math.max(-maxOffsetY, Math.min(offsetY, maxOffsetY)));
+			const maxOffsetY = (cov_9m9ln6fdi.s[83]++, (_this._boardOuterHeight - _this._boardOuterHeight / normalizedScale) / 2);
+			const normalizedOffsetY = (cov_9m9ln6fdi.s[84]++, Math.max(-maxOffsetY, Math.min(offsetY, maxOffsetY)));
 
-			++cov_9m9ln6fdi.s[85];
+			cov_9m9ln6fdi.s[85]++;
 			return {
 				scale: normalizedScale,
 				offsetX: normalizedOffsetX,
@@ -35492,62 +35492,62 @@ let BoardComponent = function (_React$Component) {
 		};
 
 		_this.handleBoardOutput = value => {
-			++cov_9m9ln6fdi.f[26];
-			++cov_9m9ln6fdi.s[86];
+			cov_9m9ln6fdi.f[26]++;
+			cov_9m9ln6fdi.s[86]++;
 
 			_this.props.onOutput(value);
 		};
 
 		_this.handleBoardHalt = () => {
-			++cov_9m9ln6fdi.f[27];
-			++cov_9m9ln6fdi.s[87];
+			cov_9m9ln6fdi.f[27]++;
+			cov_9m9ln6fdi.s[87]++;
 
 			_this.props.onHalt();
 		};
 
 		_this.handleBoardPaused = () => {
-			++cov_9m9ln6fdi.f[28];
-			++cov_9m9ln6fdi.s[88];
+			cov_9m9ln6fdi.f[28]++;
+			cov_9m9ln6fdi.s[88]++;
 
 			_this.props.onPaused();
 		};
 
 		_this.handleClickBlock = (event, x, y) => {
-			++cov_9m9ln6fdi.f[29];
-			++cov_9m9ln6fdi.s[89];
+			cov_9m9ln6fdi.f[29]++;
+			cov_9m9ln6fdi.s[89]++;
 
 			event.preventDefault();
-			++cov_9m9ln6fdi.s[90];
+			cov_9m9ln6fdi.s[90]++;
 			return _this.props.onClickBlock({ x, y, type: event.type });
 		};
 
 		_this.handlePassAnimationComplete = passEvent => {
-			++cov_9m9ln6fdi.f[30];
-			++cov_9m9ln6fdi.s[91];
+			cov_9m9ln6fdi.f[30]++;
+			cov_9m9ln6fdi.s[91]++;
 
 			if (_this.passAnimationResolvers.has(passEvent)) {
-				++cov_9m9ln6fdi.b[10][0];
-				++cov_9m9ln6fdi.s[92];
+				cov_9m9ln6fdi.b[10][0]++;
+				cov_9m9ln6fdi.s[92]++;
 
 				_this.passAnimationResolvers.get(passEvent)();
 			} else {
-				++cov_9m9ln6fdi.b[10][1];
+				cov_9m9ln6fdi.b[10][1]++;
 			}
 		};
 
 		_this.handlePan = event => {
-			++cov_9m9ln6fdi.f[31];
-			++cov_9m9ln6fdi.s[93];
+			cov_9m9ln6fdi.f[31]++;
+			cov_9m9ln6fdi.s[93]++;
 
 			event.preventDefault();
 
-			const distance = (++cov_9m9ln6fdi.s[94], _this.state.viewBoxScale === null ? (++cov_9m9ln6fdi.b[11][0], event.distance) : (++cov_9m9ln6fdi.b[11][1], event.distance / _this.state.viewBoxScale));
-			const angle = (++cov_9m9ln6fdi.s[95], event.angle / 180 * Math.PI);
+			const distance = (cov_9m9ln6fdi.s[94]++, _this.state.viewBoxScale === null ? (cov_9m9ln6fdi.b[11][0]++, event.distance) : (cov_9m9ln6fdi.b[11][1]++, event.distance / _this.state.viewBoxScale));
+			const angle = (cov_9m9ln6fdi.s[95]++, event.angle / 180 * Math.PI);
 
-			++cov_9m9ln6fdi.s[96];
+			cov_9m9ln6fdi.s[96]++;
 			if (event.eventType === INPUT_MOVE) {
-				++cov_9m9ln6fdi.b[12][0];
-				++cov_9m9ln6fdi.s[97];
+				cov_9m9ln6fdi.b[12][0]++;
+				cov_9m9ln6fdi.s[97]++;
 
 				_this.setState({
 					isPanning: true,
@@ -35555,18 +35555,18 @@ let BoardComponent = function (_React$Component) {
 					panAngle: angle
 				});
 			} else {
-					++cov_9m9ln6fdi.b[12][1];
-					++cov_9m9ln6fdi.s[98];
+					cov_9m9ln6fdi.b[12][1]++;
+					cov_9m9ln6fdi.s[98]++;
 					if (event.eventType === INPUT_END) {
-						++cov_9m9ln6fdi.b[13][0];
+						cov_9m9ln6fdi.b[13][0]++;
 
-						const { offsetX, offsetY, scale } = (++cov_9m9ln6fdi.s[99], _this.normalizeScaleAndOffset({
+						const { offsetX, offsetY, scale } = (cov_9m9ln6fdi.s[99]++, _this.normalizeScaleAndOffset({
 							offsetX: _this.state.offsetX - distance * Math.cos(angle),
 							offsetY: _this.state.offsetY - distance * Math.sin(angle),
 							scale: _this.state.scale
 						}));
 
-						++cov_9m9ln6fdi.s[100];
+						cov_9m9ln6fdi.s[100]++;
 						_this.setState({
 							isPanning: false,
 							offsetX,
@@ -35574,39 +35574,39 @@ let BoardComponent = function (_React$Component) {
 							scale
 						});
 					} else {
-						++cov_9m9ln6fdi.b[13][1];
+						cov_9m9ln6fdi.b[13][1]++;
 					}
 				}
 		};
 
 		_this.handlePinch = event => {
-			++cov_9m9ln6fdi.f[32];
-			++cov_9m9ln6fdi.s[101];
+			cov_9m9ln6fdi.f[32]++;
+			cov_9m9ln6fdi.s[101]++;
 
 			event.preventDefault();
 
-			++cov_9m9ln6fdi.s[102];
+			cov_9m9ln6fdi.s[102]++;
 			if (event.eventType === INPUT_MOVE) {
-				++cov_9m9ln6fdi.b[14][0];
-				++cov_9m9ln6fdi.s[103];
+				cov_9m9ln6fdi.b[14][0]++;
+				cov_9m9ln6fdi.s[103]++;
 
 				_this.setState({
 					isPinching: true,
 					pinchScale: event.scale
 				});
 			} else {
-					++cov_9m9ln6fdi.b[14][1];
-					++cov_9m9ln6fdi.s[104];
+					cov_9m9ln6fdi.b[14][1]++;
+					cov_9m9ln6fdi.s[104]++;
 					if (event.eventType === INPUT_END) {
-						++cov_9m9ln6fdi.b[15][0];
+						cov_9m9ln6fdi.b[15][0]++;
 
-						const { offsetX, offsetY, scale } = (++cov_9m9ln6fdi.s[105], _this.normalizeScaleAndOffset({
+						const { offsetX, offsetY, scale } = (cov_9m9ln6fdi.s[105]++, _this.normalizeScaleAndOffset({
 							offsetX: _this.state.offsetX,
 							offsetY: _this.state.offsetY,
 							scale: _this.state.scale * _this.state.pinchScale
 						}));
 
-						++cov_9m9ln6fdi.s[106];
+						cov_9m9ln6fdi.s[106]++;
 						_this.setState({
 							isPinching: false,
 							offsetX,
@@ -35614,149 +35614,149 @@ let BoardComponent = function (_React$Component) {
 							scale
 						});
 
-						++cov_9m9ln6fdi.s[107];
+						cov_9m9ln6fdi.s[107]++;
 						if (_this.measureComponent) {
-							++cov_9m9ln6fdi.b[16][0];
-							++cov_9m9ln6fdi.s[108];
+							cov_9m9ln6fdi.b[16][0]++;
+							cov_9m9ln6fdi.s[108]++;
 
 							_this.measureComponent.measure();
 						} else {
-							++cov_9m9ln6fdi.b[16][1];
+							cov_9m9ln6fdi.b[16][1]++;
 						}
 					} else {
-						++cov_9m9ln6fdi.b[15][1];
+						cov_9m9ln6fdi.b[15][1]++;
 					}
 				}
 		};
 
 		_this.handleWheel = event => {
-			++cov_9m9ln6fdi.f[33];
+			cov_9m9ln6fdi.f[33]++;
 
-			const direction = (++cov_9m9ln6fdi.s[109], event.deltaY > 0 ? (++cov_9m9ln6fdi.b[17][0], -1) : (++cov_9m9ln6fdi.b[17][1], 1));
+			const direction = (cov_9m9ln6fdi.s[109]++, event.deltaY > 0 ? (cov_9m9ln6fdi.b[17][0]++, -1) : (cov_9m9ln6fdi.b[17][1]++, 1));
 
-			const { offsetX, offsetY, scale } = (++cov_9m9ln6fdi.s[110], _this.normalizeScaleAndOffset({
+			const { offsetX, offsetY, scale } = (cov_9m9ln6fdi.s[110]++, _this.normalizeScaleAndOffset({
 				offsetX: _this.state.offsetX,
 				offsetY: _this.state.offsetY,
 				scale: _this.state.scale * (1.0 + 0.1 * direction)
 			}));
 
-			++cov_9m9ln6fdi.s[111];
+			cov_9m9ln6fdi.s[111]++;
 			_this.setState({
 				offsetX,
 				offsetY,
 				scale
 			});
 
-			++cov_9m9ln6fdi.s[112];
+			cov_9m9ln6fdi.s[112]++;
 			if (_this.measureComponent) {
-				++cov_9m9ln6fdi.b[18][0];
-				++cov_9m9ln6fdi.s[113];
+				cov_9m9ln6fdi.b[18][0]++;
+				cov_9m9ln6fdi.s[113]++;
 
 				_this.measureComponent.measure();
 			} else {
-				++cov_9m9ln6fdi.b[18][1];
+				cov_9m9ln6fdi.b[18][1]++;
 			}
 		};
 
 		_this.handleDragStart = event => {
-			++cov_9m9ln6fdi.f[34];
-			++cov_9m9ln6fdi.s[114];
+			cov_9m9ln6fdi.f[34]++;
+			cov_9m9ln6fdi.s[114]++;
 
 			event.preventDefault();
 		};
 
 		_this.handleMeasureBackground = dimensions => {
-			++cov_9m9ln6fdi.f[35];
-			++cov_9m9ln6fdi.s[115];
+			cov_9m9ln6fdi.f[35]++;
+			cov_9m9ln6fdi.s[115]++;
 
 			_this.backgroundDimensions = dimensions.bounds;
-			++cov_9m9ln6fdi.s[116];
+			cov_9m9ln6fdi.s[116]++;
 			_this.setState({
 				viewBoxScale: _this.backgroundDimensions.width / _this._boardWidth
 			});
 		};
 
 		_this.handleMeasureInput = dimensions => {
-			++cov_9m9ln6fdi.f[36];
-			++cov_9m9ln6fdi.s[117];
+			cov_9m9ln6fdi.f[36]++;
+			cov_9m9ln6fdi.s[117]++;
 
 			_this.handleMeasureIO({ type: 'input', dimensions });
 		};
 
 		_this.handleMeasureOutput = dimensions => {
-			++cov_9m9ln6fdi.f[37];
-			++cov_9m9ln6fdi.s[118];
+			cov_9m9ln6fdi.f[37]++;
+			cov_9m9ln6fdi.s[118]++;
 
 			_this.handleMeasureIO({ type: 'output', dimensions });
 		};
 
 		_this.handleMeasureUserOutput = dimensions => {
-			++cov_9m9ln6fdi.f[38];
-			++cov_9m9ln6fdi.s[119];
+			cov_9m9ln6fdi.f[38]++;
+			cov_9m9ln6fdi.s[119]++;
 
 			_this.handleMeasureIO({ type: 'user_output', dimensions });
 		};
 
 		_this.getViewBox = () => {
-			++cov_9m9ln6fdi.f[39];
+			cov_9m9ln6fdi.f[39]++;
 
-			const { offsetX, offsetY, scale } = (++cov_9m9ln6fdi.s[120], _this.normalizeScaleAndOffset({
-				offsetX: _this.state.isPanning ? (++cov_9m9ln6fdi.b[19][0], _this.state.offsetX - _this.state.panDistance * Math.cos(_this.state.panAngle)) : (++cov_9m9ln6fdi.b[19][1], _this.state.offsetX),
-				offsetY: _this.state.isPanning ? (++cov_9m9ln6fdi.b[20][0], _this.state.offsetY - _this.state.panDistance * Math.sin(_this.state.panAngle)) : (++cov_9m9ln6fdi.b[20][1], _this.state.offsetY),
-				scale: _this.state.isPinching ? (++cov_9m9ln6fdi.b[21][0], _this.state.scale * _this.state.pinchScale) : (++cov_9m9ln6fdi.b[21][1], _this.state.scale)
+			const { offsetX, offsetY, scale } = (cov_9m9ln6fdi.s[120]++, _this.normalizeScaleAndOffset({
+				offsetX: _this.state.isPanning ? (cov_9m9ln6fdi.b[19][0]++, _this.state.offsetX - _this.state.panDistance * Math.cos(_this.state.panAngle)) : (cov_9m9ln6fdi.b[19][1]++, _this.state.offsetX),
+				offsetY: _this.state.isPanning ? (cov_9m9ln6fdi.b[20][0]++, _this.state.offsetY - _this.state.panDistance * Math.sin(_this.state.panAngle)) : (cov_9m9ln6fdi.b[20][1]++, _this.state.offsetY),
+				scale: _this.state.isPinching ? (cov_9m9ln6fdi.b[21][0]++, _this.state.scale * _this.state.pinchScale) : (cov_9m9ln6fdi.b[21][1]++, _this.state.scale)
 			}));
 
-			const normalOffsetY = (++cov_9m9ln6fdi.s[121], (_this._outputHeight - _this._inputHeight) / 2);
+			const normalOffsetY = (cov_9m9ln6fdi.s[121]++, (_this._outputHeight - _this._inputHeight) / 2);
 
-			const viewBoxWidth = (++cov_9m9ln6fdi.s[122], _this._boardOuterWidth / scale);
-			const viewBoxHeight = (++cov_9m9ln6fdi.s[123], _this._boardOuterHeight / scale);
+			const viewBoxWidth = (cov_9m9ln6fdi.s[122]++, _this._boardOuterWidth / scale);
+			const viewBoxHeight = (cov_9m9ln6fdi.s[123]++, _this._boardOuterHeight / scale);
 
-			++cov_9m9ln6fdi.s[124];
+			cov_9m9ln6fdi.s[124]++;
 			return [-viewBoxWidth / 2 + offsetX, -viewBoxHeight / 2 + offsetY + normalOffsetY, viewBoxWidth, viewBoxHeight];
 		};
 
 		_this.getIOWirePathData = ({ startX, endX, head, tail }) => {
-			++cov_9m9ln6fdi.f[40];
+			cov_9m9ln6fdi.f[40]++;
 
-			const pathLength = (++cov_9m9ln6fdi.s[125], 30);
-			const curveLength = (++cov_9m9ln6fdi.s[126], pathLength * 0.9);
+			const pathLength = (cov_9m9ln6fdi.s[125]++, 30);
+			const curveLength = (cov_9m9ln6fdi.s[126]++, pathLength * 0.9);
 
-			++cov_9m9ln6fdi.s[127];
+			cov_9m9ln6fdi.s[127]++;
 			return Path().moveTo(startX, 0).relative().lineTo(0, head).relative().curveTo(0, curveLength, endX - startX, pathLength - curveLength, endX - startX, pathLength).relative().lineTo(0, tail).end();
 		};
 
 		_this.getInputColor = index => {
-			++cov_9m9ln6fdi.f[41];
-			++cov_9m9ln6fdi.s[128];
+			cov_9m9ln6fdi.f[41]++;
+			cov_9m9ln6fdi.s[128]++;
 
-			if ((++cov_9m9ln6fdi.b[23][0], _this.props.currentInputIndex !== null) && (++cov_9m9ln6fdi.b[23][1], _this.props.currentInputIndex !== index)) {
-				++cov_9m9ln6fdi.b[22][0];
-				++cov_9m9ln6fdi.s[129];
+			if ((cov_9m9ln6fdi.b[23][0]++, _this.props.currentInputIndex !== null) && (cov_9m9ln6fdi.b[23][1]++, _this.props.currentInputIndex !== index)) {
+				cov_9m9ln6fdi.b[22][0]++;
+				cov_9m9ln6fdi.s[129]++;
 
 				return 'gray';
 			} else {
-				++cov_9m9ln6fdi.b[22][1];
+				cov_9m9ln6fdi.b[22][1]++;
 			}
 
-			++cov_9m9ln6fdi.s[130];
+			cov_9m9ln6fdi.s[130]++;
 			return inputColors[index % inputColors.length];
 		};
 
 		_this.renderInputs = () => {
-			++cov_9m9ln6fdi.f[47];
-			++cov_9m9ln6fdi.s[136];
+			cov_9m9ln6fdi.f[47]++;
+			cov_9m9ln6fdi.s[136]++;
 			return _this.props.input.map((inputsList, index) => {
-				++cov_9m9ln6fdi.f[48];
-				++cov_9m9ln6fdi.s[137];
+				cov_9m9ln6fdi.f[48]++;
+				cov_9m9ln6fdi.s[137]++;
 				return React.createElement(
 					'g',
 					{ key: index },
 					inputsList.map((inputs, inputsIndex) => {
-						++cov_9m9ln6fdi.f[49];
+						cov_9m9ln6fdi.f[49]++;
 
-						const x = (++cov_9m9ln6fdi.s[138], -_this._inputAreaWidth / 2 + (index * inputsList.length + inputsIndex) * 200);
+						const x = (cov_9m9ln6fdi.s[138]++, -_this._inputAreaWidth / 2 + (index * inputsList.length + inputsIndex) * 200);
 
-						++cov_9m9ln6fdi.s[139];
+						cov_9m9ln6fdi.s[139]++;
 						return React.createElement(
 							'g',
 							{ key: inputsIndex },
@@ -35791,14 +35791,14 @@ let BoardComponent = function (_React$Component) {
 		};
 
 		_this.renderBlocks = () => {
-			++cov_9m9ln6fdi.f[50];
-			++cov_9m9ln6fdi.s[140];
+			cov_9m9ln6fdi.f[50]++;
+			cov_9m9ln6fdi.s[140]++;
 			return _this.state.blocks.map(row => {
-				++cov_9m9ln6fdi.f[51];
-				++cov_9m9ln6fdi.s[141];
+				cov_9m9ln6fdi.f[51]++;
+				cov_9m9ln6fdi.s[141]++;
 				return row.map(block => {
-					++cov_9m9ln6fdi.f[52];
-					++cov_9m9ln6fdi.s[142];
+					cov_9m9ln6fdi.f[52]++;
+					cov_9m9ln6fdi.s[142]++;
 					return React.createElement(
 						'g',
 						{ key: id(block) },
@@ -35809,7 +35809,7 @@ let BoardComponent = function (_React$Component) {
 							x: block.x * BLOCK_SIZE,
 							y: block.y * BLOCK_SIZE
 						}),
-						(++cov_9m9ln6fdi.b[24][0], block.config.onRotatableWire) && (++cov_9m9ln6fdi.b[24][1], React.createElement('image', {
+						(cov_9m9ln6fdi.b[24][0]++, block.config.onRotatableWire) && (cov_9m9ln6fdi.b[24][1]++, React.createElement('image', {
 							className: 'block',
 							width: BLOCK_SIZE,
 							height: BLOCK_SIZE,
@@ -35824,7 +35824,7 @@ let BoardComponent = function (_React$Component) {
 								pointerEvents: 'none'
 							}
 						})),
-						(++cov_9m9ln6fdi.b[25][0], block.name !== 'empty') && (++cov_9m9ln6fdi.b[25][1], React.createElement('image', {
+						(cov_9m9ln6fdi.b[25][0]++, block.name !== 'empty') && (cov_9m9ln6fdi.b[25][1]++, React.createElement('image', {
 							className: 'block',
 							width: BLOCK_SIZE,
 							height: BLOCK_SIZE,
@@ -35832,7 +35832,7 @@ let BoardComponent = function (_React$Component) {
 							y: block.y * BLOCK_SIZE,
 							xlinkHref: `image/${block.name}.png`,
 							style: {
-								transform: block.config.onRotatableWire ? (++cov_9m9ln6fdi.b[26][0], 'none') : (++cov_9m9ln6fdi.b[26][1], `rotate(${block.rotate * 90}deg)`),
+								transform: block.config.onRotatableWire ? (cov_9m9ln6fdi.b[26][0]++, 'none') : (cov_9m9ln6fdi.b[26][1]++, `rotate(${block.rotate * 90}deg)`),
 								transformOrigin: 'center',
 								// Enabled from FF55
 								transformBox: 'fill-box',
@@ -35845,11 +35845,11 @@ let BoardComponent = function (_React$Component) {
 		};
 
 		_this.renderOutputs = () => {
-			++cov_9m9ln6fdi.f[53];
-			++cov_9m9ln6fdi.s[143];
+			cov_9m9ln6fdi.f[53]++;
+			cov_9m9ln6fdi.s[143]++;
 			return _this.props.output.map((output, index) => {
-				++cov_9m9ln6fdi.f[54];
-				++cov_9m9ln6fdi.s[144];
+				cov_9m9ln6fdi.f[54]++;
+				cov_9m9ln6fdi.s[144]++;
 				return React.createElement(
 					'g',
 					{ key: index },
@@ -35889,10 +35889,10 @@ let BoardComponent = function (_React$Component) {
 			});
 		};
 
-		++cov_9m9ln6fdi.s[14];
+		cov_9m9ln6fdi.s[14]++;
 		assert(props.status === 'stop');
 
-		++cov_9m9ln6fdi.s[15];
+		cov_9m9ln6fdi.s[15]++;
 		_this.board = new Board({
 			height: _this.props.height,
 			width: _this.props.width,
@@ -35901,30 +35901,30 @@ let BoardComponent = function (_React$Component) {
 			outputX: _this.props.outputX
 		}, _this.blockSize);
 
-		++cov_9m9ln6fdi.s[16];
+		cov_9m9ln6fdi.s[16]++;
 		_this.board.on('output', _this.handleBoardOutput);
-		++cov_9m9ln6fdi.s[17];
+		cov_9m9ln6fdi.s[17]++;
 		_this.board.on('halt', _this.handleBoardHalt);
-		++cov_9m9ln6fdi.s[18];
+		cov_9m9ln6fdi.s[18]++;
 		_this.board.on('paused', _this.handleBoardPaused);
 
-		++cov_9m9ln6fdi.s[19];
+		cov_9m9ln6fdi.s[19]++;
 		_this.passAnimationResolvers = new WeakMap();
 
-		++cov_9m9ln6fdi.s[20];
+		cov_9m9ln6fdi.s[20]++;
 		_this.inputBlockY = 0;
-		++cov_9m9ln6fdi.s[21];
+		cov_9m9ln6fdi.s[21]++;
 		_this.outputBlockX = _this.props.outputX;
-		++cov_9m9ln6fdi.s[22];
+		cov_9m9ln6fdi.s[22]++;
 		_this.outputBlockY = _this.props.height - 1;
 
-		++cov_9m9ln6fdi.s[23];
+		cov_9m9ln6fdi.s[23]++;
 		_this.animations = [];
 
-		++cov_9m9ln6fdi.s[24];
+		cov_9m9ln6fdi.s[24]++;
 		_this.backgroundDimensions = null;
 
-		++cov_9m9ln6fdi.s[25];
+		cov_9m9ln6fdi.s[25]++;
 		_this.state = {
 			blocks: _this.board.getBlocks(),
 			clocks: 0,
@@ -35946,43 +35946,43 @@ let BoardComponent = function (_React$Component) {
 	_createClass(BoardComponent, [{
 		key: 'componentDidUpdate',
 		value: function componentDidUpdate(prevProps) {
-			++cov_9m9ln6fdi.f[1];
-			++cov_9m9ln6fdi.s[26];
+			cov_9m9ln6fdi.f[1]++;
+			cov_9m9ln6fdi.s[26]++;
 
 			if (prevProps.status === 'stop') {
-				++cov_9m9ln6fdi.b[1][0];
-				++cov_9m9ln6fdi.s[27];
+				cov_9m9ln6fdi.b[1][0]++;
+				cov_9m9ln6fdi.s[27]++;
 
 				assert(this.props.status !== 'pause');
 
-				++cov_9m9ln6fdi.s[28];
+				cov_9m9ln6fdi.s[28]++;
 				if (this.props.status === 'executing') {
-					++cov_9m9ln6fdi.b[2][0];
-					++cov_9m9ln6fdi.s[29];
+					cov_9m9ln6fdi.b[2][0]++;
+					cov_9m9ln6fdi.s[29]++;
 
 					this.execute(this.props.input[this.props.currentInputIndex]);
 				} else {
-					++cov_9m9ln6fdi.b[2][1];
+					cov_9m9ln6fdi.b[2][1]++;
 				}
 			} else {
-				++cov_9m9ln6fdi.b[1][1];
+				cov_9m9ln6fdi.b[1][1]++;
 			}
 
-			++cov_9m9ln6fdi.s[30];
+			cov_9m9ln6fdi.s[30]++;
 			if (prevProps.status === 'executing') {
-				++cov_9m9ln6fdi.b[3][0];
-				++cov_9m9ln6fdi.s[31];
+				cov_9m9ln6fdi.b[3][0]++;
+				cov_9m9ln6fdi.s[31]++;
 
 				if (this.props.status === 'stop') {
-					++cov_9m9ln6fdi.b[4][0];
-					++cov_9m9ln6fdi.s[32];
+					cov_9m9ln6fdi.b[4][0]++;
+					cov_9m9ln6fdi.s[32]++;
 
 					this.halt({ force: this.props.isForced });
 				} else {
-					++cov_9m9ln6fdi.b[4][1];
+					cov_9m9ln6fdi.b[4][1]++;
 				}
 			} else {
-				++cov_9m9ln6fdi.b[3][1];
+				cov_9m9ln6fdi.b[3][1]++;
 			}
 		}
 	}, {
@@ -35992,51 +35992,51 @@ let BoardComponent = function (_React$Component) {
 		// TODO: publicなメソッドを殺したい
 
 		value: function getBlock(x, y) {
-			++cov_9m9ln6fdi.f[14];
-			++cov_9m9ln6fdi.s[46];
+			cov_9m9ln6fdi.f[14]++;
+			cov_9m9ln6fdi.s[46]++;
 
 			return this.board.getBlock(x, y);
 		}
 	}, {
 		key: 'getBoardData',
 		value: function getBoardData() {
-			++cov_9m9ln6fdi.f[15];
-			++cov_9m9ln6fdi.s[47];
+			cov_9m9ln6fdi.f[15]++;
+			cov_9m9ln6fdi.s[47]++;
 
 			return this.board.boardData;
 		}
 	}, {
 		key: 'getClock',
 		value: function getClock() {
-			++cov_9m9ln6fdi.f[16];
-			++cov_9m9ln6fdi.s[48];
+			cov_9m9ln6fdi.f[16]++;
+			cov_9m9ln6fdi.s[48]++;
 
 			return this.board.clock;
 		}
 	}, {
 		key: 'getWeighedBlockCount',
 		value: function getWeighedBlockCount() {
-			++cov_9m9ln6fdi.f[17];
-			++cov_9m9ln6fdi.s[49];
+			cov_9m9ln6fdi.f[17]++;
+			cov_9m9ln6fdi.s[49]++;
 
 			return this.board.weighedBlockCount;
 		}
 	}, {
 		key: 'getSeededRandom',
 		value: function getSeededRandom() {
-			++cov_9m9ln6fdi.f[18];
-			++cov_9m9ln6fdi.s[50];
+			cov_9m9ln6fdi.f[18]++;
+			cov_9m9ln6fdi.s[50]++;
 
 			return this.board.getSeededRandom();
 		}
 	}, {
 		key: 'placeBlock',
 		value: function placeBlock({ x, y, type, rotate }) {
-			++cov_9m9ln6fdi.f[19];
-			++cov_9m9ln6fdi.s[51];
+			cov_9m9ln6fdi.f[19]++;
+			cov_9m9ln6fdi.s[51]++;
 
 			this.board.placeBlock({ x, y, type, rotate });
-			++cov_9m9ln6fdi.s[52];
+			cov_9m9ln6fdi.s[52]++;
 			this.setState({
 				blocks: this.board.getBlocks()
 			});
@@ -36044,23 +36044,23 @@ let BoardComponent = function (_React$Component) {
 	}, {
 		key: 'halt',
 		value: function halt({ force }) {
-			++cov_9m9ln6fdi.f[21];
-			++cov_9m9ln6fdi.s[57];
+			cov_9m9ln6fdi.f[21]++;
+			cov_9m9ln6fdi.s[57]++;
 
 			if (force) {
-				++cov_9m9ln6fdi.b[5][0];
-				++cov_9m9ln6fdi.s[58];
+				cov_9m9ln6fdi.b[5][0]++;
+				cov_9m9ln6fdi.s[58]++;
 
 				this.board.halt();
 			} else {
-				++cov_9m9ln6fdi.b[5][1];
+				cov_9m9ln6fdi.b[5][1]++;
 			}
 		}
 	}, {
 		key: 'render',
 		value: function render() {
-			++cov_9m9ln6fdi.f[42];
-			++cov_9m9ln6fdi.s[131];
+			cov_9m9ln6fdi.f[42]++;
+			cov_9m9ln6fdi.s[131]++;
 
 			return React.createElement(
 				Hammer,
@@ -36177,8 +36177,8 @@ let BoardComponent = function (_React$Component) {
 								Measure,
 								{
 									ref: ref => {
-										++cov_9m9ln6fdi.f[43];
-										++cov_9m9ln6fdi.s[132];
+										cov_9m9ln6fdi.f[43]++;
+										cov_9m9ln6fdi.s[132]++;
 
 										this.measureComponent = ref;
 									},
@@ -36186,8 +36186,8 @@ let BoardComponent = function (_React$Component) {
 									bounds: true
 								},
 								({ measureRef }) => {
-									++cov_9m9ln6fdi.f[44];
-									++cov_9m9ln6fdi.s[133];
+									cov_9m9ln6fdi.f[44]++;
+									cov_9m9ln6fdi.s[133]++;
 									return React.createElement('rect', {
 										ref: measureRef,
 										className: 'board-background',
@@ -36205,11 +36205,11 @@ let BoardComponent = function (_React$Component) {
 								'g',
 								null,
 								this.state.blocks.map(row => {
-									++cov_9m9ln6fdi.f[45];
-									++cov_9m9ln6fdi.s[134];
+									cov_9m9ln6fdi.f[45]++;
+									cov_9m9ln6fdi.s[134]++;
 									return row.map(block => {
-										++cov_9m9ln6fdi.f[46];
-										++cov_9m9ln6fdi.s[135];
+										cov_9m9ln6fdi.f[46]++;
+										cov_9m9ln6fdi.s[135]++;
 										return React.createElement(BlockComponent, {
 											key: id(block),
 											block: block,
@@ -36245,93 +36245,93 @@ let BoardComponent = function (_React$Component) {
 	}, {
 		key: '_borderSize',
 		get: function () {
-			++cov_9m9ln6fdi.f[2];
-			++cov_9m9ln6fdi.s[33];
+			cov_9m9ln6fdi.f[2]++;
+			cov_9m9ln6fdi.s[33]++;
 
 			return 25;
 		}
 	}, {
 		key: '_boardWidth',
 		get: function () {
-			++cov_9m9ln6fdi.f[3];
-			++cov_9m9ln6fdi.s[34];
+			cov_9m9ln6fdi.f[3]++;
+			cov_9m9ln6fdi.s[34]++;
 
 			return this.props.width * BLOCK_SIZE;
 		}
 	}, {
 		key: '_boardHeight',
 		get: function () {
-			++cov_9m9ln6fdi.f[4];
-			++cov_9m9ln6fdi.s[35];
+			cov_9m9ln6fdi.f[4]++;
+			cov_9m9ln6fdi.s[35]++;
 
 			return this.props.height * BLOCK_SIZE;
 		}
 	}, {
 		key: '_inputHeight',
 		get: function () {
-			++cov_9m9ln6fdi.f[5];
-			++cov_9m9ln6fdi.s[36];
+			cov_9m9ln6fdi.f[5]++;
+			cov_9m9ln6fdi.s[36]++;
 
 			return 120;
 		}
 	}, {
 		key: '_outputHeight',
 		get: function () {
-			++cov_9m9ln6fdi.f[6];
-			++cov_9m9ln6fdi.s[37];
+			cov_9m9ln6fdi.f[6]++;
+			cov_9m9ln6fdi.s[37]++;
 
 			return 170;
 		}
 	}, {
 		key: '_boardBorderWidth',
 		get: function () {
-			++cov_9m9ln6fdi.f[7];
-			++cov_9m9ln6fdi.s[38];
+			cov_9m9ln6fdi.f[7]++;
+			cov_9m9ln6fdi.s[38]++;
 
 			return this._borderSize * 2 + this._boardWidth;
 		}
 	}, {
 		key: '_boardBorderHeight',
 		get: function () {
-			++cov_9m9ln6fdi.f[8];
-			++cov_9m9ln6fdi.s[39];
+			cov_9m9ln6fdi.f[8]++;
+			cov_9m9ln6fdi.s[39]++;
 
 			return this._borderSize * 2 + this._boardHeight;
 		}
 	}, {
 		key: '_boardOuterWidth',
 		get: function () {
-			++cov_9m9ln6fdi.f[9];
-			++cov_9m9ln6fdi.s[40];
+			cov_9m9ln6fdi.f[9]++;
+			cov_9m9ln6fdi.s[40]++;
 
 			return Math.max(this._borderSize * 2 + this._boardWidth, this._inputAreaWidth);
 		}
 	}, {
 		key: '_boardOuterHeight',
 		get: function () {
-			++cov_9m9ln6fdi.f[10];
-			++cov_9m9ln6fdi.s[41];
+			cov_9m9ln6fdi.f[10]++;
+			cov_9m9ln6fdi.s[41]++;
 
 			return this._borderSize * 2 + this._boardHeight + this._inputHeight + this._outputHeight;
 		}
 	}, {
 		key: '_inputAreaWidth',
 		get: function () {
-			++cov_9m9ln6fdi.f[11];
+			cov_9m9ln6fdi.f[11]++;
 
-			const inputComponentSize = (++cov_9m9ln6fdi.s[42], sum(this.props.input.map(inputList => {
-				++cov_9m9ln6fdi.f[12];
-				++cov_9m9ln6fdi.s[43];
+			const inputComponentSize = (cov_9m9ln6fdi.s[42]++, sum(this.props.input.map(inputList => {
+				cov_9m9ln6fdi.f[12]++;
+				cov_9m9ln6fdi.s[43]++;
 				return inputList.length;
 			})));
-			++cov_9m9ln6fdi.s[44];
+			cov_9m9ln6fdi.s[44]++;
 			return inputComponentSize * 200 - 50;
 		}
 	}, {
 		key: '_outputAreaWidth',
 		get: function () {
-			++cov_9m9ln6fdi.f[13];
-			++cov_9m9ln6fdi.s[45];
+			cov_9m9ln6fdi.f[13]++;
+			cov_9m9ln6fdi.s[45]++;
 
 			return this.props.output.length * 200 - 50;
 		}
@@ -36364,7 +36364,7 @@ BoardComponent.propTypes = {
 BoardComponent.defaultProps = {
 	currentInputIndex: null
 };
-++cov_9m9ln6fdi.s[145];
+cov_9m9ln6fdi.s[145]++;
 
 
 module.exports = BoardComponent;
@@ -37712,9 +37712,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-const assert = (++cov_23vg6hj758.s[0], __webpack_require__(4));
-const React = (++cov_23vg6hj758.s[1], __webpack_require__(1));
-const PropTypes = (++cov_23vg6hj758.s[2], __webpack_require__(3));
+const assert = (cov_23vg6hj758.s[0]++, __webpack_require__(4));
+const React = (cov_23vg6hj758.s[1]++, __webpack_require__(1));
+const PropTypes = (cov_23vg6hj758.s[2]++, __webpack_require__(3));
 
 let PanelComponent = function (_React$Component) {
 	_inherits(PanelComponent, _React$Component);
@@ -37722,43 +37722,43 @@ let PanelComponent = function (_React$Component) {
 	function PanelComponent(props, state) {
 		_classCallCheck(this, PanelComponent);
 
-		++cov_23vg6hj758.f[0];
-		++cov_23vg6hj758.s[3];
+		cov_23vg6hj758.f[0]++;
+		cov_23vg6hj758.s[3]++;
 
 		var _this = _possibleConstructorReturn(this, (PanelComponent.__proto__ || Object.getPrototypeOf(PanelComponent)).call(this, props, state));
 
 		_this.handleClickBlock = event => {
-			++cov_23vg6hj758.f[4];
-			++cov_23vg6hj758.s[27];
+			cov_23vg6hj758.f[4]++;
+			cov_23vg6hj758.s[27]++;
 
 			_this.setState({
 				selected: event.target.getAttribute('data-type')
 			});
 		};
 
-		const parts = (++cov_23vg6hj758.s[4], new Map());
-		let selected = (++cov_23vg6hj758.s[5], null);
+		const parts = (cov_23vg6hj758.s[4]++, new Map());
+		let selected = (cov_23vg6hj758.s[5]++, null);
 
-		++cov_23vg6hj758.s[6];
+		cov_23vg6hj758.s[6]++;
 		Object.keys(props.parts).forEach((name, index) => {
-			++cov_23vg6hj758.f[1];
+			cov_23vg6hj758.f[1]++;
 
-			const count = (++cov_23vg6hj758.s[7], props.parts[name]);
+			const count = (cov_23vg6hj758.s[7]++, props.parts[name]);
 
-			++cov_23vg6hj758.s[8];
+			cov_23vg6hj758.s[8]++;
 			parts.set(name, count);
-			++cov_23vg6hj758.s[9];
+			cov_23vg6hj758.s[9]++;
 			if (index === 0) {
-				++cov_23vg6hj758.b[0][0];
-				++cov_23vg6hj758.s[10];
+				cov_23vg6hj758.b[0][0]++;
+				cov_23vg6hj758.s[10]++;
 
 				selected = name;
 			} else {
-				++cov_23vg6hj758.b[0][1];
+				cov_23vg6hj758.b[0][1]++;
 			}
 		});
 
-		++cov_23vg6hj758.s[11];
+		cov_23vg6hj758.s[11]++;
 		_this.state = {
 			parts,
 			selected
@@ -37776,30 +37776,30 @@ let PanelComponent = function (_React$Component) {
 	_createClass(PanelComponent, [{
 		key: 'push',
 		value: function push(blockName) {
-			++cov_23vg6hj758.f[2];
+			cov_23vg6hj758.f[2]++;
 
-			let currentCount = (++cov_23vg6hj758.s[12], 0);
+			let currentCount = (cov_23vg6hj758.s[12]++, 0);
 
-			++cov_23vg6hj758.s[13];
+			cov_23vg6hj758.s[13]++;
 			if (this.state.parts.has(blockName)) {
-				++cov_23vg6hj758.b[1][0];
-				++cov_23vg6hj758.s[14];
+				cov_23vg6hj758.b[1][0]++;
+				cov_23vg6hj758.s[14]++;
 
 				currentCount = this.state.parts.get(blockName);
 			} else {
-				++cov_23vg6hj758.b[1][1];
+				cov_23vg6hj758.b[1][1]++;
 			}
 
-			++cov_23vg6hj758.s[15];
+			cov_23vg6hj758.s[15]++;
 			if (currentCount !== null) {
-				++cov_23vg6hj758.b[2][0];
-				++cov_23vg6hj758.s[16];
+				cov_23vg6hj758.b[2][0]++;
+				cov_23vg6hj758.s[16]++;
 				// null means infinity
 				this.state.parts.set(blockName, currentCount + 1);
-				++cov_23vg6hj758.s[17];
+				cov_23vg6hj758.s[17]++;
 				this.setState({ parts: this.state.parts });
 			} else {
-				++cov_23vg6hj758.b[2][1];
+				cov_23vg6hj758.b[2][1]++;
 			}
 		}
 
@@ -37812,56 +37812,56 @@ let PanelComponent = function (_React$Component) {
 	}, {
 		key: 'take',
 		value: function take(blockName) {
-			++cov_23vg6hj758.f[3];
-			++cov_23vg6hj758.s[18];
+			cov_23vg6hj758.f[3]++;
+			cov_23vg6hj758.s[18]++;
 
 			assert(this.state.parts.has(blockName), 'try to take non-existent block');
 
-			const currentCount = (++cov_23vg6hj758.s[19], this.state.parts.get(blockName));
+			const currentCount = (cov_23vg6hj758.s[19]++, this.state.parts.get(blockName));
 
-			++cov_23vg6hj758.s[20];
+			cov_23vg6hj758.s[20]++;
 			if (currentCount !== null) {
-				++cov_23vg6hj758.b[3][0];
-				++cov_23vg6hj758.s[21];
+				cov_23vg6hj758.b[3][0]++;
+				cov_23vg6hj758.s[21]++;
 				// null means infinity
 				assert(currentCount > 0, 'the block isn\'t remaining');
 
-				++cov_23vg6hj758.s[22];
+				cov_23vg6hj758.s[22]++;
 				if (currentCount - 1 === 0) {
-					++cov_23vg6hj758.b[4][0];
-					++cov_23vg6hj758.s[23];
+					cov_23vg6hj758.b[4][0]++;
+					cov_23vg6hj758.s[23]++;
 					// take the last block
 					this.setState({ selected: null });
 
-					++cov_23vg6hj758.s[24];
+					cov_23vg6hj758.s[24]++;
 					this.state.parts.delete(blockName);
 				} else {
-					++cov_23vg6hj758.b[4][1];
-					++cov_23vg6hj758.s[25];
+					cov_23vg6hj758.b[4][1]++;
+					cov_23vg6hj758.s[25]++;
 
 					this.state.parts.set(blockName, currentCount - 1);
 				}
 
-				++cov_23vg6hj758.s[26];
+				cov_23vg6hj758.s[26]++;
 				this.setState({
 					parts: this.state.parts
 				});
 			} else {
-				++cov_23vg6hj758.b[3][1];
+				cov_23vg6hj758.b[3][1]++;
 			}
 		}
 	}, {
 		key: 'render',
 		value: function render() {
-			++cov_23vg6hj758.f[5];
-			++cov_23vg6hj758.s[28];
+			cov_23vg6hj758.f[5]++;
+			cov_23vg6hj758.s[28]++;
 
 			return React.createElement(
 				'div',
 				{ className: 'panel' },
 				Array.from(this.state.parts).map(([name, count]) => {
-					++cov_23vg6hj758.f[6];
-					++cov_23vg6hj758.s[29];
+					cov_23vg6hj758.f[6]++;
+					cov_23vg6hj758.s[29]++;
 					return React.createElement(
 						'div',
 						_extends({
@@ -37869,11 +37869,11 @@ let PanelComponent = function (_React$Component) {
 							className: 'block',
 							onClick: this.handleClickBlock,
 							'data-type': name
-						}, this.state.selected === name ? (++cov_23vg6hj758.b[5][0], { 'data-selected': 'data-selected' }) : (++cov_23vg6hj758.b[5][1], {})),
+						}, this.state.selected === name ? (cov_23vg6hj758.b[5][0]++, { 'data-selected': 'data-selected' }) : (cov_23vg6hj758.b[5][1]++, {})),
 						React.createElement(
 							'div',
 							{ className: 'count' },
-							count === null ? (++cov_23vg6hj758.b[6][0], '∞') : (++cov_23vg6hj758.b[6][1], count)
+							count === null ? (cov_23vg6hj758.b[6][0]++, '∞') : (cov_23vg6hj758.b[6][1]++, count)
 						)
 					);
 				})
@@ -37887,7 +37887,7 @@ let PanelComponent = function (_React$Component) {
 PanelComponent.propTypes = {
 	parts: PropTypes.object.isRequired
 };
-++cov_23vg6hj758.s[30];
+cov_23vg6hj758.s[30]++;
 
 
 module.exports = PanelComponent;
@@ -40970,272 +40970,272 @@ var cov_1ide81xho3 = function () {
 	return coverage[path] = coverageData;
 }();
 
-const assert = (++cov_1ide81xho3.s[0], __webpack_require__(4));
-const blockConfigs = (++cov_1ide81xho3.s[1], __webpack_require__(15));
-const stages = (++cov_1ide81xho3.s[2], __webpack_require__(63));
-const Board = (++cov_1ide81xho3.s[3], __webpack_require__(5));
-const { arrayEquals, zip } = (++cov_1ide81xho3.s[4], __webpack_require__(0));
+const assert = (cov_1ide81xho3.s[0]++, __webpack_require__(4));
+const blockConfigs = (cov_1ide81xho3.s[1]++, __webpack_require__(15));
+const stages = (cov_1ide81xho3.s[2]++, __webpack_require__(63));
+const Board = (cov_1ide81xho3.s[3]++, __webpack_require__(5));
+const { arrayEquals, zip } = (cov_1ide81xho3.s[4]++, __webpack_require__(0));
 
-const blockNames = (++cov_1ide81xho3.s[5], Object.keys(blockConfigs));
+const blockNames = (cov_1ide81xho3.s[5]++, Object.keys(blockConfigs));
 
 // https://github.com/tsg-ut/mnemo/wiki/%E3%82%B9%E3%82%B3%E3%82%A2%E3%81%AE%E4%BB%95%E6%A7%98#%E8%A8%88%E7%AE%97%E5%BC%8F
-++cov_1ide81xho3.s[6];
+cov_1ide81xho3.s[6]++;
 module.exports.calculateScore = ({ clocks: C, blocks: B, stage }) => {
-	++cov_1ide81xho3.f[0];
+	cov_1ide81xho3.f[0]++;
 
-	const { clockLimit: C_L, width: W, height: H } = (++cov_1ide81xho3.s[7], stage);
+	const { clockLimit: C_L, width: W, height: H } = (cov_1ide81xho3.s[7]++, stage);
 
-	const P_C = (++cov_1ide81xho3.s[8], Math.floor(500 * Math.exp(2 * (H - C) / (C_L - 2 * H) * Math.log(5 / 2))) * 10);
-	const P_B = (++cov_1ide81xho3.s[9], Math.floor(500 * Math.exp((H - B) / (H * (W - 1)) * Math.log(5 / 2))) * 10);
+	const P_C = (cov_1ide81xho3.s[8]++, Math.floor(500 * Math.exp(2 * (H - C) / (C_L - 2 * H) * Math.log(5 / 2))) * 10);
+	const P_B = (cov_1ide81xho3.s[9]++, Math.floor(500 * Math.exp((H - B) / (H * (W - 1)) * Math.log(5 / 2))) * 10);
 
-	++cov_1ide81xho3.s[10];
+	cov_1ide81xho3.s[10]++;
 	return P_C + P_B;
 };
 
-++cov_1ide81xho3.s[11];
+cov_1ide81xho3.s[11]++;
 module.exports.validateSubmission = submission => {
-	++cov_1ide81xho3.f[1];
-	++cov_1ide81xho3.s[12];
+	cov_1ide81xho3.f[1]++;
+	cov_1ide81xho3.s[12]++;
 
 	if (typeof submission.stage !== 'string') {
-		++cov_1ide81xho3.b[0][0];
-		++cov_1ide81xho3.s[13];
+		cov_1ide81xho3.b[0][0]++;
+		cov_1ide81xho3.s[13]++;
 
 		return { pass: false, message: 'stage data is missing' };
 	} else {
-		++cov_1ide81xho3.b[0][1];
+		cov_1ide81xho3.b[0][1]++;
 	}
 
-	const stage = (++cov_1ide81xho3.s[14], stages.find(s => {
-		++cov_1ide81xho3.f[2];
-		++cov_1ide81xho3.s[15];
+	const stage = (cov_1ide81xho3.s[14]++, stages.find(s => {
+		cov_1ide81xho3.f[2]++;
+		cov_1ide81xho3.s[15]++;
 		return s.name === submission.stage;
 	}));
 
-	++cov_1ide81xho3.s[16];
+	cov_1ide81xho3.s[16]++;
 	if (typeof stage !== 'object') {
-		++cov_1ide81xho3.b[1][0];
-		++cov_1ide81xho3.s[17];
+		cov_1ide81xho3.b[1][0]++;
+		cov_1ide81xho3.s[17]++;
 
 		return { pass: false, message: 'stage data is invalid' };
 	} else {
-		++cov_1ide81xho3.b[1][1];
+		cov_1ide81xho3.b[1][1]++;
 	}
 
-	++cov_1ide81xho3.s[18];
+	cov_1ide81xho3.s[18]++;
 	if (!Array.isArray(submission.board)) {
-		++cov_1ide81xho3.b[2][0];
-		++cov_1ide81xho3.s[19];
+		cov_1ide81xho3.b[2][0]++;
+		cov_1ide81xho3.s[19]++;
 
 		return { pass: false, message: 'board should be an array' };
 	} else {
-		++cov_1ide81xho3.b[2][1];
+		cov_1ide81xho3.b[2][1]++;
 	}
 
-	++cov_1ide81xho3.s[20];
+	cov_1ide81xho3.s[20]++;
 	if (submission.board.length === 0) {
-		++cov_1ide81xho3.b[3][0];
-		++cov_1ide81xho3.s[21];
+		cov_1ide81xho3.b[3][0]++;
+		cov_1ide81xho3.s[21]++;
 
 		return { pass: false, message: 'board must at least have one block' };
 	} else {
-		++cov_1ide81xho3.b[3][1];
+		cov_1ide81xho3.b[3][1]++;
 	}
 
-	let error = (++cov_1ide81xho3.s[22], null);
+	let error = (cov_1ide81xho3.s[22]++, null);
 
-	++cov_1ide81xho3.s[23];
+	cov_1ide81xho3.s[23]++;
 	submission.board.forEach((block, index) => {
-		++cov_1ide81xho3.f[3];
+		cov_1ide81xho3.f[3]++;
 
-		const message = (++cov_1ide81xho3.s[24], (() => {
-			++cov_1ide81xho3.f[4];
-			++cov_1ide81xho3.s[25];
+		const message = (cov_1ide81xho3.s[24]++, (() => {
+			cov_1ide81xho3.f[4]++;
+			cov_1ide81xho3.s[25]++;
 
 			if (!arrayEquals(Object.keys(block), ['x', 'y', 'type', 'rotate'])) {
-				++cov_1ide81xho3.b[4][0];
-				++cov_1ide81xho3.s[26];
+				cov_1ide81xho3.b[4][0]++;
+				cov_1ide81xho3.s[26]++;
 
 				return `keys of block ${index} are invalid`;
 			} else {
-				++cov_1ide81xho3.b[4][1];
+				cov_1ide81xho3.b[4][1]++;
 			}
 
-			++cov_1ide81xho3.s[27];
+			cov_1ide81xho3.s[27]++;
 			if (!Number.isInteger(block.x)) {
-				++cov_1ide81xho3.b[5][0];
-				++cov_1ide81xho3.s[28];
+				cov_1ide81xho3.b[5][0]++;
+				cov_1ide81xho3.s[28]++;
 
 				return `x position of block ${index} should be an integer`;
 			} else {
-				++cov_1ide81xho3.b[5][1];
+				cov_1ide81xho3.b[5][1]++;
 			}
 
-			++cov_1ide81xho3.s[29];
-			if ((++cov_1ide81xho3.b[7][0], block.x < 0) || (++cov_1ide81xho3.b[7][1], stage.width <= block.x)) {
-				++cov_1ide81xho3.b[6][0];
-				++cov_1ide81xho3.s[30];
+			cov_1ide81xho3.s[29]++;
+			if ((cov_1ide81xho3.b[7][0]++, block.x < 0) || (cov_1ide81xho3.b[7][1]++, stage.width <= block.x)) {
+				cov_1ide81xho3.b[6][0]++;
+				cov_1ide81xho3.s[30]++;
 
 				return `x position of block ${index} exceeds the board size`;
 			} else {
-				++cov_1ide81xho3.b[6][1];
+				cov_1ide81xho3.b[6][1]++;
 			}
 
-			++cov_1ide81xho3.s[31];
+			cov_1ide81xho3.s[31]++;
 			if (!Number.isInteger(block.y)) {
-				++cov_1ide81xho3.b[8][0];
-				++cov_1ide81xho3.s[32];
+				cov_1ide81xho3.b[8][0]++;
+				cov_1ide81xho3.s[32]++;
 
 				return `y position of block ${index} should be an integer`;
 			} else {
-				++cov_1ide81xho3.b[8][1];
+				cov_1ide81xho3.b[8][1]++;
 			}
 
-			++cov_1ide81xho3.s[33];
-			if ((++cov_1ide81xho3.b[10][0], block.y < 0) || (++cov_1ide81xho3.b[10][1], stage.height <= block.y)) {
-				++cov_1ide81xho3.b[9][0];
-				++cov_1ide81xho3.s[34];
+			cov_1ide81xho3.s[33]++;
+			if ((cov_1ide81xho3.b[10][0]++, block.y < 0) || (cov_1ide81xho3.b[10][1]++, stage.height <= block.y)) {
+				cov_1ide81xho3.b[9][0]++;
+				cov_1ide81xho3.s[34]++;
 
 				return `y position of block ${index} exceeds the board size`;
 			} else {
-				++cov_1ide81xho3.b[9][1];
+				cov_1ide81xho3.b[9][1]++;
 			}
 
-			++cov_1ide81xho3.s[35];
+			cov_1ide81xho3.s[35]++;
 			if (typeof block.type !== 'string') {
-				++cov_1ide81xho3.b[11][0];
-				++cov_1ide81xho3.s[36];
+				cov_1ide81xho3.b[11][0]++;
+				cov_1ide81xho3.s[36]++;
 
 				return `type of block ${index} should be a string`;
 			} else {
-				++cov_1ide81xho3.b[11][1];
+				cov_1ide81xho3.b[11][1]++;
 			}
 
-			++cov_1ide81xho3.s[37];
+			cov_1ide81xho3.s[37]++;
 			if (!blockNames.includes(block.type)) {
-				++cov_1ide81xho3.b[12][0];
-				++cov_1ide81xho3.s[38];
+				cov_1ide81xho3.b[12][0]++;
+				cov_1ide81xho3.s[38]++;
 
 				return `type of block ${index} is unknown`;
 			} else {
-				++cov_1ide81xho3.b[12][1];
+				cov_1ide81xho3.b[12][1]++;
 			}
 
-			++cov_1ide81xho3.s[39];
+			cov_1ide81xho3.s[39]++;
 			if (!Number.isInteger(block.rotate)) {
-				++cov_1ide81xho3.b[13][0];
-				++cov_1ide81xho3.s[40];
+				cov_1ide81xho3.b[13][0]++;
+				cov_1ide81xho3.s[40]++;
 
 				return `rotation of block ${index} should be an integer`;
 			} else {
-				++cov_1ide81xho3.b[13][1];
+				cov_1ide81xho3.b[13][1]++;
 			}
 
-			++cov_1ide81xho3.s[41];
-			if ((++cov_1ide81xho3.b[15][0], block.rotate < 0) || (++cov_1ide81xho3.b[15][1], 4 <= block.rotate)) {
-				++cov_1ide81xho3.b[14][0];
-				++cov_1ide81xho3.s[42];
+			cov_1ide81xho3.s[41]++;
+			if ((cov_1ide81xho3.b[15][0]++, block.rotate < 0) || (cov_1ide81xho3.b[15][1]++, 4 <= block.rotate)) {
+				cov_1ide81xho3.b[14][0]++;
+				cov_1ide81xho3.s[42]++;
 
 				return `rotation of block ${index} is invalid`;
 			} else {
-				++cov_1ide81xho3.b[14][1];
+				cov_1ide81xho3.b[14][1]++;
 			}
 
-			++cov_1ide81xho3.s[43];
+			cov_1ide81xho3.s[43]++;
 			return null;
 		})());
 
-		++cov_1ide81xho3.s[44];
+		cov_1ide81xho3.s[44]++;
 		if (message !== null) {
-			++cov_1ide81xho3.b[16][0];
-			++cov_1ide81xho3.s[45];
+			cov_1ide81xho3.b[16][0]++;
+			cov_1ide81xho3.s[45]++;
 
 			error = message;
 		} else {
-			++cov_1ide81xho3.b[16][1];
+			cov_1ide81xho3.b[16][1]++;
 		}
 	});
 
-	++cov_1ide81xho3.s[46];
+	cov_1ide81xho3.s[46]++;
 	if (error) {
-		++cov_1ide81xho3.b[17][0];
-		++cov_1ide81xho3.s[47];
+		cov_1ide81xho3.b[17][0]++;
+		cov_1ide81xho3.s[47]++;
 
 		return { pass: false, message: error };
 	} else {
-		++cov_1ide81xho3.b[17][1];
+		cov_1ide81xho3.b[17][1]++;
 	}
 
 	// Validate uniqueness of the block positions
-	const positions = (++cov_1ide81xho3.s[48], new Set());
-	++cov_1ide81xho3.s[49];
+	const positions = (cov_1ide81xho3.s[48]++, new Set());
+	cov_1ide81xho3.s[49]++;
 	submission.board.forEach(block => {
-		++cov_1ide81xho3.f[5];
+		cov_1ide81xho3.f[5]++;
 
-		const index = (++cov_1ide81xho3.s[50], block.y * stage.width + block.x);
-		++cov_1ide81xho3.s[51];
+		const index = (cov_1ide81xho3.s[50]++, block.y * stage.width + block.x);
+		cov_1ide81xho3.s[51]++;
 		positions.add(index);
 	});
 
-	++cov_1ide81xho3.s[52];
+	cov_1ide81xho3.s[52]++;
 	if (positions.size !== submission.board.length) {
-		++cov_1ide81xho3.b[18][0];
-		++cov_1ide81xho3.s[53];
+		cov_1ide81xho3.b[18][0]++;
+		cov_1ide81xho3.s[53]++;
 
 		return { pass: false, message: 'positions of blocks are not unique' };
 	} else {
-		++cov_1ide81xho3.b[18][1];
+		cov_1ide81xho3.b[18][1]++;
 	}
 
 	// Validate if the only usable blocks are used
-	const blockCounts = (++cov_1ide81xho3.s[54], new Map());
-	++cov_1ide81xho3.s[55];
+	const blockCounts = (cov_1ide81xho3.s[54]++, new Map());
+	cov_1ide81xho3.s[55]++;
 	submission.board.forEach(block => {
-		++cov_1ide81xho3.f[6];
-		++cov_1ide81xho3.s[56];
+		cov_1ide81xho3.f[6]++;
+		cov_1ide81xho3.s[56]++;
 
 		if (blockCounts.has(block.type)) {
-			++cov_1ide81xho3.b[19][0];
-			++cov_1ide81xho3.s[57];
+			cov_1ide81xho3.b[19][0]++;
+			cov_1ide81xho3.s[57]++;
 
 			blockCounts.set(block.type, blockCounts.get(block.type) + 1);
 		} else {
-			++cov_1ide81xho3.b[19][1];
-			++cov_1ide81xho3.s[58];
+			cov_1ide81xho3.b[19][1]++;
+			cov_1ide81xho3.s[58]++;
 
 			blockCounts.set(block.type, 1);
 		}
 	});
 
-	++cov_1ide81xho3.s[59];
+	cov_1ide81xho3.s[59]++;
 	for (const [type, count] of blockCounts.entries()) {
-		++cov_1ide81xho3.s[60];
+		cov_1ide81xho3.s[60]++;
 
 		if (!{}.hasOwnProperty.call(stage.parts, type)) {
-			++cov_1ide81xho3.b[20][0];
-			++cov_1ide81xho3.s[61];
+			cov_1ide81xho3.b[20][0]++;
+			cov_1ide81xho3.s[61]++;
 
 			return { pass: false, message: 'used blocks are not matching to the stage' };
 		} else {
-			++cov_1ide81xho3.b[20][1];
+			cov_1ide81xho3.b[20][1]++;
 		}
 
-		const allowedCount = (++cov_1ide81xho3.s[62], stage.parts[type]);
+		const allowedCount = (cov_1ide81xho3.s[62]++, stage.parts[type]);
 
-		++cov_1ide81xho3.s[63];
-		if ((++cov_1ide81xho3.b[22][0], allowedCount !== null) && (++cov_1ide81xho3.b[22][1], count > allowedCount)) {
-			++cov_1ide81xho3.b[21][0];
-			++cov_1ide81xho3.s[64];
+		cov_1ide81xho3.s[63]++;
+		if ((cov_1ide81xho3.b[22][0]++, allowedCount !== null) && (cov_1ide81xho3.b[22][1]++, count > allowedCount)) {
+			cov_1ide81xho3.b[21][0]++;
+			cov_1ide81xho3.s[64]++;
 
 			return { pass: false, message: 'used blocks are not matching to the stage' };
 		} else {
-			++cov_1ide81xho3.b[21][1];
+			cov_1ide81xho3.b[21][1]++;
 		}
 	}
 
 	// Validate if this passes test cases
 
-	const board = (++cov_1ide81xho3.s[65], new Board({
+	const board = (cov_1ide81xho3.s[65]++, new Board({
 		width: stage.width,
 		height: stage.height,
 		inputX: stage.inputX,
@@ -41243,67 +41243,67 @@ module.exports.validateSubmission = submission => {
 		clockLimit: stage.clockLimit
 	}));
 
-	++cov_1ide81xho3.s[66];
+	cov_1ide81xho3.s[66]++;
 	submission.board.forEach(block => {
-		++cov_1ide81xho3.f[7];
-		++cov_1ide81xho3.s[67];
+		cov_1ide81xho3.f[7]++;
+		cov_1ide81xho3.s[67]++;
 
 		board.placeBlock(block);
 	});
 
-	let maxClock = (++cov_1ide81xho3.s[68], 0);
+	let maxClock = (cov_1ide81xho3.s[68]++, 0);
 
-	const { inputs, outputs } = (++cov_1ide81xho3.s[69], (() => {
-		++cov_1ide81xho3.f[8];
-		++cov_1ide81xho3.s[70];
+	const { inputs, outputs } = (cov_1ide81xho3.s[69]++, (() => {
+		cov_1ide81xho3.f[8]++;
+		cov_1ide81xho3.s[70]++;
 
 		if (stage.ioGenerator) {
-			++cov_1ide81xho3.b[23][0];
+			cov_1ide81xho3.b[23][0]++;
 
-			const random = (++cov_1ide81xho3.s[71], board.getSeededRandom());
-			const { input, output } = (++cov_1ide81xho3.s[72], stage.ioGenerator(random));
-			++cov_1ide81xho3.s[73];
+			const random = (cov_1ide81xho3.s[71]++, board.getSeededRandom());
+			const { input, output } = (cov_1ide81xho3.s[72]++, stage.ioGenerator(random));
+			cov_1ide81xho3.s[73]++;
 			assert(Array.isArray(input));
-			++cov_1ide81xho3.s[74];
+			cov_1ide81xho3.s[74]++;
 			assert(Array.isArray(output));
 
-			++cov_1ide81xho3.s[75];
+			cov_1ide81xho3.s[75]++;
 			return {
 				inputs: input,
 				outputs: output
 			};
 		} else {
-			++cov_1ide81xho3.b[23][1];
+			cov_1ide81xho3.b[23][1]++;
 		}
 
-		++cov_1ide81xho3.s[76];
+		cov_1ide81xho3.s[76]++;
 		return {
 			inputs: stage.input,
 			outputs: stage.output
 		};
 	})());
 
-	++cov_1ide81xho3.s[77];
+	cov_1ide81xho3.s[77]++;
 	for (const [input, output] of zip(inputs, outputs)) {
-		++cov_1ide81xho3.s[78];
+		cov_1ide81xho3.s[78]++;
 
 		board.run(input);
 
-		++cov_1ide81xho3.s[79];
+		cov_1ide81xho3.s[79]++;
 		if (board.outputValue !== output) {
-			++cov_1ide81xho3.b[24][0];
-			++cov_1ide81xho3.s[80];
+			cov_1ide81xho3.b[24][0]++;
+			cov_1ide81xho3.s[80]++;
 
 			return { pass: false, message: 'the board cannot clear the stage' };
 		} else {
-			++cov_1ide81xho3.b[24][1];
+			cov_1ide81xho3.b[24][1]++;
 		}
 
-		++cov_1ide81xho3.s[81];
+		cov_1ide81xho3.s[81]++;
 		maxClock = Math.max(maxClock, board.clock);
 	}
 
-	++cov_1ide81xho3.s[82];
+	cov_1ide81xho3.s[82]++;
 	return { pass: true, clocks: maxClock, blocks: board.weighedBlockCount };
 };
 
@@ -41483,29 +41483,29 @@ var cov_1uza411nc3 = function () {
 
 /* eslint global-require: 'off' */
 
-const { normalizeStageInput } = (++cov_1uza411nc3.s[0], __webpack_require__(0));
+const { normalizeStageInput } = (cov_1uza411nc3.s[0]++, __webpack_require__(0));
 
-const stages = (++cov_1uza411nc3.s[1], [__webpack_require__(64), __webpack_require__(65), __webpack_require__(66), __webpack_require__(17), __webpack_require__(67), __webpack_require__(68), __webpack_require__(69), __webpack_require__(70), __webpack_require__(71), __webpack_require__(72), __webpack_require__(73), __webpack_require__(74), __webpack_require__(18), __webpack_require__(19), __webpack_require__(20), __webpack_require__(21), __webpack_require__(22), __webpack_require__(23), __webpack_require__(75), __webpack_require__(76), __webpack_require__(24), __webpack_require__(77), __webpack_require__(25), __webpack_require__(26), __webpack_require__(78), __webpack_require__(79), __webpack_require__(27), __webpack_require__(28), __webpack_require__(80), __webpack_require__(81), __webpack_require__(82), __webpack_require__(83), __webpack_require__(29), __webpack_require__(30), __webpack_require__(84), __webpack_require__(85), __webpack_require__(86), __webpack_require__(31), __webpack_require__(87), __webpack_require__(88), __webpack_require__(89), __webpack_require__(90), __webpack_require__(91), __webpack_require__(92), __webpack_require__(32), __webpack_require__(33), __webpack_require__(34), __webpack_require__(35), __webpack_require__(93), __webpack_require__(36)]);
+const stages = (cov_1uza411nc3.s[1]++, [__webpack_require__(64), __webpack_require__(65), __webpack_require__(66), __webpack_require__(17), __webpack_require__(67), __webpack_require__(68), __webpack_require__(69), __webpack_require__(70), __webpack_require__(71), __webpack_require__(72), __webpack_require__(73), __webpack_require__(74), __webpack_require__(18), __webpack_require__(19), __webpack_require__(20), __webpack_require__(21), __webpack_require__(22), __webpack_require__(23), __webpack_require__(75), __webpack_require__(76), __webpack_require__(24), __webpack_require__(77), __webpack_require__(25), __webpack_require__(26), __webpack_require__(78), __webpack_require__(79), __webpack_require__(27), __webpack_require__(28), __webpack_require__(80), __webpack_require__(81), __webpack_require__(82), __webpack_require__(83), __webpack_require__(29), __webpack_require__(30), __webpack_require__(84), __webpack_require__(85), __webpack_require__(86), __webpack_require__(31), __webpack_require__(87), __webpack_require__(88), __webpack_require__(89), __webpack_require__(90), __webpack_require__(91), __webpack_require__(92), __webpack_require__(32), __webpack_require__(33), __webpack_require__(34), __webpack_require__(35), __webpack_require__(93), __webpack_require__(36)]);
 
 // Normalize stage data
-++cov_1uza411nc3.s[2];
+cov_1uza411nc3.s[2]++;
 module.exports = stages.map(stage => {
-	++cov_1uza411nc3.f[0];
-	++cov_1uza411nc3.s[3];
+	cov_1uza411nc3.f[0]++;
+	cov_1uza411nc3.s[3]++;
 
 	if (!Array.isArray(stage.inputX)) {
-		++cov_1uza411nc3.b[0][0];
-		++cov_1uza411nc3.s[4];
+		cov_1uza411nc3.b[0][0]++;
+		cov_1uza411nc3.s[4]++;
 
 		stage.inputX = [stage.inputX];
 	} else {
-		++cov_1uza411nc3.b[0][1];
+		cov_1uza411nc3.b[0][1]++;
 	}
 
-	++cov_1uza411nc3.s[5];
+	cov_1uza411nc3.s[5]++;
 	stage.input = normalizeStageInput(stage.input);
 
-	++cov_1uza411nc3.s[6];
+	cov_1uza411nc3.s[6]++;
 	return stage;
 });
 
@@ -41554,7 +41554,7 @@ var cov_12umgttovn = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_12umgttovn.s[0];
+cov_12umgttovn.s[0]++;
 module.exports = {
 	name: 'wire01',
 	version: 4,
@@ -41618,7 +41618,7 @@ var cov_klnqdnvu1 = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_klnqdnvu1.s[0];
+cov_klnqdnvu1.s[0]++;
 module.exports = {
 	name: 'calc01',
 	version: 3,
@@ -41689,7 +41689,7 @@ var cov_cpueqa5kc = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_cpueqa5kc.s[0];
+cov_cpueqa5kc.s[0]++;
 module.exports = {
 	name: 'calc02',
 	version: 3,
@@ -41757,7 +41757,7 @@ var cov_14eviprf84 = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_14eviprf84.s[0];
+cov_14eviprf84.s[0]++;
 module.exports = {
 	name: 'calc04',
 	version: 3,
@@ -41825,7 +41825,7 @@ var cov_m0flp0l1e = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_m0flp0l1e.s[0];
+cov_m0flp0l1e.s[0]++;
 module.exports = {
 	name: 'calc05',
 	version: 3,
@@ -41890,7 +41890,7 @@ var cov_2idxozgyc = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_2idxozgyc.s[0];
+cov_2idxozgyc.s[0]++;
 module.exports = {
 	name: 'calc06',
 	version: 3,
@@ -41957,7 +41957,7 @@ var cov_2o4gxgiftx = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_2o4gxgiftx.s[0];
+cov_2o4gxgiftx.s[0]++;
 module.exports = {
 	name: 'make-minus-one-easy',
 	version: 3,
@@ -42032,7 +42032,7 @@ var cov_2kzntuudvu = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_2kzntuudvu.s[0];
+cov_2kzntuudvu.s[0]++;
 module.exports = {
 	name: 'division-easy',
 	version: 3,
@@ -42107,7 +42107,7 @@ var cov_18vxx4z1yc = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_18vxx4z1yc.s[0];
+cov_18vxx4z1yc.s[0]++;
 module.exports = {
 	name: 'sixth-power',
 	version: 3,
@@ -42182,7 +42182,7 @@ var cov_2hps3u8q9p = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_2hps3u8q9p.s[0];
+cov_2hps3u8q9p.s[0]++;
 module.exports = {
 	name: 'remainder',
 	version: 3,
@@ -42257,7 +42257,7 @@ var cov_238r8wzuy7 = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_238r8wzuy7.s[0];
+cov_238r8wzuy7.s[0]++;
 module.exports = {
 	name: 'plus-32',
 	version: 3,
@@ -42332,7 +42332,7 @@ var cov_b9e7dsgs3 = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_b9e7dsgs3.s[0];
+cov_b9e7dsgs3.s[0]++;
 module.exports = {
 	name: 'bivariation01',
 	version: 3,
@@ -42411,7 +42411,7 @@ var cov_1quzrp044e = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_1quzrp044e.s[0];
+cov_1quzrp044e.s[0]++;
 module.exports = {
 	name: 'power-easy',
 	version: 3,
@@ -42498,7 +42498,7 @@ var cov_140iedwnrg = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_140iedwnrg.s[0];
+cov_140iedwnrg.s[0]++;
 module.exports = {
 	name: 'division-hard',
 	version: 3,
@@ -42567,7 +42567,7 @@ var cov_4stdjky1n = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_4stdjky1n.s[0];
+cov_4stdjky1n.s[0]++;
 module.exports = {
 	name: 'make-minus-one-med',
 	version: 3,
@@ -42639,7 +42639,7 @@ var cov_2j5gm6u5fl = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_2j5gm6u5fl.s[0];
+cov_2j5gm6u5fl.s[0]++;
 module.exports = {
 	name: 'make-minus-one-hard',
 	version: 3,
@@ -42712,7 +42712,7 @@ var cov_2d89ubgmcx = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_2d89ubgmcx.s[0];
+cov_2d89ubgmcx.s[0]++;
 module.exports = {
 	name: 'complement-of-2',
 	version: 3,
@@ -42810,7 +42810,7 @@ var cov_2f7v9ew9ao = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_2f7v9ew9ao.s[0];
+cov_2f7v9ew9ao.s[0]++;
 module.exports = {
 	name: 'binarian-easy',
 	version: 3,
@@ -42908,7 +42908,7 @@ var cov_wur5txvdu = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_wur5txvdu.s[0];
+cov_wur5txvdu.s[0]++;
 module.exports = {
 	name: 'perfect-number',
 	version: 3,
@@ -43006,7 +43006,7 @@ var cov_1x1bcvw9ri = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_1x1bcvw9ri.s[0];
+cov_1x1bcvw9ri.s[0]++;
 module.exports = {
 	name: 'reversal',
 	version: 3,
@@ -43104,7 +43104,7 @@ var cov_10qn030blw = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_10qn030blw.s[0];
+cov_10qn030blw.s[0]++;
 module.exports = {
 	name: 'seq01',
 	version: 1,
@@ -43182,7 +43182,7 @@ var cov_o24lrekon = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_o24lrekon.s[0];
+cov_o24lrekon.s[0]++;
 module.exports = {
 	name: 'seq02',
 	version: 1,
@@ -43260,7 +43260,7 @@ var cov_quas8j5p9 = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_quas8j5p9.s[0];
+cov_quas8j5p9.s[0]++;
 module.exports = {
 	name: 'max',
 	version: 3,
@@ -43338,7 +43338,7 @@ var cov_4vvqodiv8 = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_4vvqodiv8.s[0];
+cov_4vvqodiv8.s[0]++;
 module.exports = {
 	name: '100',
 	version: 3,
@@ -43405,7 +43405,7 @@ var cov_24yfjphz2h = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_24yfjphz2h.s[0];
+cov_24yfjphz2h.s[0]++;
 module.exports = {
 	name: '100-again',
 	version: 3,
@@ -43475,7 +43475,7 @@ var cov_114bz4l7d5 = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_114bz4l7d5.s[0];
+cov_114bz4l7d5.s[0]++;
 module.exports = {
 	name: '1000',
 	version: 3,
@@ -43545,7 +43545,7 @@ var cov_2a0imki9bq = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_2a0imki9bq.s[0];
+cov_2a0imki9bq.s[0]++;
 module.exports = {
 	name: 'plus-32-hard',
 	version: 3,
@@ -43618,7 +43618,7 @@ var cov_2ej8700sp3 = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_2ej8700sp3.s[0];
+cov_2ej8700sp3.s[0]++;
 module.exports = {
 	name: 'xor',
 	version: 2,
@@ -43686,7 +43686,7 @@ var cov_16asdszbhq = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_16asdszbhq.s[0];
+cov_16asdszbhq.s[0]++;
 module.exports = {
 	name: '2017',
 	version: 2,
@@ -43760,7 +43760,7 @@ var cov_1qfnbzznti = function () {
 	return coverage[path] = coverageData;
 }();
 
-++cov_1qfnbzznti.s[0];
+cov_1qfnbzznti.s[0]++;
 module.exports = {
 	name: 'addition-med',
 	version: 1,
