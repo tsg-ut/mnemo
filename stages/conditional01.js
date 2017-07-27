@@ -24,10 +24,14 @@ module.exports = {
 	input: [5, -10, null, null],
 	output: [15, -20, null, null],
 	ioGenerator: (random) => {
-		const input1 = Math.floor(random() * 200);
+		let candidates = Array.from({length: 200}, (item, index) => index)
+			.filter((val) => val !== 5 && val !== -10);
+
+		const input1 = candidates[Math.floor(random() * candidates.length)];
 		const output1 = input1 % 2 === 0 ? 2 * input1 : 3 * input1;
 
-		const input2 = Math.floor(random() * 200);
+		candidates = candidates.filter((val) => val != input1);
+		const input2 = candidates[Math.floor(random() * candidates.length)];
 		const output2 = input2 % 2 === 0 ? 2 * input2 : 3 * input2;
 
 		return {
