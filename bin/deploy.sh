@@ -13,7 +13,7 @@ git config user.name "Travis CI"
 git config user.email "info@tsg.ne.jp"
 git branch gh-pages origin/gh-pages
 git symbolic-ref HEAD refs/heads/gh-pages
-git checkout f2b3222e3e930b33c5618b26effcf4be451841ed .gitignore
+git checkout f78ce921b51f5d16e778fb266fe7dea0222fa505 .gitignore
 git add --all
 git commit -m "Update build - ${TRAVIS_COMMIT}"
 git push "https://${GH_TOKEN}@github.com/tsg-ut/mnemo.git" gh-pages:gh-pages --follow-tags > /dev/null 2>&1
