@@ -28,7 +28,8 @@
     "test": "npm run unit && npm run functional && npm run lint",
     "api:init": "cd api && sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
     "api": "cd api && node index.js",
-    "test:api": "cd api && cross-env NODE_ENV=test istanbul cover ../node_modules/mocha/bin/_mocha -- --recursive"
+    "test:api": "cd api && cross-env NODE_ENV=test istanbul cover ../node_modules/mocha/bin/_mocha -- --recursive",
+    "bench": "lsc benchmark/index.ls"
   },
   "repository": {
     "type": "git",
@@ -88,6 +89,7 @@
     "less": "^2.7.1",
     "livescript-loader": "^0.1.6",
     "mathjs": "^3.8.0",
+    "microtime": "^2.1.6",
     "mocha": "^3.3.0",
     "mocha-logger": "^1.0.4",
     "mocha-webpack": "^0.7.0",
