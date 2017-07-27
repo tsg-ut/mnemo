@@ -118,10 +118,9 @@ button {
 
 		@keyframes slide {
 			from {
-				transform: translateX(0);
 			}
 			to {
-				transform: translateX(calc(-100vw - 100%));
+				transform: translateX(calc(~"-100vw - 100%"));
 			}
 		}
 
@@ -1178,7 +1177,7 @@ button {
 
 			@keyframes ranking-animate {
 				from {
-					transform: translate(-50%, calc(-50% + 100px));
+					transform: translate(-50%, calc(~"-50% + 100px"));
 					opacity: 0;
 				}
 				to {
