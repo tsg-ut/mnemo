@@ -29,7 +29,7 @@ module.exports = {
 
 		const input1 = candidates[Math.floor(random() * candidates.length)];
 
-		candidates = candidates.filter((val) => val != input1);
+		candidates = candidates.filter((val) => val !== input1);
 		const input2 = candidates[Math.floor(random() * candidates.length)];
 
 		return {
