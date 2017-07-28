@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'conditional02',
-	version: 4,
+	version: 5,
 	parts: {
 		wireI: null,
 		wireL: null,
