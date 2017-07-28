@@ -63,7 +63,7 @@ io-spec-seq = ({input, output}) ->
 
 test-many-times-with-random = (test) ->
   # 100 is many!
-  for i from 0 til 100 - 1
+  for i from 0 til 100
     random = seedrandom i
     test random
 
