@@ -34,7 +34,7 @@ const umzug = new Umzug({
 
 chai.use(chaiHttp);
 
-const expect = chai.expect;
+const {expect} = chai;
 
 const now = new Date();
 const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000);

@@ -216,7 +216,7 @@ class DataComponent extends React.Component {
 				/>
 				<Measure
 					onResize={this.handleMeasureValue}
-					bounds={true}
+					bounds
 				>
 					{({measureRef}) => (
 						<text
