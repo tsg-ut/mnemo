@@ -51,7 +51,7 @@ module.exports = {
 
 			do {
 				n = 1000 + Math.floor(9000 * random());
-			} while (!(10 <= sumOfDigits(n) && sumOfDigits(n) < 20));
+			} while (!(sumOfDigits(n) >= 10 && sumOfDigits(n) < 20));
 
 			return n;
 		})());
@@ -62,7 +62,7 @@ module.exports = {
 
 			do {
 				n = 1000 + Math.floor(9000 * random());
-			} while (!(20 <= sumOfDigits(n)));
+			} while (!(sumOfDigits(n) >= 20));
 
 			return n;
 		})());

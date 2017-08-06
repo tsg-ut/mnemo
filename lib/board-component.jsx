@@ -546,7 +546,7 @@ class BoardComponent extends React.Component {
 									this.measureComponent = ref;
 								}}
 								onResize={this.handleMeasureBackground}
-								bounds={true}
+								bounds
 							>
 								{({measureRef}) => (
 									<rect
@@ -605,7 +605,7 @@ class BoardComponent extends React.Component {
 									value={inputs}
 									correctness={null}
 									color={this.getInputColor(index)}
-									filled={true}
+									filled
 									nullable={false}
 								/>
 								<path
@@ -710,7 +710,7 @@ class BoardComponent extends React.Component {
 					value={output}
 					correctness={null}
 					color={this.getInputColor(index)}
-					filled={true}
+					filled
 					nullable={false}
 				/>
 				<IOComponent
@@ -720,7 +720,7 @@ class BoardComponent extends React.Component {
 					correctness={this.props.userOutputCorrectness[index]}
 					color={this.getInputColor(index)}
 					filled={false}
-					nullable={true}
+					nullable
 				/>
 			</g>
 		))
