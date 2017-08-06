@@ -205,7 +205,7 @@ class BlockComponent extends React.Component {
 							<DataComponent
 								key={id(data)}
 								direction={direction}
-								isInward={true}
+								isInward
 								isAnimating={false}
 								isErasing={isErasing}
 								value={data.value}
@@ -221,7 +221,7 @@ class BlockComponent extends React.Component {
 								key={id(data)}
 								direction={direction}
 								isInward={isInward}
-								isAnimating={true}
+								isAnimating
 								isErasing={isErasing}
 								value={data.value}
 								data={data}

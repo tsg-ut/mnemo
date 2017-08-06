@@ -64,9 +64,9 @@ module.exports = {
 				[2, 35],
 			],
 			output: [
-				Math.pow(input1Base, input1Exponent),
-				Math.pow(input2Base, input2Exponent),
-				Math.pow(2, 35),
+				input1Base ** input1Exponent,
+				input2Base ** input2Exponent,
+				2 ** 35,
 			],
 		};
 	},
