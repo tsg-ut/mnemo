@@ -36,7 +36,7 @@ module.exports = {
 	outputX: 6,
 	input: [[null, null], [null, null], [null, null], [56, 1275]],
 	output: [null, null, null, 1],
-	ioGenerator: (random) => 	{
+	ioGenerator: (random) => {
 		// Durstenfeld shuffle
 		const shuffleArray = (array) => {
 			for (let i = array.length - 1; i > 0; i--) {
