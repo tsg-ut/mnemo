@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
 		],
 		include: [{
 			model: Stages,
+			attributes: [],
 			where: {
 				migratedVersion: {
 					$col: 'submissions.version',
