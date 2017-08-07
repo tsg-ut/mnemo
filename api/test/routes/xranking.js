@@ -201,5 +201,41 @@ describe('/ranking', () => {
 				}]);
 			});
 		});
+
+		describe('limit parameter', () => {
+			it('restricts size of returned array', async () => {
+				const stage = await Stages.create({
+					name: 'wire01',
+					migratedVersion: 1,
+				}, {transaction});
+
+				const submissionFactory = {
+					board: JSON.stringify([]),
+					blocks: 0,
+					clocks: 0,
+					version: 1,
+					stageId: stage.id,
+					score: 10000,
+				};
+
+				await Submissions.bulkCreate([
+					Object.assign({}, submissionFactory, {
+						name: 'A',
+					}),
+					Object.assign({}, submissionFactory, {
+						name: 'B',
+					}),
+					Object.assign({}, submissionFactory, {
+						name: 'C',
+					}),
+				], {transaction});
+
+				const res = await chai.request(app).get('/ranking').query({limit: 2});
+
+				expect(res).to.have.status(200);
+				expect(res).to.be.json;
+				expect(res.body).to.have.length(2);
+			});
+		});
 	});
 });

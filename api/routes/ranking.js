@@ -7,6 +7,7 @@ const sequelize = require('../models');
 
 router.get('/', async (req, res) => {
 	const since = new Date(req.query.since || 0);
+	const limit = req.query.limit ? parseInt(req.query.limit) : 20;
 
 	const submissions = await Submissions.findAll({
 		attributes: [
@@ -30,7 +31,7 @@ router.get('/', async (req, res) => {
 				$gte: since,
 			},
 		},
-		limit: 20,
+		limit,
 	});
 
 	res.json(submissions.map((submission) => ({
