@@ -32,11 +32,12 @@ router.get('/', async (req, res) => {
 			},
 		},
 		limit,
+		raw: true,
 	});
 
 	res.json(submissions.map((submission) => ({
 		name: submission.name,
-		score: submission.dataValues.totalScore,
+		score: submission.totalScore,
 	})));
 });
 
