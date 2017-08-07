@@ -41,24 +41,24 @@ const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000);
 
 let transaction = null;
 
-// Execute all migrations
-before(async () => {
-	await umzug.up();
-});
-
-beforeEach(async () => {
-	transaction = await sequelize.transaction();
-});
-
-afterEach(async () => {
-	await transaction.rollback();
-});
-
-after(() => {
-	mockery.disable();
-});
-
 describe('/stages', () => {
+	// Execute all migrations
+	before(async () => {
+		await umzug.up();
+	});
+
+	beforeEach(async () => {
+		transaction = await sequelize.transaction();
+	});
+
+	afterEach(async () => {
+		await transaction.rollback();
+	});
+
+	after(() => {
+		mockery.disable();
+	});
+
 	describe('GET /stages', () => {
 		it('retuns JSON of the stage array', async () => {
 			await Stages.bulkCreate([{
