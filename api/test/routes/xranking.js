@@ -53,11 +53,9 @@ describe('/ranking', () => {
 			}, {transaction});
 
 			const submissionFactory = {
-				name: 'A',
 				board: JSON.stringify([]),
 				blocks: 0,
 				clocks: 0,
-				score: 0,
 				version: 1,
 			};
 
@@ -103,6 +101,105 @@ describe('/ranking', () => {
 				name: 'C',
 				score: 10000,
 			}]);
+		});
+
+		it('does not include scores from old version stage', async () => {
+			const stage1 = await Stages.create({
+				name: 'wire01',
+				migratedVersion: 1,
+			}, {transaction});
+
+			const stage2 = await Stages.create({
+				name: 'calc01',
+				migratedVersion: 1,
+			}, {transaction});
+
+			const stage3 = await Stages.create({
+				name: 'calc02',
+				migratedVersion: 2,
+			}, {transaction});
+
+			const submissionFactory = {
+				name: 'A',
+				board: JSON.stringify([]),
+				blocks: 0,
+				clocks: 0,
+				score: 10000,
+				version: 1,
+			};
+
+			await Submissions.bulkCreate([
+				Object.assign({}, submissionFactory, {
+					stageId: stage1.id,
+				}),
+				Object.assign({}, submissionFactory, {
+					stageId: stage2.id,
+				}),
+				Object.assign({}, submissionFactory, {
+					stageId: stage3.id,
+				}),
+			], {transaction});
+
+			const res = await chai.request(app).get('/ranking');
+
+			expect(res).to.have.status(200);
+			expect(res).to.be.json;
+			expect(res.body).to.deep.equal([{
+				name: 'A',
+				score: 20000,
+			}]);
+		});
+
+		describe('since parameter', () => {
+			it('filters submissions only from specified time', async () => {
+				const stage1 = await Stages.create({
+					name: 'wire01',
+					migratedVersion: 1,
+				}, {transaction});
+
+				const stage2 = await Stages.create({
+					name: 'calc01',
+					migratedVersion: 1,
+				}, {transaction});
+
+				const stage3 = await Stages.create({
+					name: 'calc02',
+					migratedVersion: 1,
+				}, {transaction});
+
+				const submissionFactory = {
+					name: 'A',
+					board: JSON.stringify([]),
+					blocks: 0,
+					clocks: 0,
+					score: 10000,
+					version: 1,
+				};
+
+				await Submissions.bulkCreate([
+					Object.assign({}, submissionFactory, {
+						updatedAt: new Date('2017-04-01'),
+						stageId: stage1.id,
+					}),
+					Object.assign({}, submissionFactory, {
+						updatedAt: new Date('2017-05-01'),
+						stageId: stage2.id,
+					}),
+					Object.assign({}, submissionFactory, {
+						updatedAt: new Date('2017-06-01'),
+						stageId: stage3.id,
+					}),
+				], {transaction});
+
+				const res = await chai.request(app).get('/ranking').query({since: '2017-05-01'});
+
+				expect(res).to.have.status(200);
+				expect(res).to.be.json;
+				expect(res.body).to.deep.equal([{
+					name: 'A',
+					score: 20000,
+				}]);
+			});
 		});
 	});
 });

@@ -6,6 +6,8 @@ const Submissions = require('../models/submission');
 const sequelize = require('../models');
 
 router.get('/', async (req, res) => {
+	const since = new Date(req.query.since || 0);
+
 	const submissions = await Submissions.findAll({
 		attributes: [
 			'name',
@@ -23,6 +25,11 @@ router.get('/', async (req, res) => {
 		order: [
 			[sequelize.fn('sum', sequelize.col('score')), 'DESC'],
 		],
+		where: {
+			updatedAt: {
+				$gte: since,
+			},
+		},
 		limit: 20,
 	});
 
