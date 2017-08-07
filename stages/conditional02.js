@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'conditional02',
-	version: 4,
+	version: 5,
 	parts: {
 		wireI: null,
 		wireL: null,
@@ -24,10 +24,12 @@ module.exports = {
 	input: [5, 6, null, null],
 	output: [10, 18, null, null],
 	ioGenerator: (random) => {
-		const candidates = Array.from({length: 200}, (item, index) => index + 1)
+		let candidates = Array.from({length: 200 - 1}, (item, index) => index + 1)
 			.filter((val) => val !== 5 && val !== 6);
 
 		const input1 = candidates[Math.floor(random() * candidates.length)];
+
+		candidates = candidates.filter((val) => val !== input1);
 		const input2 = candidates[Math.floor(random() * candidates.length)];
 
 		return {
