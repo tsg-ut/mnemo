@@ -7,6 +7,12 @@ const sequelize = require('../models');
 
 router.get('/', async (req, res) => {
 	const since = new Date(req.query.since || 0);
+
+	if (Number.isNaN(since.getTime())) {
+		res.status(400).send('since parameter is invalid');
+		return;
+	}
+
 	const limit = req.query.limit ? parseInt(req.query.limit) : 20;
 
 	const submissions = await Submissions.findAll({
