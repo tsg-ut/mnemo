@@ -99,8 +99,7 @@ ten-thousandth-digit-calc = (n) ->
 eight-eight-zero-nine-calc = (n) ->
   n.to-string!split '' .map (digit) ->
     [1 0 0 0 1 0 1 0 2 1][parse-int digit]
-  .reduce (previous, current) ->
-    previous + current
+  |> mathjs.sum
 
 describe 'Stage Data' ->
   describe 'calc03 stage' ->
