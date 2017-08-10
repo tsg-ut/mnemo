@@ -35,6 +35,8 @@ module.exports = {
 		neq: null,
 		gt: null,
 		lt: null,
+		'bitwise-and': null,
+		not: null,
 		diode: null,
 		conditional: null,
 		transistor: null,
