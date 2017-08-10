@@ -54,6 +54,7 @@ const stages = [
 	require('./spaceship.js'),
 	require('./addition-med.js'),
 	require('./10000th-digit.js'),
+	require('./8809.js'),
 ];
 
 // Normalize stage data
