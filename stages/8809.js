@@ -39,8 +39,8 @@ module.exports = {
 		conditional: null,
 		transistor: null,
 	},
-	inputX: 4,
-	outputX: 4,
+	inputX: 5,
+	outputX: 5,
 	input: [null, null, null, null, 9609348],
 	output: [null, null, null, null, 7],
 	ioGenerator: (random) => {
@@ -96,8 +96,8 @@ module.exports = {
 			],
 		};
 	},
-	width: 9,
-	height: 9,
+	width: 11,
+	height: 11,
 	clockLimit: 200,
 	statement: 'プログラマーなら1時間で解ける問題です！',
 	title: '8809=6',
