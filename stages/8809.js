@@ -88,11 +88,11 @@ module.exports = {
 		return {
 			input: [
 				...inputs,
-				960348,
+				9609348,
 			],
 			output: [
 				...(inputs.map(calc)),
-				6,
+				7,
 			],
 		};
 	},

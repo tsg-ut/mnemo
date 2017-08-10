@@ -24,6 +24,7 @@ require! {
   '../../stages/factorization'
   '../../stages/spaceship'
   '../../stages/10000th-digit': ten-thousandth-digit
+  '../../stages/8809': eight-eight-zero-nine
 }
 
 chai.use chai-things
@@ -94,6 +95,12 @@ ten-thousandth-digit-calc = (n) ->
   mathjs.config precision: 20000
   x = mathjs.divide mathjs.bignumber(1), mathjs.bignumber(n)
   return x.to-string!split '.' .1.9999 |> parse-int
+
+eight-eight-zero-nine-calc = (n) ->
+  n.to-string!split '' .map (digit) ->
+    [1 0 0 0 1 0 1 0 2 1][parse-int digit]
+  .reduce (previous, current) ->
+    previous + current
 
 describe 'Stage Data' ->
   describe 'calc03 stage' ->
@@ -380,3 +387,19 @@ describe 'Stage Data' ->
           and output is ten-thousandth-digit-calc input
 
         expect io.input.4 .to.equal 107
+
+  describe '8809 stage' ->
+    It 'generates 8809' ->
+      test-many-times-with-random (random) ->
+        io = eight-eight-zero-nine.io-generator random
+
+        expect io .to.satisfy io-spec
+
+        # Uniqueness of output
+        unique-output = Array.from new Set io.output[0 to 3]
+        expect io.output[0 to 3] .to.deep.equal unique-output
+
+        expect zip io.input, io.output .to.all.satisfy ([input, output]) ->
+          output is eight-eight-zero-nine-calc input
+
+        expect io.input.4 .to.equal 9609348
