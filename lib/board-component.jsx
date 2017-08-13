@@ -545,6 +545,21 @@ class BoardComponent extends React.Component {
 		return 'transparent';
 	}
 
+	permutation = (array) => {
+		const front = [];
+		const back = [];
+		for (let row = 0; row < array.length; row++) {
+			for (let line = 0; line < array[row].length; line++) {
+				if (this.isSelectedBlock(line, row)) {
+					front.push(array[row][line]);
+				} else {
+					back.push(array[row][line]);
+				}
+			}
+		}
+		return back.concat(front);
+	}
+
 	render() {
 		return (
 			<Hammer
@@ -670,7 +685,7 @@ class BoardComponent extends React.Component {
 								)}
 							</Measure>
 							<g>
-								{this.renderBlocks()}
+								{this.permutation(this.renderBlocks())}
 							</g>
 							<g
 								onMouseLeave={this.handleMouseLeaveBoard}
