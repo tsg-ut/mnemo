@@ -321,13 +321,17 @@ class BoardComponent extends React.Component {
 	handleMouseMove = (event, x, y) => {
 		event.preventDefault();
 		if (this.props.moveStatus === 'select' && this.state.selectStart !== null) {
-			this.setState({
-				selectEnd: {x, y},
-			});
+			if (!(this.state.selectEnd.x == x && this.state.selectEnd.y == y)) {
+				this.setState({
+					selectEnd: {x, y},
+				});
+			}
 		} else if (this.props.moveStatus === 'move' && this.state.moveStart !== null) {
-			this.setState({
-				moveEnd: {x, y},
-			});
+			if (!(this.state.moveEnd.x == x && this.state.moveEnd.y == y)) {
+				this.setState({
+					moveEnd: {x, y},
+				});
+			}
 		}
 	}
 
