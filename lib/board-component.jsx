@@ -112,17 +112,6 @@ class BoardComponent extends React.Component {
 				this.halt({force: this.props.isForced});
 			}
 		}
-
-		if (prevProps.moveStatus !== 'none') {
-			if (this.props.moveStatus === 'none') {
-				this.setState({
-					selectStart: null,
-					selectEnd: null,
-					moveStart: null,
-					moveEnd: null,
-				});
-			}
-		}
 	}
 
 	get _borderSize() {
@@ -196,6 +185,15 @@ class BoardComponent extends React.Component {
 		this.board.placeBlock({x, y, type, rotate});
 		this.setState({
 			blocks: this.board.getBlocks(),
+		});
+	}
+
+	resetMoveState() {
+		this.setState({
+			selectStart: null,
+			selectEnd: null,
+			moveStart: null,
+			moveEnd: null,
 		});
 	}
 
@@ -321,13 +319,13 @@ class BoardComponent extends React.Component {
 	handleMouseMove = (event, x, y) => {
 		event.preventDefault();
 		if (this.props.moveStatus === 'select' && this.state.selectStart !== null) {
-			if (!(this.state.selectEnd.x == x && this.state.selectEnd.y == y)) {
+			if (!(this.state.selectEnd.x === x && this.state.selectEnd.y === y)) {
 				this.setState({
 					selectEnd: {x, y},
 				});
 			}
 		} else if (this.props.moveStatus === 'move' && this.state.moveStart !== null) {
-			if (!(this.state.moveEnd.x == x && this.state.moveEnd.y == y)) {
+			if (!(this.state.moveEnd.x === x && this.state.moveEnd.y === y)) {
 				this.setState({
 					moveEnd: {x, y},
 				});
