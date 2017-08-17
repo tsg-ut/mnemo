@@ -344,7 +344,12 @@ class BoardComponent extends React.Component {
 			this.setState({
 				moveEnd: {x, y},
 			});
-			this.props.finishMove(this.state.selectStart, this.state.selectEnd, this.state.moveEnd.x - this.state.moveStart.x, this.state.moveEnd.y - this.state.moveStart.y);
+			this.props.finishMove({
+				selectStart: this.state.selectStart,
+				selectEnd: this.state.selectEnd,
+				deltaX: this.state.moveEnd.x - this.state.moveStart.x,
+				deltaY: this.state.moveEnd.y - this.state.moveStart.y,
+			});
 		}
 	}
 
@@ -352,7 +357,12 @@ class BoardComponent extends React.Component {
 		if (this.props.moveStatus === 'select' && this.state.selectStart !== null) {
 			this.props.finishSelect();
 		} else if (this.props.moveStatus === 'move' && this.state.moveStart !== null) {
-			this.props.finishMove(this.state.selectStart, this.state.selectEnd, this.state.moveEnd.x - this.state.moveStart.x, this.state.moveEnd.y - this.state.moveStart.y);
+			this.props.finishMove({
+				selectStart: this.state.selectStart,
+				selectEnd: this.state.selectEnd,
+				deltaX: this.state.moveEnd.x - this.state.moveStart.x,
+				deltaY: this.state.moveEnd.y - this.state.moveStart.y,
+			});
 		}
 	}
 
