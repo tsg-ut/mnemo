@@ -68,6 +68,14 @@ router.get('/:stage/submissions', async (req, res) => {
 router.post('/:stage/submissions', async (req, res) => {
 	const stageName = req.params.stage;
 
+	if (typeof req.body.name !== 'string') {
+		res.status(400).json({
+			error: true,
+			message: 'type of name must be string',
+		});
+		return;
+	}
+
 	const [stage, existingSubmission] = await Promise.all([
 		Stages.findOne({
 			where: {
