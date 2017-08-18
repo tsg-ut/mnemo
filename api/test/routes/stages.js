@@ -344,7 +344,7 @@ describe('/stages', () => {
 		it('reports 400 error when attempted to post malicious name (object)', async () => {
 			try {
 				await chai.request(app).post('/stages/wire01/submissions').send({
-					name: { '$ne' : 'attacker' },
+					name: {$ne: 'attacker'},
 					board: validBoard,
 				});
 				expect.fail();
