@@ -33,6 +33,7 @@ describe 'util' ->
     It 'returns NaN if arguments are invalid' ->
       expect log 0, 100 .to.be.NaN
       expect log 1, 100 .to.be.NaN
+      expect log 100, 0 .to.be.NaN
       expect log -5, 100 .to.be.NaN
       expect log 100, -5 .to.be.NaN
       expect log Infinity, Infinity .to.be.NaN
