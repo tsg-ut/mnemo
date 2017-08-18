@@ -60,7 +60,7 @@ describe('/stages', () => {
 	});
 
 	describe('GET /stages', () => {
-		it('retuns JSON of the stage array', async () => {
+		it('returns JSON of the stage array', async () => {
 			await Stages.bulkCreate([{
 				name: 'stage1',
 				migratedVersion: 1,
@@ -87,7 +87,7 @@ describe('/stages', () => {
 	});
 
 	describe('GET /stages/:stage', () => {
-		it('retuns JSON of the stage information', async () => {
+		it('returns JSON of the stage information', async () => {
 			await Stages.bulkCreate([{
 				name: 'wire01',
 				migratedVersion: 2,
@@ -120,7 +120,7 @@ describe('/stages', () => {
 			rotate: 0,
 		}]);
 
-		it('retuns JSON of the correctly ordered submissions', async () => {
+		it('returns JSON of the correctly ordered submissions', async () => {
 			const stage = await Stages.create({
 				name: 'wire01',
 				migratedVersion: 2,
@@ -334,6 +334,18 @@ describe('/stages', () => {
 				await chai.request(app).post('/stages/wire01/submissions').send({
 					name: 'hakatashi',
 					board: invalidBoard,
+				});
+				expect.fail();
+			} catch (res) {
+				expect(res).to.have.status(400);
+			}
+		});
+
+		it('reports 400 error when attempted to post malicious name (object)', async () => {
+			try {
+				await chai.request(app).post('/stages/wire01/submissions').send({
+					name: {$ne: 'attacker'},
+					board: validBoard,
 				});
 				expect.fail();
 			} catch (res) {
