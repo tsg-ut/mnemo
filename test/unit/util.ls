@@ -5,7 +5,6 @@ require! {
     log,
     sum,
     translate-date-from-unix-time,
-    trimAfter,
   }
 }
 
