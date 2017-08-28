@@ -8,7 +8,7 @@ const assert = require('assert');
 const Board = require('./board');
 const BlockComponent = require('./block-component.jsx');
 const IOComponent = require('./io-component.jsx');
-const {id, sum} = require('./util');
+const {id, sum, isBetween} = require('./util');
 const {BLOCK_SIZE} = require('./constants');
 
 const inputColors = [
@@ -39,10 +39,10 @@ class BoardComponent extends React.Component {
 		onClockLimitExceeded: PropTypes.func.isRequired,
 		isRapid: PropTypes.bool.isRequired,
 		isForced: PropTypes.bool.isRequired,
-		moveStatus: PropTypes.string.isRequired,
-		finishSelect: PropTypes.func.isRequired,
-		cancelMove: PropTypes.func.isRequired,
-		finishMove: PropTypes.func.isRequired,
+		moveStatus: PropTypes.oneOf(['none', 'select', 'move']).isRequired,
+		onFinishSelect: PropTypes.func.isRequired,
+		onCancelMove: PropTypes.func.isRequired,
+		onFinishMove: PropTypes.func.isRequired,
 	}
 
 	static defaultProps = {
@@ -111,6 +111,12 @@ class BoardComponent extends React.Component {
 			if (this.props.status === 'stop') {
 				this.halt({force: this.props.isForced});
 			}
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (this.props.moveStatus !== 'none' && nextProps.moveStatus === 'none') {
+			this.resetMoveState();
 		}
 	}
 
@@ -311,7 +317,7 @@ class BoardComponent extends React.Component {
 					moveEnd: {x, y},
 				});
 			} else {
-				this.props.cancelMove();
+				this.props.onCancelMove();
 			}
 		}
 	}
@@ -339,12 +345,12 @@ class BoardComponent extends React.Component {
 			this.setState({
 				selectEnd: {x, y},
 			});
-			this.props.finishSelect();
+			this.props.onFinishSelect();
 		} else if (this.props.moveStatus === 'move') {
 			this.setState({
 				moveEnd: {x, y},
 			});
-			this.props.finishMove({
+			this.props.onFinishMove({
 				selectStart: this.state.selectStart,
 				selectEnd: this.state.selectEnd,
 				deltaX: this.state.moveEnd.x - this.state.moveStart.x,
@@ -355,9 +361,9 @@ class BoardComponent extends React.Component {
 
 	handleMouseLeaveBoard = () => {
 		if (this.props.moveStatus === 'select' && this.state.selectStart !== null) {
-			this.props.finishSelect();
+			this.props.onFinishSelect();
 		} else if (this.props.moveStatus === 'move' && this.state.moveStart !== null) {
-			this.props.finishMove({
+			this.props.onFinishMove({
 				selectStart: this.state.selectStart,
 				selectEnd: this.state.selectEnd,
 				deltaX: this.state.moveEnd.x - this.state.moveStart.x,
@@ -368,13 +374,15 @@ class BoardComponent extends React.Component {
 
 	isSelectedBlock = (x, y) => {
 		if (this.props.moveStatus !== 'none' && this.state.selectStart !== null && this.state.selectEnd !== null) {
-			const left = (this.state.selectStart.x < this.state.selectEnd.x) ? this.state.selectStart.x : this.state.selectEnd.x;
-			const right = (this.state.selectStart.x > this.state.selectEnd.x) ? this.state.selectStart.x : this.state.selectEnd.x;
-			const top = (this.state.selectStart.y < this.state.selectEnd.y) ? this.state.selectStart.y : this.state.selectEnd.y;
-			const bottom = (this.state.selectStart.y > this.state.selectEnd.y) ? this.state.selectStart.y : this.state.selectEnd.y;
-			if (left <= x && x <= right && top <= y && y <= bottom) {
-				return true;
-			}
+			return isBetween({
+				number: x,
+				left: this.state.selectStart.x,
+				right: this.state.selectEnd.x,
+			}) && isBetween({
+				number: y,
+				left: this.state.selectStart.y,
+				right: this.state.selectEnd.y,
+			});
 		}
 		return false;
 	}
@@ -697,7 +705,7 @@ class BoardComponent extends React.Component {
 								)}
 							</Measure>
 							<g>
-								{this.permutation(this.renderBlocks())}
+								{this.renderBlocks()}
 							</g>
 							<g
 								onMouseLeave={this.handleMouseLeaveBoard}
@@ -782,57 +790,59 @@ class BoardComponent extends React.Component {
 		They must be inside BlockComponent, though...
 	*/
 	renderBlocks = () => (
-		this.state.blocks.map((row) => (
-			row.map((block) => (
-				<g
-					key={id(block)}
-					transform={this.getBlockTransform(block.x, block.y)}
-				>
-					<rect
-						className="block-border"
-						width={BLOCK_SIZE}
-						height={BLOCK_SIZE}
-						x={block.x * BLOCK_SIZE}
-						y={block.y * BLOCK_SIZE}
-						fill={this.getBlockFill(block.x, block.y)}
-					/>
-					{block.config.onRotatableWire && (
-						<image
-							className="block"
+		this.permutation(
+			this.state.blocks.map((row) => (
+				row.map((block) => (
+					<g
+						key={id(block)}
+						transform={this.getBlockTransform(block.x, block.y)}
+					>
+						<rect
+							className="block-border"
 							width={BLOCK_SIZE}
 							height={BLOCK_SIZE}
 							x={block.x * BLOCK_SIZE}
 							y={block.y * BLOCK_SIZE}
-							xlinkHref="image/wireI.png"
-							style={{
-								transform: `rotate(${block.rotate * 90}deg)`,
-								transformOrigin: 'center',
-								// Enabled from FF55
-								transformBox: 'fill-box',
-								pointerEvents: 'none',
-							}}
+							fill={this.getBlockFill(block.x, block.y)}
 						/>
-					)}
-					{(block.name !== 'empty') && (
-						<image
-							className="block"
-							width={BLOCK_SIZE}
-							height={BLOCK_SIZE}
-							x={block.x * BLOCK_SIZE}
-							y={block.y * BLOCK_SIZE}
-							xlinkHref={`image/${block.name}.png`}
-							style={{
-								transform: block.config.onRotatableWire ? 'none' : `rotate(${block.rotate * 90}deg)`,
-								transformOrigin: 'center',
-								// Enabled from FF55
-								transformBox: 'fill-box',
-								pointerEvents: 'none',
-							}}
-						/>
-					)}
-				</g>
+						{block.config.onRotatableWire && (
+							<image
+								className="block"
+								width={BLOCK_SIZE}
+								height={BLOCK_SIZE}
+								x={block.x * BLOCK_SIZE}
+								y={block.y * BLOCK_SIZE}
+								xlinkHref="image/wireI.png"
+								style={{
+									transform: `rotate(${block.rotate * 90}deg)`,
+									transformOrigin: 'center',
+									// Enabled from FF55
+									transformBox: 'fill-box',
+									pointerEvents: 'none',
+								}}
+							/>
+						)}
+						{(block.name !== 'empty') && (
+							<image
+								className="block"
+								width={BLOCK_SIZE}
+								height={BLOCK_SIZE}
+								x={block.x * BLOCK_SIZE}
+								y={block.y * BLOCK_SIZE}
+								xlinkHref={`image/${block.name}.png`}
+								style={{
+									transform: block.config.onRotatableWire ? 'none' : `rotate(${block.rotate * 90}deg)`,
+									transformOrigin: 'center',
+									// Enabled from FF55
+									transformBox: 'fill-box',
+									pointerEvents: 'none',
+								}}
+							/>
+						)}
+					</g>
+				))
 			))
-		))
+		)
 	)
 
 	renderOutputs = () => (
