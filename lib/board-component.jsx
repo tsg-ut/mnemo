@@ -40,7 +40,6 @@ class BoardComponent extends React.Component {
 		isRapid: PropTypes.bool.isRequired,
 		isForced: PropTypes.bool.isRequired,
 		isMovingMode: PropTypes.bool.isRequired,
-		onCancelMove: PropTypes.func.isRequired,
 		onFinishMove: PropTypes.func.isRequired,
 		isMouseDown: PropTypes.bool.isRequired,
 	}
