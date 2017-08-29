@@ -15,7 +15,6 @@ class BlockComponent extends React.Component {
 		onClick: PropTypes.func.isRequired,
 		onMouseDown: PropTypes.func.isRequired,
 		onMouseMove: PropTypes.func.isRequired,
-		onMouseUp: PropTypes.func.isRequired,
 		onPassAnimationComplete: PropTypes.func.isRequired,
 		isRapid: PropTypes.bool.isRequired,
 		viewBoxScale: PropTypes.number,
@@ -192,10 +191,6 @@ class BlockComponent extends React.Component {
 		this.props.onMouseMove(event, this.props.x, this.props.y)
 	)
 
-	handleMouseUp = (event) => (
-		this.props.onMouseUp(event, this.props.x, this.props.y)
-	)
-
 	render() {
 		return (
 			<g
@@ -212,7 +207,6 @@ class BlockComponent extends React.Component {
 					onClick={this.handleClick}
 					onMouseDown={this.handleMouseDown}
 					onMouseMove={this.handleMouseMove}
-					onMouseUp={this.handleMouseUp}
 					onContextMenu={this.handleClick}
 					cursor="pointer"
 				/>

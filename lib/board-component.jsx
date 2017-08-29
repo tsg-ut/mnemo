@@ -42,6 +42,7 @@ class BoardComponent extends React.Component {
 		isMovingMode: PropTypes.bool.isRequired,
 		onCancelMove: PropTypes.func.isRequired,
 		onFinishMove: PropTypes.func.isRequired,
+		isMouseDown: PropTypes.bool.isRequired,
 	}
 
 	static defaultProps = {
@@ -117,6 +118,23 @@ class BoardComponent extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		if (this.props.isMovingMode && !nextProps.isMovingMode) {
 			this.resetMoveState();
+		}
+		if (this.props.isMouseDown && !nextProps.isMouseDown) {
+			// mouseup
+			if (this.props.isMovingMode) {
+				if (this.state.moveStatus === 'select' && this.state.selectStart !== null && this.state.selectEnd !== null) {
+					this.setState({
+						moveStatus: 'move',
+					});
+				} else if (this.state.moveStatus === 'move' && this.state.moveStart !== null && this.state.moveEnd !== null) {
+					this.props.onFinishMove({
+						selectStart: this.state.selectStart,
+						selectEnd: this.state.selectEnd,
+						deltaX: this.state.moveEnd.x - this.state.moveStart.x,
+						deltaY: this.state.moveEnd.y - this.state.moveStart.y,
+					});
+				}
+			}
 		}
 	}
 
@@ -313,14 +331,10 @@ class BoardComponent extends React.Component {
 					selectEnd: {x, y},
 				});
 			} else if (this.state.moveStatus === 'move') {
-				if (this.isSelectedBlock(x, y)) {
-					this.setState({
-						moveStart: {x, y},
-						moveEnd: {x, y},
-					});
-				} else {
-					this.props.onCancelMove();
-				}
+				this.setState({
+					moveStart: {x, y},
+					moveEnd: {x, y},
+				});
 			}
 		}
 	}
@@ -340,45 +354,6 @@ class BoardComponent extends React.Component {
 						moveEnd: {x, y},
 					});
 				}
-			}
-		}
-	}
-
-	handleMouseUp = (event, x, y) => {
-		event.preventDefault();
-		if (this.props.isMovingMode) {
-			if (this.state.moveStatus === 'select') {
-				this.setState({
-					selectEnd: {x, y},
-					moveStatus: 'move',
-				});
-			} else if (this.state.moveStatus === 'move') {
-				this.setState({
-					moveEnd: {x, y},
-				});
-				this.props.onFinishMove({
-					selectStart: this.state.selectStart,
-					selectEnd: this.state.selectEnd,
-					deltaX: this.state.moveEnd.x - this.state.moveStart.x,
-					deltaY: this.state.moveEnd.y - this.state.moveStart.y,
-				});
-			}
-		}
-	}
-
-	handleMouseLeaveBoard = () => {
-		if (this.props.isMovingMode) {
-			if (this.state.moveStatus === 'select' && this.state.selectStart !== null) {
-				this.setState({
-					moveStatus: 'move',
-				});
-			} else if (this.state.moveStatus === 'move' && this.state.moveStart !== null) {
-				this.props.onFinishMove({
-					selectStart: this.state.selectStart,
-					selectEnd: this.state.selectEnd,
-					deltaX: this.state.moveEnd.x - this.state.moveStart.x,
-					deltaY: this.state.moveEnd.y - this.state.moveStart.y,
-				});
 			}
 		}
 	}
@@ -721,9 +696,7 @@ class BoardComponent extends React.Component {
 							<g>
 								{this.renderBlocks()}
 							</g>
-							<g
-								onMouseLeave={this.handleMouseLeaveBoard}
-							>
+							<g>
 								{
 									this.state.blocks.map((row) => (
 										row.map((block) => (
@@ -736,7 +709,6 @@ class BoardComponent extends React.Component {
 												onClick={this.handleClickBlock}
 												onMouseDown={this.handleMouseDown}
 												onMouseMove={this.handleMouseMove}
-												onMouseUp={this.handleMouseUp}
 												onPassAnimationComplete={this.handlePassAnimationComplete}
 												isRapid={this.props.isRapid}
 												viewBoxScale={this.state.viewBoxScale}
