@@ -41,7 +41,6 @@ class BoardComponent extends React.Component {
 		isForced: PropTypes.bool.isRequired,
 		isMovingMode: PropTypes.bool.isRequired,
 		onFinishMove: PropTypes.func.isRequired,
-		isMouseDown: PropTypes.bool.isRequired,
 	}
 
 	static defaultProps = {
@@ -117,23 +116,6 @@ class BoardComponent extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		if (this.props.isMovingMode && !nextProps.isMovingMode) {
 			this.resetMoveState();
-		}
-		if (this.props.isMouseDown && !nextProps.isMouseDown) {
-			// mouseup
-			if (this.props.isMovingMode) {
-				if (this.state.moveStatus === 'select' && this.state.selectStart !== null && this.state.selectEnd !== null) {
-					this.setState({
-						moveStatus: 'move',
-					});
-				} else if (this.state.moveStatus === 'move' && this.state.moveStart !== null && this.state.moveEnd !== null) {
-					this.props.onFinishMove({
-						selectStart: this.state.selectStart,
-						selectEnd: this.state.selectEnd,
-						deltaX: this.state.moveEnd.x - this.state.moveStart.x,
-						deltaY: this.state.moveEnd.y - this.state.moveStart.y,
-					});
-				}
-			}
 		}
 	}
 
@@ -321,42 +303,6 @@ class BoardComponent extends React.Component {
 		return false;
 	}
 
-	handleMouseDown = (event, x, y) => {
-		event.preventDefault();
-		if (this.props.isMovingMode) {
-			if (this.state.moveStatus === 'select') {
-				this.setState({
-					selectStart: {x, y},
-					selectEnd: {x, y},
-				});
-			} else if (this.state.moveStatus === 'move') {
-				this.setState({
-					moveStart: {x, y},
-					moveEnd: {x, y},
-				});
-			}
-		}
-	}
-
-	handleMouseMove = (event, x, y) => {
-		event.preventDefault();
-		if (this.props.isMovingMode) {
-			if (this.state.moveStatus === 'select' && this.state.selectStart !== null) {
-				if (!(this.state.selectEnd.x === x && this.state.selectEnd.y === y)) {
-					this.setState({
-						selectEnd: {x, y},
-					});
-				}
-			} else if (this.state.moveStatus === 'move' && this.state.moveStart !== null) {
-				if (!(this.state.moveEnd.x === x && this.state.moveEnd.y === y)) {
-					this.setState({
-						moveEnd: {x, y},
-					});
-				}
-			}
-		}
-	}
-
 	isSelectedBlock = (x, y) => {
 		if (this.props.isMovingMode && this.state.selectStart !== null && this.state.selectEnd !== null) {
 			return isBetween({
@@ -381,33 +327,112 @@ class BoardComponent extends React.Component {
 	handlePan = (event) => {
 		event.preventDefault();
 		if (this.props.isMovingMode) {
+			if (this.measureComponent) {
+				this.measureComponent.measure();
+			}
+
+			const realBlockSize = this.state.viewBoxScale === null
+				? BLOCK_SIZE
+				: BLOCK_SIZE * this.state.viewBoxScale;
+			const onBoardX = event.center.x - this.backgroundDimensions.left;
+			const onBoardY = event.center.y - this.backgroundDimensions.top;
+			const onBoardStartX = event.center.x - event.deltaX - this.backgroundDimensions.left;
+			const onBoardStartY = event.center.y - event.deltaY - this.backgroundDimensions.top;
+
+			const blockX = Math.floor(onBoardX / realBlockSize);
+			const blockY = Math.floor(onBoardY / realBlockSize);
+			const startBlockX = Math.floor(onBoardStartX / realBlockSize);
+			const startBlockY = Math.floor(onBoardStartY / realBlockSize);
+
+			if (this.state.moveStatus === 'select') {
+				if (event.type === 'panstart') {
+					// start selecting
+					if (isBetween({
+						number: startBlockX,
+						left: 0,
+						right: this.props.width - 1,
+					}) && isBetween({
+							number: startBlockY,
+							left: 0,
+							right: this.props.height - 1,
+						})) {
+						// valid block
+						this.setState({
+							selectStart: {x: startBlockX, y: startBlockY},
+							selectEnd: {x: startBlockX, y: startBlockY},
+						});
+					}
+				} else if (event.type === 'pan') {
+					// update selecting blocks
+					this.setState({
+						selectEnd: {
+							x: Math.min(Math.max(0, blockX), this.props.width - 1),	// limit 0 <= num < this.props.width
+							y: Math.min(Math.max(0, blockY), this.props.height - 1),
+						},
+					});
+				} else if (event.type === 'panend') {
+					// end selecting
+					if (this.state.selectStart !== null && this.state.selectEnd !== null) {
+						this.setState({
+							moveStatus: 'move',
+						});
+					}
+				}
+			} else if (this.state.moveStatus === 'move') {
+				if (event.type === 'panstart') {
+					// panstart should be fired on board
+					if (this.isSelectedBlock(startBlockX, startBlockY)) {
+						this.setState({
+							moveStart: {x: startBlockX, y: startBlockY},
+							moveEnd: {x: startBlockX, y: startBlockY},
+						});
+					}
+				} else if (event.type === 'pan') {
+					if (this.state.moveStart !== null) {
+						this.setState({
+							moveEnd: {x: blockX, y: blockY},
+						});
+					}
+				} else if (event.type === 'panend') {
+					if (this.state.moveStart !== null && this.state.moveEnd !== null) {
+						this.props.onFinishMove({
+							selectStart: this.state.selectStart,
+							selectEnd: this.state.selectEnd,
+							deltaX: this.state.moveEnd.x - this.state.moveStart.x,
+							deltaY: this.state.moveEnd.y - this.state.moveStart.y,
+						});
+					}
+				}
+			}
 			return;
 		}
 
-		const distance = this.state.viewBoxScale === null
-			? event.distance
-			: event.distance / this.state.viewBoxScale;
-		const angle = event.angle / 180 * Math.PI;
+		if (event.type === 'pan') {
+			const distance = this.state.viewBoxScale === null
+				? event.distance
+				: event.distance / this.state.viewBoxScale;
+			const angle = event.angle / 180 * Math.PI;
 
-		if (event.eventType === INPUT_MOVE) {
-			this.setState({
-				isPanning: true,
-				panDistance: distance,
-				panAngle: angle,
-			});
-		} else if (event.eventType === INPUT_END) {
-			const {offsetX, offsetY, scale} = this.normalizeScaleAndOffset({
-				offsetX: this.state.offsetX - distance * Math.cos(angle),
-				offsetY: this.state.offsetY - distance * Math.sin(angle),
-				scale: this.state.scale,
-			});
+			if (event.eventType === INPUT_MOVE) {
+				this.setState({
+					isPanning: true,
+					panDistance: distance,
+					panAngle: angle,
+				});
+			} else if (event.eventType === INPUT_END) {
+				const {offsetX, offsetY, scale} = this.normalizeScaleAndOffset({
+					offsetX: this.state.offsetX - distance * Math.cos(angle),
+					offsetY: this.state.offsetY - distance * Math.sin(angle),
+					scale: this.state.scale,
+				});
 
-			this.setState({
-				isPanning: false,
-				offsetX,
-				offsetY,
-				scale,
-			});
+				this.setState({
+					isPanning: false,
+					offsetX,
+					offsetY,
+					scale,
+				});
+			}
 		}
 	}
 
@@ -572,10 +597,13 @@ class BoardComponent extends React.Component {
 		return (
 			<Hammer
 				onPan={this.handlePan}
+				onPanStart={this.handlePan}
+				onPanEnd={this.handlePan}
 				onPinch={this.handlePinch}
 				options={{
 					recognizers: {
 						pinch: {enable: true},
+						pan: {threshold: 10},
 					},
 					preventDefault: true,
 				}}
@@ -706,8 +734,6 @@ class BoardComponent extends React.Component {
 												y={block.y}
 												status={this.props.status}
 												onClick={this.handleClickBlock}
-												onMouseDown={this.handleMouseDown}
-												onMouseMove={this.handleMouseMove}
 												onPassAnimationComplete={this.handlePassAnimationComplete}
 												isRapid={this.props.isRapid}
 												viewBoxScale={this.state.viewBoxScale}
