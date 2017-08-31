@@ -570,10 +570,10 @@ class BoardComponent extends React.Component {
 
 	getBlockFill = (x, y) => {
 		if (this.isSelectedBlock(x, y)) {
-			return 'red';
+			return '#ffc37a';
 		}
 		if (this.props.isMovingMode) {
-			return 'white';
+			return '#967c52';
 		}
 		return 'transparent';
 	}

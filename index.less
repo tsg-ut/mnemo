@@ -401,6 +401,53 @@ button {
 				});
 			}
 
+			.exit-button-area {
+				margin-top: 10px;
+				position: absolute;
+				z-index: 2;	// over statement-area
+
+				.mobile ({
+					margin-top: 5px;
+				});
+
+				.exit {
+					background: rgba(61, 128, 42, 0.2);
+					transition: background-color .3s;
+					font-weight: bold;
+					color: white;
+
+					border: 2px solid #5651ab;
+					border-left: none;
+					padding: 6px 20px 6px 6px;
+					border-top-right-radius: 24px;
+					border-bottom-right-radius: 24px;
+
+					font-size: 20px;
+
+					.mobile ({
+						font-size: 12px;
+						border-top-right-radius: 14px;
+						border-bottom-right-radius: 14px;
+					});
+
+					&::before {
+						margin: 0 0.5em 0 0;
+				    content: '';
+				    display: inline-block;
+				    width: 1.3em;
+				    height: 0.9em;
+				    background: url('image/exit-button-before.png') no-repeat;
+				    background-size: contain;
+				    vertical-align: middle;
+					}
+
+					&:hover {
+						background: rgba(61, 128, 42, 0.6);
+					}
+
+				}
+			}
+
 			.panel-area {
 				.fixed-width(160px);
 				user-select: none;
@@ -1520,7 +1567,7 @@ button {
 			}
 		}
 
-		@buttons: exit, ranking, execute, stop, rapid, move;
+		@buttons: ranking, execute, stop, rapid, move;
 		.-(@i: length(@buttons)) when (@i > 0) {
 			@button: extract(@buttons, @i);
 			& > button.@{button} {
