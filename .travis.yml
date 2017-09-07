@@ -23,11 +23,9 @@ before_install:
   - export DISPLAY=':99.0'
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
 
-# yarn upgrade will also install missing packages as well
 install:
-  # Yarn needs lockfile to exist even if --no-lockfile option is provided. So... fake lockfile *puke*
-  - touch yarn.lock
-  - yarn upgrade --no-lockfile
+  - yarn install
+  - yarn upgrade
 
 script:
   - yarn build:production
