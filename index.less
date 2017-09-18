@@ -383,68 +383,73 @@ button {
 				flex-direction: column;
 			});
 
-			.statement-area {
-				display: none;
+			.statement-exit {
+				display: flex;
+				margin-top: 0;
 
-				.mobile({
-					display: block;
-					margin: 0;
-					text-align: right;
-					z-index: 1;
+				.statement-area {
+					display: none;
 
-					.statement {
-						display: inline-block;
-						margin-top: 5px;
+					.mobile({
+						display: block;
+						margin: 0 0 0 auto;
+						text-align: right;
+						z-index: 1;
+						max-width: calc(~'100% - 8em');
 
-						font-size: 12px;
-					}
-				});
-			}
+						.statement {
+							display: inline-block;
+							margin-top: 5px;
 
-			.exit-button-area {
-				margin-top: 10px;
-				position: absolute;
-				z-index: 2;	// over statement-area
+							font-size: 12px;
+						}
+					});
+				}
 
-				.mobile ({
-					margin-top: 5px;
-				});
-
-				.exit {
-					background: rgba(61, 128, 42, 0.2);
-					transition: background-color .3s;
-					font-weight: bold;
-					color: white;
-
-					border: 2px solid #5651ab;
-					border-left: none;
-					padding: 6px 20px 6px 6px;
-					border-top-right-radius: 24px;
-					border-bottom-right-radius: 24px;
-
+				.exit-button-area {
+					margin-top: 10px;
+					z-index: 2;	// over statement-area
 					font-size: 20px;
 
 					.mobile ({
+						margin-top: 5px;
 						font-size: 12px;
-						border-top-right-radius: 14px;
-						border-bottom-right-radius: 14px;
 					});
 
-					&::before {
-						margin: 0 0.5em 0 0;
-				    content: '';
-				    display: inline-block;
-				    width: 1.3em;
-				    height: 0.9em;
-				    background: url('image/exit-button-before.png') no-repeat;
-				    background-size: contain;
-				    vertical-align: middle;
-					}
+					.exit {
+						background: rgba(61, 128, 42, 0.2);
+						transition: background-color .3s;
+						font-weight: bold;
+						color: white;
 
-					&:hover {
-						background: rgba(61, 128, 42, 0.6);
-					}
+						border: 2px solid #5651ab;
+						border-left: none;
+						padding: 6px 20px 6px 6px;
+						border-top-right-radius: 24px;
+						border-bottom-right-radius: 24px;
 
+
+						.mobile ({
+							border-top-right-radius: 14px;
+							border-bottom-right-radius: 14px;
+						});
+
+						&::before {
+							margin: 0 0.5em 0 0;
+					    content: '';
+					    display: inline-block;
+					    width: 1.3em;
+					    height: 0.9em;
+					    background: url('image/exit-button-before.png') no-repeat;
+					    background-size: contain;
+					    vertical-align: middle;
+						}
+
+						&:hover {
+							background: rgba(61, 128, 42, 0.6);
+						}
+
+					}
 				}
 			}
 
