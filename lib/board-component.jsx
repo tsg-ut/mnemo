@@ -331,9 +331,7 @@ class BoardComponent extends React.Component {
 				this.measureComponent.measure();
 			}
 
-			const realBlockSize = this.state.viewBoxScale === null
-				? BLOCK_SIZE
-				: BLOCK_SIZE * this.state.viewBoxScale;
+			const realBlockSize = BLOCK_SIZE * (this.state.viewBoxScale || 1);
 			const onBoardX = event.center.x - this.backgroundDimensions.left;
 			const onBoardY = event.center.y - this.backgroundDimensions.top;
 			const onBoardStartX = event.center.x - event.deltaX - this.backgroundDimensions.left;
@@ -347,15 +345,17 @@ class BoardComponent extends React.Component {
 			if (this.state.moveStatus === 'select') {
 				if (event.type === 'panstart') {
 					// start selecting
-					if (isBetween({
-						number: startBlockX,
-						left: 0,
-						right: this.props.width - 1,
-					}) && isBetween({
+					if (
+						isBetween({
+							number: startBlockX,
+							left: 0,
+							right: this.props.width - 1,
+						}) && isBetween({
 							number: startBlockY,
 							left: 0,
 							right: this.props.height - 1,
-						})) {
+						})
+					) {
 						// valid block
 						this.setState({
 							selectStart: {x: startBlockX, y: startBlockY},
@@ -406,7 +406,7 @@ class BoardComponent extends React.Component {
 			}
 			return;
 		}
-
+		// when this.props.isMovingMode === false
 		if (event.type === 'pan') {
 			const distance = this.state.viewBoxScale === null
 				? event.distance
