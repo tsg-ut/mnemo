@@ -108,7 +108,7 @@
     "react-hammerjs": "^0.5.0",
     "react-measure": "^2.0.2",
     "react-test-renderer": "^15.5.4",
-    "sequelize-cli": "^2.4.0",
+    "sequelize-cli": "^3.0.0",
     "sqlite3": "^3.1.4",
     "svg-path-generator": "^1.1.0",
     "umzug": "^2.0.1",
