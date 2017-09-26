@@ -103,7 +103,7 @@
     "prop-types": "^15.5.8",
     "pug-cli": "^1.0.0-alpha6",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "react-dom": "^16.0.0",
     "react-gsap-enhancer": "^0.3.0",
     "react-hammerjs": "^0.5.0",
     "react-measure": "^2.0.2",
