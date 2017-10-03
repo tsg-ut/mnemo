@@ -90,7 +90,7 @@
     "livescript-loader": "^0.1.6",
     "mathjs": "^3.8.0",
     "microtime": "^2.1.6",
-    "mocha": "^3.3.0",
+    "mocha": "^4.0.0",
     "mocha-logger": "^1.0.4",
     "mocha-webpack": "^0.7.0",
     "mockery": "^2.0.0",
