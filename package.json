@@ -71,6 +71,7 @@
     "cssnano": "^3.10.0",
     "electron": "^1.6.11",
     "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.1",
     "eslint": "^4.1.0",
     "eslint-plugin-react": "^7.0.0",
     "fetch-ponyfill": "^4.0.0",
