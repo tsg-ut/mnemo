@@ -69,7 +69,7 @@
     "cross-env": "^5.0.0",
     "cssnano": "^3.10.0",
     "electron": "^1.6.11",
-    "enzyme": "^2.7.1",
+    "enzyme": "^3.0.0",
     "eslint": "^4.1.0",
     "eslint-plugin-react": "^7.0.0",
     "fetch-ponyfill": "^4.0.0",
