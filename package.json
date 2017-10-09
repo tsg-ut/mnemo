@@ -66,6 +66,7 @@
     "chokidar-cli": "^1.2.0",
     "codecov": "^2.2.0",
     "concurrently": "^3.3.0",
+    "create-react-class": "^15.6.2",
     "cross-env": "^5.0.0",
     "cssnano": "^3.10.0",
     "electron": "^1.6.11",
