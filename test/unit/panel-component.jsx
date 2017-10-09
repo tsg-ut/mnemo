@@ -2,10 +2,13 @@
 /* eslint no-unused-expressions: "off" */
 
 const React = require('react');
-const {shallow} = require('enzyme');
+const {configure, shallow} = require('enzyme');
+const Adapter = require('enzyme-adapter-react-16');
 const chai = require('chai');
 const chaiEnzyme = require('chai-enzyme');
 
+// Configure Enzyme
+configure({adapter: new Adapter()});
 chai.use(chaiEnzyme());
 
 const {expect} = chai;
