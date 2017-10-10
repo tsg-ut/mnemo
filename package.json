@@ -129,7 +129,7 @@
     "forcedomain": "^0.8.0",
     "lcov-result-merger": "^1.2.0",
     "node-slack": "^0.0.7",
-    "pg": "^6.1.0",
+    "pg": "^6.4.2",
     "regenerator-runtime": "^0.11.0",
     "request": "^2.81.0",
     "seedrandom": "^2.4.2",
