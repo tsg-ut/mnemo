@@ -21,7 +21,10 @@ module.exports = (env = {}) => ({
 			],
 			loader: 'babel-loader',
 			options: {
-				plugins: ['transform-class-properties'],
+				plugins: [
+					'transform-class-properties',
+					'transform-es2015-modules-commonjs',
+				],
 				babelrc: false,
 			},
 		}],
