@@ -1,3 +1,4 @@
+const path = require('path');
 const BabiliPlugin = require('babili-webpack-plugin');
 const {DefinePlugin} = require('webpack');
 
@@ -13,6 +14,18 @@ module.exports = (env = {}) => ({
 			test: /\.jsx?$/,
 			loader: 'babel-loader',
 			exclude: /node_modules/,
+		}, {
+			test: /\.js$/,
+			include: [
+				path.resolve(__dirname, 'node_modules/react-hammerjs'),
+			],
+			loader: 'babel-loader',
+			options: {
+				plugins: [
+					'transform-class-properties',
+				],
+				babelrc: false,
+			},
 		}],
 	},
 	plugins: [

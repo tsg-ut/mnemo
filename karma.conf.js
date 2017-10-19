@@ -1,3 +1,4 @@
+const path = require('path');
 const {SourceMapDevToolPlugin} = require('webpack');
 
 module.exports = (config) => {
@@ -18,6 +19,18 @@ module.exports = (config) => {
 					test: /\.jsx?$/,
 					loader: 'babel-loader',
 					exclude: /node_modules/,
+				}, {
+					test: /\.js$/,
+					include: [
+						path.resolve(__dirname, 'node_modules/react-hammerjs'),
+					],
+					loader: 'babel-loader',
+					options: {
+						plugins: [
+							'transform-class-properties',
+						],
+						babelrc: false,
+					},
 				}, {
 					test: /\.ls$/,
 					loader: 'livescript-loader',

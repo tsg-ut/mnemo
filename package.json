@@ -107,7 +107,7 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-gsap-enhancer": "^0.3.0",
-    "react-hammerjs": "pista329/react-hammerjs",
+    "react-hammerjs": "JedWatson/react-hammerjs",
     "react-measure": "^2.0.2",
     "react-test-renderer": "^16.0.0",
     "sequelize-cli": "^3.0.0",
