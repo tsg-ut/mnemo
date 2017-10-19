@@ -1,6 +1,6 @@
 const React = require('react');
 const PropTypes = require('prop-types');
-const Hammer = require('react-hammerjs');
+const {default: Hammer} = require('react-hammerjs');
 const {INPUT_MOVE, INPUT_END} = (typeof window === 'undefined') ? {} : require('hammerjs');
 const {default: Measure} = require('react-measure');
 const Path = require('svg-path-generator');

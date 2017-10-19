@@ -1,3 +1,4 @@
+const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
@@ -8,9 +9,29 @@ module.exports = {
 			test: /\.jsx?$/,
 			loader: 'babel-loader',
 		}, {
+			test: /\.js$/,
+			include: [
+				path.resolve(__dirname, 'node_modules/react-hammerjs'),
+			],
+			loader: 'babel-loader',
+			options: {
+				plugins: [
+					'transform-class-properties',
+					'transform-es2015-modules-commonjs',
+				],
+				babelrc: false,
+			},
+		}, {
 			test: /\.ls$/,
 			loader: 'livescript-loader',
 		}],
 	},
-	externals: [nodeExternals()],
+	externals: [(context, request, callback) => {
+		if (request === 'react-hammerjs') {
+			callback();
+			return;
+		}
+
+		nodeExternals()(context, request, callback);
+	}],
 };
