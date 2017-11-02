@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": "^9.0.0"
+    "node": "^8.8.1"
   },
   "scripts": {
     "js": "cross-env BABEL_ENV=debug webpack",
