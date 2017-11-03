@@ -134,5 +134,8 @@
     "request": "^2.81.0",
     "seedrandom": "^2.4.2",
     "sequelize": "^4.0.0"
+  },
+  "resolutions": {
+    "enzyme-adapter-react-16/enzyme-adapter-utils": "1.0.1"
   }
 }
