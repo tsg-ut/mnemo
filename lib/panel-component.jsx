@@ -79,6 +79,12 @@ class PanelComponent extends React.Component {
 		});
 	}
 
+	handleClickHelp = (event) => {
+		// create modal
+		event.stopPropagation();
+		console.log(event.target.parentNode.getAttribute('data-type'));
+	}
+
 	render() {
 		return (
 			<div className="panel">
@@ -92,6 +98,12 @@ class PanelComponent extends React.Component {
 							this.state.selected === name ? {'data-selected': 'data-selected'} : {}
 						)}
 					>
+						<img
+							className="help"
+							src="image/help.png"
+							onClick={this.handleClickHelp}
+						>
+						</img>
 						<div className="count">
 							{count === null ? '∞' : count}
 						</div>

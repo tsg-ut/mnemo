@@ -1425,6 +1425,23 @@ button {
 				border: 3px solid red;
 				pointer-events: none;
 			}
+			
+			.help {
+				display: none;
+			}
+			
+			&[data-selected] .help {
+				display: block;
+				position: absolute;
+				left: 70%;
+				top: -10%;
+				z-index: 1;
+				cursor: help;
+				width: 40%;
+				height: 40%;
+				//background-image: url(image/help.png);
+				//background-size: contain;
+			}
 
 			.count {
 				position: absolute;
