@@ -5,6 +5,7 @@ const PropTypes = require('prop-types');
 class PanelComponent extends React.Component {
 	static propTypes = {
 		parts: PropTypes.object.isRequired,
+		onClickHelp: PropTypes.func.isRequired,
 	}
 
 	constructor(props, state) {
@@ -82,7 +83,9 @@ class PanelComponent extends React.Component {
 	handleClickHelp = (event) => {
 		// create modal
 		event.stopPropagation();
-		console.log(event.target.parentNode.getAttribute('data-type'));
+		const blockName = event.target.parentNode.getAttribute('data-type');
+		console.log(blockName);
+		this.props.onClickHelp(blockName);
 	}
 
 	render() {
