@@ -139,7 +139,7 @@ html
 								ol.ranks
 								button.close 閉じる
 						.layer.modal-layer
-							- const modals = ['01', '02', '03', '04', 'conditionals', 'help-wire']
+							- const modals = ['01', '02', '03', '04', 'conditionals', 'help-wire', 'help-calc', 'help-calc2']
 							each modal in modals
 								.modal(class=modal)
 									button.close
@@ -151,4 +151,6 @@ html
 											when '04': include modals/04/content.pug
 											when 'conditionals': include modals/conditionals/content.pug
 											when 'help-wire': include modals/help-wire/content.pug
+											when 'help-calc': include modals/help-calc/content.pug
+											when 'help-calc2': include modals/help-calc2/content.pug
 										button.close-content OK

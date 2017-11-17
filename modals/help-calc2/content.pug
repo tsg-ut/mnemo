@@ -1,0 +1,37 @@
+p
+    | <strong>計算ブロックの使い方その2</strong>
+
+p
+    | 左と右の両方に数字が入ると、ブロックに書かれている計算を行い、結果を下に流します。
+
+p
+    include calc2blocks.svg
+
+p このブロックは回転できません。
+
+p ・割り算は小数が切り捨てられます。
+
+p
+    include div.svg
+
+p 
+    |・
+    img(alt='%' src='image/mod.png')
+    | は割った余りを表します。
+
+p
+    include mod.svg
+
+p
+    | ・
+    img(alt='=' src='image/equal.png')
+    | ブロックは"左=右"が正しければ1を、正しくなければ0を下に送ります。
+
+p
+    include equal.svg
+
+p
+    img(alt='>' src='image/lt.png')
+    | や
+    img(alt='<' src='image/gt.png')
+    | なども同様に、左右を書かれている記号で比較し、正しければ1を送ります。
