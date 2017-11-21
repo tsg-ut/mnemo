@@ -67,8 +67,24 @@ router.get('/:stage/submissions', async (req, res) => {
 
 router.post('/:stage/submissions', async (req, res) => {
 	const stageName = req.params.stage;
+	if (typeof stageName !== 'string') {
+		res.status(400).json({
+			error: true,
+			message: 'malicious stageName',
+		});
+		return;
+	}
+	const stageDatum = stageData.find((s) => s.name === stageName);
+	if (typeof stageDatum === 'undefined') {
+		res.status(404).json({
+			error: true,
+			message: 'stage not found',
+		});
+		return;
+	}
 
-	if (typeof req.body.name !== 'string') {
+	const playerName = req.body.name;
+	if (typeof playerName !== 'string') {
 		res.status(400).json({
 			error: true,
 			message: 'type of name must be string',
@@ -84,7 +100,7 @@ router.post('/:stage/submissions', async (req, res) => {
 		}),
 		Submissions.findOne({
 			where: {
-				name: req.body.name,
+				name: playerName,
 			},
 			include: [{
 				model: Stages,
@@ -98,16 +114,26 @@ router.post('/:stage/submissions', async (req, res) => {
 		}),
 	]);
 
-	const submissionData = req.body;
-
 	if (stage === null) {
-		res.status(404).json({
+		// forget migration?
+		res.status(500).json({
 			error: true,
-			message: 'stage not found',
+			message: 'server error',
 		});
 		return;
 	}
 
+	const proposedScore = req.body.score;
+	if (typeof proposedScore === 'number' && existingSubmission &&
+		proposedScore <= existingSubmission.score && stageDatum.version <= existingSubmission.version) {
+		res.status(400).json({
+			error: true,
+			message: 'user name existing',
+		});
+		return;
+	}
+
+	const submissionData = req.body;
 	submissionData.stage = stageName;
 
 	const {pass, message, blocks, clocks} = validateSubmission(submissionData);
@@ -119,8 +145,6 @@ router.post('/:stage/submissions', async (req, res) => {
 		});
 		return;
 	}
-
-	const stageDatum = stageData.find((s) => s.name === stageName);
 
 	const score = calculateScore({
 		clocks,
@@ -138,7 +162,7 @@ router.post('/:stage/submissions', async (req, res) => {
 		}
 
 		const [count] = await Submissions.update({
-			name: req.body.name,
+			name: playerName,
 			board: JSON.stringify(req.body.board),
 			score,
 			blocks,
@@ -147,7 +171,7 @@ router.post('/:stage/submissions', async (req, res) => {
 			stageId: stage.id,
 		}, {
 			where: {
-				name: req.body.name,
+				name: playerName,
 				stageId: stage.id,
 			},
 		});
@@ -156,7 +180,7 @@ router.post('/:stage/submissions', async (req, res) => {
 
 		const submission = await Submissions.findOne({
 			where: {
-				name: req.body.name,
+				name: playerName,
 				stageId: stage.id,
 			},
 		});
@@ -165,7 +189,7 @@ router.post('/:stage/submissions', async (req, res) => {
 	} else {
 		// If no previous submission is existing
 		const submission = await Submissions.create({
-			name: req.body.name,
+			name: playerName,
 			board: JSON.stringify(req.body.board),
 			score,
 			blocks,
@@ -195,13 +219,13 @@ router.post('/:stage/submissions', async (req, res) => {
 		],
 	});
 
-	const rank = submissions.findIndex((submission) => submission.name === req.body.name);
+	const rank = submissions.findIndex((submission) => submission.name === playerName);
 	const surroundingSubmissions = submissions.map((submission, index) => (
 		[index, submission]
-	)).slice(rank - 1, rank + 2);
+	)).slice(rank === 0 ? rank : rank - 1, rank + 2);
 
 	slack.send({
-		text: `*${req.body.name}* さんがステージ「${stageDatum.title}」を *${score}点* でクリアしました！`,
+		text: `*${playerName}* さんがステージ「${stageDatum.title}」を *${score}点* でクリアしました！`,
 		attachments: surroundingSubmissions.map(([submissionRank, submission]) => (
 			{
 				text: `#${submissionRank + 1} ${submission.name}: ${submission.score}pts (${submission.blocks} blocks, ${submission.clocks} clocks)`,
@@ -212,7 +236,7 @@ router.post('/:stage/submissions', async (req, res) => {
 
 	const tweetText = stripIndents`
 		${stripIndents`
-			“${req.body.name}”さんがステージ「${stageDatum.title}」をクリアしました！
+			“${playerName}”さんがステージ「${stageDatum.title}」をクリアしました！
 			${rank + 1}位にランクイン！
 
 			💯Score: ${score}
