@@ -29,6 +29,7 @@
     "api:init": "cd api && sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
     "api": "cd api && node index.js",
     "test:api": "cd api && cross-env NODE_ENV=test istanbul cover ../node_modules/mocha/bin/_mocha -- --recursive --exit",
+    "test:api:ci": "cd api && cross-env NODE_ENV=testci istanbul cover ../node_modules/mocha/bin/_mocha -- --recursive --exit",
     "bench": "lsc benchmark/index.ls"
   },
   "repository": {

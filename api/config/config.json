@@ -5,6 +5,12 @@
     "dialect": "sqlite",
     "storage": "db-development.sqlite3"
   },
+  "testci": {
+    "username": "postgres",
+    "password": "",
+    "dialect": "postgres",
+    "logging": false
+  },
   "test": {
     "username": "",
     "password": "",

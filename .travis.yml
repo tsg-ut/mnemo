@@ -4,6 +4,8 @@ node_js:
 
 dist: trusty
 sudo: false
+services:
+    - postgresql
 
 # Setup xvfb
 # https://github.com/electron/electron/blob/master/docs/tutorial/testing-on-headless-ci.md
@@ -30,7 +32,7 @@ install:
 script:
   - yarn build:production
   - yarn test
-  - yarn test:api
+  - yarn test:api:ci
 
 after_success:
   - yarn codecov
