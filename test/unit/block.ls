@@ -1,6 +1,5 @@
 require! {
   chai: {expect}
-  # Shims for phantomjs environment
   '../../lib/board': Board
   '../../lib/block': Block
   '../../lib/data': Data
