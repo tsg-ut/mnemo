@@ -6,6 +6,8 @@
     "storage": "db-development.sqlite3"
   },
   "testci": {
+    "host": "localhost",
+    "database": "travis_test_db",
     "username": "postgres",
     "password": "",
     "dialect": "postgres",
