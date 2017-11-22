@@ -325,7 +325,7 @@ describe('/stages', () => {
 		});
 
 		before(async () => {
-			expect(validBoardScore).to.equal(10000);
+			await expect(validBoardScore).to.equal(10000);
 		});
 
 		beforeEach(async () => {
