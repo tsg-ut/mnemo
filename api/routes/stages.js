@@ -67,13 +67,7 @@ router.get('/:stage/submissions', async (req, res) => {
 
 router.post('/:stage/submissions', async (req, res) => {
 	const stageName = req.params.stage;
-	if (typeof stageName !== 'string') {
-		res.status(400).json({
-			error: true,
-			message: 'malicious stageName',
-		});
-		return;
-	}
+
 	const stageDatum = stageData.find((s) => s.name === stageName);
 	if (typeof stageDatum === 'undefined') {
 		res.status(404).json({
