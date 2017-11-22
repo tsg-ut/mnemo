@@ -1,7 +1,5 @@
 require! {
   chai: {expect}
-  # Shims for phantomjs environment
-  'core-js'
   '../../lib/board': Board
   '../../lib/block': Block
   '../../lib/data': Data
