@@ -350,6 +350,20 @@ describe('/stages', () => {
 			}
 		});
 
+		it('reports 500 error when stage is not found in DB', async () => {
+			try {
+				// FIXME 'calc01' is magic stage name...
+				await chai.request(app).post('/stages/calc01/submissions').send({
+					name: 'hakatashi',
+					board: validBoard,
+					score: validBoardScore,
+				});
+				expect.fail();
+			} catch (res) {
+				expect(res).to.have.status(500);
+			}
+		});
+
 		it('reports 400 error when attempted to post invalid board', async () => {
 			try {
 				await chai.request(app).post('/stages/wire01/submissions').send({
