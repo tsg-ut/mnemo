@@ -20,6 +20,7 @@ const Stages = require('../../models/stage');
 const Submissions = require('../../models/submission');
 const stageData = require('../../../stages');
 const {nop} = require('../../../lib/util');
+const {calculateScore} = require('../../../lib/validator');
 const wire01 = stageData.find((stageDatum) => stageDatum.name === 'wire01');
 
 const umzug = new Umzug({
@@ -268,6 +269,11 @@ describe('/stages', () => {
 			type: 'wireI',
 			rotate: 0,
 		}];
+		const validBoardScore = calculateScore({
+			clocks: 3,
+			blocks: 3,
+			stage: wire01,
+		});
 
 		const invalidBoard = [{
 			x: 1,
@@ -285,6 +291,11 @@ describe('/stages', () => {
 			type: 'wireI',
 			rotate: 0,
 		}];
+		const invalidBoardScore = calculateScore({
+			clocks: 3,
+			blocks: 3,
+			stage: wire01,
+		});
 
 		const lowerScoreBoard = [{
 			x: 1,
@@ -307,6 +318,15 @@ describe('/stages', () => {
 			type: 'wireI',
 			rotate: 0,
 		}];
+		const lowerScoreBoardScore = calculateScore({
+			clocks: 3,
+			blocks: 4,
+			stage: wire01,
+		});
+
+		before(async () => {
+			await expect(validBoardScore).to.equal(10000);
+		});
 
 		beforeEach(async () => {
 			stage = await Stages.create({
@@ -322,10 +342,25 @@ describe('/stages', () => {
 				await chai.request(app).post('/stages/hoge/submissions').send({
 					name: 'hakatashi',
 					board: validBoard,
+					score: validBoardScore,
 				});
 				expect.fail();
 			} catch (res) {
 				expect(res).to.have.status(404);
+			}
+		});
+
+		it('reports 500 error when stage is not found in DB', async () => {
+			try {
+				// FIXME 'calc01' is magic stage name...
+				await chai.request(app).post('/stages/calc01/submissions').send({
+					name: 'hakatashi',
+					board: validBoard,
+					score: validBoardScore,
+				});
+				expect.fail();
+			} catch (res) {
+				expect(res).to.have.status(500);
 			}
 		});
 
@@ -334,6 +369,7 @@ describe('/stages', () => {
 				await chai.request(app).post('/stages/wire01/submissions').send({
 					name: 'hakatashi',
 					board: invalidBoard,
+					score: invalidBoardScore,
 				});
 				expect.fail();
 			} catch (res) {
@@ -346,6 +382,7 @@ describe('/stages', () => {
 				await chai.request(app).post('/stages/wire01/submissions').send({
 					name: {$ne: 'attacker'},
 					board: validBoard,
+					score: validBoardScore,
 				});
 				expect.fail();
 			} catch (res) {
@@ -357,11 +394,12 @@ describe('/stages', () => {
 			const res = await chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'satos',
 				board: validBoard,
+				score: validBoardScore,
 			});
 			expect(res).to.have.status(200);
 			expect(res).to.be.json;
 			expect(res.body.name).to.equal('satos');
-			expect(res.body.score).to.equal(10000);
+			expect(res.body.score).to.equal(validBoardScore);
 			expect(res.body.blocks).to.equal(3);
 			expect(res.body.version).to.equal(wire01.version);
 
@@ -373,19 +411,83 @@ describe('/stages', () => {
 
 			expect(submission).to.not.be.null;
 			expect(submission.name).to.equal('satos');
-			expect(submission.score).to.equal(10000);
+			expect(submission.score).to.equal(validBoardScore);
+		});
+
+		it('creates new submission data with right score calculated by server', async () => {
+			const res = await chai.request(app).post('/stages/wire01/submissions').send({
+				name: 'satos',
+				board: validBoard,
+				score: validBoardScore + 10000,
+			});
+			expect(res).to.have.status(200);
+			expect(res).to.be.json;
+			expect(res.body.name).to.equal('satos');
+			expect(res.body.score).to.equal(validBoardScore);
+			expect(res.body.blocks).to.equal(3);
+			expect(res.body.version).to.equal(wire01.version);
+
+			const submission = await Submissions.findOne({
+				order: [
+					['createdAt', 'DESC'],
+				],
+			});
+
+			expect(submission).to.not.be.null;
+			expect(submission.name).to.equal('satos');
+			expect(submission.score).to.equal(validBoardScore);
 		});
 
 		it('reports error when the submission with higher score is existing', async () => {
 			await chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'hakatashi',
 				board: validBoard,
+				score: validBoardScore,
 			});
 
 			try {
 				await chai.request(app).post('/stages/wire01/submissions').send({
 					name: 'hakatashi',
 					board: lowerScoreBoard,
+					score: lowerScoreBoardScore,
+				});
+				expect.fail();
+			} catch (res) {
+				expect(res).to.have.status(400);
+			}
+		});
+
+		it('omits calculting score and reports error when lower score than existing submission was proposed by client', async () => {
+			await chai.request(app).post('/stages/wire01/submissions').send({
+				name: 'hakatashi',
+				board: lowerScoreBoard,
+				score: lowerScoreBoardScore,
+			});
+
+			try {
+				await chai.request(app).post('/stages/wire01/submissions').send({
+					name: 'hakatashi',
+					board: validBoard,
+					score: lowerScoreBoardScore,
+				});
+				expect.fail();
+			} catch (res) {
+				expect(res).to.have.status(400);
+			}
+		});
+
+		it('reports error when the submission with higher score is existing, regardless of proposed score by client', async () => {
+			await chai.request(app).post('/stages/wire01/submissions').send({
+				name: 'hakatashi',
+				board: validBoard,
+				score: validBoardScore,
+			});
+
+			try {
+				await chai.request(app).post('/stages/wire01/submissions').send({
+					name: 'hakatashi',
+					board: lowerScoreBoard,
+					score: validBoardScore,
 				});
 				expect.fail();
 			} catch (res) {
@@ -398,6 +500,7 @@ describe('/stages', () => {
 				await chai.request(app).post('/stages/wire01/submissions').send({
 					name: '',
 					board: validBoard,
+					score: validBoardScore,
 				});
 				expect.fail();
 			} catch (res) {
@@ -409,16 +512,18 @@ describe('/stages', () => {
 			await chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'kurgm',
 				board: lowerScoreBoard,
+				score: lowerScoreBoardScore,
 			});
 
 			const res = await chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'kurgm',
 				board: validBoard,
+				score: validBoardScore,
 			});
 
 			expect(res).to.have.status(200);
 			expect(res).to.be.json;
-			expect(res.body.score).to.equal(10000);
+			expect(res.body.score).to.equal(validBoardScore);
 			expect(res.body.blocks).to.equal(3);
 
 			const submissions = await Submissions.findAll({
@@ -428,7 +533,7 @@ describe('/stages', () => {
 			});
 
 			expect(submissions).to.have.length(1);
-			expect(submissions[0].score).to.equal(10000);
+			expect(submissions[0].score).to.equal(validBoardScore);
 			expect(submissions[0].blocks).to.equal(3);
 		});
 
@@ -436,7 +541,7 @@ describe('/stages', () => {
 			await Submissions.create({
 				name: 'cookies',
 				board: JSON.stringify(validBoard),
-				score: 10000,
+				score: validBoardScore,
 				blocks: 3,
 				clocks: 3,
 				version: 1,
@@ -446,11 +551,12 @@ describe('/stages', () => {
 			const res = await chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'cookies',
 				board: lowerScoreBoard,
+				score: lowerScoreBoardScore,
 			});
 
 			expect(res).to.have.status(200);
 			expect(res).to.be.json;
-			expect(res.body.score).to.be.below(10000);
+			expect(res.body.score).to.be.below(validBoardScore);
 			expect(res.body.blocks).to.equal(4);
 
 			const submissions = await Submissions.findAll({
@@ -460,7 +566,7 @@ describe('/stages', () => {
 			});
 
 			expect(submissions).to.have.length(1);
-			expect(submissions[0].score).to.be.below(10000);
+			expect(submissions[0].score).to.be.below(validBoardScore);
 			expect(submissions[0].blocks).to.equal(4);
 		});
 
@@ -469,7 +575,7 @@ describe('/stages', () => {
 				slackMock.send = ({text, attachments}) => {
 					try {
 						expect(text).to.include('kurgm');
-						expect(text).to.include('10000');
+						expect(text).to.include(String(validBoardScore));
 						expect(attachments).to.have.lengthOf(1);
 						resolve();
 					} catch (error) {
@@ -481,6 +587,7 @@ describe('/stages', () => {
 			await chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'kurgm',
 				board: validBoard,
+				score: validBoardScore,
 			});
 
 			await promise;
@@ -491,7 +598,7 @@ describe('/stages', () => {
 				twitterMock.tweet = ({status}) => {
 					try {
 						expect(status).to.include('kurgm');
-						expect(status).to.include('10000');
+						expect(status).to.include(String(validBoardScore));
 						resolve();
 					} catch (error) {
 						reject(error);
@@ -502,6 +609,7 @@ describe('/stages', () => {
 			await chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'kurgm',
 				board: validBoard,
+				score: validBoardScore,
 			});
 
 			await promise;
