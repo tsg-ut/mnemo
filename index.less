@@ -1387,16 +1387,7 @@ button {
 			box-sizing: border-box;
 			background-size: contain;
 		}
-		&[data-rotate='90']::before {
-			transform: rotate(90deg);
-		}
-		&[data-rotate='180']::before {
-			transform: rotate(180deg);
-		}
-		&[data-rotate='270']::before {
-			transform: rotate(270deg);
-		}
-		@blocks-rotatable: wireI, wireL, wireT, diode, c-contact, transistor, junctionR, junctionL, junctionT;
+		@blocks-rotatable: wireI, wireL, wireT, diode, c-contact, transistor, junctionR, junctionL, junctionT, not;
 		@blocks-rotate-back-wireI:
 			add-3,
 			times-2, times-3, times-10,
@@ -1404,8 +1395,7 @@ button {
 			minus-1, minus-2,
 			div-2, div-3, div-10,
 			const-0, const-1, const-2, const-3, const-10,
-			log10, log2, sqrt,
-			not;
+			log10, log2, sqrt;
 		@blocks-norotate:
 			wireXdot, wireX,
 			add, sub, mul, div,
