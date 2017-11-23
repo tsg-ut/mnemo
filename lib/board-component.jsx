@@ -8,7 +8,7 @@ const assert = require('assert');
 const Board = require('./board');
 const BlockComponent = require('./block-component.jsx');
 const IOComponent = require('./io-component.jsx');
-const {id, sum} = require('./util');
+const {id, sum, isBetween} = require('./util');
 const {BLOCK_SIZE} = require('./constants');
 
 const inputColors = [
@@ -39,6 +39,8 @@ class BoardComponent extends React.Component {
 		onClockLimitExceeded: PropTypes.func.isRequired,
 		isRapid: PropTypes.bool.isRequired,
 		isForced: PropTypes.bool.isRequired,
+		isMovingMode: PropTypes.bool.isRequired,
+		onFinishMove: PropTypes.func.isRequired,
 	}
 
 	static defaultProps = {
@@ -87,6 +89,11 @@ class BoardComponent extends React.Component {
 			offsetY: 0,
 			scale: 1,
 			viewBoxScale: null,
+			selectStart: null,
+			selectEnd: null,
+			moveStart: null,
+			moveEnd: null,
+			moveStatus: 'select',
 		};
 	}
 
@@ -103,6 +110,12 @@ class BoardComponent extends React.Component {
 			if (this.props.status === 'stop') {
 				this.halt({force: this.props.isForced});
 			}
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (this.props.isMovingMode && !nextProps.isMovingMode) {
+			this.resetMoveState();
 		}
 	}
 
@@ -177,6 +190,16 @@ class BoardComponent extends React.Component {
 		this.board.placeBlock({x, y, type, rotate});
 		this.setState({
 			blocks: this.board.getBlocks(),
+		});
+	}
+
+	resetMoveState() {
+		this.setState({
+			selectStart: null,
+			selectEnd: null,
+			moveStart: null,
+			moveEnd: null,
+			moveStatus: 'select',
 		});
 	}
 
@@ -274,7 +297,25 @@ class BoardComponent extends React.Component {
 
 	handleClickBlock = (event, x, y) => {
 		event.preventDefault();
-		return this.props.onClickBlock({x, y, type: event.type});
+		if (!this.props.isMovingMode) {
+			return this.props.onClickBlock({x, y, type: event.type});
+		}
+		return false;
+	}
+
+	isSelectedBlock = (x, y) => {
+		if (this.props.isMovingMode && this.state.selectStart !== null && this.state.selectEnd !== null) {
+			return isBetween({
+				number: x,
+				left: this.state.selectStart.x,
+				right: this.state.selectEnd.x,
+			}) && isBetween({
+				number: y,
+				left: this.state.selectStart.y,
+				right: this.state.selectEnd.y,
+			});
+		}
+		return false;
 	}
 
 	handlePassAnimationComplete = (passEvent) => {
@@ -285,31 +326,113 @@ class BoardComponent extends React.Component {
 
 	handlePan = (event) => {
 		event.preventDefault();
+		if (this.props.isMovingMode) {
+			if (this.measureComponent) {
+				this.measureComponent.measure();
+			}
 
-		const distance = this.state.viewBoxScale === null
-			? event.distance
-			: event.distance / this.state.viewBoxScale;
-		const angle = event.angle / 180 * Math.PI;
+			const realBlockSize = BLOCK_SIZE * (this.state.viewBoxScale || 1);
+			const onBoardX = event.center.x - this.backgroundDimensions.left;
+			const onBoardY = event.center.y - this.backgroundDimensions.top;
+			const onBoardStartX = event.center.x - event.deltaX - this.backgroundDimensions.left;
+			const onBoardStartY = event.center.y - event.deltaY - this.backgroundDimensions.top;
 
-		if (event.eventType === INPUT_MOVE) {
-			this.setState({
-				isPanning: true,
-				panDistance: distance,
-				panAngle: angle,
-			});
-		} else if (event.eventType === INPUT_END) {
-			const {offsetX, offsetY, scale} = this.normalizeScaleAndOffset({
-				offsetX: this.state.offsetX - distance * Math.cos(angle),
-				offsetY: this.state.offsetY - distance * Math.sin(angle),
-				scale: this.state.scale,
-			});
+			const blockX = Math.floor(onBoardX / realBlockSize);
+			const blockY = Math.floor(onBoardY / realBlockSize);
+			const startBlockX = Math.floor(onBoardStartX / realBlockSize);
+			const startBlockY = Math.floor(onBoardStartY / realBlockSize);
 
-			this.setState({
-				isPanning: false,
-				offsetX,
-				offsetY,
-				scale,
-			});
+			if (this.state.moveStatus === 'select') {
+				if (event.type === 'panstart') {
+					// start selecting
+					if (
+						isBetween({
+							number: startBlockX,
+							left: 0,
+							right: this.props.width - 1,
+						}) && isBetween({
+							number: startBlockY,
+							left: 0,
+							right: this.props.height - 1,
+						})
+					) {
+						// valid block
+						this.setState({
+							selectStart: {x: startBlockX, y: startBlockY},
+							selectEnd: {x: startBlockX, y: startBlockY},
+						});
+					}
+				} else if (event.type === 'pan') {
+					// update selecting blocks
+					this.setState({
+						selectEnd: {
+							x: Math.min(Math.max(0, blockX), this.props.width - 1),	// limit 0 <= num < this.props.width
+							y: Math.min(Math.max(0, blockY), this.props.height - 1),
+						},
+					});
+				} else if (event.type === 'panend') {
+					// end selecting
+					if (this.state.selectStart !== null && this.state.selectEnd !== null) {
+						this.setState({
+							moveStatus: 'move',
+						});
+					}
+				}
+			} else if (this.state.moveStatus === 'move') {
+				if (event.type === 'panstart') {
+					// panstart should be fired on board
+					if (this.isSelectedBlock(startBlockX, startBlockY)) {
+						this.setState({
+							moveStart: {x: startBlockX, y: startBlockY},
+							moveEnd: {x: startBlockX, y: startBlockY},
+						});
+					}
+				} else if (event.type === 'pan') {
+					if (this.state.moveStart !== null) {
+						this.setState({
+							moveEnd: {x: blockX, y: blockY},
+						});
+					}
+				} else if (event.type === 'panend') {
+					if (this.state.moveStart !== null && this.state.moveEnd !== null) {
+						this.props.onFinishMove({
+							selectStart: this.state.selectStart,
+							selectEnd: this.state.selectEnd,
+							deltaX: this.state.moveEnd.x - this.state.moveStart.x,
+							deltaY: this.state.moveEnd.y - this.state.moveStart.y,
+						});
+					}
+				}
+			}
+			return;
+		}
+		// when this.props.isMovingMode === false
+		if (event.type === 'pan') {
+			const distance = this.state.viewBoxScale === null
+				? event.distance
+				: event.distance / this.state.viewBoxScale;
+			const angle = event.angle / 180 * Math.PI;
+
+			if (event.eventType === INPUT_MOVE) {
+				this.setState({
+					isPanning: true,
+					panDistance: distance,
+					panAngle: angle,
+				});
+			} else if (event.eventType === INPUT_END) {
+				const {offsetX, offsetY, scale} = this.normalizeScaleAndOffset({
+					offsetX: this.state.offsetX - distance * Math.cos(angle),
+					offsetY: this.state.offsetY - distance * Math.sin(angle),
+					scale: this.state.scale,
+				});
+
+				this.setState({
+					isPanning: false,
+					offsetX,
+					offsetY,
+					scale,
+				});
+			}
 		}
 	}
 
@@ -433,14 +556,54 @@ class BoardComponent extends React.Component {
 		return inputColors[index % inputColors.length];
 	}
 
+	getBlockTransform = (x, y) => {
+		if (this.state.moveStatus === 'move' && this.isSelectedBlock(x, y)) {
+			if (this.state.moveStart !== null && this.state.moveEnd !== null) {
+				const deltaX = this.state.moveEnd.x - this.state.moveStart.x;
+				const deltaY = this.state.moveEnd.y - this.state.moveStart.y;
+				return `translate(${-10 + deltaX * BLOCK_SIZE}, ${-10 + deltaY * BLOCK_SIZE})`;
+			}
+			return 'translate(-10, -10)';
+		}
+		return 'translate(0, 0)';
+	}
+
+	getBlockFill = (x, y) => {
+		if (this.isSelectedBlock(x, y)) {
+			return '#ffc37a';
+		}
+		if (this.props.isMovingMode) {
+			return '#967c52';
+		}
+		return 'transparent';
+	}
+
+	permutation = (array) => {
+		const front = [];
+		const back = [];
+		for (let row = 0; row < array.length; row++) {
+			for (let line = 0; line < array[row].length; line++) {
+				if (this.isSelectedBlock(line, row)) {
+					front.push(array[row][line]);
+				} else {
+					back.push(array[row][line]);
+				}
+			}
+		}
+		return back.concat(front);
+	}
+
 	render() {
 		return (
 			<Hammer
 				onPan={this.handlePan}
+				onPanStart={this.handlePan}
+				onPanEnd={this.handlePan}
 				onPinch={this.handlePinch}
 				options={{
 					recognizers: {
 						pinch: {enable: true},
+						pan: {threshold: 10},
 					},
 					preventDefault: true,
 				}}
@@ -638,53 +801,59 @@ class BoardComponent extends React.Component {
 		They must be inside BlockComponent, though...
 	*/
 	renderBlocks = () => (
-		this.state.blocks.map((row) => (
-			row.map((block) => (
-				<g key={id(block)}>
-					<rect
-						className="block-border"
-						width={BLOCK_SIZE}
-						height={BLOCK_SIZE}
-						x={block.x * BLOCK_SIZE}
-						y={block.y * BLOCK_SIZE}
-					/>
-					{block.config.onRotatableWire && (
-						<image
-							className="block"
+		this.permutation(
+			this.state.blocks.map((row) => (
+				row.map((block) => (
+					<g
+						key={id(block)}
+						transform={this.getBlockTransform(block.x, block.y)}
+					>
+						<rect
+							className="block-border"
 							width={BLOCK_SIZE}
 							height={BLOCK_SIZE}
 							x={block.x * BLOCK_SIZE}
 							y={block.y * BLOCK_SIZE}
-							xlinkHref="image/wireI.png"
-							style={{
-								transform: `rotate(${block.rotate * 90}deg)`,
-								transformOrigin: 'center',
-								// Enabled from FF55
-								transformBox: 'fill-box',
-								pointerEvents: 'none',
-							}}
+							fill={this.getBlockFill(block.x, block.y)}
 						/>
-					)}
-					{(block.name !== 'empty') && (
-						<image
-							className="block"
-							width={BLOCK_SIZE}
-							height={BLOCK_SIZE}
-							x={block.x * BLOCK_SIZE}
-							y={block.y * BLOCK_SIZE}
-							xlinkHref={`image/${block.name}.png`}
-							style={{
-								transform: block.config.onRotatableWire ? 'none' : `rotate(${block.rotate * 90}deg)`,
-								transformOrigin: 'center',
-								// Enabled from FF55
-								transformBox: 'fill-box',
-								pointerEvents: 'none',
-							}}
-						/>
-					)}
-				</g>
+						{block.config.onRotatableWire && (
+							<image
+								className="block"
+								width={BLOCK_SIZE}
+								height={BLOCK_SIZE}
+								x={block.x * BLOCK_SIZE}
+								y={block.y * BLOCK_SIZE}
+								xlinkHref="image/wireI.png"
+								style={{
+									transform: `rotate(${block.rotate * 90}deg)`,
+									transformOrigin: 'center',
+									// Enabled from FF55
+									transformBox: 'fill-box',
+									pointerEvents: 'none',
+								}}
+							/>
+						)}
+						{(block.name !== 'empty') && (
+							<image
+								className="block"
+								width={BLOCK_SIZE}
+								height={BLOCK_SIZE}
+								x={block.x * BLOCK_SIZE}
+								y={block.y * BLOCK_SIZE}
+								xlinkHref={`image/${block.name}.png`}
+								style={{
+									transform: block.config.onRotatableWire ? 'none' : `rotate(${block.rotate * 90}deg)`,
+									transformOrigin: 'center',
+									// Enabled from FF55
+									transformBox: 'fill-box',
+									pointerEvents: 'none',
+								}}
+							/>
+						)}
+					</g>
+				))
 			))
-		))
+		)
 	)
 
 	renderOutputs = () => (
