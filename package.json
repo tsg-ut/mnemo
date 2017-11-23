@@ -133,7 +133,7 @@
     "regenerator-runtime": "^0.11.0",
     "request": "^2.81.0",
     "seedrandom": "^2.4.2",
-    "sequelize": "^4.0.0"
+    "sequelize": "^4.22.14"
   },
   "resolutions": {
     "webpack/webpack-sources": "1.0.1"
