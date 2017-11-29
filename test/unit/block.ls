@@ -22,7 +22,7 @@ describe 'Block' ->
     block = board.get-block 0, 0
 
     for own source, value of io.in
-      data = new Data board, value
+      data = new Data value
       block.input source, data
 
     block.step!
@@ -60,7 +60,7 @@ describe 'Block' ->
 
         resolve, reject <~ new Promise _
 
-        data = new Data @board, 334
+        data = new Data 334
         @block.input 'right', data
 
         @block.on 'erase' (erased-data) ->
@@ -186,7 +186,7 @@ describe 'Block' ->
 
         resolve, reject <~ new Promise _
 
-        data = new Data @board, 334
+        data = new Data 334
         @block.input 'bottom', data
 
         @block.on 'erase' (erased-data) ->
