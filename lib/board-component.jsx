@@ -366,7 +366,8 @@ class BoardComponent extends React.Component {
 					// update selecting blocks
 					this.setState({
 						selectEnd: {
-							x: Math.min(Math.max(0, blockX), this.props.width - 1),	// limit 0 <= num < this.props.width
+							// limit 0 <= num < this.props.width
+							x: Math.min(Math.max(0, blockX), this.props.width - 1),
 							y: Math.min(Math.max(0, blockY), this.props.height - 1),
 						},
 					});
