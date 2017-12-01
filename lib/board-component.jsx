@@ -733,6 +733,12 @@ class BoardComponent extends React.Component {
 												block={block}
 												x={block.x}
 												y={block.y}
+												ends={[].concat(
+													block.x === 0 ? ['left'] : [],
+													block.x === this.props.width - 1 ? ['right'] : [],
+													block.y === 0 ? ['top'] : [],
+													block.y === this.props.height - 1 ? ['bottom'] : [],
+												)}
 												status={this.props.status}
 												onClick={this.handleClickBlock}
 												onPassAnimationComplete={this.handlePassAnimationComplete}

@@ -8,6 +8,7 @@ class BlockComponent extends React.Component {
 	static propTypes = {
 		x: PropTypes.number.isRequired,
 		y: PropTypes.number.isRequired,
+		ends: PropTypes.arrayOf(PropTypes.string).isRequired,
 		status: PropTypes.string.isRequired,
 		block: PropTypes.shape({
 			on: PropTypes.func.isRequired,
@@ -102,15 +103,41 @@ class BlockComponent extends React.Component {
 			this.props.onPassAnimationComplete(passEvent);
 		});
 
-		this.props.block.on('hand', (data) => {
-			this.setState({
-				outputData: this.state.outputData.filter((outputData) => (
-					data !== outputData.data
-				)),
-			});
+		this.props.block.on('put', ({direction, data}) => {
+			if (this.props.ends.includes(direction)) {
+				this.state.inputData.forEach((inputData) => {
+					if (inputData.data === data) {
+						inputData.isErasing = true;
+					}
+				});
+
+				this.state.animatingData.forEach((animatingData) => {
+					if (animatingData.data === data) {
+						animatingData.isErasing = true;
+					}
+				});
+
+				this.state.outputData.forEach((outputData) => {
+					if (outputData.data === data) {
+						outputData.isErasing = true;
+					}
+				});
+
+				this.setState({
+					inputData: this.state.inputData,
+					animatingData: this.state.animatingData,
+					outputData: this.state.outputData,
+				});
+			} else {
+				this.setState({
+					outputData: this.state.outputData.filter((outputData) => (
+						data !== outputData.data
+					)),
+				});
+			}
 		});
 
-		this.props.block.on('erase', (data) => {
+		this.props.block.on('reject', (data) => {
 			this.state.inputData.forEach((inputData) => {
 				if (inputData.data === data) {
 					inputData.isErasing = true;
