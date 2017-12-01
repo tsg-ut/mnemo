@@ -8,7 +8,7 @@ class BlockComponent extends React.Component {
 	static propTypes = {
 		x: PropTypes.number.isRequired,
 		y: PropTypes.number.isRequired,
-		ends: PropTypes.arrayOf(PropTypes.string).isRequired,
+		boardEnds: PropTypes.arrayOf(PropTypes.string).isRequired,
 		status: PropTypes.string.isRequired,
 		block: PropTypes.shape({
 			on: PropTypes.func.isRequired,
@@ -104,7 +104,7 @@ class BlockComponent extends React.Component {
 		});
 
 		this.props.block.on('put', ({direction, data}) => {
-			if (this.props.ends.includes(direction)) {
+			if (this.props.boardEnds.includes(direction)) {
 				this.state.inputData.forEach((inputData) => {
 					if (inputData.data === data) {
 						inputData.isErasing = true;

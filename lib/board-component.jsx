@@ -733,7 +733,7 @@ class BoardComponent extends React.Component {
 												block={block}
 												x={block.x}
 												y={block.y}
-												ends={[].concat(
+												boardEnds={[].concat(
 													block.x === 0 ? ['left'] : [],
 													block.x === this.props.width - 1 ? ['right'] : [],
 													block.y === 0 ? ['top'] : [],
