@@ -728,23 +728,25 @@ class BoardComponent extends React.Component {
 								{
 									this.state.blocks.map((row, y) => (
 										row.map((block, x) => (
-											<BlockComponent
+											<g
 												key={id(block)}
-												block={block}
-												x={x}
-												y={y}
-												boardEnds={[].concat(
-													x === 0 ? ['left'] : [],
-													x === this.props.width - 1 ? ['right'] : [],
-													y === 0 ? ['top'] : [],
-													y === this.props.height - 1 ? ['bottom'] : [],
-												)}
-												status={this.props.status}
-												onClick={this.handleClickBlock(x, y)}
-												onPassAnimationComplete={this.handlePassAnimationComplete}
-												isRapid={this.props.isRapid}
-												viewBoxScale={this.state.viewBoxScale}
-											/>
+												transform={`translate(${x * BLOCK_SIZE}, ${y * BLOCK_SIZE})`}
+											>
+												<BlockComponent
+													block={block}
+													boardEnds={[].concat(
+														x === 0 ? ['left'] : [],
+														x === this.props.width - 1 ? ['right'] : [],
+														y === 0 ? ['top'] : [],
+														y === this.props.height - 1 ? ['bottom'] : [],
+													)}
+													status={this.props.status}
+													onClick={this.handleClickBlock(x, y)}
+													onPassAnimationComplete={this.handlePassAnimationComplete}
+													isRapid={this.props.isRapid}
+													viewBoxScale={this.state.viewBoxScale}
+												/>
+											</g>
 										))
 									))
 								}

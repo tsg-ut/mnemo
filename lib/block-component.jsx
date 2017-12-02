@@ -6,8 +6,6 @@ const DataComponent = require('./data-component.jsx');
 
 class BlockComponent extends React.Component {
 	static propTypes = {
-		x: PropTypes.number.isRequired,
-		y: PropTypes.number.isRequired,
 		boardEnds: PropTypes.arrayOf(PropTypes.string).isRequired,
 		status: PropTypes.string.isRequired,
 		block: PropTypes.shape({
@@ -210,9 +208,7 @@ class BlockComponent extends React.Component {
 
 	render() {
 		return (
-			<g
-				transform={`translate(${this.props.x * BLOCK_SIZE}, ${this.props.y * BLOCK_SIZE})`}
-			>
+			<g>
 				{/* click event capture */}
 				<rect
 					className="block-click-capture"
