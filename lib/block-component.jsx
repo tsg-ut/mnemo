@@ -6,7 +6,14 @@ const DataComponent = require('./data-component.jsx');
 
 class BlockComponent extends React.Component {
 	static propTypes = {
-		boardEnds: PropTypes.arrayOf(PropTypes.string).isRequired,
+		boardEnds: PropTypes.shape({
+			left: PropTypes.bool.isRequired,
+			right: PropTypes.bool.isRequired,
+			top: PropTypes.bool.isRequired,
+			bottom: PropTypes.bool.isRequired,
+		}).isRequired,
+		x: PropTypes.number.isRequired,
+		y: PropTypes.number.isRequired,
 		status: PropTypes.string.isRequired,
 		block: PropTypes.shape({
 			on: PropTypes.func.isRequired,
@@ -102,7 +109,7 @@ class BlockComponent extends React.Component {
 		});
 
 		this.props.block.on('put', ({direction, data}) => {
-			if (this.props.boardEnds.includes(direction)) {
+			if (this.props.boardEnds[direction]) {
 				this.state.inputData.forEach((inputData) => {
 					if (inputData.data === data) {
 						inputData.isErasing = true;
@@ -203,7 +210,7 @@ class BlockComponent extends React.Component {
 	}
 
 	handleClick = (event) => (
-		this.props.onClick(event)
+		this.props.onClick(event, this.props.x, this.props.y)
 	)
 
 	render() {
