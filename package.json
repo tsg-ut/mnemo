@@ -136,6 +136,8 @@
     "sequelize": "^4.22.14"
   },
   "resolutions": {
-    "webpack/webpack-sources": "1.0.1"
+    "webpack/webpack-sources": "1.0.1",
+    "webpack/uglifyjs-webpack-plugin/webpack-sources": "1.0.1",
+    "babel-minify-webpack-plugin/webpack-sources": "1.0.1"
   }
 }
