@@ -205,7 +205,7 @@ class BlockComponent extends React.Component {
 	}
 
 	handleClick = (event) => (
-		this.props.onClick(event, this.props.x, this.props.y)
+		this.props.onClick(event)
 	)
 
 	render() {

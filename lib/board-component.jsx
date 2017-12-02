@@ -295,7 +295,7 @@ class BoardComponent extends React.Component {
 		this.props.onPaused();
 	}
 
-	handleClickBlock = (event, x, y) => {
+	handleClickBlock = (x, y) => (event) => {
 		event.preventDefault();
 		if (!this.props.isMovingMode) {
 			return this.props.onClickBlock({x, y, type: event.type});
@@ -740,7 +740,7 @@ class BoardComponent extends React.Component {
 													y === this.props.height - 1 ? ['bottom'] : [],
 												)}
 												status={this.props.status}
-												onClick={this.handleClickBlock}
+												onClick={this.handleClickBlock(x, y)}
 												onPassAnimationComplete={this.handlePassAnimationComplete}
 												isRapid={this.props.isRapid}
 												viewBoxScale={this.state.viewBoxScale}
