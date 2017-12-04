@@ -726,19 +726,29 @@ class BoardComponent extends React.Component {
 							</g>
 							<g>
 								{
-									this.state.blocks.map((row) => (
-										row.map((block) => (
-											<BlockComponent
+									this.state.blocks.map((row, y) => (
+										row.map((block, x) => (
+											<g
 												key={id(block)}
-												block={block}
-												x={block.x}
-												y={block.y}
-												status={this.props.status}
-												onClick={this.handleClickBlock}
-												onPassAnimationComplete={this.handlePassAnimationComplete}
-												isRapid={this.props.isRapid}
-												viewBoxScale={this.state.viewBoxScale}
-											/>
+												transform={`translate(${x * BLOCK_SIZE}, ${y * BLOCK_SIZE})`}
+											>
+												<BlockComponent
+													block={block}
+													x={x}
+													y={y}
+													boardEnds={{
+														left: x === 0,
+														right: x === this.props.width - 1,
+														top: y === 0,
+														bottom: y === this.props.height - 1,
+													}}
+													status={this.props.status}
+													onClick={this.handleClickBlock}
+													onPassAnimationComplete={this.handlePassAnimationComplete}
+													isRapid={this.props.isRapid}
+													viewBoxScale={this.state.viewBoxScale}
+												/>
+											</g>
 										))
 									))
 								}
@@ -803,27 +813,27 @@ class BoardComponent extends React.Component {
 	*/
 	renderBlocks = () => (
 		this.permutation(
-			this.state.blocks.map((row) => (
-				row.map((block) => (
+			this.state.blocks.map((row, y) => (
+				row.map((block, x) => (
 					<g
 						key={id(block)}
-						transform={this.getBlockTransform(block.x, block.y)}
+						transform={this.getBlockTransform(x, y)}
 					>
 						<rect
 							className="block-border"
 							width={BLOCK_SIZE}
 							height={BLOCK_SIZE}
-							x={block.x * BLOCK_SIZE}
-							y={block.y * BLOCK_SIZE}
-							fill={this.getBlockFill(block.x, block.y)}
+							x={x * BLOCK_SIZE}
+							y={y * BLOCK_SIZE}
+							fill={this.getBlockFill(x, y)}
 						/>
 						{block.config.onRotatableWire && (
 							<image
 								className="block"
 								width={BLOCK_SIZE}
 								height={BLOCK_SIZE}
-								x={block.x * BLOCK_SIZE}
-								y={block.y * BLOCK_SIZE}
+								x={x * BLOCK_SIZE}
+								y={y * BLOCK_SIZE}
 								xlinkHref="image/wireI.png"
 								style={{
 									transform: `rotate(${block.rotate * 90}deg)`,
@@ -839,8 +849,8 @@ class BoardComponent extends React.Component {
 								className="block"
 								width={BLOCK_SIZE}
 								height={BLOCK_SIZE}
-								x={block.x * BLOCK_SIZE}
-								y={block.y * BLOCK_SIZE}
+								x={x * BLOCK_SIZE}
+								y={y * BLOCK_SIZE}
 								xlinkHref={`image/${block.name}.png`}
 								style={{
 									transform: block.config.onRotatableWire ? 'none' : `rotate(${block.rotate * 90}deg)`,

@@ -6,6 +6,12 @@ const DataComponent = require('./data-component.jsx');
 
 class BlockComponent extends React.Component {
 	static propTypes = {
+		boardEnds: PropTypes.shape({
+			left: PropTypes.bool.isRequired,
+			right: PropTypes.bool.isRequired,
+			top: PropTypes.bool.isRequired,
+			bottom: PropTypes.bool.isRequired,
+		}).isRequired,
 		x: PropTypes.number.isRequired,
 		y: PropTypes.number.isRequired,
 		status: PropTypes.string.isRequired,
@@ -102,15 +108,41 @@ class BlockComponent extends React.Component {
 			this.props.onPassAnimationComplete(passEvent);
 		});
 
-		this.props.block.on('hand', (data) => {
-			this.setState({
-				outputData: this.state.outputData.filter((outputData) => (
-					data !== outputData.data
-				)),
-			});
+		this.props.block.on('put', ({direction, data}) => {
+			if (this.props.boardEnds[direction]) {
+				this.state.inputData.forEach((inputData) => {
+					if (inputData.data === data) {
+						inputData.isErasing = true;
+					}
+				});
+
+				this.state.animatingData.forEach((animatingData) => {
+					if (animatingData.data === data) {
+						animatingData.isErasing = true;
+					}
+				});
+
+				this.state.outputData.forEach((outputData) => {
+					if (outputData.data === data) {
+						outputData.isErasing = true;
+					}
+				});
+
+				this.setState({
+					inputData: this.state.inputData,
+					animatingData: this.state.animatingData,
+					outputData: this.state.outputData,
+				});
+			} else {
+				this.setState({
+					outputData: this.state.outputData.filter((outputData) => (
+						data !== outputData.data
+					)),
+				});
+			}
 		});
 
-		this.props.block.on('erase', (data) => {
+		this.props.block.on('reject', (data) => {
 			this.state.inputData.forEach((inputData) => {
 				if (inputData.data === data) {
 					inputData.isErasing = true;
@@ -183,9 +215,7 @@ class BlockComponent extends React.Component {
 
 	render() {
 		return (
-			<g
-				transform={`translate(${this.props.x * BLOCK_SIZE}, ${this.props.y * BLOCK_SIZE})`}
-			>
+			<g>
 				{/* click event capture */}
 				<rect
 					className="block-click-capture"

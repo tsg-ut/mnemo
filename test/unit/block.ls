@@ -54,7 +54,7 @@ describe 'Block' ->
           in: bottom: 334
           out: top: 334
 
-      It 'erases any data put on the right side' ->
+      It 'rejects any data put on the right side' ->
         @board.place-block x: 0, y: 0, type: \wireI, rotate: 0
         @block = @board.get-block 0, 0
 
@@ -63,8 +63,8 @@ describe 'Block' ->
         data = new Data 334
         @block.input 'right', data
 
-        @block.on 'erase' (erased-data) ->
-          expect erased-data .to.equal data
+        @block.on 'reject' (rejected-data) ->
+          expect rejected-data .to.equal data
           resolve!
 
         @block.step!
@@ -180,7 +180,7 @@ describe 'Block' ->
             top: 334
             left: 334
 
-      It 'erases any data put on the bottom' ->
+      It 'rejects any data put on the bottom' ->
         @board.place-block x: 0, y: 0, type: \junctionR, rotate: 0
         @block = @board.get-block 0, 0
 
@@ -189,8 +189,8 @@ describe 'Block' ->
         data = new Data 334
         @block.input 'bottom', data
 
-        @block.on 'erase' (erased-data) ->
-          expect erased-data .to.equal data
+        @block.on 'reject' (rejected-data) ->
+          expect rejected-data .to.equal data
           resolve!
 
         @block.step!
