@@ -42,37 +42,37 @@ class BlockComponent extends React.Component {
 		};
 
 		this.props.block.on('get', ({direction, data}) => {
-			this.setState( (prevState, props) => ({
+			this.setState((prevState, curProps) => ({
 				inputData: prevState.inputData.set(data, {
 					direction,
-					isErasing: props.status === 'stop',
+					isErasing: curProps.status === 'stop',
 				}),
 			}));
 		});
 
 		this.props.block.on('reject', (data) => {
-				this.setState( (prevState) => {
-					let {inputData, animatingData, outputData} = prevState;
+			this.setState((prevState) => {
+				let {inputData, animatingData, outputData} = prevState;
 
-					if (inputData.has(data)) {
-						const datum = inputData.get(data);
-						inputData = inputData.set(data, Object.assign(datum, {isErasing: true}));
-					};
-					if (animatingData.has(data)) {
-						const datum = animatingData.get(data);
-						animatingData = animatingData.set(data, Object.assign(datum, {isErasing: true}));
-					}
-					if (outputData.has(data)) {
-						const datum = outputData.get(data);
-						outputData = outputData.set(data, Object.assign(datum, {isErasing: true}));
-					}
-					return {inputData, animatingData, outputData};
-				});
+				if (inputData.has(data)) {
+					const datum = inputData.get(data);
+					inputData = inputData.set(data, Object.assign(datum, {isErasing: true}));
+				}
+				if (animatingData.has(data)) {
+					const datum = animatingData.get(data);
+					animatingData = animatingData.set(data, Object.assign(datum, {isErasing: true}));
+				}
+				if (outputData.has(data)) {
+					const datum = outputData.get(data);
+					outputData = outputData.set(data, Object.assign(datum, {isErasing: true}));
+				}
+				return {inputData, animatingData, outputData};
+			});
 		});
 
 		this.props.block.on('pass', async (passEvent) => {
 			const inputAnimations = [];
-			const inwardPromise = new Promise( (resolve) => {
+			const inwardPromise = new Promise((resolve) => {
 				this.setState(
 					// updater
 					(prevState) => {
@@ -96,7 +96,7 @@ class BlockComponent extends React.Component {
 						};
 					},
 					// callback
-					() => Promise.all(inputAnimations).then( () => resolve() )
+					() => Promise.all(inputAnimations).then(() => resolve())
 				);
 			});
 			await inwardPromise;
@@ -110,7 +110,7 @@ class BlockComponent extends React.Component {
 			});
 
 			const outputAnimations = [];
-			const outwardPromise = new Promise( (resolve) => {
+			const outwardPromise = new Promise((resolve) => {
 				this.setState(
 					// updater
 					(prevState) => {
@@ -129,7 +129,7 @@ class BlockComponent extends React.Component {
 						return {animatingData};
 					},
 					// callback
-					() => Promise.all(outputAnimations).then( () => resolve() )
+					() => Promise.all(outputAnimations).then(() => resolve())
 				);
 			});
 			await outwardPromise;
@@ -151,7 +151,7 @@ class BlockComponent extends React.Component {
 
 		this.props.block.on('put', ({direction, data}) => {
 			if (this.props.boardEnds[direction]) {
-				this.setState( (prevState) => {
+				this.setState((prevState) => {
 					assert(prevState.outputData.has(data));
 					const datum = Object.assign(prevState.outputData.get(data), {isErasing: true});
 
@@ -160,7 +160,7 @@ class BlockComponent extends React.Component {
 					};
 				});
 			} else {
-				this.setState( (prevState) => ({
+				this.setState((prevState) => ({
 					outputData: prevState.outputData.delete(data),
 				}));
 			}
@@ -176,7 +176,7 @@ class BlockComponent extends React.Component {
 	handleStop() {
 		const eraseAll = (obj) => Object.assign(obj, {isErasing: true});
 
-		this.setState( (prevState) => ({
+		this.setState((prevState) => ({
 			inputData: prevState.inputData.map(eraseAll),
 			animatingData: prevState.animatingData.map(eraseAll),
 			outputData: prevState.outputData.map(eraseAll),
@@ -190,7 +190,7 @@ class BlockComponent extends React.Component {
 	}
 
 	handleDataEraseAnimationComplete = (data) => {
-		this.setState( (prevState) => ({
+		this.setState((prevState) => ({
 			inputData: prevState.inputData.delete(data),
 			animatingData: prevState.animatingData.delete(data),
 			outputData: prevState.outputData.delete(data),
