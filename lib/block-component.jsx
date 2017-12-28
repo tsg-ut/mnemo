@@ -36,9 +36,9 @@ class BlockComponent extends React.Component {
 		this.dataAnimationResolvers = new WeakMap();
 
 		this.state = {
-			inputData: new Immutable.Map(), // Data in inputQueue
-			outputData: new Immutable.Map(), // Data in outputQueue
-			animatingData: new Immutable.Map(), // Data in animation
+			inputData: Immutable.Map(), // Data in inputQueue
+			outputData: Immutable.Map(), // Data in outputQueue
+			animatingData: Immutable.Map(), // Data in animation
 		};
 
 		this.props.block.on('get', ({direction, data}) => {
