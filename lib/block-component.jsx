@@ -60,7 +60,12 @@ class BlockComponent extends React.Component {
 
 		this.props.block.on('pass', async (passEvent) => {
 			const inputAnimations = [];
-			const inwardPromise = new Promise((resolve) => {
+			for (const data of passEvent.in.values()) {
+				inputAnimations.push(new Promise((resolve) => {
+					this.dataAnimationResolvers.set(data, resolve);
+				}));
+			}
+			const inwardStatePromise = new Promise((resolve) => {
 				this.setState(
 					// updater
 					(prevState) => {
@@ -75,27 +80,29 @@ class BlockComponent extends React.Component {
 								isErasing: this.props.status === 'stop',
 							}),
 						]));
-
-						for (const data of passEvent.in.values()) {
-							inputAnimations.push(new Promise((resolve) => {
-								this.dataAnimationResolvers.set(data, resolve);
-							}));
-						}
-
 						return {inputData, animatingData};
 					},
 					// callback
-					() => Promise.all(inputAnimations).then(() => resolve())
+					resolve
 				);
 			});
-			await inwardPromise;
+			await Promise.all([
+				...inputAnimations,
+				inwardStatePromise,
+			]);
 
 			this.setState(({animatingData}) => ({
 				animatingData: animatingData.deleteAll(passEvent.in.values()),
 			}));
 
 			const outputAnimations = [];
-			const outwardPromise = new Promise((resolve) => {
+			for (const data of passEvent.out.values()) {
+				outputAnimations.push(new Promise((resolve) => {
+					this.dataAnimationResolvers.set(data, resolve);
+				}));
+			}
+
+			const outwardStatePromise = new Promise((resolve) => {
 				this.setState(
 					// updater
 					(prevState) => {
@@ -109,19 +116,16 @@ class BlockComponent extends React.Component {
 							}),
 						]));
 
-						for (const data of passEvent.out.values()) {
-							outputAnimations.push(new Promise((resolve) => {
-								this.dataAnimationResolvers.set(data, resolve);
-							}));
-						}
-
 						return {animatingData};
 					},
 					// callback
-					() => Promise.all(outputAnimations).then(() => resolve())
+					resolve
 				);
 			});
-			await outwardPromise;
+			await Promise.all([
+				...outputAnimations,
+				outwardStatePromise,
+			]);
 
 			this.setState(({animatingData, outputData}) => ({
 				animatingData: animatingData.deleteAll(passEvent.out.values()),
