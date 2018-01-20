@@ -125,7 +125,7 @@
     "core-js": "^2.4.1",
     "cors": "^2.8.1",
     "express": "^4.14.0",
-    "express-promise-router": "^2.0.0",
+    "express-promise-router": "^3.0.0",
     "forcedomain": "^0.8.0",
     "lcov-result-merger": "^1.2.0",
     "node-slack": "^0.0.7",
