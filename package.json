@@ -81,7 +81,7 @@
     "hammerjs": "^2.0.8",
     "istanbul": "next",
     "jquery": "^3.0.0",
-    "karma": "^1.7.0",
+    "karma": "^2.0.0",
     "karma-coverage": "^1.1.1",
     "karma-electron": "^5.2.1",
     "karma-mocha": "^1.3.0",
