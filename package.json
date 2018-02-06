@@ -99,7 +99,7 @@
     "nightmare": "^2.8.1",
     "normalize.css": "^7.0.0",
     "postcss-assets": "^5.0.0",
-    "postcss-cli": "^4.0.0",
+    "postcss-cli": "^5.0.0",
     "postcss-flexbugs-fixes": "^3.0.0",
     "postcss-font-magician": "^2.0.0",
     "prop-types": "^15.5.8",
