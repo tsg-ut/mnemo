@@ -96,7 +96,7 @@
     "mocha-logger": "^1.0.4",
     "mocha-webpack": "^1.0.0",
     "mockery": "^2.0.0",
-    "nightmare": "^2.8.1",
+    "nightmare": "^3.0.0",
     "normalize.css": "^8.0.0",
     "postcss-assets": "^5.0.0",
     "postcss-cli": "^5.0.0",
