@@ -74,7 +74,7 @@
     "enzyme-adapter-react-16": "^1.0.1",
     "eslint": "^4.1.0",
     "eslint-plugin-react": "^7.0.0",
-    "fetch-ponyfill": "^5.0.0",
+    "fetch-ponyfill": "^6.0.0",
     "file-url": "^2.0.0",
     "github-fork-ribbon-css": "^0.2.1",
     "gsap": "^1.19.1",
