@@ -111,7 +111,7 @@
     "react-measure": "^2.0.2",
     "react-test-renderer": "^16.0.0",
     "sequelize-cli": "^4.0.0",
-    "sqlite3": "^3.1.4",
+    "sqlite3": "^4.0.0",
     "svg-path-generator": "^1.1.0",
     "umzug": "^2.0.1",
     "webpack": "^3.0.0",
