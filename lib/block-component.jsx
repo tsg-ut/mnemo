@@ -1,5 +1,7 @@
 const React = require('react');
 const PropTypes = require('prop-types');
+const Immutable = require('immutable');
+const assert = require('assert');
 const {id} = require('./util');
 const {BLOCK_SIZE} = require('./constants');
 const DataComponent = require('./data-component.jsx');
@@ -33,146 +35,128 @@ class BlockComponent extends React.Component {
 
 		this.dataAnimationResolvers = new WeakMap();
 
+		this.state = {
+			inputData: Immutable.Map(), // Data in inputQueue
+			outputData: Immutable.Map(), // Data in outputQueue
+			animatingData: Immutable.Map(), // Data in animation
+		};
+
 		this.props.block.on('get', ({direction, data}) => {
-			this.setState({
-				inputData: this.state.inputData.concat([{
+			this.setState(({inputData}, curProps) => ({
+				inputData: inputData.set(data, Immutable.Map({
 					direction,
-					data,
-					isErasing: this.props.status === 'stop',
-				}]),
-			});
+					isErasing: curProps.status === 'stop',
+				})),
+			}));
+		});
+
+		this.props.block.on('reject', (data) => {
+			this.setState(({inputData, animatingData, outputData}) => ({
+				inputData: inputData.has(data) ? inputData.setIn([data, 'isErasing'], true) : inputData,
+				animatingData: animatingData.has(data) ? animatingData.setIn([data, 'isErasing'], true) : animatingData,
+				outputData: outputData.has(data) ? outputData.setIn([data, 'isErasing'], true) : outputData,
+			}));
 		});
 
 		this.props.block.on('pass', async (passEvent) => {
 			const inputAnimations = [];
-
-			for (const [direction, data] of passEvent.in.entries()) {
-				// MEMO: Immutable.js使いたい
-				this.setState({
-					animatingData: this.state.animatingData.concat([{
-						direction,
-						data,
-						isInward: true,
-						isErasing: this.props.status === 'stop',
-					}]),
-					inputData: this.state.inputData.filter((inputData) => data !== inputData.data),
-				});
-
+			for (const data of passEvent.in.values()) {
 				inputAnimations.push(new Promise((resolve) => {
 					this.dataAnimationResolvers.set(data, resolve);
 				}));
 			}
+			const inwardStatePromise = new Promise((resolve) => {
+				this.setState(
+					// updater
+					(prevState) => {
+						let {inputData, animatingData} = prevState;
 
-			await Promise.all(inputAnimations);
+						inputData = inputData.deleteAll(passEvent.in.values());
+						animatingData = animatingData.merge([...passEvent.in.entries()].map(([direction, data]) => [
+							data,
+							Immutable.Map({
+								direction,
+								isInward: true,
+								isErasing: this.props.status === 'stop',
+							}),
+						]));
+						return {inputData, animatingData};
+					},
+					// callback
+					resolve
+				);
+			});
+			await Promise.all([
+				...inputAnimations,
+				inwardStatePromise,
+			]);
+
+			this.setState(({animatingData}) => ({
+				animatingData: animatingData.deleteAll(passEvent.in.values()),
+			}));
 
 			const outputAnimations = [];
-
-			for (const data of passEvent.in.values()) {
-				this.setState({
-					animatingData: this.state.animatingData.filter((animatingData) => (
-						data !== animatingData.data
-					)),
-				});
-			}
-
-			for (const [direction, data] of passEvent.out.entries()) {
-				this.setState({
-					animatingData: this.state.animatingData.concat([{
-						direction,
-						data,
-						isInward: false,
-						isErasing: this.props.status === 'stop',
-					}]),
-				});
-
+			for (const data of passEvent.out.values()) {
 				outputAnimations.push(new Promise((resolve) => {
 					this.dataAnimationResolvers.set(data, resolve);
 				}));
 			}
 
-			await Promise.all(outputAnimations);
+			const outwardStatePromise = new Promise((resolve) => {
+				this.setState(
+					// updater
+					(prevState) => {
+						let {animatingData} = prevState;
+						animatingData = animatingData.merge([...passEvent.out.entries()].map(([direction, data]) => [
+							data,
+							Immutable.Map({
+								direction,
+								isInward: false,
+								isErasing: this.props.status === 'stop',
+							}),
+						]));
 
-			for (const [direction, data] of passEvent.out.entries()) {
-				this.setState({
-					animatingData: this.state.animatingData.filter((animatingData) => (
-						data !== animatingData.data
-					)),
-					outputData: this.state.outputData.concat([{
-						direction,
+						return {animatingData};
+					},
+					// callback
+					resolve
+				);
+			});
+			await Promise.all([
+				...outputAnimations,
+				outwardStatePromise,
+			]);
+
+			this.setState(({animatingData, outputData}) => ({
+				animatingData: animatingData.deleteAll(passEvent.out.values()),
+				outputData: outputData.merge([...passEvent.out.entries()]
+					.map(([direction, data]) => [
 						data,
-						isErasing: this.props.status === 'stop',
-					}]),
-				});
-			}
+						Immutable.Map({
+							direction,
+							isErasing: this.props.status === 'stop',
+						}),
+					])),
+			}));
 
 			this.props.onPassAnimationComplete(passEvent);
 		});
 
 		this.props.block.on('put', ({direction, data}) => {
 			if (this.props.boardEnds[direction]) {
-				this.state.inputData.forEach((inputData) => {
-					if (inputData.data === data) {
-						inputData.isErasing = true;
-					}
-				});
+				this.setState(({outputData}) => {
+					assert(outputData.has(data));
 
-				this.state.animatingData.forEach((animatingData) => {
-					if (animatingData.data === data) {
-						animatingData.isErasing = true;
-					}
-				});
-
-				this.state.outputData.forEach((outputData) => {
-					if (outputData.data === data) {
-						outputData.isErasing = true;
-					}
-				});
-
-				this.setState({
-					inputData: this.state.inputData,
-					animatingData: this.state.animatingData,
-					outputData: this.state.outputData,
+					return {
+						outputData: outputData.setIn([data, 'isErasing'], true),
+					};
 				});
 			} else {
-				this.setState({
-					outputData: this.state.outputData.filter((outputData) => (
-						data !== outputData.data
-					)),
-				});
+				this.setState(({outputData}) => ({
+					outputData: outputData.delete(data),
+				}));
 			}
 		});
-
-		this.props.block.on('reject', (data) => {
-			this.state.inputData.forEach((inputData) => {
-				if (inputData.data === data) {
-					inputData.isErasing = true;
-				}
-			});
-
-			this.state.animatingData.forEach((animatingData) => {
-				if (animatingData.data === data) {
-					animatingData.isErasing = true;
-				}
-			});
-
-			this.state.outputData.forEach((outputData) => {
-				if (outputData.data === data) {
-					outputData.isErasing = true;
-				}
-			});
-
-			this.setState({
-				inputData: this.state.inputData,
-				animatingData: this.state.animatingData,
-				outputData: this.state.outputData,
-			});
-		});
-
-		this.state = {
-			inputData: [], // Data in inputQueue
-			outputData: [], // Data in outputQueue
-			animatingData: [], // Data in animation
-		};
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -182,17 +166,13 @@ class BlockComponent extends React.Component {
 	}
 
 	handleStop() {
-		[this.state.inputData, this.state.animatingData, this.state.outputData].forEach((data) => {
-			data.forEach((datum) => {
-				datum.isErasing = true;
-			});
-		});
+		const eraseAll = (map) => map.set('isErasing', true);
 
-		this.setState({
-			inputData: this.state.inputData,
-			animatingData: this.state.animatingData,
-			outputData: this.state.outputData,
-		});
+		this.setState(({inputData, animatingData, outputData}) => ({
+			inputData: inputData.map(eraseAll),
+			animatingData: animatingData.map(eraseAll),
+			outputData: outputData.map(eraseAll),
+		}));
 	}
 
 	handleDataAnimationComplete = (data) => {
@@ -202,11 +182,11 @@ class BlockComponent extends React.Component {
 	}
 
 	handleDataEraseAnimationComplete = (data) => {
-		this.setState({
-			inputData: this.state.inputData.filter((inputData) => inputData.data !== data),
-			animatingData: this.state.animatingData.filter((animatingData) => animatingData.data !== data),
-			outputData: this.state.outputData.filter((outputData) => outputData.data !== data),
-		});
+		this.setState(({inputData, animatingData, outputData}) => ({
+			inputData: inputData.delete(data),
+			animatingData: animatingData.delete(data),
+			outputData: outputData.delete(data),
+		}));
 	}
 
 	handleClick = (event) => (
@@ -231,13 +211,13 @@ class BlockComponent extends React.Component {
 				{/* data layer */}
 				<g>
 					{[
-						...(this.state.inputData.map(({direction, data, isErasing}) => (
+						...(this.state.inputData.map((map, data) => (
 							<DataComponent
 								key={id(data)}
-								direction={direction}
+								direction={map.get('direction')}
 								isInward
 								isAnimating={false}
-								isErasing={isErasing}
+								isErasing={map.get('isErasing')}
 								value={data.value}
 								data={data}
 								onAnimationComplete={this.handleDataAnimationComplete}
@@ -245,14 +225,14 @@ class BlockComponent extends React.Component {
 								isRapid={this.props.isRapid}
 								viewBoxScale={this.props.viewBoxScale}
 							/>
-						))),
-						...(this.state.animatingData.map(({direction, data, isInward, isErasing}) => (
+						)).values()),
+						...(this.state.animatingData.map((map, data) => (
 							<DataComponent
 								key={id(data)}
-								direction={direction}
-								isInward={isInward}
+								direction={map.get('direction')}
+								isInward={map.get('isInward')}
 								isAnimating
-								isErasing={isErasing}
+								isErasing={map.get('isErasing')}
 								value={data.value}
 								data={data}
 								onAnimationComplete={this.handleDataAnimationComplete}
@@ -260,14 +240,14 @@ class BlockComponent extends React.Component {
 								isRapid={this.props.isRapid}
 								viewBoxScale={this.props.viewBoxScale}
 							/>
-						))),
-						...(this.state.outputData.map(({direction, data, isErasing}) => (
+						)).values()),
+						...(this.state.outputData.map((map, data) => (
 							<DataComponent
 								key={id(data)}
-								direction={direction}
+								direction={map.get('direction')}
 								isInward={false}
 								isAnimating={false}
-								isErasing={isErasing}
+								isErasing={map.get('isErasing')}
 								value={data.value}
 								data={data}
 								onAnimationComplete={this.handleDataAnimationComplete}
@@ -275,7 +255,7 @@ class BlockComponent extends React.Component {
 								isRapid={this.props.isRapid}
 								viewBoxScale={this.props.viewBoxScale}
 							/>
-						))),
+						)).values()),
 					]}
 				</g>
 			</g>
