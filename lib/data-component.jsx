@@ -44,24 +44,24 @@ class DataComponent extends React.Component {
 		}
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (!this.props.isAnimating && nextProps.isAnimating) {
+	componentDidUpdate(prevProps) {
+		if (!prevProps.isAnimating && this.props.isAnimating) {
 			this.handleStartAnimation();
 		}
 
-		if (this.props.isAnimating && !nextProps.isAnimating) {
+		if (prevProps.isAnimating && !this.props.isAnimating) {
 			this.handleStopAnimation();
 		}
 
-		if (!this.props.isErasing && nextProps.isErasing) {
+		if (!prevProps.isErasing && this.props.isErasing) {
 			this.handleStartErasion();
 		}
 
-		if (this.props.isErasing && !nextProps.isErasing) {
+		if (prevProps.isErasing && !this.props.isErasing) {
 			this.handleStopErasion();
 		}
 
-		if (!this.props.isRapid && nextProps.isRapid) {
+		if (!prevProps.isRapid && this.props.isRapid) {
 			this.handleStartRapid();
 		}
 	}

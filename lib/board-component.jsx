@@ -98,6 +98,10 @@ class BoardComponent extends React.Component {
 	}
 
 	componentDidUpdate(prevProps) {
+		if (prevProps.isMovingMode && !this.props.isMovingMode) {
+			this.resetMoveState();
+		}
+
 		if (prevProps.status === 'stop') {
 			assert(this.props.status !== 'pause');
 
@@ -110,12 +114,6 @@ class BoardComponent extends React.Component {
 			if (this.props.status === 'stop') {
 				this.halt({force: this.props.isForced});
 			}
-		}
-	}
-
-	componentWillReceiveProps(nextProps) {
-		if (this.props.isMovingMode && !nextProps.isMovingMode) {
-			this.resetMoveState();
 		}
 	}
 
