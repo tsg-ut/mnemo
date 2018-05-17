@@ -159,8 +159,8 @@ class BlockComponent extends React.Component {
 		});
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (this.props.status !== 'stop' && nextProps.status === 'stop') {
+	componentDidUpdate(prevProps) {
+		if (prevProps.status !== 'stop' && this.props.status === 'stop') {
 			this.handleStop();
 		}
 	}
