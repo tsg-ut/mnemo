@@ -342,7 +342,7 @@ describe('/stages', () => {
 				name: 'hakatashi',
 				board: validBoard,
 				score: validBoardScore,
-			}) .then((res) => expect(res).to.have.status(404));
+			}).then((res) => expect(res).to.have.status(404));
 		});
 
 		it('reports 500 error when stage is not found in DB', async () => {
