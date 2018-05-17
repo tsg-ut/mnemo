@@ -61,7 +61,7 @@
     "babel-preset-react": "^6.23.0",
     "chai": "^4.0.2",
     "chai-enzyme": "beta",
-    "chai-http": "^3.0.0",
+    "chai-http": "^4.0.0",
     "chai-things": "^0.2.0",
     "chokidar-cli": "^1.2.0",
     "codecov": "^3.0.0",
