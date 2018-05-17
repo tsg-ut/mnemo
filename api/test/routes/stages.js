@@ -338,36 +338,40 @@ describe('/stages', () => {
 		});
 
 		it('reports 404 error when attempted to submit to unknown stage', async () => {
-			await chai.request(app).post('/stages/hoge/submissions').send({
+			const res = await chai.request(app).post('/stages/hoge/submissions').send({
 				name: 'hakatashi',
 				board: validBoard,
 				score: validBoardScore,
-			}).then((res) => expect(res).to.have.status(404));
+			});
+			await expect(res).to.have.status(404);
 		});
 
 		it('reports 500 error when stage is not found in DB', async () => {
 			// FIXME 'calc01' is magic stage name...
-			await chai.request(app).post('/stages/calc01/submissions').send({
+			const res = await chai.request(app).post('/stages/calc01/submissions').send({
 				name: 'hakatashi',
 				board: validBoard,
 				score: validBoardScore,
-			}).then((res) => expect(res).to.have.status(500));
+			});
+			await expect(res).to.have.status(500);
 		});
 
 		it('reports 400 error when attempted to post invalid board', async () => {
-			await chai.request(app).post('/stages/wire01/submissions').send({
+			const res = await chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'hakatashi',
 				board: invalidBoard,
 				score: invalidBoardScore,
-			}).then((res) => expect(res).to.have.status(400));
+			});
+			await expect(res).to.have.status(400);
 		});
 
 		it('reports 400 error when attempted to post malicious name (object)', async () => {
-			await chai.request(app).post('/stages/wire01/submissions').send({
+			const res = await chai.request(app).post('/stages/wire01/submissions').send({
 				name: {$ne: 'attacker'},
 				board: validBoard,
 				score: validBoardScore,
-			}).then((res) => expect(res).to.have.status(400));
+			});
+			await expect(res).to.have.status(400);
 		});
 
 		it('creates new submission data if the submission is valid', async () => {
@@ -425,11 +429,12 @@ describe('/stages', () => {
 				score: validBoardScore,
 			});
 
-			await chai.request(app).post('/stages/wire01/submissions').send({
+			const res = await chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'hakatashi',
 				board: lowerScoreBoard,
 				score: lowerScoreBoardScore,
-			}).then((res) => expect(res).to.have.status(400));
+			});
+			await expect(res).to.have.status(400);
 		});
 
 		it('omits calculting score and reports error when lower score than existing submission was proposed by client', async () => {
@@ -439,11 +444,12 @@ describe('/stages', () => {
 				score: lowerScoreBoardScore,
 			});
 
-			await chai.request(app).post('/stages/wire01/submissions').send({
+			const res = await chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'hakatashi',
 				board: validBoard,
 				score: lowerScoreBoardScore,
-			}).then((res) => expect(res).to.have.status(400));
+			});
+			await expect(res).to.have.status(400);
 		});
 
 		it('reports error when the submission with higher score is existing, regardless of proposed score by client', async () => {
@@ -453,19 +459,21 @@ describe('/stages', () => {
 				score: validBoardScore,
 			});
 
-			await chai.request(app).post('/stages/wire01/submissions').send({
+			const res = await chai.request(app).post('/stages/wire01/submissions').send({
 				name: 'hakatashi',
 				board: lowerScoreBoard,
 				score: validBoardScore,
-			}).then((res) => expect(res).to.have.status(400));
+			});
+			await expect(res).to.have.status(400);
 		});
 
 		it('rejects submission with empty name', async () => {
-			await chai.request(app).post('/stages/wire01/submissions').send({
+			const res = await chai.request(app).post('/stages/wire01/submissions').send({
 				name: '',
 				board: validBoard,
 				score: validBoardScore,
-			}).then((res) => expect(res).to.not.have.status(200));
+			});
+			await expect(res).to.not.have.status(200);
 		});
 
 		it('updates record when the submission score is higher than existing one', async () => {
