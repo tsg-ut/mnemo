@@ -135,8 +135,5 @@
     "request": "^2.81.0",
     "seedrandom": "^2.4.2",
     "sequelize": "^4.22.14"
-  },
-  "resolutions": {
-    "webpack-sources": "1.0.1"
   }
 }
