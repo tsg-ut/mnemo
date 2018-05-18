@@ -343,7 +343,7 @@ describe('/stages', () => {
 				board: validBoard,
 				score: validBoardScore,
 			});
-			await expect(res).to.have.status(404);
+			expect(res).to.have.status(404);
 		});
 
 		it('reports 500 error when stage is not found in DB', async () => {
@@ -353,7 +353,7 @@ describe('/stages', () => {
 				board: validBoard,
 				score: validBoardScore,
 			});
-			await expect(res).to.have.status(500);
+			expect(res).to.have.status(500);
 		});
 
 		it('reports 400 error when attempted to post invalid board', async () => {
@@ -362,7 +362,7 @@ describe('/stages', () => {
 				board: invalidBoard,
 				score: invalidBoardScore,
 			});
-			await expect(res).to.have.status(400);
+			expect(res).to.have.status(400);
 		});
 
 		it('reports 400 error when attempted to post malicious name (object)', async () => {
@@ -371,7 +371,7 @@ describe('/stages', () => {
 				board: validBoard,
 				score: validBoardScore,
 			});
-			await expect(res).to.have.status(400);
+			expect(res).to.have.status(400);
 		});
 
 		it('creates new submission data if the submission is valid', async () => {
@@ -434,7 +434,7 @@ describe('/stages', () => {
 				board: lowerScoreBoard,
 				score: lowerScoreBoardScore,
 			});
-			await expect(res).to.have.status(400);
+			expect(res).to.have.status(400);
 		});
 
 		it('omits calculting score and reports error when lower score than existing submission was proposed by client', async () => {
@@ -449,7 +449,7 @@ describe('/stages', () => {
 				board: validBoard,
 				score: lowerScoreBoardScore,
 			});
-			await expect(res).to.have.status(400);
+			expect(res).to.have.status(400);
 		});
 
 		it('reports error when the submission with higher score is existing, regardless of proposed score by client', async () => {
@@ -464,7 +464,7 @@ describe('/stages', () => {
 				board: lowerScoreBoard,
 				score: validBoardScore,
 			});
-			await expect(res).to.have.status(400);
+			expect(res).to.have.status(400);
 		});
 
 		it('rejects submission with empty name', async () => {
@@ -473,7 +473,7 @@ describe('/stages', () => {
 				board: validBoard,
 				score: validBoardScore,
 			});
-			await expect(res).to.not.have.status(200);
+			expect(res).to.not.have.status(200);
 		});
 
 		it('updates record when the submission score is higher than existing one', async () => {

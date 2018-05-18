@@ -153,7 +153,7 @@ describe('/ranking', () => {
 		describe('since parameter', () => {
 			it('reports error when invalid date is supplied', async () => {
 				const res = await chai.request(app).get('/ranking').query({since: 'hogehoge'});
-				await expect(res).to.have.status(400);
+				expect(res).to.have.status(400);
 			});
 
 			it('filters submissions only from specified time', async () => {
