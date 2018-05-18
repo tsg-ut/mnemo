@@ -152,12 +152,8 @@ describe('/ranking', () => {
 
 		describe('since parameter', () => {
 			it('reports error when invalid date is supplied', async () => {
-				try {
-					await chai.request(app).get('/ranking').query({since: 'hogehoge'});
-					expect.fail();
-				} catch (res) {
-					expect(res).to.have.status(400);
-				}
+				const res = await chai.request(app).get('/ranking').query({since: 'hogehoge'});
+				expect(res).to.have.status(400);
 			});
 
 			it('filters submissions only from specified time', async () => {

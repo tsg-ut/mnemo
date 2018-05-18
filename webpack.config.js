@@ -2,15 +2,16 @@ const path = require('path');
 const BabelMinifyPlugin = require('babel-minify-webpack-plugin');
 const {DefinePlugin} = require('webpack');
 
-module.exports = (env = {}) => ({
+module.exports = (env = {}, argv = {}) => ({
 	entry: './lib/index.js',
+	mode: argv.mode || 'development',
 	output: {
 		path: __dirname,
-		filename: env.production ? 'index.min.js' : 'index.js',
+		filename: argv.mode === 'production' ? 'index.min.js' : 'index.js',
 	},
-	devtool: env.production ? 'source-map' : 'cheap-module-eval-source-map',
+	devtool: argv.mode === 'production' ? 'source-map' : 'cheap-module-eval-source-map',
 	module: {
-		loaders: [{
+		rules: [{
 			test: /\.jsx?$/,
 			loader: 'babel-loader',
 			exclude: /node_modules/,
@@ -19,24 +20,24 @@ module.exports = (env = {}) => ({
 			include: [
 				path.resolve(__dirname, 'node_modules/react-hammerjs'),
 			],
-			loader: 'babel-loader',
-			options: {
-				plugins: [
-					'transform-class-properties',
-				],
-				babelrc: false,
-			},
+			use: [{
+				loader: 'babel-loader',
+				options: {
+					plugins: [
+						'transform-class-properties',
+					],
+					babelrc: false,
+				},
+			}],
 		}],
 	},
 	plugins: [
-		...(env.production ? [
-			new DefinePlugin({
-				'process.env': {
-					NODE_ENV: JSON.stringify('production'),
-				},
-			}),
-			new BabelMinifyPlugin(),
-		] : []),
+		new DefinePlugin({
+			'process.env': {
+				NODE_ENV: JSON.stringify(argv.mode),
+			},
+		}),
+		...(argv.mode == 'production' ? [new BabelMinifyPlugin()] : []),
 	],
 	devServer: {
 		watchContentBase: true,
