@@ -91,7 +91,7 @@
     "karma-webpack": "^3.0.0",
     "less": "^3.0.0",
     "livescript-loader": "^0.1.6",
-    "mathjs": "^4.0.0",
+    "mathjs": "^5.0.0",
     "microtime": "^2.1.6",
     "mocha": "^5.0.0",
     "mocha-logger": "^1.0.4",
@@ -132,7 +132,7 @@
     "lcov-result-merger": "^3.0.0",
     "node-slack": "^0.0.7",
     "pg": "^6.4.2",
-    "regenerator-runtime": "^0.11.0",
+    "regenerator-runtime": "^0.12.0",
     "request": "^2.81.0",
     "seedrandom": "^2.4.2",
     "sequelize": "^4.22.14"
