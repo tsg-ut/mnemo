@@ -91,7 +91,7 @@
     "karma-webpack": "^3.0.0",
     "less": "^3.0.0",
     "livescript-loader": "^0.1.6",
-    "mathjs": "^4.0.0",
+    "mathjs": "^5.0.0",
     "microtime": "^2.1.6",
     "mocha": "^5.0.0",
     "mocha-logger": "^1.0.4",
