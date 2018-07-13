@@ -68,7 +68,7 @@
     "concurrently": "^3.3.0",
     "create-react-class": "^15.6.2",
     "cross-env": "^5.0.0",
-    "cssnano": "^3.10.0",
+    "cssnano": "^4.0.0",
     "electron": "^2.0.0",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.1",
