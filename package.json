@@ -115,7 +115,7 @@
     "sqlite3": "^4.0.0",
     "svg-path-generator": "^1.1.0",
     "umzug": "^2.0.1",
-    "webpack": "^4.0.0",
+    "webpack": "^4.16.5",
     "webpack-cli": "^3.0.0",
     "webpack-dev-server": "^3.0.0",
     "webpack-node-externals": "^1.7.2"
