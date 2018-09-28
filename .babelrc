@@ -1,68 +1,71 @@
 {
-	env: {
-		debug: {
-			presets: [
-				['env', {
-					targets: {
-						browsers: [
-							'last 2 Chrome versions',
-						],
-					},
-					useBuiltIns: true,
-					include: [
-						'transform-es2015-classes',
-					],
-				}],
-				'react',
+	"env": {
+		"debug": {
+			"presets": [
+				[
+					"@babel/preset-env",
+					{
+						"targets": {
+							"browsers": [
+								"last 2 Chrome versions"
+							]
+						},
+						"useBuiltIns": "entry"
+					}
+				],
+				"@babel/preset-react"
 			],
-			plugins: [
-				'transform-inline-environment-variables',
-				'transform-class-properties',
-			],
+			"plugins": [
+				"transform-inline-environment-variables",
+				"@babel/plugin-proposal-class-properties"
+			]
 		},
-		production: {
-			presets: [
-				['env', {
-					targets: {
-						browsers: [
-							'last 2 Chrome versions',
-							'last 2 Firefox versions',
-							'ie 11',
-							'last 2 edge versions',
-							'Safari >= 10',
-							'iOS >= 10',
-						],
-					},
-					useBuiltIns: true,
-				}],
-				'react',
+		"production": {
+			"presets": [
+				[
+					"@babel/preset-env",
+					{
+						"targets": {
+							"browsers": [
+								"last 2 Chrome versions",
+								"last 2 Firefox versions",
+								"ie 11",
+								"last 2 edge versions",
+								"Safari >= 10",
+								"iOS >= 10"
+							]
+						},
+						"useBuiltIns": "entry"
+					}
+				],
+				"@babel/preset-react"
 			],
-			plugins: [
-				'transform-inline-environment-variables',
-				'transform-class-properties',
-				'transform-react-remove-prop-types',
-			],
+			"plugins": [
+				"transform-inline-environment-variables",
+				"@babel/plugin-proposal-class-properties",
+				"transform-react-remove-prop-types"
+			]
 		},
-		test: {
-			presets: [
-				['env', {
-					targets: {
-						browsers: [
-							'last 2 Chrome versions',
-						],
-					},
-					useBuiltIns: true,
-					include: [
-						'transform-es2015-classes',
-					],
-				}],
-				'react',
+		"test": {
+			"presets": [
+				[
+					"@babel/preset-env",
+					{
+						"targets": {
+							"browsers": [
+								"last 2 Chrome versions"
+							]
+						},
+						"useBuiltIns": "entry"
+					}
+				],
+				"@babel/preset-react"
 			],
-			plugins: [
-				'transform-inline-environment-variables',
-				'transform-class-properties',
-				'istanbul',
-			],
-		},
-	},
+			"plugins": [
+				"transform-inline-environment-variables",
+				"@babel/plugin-proposal-class-properties",
+				"istanbul"
+			]
+		}
+	}
 }
