@@ -24,7 +24,7 @@ module.exports = (env = {}, argv = {}) => ({
 				loader: 'babel-loader',
 				options: {
 					plugins: [
-						'transform-class-properties',
+						'@babel/plugin-proposal-class-properties',
 					],
 					babelrc: false,
 				},
@@ -37,7 +37,7 @@ module.exports = (env = {}, argv = {}) => ({
 				NODE_ENV: JSON.stringify(argv.mode),
 			},
 		}),
-		...(argv.mode == 'production' ? [new BabelMinifyPlugin()] : []),
+		...(argv.mode === 'production' ? [new BabelMinifyPlugin()] : []),
 	],
 	devServer: {
 		watchContentBase: true,
