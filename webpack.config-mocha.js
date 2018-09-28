@@ -18,7 +18,7 @@ module.exports = (env, argv = {}) => ({
 				loader: 'babel-loader',
 				options: {
 					plugins: [
-						'transform-class-properties',
+						'@babel/plugin-proposal-class-properties',
 					],
 					babelrc: false,
 				},

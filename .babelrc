@@ -10,10 +10,7 @@
 								"last 2 Chrome versions"
 							]
 						},
-						"useBuiltIns": true,
-						"include": [
-							"transform-es2015-classes"
-						]
+						"useBuiltIns": "entry"
 					}
 				],
 				"@babel/preset-react"
@@ -38,7 +35,7 @@
 								"iOS >= 10"
 							]
 						},
-						"useBuiltIns": true
+						"useBuiltIns": "entry"
 					}
 				],
 				"@babel/preset-react"
@@ -59,10 +56,7 @@
 								"last 2 Chrome versions"
 							]
 						},
-						"useBuiltIns": true,
-						"include": [
-							"transform-es2015-classes"
-						]
+						"useBuiltIns": "entry"
 					}
 				],
 				"@babel/preset-react"
