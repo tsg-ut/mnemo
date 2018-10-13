@@ -111,7 +111,7 @@
     "react-hammerjs": "JedWatson/react-hammerjs",
     "react-measure": "^2.1.2",
     "react-test-renderer": "^16.5.2",
-    "sequelize-cli": "^4.1.1",
+    "sequelize-cli": "^5.0.0",
     "sqlite3": "^4.0.2",
     "svg-path-generator": "^1.1.0",
     "umzug": "^2.1.0",
