@@ -92,7 +92,7 @@
     "less": "^3.8.1",
     "livescript-loader": "^0.1.6",
     "mathjs": "^5.1.2",
-    "microtime": "^2.1.8",
+    "microtime": "^3.0.0",
     "mocha": "^5.2.0",
     "mocha-logger": "^1.0.6",
     "mocha-webpack": "^2.0.0-beta.0",
