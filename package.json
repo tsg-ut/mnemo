@@ -124,7 +124,7 @@
     "bluebird": "^3.5.2",
     "body-parser": "^1.18.3",
     "common-tags": "^1.8.0",
-    "core-js": "^2.5.7",
+    "core-js": "^3.0.0",
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "express-promise-router": "^3.0.3",
