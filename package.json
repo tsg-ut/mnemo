@@ -63,7 +63,7 @@
     "chai-enzyme": "beta",
     "chai-http": "^4.2.0",
     "chai-things": "^0.2.0",
-    "chokidar-cli": "^1.2.1",
+    "chokidar-cli": "^2.0.0",
     "codecov": "^3.1.0",
     "concurrently": "^4.0.1",
     "create-react-class": "^15.6.3",
