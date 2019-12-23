@@ -56,7 +56,7 @@
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.0",
     "babel-minify-webpack-plugin": "^0.3.1",
-    "babel-plugin-istanbul": "^5.0.1",
+    "babel-plugin-istanbul": "^6.0.0",
     "babel-plugin-transform-inline-environment-variables": "^6.8.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.18",
     "chai": "^4.2.0",
