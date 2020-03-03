@@ -91,8 +91,9 @@ factorization-calc = (n) ->
 spaceship-calc = (a, b) -> Math.sign a - b
 
 ten-thousandth-digit-calc = (n) ->
-  mathjs.config precision: 20000
-  x = mathjs.divide mathjs.bignumber(1), mathjs.bignumber(n)
+  m = mathjs.create mathjs.all
+  m.config precision: 10010
+  x = m.divide m.bignumber(1), m.bignumber(n)
   return x.to-string!split '.' .1.9999 |> parse-int
 
 eight-eight-zero-nine-calc = (n) ->
@@ -371,6 +372,7 @@ describe 'Stage Data' ->
 
   describe '10000th-digit stage' ->
     It 'generates 10000th-digit' ->
+      @timeout 30000
       test-many-times-with-random (random) ->
         io = ten-thousandth-digit.io-generator random
 
