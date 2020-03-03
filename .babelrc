@@ -10,7 +10,8 @@
 								"last 2 Chrome versions"
 							]
 						},
-						"useBuiltIns": "entry"
+						"useBuiltIns": "entry",
+						"corejs": 3
 					}
 				],
 				"@babel/preset-react"
@@ -35,7 +36,8 @@
 								"iOS >= 10"
 							]
 						},
-						"useBuiltIns": "entry"
+						"useBuiltIns": "entry",
+						"corejs": 3
 					}
 				],
 				"@babel/preset-react"
@@ -56,7 +58,8 @@
 								"last 2 Chrome versions"
 							]
 						},
-						"useBuiltIns": "entry"
+						"useBuiltIns": "entry",
+						"corejs": 3
 					}
 				],
 				"@babel/preset-react"
