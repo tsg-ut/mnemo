@@ -132,7 +132,7 @@
     "lcov-result-merger": "^3.1.0",
     "node-slack": "^0.0.7",
     "pg": "^6.4.2",
-    "regenerator-runtime": "^0.12.1",
+    "regenerator-runtime": "^0.13.5",
     "request": "^2.88.0",
     "seedrandom": "^2.4.4",
     "sequelize": "^4.39.0"
