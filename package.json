@@ -29,7 +29,9 @@
     "api:init": "cd api && sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
     "api": "cd api && node index.js",
     "test:api": "cd api && cross-env NODE_ENV=test istanbul cover ../node_modules/mocha/bin/_mocha -- --recursive --exit",
-    "bench": "lsc benchmark/index.ls"
+    "bench": "lsc benchmark/index.ls",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -135,9 +137,11 @@
     "regenerator-runtime": "^0.12.1",
     "request": "^2.88.0",
     "seedrandom": "^2.4.4",
-    "sequelize": "^4.39.0"
+    "sequelize": "^4.39.0",
+    "snyk": "^1.316.1"
   },
   "resolutions": {
     "webpack-sources": "1.0.1"
-  }
+  },
+  "snyk": true
 }
