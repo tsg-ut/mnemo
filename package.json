@@ -135,7 +135,7 @@
     "regenerator-runtime": "^0.12.1",
     "request": "^2.88.0",
     "seedrandom": "^2.4.4",
-    "sequelize": "^4.39.0"
+    "sequelize": "^6.6.5"
   },
   "resolutions": {
     "webpack-sources": "1.0.1"
