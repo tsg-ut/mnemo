@@ -129,7 +129,7 @@
     "express": "^4.16.3",
     "express-promise-router": "^3.0.3",
     "forcedomain": "^2.0.1",
-    "lcov-result-merger": "^3.1.0",
+    "lcov-result-merger": "^4.0.0",
     "node-slack": "^0.0.7",
     "pg": "^6.4.2",
     "regenerator-runtime": "^0.12.1",
